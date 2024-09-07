@@ -65,7 +65,7 @@ class VegExecutionListController extends GetxController {
     // "search": true,
   });
   final Map<String, double> columnwidth = {
-    "ID": 150,
+    "ID": 200,
     "Title": 200,
     "Plan ID": 100,
     "Responsibility": 200,

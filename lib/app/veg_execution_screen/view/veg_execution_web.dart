@@ -288,7 +288,7 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                   style: Styles.blue17,
                                                 ),
                                                 Text(
-                                                  ' ${controller.vegExecutionDetailsModel.value?.startedBy}',
+                                                  ' ${controller.vegExecutionDetailsModel.value?.startedBy == null ? "" : controller.vegExecutionDetailsModel.value?.startedBy}',
                                                   style: Styles.blue17,
                                                 ),
                                               ],
@@ -723,7 +723,6 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                                                                                   : Dimens.box0,
                                                                                                             ],
                                                                                                           )
-                                                                                                     
                                                                                                         : Text(mapData['key'] ?? ''),
                                                           );
                                                         },
@@ -1134,7 +1133,7 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                             Spacer(),
                                           ],
                                         ),
-                                    
+
                                         Dimens.boxHeight10
                                       ],
                                     ),
