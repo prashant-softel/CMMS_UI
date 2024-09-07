@@ -479,7 +479,26 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         isLoading: true,
       );
       if (response == true) {
-        Get.offAllNamed(Routes.pmTask);
+        // Get.offAllNamed(Routes.pmTask);
+      }
+    }
+  }
+
+  approveCancelPmTaskExecution() async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel = CommentModel(
+          id: scheduleId.value, comment: _comment, facilityId: facilityId);
+
+      var approveCanceltoJsonString = commentModel.toJson();
+      final response = await preventiveMaintenanceTaskViewPresenter
+          .approveCancelPmTaskExecution(
+        approveCanceltoJsonString: approveCanceltoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        // Get.offAllNamed(Routes.pmTask);
       }
     }
   }
@@ -565,7 +584,26 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         isLoading: true,
       );
       if (response == true) {
-        Get.offAllNamed(Routes.pmTask);
+        // Get.offAllNamed(Routes.pmTask);
+      }
+    }
+  }
+
+  rejectCancelPmTaskExecution() async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel = CommentModel(
+          id: scheduleId.value, comment: _comment, facilityId: facilityId);
+
+      var rejectCanceltoJsonString = commentModel.toJson();
+      final response = await preventiveMaintenanceTaskViewPresenter
+          .rejectCancelPmTaskExecution(
+        rejectCanceltoJsonString: rejectCanceltoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        // Get.offAllNamed(Routes.pmTask);
       }
     }
   }

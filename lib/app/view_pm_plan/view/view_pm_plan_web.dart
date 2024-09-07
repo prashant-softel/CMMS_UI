@@ -176,8 +176,7 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 50),
                                   child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Column(
                                         crossAxisAlignment:
@@ -341,8 +340,7 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                               "Checklist",
                                               style: TextStyle(
                                                   fontSize: 15,
-                                                  fontWeight:
-                                                      FontWeight.bold),
+                                                  fontWeight: FontWeight.bold),
                                             )),
                                           ],
                                           rows: List<DataRow>.generate(
@@ -400,58 +398,53 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                   ),
                                 ),
                                 Dimens.boxHeight35,
-                                Container(
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 30),
-                                        child: Text('History',
-                                            style: Styles.blackBold16),
-                                      ),
-                                      (controller.historyList != null &&
-                                              controller.historyList!
-                                                  .isNotEmpty)
-                                          ? Container(
+                                (controller.historyList != null &&
+                                        controller.historyList!.isNotEmpty)
+                                    ? Container(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 30),
+                                              child: Text('History',
+                                                  style: Styles.blackBold16),
+                                            ),
+                                            Container(
                                               margin: Dimens.edgeInsets20,
-                                              height: ((controller
-                                                          .historyList
-                                                          ?.length ??
-                                                      0) *
-                                                  40) +
+                                              height: ((controller.historyList
+                                                              ?.length ??
+                                                          0) *
+                                                      40) +
                                                   120,
                                               child: HistoryTableWidgetWeb(
                                                 historyList:
                                                     controller.historyList,
                                               ),
                                             )
-                                          : Container(
-                                              child: Padding(
-                                                padding: const EdgeInsets.fromLTRB(12,0,8,0),
-                                                child: Text('History is empty'),
-                                              ),
-                                            )
-                                    ],
-                                  ),
-                                ),
+                                          ],
+                                        ),
+                                      )
+                                    : Dimens.box0,
                                 Dimens.boxHeight15,
                                 Row(
                                   children: [
                                     Spacer(),
                                     controller.pmPlanDetailsModel.value
-                                                ?.status_id ==
-                                            401 &&
-                                        varUserAccessModel
-                                                .value.access_list!
-                                                .where((e) =>
-                                                    e.feature_id ==
-                                                        UserAccessConstants
-                                                            .kPmPlanFeatureId &&
-                                                    e.approve ==
-                                                        UserAccessConstants
-                                                            .kHaveApproveAccess)
-                                                .length >
-                                            0
+                                                    ?.status_id ==
+                                                401 &&
+                                            varUserAccessModel
+                                                    .value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kPmPlanFeatureId &&
+                                                        e.approve ==
+                                                            UserAccessConstants
+                                                                .kHaveApproveAccess)
+                                                    .length >
+                                                0
                                         ? Container(
                                             height: 45,
                                             child: CustomElevatedButton(
@@ -469,19 +462,19 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                         : Dimens.box0,
                                     Dimens.boxWidth10,
                                     controller.pmPlanDetailsModel.value
-                                                ?.status_id ==
-                                            401 &&
-                                        varUserAccessModel
-                                                .value.access_list!
-                                                .where((e) =>
-                                                    e.feature_id ==
-                                                        UserAccessConstants
-                                                            .kPmPlanFeatureId &&
-                                                    e.approve ==
-                                                        UserAccessConstants
-                                                            .kHaveApproveAccess)
-                                                .length >
-                                            0
+                                                    ?.status_id ==
+                                                401 &&
+                                            varUserAccessModel
+                                                    .value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kPmPlanFeatureId &&
+                                                        e.approve ==
+                                                            UserAccessConstants
+                                                                .kHaveApproveAccess)
+                                                    .length >
+                                                0
                                         ? Container(
                                             height: 45,
                                             child: CustomElevatedButton(

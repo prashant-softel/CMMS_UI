@@ -5,6 +5,7 @@ import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/widgets/add_material_popup.dart';
 import 'package:cmms/app/widgets/attendance_popup.dart';
 import 'package:cmms/app/widgets/audit_task_msg_receive_dialog.dart';
+import 'package:cmms/app/widgets/pm_task_view_dialog.dart';
 import 'package:cmms/domain/models/Compliance_Status_model.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/attendance_list_model.dart';
@@ -980,8 +981,14 @@ class Repository {
           approvetoJsonString: json.encode(approvetoJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: "Approved Successfully!", fontSize: 45.0);
-
+        // Fluttertoast.showToast(msg: "Approved Successfully!", fontSize: 45.0);
+  var resp = res.data;
+        var parsedJson = json.decode(resp);
+        Get.dialog<void>(PmTaskViewDialog(
+          data: parsedJson['message'],
+          taskId: parsedJson['id'][0],
+          type: 5,
+        ));
         return true;
       } else {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -992,8 +999,40 @@ class Repository {
       return false;
     }
   }
-  Future<bool> CancelPMTask(
-      {bool? isLoading, CancelPMTaskJsonString,closePtwJsonString,
+
+  Future<bool> approveCancelPmTaskExecution(
+      {bool? isLoading, approveCanceltoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.approveCancelPmTaskExecution(
+          auth: auth,
+          isLoading: isLoading,
+          approveCanceltoJsonString: json.encode(approveCanceltoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        var resp = res.data;
+        var parsedJson = json.decode(resp);
+        Get.dialog<void>(PmTaskViewDialog(
+          data: parsedJson['message'],
+          taskId: parsedJson['id'][0],
+          type: 3,
+        ));
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> CancelPMTask({
+    bool? isLoading,
+    CancelPMTaskJsonString,
+    closePtwJsonString,
     required bool shouldClosePermit,
   }) async {
     try {
@@ -1005,22 +1044,16 @@ class Repository {
           CancelPMTaskJsonString: json.encode(CancelPMTaskJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: "PM Task Cancelled Successfully!", fontSize: 45.0);
-        Get.defaultDialog(
-          radius: 5,
-          title: 'Alert',
-          middleText: 'Task Cancelled!',
-          textConfirm: 'OK',
-          onConfirm: () {
-            Get.offNamed(Routes.pmTask); // Close the dialog
-          },
-          buttonColor: ColorValues.appGreenColor,
-          confirmTextColor: Colors.white,
-        );
-         // Check if permit should be closed
-      if (shouldClosePermit) {
-        permitCloseButton(closePtwJsonString, isLoading, 0, 2);
-      }
+        var resp = res.data;
+        var parsedJson = json.decode(resp);
+        Get.dialog<void>(PmTaskViewDialog(
+          data: parsedJson['message'],
+          taskId: parsedJson['id'][0],
+          type: 1,
+        ));
+        if (shouldClosePermit) {
+          permitCloseButton(closePtwJsonString, isLoading, 0, 2);
+        }
         return true;
       } else {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -1043,7 +1076,45 @@ class Repository {
           rejecttoJsonString: json.encode(rejecttoJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {
+        var resp = res.data;
+        var parsedJson = json.decode(resp);
+        Get.dialog<void>(PmTaskViewDialog(
+          data: parsedJson['message'],
+          taskId: parsedJson['id'][0],
+          type: 4,
+        ));
+        // Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> rejectCancelPmTaskExecution(
+      {bool? isLoading, rejectCanceltoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.rejectCancelPmTaskExecution(
+          auth: auth,
+          isLoading: isLoading,
+          rejectCanceltoJsonString: json.encode(rejectCanceltoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        var resp = res.data;
+        var parsedJson = json.decode(resp);
+        Get.dialog<void>(PmTaskViewDialog(
+          data: parsedJson['message'],
+          taskId: parsedJson['id'][0],
+          type: 2,
+        ));
+        // Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
         return true;
       } else {
@@ -6254,8 +6325,9 @@ class Repository {
       print(error.toString());
     }
   }
+
 //deleteKaizen
-Future<void> deleteKaizen({int? Id, bool? isLoading}) async {
+  Future<void> deleteKaizen({int? Id, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteKaizen(
@@ -6273,6 +6345,7 @@ Future<void> deleteKaizen({int? Id, bool? isLoading}) async {
       print(error.toString());
     }
   }
+
   //deleteHealth
   Future<void> deleteHealth({int? Id, bool? isLoading}) async {
     try {
@@ -6292,6 +6365,7 @@ Future<void> deleteKaizen({int? Id, bool? isLoading}) async {
       print(error.toString());
     }
   }
+
   //deleteVisitNotice
   Future<void> deleteVisitNotice({int? Id, bool? isLoading}) async {
     try {
@@ -6311,6 +6385,7 @@ Future<void> deleteKaizen({int? Id, bool? isLoading}) async {
       print(error.toString());
     }
   }
+
   //deleteFuel
   Future<void> deleteFuel({int? Id, bool? isLoading}) async {
     try {
@@ -6330,6 +6405,7 @@ Future<void> deleteKaizen({int? Id, bool? isLoading}) async {
       print(error.toString());
     }
   }
+
   //deletePlantation
   Future<void> deletePlantation({int? Id, bool? isLoading}) async {
     try {
@@ -6349,6 +6425,7 @@ Future<void> deleteKaizen({int? Id, bool? isLoading}) async {
       print(error.toString());
     }
   }
+
   Future<bool> createGrievanceType({bool? isLoading, grievanceJson}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);

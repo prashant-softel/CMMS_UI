@@ -562,25 +562,45 @@ class PmPlanDataSource extends DataTableSource {
                               )
                             : Dimens.box0,
                         controller.pmPlanList
-                                        .firstWhere(
-                                          (e) =>
-                                              e?.plan_id ==
-                                              pmPlanDetails!.plan_id,
-                                          orElse: () =>
-                                              PmPlanListModel(plan_id: 00),
-                                        )
-                                        ?.status_id ==
-                                    401 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kPmPlanFeatureId &&
-                                            e.edit ==
-                                                UserAccessConstants
-                                                    .kHaveEditAccess)
-                                        .length >
-                                    0
+                                            .firstWhere(
+                                              (e) =>
+                                                  e?.plan_id ==
+                                                  pmPlanDetails!.plan_id,
+                                              orElse: () =>
+                                                  PmPlanListModel(plan_id: 00),
+                                            )
+                                            ?.status_id ==
+                                        401 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kPmPlanFeatureId &&
+                                                e.edit ==
+                                                    UserAccessConstants
+                                                        .kHaveEditAccess)
+                                            .length >
+                                        0 ||
+                                controller.pmPlanList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e?.plan_id ==
+                                                  pmPlanDetails!.plan_id,
+                                              orElse: () =>
+                                                  PmPlanListModel(plan_id: 00),
+                                            )
+                                            ?.status_id ==
+                                        406 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kPmPlanFeatureId &&
+                                                e.edit ==
+                                                    UserAccessConstants
+                                                        .kHaveEditAccess)
+                                            .length >
+                                        0
                             ? TableActionButton(
                                 color: ColorValues.editColor,
                                 icon: Icons.edit,
@@ -636,37 +656,49 @@ class PmPlanDataSource extends DataTableSource {
                               )
                             : Dimens.box0,
                         (controller.pmPlanList
-                                        .firstWhere(
-                                          (e) =>
-                                              e?.plan_id ==
-                                              pmPlanDetails?.plan_id,
-                                          orElse: () =>
-                                              PmPlanListModel(plan_id: 00),
-                                        )
-                                        ?.status_id !=
-                                    405 &&
+                                            .firstWhere(
+                                              (e) =>
+                                                  e?.plan_id ==
+                                                  pmPlanDetails?.plan_id,
+                                              orElse: () =>
+                                                  PmPlanListModel(plan_id: 00),
+                                            )
+                                            ?.status_id ==
+                                        401 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where(
+                                              (e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kPmPlanFeatureId &&
+                                                  e.delete ==
+                                                      UserAccessConstants
+                                                          .kHaveDeleteAccess,
+                                            )
+                                            .length >
+                                        0 ||
                                 controller.pmPlanList
-                                        .firstWhere(
-                                          (e) =>
-                                              e?.plan_id ==
-                                              pmPlanDetails?.plan_id,
-                                          orElse: () =>
-                                              PmPlanListModel(plan_id: 00),
-                                        )
-                                        ?.status_id !=
-                                    406 &&
-                                varUserAccessModel.value.access_list!
-                                        .where(
-                                          (e) =>
-                                              e.feature_id ==
-                                                  UserAccessConstants
-                                                      .kPmPlanFeatureId &&
-                                              e.delete ==
-                                                  UserAccessConstants
-                                                      .kHaveDeleteAccess,
-                                        )
-                                        .length >
-                                    0)
+                                            .firstWhere(
+                                              (e) =>
+                                                  e?.plan_id ==
+                                                  pmPlanDetails?.plan_id,
+                                              orElse: () =>
+                                                  PmPlanListModel(plan_id: 00),
+                                            )
+                                            ?.status_id ==
+                                        406 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where(
+                                              (e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kPmPlanFeatureId &&
+                                                  e.delete ==
+                                                      UserAccessConstants
+                                                          .kHaveDeleteAccess,
+                                            )
+                                            .length >
+                                        0)
                             ? TableActionButton(
                                 color: ColorValues.deleteColor,
                                 icon: Icons.delete,

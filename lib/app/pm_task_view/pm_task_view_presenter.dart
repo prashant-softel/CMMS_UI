@@ -72,6 +72,16 @@ class PreventiveMaintenanceTaskViewPresenter {
     );
   }
 
+  Future<bool> approveCancelPmTaskExecution({
+    approveCanceltoJsonString,
+    required bool isLoading,
+  }) async {
+    return preventiveMaintenanceTaskViewUsecase.approveCancelPmTaskExecution(
+      approveCanceltoJsonString: approveCanceltoJsonString,
+      isLoading: isLoading,
+    );
+  }
+
   Future<bool> CancelPMTask({
     CancelPMTaskJsonString,
     closePtwJsonString,
@@ -81,7 +91,7 @@ class PreventiveMaintenanceTaskViewPresenter {
     return preventiveMaintenanceTaskViewUsecase.CancelPMTask(
       CancelPMTaskJsonString: CancelPMTaskJsonString,
       closePtwJsonString: closePtwJsonString,
-      shouldClosePermit:shouldClosePermit,
+      shouldClosePermit: shouldClosePermit,
       isLoading: isLoading,
     );
   }
@@ -92,6 +102,16 @@ class PreventiveMaintenanceTaskViewPresenter {
   }) async {
     return preventiveMaintenanceTaskViewUsecase.rejectPmTaskExecution(
       rejecttoJsonString: rejecttoJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<bool> rejectCancelPmTaskExecution({
+    rejectCanceltoJsonString,
+    required bool isLoading,
+  }) async {
+    return preventiveMaintenanceTaskViewUsecase.rejectCancelPmTaskExecution(
+      rejectCanceltoJsonString: rejectCanceltoJsonString,
       isLoading: isLoading,
     );
   }

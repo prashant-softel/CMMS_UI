@@ -119,8 +119,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               .pmtaskViewModel.value?.status ==
                                           164
                                       ? ColorValues.linktopermitColor
-                                      : controller.pmtaskViewModel.value
-                                                  ?.status ==
+                                      : controller.pmtaskViewModel.value?.status ==
                                               162
                                           ? ColorValues.appLightBlueColor
                                           : controller.pmtaskViewModel.value
@@ -140,7 +139,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                   .pmtaskViewModel
                                                                   .value
                                                                   ?.status ==
-                                                              169
+                                                              170
                                                           ? ColorValues
                                                               .approveStatusColor
                                                           : controller
@@ -152,7 +151,12 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                           .pmtaskViewModel
                                                                           .value
                                                                           ?.status ==
-                                                                      170
+                                                                      169 ||
+                                                                  controller
+                                                                          .pmtaskViewModel
+                                                                          .value
+                                                                          ?.status ==
+                                                                      166
                                                               ? ColorValues
                                                                   .rejectedStatusColor
                                                               : ColorValues
@@ -1029,7 +1033,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                         },
                       ),
                     ),
-                    Dimens.boxWidth10,
+                    // Dimens.boxWidth10,
+                    Dimens.boxWidth5,
                     controller.pmtaskViewModel.value?.status == 161
                         ? Container(
                             height: 35,
@@ -1046,7 +1051,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                             ),
                           )
                         : Dimens.box0,
-                    Dimens.boxWidth10,
+                    // Dimens.boxWidth10,
                     // controller.pmtaskViewModel.value?.status == 161
                     //     ? Container(
                     //         height: 35,
@@ -1062,6 +1067,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                     //         ),
                     //       )
                     //     :
+                    Dimens.boxWidth5,
                     controller.pmtaskViewModel.value?.status == 167 &&
                             varUserAccessModel.value.access_list!
                                     .where((e) =>
@@ -1117,17 +1123,6 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                 UserAccessConstants
                                                     .kHaveAddAccess)
                                         .length >
-                                    0 ||
-                            controller.pmtaskViewModel.value?.status == 168 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kPmExecutionFeatureId &&
-                                            e.add ==
-                                                UserAccessConstants
-                                                    .kHaveAddAccess)
-                                        .length >
                                     0
                         ? Container(
                             height: 35,
@@ -1142,7 +1137,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                           )
                         : Dimens.box0,
 
-                    Dimens.boxWidth10,
+                    Dimens.boxWidth5,
                     controller.pmtaskViewModel.value?.status == 162 &&
                             varUserAccessModel.value.access_list!
                                     .where((e) =>
@@ -1165,51 +1160,75 @@ class PreventiveMaintenanceTaskViewContentWeb
                             ),
                           )
                         : Dimens.box0,
-                    Dimens.boxWidth10,
-                    (controller.pmtaskViewModel.value?.status == 162 ||
-                                controller.pmtaskViewModel.value?.status ==
-                                    161 ||
-                                controller.pmtaskViewModel.value?.status ==
-                                    163) &&
-                            varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kPmTaskFeatureId &&
-                                        e.add ==
-                                            UserAccessConstants.kHaveAddAccess)
-                                    .length >
-                                0
-                        ? Container(
-                            height: 35,
-                            child: CustomElevatedButton(
-                              // icon: Icons.link,
-                              backgroundColor: ColorValues.redColor,
-                              text: "Cancel Task",
-                              onPressed: () {
-                                // controller.CancelPMTask();
-                                Get.defaultDialog(
-                                    radius: 5,
-                                    title: 'Confirm',
-                                    middleText:
-                                        'Are you sure you want to cancel the task?',
-                                    textCancel: 'No',
-                                    textConfirm: 'Yes',
-                                    onCancel: () {
-                                      Get.back(); // Close the dialog
-                                    },
-                                    onConfirm: () {
-                                      Get.back(); // Close the dialog
-                                      controller
-                                          .CancelPMTask(); // Call cancel task method
-                                    },
-                                    buttonColor: ColorValues.appRedColor,
-                                    confirmTextColor: Colors.white,
-                                    cancelTextColor: Colors.black);
-                              },
-                            ),
-                          )
-                        : Dimens.box0,
+                    Dimens.boxWidth5,
+                    // (controller.pmtaskViewModel.value?.status == 162 ||
+                    //             controller.pmtaskViewModel.value?.status ==
+                    //                 161 ||
+                    //             controller.pmtaskViewModel.value?.status ==
+                    //                 163) &&
+                    //         varUserAccessModel.value.access_list!
+                    //                 .where((e) =>
+                    //                     e.feature_id ==
+                    //                         UserAccessConstants
+                    //                             .kPmTaskFeatureId &&
+                    //                     e.add ==
+                    //                         UserAccessConstants.kHaveAddAccess)
+                    //                 .length >
+                    //             0
+                    //     ? Container(
+                    //         height: 35,
+                    //         child: CustomElevatedButton(
+                    //           // icon: Icons.link,
+                    //           backgroundColor: ColorValues.redColor,
+                    //           text: "Cancel Task",
+                    //           onPressed: () {
+                    //             // controller.CancelPMTask();
+
+                    //             // _isDeleteDialog() {
+                    //             Get.dialog(
+                    //               AlertDialog(
+                    //                 content: Column(
+                    //                     mainAxisSize: MainAxisSize.min,
+                    //                     children: [
+                    //                       Icon(Icons.cancel,
+                    //                           size: 35,
+                    //                           color: ColorValues.redColor),
+                    //                       SizedBox(
+                    //                         height: 10,
+                    //                       ),
+                    //                       Text(
+                    //                         'Are you sure you want to cancel the task?',
+                    //                         style: Styles.blackBold14w500,
+                    //                       ),
+                    //                     ]),
+                    //                 actions: [
+                    //                   Row(
+                    //                     mainAxisAlignment:
+                    //                         MainAxisAlignment.spaceEvenly,
+                    //                     children: [
+                    //                       TextButton(
+                    //                         onPressed: () {
+                    //                           Get.back();
+                    //                         },
+                    //                         child: Text('NO'),
+                    //                       ),
+                    //                       TextButton(
+                    //                         onPressed: () {
+                    //                           Get.back();
+                    //                           controller.CancelPMTask();
+                    //                         },
+                    //                         child: Text('YES'),
+                    //                       ),
+                    //                     ],
+                    //                   )
+                    //                 ],
+                    //               ),
+                    //             );
+                    //             // }
+                    //           },
+                    //         ),
+                    //       )
+                    //     : Dimens.box0,
                     // Dimens.boxWidth10,
                     // Container(
                     //   height: 35,
@@ -1243,7 +1262,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                     //     },
                     //   ),
                     // ),
-                    Dimens.boxWidth3,
+                    // Dimens.boxWidth3,
 
                     controller.pmtaskViewModel.value?.status == 165 &&
                             varUserAccessModel.value.access_list!
@@ -1303,6 +1322,71 @@ class PreventiveMaintenanceTaskViewContentWeb
                                   style: Styles.redElevatedButtonStyle,
                                   onPressed: () {
                                     controller.rejectPmTaskExecution();
+                                    Get.back();
+                                  },
+                                ));
+                              },
+                            ),
+                          )
+                        : Dimens.box0,
+                    controller.pmtaskViewModel.value?.status == 168 &&
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPmTaskFeatureId &&
+                                        e.approve ==
+                                            UserAccessConstants
+                                                .kHaveApproveAccess)
+                                    .length >
+                                0
+                        ? Container(
+                            height: 35,
+                            child: CustomElevatedButton(
+                              icon: Icons.check,
+                              backgroundColor: ColorValues.approveColor,
+                              text: "Approve",
+                              onPressed: () {
+                                Get.dialog(CustonApproveRejectDialog(
+                                  text: "Cancel Task Approve",
+                                  controller: controller,
+                                  buttonText: "Approve",
+                                  style: Styles.greenElevatedButtonStyle,
+                                  onPressed: () {
+                                    controller.approveCancelPmTaskExecution();
+                                    Get.back();
+                                  },
+                                ));
+                              },
+                            ),
+                          )
+                        : Dimens.box0,
+                    Dimens.boxWidth5,
+                    controller.pmtaskViewModel.value?.status == 168 &&
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPmTaskFeatureId &&
+                                        e.approve ==
+                                            UserAccessConstants
+                                                .kHaveApproveAccess)
+                                    .length >
+                                0
+                        ? Container(
+                            height: 35,
+                            child: CustomElevatedButton(
+                              icon: Icons.close,
+                              backgroundColor: ColorValues.rejectColor,
+                              text: "Reject",
+                              onPressed: () {
+                                Get.dialog(CustonApproveRejectDialog(
+                                  text: "Cancel Task Reject",
+                                  controller: controller,
+                                  buttonText: "Reject",
+                                  style: Styles.redElevatedButtonStyle,
+                                  onPressed: () {
+                                    controller.rejectCancelPmTaskExecution();
                                     Get.back();
                                   },
                                 ));

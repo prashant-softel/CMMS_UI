@@ -2259,9 +2259,9 @@ class ConnectHelper {
                     : closetype == 5
                         ? Get.offAllNamed(Routes.vegExecutionScreen)
                         : Get.dialog<void>(
-                        PermitMessageCloseDialog(
-                            data: parsedJson['message'], jobId: jobId),
-                        barrierDismissible: false);
+                            PermitMessageCloseDialog(
+                                data: parsedJson['message'], jobId: jobId),
+                            barrierDismissible: false);
 
     return responseModel;
   }
@@ -8803,6 +8803,30 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> approveCancelPmTaskExecution({
+    required String auth,
+    approveCanceltoJsonString,
+    bool? isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/CancelApprovedPMTaskExecution',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      approveCanceltoJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
   Future<ResponseModel> CancelPMTask({
     required String auth,
     CancelPMTaskJsonString,
@@ -8838,6 +8862,30 @@ class ConnectHelper {
       Request.put,
       // {'comment': "$comment", 'id': id},
       rejecttoJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> rejectCancelPmTaskExecution({
+    required String auth,
+    rejectCanceltoJsonString,
+    bool? isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/CancelRejectedPMTaskExecution',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      rejectCanceltoJsonString,
       isLoading ?? true,
       {
         'Content-Type': 'application/json',
@@ -9124,8 +9172,9 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   //deleteKaizen
-   Future<ResponseModel> deleteKaizen({
+  Future<ResponseModel> deleteKaizen({
     required String auth,
     int? Id,
     bool? isLoading,
@@ -9142,8 +9191,9 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   //deleteHealth
-     Future<ResponseModel> deleteHealth({
+  Future<ResponseModel> deleteHealth({
     required String auth,
     int? Id,
     bool? isLoading,
@@ -9160,8 +9210,9 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   //deleteVisitNotice
-   Future<ResponseModel> deleteVisitNotice({
+  Future<ResponseModel> deleteVisitNotice({
     required String auth,
     int? Id,
     bool? isLoading,
@@ -9178,8 +9229,9 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   //deleteFuel
-     Future<ResponseModel> deleteFuel({
+  Future<ResponseModel> deleteFuel({
     required String auth,
     int? Id,
     bool? isLoading,
@@ -9196,6 +9248,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
 //deletePlantation
   Future<ResponseModel> deletePlantation({
     required String auth,
@@ -9214,6 +9267,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> saveGrievance({
     required String auth,
     grievance,
