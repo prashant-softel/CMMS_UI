@@ -309,6 +309,7 @@ class DashboardController extends GetxController {
         final typeMapMc = <String, int>{};
         final totalWater = <String, double>{};
 
+        // Null check for item_list before processing types
         for (var item
             in dashboardMcList.value!.cmDashboadDetails!.item_list ?? []) {
           final types = item.mC_Type?.split(', ') ?? [];
@@ -340,35 +341,41 @@ class DashboardController extends GetxController {
         mcTypeMapMcDouble =
             typeMapMc.map((key, value) => MapEntry(key, (value.toDouble())));
 
-        ///water used site wise
-        for (var item
-            in dashboardMcList.value?.cmDashboadDetails?.waterUsedTotal ?? []) {
-          if (totalWater.containsKey(item.site_name)) {
-            totalWater[item.site_name!] =
-                totalWater[item.site_name!]! + item.totalWaterUsed!;
-          } else {
-            totalWater[item.site_name!] = item.totalWaterUsed!.toDouble();
+        if (dashboardMcList.value?.cmDashboadDetails?.waterUsedTotal != null) {
+          for (var item
+              in dashboardMcList.value!.cmDashboadDetails!.waterUsedTotal!) {
+            if (item.site_name != null && item.totalWaterUsed != null) {
+              if (totalWater.containsKey(item.site_name)) {
+                totalWater[item.site_name!] =
+                    totalWater[item.site_name!]! + item.totalWaterUsed!;
+              } else {
+                totalWater[item.site_name!] = item.totalWaterUsed!.toDouble();
+              }
+            }
           }
-        }
-        final sortedUsedWaters = totalWater.entries.toList()
-          ..sort((a, b) => b.value.compareTo(a.value));
-        final top5sortedUsedWaters = sortedUsedWaters.take(5).toList();
-        final otherCategoriesCountConsumptionSites =
-            sortedUsedWaters.skip(5).fold<double>(
-                  0.0,
-                  (sum, entry) => sum + entry.value,
-                );
 
-        final top5mapededUsedWaters = <String, double>{};
-        for (var entry in top5sortedUsedWaters) {
-          top5mapededUsedWaters[entry.key] = entry.value;
-        }
-        if (otherCategoriesCountConsumptionSites > 0) {
-          top5mapededUsedWaters['Other'] = otherCategoriesCountConsumptionSites;
-        }
+          final sortedUsedWaters = totalWater.entries.toList()
+            ..sort((a, b) => b.value.compareTo(a.value));
+          final top5sortedUsedWaters = sortedUsedWaters.take(5).toList();
+          final otherCategoriesCountConsumptionSites =
+              sortedUsedWaters.skip(5).fold<double>(
+                    0.0,
+                    (sum, entry) => sum + entry.value,
+                  );
 
-        waterUsedDouble = top5mapededUsedWaters;
+          final top5mapededUsedWaters = <String, double>{};
+          for (var entry in top5sortedUsedWaters) {
+            top5mapededUsedWaters[entry.key] = entry.value;
+          }
+          if (otherCategoriesCountConsumptionSites > 0) {
+            top5mapededUsedWaters['Other'] =
+                otherCategoriesCountConsumptionSites;
+          }
+
+          waterUsedDouble = top5mapededUsedWaters;
+        }
       }
+
       if (dashboardIrList.value != null) {
         final categoryMapIr = <String, int>{};
 
