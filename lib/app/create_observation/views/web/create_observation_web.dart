@@ -1,9 +1,7 @@
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/create_observation/create_observation_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -258,162 +256,162 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             ],
                                                           ),
                                                           Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Corrective/Preventive Action'),
-                                                              Dimens.boxWidth3,
-                                                              LoginCustomTextfield(
-                                                                  width: (MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      .2),
-                                                                  textController:
-                                                                      controller
-                                                                          .correctivePreventiveCtrlr,
-                                                                  //validate
-                                                                  errorController: controller
-                                                                          .isCorrectiveInvalid
-                                                                          .value
-                                                                      ? "Required field"
-                                                                      : null,
-                                                                  onChanged:
-                                                                      (value) {
-                                                                    if (value
-                                                                            .trim()
-                                                                            .length >
-                                                                        0) {
-                                                                      controller
-                                                                          .isCorrectiveInvalid
-                                                                          .value = false;
-                                                                    } else {
-                                                                      controller
-                                                                          .isCorrectiveInvalid
-                                                                          .value = true;
-                                                                    }
-                                                                  }),
-                                                            ],
-                                                          ),
+                                                          // Row(
+                                                          //   children: [
+                                                          //     CustomRichText(
+                                                          //         title:
+                                                          //             'Corrective/Preventive Action'),
+                                                          //     Dimens.boxWidth3,
+                                                          //     LoginCustomTextfield(
+                                                          //         width: (MediaQuery.of(
+                                                          //                     context)
+                                                          //                 .size
+                                                          //                 .width *
+                                                          //             .2),
+                                                          //         textController:
+                                                          //             controller
+                                                          //                 .correctivePreventiveCtrlr,
+                                                          //         //validate
+                                                          //         errorController: controller
+                                                          //                 .isCorrectiveInvalid
+                                                          //                 .value
+                                                          //             ? "Required field"
+                                                          //             : null,
+                                                          //         onChanged:
+                                                          //             (value) {
+                                                          //           if (value
+                                                          //                   .trim()
+                                                          //                   .length >
+                                                          //               0) {
+                                                          //             controller
+                                                          //                 .isCorrectiveInvalid
+                                                          //                 .value = false;
+                                                          //           } else {
+                                                          //             controller
+                                                          //                 .isCorrectiveInvalid
+                                                          //                 .value = true;
+                                                          //           }
+                                                          //         }),
+                                                          //   ],
+                                                          // ),
                                                           Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Responsible Person'),
-                                                              Dimens.boxWidth3,
-                                                              LoginCustomTextfield(
-                                                                  width: (MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      .2),
-                                                                  textController:
-                                                                      controller
-                                                                          .responsiblePersonCtrlr,
-                                                                  //validate
-                                                                  errorController: controller
-                                                                          .isResponsibleInvalid
-                                                                          .value
-                                                                      ? "Required field"
-                                                                      : null,
-                                                                  onChanged:
-                                                                      (value) {
-                                                                    if (value
-                                                                            .trim()
-                                                                            .length >
-                                                                        0) {
-                                                                      controller
-                                                                          .isResponsibleInvalid
-                                                                          .value = false;
-                                                                    } else {
-                                                                      controller
-                                                                          .isResponsibleInvalid
-                                                                          .value = true;
-                                                                    }
-                                                                  }),
-                                                            ],
-                                                          ),
+                                                          // Row(
+                                                          //   children: [
+                                                          //     CustomRichText(
+                                                          //         title:
+                                                          //             'Responsible Person'),
+                                                          //     Dimens.boxWidth3,
+                                                          //     LoginCustomTextfield(
+                                                          //         width: (MediaQuery.of(
+                                                          //                     context)
+                                                          //                 .size
+                                                          //                 .width *
+                                                          //             .2),
+                                                          //         textController:
+                                                          //             controller
+                                                          //                 .responsiblePersonCtrlr,
+                                                          //         //validate
+                                                          //         errorController: controller
+                                                          //                 .isResponsibleInvalid
+                                                          //                 .value
+                                                          //             ? "Required field"
+                                                          //             : null,
+                                                          //         onChanged:
+                                                          //             (value) {
+                                                          //           if (value
+                                                          //                   .trim()
+                                                          //                   .length >
+                                                          //               0) {
+                                                          //             controller
+                                                          //                 .isResponsibleInvalid
+                                                          //                 .value = false;
+                                                          //           } else {
+                                                          //             controller
+                                                          //                 .isResponsibleInvalid
+                                                          //                 .value = true;
+                                                          //           }
+                                                          //         }),
+                                                          //   ],
+                                                          // ),
                                                           Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Contact Number'),
-                                                              Dimens.boxWidth3,
-                                                              LoginCustomTextfield(
-                                                                  width: (MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      .2),
-                                                                  inputFormatters: [
-                                                                    FilteringTextInputFormatter
-                                                                        .digitsOnly
-                                                                  ],
-                                                                  keyboardType:
-                                                                      TextInputType
-                                                                          .number,
-                                                                  textController:
-                                                                      controller
-                                                                          .contactNumberCtrlr,
-                                                                  //validate
-                                                                  errorController: controller
-                                                                          .isContactNumberInvalid
-                                                                          .value
-                                                                      ? "Required field"
-                                                                      : null,
-                                                                  onChanged:
-                                                                      (value) {
-                                                                    if (value
-                                                                            .trim()
-                                                                            .length >
-                                                                        0) {
-                                                                      controller
-                                                                          .isContactNumberInvalid
-                                                                          .value = false;
-                                                                    } else {
-                                                                      controller
-                                                                          .isContactNumberInvalid
-                                                                          .value = true;
-                                                                    }
-                                                                  }),
-                                                            ],
-                                                          ),
+                                                          // Row(
+                                                          //   children: [
+                                                          //     CustomRichText(
+                                                          //         title:
+                                                          //             'Contact Number'),
+                                                          //     Dimens.boxWidth3,
+                                                          //     LoginCustomTextfield(
+                                                          //         width: (MediaQuery.of(
+                                                          //                     context)
+                                                          //                 .size
+                                                          //                 .width *
+                                                          //             .2),
+                                                          //         inputFormatters: [
+                                                          //           FilteringTextInputFormatter
+                                                          //               .digitsOnly
+                                                          //         ],
+                                                          //         keyboardType:
+                                                          //             TextInputType
+                                                          //                 .number,
+                                                          //         textController:
+                                                          //             controller
+                                                          //                 .contactNumberCtrlr,
+                                                          //         //validate
+                                                          //         errorController: controller
+                                                          //                 .isContactNumberInvalid
+                                                          //                 .value
+                                                          //             ? "Required field"
+                                                          //             : null,
+                                                          //         onChanged:
+                                                          //             (value) {
+                                                          //           if (value
+                                                          //                   .trim()
+                                                          //                   .length >
+                                                          //               0) {
+                                                          //             controller
+                                                          //                 .isContactNumberInvalid
+                                                          //                 .value = false;
+                                                          //           } else {
+                                                          //             controller
+                                                          //                 .isContactNumberInvalid
+                                                          //                 .value = true;
+                                                          //           }
+                                                          //         }),
+                                                          //   ],
+                                                          // ),
                                                           Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Cost Type'),
-                                                              Dimens.boxWidth3,
-                                                              Obx(
-                                                                () =>
-                                                                    DropdownWebStock(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      5,
-                                                                  dropdownList:
-                                                                      controller
-                                                                          .costType,
-                                                                  isValueSelected:
-                                                                      controller
-                                                                          .isCostTypeListSelected
-                                                                          .value,
-                                                                  selectedValue:
-                                                                      controller
-                                                                          .selectedCostTypeList
-                                                                          .value,
-                                                                  onValueChanged:
-                                                                      controller
-                                                                          .onValueChanged,
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
+                                                          // Row(
+                                                          //   children: [
+                                                          //     CustomRichText(
+                                                          //         title:
+                                                          //             'Cost Type'),
+                                                          //     Dimens.boxWidth3,
+                                                          //     Obx(
+                                                          //       () =>
+                                                          //           DropdownWebStock(
+                                                          //         width: MediaQuery.of(
+                                                          //                     context)
+                                                          //                 .size
+                                                          //                 .width /
+                                                          //             5,
+                                                          //         dropdownList:
+                                                          //             controller
+                                                          //                 .costType,
+                                                          //         isValueSelected:
+                                                          //             controller
+                                                          //                 .isCostTypeListSelected
+                                                          //                 .value,
+                                                          //         selectedValue:
+                                                          //             controller
+                                                          //                 .selectedCostTypeList
+                                                          //                 .value,
+                                                          //         onValueChanged:
+                                                          //             controller
+                                                          //                 .onValueChanged,
+                                                          //       ),
+                                                          //     ),
+                                                          //   ],
+                                                          // ),
                                                           // Row(
                                                           //   children: [
                                                           //     CustomRichText(
@@ -634,57 +632,57 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             ],
                                                           ),
                                                           Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Target Date'),
-                                                              Dimens.boxWidth3,
-                                                              CustomTextFieldForStock(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                numberTextField:
-                                                                    true,
-                                                                onTap: () {
-                                                                  controller
-                                                                          .openTargetObsDatePicker =
-                                                                      !controller
-                                                                          .openTargetObsDatePicker;
-                                                                  controller
-                                                                      .update([
-                                                                    'stock_Mangement'
-                                                                  ]);
-                                                                },
-                                                                textController:
-                                                                    controller
-                                                                        .targetDateTc,
-                                                                errorController:
-                                                                    controller
-                                                                            .isTargetDateInvalid
-                                                                            .value
-                                                                        ? "Required field"
-                                                                        : null,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  if (value
-                                                                          .trim()
-                                                                          .length >
-                                                                      0) {
-                                                                    controller
-                                                                        .isTargetDateInvalid
-                                                                        .value = false;
-                                                                  } else {
-                                                                    controller
-                                                                        .isTargetDateInvalid
-                                                                        .value = true;
-                                                                  }
-                                                                },
-                                                              ),
-                                                            ],
-                                                          ),
+                                                          // Row(
+                                                          //   children: [
+                                                          //     CustomRichText(
+                                                          //         title:
+                                                          //             'Target Date'),
+                                                          //     Dimens.boxWidth3,
+                                                          //     CustomTextFieldForStock(
+                                                          //       width: MediaQuery.of(
+                                                          //                   context)
+                                                          //               .size
+                                                          //               .width /
+                                                          //           5,
+                                                          //       numberTextField:
+                                                          //           true,
+                                                          //       onTap: () {
+                                                          //         controller
+                                                          //                 .openTargetObsDatePicker =
+                                                          //             !controller
+                                                          //                 .openTargetObsDatePicker;
+                                                          //         controller
+                                                          //             .update([
+                                                          //           'stock_Mangement'
+                                                          //         ]);
+                                                          //       },
+                                                          //       textController:
+                                                          //           controller
+                                                          //               .targetDateTc,
+                                                          //       errorController:
+                                                          //           controller
+                                                          //                   .isTargetDateInvalid
+                                                          //                   .value
+                                                          //               ? "Required field"
+                                                          //               : null,
+                                                          //       onChanged:
+                                                          //           (value) {
+                                                          //         if (value
+                                                          //                 .trim()
+                                                          //                 .length >
+                                                          //             0) {
+                                                          //           controller
+                                                          //               .isTargetDateInvalid
+                                                          //               .value = false;
+                                                          //         } else {
+                                                          //           controller
+                                                          //               .isTargetDateInvalid
+                                                          //               .value = true;
+                                                          //         }
+                                                          //       },
+                                                          //     ),
+                                                          //   ],
+                                                          // ),
                                                           Dimens.boxHeight5,
                                                         ],
                                                       ),
@@ -927,7 +925,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                             backgroundColor: ColorValues.cancelColor,
                             text: 'Cancel',
                             onPressed: () {
-                              Get.toNamed(Routes.misDashboard);
+                              Get.offAllNamed(Routes.misDashboard);
                             },
                           ),
                         ),

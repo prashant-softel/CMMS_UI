@@ -13,7 +13,7 @@ class CreateObsModel {
   String? responsible_person;
   String? contact_number;
 
-  String? cost_type;
+  int? cost_type;
   String? date_of_observation;
   int? type_of_observation;
   String? location_of_observation;

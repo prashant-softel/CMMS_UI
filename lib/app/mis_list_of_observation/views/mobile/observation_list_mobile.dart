@@ -35,17 +35,19 @@ class ObservationListMobile extends GetView<ObservationListController> {
                         Expanded(
                           child: ListView.builder(
                             shrinkWrap: true,
+                            // ignore: unnecessary_null_comparison
                             itemCount: controller.getObservationList != null
                                 ? controller.getObservationList.length
                                 : 0,
                             itemBuilder: (context, index) {
                               final obsListModel =
+                                  // ignore: unnecessary_null_comparison
                                   controller.getObservationList != null
                                       ? controller.getObservationList[index]
                                       : GetObservationList();
                               return GestureDetector(
                                   onTap: () {
-                                    int obsId = obsListModel?.id ?? 0;
+                                    int obsId = obsListModel.id ?? 0;
                                     if (obsId != 0) {
                                       Get.toNamed(Routes.createObservation,
                                           arguments: {'obsId': obsId});
@@ -72,7 +74,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                               children: [
                                                 Expanded(
                                                   child: Text(
-                                                    'OBS Id : ${obsListModel?.id ?? 0}',
+                                                    'OBS Id : ${obsListModel.id ?? 0}',
                                                     style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -114,7 +116,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    '${obsListModel?.month_of_observation ?? ""}',
+                                                    '${obsListModel.month_of_observation ?? ""}',
                                                     style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -139,7 +141,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 Expanded(
                                                   child: Text(
                                                     obsListModel
-                                                            ?.date_of_observation ??
+                                                            .date_of_observation ??
                                                         '',
                                                     style: const TextStyle(
                                                       fontWeight:
@@ -165,7 +167,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 Expanded(
                                                   child: Text(
                                                     obsListModel
-                                                            ?.contractor_name ??
+                                                            .contractor_name ??
                                                         '',
                                                     style: const TextStyle(
                                                       fontWeight:
@@ -191,7 +193,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 Expanded(
                                                   child: Text(
                                                     obsListModel
-                                                            ?.location_of_observation ??
+                                                            .location_of_observation ??
                                                         '',
                                                     style: const TextStyle(
                                                       fontWeight:
@@ -219,7 +221,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    obsListModel!
+                                                    obsListModel
                                                         .type_of_observation
                                                         .toString(),
                                                     style: const TextStyle(
@@ -245,7 +247,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 ),
                                                 Flexible(
                                                   child: Text(
-                                                    (obsListModel!
+                                                    (obsListModel
                                                         .source_of_observation
                                                         .toString()),
                                                     style: const TextStyle(
@@ -274,7 +276,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    obsListModel!.risk_type
+                                                    obsListModel.risk_type
                                                         .toString(),
                                                     style: const TextStyle(
                                                       fontWeight:
@@ -302,7 +304,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    obsListModel!
+                                                    obsListModel
                                                         .corrective_action
                                                         .toString(),
                                                     style: const TextStyle(
@@ -329,7 +331,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 Expanded(
                                                   child: Text(
                                                     obsListModel
-                                                            ?.responsible_person ??
+                                                            .responsible_person ??
                                                         '',
                                                     style: const TextStyle(
                                                       fontWeight:
@@ -354,7 +356,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    obsListModel?.target_date ??
+                                                    obsListModel.target_date ??
                                                         '',
                                                     style: const TextStyle(
                                                       fontWeight:
@@ -380,7 +382,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 Expanded(
                                                   child: Text(
                                                     obsListModel
-                                                            ?.action_taken ??
+                                                            .action_taken ??
                                                         '',
                                                     style: const TextStyle(
                                                       fontWeight:
@@ -405,7 +407,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    obsListModel?.closer_date ??
+                                                    obsListModel.closer_date ??
                                                         '',
                                                     style: const TextStyle(
                                                       fontWeight:
@@ -430,7 +432,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    obsListModel?.cost_type ??
+                                                    obsListModel.cost_type?.toString() ??
                                                         '',
                                                     style: const TextStyle(
                                                       fontWeight:
