@@ -381,7 +381,6 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                                     );
                                                   }),
                                             ),
-                             
                                 ],
                               ),
                             ),
@@ -441,63 +440,46 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
 }
 
 DataColumn2 buildDataColumn(
-  // String columnName,
   String header,
-
-  /// ColumnSize columnSize,
   RxString filterText,
   double? fixedWidth,
-  //  {required Function(String) onSearchCallBack}
 ) {
-  return //
-      DataColumn2(
-    // size: columnSize,
+  return DataColumn2(
     fixedWidth: fixedWidth,
-
-    label: //
-        Column(
-            mainAxisAlignment: MainAxisAlignment.center, //
-            children: [
-          // SizedBox(
-          //   height: Get.height * 0.05,
-          //   child: TextField(
-          //     style: GoogleFonts.lato(
-          //       textStyle:
-          //           TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-          //     ),
-          //     onChanged: (value) {
-          //       filterText.value = value;
-          //       //   onSearchCallBack(value);
-          //     },
-          //     textAlign: TextAlign.left,
-          //     decoration: InputDecoration(
-          //       hintText: 'Filter',
-          //       contentPadding:
-          //           EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
-          //       border: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(5),
-          //         borderSide: BorderSide(color: Colors.black),
-          //       ),
-          //       focusedBorder: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(5),
-          //         borderSide: BorderSide(color: Colors.black),
-          //       ),
-          //       enabledBorder: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(5),
-          //         borderSide: BorderSide(color: Colors.black),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
+    onSort: header == "Actions"
+        ? null
+        : (int columnIndex, bool ascending) {
+            final controller = Get.find<ModuleCleaningListPlanController>();
+            controller.sortData(header);
+          },
+    label: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          children: [
+            Text(
               header,
               style: Styles.black16W500,
             ),
-          ),
-        ]),
-    // ),
+            if (header != "Actions")
+              Obx(() {
+                final controller = Get.find<ModuleCleaningListPlanController>();
+
+                return AnimatedRotation(
+                  turns: controller.currentSortColumn.value == header
+                      ? (controller.isAscending.value ? 0.5 : 0.0)
+                      : 0.0,
+                  duration: Duration(milliseconds: 300),
+                  child: Icon(
+                    Icons.expand_more,
+                    size: 20,
+                  ),
+                );
+              }),
+          ],
+        ),
+      ],
+    ),
   );
 }
 

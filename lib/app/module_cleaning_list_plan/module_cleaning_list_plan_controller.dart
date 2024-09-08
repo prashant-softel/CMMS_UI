@@ -8,16 +8,13 @@ import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class ModuleCleaningListPlanController extends GetxController {
-  ModuleCleaningListPlanController(
-    this.moduleCleaningListPlanPresenter,
-  );
+  ModuleCleaningListPlanController(this.moduleCleaningListPlanPresenter);
   ModuleCleaningListPlanPresenter moduleCleaningListPlanPresenter;
   final HomeController homecontroller = Get.find();
   RxList<ModuleCleaningListPlanModel> moduleCleaningListPlan =
       <ModuleCleaningListPlanModel>[].obs;
   RxList<ModuleCleaningListPlanModel> filteredData =
       <ModuleCleaningListPlanModel>[].obs;
-  // Rx<int> Plan Id = 0.obs;
   Rx<int> PlanId = 0.obs;
   RxString planIdFilterText = ''.obs;
   RxString planTitleFilterText = ''.obs;
@@ -26,7 +23,11 @@ class ModuleCleaningListPlanController extends GetxController {
   RxString frequencyFilterText = ''.obs;
   RxString statusFilterText = ''.obs;
 
-  //Start DateTime
+  // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
+
+  // Start DateTime
   bool openStartDatePicker = false;
   var startDateTimeCtrlr = TextEditingController();
 
@@ -38,8 +39,6 @@ class ModuleCleaningListPlanController extends GetxController {
     'No of Days': true,
     'Created By': true,
     'Frequency': true,
-
-    // "search": true,
   });
   final Map<String, double> columnwidth = {
     'Plan Id': 153,
@@ -48,20 +47,13 @@ class ModuleCleaningListPlanController extends GetxController {
     'Created By': 200,
     'Frequency': 250,
   };
+
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
     final newVisibility = Map<String, bool>.from(columnVisibility.value)
       ..[columnName] = isVisible;
     columnVisibility.value = newVisibility;
-    print({"updated columnVisibility": columnVisibility});
   }
-
-  // String get formattedFromdate =>
-  //     DateFormat('dd/MM/yyyy').format(fromDate.value);
-  // String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
-  // String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
-  // String get formattedFromdate1 =>
-  //     DateFormat('yyyy-MM-dd').format(fromDate.value);
 
   ModuleCleaningListPlanModel? moduleCleaningListModel;
   RxList<String> moduleCleaningListTableColumns = <String>[].obs;
@@ -95,7 +87,6 @@ class ModuleCleaningListPlanController extends GetxController {
   }
 
   void export() {
-   
     getModuleCleaningListPlan(facilityId, true, isExportOnly: true);
   }
 
@@ -190,5 +181,45 @@ class ModuleCleaningListPlanController extends GetxController {
   void clearStoreData() {
     clearStoreDataMcid();
     clearStoreDataPlanid();
+  }
+
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+
+    switch (columnName) {
+      case 'Plan Id':
+        moduleCleaningListPlan.sort((a, b) => isAscending.value
+            ? a.planId!.compareTo(b.planId!)
+            : b.planId!.compareTo(a.planId!));
+        break;
+      case 'Plan Title':
+        moduleCleaningListPlan.sort((a, b) => isAscending.value
+            ? a.title!.compareTo(b.title!)
+            : b.title!.compareTo(a.title!));
+        break;
+      case 'No of Days':
+        moduleCleaningListPlan.sort((a, b) => isAscending.value
+            ? a.noOfCleaningDays!.compareTo(b.noOfCleaningDays!)
+            : b.noOfCleaningDays!.compareTo(a.noOfCleaningDays!));
+        break;
+      case 'Created By':
+        moduleCleaningListPlan.sort((a, b) => isAscending.value
+            ? a.createdBy!.compareTo(b.createdBy!)
+            : b.createdBy!.compareTo(a.createdBy!));
+        break;
+      case 'Frequency':
+        moduleCleaningListPlan.sort((a, b) => isAscending.value
+            ? a.frequency!.compareTo(b.frequency!)
+            : b.frequency!.compareTo(a.frequency!));
+        break;
+      default:
+        break;
+    }
+    update();
   }
 }
