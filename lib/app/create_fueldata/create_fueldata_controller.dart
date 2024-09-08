@@ -7,6 +7,7 @@ import 'package:cmms/domain/models/create_fueldata_model.dart';
 import 'package:cmms/domain/models/get_fueldata_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../home/home_controller.dart';
 
 class CreateFuelDataController extends GetxController {
@@ -17,14 +18,13 @@ class CreateFuelDataController extends GetxController {
   final HomeController homeController = Get.find();
   StreamSubscription<int>? facilityIdStreamSubscription;
   GetFuelDataList? selectedItem;
-    var FuelDateTc =
-      TextEditingController();
+  var FuelDateTc = TextEditingController();
   int selectedMonth = 0;
-  int selectedYear=0;
-  String month = 'April';
-  String year ='2000';
+  int selectedYear = 0;
   RxList<GetFuelDataList?> fueldataType = <GetFuelDataList>[].obs;
   //createfuledata
+  var selectedMonthnamectrl = TextEditingController();
+  var selectedYearctrl = TextEditingController();
   var dieselConsumedforvehiclesCtrl = TextEditingController();
   var petrolconsumedforvehiclesCtrl = TextEditingController();
   var petrolconsumedforgrasscuttingandmoversCtrl = TextEditingController();
@@ -38,7 +38,10 @@ class CreateFuelDataController extends GetxController {
   Rx<bool> isDieselConsumedAtSiteInvalid = false.obs;
   Rx<bool> isPetrolConsumedAtSiteInvalid = false.obs;
 
-  void createfuledata({List<dynamic>? fileIds,required int month_id,required int year}) async {
+  void createfuledata(
+      {List<dynamic>? fileIds,
+      required int month_id,
+      required int year}) async {
     try {
       checkForm();
       if (isFormInvalid.value) {
@@ -63,8 +66,8 @@ class CreateFuelDataController extends GetxController {
             _petrolconsumedforgrasscuttingandmoversCtrl,
         DieselConsumedAtSite: _dieselconsumedatsiteCtrl,
         PetrolConsumedAtSite: _petrolconsumedatsiteCtrl,
-        month_id:month_id,
-        year:year,
+        month_id: month_id,
+        year: year,
 
         id: 0,
         // date:"2024-08-18",
@@ -92,6 +95,10 @@ class CreateFuelDataController extends GetxController {
   void onInit() async {
     try {
       await setFDId();
+      selectedItem!.id == 0
+          ? FuelDateTc.text = ""
+          : FuelDateTc.text =
+              "${DateFormat.MMMM().format(DateTime(0, selectedItem!.month_id ?? 0))} ${selectedItem!.year}";
       super.onInit();
     } catch (e) {
       print(e);
@@ -105,12 +112,15 @@ class CreateFuelDataController extends GetxController {
         selectedItem = dataFromPreviousScreen['selectedItem'];
       } else {
         selectedItem = GetFuelDataList(
-            id: 0,
-            dieselConsumedForVehicles: 0,
-            petrolConsumedForVehicles: 0,
-            petrolConsumedForGrassCuttingAndMovers: 0,
-            dieselConsumedAtSite: 0,
-            petrolConsumedAtSite: 0);
+          id: 0,
+          dieselConsumedForVehicles: 0,
+          petrolConsumedForVehicles: 0,
+          petrolConsumedForGrassCuttingAndMovers: 0,
+          dieselConsumedAtSite: 0,
+          petrolConsumedAtSite: 0,
+          month_name: '',
+          year: 0,
+        );
       }
       GetFuelDataList? selectedItemhea;
       final _selectedItem = await createfueldataPresenter.getValue();
@@ -167,6 +177,15 @@ class CreateFuelDataController extends GetxController {
     int _petrolconsumedatsiteCtrl =
         int.tryParse(petrolconsumedatsiteCtrl.text.trim()) ?? 0;
 
+            // If the month and year are not changed, fallback to selectedItem's values
+    int _monthId = selectedMonth != (selectedItem?.month_id ?? 0)
+        ? selectedMonth
+        : selectedItem?.month_id ?? 0;
+
+    int _year = selectedYear != (selectedItem?.year ?? 0)
+        ? selectedYear
+        : selectedItem?.year ?? 0;
+
     CreateFuelDataModel createfueldataModel = CreateFuelDataModel(
       id: _id,
       DieselConsumedForVehicles: _dieselConsumedforvehiclesCtrl,
@@ -175,6 +194,8 @@ class CreateFuelDataController extends GetxController {
           _petrolconsumedforgrasscuttingandmoversCtrl,
       DieselConsumedAtSite: _dieselconsumedatsiteCtrl,
       PetrolConsumedAtSite: _petrolconsumedatsiteCtrl,
+       month_id: _monthId, // Use the new month or fallback to original
+      year: _year,
 
       // date:"2024-08-18",
     );
@@ -188,7 +209,9 @@ class CreateFuelDataController extends GetxController {
     );
 
     if (responseCreateGoModel == null) {
-      print("data fail ");
+      print("Update failed ");
+    }else {
+      print("Update successful");
     }
   }
 

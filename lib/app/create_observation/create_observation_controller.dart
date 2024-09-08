@@ -52,7 +52,7 @@ class CreateObservationController extends GetxController {
     GenderModel(id: 2, name: "Opex"),
   ].obs;
   Rx<bool> isCostTypeListSelected = true.obs;
-   Rx<String> selectedCostTypeList = ''.obs;
+  Rx<String> selectedCostTypeList = ''.obs;
   RxList<TypeOfObsListModel?> typeOfObsList = <TypeOfObsListModel>[].obs;
   Rx<String> selectedTypeOfObs = ''.obs;
   Rx<bool> isSelectedTypeOfObs = true.obs;
@@ -75,7 +75,8 @@ class CreateObservationController extends GetxController {
   Rx<bool> islocationofObservationInvalid = false.obs;
   Rx<DateTime> selectedObsTime = DateTime.now().obs;
   Rx<DateTime> selectedTargetTime = DateTime.now().obs;
-
+  int selectedCostTypeId = 1;
+// GetObservationList? selectedItem;
   Rx<bool> isLoading = true.obs;
   int facilityId = 0;
   Rx<int> obsId = 0.obs;
@@ -127,6 +128,54 @@ class CreateObservationController extends GetxController {
       //  Utility.showDialog(e.toString() + 'userId');
     }
   }
+  //update
+  // void updateobsDetails() async {
+  //   int _id = selectedItem?.id ?? 0;
+
+  //   // Get the entered data from the text fields
+  //   int _KaizensImplementedCtrl =
+  //       int.tryParse(KaizensImplementedCtrl.text.trim()) ?? 0;
+  //   int _CostForImplementationCtrl =
+  //       int.tryParse(CostForImplementationCtrl.text.trim()) ?? 0;
+  //   int _CostSavedFromImplementationCtrl =
+  //       int.tryParse(CostSavedFromImplementationCtrl.text.trim()) ?? 0;
+
+  //   // If the month and year are not changed, fallback to selectedItem's values
+  //   int _monthId = selectedMonth != (selectedItem?.month_id ?? 0)
+  //       ? selectedMonth
+  //       : selectedItem?.month_id ?? 0;
+
+  //   int _year = selectedYear != (selectedItem?.year ?? 0)
+  //       ? selectedYear
+  //       : selectedItem?.year ?? 0;
+
+  //   // Ensure that the month and year are correctly assigned to their respective fields in the model
+  //   CreateKaizensModel createkaizensdataModel = CreateKaizensModel(
+  //     id: _id,
+  //     KaizensImplemented: _KaizensImplementedCtrl,
+  //     CostForImplementation: _CostForImplementationCtrl,
+  //     CostSavedFromImplementation: _CostSavedFromImplementationCtrl,
+  //     month_id: _monthId, // Use the new month or fallback to original
+  //     year: _year, // Use the new year or fallback to original
+  //   );
+
+  //   // Converting the model to JSON format
+  //   var updateKaizensModelJsonString = createkaizensdataModel.toJson();
+
+  //   // Calling the updateKaizenDetails method in the presenter
+  //   Map<String, dynamic>? responseCreateGoModel =
+  //       await createkaizensdataPresenter.updateKaizenDetails(
+  //     updateKaizen: updateKaizensModelJsonString,
+  //     isLoading: true,
+  //   );
+
+  //   // Handling the response from the API
+  //   if (responseCreateGoModel == null) {
+  //     print("Update failed");
+  //   } else {
+  //     print("Update successful");
+  //   }
+  // }
 
   void clearStoreData() {
     createObservationPresenter.clearValue();
@@ -189,63 +238,62 @@ class CreateObservationController extends GetxController {
   }
 
   void createObs({int? position, List<dynamic>? fileIds}) async {
-    try {
-      checkObs();
-      if (isFormInvalid.value) {
-        return;
-      }
-      String _contractorNameCtrlr = contractorNameCtrlr.text.trim();
-      String _correctivePreventiveCtrlr = correctivePreventiveCtrlr.text.trim();
-      String _responsiblePersonCtrlr = responsiblePersonCtrlr.text.trim();
-      String _contactNumberCtrlr = contactNumberCtrlr.text.trim();
-      String _costTypeCtrlr = costTypeCtrlr.text.trim();
-      String _obsDateTc = obsDateTc.text.trim();
-      String _discriptionCtrlr = discriptionCtrlr.text.trim();
+  try {
+  //   checkObs();
+  //   if (isFormInvalid.value) {
+  //     return;
+  //   }
+    
+    String _contractorNameCtrlr = contractorNameCtrlr.text.trim();
+    // String _correctivePreventiveCtrlr = correctivePreventiveCtrlr.text.trim();
+    // String _responsiblePersonCtrlr = responsiblePersonCtrlr.text.trim();
+    String _contactNumberCtrlr = contactNumberCtrlr.text.trim();
+    String _obsDateTc = obsDateTc.text.trim();
+    String _discriptionCtrlr = discriptionCtrlr.text.trim();
+    String _locationOfObservationCtrlr = locationOfObservationCtrlr.text.trim();
+    // String _targetDateTc = targetDateTc.text.trim();
+    
+    // Assigning the correct id based on the selected cost type
+    int idToSend = position == 1 ? 0 : obsId.value;
+    
+    CreateObsModel createObsModel = CreateObsModel(
+      id: idToSend,
+      facility_id: facilityId,
+      contact_number: _contactNumberCtrlr,
+      contractor_name: _contractorNameCtrlr,
+      cost_type: selectedCostTypeId, // Sending the selected cost type ID
+      date_of_observation: _obsDateTc,
+      location_of_observation: _locationOfObservationCtrlr,
+      observation_description: _discriptionCtrlr,
+      // preventive_action: _correctivePreventiveCtrlr,
+      // responsible_person: _responsiblePersonCtrlr,
+      risk_type_id: incidenttypeId,
+      source_of_observation: sourceOfObsId,
+      // target_date: _targetDateTc,
+      type_of_observation: typeOfObsId,
+      uploadfileIds: fileIds,
+    );
 
-      String _locationOfObservationCtrlr =
-          locationOfObservationCtrlr.text.trim();
-      String _targetDateTc = targetDateTc.text.trim();
-      int idToSend = position == 1 ? 0 : obsId.value;
+    // Convert the CreateObsModel instance to JSON
+    var createObsModelJsonString = createObsModel.toJson();
 
-      CreateObsModel createObsModel = CreateObsModel(
-        id: idToSend,
-        facility_id: facilityId,
-        contact_number: _contactNumberCtrlr,
-        contractor_name: _contractorNameCtrlr,
-        cost_type: selectedCostTypeList.value,
-        date_of_observation: _obsDateTc,
-        location_of_observation: _locationOfObservationCtrlr,
-        observation_description: _discriptionCtrlr,
-        preventive_action: _correctivePreventiveCtrlr,
-        responsible_person: _responsiblePersonCtrlr,
-        risk_type_id: incidenttypeId,
-        source_of_observation: sourceOfObsId,
-        target_date: _targetDateTc,
-        type_of_observation: typeOfObsId,
-        uploadfileIds: fileIds,
-      );
+    // Call the createObs function from the presenter
+    Map<String, dynamic>? responseCreateObsModel =
+        await createObservationPresenter.createObs(
+      createObs: createObsModelJsonString,
+      isLoading: true,
+      position: position,
+    );
 
-      // Convert the CreateObsModel instance to JSON
-      var createObsModelJsonString = createObsModel.toJson();
-
-      // Call the createObs function from stockManagementAddGoodsOrdersPresenter
-      Map<String, dynamic>? responseCreateObsModel =
-          await createObservationPresenter.createObs(
-        createObs: createObsModelJsonString,
-        isLoading: true,
-        position: position,
-      );
-
-      // Handle the response
-      if (responseCreateObsModel == null) {
-        // CreateNewPermitDialog();
-        // showAlertDialog();
-      }
-      print('Create  create Obseravtion  data: $createObsModelJsonString');
-    } catch (e) {
-      print(e);
+    if (responseCreateObsModel == null) {
+      // Handle response if needed
     }
+
+    print('Create Observation data: $createObsModelJsonString');
+  } catch (e) {
+    print(e);
   }
+}
 
   void checkObs() {
     if (selectedRiskTypeList.value == '') {
@@ -409,6 +457,20 @@ class CreateObservationController extends GetxController {
           }
         }
         break;
+      case const (RxList<GenderModel>):
+  {
+    if (value.toString() != "Please Select") {
+      int costTypeIndex = costType?.indexWhere((x) => x?.name == value.toString()) ?? -1;
+      if (costTypeIndex != -1 && costType?[costTypeIndex] != null) {
+        selectedCostTypeId = costType![costTypeIndex]!.id ?? 0;
+        selectedCostTypeList.value = value.toString();
+        isCostTypeListSelected.value = true;
+      }
+    } else {
+      selectedCostTypeId = 0;
+    }
+  }
+  break;
     }
   }
 }

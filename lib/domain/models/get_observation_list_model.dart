@@ -18,7 +18,7 @@ class GetObservationList {
   String? preventive_action;
   String? responsible_person;
   String? contact_number;
-  String? cost_type;
+  int? cost_type; 
   String? date_of_observation;
   int? type_of_observation;
   int? source_of_observation;

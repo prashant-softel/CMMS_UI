@@ -450,7 +450,7 @@ class ObservationListDataSource extends DataTableSource {
               .contains(controller.actionTakenFilterText.value.toLowerCase()) &&
           (ObservationList.corrective_action ?? '').toString().contains(
               controller.dateofObservationFilterText.value.toLowerCase()) &&
-          (ObservationList.cost_type ?? '').contains(
+          (ObservationList.cost_type ?? '').toString().contains(
               controller.dateofObservationFilterText.value.toLowerCase()) &&
           (ObservationList.corrective_action ?? '')
               .toString()
@@ -574,12 +574,12 @@ class ObservationListDataSource extends DataTableSource {
                                   message: 'Edit',
                                   onPress: () {
                                     // controller.clearStoreData();
-                                    int obsId = ObservationListDetails?.id ?? 0;
+                                    int obsId = ObservationListDetails.id ?? 0;
                                     if (obsId != 0) {
                                       Get.toNamed(
                                         Routes.createObservation,
                                         arguments: {
-                                          'obsId': ObservationListDetails?.id,
+                                          'obsId': ObservationListDetails.id,
                                         },
                                       );
                                     }
