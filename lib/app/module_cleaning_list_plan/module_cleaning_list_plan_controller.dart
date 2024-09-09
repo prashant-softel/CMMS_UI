@@ -222,4 +222,5 @@ class ModuleCleaningListPlanController extends GetxController {
     }
     update();
   }
+
 }
