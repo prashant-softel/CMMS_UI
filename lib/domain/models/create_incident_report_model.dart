@@ -369,6 +369,7 @@ class DetailsOfOtherInjuredPerson {
 //Proposed Action Plan
 class ProposedActionPlan {
   ProposedActionPlan({
+    this.proposed_item_id,
     this.incidents_id,
     this.actions_as_per_plan,
     this.responsibility,
@@ -378,16 +379,18 @@ class ProposedActionPlan {
     this.id_Status,
   });
 
-  int? incidents_id;
   String? actions_as_per_plan;
   String? responsibility;
   String? target_date;
   String? remarks;
   String? hse_remark;
   int? id_Status;
+  int? proposed_item_id;
+  int? incidents_id;
 
   factory ProposedActionPlan.fromJson(Map<String, dynamic> json) =>
       ProposedActionPlan(
+        proposed_item_id: json['proposed_item_id'],
         incidents_id: json['incidents_id'],
         actions_as_per_plan: json['actions_as_per_plan'],
         responsibility: json['responsibility'],
@@ -398,6 +401,7 @@ class ProposedActionPlan {
       );
 
   Map<String, dynamic> toJson() => {
+        "proposed_item_id": proposed_item_id,
         "incidents_id": incidents_id,
         "actions_as_per_plan": actions_as_per_plan,
         "responsibility": responsibility,
@@ -411,22 +415,26 @@ class ProposedActionPlan {
 ///why why Analysis
 class WhyWhyAnalysis {
   WhyWhyAnalysis({
+    this.why_item_id,
     this.incidents_id,
     this.why,
     this.cause,
   });
 
-  int? incidents_id;
   String? why;
   String? cause;
+  int? why_item_id;
+  int? incidents_id;
 
   factory WhyWhyAnalysis.fromJson(Map<String, dynamic> json) => WhyWhyAnalysis(
         incidents_id: json['incidents_id'],
+        why_item_id: json['why_item_id'],
         why: json['why'],
         cause: json["cause"],
       );
 
   Map<String, dynamic> toJson() => {
+        "why_item_id": why_item_id,
         "incidents_id": incidents_id,
         "why": why,
         "cause": cause,
@@ -436,43 +444,47 @@ class WhyWhyAnalysis {
 //Root Cause
 class RootCause {
   RootCause({
+    this.root_item_id,
     this.incidents_id,
     this.cause,
   });
 
   int? incidents_id;
   String? cause;
+  int? root_item_id;
 
   factory RootCause.fromJson(Map<String, dynamic> json) => RootCause(
         incidents_id: json['incidents_id'],
         cause: json["cause"],
+        root_item_id: json["root_item_id"],
       );
 
   Map<String, dynamic> toJson() => {
         "incidents_id": incidents_id,
         "cause": cause,
+        "root_item_id": root_item_id
       };
 }
 
 ///Imeediate Correction
 class ImmediateCorrection {
-  ImmediateCorrection({
-    this.incidents_id,
-    this.details,
-  });
+  ImmediateCorrection({this.incidents_id, this.details, this.ic_item_id});
 
   int? incidents_id;
   String? details;
+  int? ic_item_id;
 
   factory ImmediateCorrection.fromJson(Map<String, dynamic> json) =>
       ImmediateCorrection(
         incidents_id: json['incidents_id'],
         details: json["details"],
+        ic_item_id: json["ic_item_id"],
       );
 
   Map<String, dynamic> toJson() => {
         "incidents_id": incidents_id,
         "details": details,
+        "ic_item_id": ic_item_id
       };
 }
 
