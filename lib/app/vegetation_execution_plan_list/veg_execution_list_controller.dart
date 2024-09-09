@@ -15,7 +15,8 @@ class VegExecutionListController extends GetxController {
 
   VegExecutionListPresenter vegExecutionListPresenter;
   final HomeController homecontroller = Get.find();
-
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
   TextEditingController commentTextFieldCtrlr = TextEditingController();
   RxList<VegTaskListModel?> vegTaskList = <VegTaskListModel?>[].obs;
   RxList<VegTaskListModel?> filteredData = <VegTaskListModel>[].obs;
@@ -67,12 +68,12 @@ class VegExecutionListController extends GetxController {
   final Map<String, double> columnwidth = {
     "ID": 200,
     "Title": 200,
-    "Plan ID": 100,
+    "Plan ID": 105,
     "Responsibility": 200,
     "Frequency": 163,
     "No Of Days": 153,
     "Start Date": 130,
-    "Done Date": 120,
+    "Done Date": 140,
     // "Status": 100
   };
 
@@ -249,5 +250,61 @@ class VegExecutionListController extends GetxController {
         "vegid": planId,
       },
     );
+  }
+
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+
+    switch (columnName) {
+      case 'ID':
+        vegTaskList.sort((a, b) => isAscending.value
+            ? a!.id!.compareTo(b!.id!)
+            : b!.id!.compareTo(a!.id!));
+        break;
+      case 'Title':
+        vegTaskList.sort((a, b) => isAscending.value
+            ? a!.title!.compareTo(b!.title!)
+            : b!.title!.compareTo(a!.title!));
+        break;
+      case 'Plan ID':
+        vegTaskList.sort((a, b) => isAscending.value
+            ? a!.planId!.compareTo(b!.planId!)
+            : b!.planId!.compareTo(a!.planId!));
+        break;
+      case 'Responsibility':
+        vegTaskList.sort((a, b) => isAscending.value
+            ? a!.responsibility!.compareTo(b!.responsibility!)
+            : b!.responsibility!.compareTo(a!.responsibility!));
+        break;
+      case 'Frequency':
+        vegTaskList.sort((a, b) => isAscending.value
+            ? a!.frequency!.compareTo(b!.frequency!)
+            : b!.frequency!.compareTo(a!.frequency!));
+        break;
+      case 'No Of Days':
+        vegTaskList.sort((a, b) => isAscending.value
+            ? a!.noOfDays!.compareTo(b!.noOfDays!)
+            : b!.noOfDays!.compareTo(a!.noOfDays!));
+        break;
+      case 'Start Date':
+        vegTaskList.sort((a, b) => isAscending.value
+            ? a!.startDate!.compareTo(b!.startDate!)
+            : b!.startDate!.compareTo(a!.startDate!));
+        break;
+      case 'Done Date':
+        vegTaskList.sort((a, b) => isAscending.value
+            ? a!.doneDate!.compareTo(b!.doneDate!)
+            : b!.doneDate!.compareTo(a!.doneDate!));
+        break;
+      default:
+        break;
+    }
+
+    update(['veg_task_list']); // Trigger UI update after sorting
   }
 }
