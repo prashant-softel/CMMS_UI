@@ -109,7 +109,9 @@ class DropdownWebWidget extends StatelessWidget {
             showSearchBox: true,
             showSelectedItems: true,
           ),
-          items: dropdownList?.map<String>((item) => item.name).toList() ?? [],
+          // Sort the dropdown list alphabetically before displaying
+          items: dropdownList!.map<String>((item) => item.name).toList()
+            ..sort(),
           dropdownDecoratorProps: DropDownDecoratorProps(
             textAlign: TextAlign.left,
             dropdownSearchDecoration: InputDecoration(

@@ -1,3 +1,4 @@
+import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
@@ -89,10 +90,10 @@ class PreventiveMaintenanceTaskViewPresenter {
     required bool shouldClosePermit,
   }) async {
     return preventiveMaintenanceTaskViewUsecase.CancelPMTask(
-      CancelPMTaskJsonString: CancelPMTaskJsonString,
-      closePtwJsonString: closePtwJsonString,
-      shouldClosePermit: shouldClosePermit,
-      isLoading: isLoading,
+        CancelPMTaskJsonString: CancelPMTaskJsonString,
+        closePtwJsonString: closePtwJsonString,
+        shouldClosePermit: shouldClosePermit,
+        isLoading: isLoading,
     );
   }
 
@@ -161,8 +162,15 @@ class PreventiveMaintenanceTaskViewPresenter {
     return preventiveMaintenanceTaskViewUsecase.saveValue(pmTaskId: pmTaskId);
   }
 
+  void saveStatusValue({String? status}) async {
+    return preventiveMaintenanceTaskViewUsecase.saveStatusValue(status: status);
+  }
+
   Future<String?> getValue() async =>
       await preventiveMaintenanceTaskViewUsecase.getValue();
+  Future<String?> getStatusValue() async =>
+      await preventiveMaintenanceTaskViewUsecase.getStatusValue();
+
   void clearValue() async => preventiveMaintenanceTaskViewUsecase.clearValue();
   void clearStoreData() async =>
       preventiveMaintenanceTaskViewUsecase.clearStoreData();

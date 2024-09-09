@@ -135,8 +135,13 @@ class PreventiveMaintenanceTaskViewUsecase {
       );
   void saveValue({String? pmTaskId}) async =>
       repository.saveValue(LocalKeys.pmTaskId, pmTaskId);
+  void saveStatusValue({String? status}) async =>
+      repository.saveValue(LocalKeys.status, status);
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.pmTaskId);
+  Future<String?> getStatusValue() async =>
+      await repository.getStringValue(LocalKeys.status);
+
   void clearValue() async => repository.clearData(LocalKeys.mrsId);
   void clearStoreData() async => repository.clearData(LocalKeys.permitId);
   void clearTypeValue() async => repository.clearData(LocalKeys.types);

@@ -583,7 +583,11 @@ class DashboardController extends GetxController {
   void clearStorePmData() {
     homePresenter.pmclearValue();
   }
-
+void clearStoreMcData() {
+    homePresenter.mcclearValue();
+  }void clearStoreMcPlanIdData() {
+    homePresenter.clearStoreMcPlanIdData();
+  }
   void clearStoreIrData() {
     homePresenter.iRclearValue();
   }

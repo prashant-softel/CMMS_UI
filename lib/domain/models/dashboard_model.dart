@@ -243,12 +243,14 @@ class Itemlist {
       this.end_Date_done,
       this.mC_Type,
       this.no_of_cleaned,
+      this.plan_id,
       this.scheduled});
 
   int? facility_id;
   String? facility_name;
   String? wo_number;
   int? status;
+  int? plan_id;
   String? status_long;
   String? asset_category;
   String? asset_name;
@@ -301,6 +303,7 @@ class Itemlist {
         facility_name: parsedJson['facility_name'],
         wo_number: parsedJson['wo_number'].toString(),
         status: parsedJson['status'],
+        plan_id: parsedJson['plan_id'],
         status_long: parsedJson['status_long'],
         asset_category: parsedJson['asset_category'],
         asset_name: parsedJson['assetsname'],
@@ -346,6 +349,7 @@ class Itemlist {
   Map<String, dynamic> toJson() => {
         "facility_id": facility_id,
         "scheduled": scheduled,
+        "plan_id": plan_id,
         "no_of_cleaned": no_of_cleaned,
         "mC_Type": mC_Type,
         "end_Date_done": end_Date_done,

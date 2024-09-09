@@ -284,7 +284,9 @@ class LstPermitDetailList {
     this.startTime,
     this.statusPTW,
     this.tbTDoneCheck,
+    this.tbt_start,
   });
+  int? tbt_start;
 
   int? permitId;
   int? sitePermitNo;
@@ -306,6 +308,7 @@ class LstPermitDetailList {
   factory LstPermitDetailList.fromJson(Map<String, dynamic> json) =>
       LstPermitDetailList(
         permitId: json["permit_id"],
+        tbt_start: json['tbt_start'] ?? 0,
         sitePermitNo: json["site_permit_no"],
         permitType: json["permit_type"],
         permitDescription: json["permit_description"],
@@ -325,6 +328,7 @@ class LstPermitDetailList {
 
   Map<String, dynamic> toJson() => {
         "permit_id": permitId,
+        "tbt_start": tbt_start,
         "site_permit_no": sitePermitNo,
         "permit_type": permitType,
         "permit_description": permitDescription,

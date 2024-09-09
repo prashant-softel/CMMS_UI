@@ -1035,81 +1035,105 @@ class PreventiveMaintenanceExecutionContentWeb
                                           )
                                         : Dimens.box0,
                                     Dimens.boxWidth3,
-                                    // Container(
-                                    //   height: 35,
-                                    //   child: CustomElevatedButton(
-                                    //     //  icon: Icons.close,
-                                    //     backgroundColor: ColorValues.redColor,
-                                    //     text: "Cancel Task",
-                                    //     onPressed: () {
-                                    //       var firstTask = controller
-                                    //           .listMrsByTaskId?.value
-                                    //           .firstWhereOrNull(
-                                    //         (element) =>
-                                    //             element?.jobCardId != 0 ||
-                                    //             element?.pmId != 0,
-                                    //       );
+                                    Container(
+                                      height: 35,
+                                      child: CustomElevatedButton(
+                                        //  icon: Icons.close,
+                                        backgroundColor: ColorValues.redColor,
+                                        text: "Cancel Task",
+                                        onPressed: () {
+                                          var firstTask = controller
+                                              .listMrsByTaskId?.value
+                                              .firstWhereOrNull(
+                                            (element) =>
+                                                element?.jobCardId != 0 ||
+                                                element?.pmId != 0,
+                                          );
 
-                                    //       if (firstTask?.mrs_return_ID == 0 &&
-                                    //           controller.allTrue.value ==
-                                    //               false) {
-                                    //         Get.defaultDialog(
-                                    //           radius: 5,
-                                    //           title: 'Alert',
-                                    //           middleText:
-                                    //               'Please return all items!',
-                                    //           textConfirm: 'OK',
-                                    //           onConfirm: () {
-                                    //             Get.back(); // Close the dialog
-                                    //           },
-                                    //           buttonColor:
-                                    //               ColorValues.appGreenColor,
-                                    //           confirmTextColor: Colors.white,
-                                    //         );
-                                    //       } else if (firstTask?.status != 323 &&
-                                    //           controller.listMrsByTaskId!
-                                    //               .isNotEmpty &&
-                                    //           controller.allTrue.value ==
-                                    //               false) {
-                                    //         Get.defaultDialog(
-                                    //           radius: 5,
-                                    //           title: 'Alert',
-                                    //           middleText:
-                                    //               'Please get Return MRS approved!',
-                                    //           textConfirm: 'OK',
-                                    //           onConfirm: () {
-                                    //             Get.back(); // Close the dialog
-                                    //           },
-                                    //           buttonColor:
-                                    //               ColorValues.appGreenColor,
-                                    //           confirmTextColor: Colors.white,
-                                    //         );
-                                    //       } else {
-                                    //         // Show confirmation dialog before canceling the task
-                                    //         Get.defaultDialog(
-                                    //           radius: 5,
-                                    //           title: 'Confirm',
-                                    //           middleText:
-                                    //               'Are you sure you want to cancel the task?',
-                                    //           textCancel: 'No',
-                                    //           textConfirm: 'Yes',
-                                    //           onCancel: () {
-                                    //             Get.back(); // Close the dialog
-                                    //           },
-                                    //           onConfirm: () {
-                                    //             Get.back(); // Close the dialog
-                                    //             controller
-                                    //                 .CancelPMTask(); // Call cancel task method
-                                    //           },
-                                    //           buttonColor:
-                                    //               ColorValues.appRedColor,
-                                    //           confirmTextColor: Colors.white,
-                                    //           cancelTextColor: Colors.black,
-                                    //         );
-                                    //       }
-                                    //     },
-                                    //   ),
-                                    // ),
+                                          if (firstTask?.mrs_return_ID == 0 &&
+                                              controller.allTrue.value ==
+                                                  false) {
+                                            Get.defaultDialog(
+                                              radius: 5,
+                                              title: 'Alert',
+                                              middleText:
+                                                  'Please return all items!',
+                                              textConfirm: 'OK',
+                                              onConfirm: () {
+                                                Get.back(); // Close the dialog
+                                              },
+                                              buttonColor:
+                                                  ColorValues.appGreenColor,
+                                              confirmTextColor: Colors.white,
+                                            );
+                                          } else if (firstTask?.status != 323 &&
+                                              controller.listMrsByTaskId!
+                                                  .isNotEmpty &&
+                                              controller.allTrue.value ==
+                                                  false) {
+                                            Get.defaultDialog(
+                                              radius: 5,
+                                              title: 'Alert',
+                                              middleText:
+                                                  'Please get Return MRS approved!',
+                                              textConfirm: 'OK',
+                                              onConfirm: () {
+                                                Get.back(); // Close the dialog
+                                              },
+                                              buttonColor:
+                                                  ColorValues.appGreenColor,
+                                              confirmTextColor: Colors.white,
+                                            );
+                                          } else {
+                                            // Show confirmation dialog before canceling the task
+                                            Get.dialog(
+                                              AlertDialog(
+                                                content: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Icon(Icons.cancel,
+                                                          size: 35,
+                                                          color: ColorValues
+                                                              .redColor),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Text(
+                                                        'Are you sure you want to cancel the task?',
+                                                        style: Styles
+                                                            .blackBold14w500,
+                                                      ),
+                                                    ]),
+                                                actions: [
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Get.back();
+                                                        },
+                                                        child: Text('NO'),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Get.back();
+                                                          controller
+                                                              .CancelPMTask();
+                                                        },
+                                                        child: Text('YES'),
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            );
+                                          }
+                                        },
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 Dimens.boxHeight20
