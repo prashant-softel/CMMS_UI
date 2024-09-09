@@ -457,6 +457,7 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                           },
                         ),
                       ),
+                      SizedBox(width: 10),
                       Container(
                         height: 35,
                         child: CustomElevatedButton(
@@ -467,7 +468,7 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                           },
                         ),
                       ),
-                      Dimens.boxWidth20,
+                      SizedBox(width: 10),
                       Container(
                         height: 35,
                         child: CustomElevatedButton(

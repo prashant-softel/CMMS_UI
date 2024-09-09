@@ -118,7 +118,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                     height: MediaQuery.of(context).size.height / 1.4,
                     child: ScrollConfiguration(
                       behavior: ScrollConfiguration.of(context)
-                          .copyWith(scrollbars: false),
+                          .copyWith(scrollbars: true),
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
