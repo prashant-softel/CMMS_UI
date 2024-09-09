@@ -81,6 +81,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   RxList<CmmrsItems> cmmrsItems = <CmmrsItems>[].obs;
   Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
       EndMCExecutionDetailsModel().obs;
+  int storeStatus = 0;
   //////////////////////////////////
 
   @override
@@ -196,7 +197,17 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
             facilityId: facilityId);
     if (_permitDetails != null) {
       pmtaskViewModel.value = _permitDetails;
+
       scheduleCheckPoint!.value = _permitDetails.schedules ?? [];
+      if (pmtaskViewModel.value?.status == 161 ||
+          pmtaskViewModel.value?.status == 162 ||
+          pmtaskViewModel.value?.status == 163 ||
+          pmtaskViewModel.value?.status == 168) {
+        preventiveMaintenanceTaskViewPresenter.saveStatusValue(
+            status: pmtaskViewModel.value?.status.toString());
+
+        // await _flu
+      }
     }
   }
 
@@ -503,7 +514,8 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     }
   }
 
-  CancelPMTask() async {
+  CancelPMTask(
+      {required PreventiveMaintenanceTaskViewController controller}) async {
     {
       String _comment = commentCtrlr.text.trim();
 
@@ -592,11 +604,17 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   rejectCancelPmTaskExecution() async {
     {
       String _comment = commentCtrlr.text.trim();
-
-      CommentModel commentModel = CommentModel(
-          id: scheduleId.value, comment: _comment, facilityId: facilityId);
-
-      var rejectCanceltoJsonString = commentModel.toJson();
+      final _storeStatus =
+          await preventiveMaintenanceTaskViewPresenter.getStatusValue();
+      storeStatus = int.tryParse(_storeStatus ?? "") ?? 0;
+      // CommentModel commentModel = CommentModel(
+      var rejectCanceltoJsonString = {
+        "id": scheduleId.value,
+        "comment": _comment,
+        "facilityId": facilityId,
+        "status": storeStatus
+      };
+      // var rejectCanceltoJsonString = commentModel.toJson();
       final response = await preventiveMaintenanceTaskViewPresenter
           .rejectCancelPmTaskExecution(
         rejectCanceltoJsonString: rejectCanceltoJsonString,

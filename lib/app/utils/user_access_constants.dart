@@ -152,6 +152,9 @@ abstract class UserAccessConstants {
   //Facility
   static int kFacilityFeatureId = 55;
   static String kFeatureFacilityName = "Facility";
+  //DashBoard
+  static int kDashboardFeatureId = 1;
+  static String kFeatureDashBoardName = "DashBoard";
 
   ///USER ACCESS
   static int kHaveAddAccess = 1;

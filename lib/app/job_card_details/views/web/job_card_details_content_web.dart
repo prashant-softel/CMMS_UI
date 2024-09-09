@@ -1396,6 +1396,37 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                     dropzoneController.fileIds,
                                               );
                                             } else if (controller.permitList
+                                                        ?.firstWhere(
+                                                            (element) =>
+                                                                element
+                                                                    .permitId !=
+                                                                null)
+                                                        .tbTDoneCheck ==
+                                                    0 &&
+                                                controller.permitList
+                                                        ?.firstWhere(
+                                                            (element) =>
+                                                                element
+                                                                    .permitId !=
+                                                                null)
+                                                        .tbt_start ==
+                                                    0) {
+                                              Get.defaultDialog(
+                                                  radius: 5,
+                                                  title: 'Alert',
+                                                  middleText:
+                                                      'Unable to start task due to permit taken for date and time ',
+                                                  textConfirm: 'OK',
+                                                  onConfirm: () {
+                                                    Get.back(); // Close the dialog
+                                                    // Get.offAllNamed(Routes.pmTask);
+                                                  },
+                                                  buttonColor:
+                                                      ColorValues.appGreenColor,
+                                                  confirmTextColor:
+                                                      Colors.white,
+                                                  barrierDismissible: false);
+                                            } else if (controller.permitList
                                                     ?.firstWhere((element) =>
                                                         element.permitId !=
                                                         null)

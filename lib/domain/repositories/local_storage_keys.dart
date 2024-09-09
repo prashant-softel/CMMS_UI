@@ -18,6 +18,7 @@ abstract class LocalKeys {
   static const typeEdit = 'typeEdit';
   static const reNew = 'reNew';
   static const compliance_id = 'compliance_id';
+  static const status = 'status';
 
   static const goType = 'goType';
   static const roType = 'roType';

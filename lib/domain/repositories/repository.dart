@@ -982,7 +982,7 @@ class Repository {
       print({"res.data", res.data});
       if (!res.hasError) {
         // Fluttertoast.showToast(msg: "Approved Successfully!", fontSize: 45.0);
-  var resp = res.data;
+        var resp = res.data;
         var parsedJson = json.decode(resp);
         Get.dialog<void>(PmTaskViewDialog(
           data: parsedJson['message'],
@@ -1046,11 +1046,14 @@ class Repository {
       if (!res.hasError) {
         var resp = res.data;
         var parsedJson = json.decode(resp);
-        Get.dialog<void>(PmTaskViewDialog(
-          data: parsedJson['message'],
-          taskId: parsedJson['id'][0],
-          type: 1,
-        ));
+        if (shouldClosePermit == false) {
+          Get.dialog<void>(PmTaskViewDialog(
+            data: parsedJson['message'],
+            taskId: parsedJson['id'][0],
+            type: 1,
+          ));
+        }
+
         if (shouldClosePermit) {
           permitCloseButton(closePtwJsonString, isLoading, 0, 2);
         }
