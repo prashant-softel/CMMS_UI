@@ -13,7 +13,7 @@ class EndMCExecutionDetailsModel {
   String? description;
   String? frequency;
   String? assignedTo;
-  String? startDate;
+  String? scheduledDate;
   int? noOfDays;
   String? plannedBy;
   String? plannedAt;
@@ -38,7 +38,7 @@ class EndMCExecutionDetailsModel {
     this.title,
     this.description,
     this.frequency,
-    this.startDate,
+    this.scheduledDate,
     this.assignedTo,
     this.noOfDays,
     this.plannedBy,
@@ -70,12 +70,13 @@ class EndMCExecutionDetailsModel {
         description: json['description'] ?? '',
         frequency: json['frequency'] ?? '',
         assignedTo: json['assignedTo'] ?? '',
-        startDate: json['startDate'] ?? '',
+        scheduledDate:
+            Utility.getFormatedyearMonthDay(json['scheduledDate'] ?? ''),
         noOfDays: json["noOfDays"],
         plannedBy: json['plannedBy'] ?? '',
-        plannedAt: json['plannedAt'] ?? '',
+        plannedAt: Utility.getFormatedyearMonthDay(json['plannedAt'] ?? ''),
         startedBy: json['startedBy'] ?? '',
-        startedAt: json['startedAt'] ?? '',
+        startedAt: Utility.getFormatedyearMonthDay(json['startedAt'] ?? ''),
         abandonedBy: json["abandonedBy"] ?? '',
         abandonedAt: json["abandonedAt"] ?? '',
         status: json['status'],
@@ -101,7 +102,7 @@ class EndMCExecutionDetailsModel {
         "description": description ?? '',
         "frequency": frequency ?? '',
         "assignedTo": assignedTo ?? '',
-        "startDate": startDate ?? '',
+        "scheduledDate": scheduledDate ?? '',
         "noOfDays": noOfDays,
         "plannedBy": plannedBy ?? '',
         "plannedAt": plannedAt ?? '',

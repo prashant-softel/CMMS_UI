@@ -1448,14 +1448,19 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                       text: 'Re-Submit',
                                                     )
                                                   : Container(),
-                                              controller.incidentReportDetailsModel
-                                                              .value?.status ==
+                                              controller
+                                                              .incidentReportDetailsModel.value?.status ==
                                                           183 ||
                                                       controller
                                                               .incidentReportDetailsModel
                                                               .value
                                                               ?.status ==
-                                                          185
+                                                          185 ||
+                                                      controller
+                                                              .incidentReportDetailsModel
+                                                              .value
+                                                              ?.status ==
+                                                          184
                                                   ? CustomElevatedButton(
                                                       backgroundColor:
                                                           ColorValues

@@ -419,32 +419,46 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
 }
 
 DataColumn2 buildDataColumn(
-  // String columnName,
   String header,
-
-  /// ColumnSize columnSize,
   RxString filterText,
   double? fixedWidth,
-  //  {required Function(String) onSearchCallBack}
 ) {
-  return //
-      DataColumn2(
-    // size: columnSize,
+  return DataColumn2(
     fixedWidth: fixedWidth,
-
-    label: //
-        Column(
-            mainAxisAlignment: MainAxisAlignment.center, //
-            children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
+    onSort: header == "Actions"
+        ? null
+        : (int columnIndex, bool ascending) {
+            final controller = Get.find<VegExecutionListController>();
+            controller.sortData(header);
+          },
+    label: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          children: [
+            Text(
               header,
               style: Styles.black16W500,
             ),
-          ),
-        ]),
-    // ),
+            if (header !=
+                "Actions") // Display sorting icon only for sortable columns
+              Obx(() {
+                final controller = Get.find<VegExecutionListController>();
+                return AnimatedRotation(
+                  turns: controller.currentSortColumn.value == header
+                      ? (controller.isAscending.value ? 0.5 : 0.0)
+                      : 0.0,
+                  duration: Duration(milliseconds: 300),
+                  child: Icon(
+                    Icons.expand_more,
+                    size: 20,
+                  ),
+                );
+              }),
+          ],
+        ),
+      ],
+    ),
   );
 }
 
@@ -476,7 +490,7 @@ class VegExcutionListDataSource extends DataTableSource {
           (VegExcutionList.noOfDays ?? '')
               .toString()
               .contains(controller.startDateFilterText.value.toLowerCase()) &&
-          (VegExcutionList.startDate ?? '')
+          (VegExcutionList.scheduledDate ?? '')
               .toString()
               .contains(controller.doneDateFilterText.value.toLowerCase()) &&
           (VegExcutionList.doneDate ?? '')
@@ -504,9 +518,9 @@ class VegExcutionListDataSource extends DataTableSource {
       '${VegExcutionListDetails?.responsibility ?? ''}',
       '${VegExcutionListDetails?.frequency ?? ''}',
       '${VegExcutionListDetails?.noOfDays ?? ''}',
-      VegExcutionListDetails?.startDate == "0001-01-01"
+      VegExcutionListDetails?.scheduledDate == "0001-01-01"
           ? "-"
-          : '${VegExcutionListDetails?.startDate ?? ''}',
+          : '${VegExcutionListDetails?.scheduledDate ?? ''}',
 
       VegExcutionListDetails?.status == 727
           ? '${VegExcutionListDetails?.abondond_done_date ?? ''}'

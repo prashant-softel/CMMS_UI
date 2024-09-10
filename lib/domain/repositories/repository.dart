@@ -982,7 +982,7 @@ class Repository {
       print({"res.data", res.data});
       if (!res.hasError) {
         // Fluttertoast.showToast(msg: "Approved Successfully!", fontSize: 45.0);
-  var resp = res.data;
+        var resp = res.data;
         var parsedJson = json.decode(resp);
         Get.dialog<void>(PmTaskViewDialog(
           data: parsedJson['message'],
@@ -1046,11 +1046,14 @@ class Repository {
       if (!res.hasError) {
         var resp = res.data;
         var parsedJson = json.decode(resp);
-        Get.dialog<void>(PmTaskViewDialog(
-          data: parsedJson['message'],
-          taskId: parsedJson['id'][0],
-          type: 1,
-        ));
+        if (shouldClosePermit == false) {
+          Get.dialog<void>(PmTaskViewDialog(
+            data: parsedJson['message'],
+            taskId: parsedJson['id'][0],
+            type: 1,
+          ));
+        }
+
         if (shouldClosePermit) {
           permitCloseButton(closePtwJsonString, isLoading, 0, 2);
         }
@@ -8721,6 +8724,24 @@ class Repository {
           saveRolelistJsonString: saveRolelistJsonString);
 
       if (!res.hasError) {
+        var resp = res.data;
+        var parsedJson = json.decode(resp);
+        Get.dialog(
+          AlertDialog(
+            title: Text("Success"),
+            content: Text("${parsedJson['message']} [${parsedJson['id'][0]}]"),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Get.back(); // Pop the dialog
+                  Get.until(
+                      (route) => route.isFirst); // Navigate to the first route
+                },
+                child: Text("OK"),
+              ),
+            ],
+          ),
+        );
         return true;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'saveRoleAccess');

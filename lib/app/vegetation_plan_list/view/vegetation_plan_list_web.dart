@@ -337,61 +337,44 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
 }
 
 DataColumn2 buildDataColumn(
-  // String columnName,
   String header,
-
-  /// ColumnSize columnSize,
   RxString filterText,
-  // double? fixedWidth,
-  //  {required Function(String) onSearchCallBack}
 ) {
-  return //
-      DataColumn2(
-    // size: columnSize,
-    // fixedWidth: fixedWidth,
-     onSort: header == "Actions"
-          ? null
-          : (int columnIndex, bool ascending) {
-              final controller = Get.find<VegetationPlanListController>();
-              controller.sortData(header);
-            },
-
-    label: //
-        Column(
-            mainAxisAlignment: MainAxisAlignment.center, //
-            children: [
-               Row(
-              children: [
-                Text(
-                  header,
-                  style: Styles.black16W500,
-                ),
-                if (header != "Actions")
-                  Obx(() {
-                    final controller = Get.find<VegetationPlanListController>();
-
-                    return AnimatedRotation(
-                      turns: controller.currentSortColumn.value == header
-                          ? (controller.isAscending.value ? 0.5 : 0.0)
-                          : 0.0,
-                      duration: Duration(milliseconds: 300),
-                      child: Icon(
-                        Icons.expand_more,
-                        size: 20,
-                      ),
-                    );
-                  }),
-              ],
+  return DataColumn2(
+    onSort: header == "Actions"
+        ? null // Disable sorting for "Actions"
+        : (int columnIndex, bool ascending) {
+            final controller = Get.find<VegetationPlanListController>();
+            controller.sortData(header);
+          },
+    label: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          children: [
+            Text(
+              header,
+              style: Styles.black16W500,
             ),
-          // Align(
-          //   alignment: Alignment.centerLeft,
-          //   child: Text(
-          //     header,
-          //     style: Styles.black16W500,
-          //   ),
-          // ),
-        ]),
-    // ),
+            if (header !=
+                "Actions") // Don't show the sorting icon for "Actions"
+              Obx(() {
+                final controller = Get.find<VegetationPlanListController>();
+                return AnimatedRotation(
+                  turns: controller.currentSortColumn.value == header
+                      ? (controller.isAscending.value ? 0.5 : 0.0)
+                      : 0.0,
+                  duration: Duration(milliseconds: 300),
+                  child: Icon(
+                    Icons.expand_more,
+                    size: 20,
+                  ),
+                );
+              }),
+          ],
+        ),
+      ],
+    ),
   );
 }
 

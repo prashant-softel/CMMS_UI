@@ -111,29 +111,6 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                           style: Styles.blackBold16,
                                         ),
                                         Spacer(),
-                                        // Row(
-                                        //   children: [
-                                        //     CustomRichText(title: 'Date Range'),
-                                        //     Dimens.boxWidth10,
-                                        //     CustomTextFieldForStock(
-                                        //       width: MediaQuery.of(context)
-                                        //               .size
-                                        //               .width /
-                                        //           5,
-                                        //       numberTextField: true,
-                                        //       onTap: () {
-                                        //         controller
-                                        //                 .openFromDateToStartDatePicker =
-                                        //             !controller
-                                        //                 .openFromDateToStartDatePicker;
-                                        //         controller.update(
-                                        //             ['stock_Mangement_Date']);
-                                        //       },
-                                        //       hintText:
-                                        //           '${controller.formattedFromdate} - ${controller.formattedTodate}',
-                                        //     ),
-                                        //   ],
-                                        // ),
                                         Dimens.boxWidth10,
                                         varUserAccessModel.value.access_list!
                                                     .where((e) =>
@@ -236,34 +213,6 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                           // Handle column selection
                                         },
                                       ),
-
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'Copy'),
-                                      // ),
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'Excel'),
-                                      // ),
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'PDF'),
-                                      // ),
                                       Container(
                                         decoration: BoxDecoration(boxShadow: [
                                           BoxShadow(
@@ -385,48 +334,6 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                               ),
                             ),
                           ),
-                          // if (controller.openFromDateToStartDatePicker)
-                          //   Positioned(
-                          //     right: 150,
-                          //     top: 85,
-                          //     child: DatePickerWidget(
-                          //       selectionMode: DateRangePickerSelectionMode.range,
-                          //       monthCellStyle: DateRangePickerMonthCellStyle(
-                          //         todayCellDecoration: BoxDecoration(
-                          //             shape: BoxShape.circle,
-                          //             color: ColorValues.appDarkBlueColor),
-                          //       ), // last date of this year
-                          //       // controller: DateRangePickerController(),
-                          //       initialSelectedRange: PickerDateRange(
-                          //         controller.fromDate.value,
-                          //         controller.toDate.value,
-                          //       ),
-
-                          //       onSubmit: (value) {
-                          //         print('po valu ${value.toString()}');
-                          //         PickerDateRange? data =
-                          //             value as PickerDateRange;
-
-                          //         var pickUpDate =
-                          //             DateTime.parse(data.startDate.toString());
-                          //         controller.fromDate.value = pickUpDate;
-                          //         var dropDate =
-                          //             DateTime.parse(data.endDate.toString());
-                          //         dropDate != null
-                          //             ? controller.toDate.value = dropDate
-                          //             : controller.toDate.value = pickUpDate;
-
-                          //         controller.getPmTaskListByDate();
-                          //         controller.openFromDateToStartDatePicker =
-                          //             !controller.openFromDateToStartDatePicker;
-                          //         controller.update(['stock_Mangement_Date']);
-
-                          //         // Get.toNamed(
-                          //         //   Routes.stockManagementGoodsOrdersScreen,
-                          //         // );
-                          //       },
-                          //     ),
-                          //   ),
                         ],
                       ),
                     ],
@@ -770,30 +677,6 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        // TableActionButton(
-                        //   color: Color.fromARGB(255, 141, 183, 180),
-                        //   icon: Icons.add,
-                        //   // label: 'Execute',
-                        //   message: 'Schedule Execution',
-                        //   onPress: () {
-                        //     Get.dialog(AddMCExecutionDialog(
-                        //       planId: ModuleCleaningPlanningListDetails?.planId,
-                        //       frequency:
-                        //           ModuleCleaningPlanningListDetails?.frequency,
-                        //     ));
-                        //     //   int id =
-                        //     //       ModuleCleaningPlanningListDetails?.planId ??
-                        //     //           0;
-                        //     //   if (id != 0) {
-                        //     //     Get.toNamed(Routes.purchaseGoodsorderView,
-                        //     //         arguments: {'id': id, "type": 1});
-                        //     //   }
-                        //     // },
-                        //     // onPress: () {
-                        //     //   controller.viewAddGoodsOrdersDetails(
-                        //     //       planId: int.tryParse('${record[0]}'));
-                        //   },
-                        // )
                       ])
                     : Text(value.toString()),
           ),
@@ -807,10 +690,6 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
           controller.clearStoreDataPlanid();
           Get.toNamed(Routes.viewMcPlaning, arguments: {'mcid': id});
         }
-        //   final _flutterSecureStorage = const FlutterSecureStorage();
-        //   _flutterSecureStorage.delete(key: "UserId");
-        //   Get.toNamed(Routes.viewUserDetail,
-        //       arguments: {'userId': UserDetails?.id});
       },
     );
   }

@@ -903,16 +903,18 @@ class IncidentReportListDataSource extends DataTableSource {
 
 //IR 2nd step button
                             varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kIncidentReportFeatureId &&
-                                                e.add ==
-                                                    UserAccessConstants
-                                                        .kHaveAddAccess)
-                                            .length >
-                                        0 &&
-                                    incidentReportListDetails!.status == 183
+                                                .where((e) =>
+                                                    e.feature_id ==
+                                                        UserAccessConstants
+                                                            .kIncidentReportFeatureId &&
+                                                    e.add ==
+                                                        UserAccessConstants
+                                                            .kHaveAddAccess)
+                                                .length >
+                                            0 &&
+                                        incidentReportListDetails!.status ==
+                                            183 ||
+                                    incidentReportListDetails!.status == 184
                                 ? TableActionButton(
                                     color: Color.fromARGB(136, 107, 152, 211),
                                     icon: Icons.start_outlined,

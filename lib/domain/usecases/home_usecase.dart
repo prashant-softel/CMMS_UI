@@ -22,6 +22,10 @@ class HomeUsecase {
   void clearValue() async => _repository.clearData(LocalKeys.userDetailId);
   void jobclearValue() async => _repository.clearData(LocalKeys.jobId);
   void pmclearValue() async => _repository.clearData(LocalKeys.pmTaskId);
+  void mcclearValue() async => _repository.clearData(LocalKeys.mcid);
+  void clearStoreMcPlanIdData() async =>
+      _repository.clearData(LocalKeys.planId);
+
   void iRclearValue() async => _repository.clearData(LocalKeys.irId);
 
   void smclearValue() async => _repository.clearData(LocalKeys.goId);

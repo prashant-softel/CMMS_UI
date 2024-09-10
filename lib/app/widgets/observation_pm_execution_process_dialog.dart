@@ -116,479 +116,455 @@ class ObservationPmExecutionViewDialog extends GetView {
                   // Text(jsonEncode(controller.dropdownMapperData)),
                   Container(
                     height: MediaQuery.of(context).size.height / 1.4,
-                    child: ScrollConfiguration(
-                      behavior: ScrollConfiguration.of(context)
-                          .copyWith(scrollbars: false),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            ////Assets
-                            Container(
-                              margin: Dimens.edgeInsets20,
-                              height: ((controller.selectedItem
-                                              ?.checklist_observation?.length ??
-                                          0) *
-                                      80) +
-                                  250,
-                              width: MediaQuery.of(context).size.width / 1.2,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color:
-                                      ColorValues.lightGreyColorWithOpacity35,
-                                  width: 1,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          ////Assets
+                          Container(
+                            margin: Dimens.edgeInsets20,
+                            height: ((controller.selectedItem
+                                            ?.checklist_observation?.length ??
+                                        0) *
+                                    80) +
+                                250,
+                            width: MediaQuery.of(context).size.width / 1.2,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: ColorValues.lightGreyColorWithOpacity35,
+                                width: 1,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: ColorValues.appBlueBackgroundColor,
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 2),
                                 ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: ColorValues.appBlueBackgroundColor,
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "  ${controller.selectedItem?.checklist_name ?? ""}",
-                                          style: Styles.blue700,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Obx(
-                                      () => DataTable2(
-                                        dataRowHeight: 100,
-                                        minWidth: 2500,
-                                        border: TableBorder.all(
-                                            color: Color.fromARGB(
-                                                255, 206, 229, 234)),
-                                        columns: [
-                                          // DataColumn2(
-                                          //     fixedWidth: 100,
-                                          //     label: Text(
-                                          //       "Sr.No.",
-                                          //       style: TextStyle(
-                                          //           fontSize: 15,
-                                          //           fontWeight: FontWeight.bold),
-                                          //     )),
-                                          DataColumn2(
-                                              fixedWidth: 400,
-                                              label: Text(
-                                                "Check Point",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              fixedWidth: 400,
-                                              label: Text(
-                                                "Requirement",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              fixedWidth: 145,
-                                              label: Text(
-                                                "Weightage",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              fixedWidth: 120,
-                                              label: Text(
-                                                "CP OK ?",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              fixedWidth: 300,
-                                              label: Text(
-                                                "Observation",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              fixedWidth: 180,
-                                              label: Text(
-                                                "Upload Images",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              fixedWidth: 193,
-                                              label: Text(
-                                                "Input Type",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-
-                                          DataColumn2(
-                                              fixedWidth: 200,
-                                              label: Text(
-                                                "Create Job",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                        ],
-                                        rows: controller.rowItemobs.value
-                                            .map((record) {
-                                          return DataRow(
-                                            // height: 130,
-                                            cells: record.map((
-                                              mapData,
-                                            ) {
-                                              return DataCell(commonUi(
-                                                  setState, mapData, record));
-                                            }).toList(),
-                                          );
-                                        }).toList(),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              ],
                             ),
-
-                            ////Associated Job cards
-                            // (controller.listMrsByTaskId?.value.isNotEmpty ??
-                            //             false) &&
-                            //         controller.listMrsByTaskId!.value[0]
-                            //                 ?.mrs_return_ID ==
-                            //             0 &&
-                            //         controller.allTrue.value == false
-                            //     ?
-                            Container(
-                              margin: Dimens.edgeInsets20,
-                              height: 300,
-                              width: MediaQuery.of(context).size.width / 1.2,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color:
-                                      ColorValues.lightGreyColorWithOpacity35,
-                                  width: 1,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: ColorValues.appBlueBackgroundColor,
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 2),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "  ${controller.selectedItem?.checklist_name ?? ""}",
+                                        style: Styles.blue700,
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Material Used For ",
-                                          style: Styles.blue700,
-                                        ),
-                                        // GestureDetector(
-                                        //   onTap: () {
-                                        //     controller.addRowItem();
-                                        //   },
-                                        //   child: Container(
-                                        //     height: 25,
-                                        //     width: 70,
-                                        //     decoration: BoxDecoration(
-                                        //       color: ColorValues.addNewColor,
-                                        //       border: Border.all(
-                                        //         color: ColorValues
-                                        //             .lightGreyColorWithOpacity35,
-                                        //         width: 1,
-                                        //       ),
-                                        //       borderRadius: BorderRadius.all(
-                                        //           Radius.circular(5)),
-                                        //     ),
-                                        //     child: Center(
-                                        //       child: Text(
-                                        //         " + Add ",
-                                        //         style: TextStyle(
-                                        //             fontSize: 18,
-                                        //             fontWeight: FontWeight.w100,
-                                        //             color: Colors.white),
-                                        //       ),
-                                        //     ),
-                                        //   ),
-                                        // )
+                                ),
+                                Expanded(
+                                  child: Obx(
+                                    () => DataTable2(
+                                      dataRowHeight: 100,
+                                      minWidth: 2500,
+                                      border: TableBorder.all(
+                                          color: Color.fromARGB(
+                                              255, 206, 229, 234)),
+                                      columns: [
+                                        // DataColumn2(
+                                        //     fixedWidth: 100,
+                                        //     label: Text(
+                                        //       "Sr.No.",
+                                        //       style: TextStyle(
+                                        //           fontSize: 15,
+                                        //           fontWeight: FontWeight.bold),
+                                        //     )),
+                                        DataColumn2(
+                                            fixedWidth: 400,
+                                            label: Text(
+                                              "Check Point",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 400,
+                                            label: Text(
+                                              "Requirement",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 145,
+                                            label: Text(
+                                              "Weightage",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 120,
+                                            label: Text(
+                                              "CP OK ?",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 300,
+                                            label: Text(
+                                              "Observation",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 180,
+                                            label: Text(
+                                              "Upload Images",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 193,
+                                            label: Text(
+                                              "Input Type",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+
+                                        DataColumn2(
+                                            fixedWidth: 200,
+                                            label: Text(
+                                              "Create Job",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
                                       ],
+                                      rows: controller.rowItemobs.value
+                                          .map((record) {
+                                        return DataRow(
+                                          // height: 130,
+                                          cells: record.map((
+                                            mapData,
+                                          ) {
+                                            return DataCell(commonUi(
+                                                setState, mapData, record));
+                                          }).toList(),
+                                        );
+                                      }).toList(),
                                     ),
                                   ),
-                                  Expanded(
-                                    child: Obx(() {
-                                      return DataTable2(
-                                        minWidth: 1600,
-                                        dataRowHeight: 70,
-                                        columnSpacing: 10,
-                                        border: TableBorder.all(
-                                            color: Color.fromARGB(
-                                                255, 206, 229, 234)),
-                                        columns: [
-                                          DataColumn2(
-                                              fixedWidth: 350,
-                                              label: Text(
-                                                "Material Name",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              fixedWidth: 150,
-                                              label: Text(
-                                                "Sr No.",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              fixedWidth: 150,
-                                              label: Text(
-                                                "MDM Code",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              fixedWidth: 250,
-                                              label: Text(
-                                                "Material Type",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              fixedWidth: 150,
-                                              label: Text(
-                                                "Issued Qty",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              fixedWidth: 150,
-                                              label: Text(
-                                                "Consumed By All",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              fixedWidth: 200,
-                                              label: Text(
-                                                "Consumed By This",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          // DataColumn2(
-                                          //     fixedWidth: 100,
-                                          //     label: Text(
-                                          //       "Action",
-                                          //       style: TextStyle(
-                                          //           fontSize: 15,
-                                          //           fontWeight:
-                                          //               FontWeight.bold),
-                                          //     )),
-                                        ],
-                                        rows: controller.rowItem.value
-                                            .map((record) {
-                                          return DataRow(
-                                            // height: 130,
-                                            cells: record.map((mapData) {
-                                              return DataCell(
-                                                (mapData['key'] == "Drop_down")
-                                                    ? DropdownWebStock(
-                                                        width: MediaQuery.of(
-                                                                context)
-                                                            .size
-                                                            .width,
-                                                        dropdownList: controller
-                                                            .cmmrsItems!
-                                                            .where((p0) {
-                                                              return !controller
-                                                                  .rowItem
-                                                                  .map((p0) => p0[
-                                                                          0]
-                                                                      ["value"])
-                                                                  .contains(
-                                                                      p0!.name);
-                                                            })
-                                                            .toList()
-                                                            .obs,
-                                                        selectedValue:
-                                                            mapData["value"],
-                                                        onValueChanged: (list,
-                                                            selectedValue) {
-                                                          // print('paifcghb:${controller.assetList}');
-                                                          // print({selectedValue: selectedValue});
-                                                          mapData["value"] =
-                                                              selectedValue;
-                                                          controller.dropdownMapperData[
-                                                                  selectedValue] =
-                                                              list.firstWhere(
-                                                                  (element) =>
-                                                                      element
-                                                                          .name ==
-                                                                      selectedValue,
-                                                                  orElse: null);
-                                                          Future.delayed(
-                                                              Duration.zero,
-                                                              () {
-                                                            setState(() {});
-                                                          });
-                                                        },
-                                                      )
-                                                    : (mapData['key'] ==
-                                                            "Sr_No")
-                                                        ? Text(
-                                                            "${controller.dropdownMapperData[record[0]['value']]?.serial_number ?? ""}")
-                                                        : (mapData['key'] ==
-                                                                "code")
-                                                            ? Text(
-                                                                "${controller.dropdownMapperData[record[0]['value']]?.asset_MDM_code ?? ""}")
-                                                            : (mapData['key'] ==
-                                                                    "Material_Type")
-                                                                ? Text(
-                                                                    "${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
-                                                                // : (mapData['key'] ==
-                                                                //         "Action ")
-                                                                //     ? Padding(
-                                                                //         padding: EdgeInsets.only(top: 10),
-                                                                //         child: Column(
-                                                                //           mainAxisAlignment: MainAxisAlignment.start,
-                                                                //           crossAxisAlignment: CrossAxisAlignment.start,
-                                                                //           children: [
-                                                                //             TableActionButton(
-                                                                //               color: ColorValues.appRedColor,
-                                                                //               icon: Icons.delete,
-                                                                //               label: '',
-                                                                //               message: '',
-                                                                //               onPress: () {
-                                                                //                 controller.rowItem.remove(record);
-                                                                //               },
-                                                                //             )
-                                                                //           ],
-                                                                //         ),
-                                                                //       )
-                                                                : (mapData['key'] ==
-                                                                        "Issued_Qty")
-                                                                    ? Text(
-                                                                        "${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0)}")
-                                                                    : (mapData['key'] ==
-                                                                            "Used_Qty")
-                                                                        ? Text(
-                                                                            "${(controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0)}")
-                                                                        : (mapData['key'] ==
-                                                                                "Consumed_Qty")
-                                                                            ? Padding(
-                                                                                padding: const EdgeInsets.only(top: 10),
-                                                                                child: Container(
-                                                                                  decoration: BoxDecoration(
-                                                                                    boxShadow: [
-                                                                                      BoxShadow(
-                                                                                        color: Colors.black26,
-                                                                                        offset: const Offset(
-                                                                                          5.0,
-                                                                                          5.0,
-                                                                                        ),
-                                                                                        blurRadius: 5.0,
-                                                                                        spreadRadius: 1.0,
-                                                                                      ),
-                                                                                    ],
-                                                                                    color: ColorValues.whiteColor,
-                                                                                    borderRadius: BorderRadius.circular(5),
-                                                                                  ),
-                                                                                  child: LoginCustomTextfield(
-                                                                                    width: (Get.width * .4),
-                                                                                    keyboardType: TextInputType.number,
-                                                                                    inputFormatters: <TextInputFormatter>[
-                                                                                      FilteringTextInputFormatter.digitsOnly
-                                                                                    ],
-                                                                                    maxLine: 1,
-                                                                                    enabled: controller.listMrsByTaskId!.value
-                                                                                                    .firstWhereOrNull(
-                                                                                                      (element) => element?.jobCardId != 0 || element?.pmId != 0,
-                                                                                                    )
-                                                                                                    ?.mrs_return_ID ==
-                                                                                                0 &&
-                                                                                            controller.allTrue.value == false
-                                                                                        ? true
-                                                                                        : false,
-                                                                                    textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                    onChanged: (txt) {
-                                                                                      int intialQty = int.tryParse(mapData['value'] ?? "") ?? 0;
+                                ),
+                              ],
+                            ),
+                          ),
 
-                                                                                      num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
-                                                                                      num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
-                                                                                      num intiAllowedQty = usedQty - intialQty;
-
-                                                                                      num maxAllowedQty = issuedQty - intiAllowedQty;
-                                                                                      if (txt.isNotEmpty) {
-                                                                                        num enteredValue = num.tryParse(txt) ?? 0;
-                                                                                        if (enteredValue > maxAllowedQty) {
-                                                                                          // If the entered quantity exceeds the allowed maximum, truncate it
-                                                                                          setState(() {
-                                                                                            txt = intialQty.toString();
-                                                                                            mapData['value'] = intialQty.toString();
-                                                                                          });
-                                                                                          // Optionally, you can show an error message or handle the situation
-                                                                                          Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
-                                                                                        }
-                                                                                      } else if (txt.isEmpty) {
-                                                                                        txt = intialQty.toString();
-                                                                                      }
-                                                                                      mapData["value"] = txt;
-                                                                                    },
-                                                                                  ),
-                                                                                ),
-                                                                              )
-                                                                            : Text(mapData['value'] ??
-                                                                                ''),
-                                              );
-                                            }).toList(),
-                                          );
-                                        }).toList(),
-                                      );
-                                    }),
-                                  ),
-                                ],
+                          ////Associated Job cards
+                          // (controller.listMrsByTaskId?.value.isNotEmpty ??
+                          //             false) &&
+                          //         controller.listMrsByTaskId!.value[0]
+                          //                 ?.mrs_return_ID ==
+                          //             0 &&
+                          //         controller.allTrue.value == false
+                          //     ?
+                          Container(
+                            margin: Dimens.edgeInsets20,
+                            height: 300,
+                            width: MediaQuery.of(context).size.width / 1.2,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: ColorValues.lightGreyColorWithOpacity35,
+                                width: 1,
                               ),
-                            )
-                            //: Dimens.box0
-                          ],
-                        ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: ColorValues.appBlueBackgroundColor,
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Material Used For ",
+                                        style: Styles.blue700,
+                                      ),
+                                      // GestureDetector(
+                                      //   onTap: () {
+                                      //     controller.addRowItem();
+                                      //   },
+                                      //   child: Container(
+                                      //     height: 25,
+                                      //     width: 70,
+                                      //     decoration: BoxDecoration(
+                                      //       color: ColorValues.addNewColor,
+                                      //       border: Border.all(
+                                      //         color: ColorValues
+                                      //             .lightGreyColorWithOpacity35,
+                                      //         width: 1,
+                                      //       ),
+                                      //       borderRadius: BorderRadius.all(
+                                      //           Radius.circular(5)),
+                                      //     ),
+                                      //     child: Center(
+                                      //       child: Text(
+                                      //         " + Add ",
+                                      //         style: TextStyle(
+                                      //             fontSize: 18,
+                                      //             fontWeight: FontWeight.w100,
+                                      //             color: Colors.white),
+                                      //       ),
+                                      //     ),
+                                      //   ),
+                                      // )
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Obx(() {
+                                    return DataTable2(
+                                      minWidth: 1600,
+                                      dataRowHeight: 70,
+                                      columnSpacing: 10,
+                                      border: TableBorder.all(
+                                          color: Color.fromARGB(
+                                              255, 206, 229, 234)),
+                                      columns: [
+                                        DataColumn2(
+                                            fixedWidth: 350,
+                                            label: Text(
+                                              "Material Name",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 150,
+                                            label: Text(
+                                              "Sr No.",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 150,
+                                            label: Text(
+                                              "MDM Code",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 250,
+                                            label: Text(
+                                              "Material Type",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 150,
+                                            label: Text(
+                                              "Issued Qty",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 150,
+                                            label: Text(
+                                              "Consumed By All",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 200,
+                                            label: Text(
+                                              "Consumed By This",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        // DataColumn2(
+                                        //     fixedWidth: 100,
+                                        //     label: Text(
+                                        //       "Action",
+                                        //       style: TextStyle(
+                                        //           fontSize: 15,
+                                        //           fontWeight:
+                                        //               FontWeight.bold),
+                                        //     )),
+                                      ],
+                                      rows: controller.rowItem.value
+                                          .map((record) {
+                                        return DataRow(
+                                          // height: 130,
+                                          cells: record.map((mapData) {
+                                            return DataCell(
+                                              (mapData['key'] == "Drop_down")
+                                                  ? DropdownWebStock(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width,
+                                                      dropdownList: controller
+                                                          .cmmrsItems!
+                                                          .where((p0) {
+                                                            return !controller
+                                                                .rowItem
+                                                                .map((p0) => p0[
+                                                                    0]["value"])
+                                                                .contains(
+                                                                    p0!.name);
+                                                          })
+                                                          .toList()
+                                                          .obs,
+                                                      selectedValue:
+                                                          mapData["value"],
+                                                      onValueChanged: (list,
+                                                          selectedValue) {
+                                                        // print('paifcghb:${controller.assetList}');
+                                                        // print({selectedValue: selectedValue});
+                                                        mapData["value"] =
+                                                            selectedValue;
+                                                        controller.dropdownMapperData[
+                                                                selectedValue] =
+                                                            list.firstWhere(
+                                                                (element) =>
+                                                                    element
+                                                                        .name ==
+                                                                    selectedValue,
+                                                                orElse: null);
+                                                        Future.delayed(
+                                                            Duration.zero, () {
+                                                          setState(() {});
+                                                        });
+                                                      },
+                                                    )
+                                                  : (mapData['key'] == "Sr_No")
+                                                      ? Text(
+                                                          "${controller.dropdownMapperData[record[0]['value']]?.serial_number ?? ""}")
+                                                      : (mapData['key'] ==
+                                                              "code")
+                                                          ? Text(
+                                                              "${controller.dropdownMapperData[record[0]['value']]?.asset_MDM_code ?? ""}")
+                                                          : (mapData['key'] ==
+                                                                  "Material_Type")
+                                                              ? Text(
+                                                                  "${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
+                                                              // : (mapData['key'] ==
+                                                              //         "Action ")
+                                                              //     ? Padding(
+                                                              //         padding: EdgeInsets.only(top: 10),
+                                                              //         child: Column(
+                                                              //           mainAxisAlignment: MainAxisAlignment.start,
+                                                              //           crossAxisAlignment: CrossAxisAlignment.start,
+                                                              //           children: [
+                                                              //             TableActionButton(
+                                                              //               color: ColorValues.appRedColor,
+                                                              //               icon: Icons.delete,
+                                                              //               label: '',
+                                                              //               message: '',
+                                                              //               onPress: () {
+                                                              //                 controller.rowItem.remove(record);
+                                                              //               },
+                                                              //             )
+                                                              //           ],
+                                                              //         ),
+                                                              //       )
+                                                              : (mapData['key'] ==
+                                                                      "Issued_Qty")
+                                                                  ? Text(
+                                                                      "${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0)}")
+                                                                  : (mapData['key'] ==
+                                                                          "Used_Qty")
+                                                                      ? Text(
+                                                                          "${(controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0)}")
+                                                                      : (mapData['key'] ==
+                                                                              "Consumed_Qty")
+                                                                          ? Padding(
+                                                                              padding: const EdgeInsets.only(top: 10),
+                                                                              child: Container(
+                                                                                decoration: BoxDecoration(
+                                                                                  boxShadow: [
+                                                                                    BoxShadow(
+                                                                                      color: Colors.black26,
+                                                                                      offset: const Offset(
+                                                                                        5.0,
+                                                                                        5.0,
+                                                                                      ),
+                                                                                      blurRadius: 5.0,
+                                                                                      spreadRadius: 1.0,
+                                                                                    ),
+                                                                                  ],
+                                                                                  color: ColorValues.whiteColor,
+                                                                                  borderRadius: BorderRadius.circular(5),
+                                                                                ),
+                                                                                child: LoginCustomTextfield(
+                                                                                  width: (Get.width * .4),
+                                                                                  keyboardType: TextInputType.number,
+                                                                                  inputFormatters: <TextInputFormatter>[
+                                                                                    FilteringTextInputFormatter.digitsOnly
+                                                                                  ],
+                                                                                  maxLine: 1,
+                                                                                  enabled: controller.listMrsByTaskId!.value
+                                                                                                  .firstWhereOrNull(
+                                                                                                    (element) => element?.jobCardId != 0 || element?.pmId != 0,
+                                                                                                  )
+                                                                                                  ?.mrs_return_ID ==
+                                                                                              0 &&
+                                                                                          controller.allTrue.value == false
+                                                                                      ? true
+                                                                                      : false,
+                                                                                  textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                  onChanged: (txt) {
+                                                                                    int intialQty = int.tryParse(mapData['value'] ?? "") ?? 0;
+
+                                                                                    num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
+                                                                                    num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
+                                                                                    num intiAllowedQty = usedQty - intialQty;
+
+                                                                                    num maxAllowedQty = issuedQty - intiAllowedQty;
+                                                                                    if (txt.isNotEmpty) {
+                                                                                      num enteredValue = num.tryParse(txt) ?? 0;
+                                                                                      if (enteredValue > maxAllowedQty) {
+                                                                                        // If the entered quantity exceeds the allowed maximum, truncate it
+                                                                                        setState(() {
+                                                                                          txt = intialQty.toString();
+                                                                                          mapData['value'] = intialQty.toString();
+                                                                                        });
+                                                                                        // Optionally, you can show an error message or handle the situation
+                                                                                        Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
+                                                                                      }
+                                                                                    } else if (txt.isEmpty) {
+                                                                                      txt = intialQty.toString();
+                                                                                    }
+                                                                                    mapData["value"] = txt;
+                                                                                  },
+                                                                                ),
+                                                                              ),
+                                                                            )
+                                                                          : Text(mapData['value'] ??
+                                                                              ''),
+                                            );
+                                          }).toList(),
+                                        );
+                                      }).toList(),
+                                    );
+                                  }),
+                                ),
+                              ],
+                            ),
+                          )
+                          //: Dimens.box0
+                        ],
                       ),
                     ),
                   ),

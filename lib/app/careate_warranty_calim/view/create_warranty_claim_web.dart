@@ -2661,16 +2661,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                         fontWeight:
                                                                             FontWeight.bold),
                                                                   )),
-                                                                  DataColumn(
-                                                                      label:
-                                                                          Text(
-                                                                    "Location",
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            15,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  )),
+                                                               
                                                                   DataColumn(
                                                                       label:
                                                                           Text(
@@ -2702,8 +2693,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                             '')),
                                                                         DataCell(Text(controller.historyList?[index]?.comment.toString() ??
                                                                             '')),
-                                                                        DataCell(
-                                                                            Text('--')),
+
                                                                         DataCell(Text(controller.historyList?[index]?.status_name.toString() ??
                                                                             '')),
                                                                       ]),

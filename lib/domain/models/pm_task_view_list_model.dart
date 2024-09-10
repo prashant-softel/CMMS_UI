@@ -61,7 +61,7 @@ class PmtaskViewModel {
   int? employee_ID;
   String? employee_name;
   String? company;
-  int? isolation_taken;
+  dynamic isolation_taken;
   String? isolated_equipment;
   String? tbT_conducted_by_name;
   String? tbT_done_time;
@@ -69,7 +69,7 @@ class PmtaskViewModel {
   String? workdescription;
   String? new_remark;
   String? site_name;
-
+  int? tbt_start;
   PmtaskViewModel({
     this.assigned_to_name,
     this.category_id,
@@ -101,6 +101,7 @@ class PmtaskViewModel {
     this.cancelled_by_name,
     this.closed_at,
     this.is_PTW,
+    this.tbt_start,
     this.closed_by_id,
     this.closed_by_name,
     this.rejected_at,
@@ -135,6 +136,7 @@ class PmtaskViewModel {
         status_short_ptw: json["status_short_ptw"] ?? "",
         approved_by: json["approved_by"],
         plan_id: json["plan_id"] ?? 0,
+        tbt_start: json['tbt_start'] ?? 0,
         is_PTW: json['is_PTW'] ?? "",
         updated_by_name: json["updated_by_name"] ?? "",
         updated_by_id: json["updated_by_id"] ?? 0,
@@ -219,6 +221,7 @@ class PmtaskViewModel {
         "employee_ID": employee_ID,
         "employee_name": employee_name,
         "company": company,
+        "tbt_start": tbt_start,
         "isolation_taken": isolation_taken,
         "isolated_equipment": isolated_equipment,
         "updated_by_name": updated_by_name,

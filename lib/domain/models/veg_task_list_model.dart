@@ -22,7 +22,7 @@ class VegTaskListModel {
   String? responsibility;
   String? frequency;
   int? noOfDays;
-  String? startDate;
+  String? scheduledDate;
   String? doneDate;
   String? lastDoneDate;
   int? status;
@@ -44,7 +44,7 @@ class VegTaskListModel {
     this.abondend,
     this.frequency,
     this.noOfDays,
-    this.startDate,
+    this.scheduledDate,
     this.doneDate,
     this.lastDoneDate,
     this.status,
@@ -69,7 +69,7 @@ class VegTaskListModel {
         actual_Qnty: json['actual_Qnty'] ?? 0,
         deviation: json['deviation'] ?? 0,
         time_taken: json['time_taken'] ?? 0,
-        startDate: Utility.getFormatedyearMonthDay(json['startDate']),
+        scheduledDate: Utility.getFormatedyearMonthDay(json['scheduledDate']),
         doneDate: json['doneDate'] == "0001-01-01T05:30:00"
             ? ''
             : Utility.getFormatedyearMonthDay(json['doneDate']),
@@ -98,7 +98,7 @@ class VegTaskListModel {
         "frequency": frequency,
         "noOfDays": noOfDays,
         "water_used": water_used,
-        "startDate": startDate,
+        "scheduledDate": scheduledDate,
         "doneDate": doneDate,
         "lastDoneDate": lastDoneDate,
         "status": status,

@@ -126,24 +126,24 @@ class IncidentReportDashboardScreen
                                     })
                                 : Dimens.box0,
                             //if (Responsive.isDesktop(context))
-                            varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kIncidentReportFeatureId &&
-                                            e.view ==
-                                                UserAccessConstants
-                                                    .kHaveViewAccess)
-                                        .length >
-                                    0
-                                ? _incidentReportList(
-                                    tittle: "Add Incident Report",
-                                    ontap: () {
-                                      Get.toNamed(
-                                        Routes.addIncidentReportContentWeb,
-                                      );
-                                    })
-                                : Dimens.box0
+                            // varUserAccessModel.value.access_list!
+                            //             .where((e) =>
+                            //                 e.feature_id ==
+                            //                     UserAccessConstants
+                            //                         .kIncidentReportFeatureId &&
+                            //                 e.view ==
+                            //                     UserAccessConstants
+                            //                         .kHaveViewAccess)
+                            //             .length >
+                            //         0
+                            //     ? _incidentReportList(
+                            //         tittle: "Add Incident Report",
+                            //         ontap: () {
+                            //           Get.toNamed(
+                            //             Routes.addIncidentReportContentWeb,
+                            //           );
+                            //         })
+                            //     : Dimens.box0
                           ],
                         )
                       ]),

@@ -18,6 +18,8 @@ class ModuleCleaningListExecutionController extends GetxController {
   TextEditingController commentTextFieldCtrlr = TextEditingController();
   RxList<MCTaskListModel?> mcTaskList = <MCTaskListModel?>[].obs;
   RxList<MCTaskListModel?> filteredData = <MCTaskListModel>[].obs;
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
 
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
@@ -69,12 +71,12 @@ class ModuleCleaningListExecutionController extends GetxController {
   final Map<String, double> columnwidth = {
     "ID": 200,
     "Title": 200,
-    "Plan ID": 100,
+    "Plan ID": 150,
     // "Responsibility": 200,
     "Frequency": 163,
     "No Of Days": 153,
     "Start Date": 130,
-    "Done Date": 120,
+    "Done Date": 135,
     // "Status": 100
   };
   Map<String, RxString> filterText = {};
@@ -142,7 +144,7 @@ class ModuleCleaningListExecutionController extends GetxController {
                 false) ||
             (item?.noOfDays?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.startDate
+            (item?.scheduledDate
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
@@ -234,5 +236,56 @@ class ModuleCleaningListExecutionController extends GetxController {
 
   void clearStoreDataPlanid() {
     moduleCleaningListExecutionPresenter.clearValuePlanId();
+  }
+
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+
+    switch (columnName) {
+      case 'ID':
+        mcTaskList.sort((a, b) => isAscending.value
+            ? a!.executionId!.compareTo(b!.executionId!)
+            : b!.executionId!.compareTo(a!.executionId!));
+        break;
+      case 'Title':
+        mcTaskList.sort((a, b) => isAscending.value
+            ? a!.title!.compareTo(b!.title!)
+            : b!.title!.compareTo(a!.title!));
+        break;
+      case 'Plan ID':
+        mcTaskList.sort((a, b) => isAscending.value
+            ? a!.planId!.compareTo(b!.planId!)
+            : b!.planId!.compareTo(a!.planId!));
+        break;
+      case 'Frequency':
+        mcTaskList.sort((a, b) => isAscending.value
+            ? a!.frequency!.compareTo(b!.frequency!)
+            : b!.frequency!.compareTo(a!.frequency!));
+        break;
+      case 'No Of Days':
+        mcTaskList.sort((a, b) => isAscending.value
+            ? a!.noOfDays!.compareTo(b!.noOfDays!)
+            : b!.noOfDays!.compareTo(a!.noOfDays!));
+        break;
+      case 'Start Date':
+        mcTaskList.sort((a, b) => isAscending.value
+            ? a!.scheduledDate!.compareTo(b!.scheduledDate!)
+            : b!.scheduledDate!.compareTo(a!.scheduledDate!));
+        break;
+      case 'Done Date':
+        mcTaskList.sort((a, b) => isAscending.value
+            ? a!.doneDate!.compareTo(b!.doneDate!)
+            : b!.doneDate!.compareTo(a!.doneDate!));
+        break;
+      default:
+        break;
+    }
+
+    update();
   }
 }

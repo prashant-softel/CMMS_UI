@@ -1086,17 +1086,36 @@ class PreventiveMaintenanceTaskViewContentWeb
                               backgroundColor: ColorValues.linktopermitColor,
                               text: "Start",
                               onPressed: () {
-                                controller.pmtaskViewModel.value
-                                            ?.ptw_tbt_done ==
+                                controller.pmtaskViewModel.value?.ptw_tbt_done ==
                                         1
                                     ? controller.setPmTask()
-                                    : Get.dialog<void>(TbtDonePMTaskDialog(
-                                        ptw_id: controller.pmtaskViewModel.value
-                                                ?.permit_id ??
-                                            0,
-                                        id: controller
-                                                .pmtaskViewModel.value?.id ??
-                                            0));
+                                    : controller.pmtaskViewModel.value!
+                                                    .ptw_tbt_done ==
+                                                0 &&
+                                            controller.pmtaskViewModel.value!
+                                                    .tbt_start ==
+                                                0
+                                        ? Get.defaultDialog(
+                                            radius: 5,
+                                            title: 'Alert',
+                                            middleText:
+                                                'Unable to start task due to permit taken for ${controller.pmtaskViewModel.value!.start_time}',
+                                            textConfirm: 'OK',
+                                            onConfirm: () {
+                                              Get.back(); // Close the dialog
+                                              // Get.offAllNamed(Routes.pmTask);
+                                            },
+                                            buttonColor:
+                                                ColorValues.appGreenColor,
+                                            confirmTextColor: Colors.white,
+                                            barrierDismissible: false)
+                                        : Get.dialog<void>(TbtDonePMTaskDialog(
+                                            ptw_id: controller.pmtaskViewModel
+                                                    .value?.permit_id ??
+                                                0,
+                                            id: controller.pmtaskViewModel.value
+                                                    ?.id ??
+                                                0));
                               },
                             ),
                           )
@@ -1161,74 +1180,75 @@ class PreventiveMaintenanceTaskViewContentWeb
                           )
                         : Dimens.box0,
                     Dimens.boxWidth5,
-                    // (controller.pmtaskViewModel.value?.status == 162 ||
-                    //             controller.pmtaskViewModel.value?.status ==
-                    //                 161 ||
-                    //             controller.pmtaskViewModel.value?.status ==
-                    //                 163) &&
-                    //         varUserAccessModel.value.access_list!
-                    //                 .where((e) =>
-                    //                     e.feature_id ==
-                    //                         UserAccessConstants
-                    //                             .kPmTaskFeatureId &&
-                    //                     e.add ==
-                    //                         UserAccessConstants.kHaveAddAccess)
-                    //                 .length >
-                    //             0
-                    //     ? Container(
-                    //         height: 35,
-                    //         child: CustomElevatedButton(
-                    //           // icon: Icons.link,
-                    //           backgroundColor: ColorValues.redColor,
-                    //           text: "Cancel Task",
-                    //           onPressed: () {
-                    //             // controller.CancelPMTask();
+                    (controller.pmtaskViewModel.value?.status == 162 ||
+                                controller.pmtaskViewModel.value?.status ==
+                                    161 ||
+                                controller.pmtaskViewModel.value?.status ==
+                                    163) &&
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPmTaskFeatureId &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0
+                        ? Container(
+                            height: 35,
+                            child: CustomElevatedButton(
+                              // icon: Icons.link,
+                              backgroundColor: ColorValues.redColor,
+                              text: "Cancel Task",
+                              onPressed: () {
+                                // controller.CancelPMTask();
 
-                    //             // _isDeleteDialog() {
-                    //             Get.dialog(
-                    //               AlertDialog(
-                    //                 content: Column(
-                    //                     mainAxisSize: MainAxisSize.min,
-                    //                     children: [
-                    //                       Icon(Icons.cancel,
-                    //                           size: 35,
-                    //                           color: ColorValues.redColor),
-                    //                       SizedBox(
-                    //                         height: 10,
-                    //                       ),
-                    //                       Text(
-                    //                         'Are you sure you want to cancel the task?',
-                    //                         style: Styles.blackBold14w500,
-                    //                       ),
-                    //                     ]),
-                    //                 actions: [
-                    //                   Row(
-                    //                     mainAxisAlignment:
-                    //                         MainAxisAlignment.spaceEvenly,
-                    //                     children: [
-                    //                       TextButton(
-                    //                         onPressed: () {
-                    //                           Get.back();
-                    //                         },
-                    //                         child: Text('NO'),
-                    //                       ),
-                    //                       TextButton(
-                    //                         onPressed: () {
-                    //                           Get.back();
-                    //                           controller.CancelPMTask();
-                    //                         },
-                    //                         child: Text('YES'),
-                    //                       ),
-                    //                     ],
-                    //                   )
-                    //                 ],
-                    //               ),
-                    //             );
-                    //             // }
-                    //           },
-                    //         ),
-                    //       )
-                    //     : Dimens.box0,
+                                // _isDeleteDialog() {
+                                Get.dialog(
+                                  AlertDialog(
+                                    content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(Icons.cancel,
+                                              size: 35,
+                                              color: ColorValues.redColor),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(
+                                            'Are you sure you want to cancel the task?',
+                                            style: Styles.blackBold14w500,
+                                          ),
+                                        ]),
+                                    actions: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                            child: Text('NO'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Get.back();
+                                              controller.CancelPMTask(
+                                                  controller: controller);
+                                            },
+                                            child: Text('YES'),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                );
+                                // }
+                              },
+                            ),
+                          )
+                        : Dimens.box0,
                     // Dimens.boxWidth10,
                     // Container(
                     //   height: 35,
@@ -1262,7 +1282,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                     //     },
                     //   ),
                     // ),
-                    // Dimens.boxWidth3,
+                    Dimens.boxWidth3,
 
                     controller.pmtaskViewModel.value?.status == 165 &&
                             varUserAccessModel.value.access_list!

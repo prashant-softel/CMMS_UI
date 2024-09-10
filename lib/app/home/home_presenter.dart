@@ -21,6 +21,8 @@ class HomePresenter {
   void jobclearValue() async => homeUsecase.jobclearValue();
   void pmclearValue() async => homeUsecase.pmclearValue();
   void iRclearValue() async => homeUsecase.iRclearValue();
+  void mcclearValue() async => homeUsecase.mcclearValue();
+  void clearStoreMcPlanIdData() async => homeUsecase.clearStoreMcPlanIdData();
 
   void smclearValue() async => homeUsecase.smclearValue();
   void clearTypeValue() async => homeUsecase.clearTypeValue();

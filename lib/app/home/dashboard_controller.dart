@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -141,7 +143,13 @@ class DashboardController extends GetxController {
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      if (facilityId > 0) getdashboardList();
+      if (facilityId > 0 &&
+          varUserAccessModel.value.access_list!
+                  .where((e) =>
+                      e.feature_id == UserAccessConstants.kDashboardFeatureId &&
+                      e.view == UserAccessConstants.kHaveViewAccess)
+                  .length >
+              0) getdashboardList();
     });
 
     super.onInit();
@@ -582,6 +590,14 @@ class DashboardController extends GetxController {
 
   void clearStorePmData() {
     homePresenter.pmclearValue();
+  }
+
+  void clearStoreMcData() {
+    homePresenter.mcclearValue();
+  }
+
+  void clearStoreMcPlanIdData() {
+    homePresenter.clearStoreMcPlanIdData();
   }
 
   void clearStoreIrData() {

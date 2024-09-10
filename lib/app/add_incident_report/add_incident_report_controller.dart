@@ -929,7 +929,7 @@ class AddIncidentReportController extends GetxController {
           {'key': "HSC", "value": '${element?.hse_remark}'},
           {
             "key": "Status",
-            "value": '${element?.id_Status}',
+            "value": '${element?.status_name}',
           },
           {'key': "Action ", "value": ''},
         ]);
@@ -1896,7 +1896,61 @@ class AddIncidentReportController extends GetxController {
       investigation_team_list.add(InvestigationTeam(
           name: e.name, designation: e.designation, investigation_item_id: 0));
     });
+    List<DetailsOfInjuredPerson> detailsOfInjuredPersonItems = [];
+    rowInjuredPersonItem.forEach((element) {
+      int injuredItemId = 0;
+      if (element.isNotEmpty && element[0].containsKey("injured_item_id")) {
+        injuredItemId = element[0]["injured_item_id"] != null &&
+                element[0]["injured_item_id"].toString().isNotEmpty
+            ? int.tryParse('${element[0]["injured_item_id"]}') ?? 0
+            : 0;
+      }
+      DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
+        injured_item_id: injuredItemId,
+        incidents_id: irId.value,
+        name: element[0]["value"],
+        person_type: 1,
+        age: 30,
+        sex: element[1]["value"],
+        designation: element[2]["value"] ?? '0',
+        address: element[3]["value"] ?? '0',
+        name_contractor: element[4]["value"],
+        body_part_and_nature_of_injury: element[5]["value"],
+        work_experience_years: int.tryParse('${element[6]["value"] ?? '0'}'),
+        plant_equipment_involved: element[7]["value"],
+        location_of_incident: element[8]["value"] ?? '0',
+      );
 
+      detailsOfInjuredPersonItems.add(item);
+    });
+    List<DetailsOfOtherInjuredPerson> detailsOfOtherInjuredPersonItems = [];
+    rowOtherInjuredPersonItem.forEach((element) {
+      int otherInjuredItemId = 0;
+      if (element.isNotEmpty &&
+          element[0].containsKey("otherinjured_item_id")) {
+        otherInjuredItemId = element[0]["otherinjured_item_id"] != null &&
+                element[0]["otherinjured_item_id"].toString().isNotEmpty
+            ? int.tryParse('${element[0]["otherinjured_item_id"]}') ?? 0
+            : 0;
+      }
+      DetailsOfOtherInjuredPerson item = DetailsOfOtherInjuredPerson(
+        injured_item_id: otherInjuredItemId,
+        incidents_id: irId.value,
+        name: element[0]["value"],
+        person_type: 1,
+        age: 30,
+        sex: element[1]["value"] ?? '0',
+        designation: element[3]["value"] ?? '0',
+        address: element[4]["value"] ?? '0',
+        name_contractor: element[5]["value"],
+        body_part_and_nature_of_injury: element[6]["value"],
+        work_experience_years: int.tryParse('${element[7]["value"] ?? '0'}'),
+        plant_equipment_involved: element[8]["value"],
+        location_of_incident: element[9]["value"] ?? '0',
+      );
+
+      detailsOfOtherInjuredPersonItems.add(item);
+    });
     // Creating the model for incident report
     CreateIncidentReportModel updateIncidentReportModel =
         CreateIncidentReportModel(
@@ -1954,7 +2008,7 @@ class AddIncidentReportController extends GetxController {
       root_cause: [],
       immediate_correction: [],
       proposed_action_plan: [],
-      injured_person: [],
+      injured_person: detailsOfInjuredPersonItems,
       Otherinjured_person: [],
     );
 

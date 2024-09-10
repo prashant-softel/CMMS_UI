@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cmms/app/utils/utility.dart';
+
 VegExecutionDetailsModel vegExecutionDetailsModelFromJson(String str) =>
     VegExecutionDetailsModel.fromJson(json.decode(str));
 
@@ -10,7 +12,7 @@ class VegExecutionDetailsModel {
   String? description;
   String? frequency;
   String? assignedTo;
-  String? startDate;
+  String? scheduledDate;
   int? noOfDays;
   int? planId;
   String? plannedBy;
@@ -37,7 +39,7 @@ class VegExecutionDetailsModel {
     this.description,
     this.frequency,
     this.assignedTo,
-    this.startDate,
+    this.scheduledDate,
     this.noOfDays,
     this.plannedBy,
     this.plannedAt,
@@ -65,12 +67,12 @@ class VegExecutionDetailsModel {
         description: json['description'],
         frequency: json['frequency'],
         assignedTo: json['assignedTo'],
-        startDate: json['startDate'],
+        scheduledDate: Utility.getFormatedyearMonthDay(json['scheduledDate']),
         noOfDays: json['noOfDays'],
         plannedBy: json['plannedBy'],
-        plannedAt: json['plannedAt'],
+        plannedAt: Utility.getFormatedyearMonthDay(json['plannedAt']),
         startedBy: json['startedBy'],
-        startedAt: json['startedAt'],
+        startedAt: Utility.getFormatedyearMonthDay(json['startedAt']),
         abandonedBy: json['abandonedBy'],
         abandonedAt: json['abandonedAt'],
         status: json['status'],
@@ -94,7 +96,7 @@ class VegExecutionDetailsModel {
         'description': description,
         'frequency': frequency,
         'assignedTo': assignedTo,
-        'startDate': startDate,
+        'scheduledDate': scheduledDate,
         'noOfDays': noOfDays,
         'plannedBy': plannedBy,
         'plannedAt': plannedAt,

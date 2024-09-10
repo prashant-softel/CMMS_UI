@@ -29,7 +29,7 @@ class MCTaskListModel {
     this.frequency,
     this.noOfDays,
     this.water_used,
-    this.startDate,
+    this.scheduledDate,
     this.doneDate,
     this.status,
     this.status_short,
@@ -53,7 +53,7 @@ class MCTaskListModel {
   String? frequency;
   int? noOfDays;
   int? water_used;
-  String? startDate;
+  String? scheduledDate;
   String? doneDate;
   int? status;
   String? status_short;
@@ -69,7 +69,7 @@ class MCTaskListModel {
         frequency: json["frequency"],
         noOfDays: json["noOfDays"],
         water_used: json["water_used"],
-        startDate: Utility.getFormatedyearMonthDay(json['startDate']),
+        scheduledDate: Utility.getFormatedyearMonthDay(json['scheduledDate']),
         doneDate: Utility.getFormatedyearMonthDay(json['doneDate']),
         status: json['status'],
         status_short: json["status_short"],
@@ -102,7 +102,7 @@ class MCTaskListModel {
         "frequency": frequency,
         "noOfDays": noOfDays,
         "water_used": water_used,
-        "startDate": startDate,
+        "scheduledDate": scheduledDate,
         "doneDate": doneDate,
         "status": status,
         "status_short": status_short,
