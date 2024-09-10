@@ -1229,16 +1229,27 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                   .clearStoreJobData();
                                                               controller
                                                                   .clearStorePmData();
+                                                              controller
+                                                                  .clearStoreMcData();
+                                                              controller
+                                                                  .clearStoreMcPlanIdData();
                                                               String Id = controller
                                                                       .allItems[
                                                                           index]
                                                                       ?.wo_number ??
+                                                                  "";
+                                                              String planId = controller
+                                                                      .allItems[
+                                                                          index]
+                                                                      ?.plan_id
+                                                                      .toString() ??
                                                                   "";
                                                               String prefix =
                                                                   Id.replaceAll(
                                                                       RegExp(
                                                                           r'\d+$'),
                                                                       '');
+
                                                               String jobId =
                                                                   Id.substring(
                                                                       Id.indexOf(
@@ -1249,26 +1260,45 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                       Id.indexOf(
                                                                               "PM") +
                                                                           2);
-
+                                                              String mcId =
+                                                                  Id.substring(
+                                                                      Id.indexOf(
+                                                                              "MC") +
+                                                                          2);
                                                               if (prefix ==
                                                                   'BM') {
                                                                 Get.toNamed(
-                                                                    Routes
-                                                                        .jobDetails,
-                                                                    arguments: {
-                                                                      'jobId': int
-                                                                          .tryParse(
-                                                                              jobId)
-                                                                    });
+                                                                  Routes
+                                                                      .jobDetails,
+                                                                  arguments: {
+                                                                    'jobId': int
+                                                                        .tryParse(
+                                                                            jobId)
+                                                                  },
+                                                                );
                                                               } else if (prefix ==
                                                                   'PM') {
                                                                 Get.toNamed(
+                                                                  Routes
+                                                                      .pmTaskView,
+                                                                  arguments: {
+                                                                    'pmTaskId':
+                                                                        int.tryParse(
+                                                                            taskId)
+                                                                  },
+                                                                );
+                                                              } else if (prefix ==
+                                                                  'MC') {
+                                                                Get.toNamed(
                                                                     Routes
-                                                                        .pmTaskView,
+                                                                        .addModuleCleaningExecutionContentWeb,
                                                                     arguments: {
-                                                                      'pmTaskId':
+                                                                      "mcid": int
+                                                                          .tryParse(
+                                                                              mcId),
+                                                                      "planId":
                                                                           int.tryParse(
-                                                                              taskId)
+                                                                              planId)
                                                                     });
                                                               }
                                                             }
@@ -1360,15 +1390,24 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                           .clearStoreJobData();
                                                                       controller
                                                                           .clearStorePmData();
+                                                                      controller
+                                                                          .clearStoreMcData();
+                                                                      controller
+                                                                          .clearStoreMcPlanIdData();
                                                                       String
                                                                           Id =
                                                                           controller.allItems[index]?.wo_number ??
+                                                                              "";
+                                                                      String
+                                                                          planId =
+                                                                          controller.allItems[index]?.plan_id.toString() ??
                                                                               "";
                                                                       String
                                                                           prefix =
                                                                           Id.replaceAll(
                                                                               RegExp(r'\d+$'),
                                                                               '');
+
                                                                       String
                                                                           jobId =
                                                                           Id.substring(Id.indexOf("BM") +
@@ -1377,7 +1416,10 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                           taskId =
                                                                           Id.substring(Id.indexOf("PM") +
                                                                               2);
-
+                                                                      String
+                                                                          mcId =
+                                                                          Id.substring(Id.indexOf("MC") +
+                                                                              2);
                                                                       if (prefix ==
                                                                           'BM') {
                                                                         Get.toNamed(
@@ -1391,6 +1433,14 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                             Routes.pmTaskView,
                                                                             arguments: {
                                                                               'pmTaskId': int.tryParse(taskId)
+                                                                            });
+                                                                      } else if (prefix ==
+                                                                          'MC') {
+                                                                        Get.toNamed(
+                                                                            Routes.addModuleCleaningExecutionContentWeb,
+                                                                            arguments: {
+                                                                              "mcid": int.tryParse(mcId),
+                                                                              "planId": int.tryParse(planId)
                                                                             });
                                                                       }
                                                                     },
