@@ -4056,6 +4056,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                 left: 0,
                                                                 right: 0),
                                                         child: DataTable2(
+                                                          showCheckboxColumn:
+                                                              false,
                                                           headingRowHeight: 45,
                                                           dataRowHeight: 40,
                                                           columnSpacing: 12,
