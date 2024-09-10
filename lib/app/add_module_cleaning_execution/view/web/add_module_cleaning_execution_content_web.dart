@@ -275,9 +275,8 @@ class AddModuleCleaningExecutionContentWeb
                                                   'Plan Title: ',
                                                   style: Styles.black17,
                                                 ),
-                                                 
                                                 Text(
-                                                  'Start Time: ',
+                                                  'Start Date: ',
                                                   style: Styles.black17,
                                                 ),
                                               ],
@@ -292,11 +291,11 @@ class AddModuleCleaningExecutionContentWeb
                                                   style: Styles.blue17,
                                                 ),
                                                 Text(
-                                                   controller.mcExecutionDetailsModel
-                                                            .value?.status !=
-                                                        360
-                                                    ?
-                                                  ' ${controller.mcExecutionDetailsModel.value?.startedAt}':'',
+                                                  controller.mcExecutionDetailsModel
+                                                              .value?.status !=
+                                                          360
+                                                      ? ' ${controller.mcExecutionDetailsModel.value?.startedAt}'
+                                                      : '',
                                                   style: Styles.blue17,
                                                 ),
                                               ],
@@ -310,11 +309,10 @@ class AddModuleCleaningExecutionContentWeb
                                                   'Planned By: ',
                                                   style: Styles.black17,
                                                 ),
-                                                 Text(
+                                                Text(
                                                   'Execution started by: ',
                                                   style: Styles.black17,
                                                 ),
-                                                
                                               ],
                                             ),
 
@@ -326,11 +324,11 @@ class AddModuleCleaningExecutionContentWeb
                                                   ' ${controller.mcExecutionDetailsModel.value?.plannedBy}',
                                                   style: Styles.blue17,
                                                 ),
-                                               Text(
+                                                Text(
                                                   ' ${controller.mcExecutionDetailsModel.value?.startedBy}',
                                                   style: Styles.blue17,
                                                 ),
-                                               
+
                                                 // : Text("")
                                               ],
                                             ),
@@ -341,11 +339,11 @@ class AddModuleCleaningExecutionContentWeb
                                                   CrossAxisAlignment.end,
                                               children: [
                                                 Text(
-                                                  'Planning Date Time: ',
+                                                  'Planning Date ',
                                                   style: Styles.black17,
                                                 ),
-                                               Text(
-                                                  'Schedule Date Time: ',
+                                                Text(
+                                                  'Schedule Date ',
                                                   style: Styles.black17,
                                                 ),
                                               ],
@@ -356,13 +354,14 @@ class AddModuleCleaningExecutionContentWeb
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                   controller
+                                                  controller
                                                           .mcExecutionDetailsModel
                                                           .value
                                                           ?.plannedAt ??
                                                       '',
                                                   style: Styles.blue17,
-                                                ), Text(
+                                                ),
+                                                Text(
                                                   controller
                                                           .mcExecutionDetailsModel
                                                           .value
@@ -370,7 +369,6 @@ class AddModuleCleaningExecutionContentWeb
                                                       '',
                                                   style: Styles.blue17,
                                                 )
-                                               
                                               ],
                                             ),
                                             Spacer(),

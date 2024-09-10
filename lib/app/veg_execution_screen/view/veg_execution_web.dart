@@ -176,6 +176,10 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                   'Task ID: ',
                                                   style: Styles.black17,
                                                 ),
+                                                Text(
+                                                  'Frequency: ',
+                                                  style: Styles.black17,
+                                                ),
                                               ],
                                             ),
                                             Dimens.boxWidth2,
@@ -192,6 +196,10 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                   'VE${controller.vegExecutionDetailsModel.value?.executionId == null ? "" : controller.vegExecutionDetailsModel.value?.executionId}',
                                                   style: Styles.blue17,
                                                 ),
+                                                Text(
+                                                  '${controller.vegExecutionDetailsModel.value?.frequency}',
+                                                  style: Styles.blue17,
+                                                ),
                                               ],
                                             ),
                                             Spacer(),
@@ -204,7 +212,7 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                   style: Styles.black17,
                                                 ),
                                                 Text(
-                                                  'Frequency: ',
+                                                  'Start Date: ',
                                                   style: Styles.black17,
                                                 ),
                                               ],
@@ -219,7 +227,7 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                   style: Styles.blue17,
                                                 ),
                                                 Text(
-                                                  ' ${controller.vegExecutionDetailsModel.value?.frequency}',
+                                                  '${controller.vegExecutionDetailsModel.value?.startedAt}',
                                                   style: Styles.blue17,
                                                 ),
                                               ],
@@ -234,7 +242,7 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                   style: Styles.black17,
                                                 ),
                                                 Text(
-                                                  'Schedule Date Time: ',
+                                                  'Schedule Date: ',
                                                   style: Styles.black17,
                                                 ),
                                               ],
@@ -269,7 +277,7 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                   CrossAxisAlignment.end,
                                               children: [
                                                 Text(
-                                                  'Planning Date Time: ',
+                                                  'Planning Date ',
                                                   style: Styles.black17,
                                                 ),
                                                 Text(
