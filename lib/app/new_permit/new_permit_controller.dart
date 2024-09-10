@@ -1439,6 +1439,7 @@ class NewPermitController extends GetxController {
         user_id: userId,
         latitude: 0,
         longitude: 0,
+        comment: "",
         block_ids: selectedEmployeeNameIdList,
         category_ids: selectedEquipmentCategoryIdList,
         uploadfile_ids: fileIds,
@@ -1551,7 +1552,8 @@ class NewPermitController extends GetxController {
         ///Permit Type Id
         start_datetime: startDateTimeCtrlrBuffer,
         end_datetime: validTillTimeCtrlrBuffer,
-        title: _title,
+        title: _title, comment: "",
+
         description: _description,
         job_type_id: selectedJobTypesId, ////Job type Id
         sop_type_id: selectedSOPId,
@@ -1658,7 +1660,8 @@ class NewPermitController extends GetxController {
       CreatePermitModel createPermitModel = CreatePermitModel(
         permit_id: permitId.value,
         facility_id: facilityId,
-        blockId: selectedBlockId,
+        blockId: selectedBlockId, comment: "",
+
         lotoId: typee.value == 5 || typee.value == 4
             ? 8
             : selectedEquipmentCategoryIdList.first,
@@ -1829,6 +1832,7 @@ class NewPermitController extends GetxController {
             : selectedEquipmentCategoryIdList.first,
         permit_id: permitId.value,
         permitTypeId: selectedPermitTypeId,
+        comment: "",
 
         ///Permit Type Id
         start_datetime: startDateTimeCtrlrBuffer,
@@ -1935,7 +1939,8 @@ class NewPermitController extends GetxController {
 
       CreatePermitModel createPermitModel = CreatePermitModel(
         facility_id: facilityId,
-        permit_id: permitId.value,
+        permit_id: permitId.value, comment: "",
+
         blockId: selectedBlockId,
         lotoId: typee.value == 5 || typee.value == 4
             ? 8
