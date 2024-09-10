@@ -43,6 +43,10 @@ class _CustomMultiSelectDialogFieldState
       }
     });
 
+    // Sorting items alphabetically by label
+    List<MultiSelectItem> sortedItems = widget.items!;
+    sortedItems.sort((a, b) => a.label.compareTo(b.label)); // Sort by label
+
     return Container(
       height: 40,
       decoration: BoxDecoration(
@@ -67,7 +71,7 @@ class _CustomMultiSelectDialogFieldState
                   height: MediaQuery.of(context).size.height * 0.4,
                   width: MediaQuery.of(context).size.height * 0.3,
                   searchable: true,
-                  items: widget.items!,
+                  items: sortedItems, // Use sorted items
                   initialValue: _selectedItems,
                 ),
               );
@@ -98,7 +102,7 @@ class _CustomMultiSelectDialogFieldState
                               final item = _selectedItems[index];
                               return Container(
                                 child: Chip(
-                                  label: Text(widget.items!
+                                  label: Text(sortedItems
                                       .firstWhere(
                                           (element) => element.value == item)
                                       .label),
@@ -124,7 +128,7 @@ class _CustomMultiSelectDialogFieldState
                         height: MediaQuery.of(context).size.height * 0.4,
                         width: MediaQuery.of(context).size.height * 0.3,
                         searchable: true,
-                        items: widget.items!,
+                        items: sortedItems, // Use sorted items
                         initialValue: _selectedItems,
                       ),
                     );
