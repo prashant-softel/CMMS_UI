@@ -442,52 +442,23 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                               text: 'Submit',
                                               onPressed: () {
                                                 //controller.addUser();
-                                                controller
-                                                    .saveRoleAccess()
-                                                    .then((value) {
-                                                  showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return AlertDialog(
-                                                        title: Text("Success"),
-                                                        content: Text(
-                                                            "Role updated successfully!"),
-                                                        actions: <Widget>[
-                                                          TextButton(
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .popUntil(
-                                                                      (route) =>
-                                                                          route
-                                                                              .isFirst);
-                                                              controller
-                                                                  .update();
-                                                            },
-                                                            child: Text("OK"),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  );
-                                                });
+                                                controller.saveRoleAccess();
                                               },
                                             ),
                                           )
                                         : Dimens.box0,
-                                    Dimens.boxWidth20,
-                                    Container(
-                                      height: 35,
-                                      child: CustomElevatedButton(
-                                        backgroundColor: ColorValues.redColor,
-                                        text: "Cancel",
-                                        onPressed: () {
-                                          Get.offAndToNamed(
-                                              Routes.masterDashboard);
-                                        },
-                                      ),
-                                    ),
+                                    // Dimens.boxWidth20,
+                                    // Container(
+                                    //   height: 35,
+                                    //   child: CustomElevatedButton(
+                                    //     backgroundColor: ColorValues.redColor,
+                                    //     text: "Cancel",
+                                    //     onPressed: () {
+                                    //       Get.offAndToNamed(
+                                    //           Routes.masterDashboard);
+                                    //     },
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                               )
