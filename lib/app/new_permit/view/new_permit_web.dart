@@ -545,7 +545,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                       ),
                                       DataCell(
                                         Text(
-                                            '${controller.mcExecutionDetailsModel!.startDate ?? ""}',
+                                            '${controller.mcExecutionDetailsModel!.startedAt ?? ""}',
                                             maxLines: 3),
                                       ),
                                       DataCell(
@@ -644,7 +644,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                       ),
                                       DataCell(
                                         Text(
-                                            '${controller.vegExecutionDetailsModel!.startDate ?? ""}',
+                                            '${controller.vegExecutionDetailsModel!.scheduledDate ?? ""}',
                                             maxLines: 3),
                                       ),
                                       DataCell(

@@ -501,7 +501,7 @@ class MCExcutionListDataSource extends DataTableSource {
           (McExcutionList.noOfDays ?? '')
               .toString()
               .contains(controller.startDateFilterText.value.toLowerCase()) &&
-          (McExcutionList.startDate ?? '')
+          (McExcutionList.scheduledDate ?? '')
               .toString()
               .contains(controller.doneDateFilterText.value.toLowerCase()) &&
           (McExcutionList.doneDate ?? '')
@@ -531,9 +531,9 @@ class MCExcutionListDataSource extends DataTableSource {
 
       '${McExcutionListDetails?.frequency ?? ''}',
       '${McExcutionListDetails?.noOfDays ?? ''}',
-      McExcutionListDetails?.startDate == "0001-01-01"
+      McExcutionListDetails?.scheduledDate == "0001-01-01"
           ? "-"
-          : '${McExcutionListDetails?.startDate ?? ''}',
+          : '${McExcutionListDetails?.scheduledDate ?? ''}',
 
       McExcutionListDetails?.status == 369
           ? '${McExcutionListDetails?.abondond_done_date ?? ''}'

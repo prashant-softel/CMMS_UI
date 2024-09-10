@@ -102,7 +102,7 @@ class _VegExecutionMobileState extends State<VegExecutionMobile> {
                                   JobDetailField(
                                     title: 'Start Date Time',
                                     value: controller.vegExecutionDetailsModel
-                                            .value?.startDate ??
+                                            .value?.scheduledDate ??
                                         '',
                                   ),
                                   JobDetailField(

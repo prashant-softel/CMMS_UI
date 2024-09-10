@@ -60,7 +60,7 @@ class VegExecutionListController extends GetxController {
     "Responsibility": true,
     "Frequency": true,
     "No Of Days": true,
-    "Start Date": true,
+    "Scheduled Date": true,
     "Done Date": true,
     // "Status": true,
     // "search": true,
@@ -72,7 +72,7 @@ class VegExecutionListController extends GetxController {
     "Responsibility": 200,
     "Frequency": 163,
     "No Of Days": 153,
-    "Start Date": 130,
+    "Scheduled Date": 200,
     "Done Date": 140,
     // "Status": 100
   };
@@ -99,7 +99,7 @@ class VegExecutionListController extends GetxController {
       "Responsibility": responsibilityFilterText,
       "Frequency": frequencyFilterText,
       "No Of Days": noOfDaysFilterText,
-      "Start Date": startDateFilterText,
+      "Scheduled Date": startDateFilterText,
       "Done Date": doneDateFilterText,
       // "Status": statusFilterText,
     };
@@ -139,7 +139,7 @@ class VegExecutionListController extends GetxController {
                 false) ||
             (item?.noOfDays?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.startDate
+            (item?.scheduledDate
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
@@ -291,10 +291,10 @@ class VegExecutionListController extends GetxController {
             ? a!.noOfDays!.compareTo(b!.noOfDays!)
             : b!.noOfDays!.compareTo(a!.noOfDays!));
         break;
-      case 'Start Date':
+      case 'Scheduled Date':
         vegTaskList.sort((a, b) => isAscending.value
-            ? a!.startDate!.compareTo(b!.startDate!)
-            : b!.startDate!.compareTo(a!.startDate!));
+            ? a!.scheduledDate!.compareTo(b!.scheduledDate!)
+            : b!.scheduledDate!.compareTo(a!.scheduledDate!));
         break;
       case 'Done Date':
         vegTaskList.sort((a, b) => isAscending.value

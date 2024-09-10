@@ -257,10 +257,10 @@ class _VegExecutionListMobileState extends State<VegExecutionListMobile> {
                                         ),
                                         buildInfoRow(
                                           'Start Date: ',
-                                          vegTaskModel?.startDate ==
+                                          vegTaskModel?.scheduledDate ==
                                                   "0001-01-01"
                                               ? '-'
-                                              : vegTaskModel?.startDate ?? "",
+                                              : vegTaskModel?.scheduledDate ?? "",
                                         ),
                                         buildInfoRow(
                                           'Done Date: ',

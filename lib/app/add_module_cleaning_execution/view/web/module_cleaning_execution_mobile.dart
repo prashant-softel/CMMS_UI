@@ -96,9 +96,15 @@ class _McExecutionMobileState extends State<McExecutionMobile> {
                                         "",
                                   ),
                                   JobDetailField(
+                                    title: 'Schedule Date Time',
+                                    value: controller.mcExecutionDetailsModel
+                                            .value?.scheduledDate ??
+                                        '',
+                                  ),
+                                  JobDetailField(
                                     title: 'Start Date Time',
                                     value: controller.mcExecutionDetailsModel
-                                            .value?.startDate ??
+                                            .value?.startedAt ??
                                         '',
                                   ),
                                   JobDetailField(

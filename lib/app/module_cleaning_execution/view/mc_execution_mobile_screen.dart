@@ -250,10 +250,10 @@ class ModuleCleaningListExecutionMobile
                                                 ''),
                                         buildInfoRow(
                                             'Start Date: ',
-                                            mcTaskModel.startDate ==
+                                            mcTaskModel.scheduledDate ==
                                                     "0001-01-01"
                                                 ? '-'
-                                                : mcTaskModel.startDate ?? ""),
+                                                : mcTaskModel.scheduledDate ?? ""),
                                         buildInfoRow(
                                             'Done Date: ',
                                             mcTaskModel.doneDate == "0001-01-01"
