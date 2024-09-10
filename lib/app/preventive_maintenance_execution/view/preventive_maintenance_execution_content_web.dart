@@ -90,10 +90,6 @@ class PreventiveMaintenanceExecutionContentWeb
           ),
           Expanded(
             child: Container(
-              width: MediaQuery.of(context).size.width,
-
-              margin: EdgeInsets.only(left: 20, top: 30, right: 20),
-              // height: Get.height,
               child: Card(
                 color: Color.fromARGB(255, 245, 248, 250),
                 elevation: 10,
@@ -351,11 +347,11 @@ class PreventiveMaintenanceExecutionContentWeb
                                                             Dimens.boxWidth2,
                                                             DropdownWebWidget(
                                                               width: (MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      .2) -
-                                                                  100,
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  .10),
+                                                              height: 33,
                                                               controller:
                                                                   controller,
                                                               dropdownList:
