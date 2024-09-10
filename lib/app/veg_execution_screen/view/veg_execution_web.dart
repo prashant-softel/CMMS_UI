@@ -619,7 +619,22 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                                                                                       onPress: () {
                                                                                                                         var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
                                                                                                                         print('filteredData:${filterdData!.scheduleId}');
-                                                                                                                        filterdData.ptw_tbt_done == 1 ? Get.dialog<void>(CustomVegetationDialog(id: filterdData.scheduleId ?? 0, title: filterdData.scheduleId.toString(), starttype: 1)) : Get.dialog<void>(TbtDoneVegDialog(ptw_id: filterdData.permit_id ?? 0, id: controller.vegExecutionDetailsModel.value?.executionId ?? 0));
+                                                                                                                        filterdData.ptw_tbt_done == 1
+                                                                                                                            ? Get.dialog<void>(CustomVegetationDialog(id: filterdData.scheduleId ?? 0, title: filterdData.scheduleId.toString(), starttype: 1))
+                                                                                                                            : filterdData.ptw_tbt_done == 0 && filterdData.tbt_start == 0
+                                                                                                                                ? Get.defaultDialog(
+                                                                                                                                    radius: 5,
+                                                                                                                                    title: 'Alert',
+                                                                                                                                    middleText: 'Unable to start task due to permit taken for ${controller.pmtaskViewModel.value!.start_time}',
+                                                                                                                                    textConfirm: 'OK',
+                                                                                                                                    onConfirm: () {
+                                                                                                                                      Get.back(); // Close the dialog
+                                                                                                                                      // Get.offAllNamed(Routes.pmTask);
+                                                                                                                                    },
+                                                                                                                                    buttonColor: ColorValues.appGreenColor,
+                                                                                                                                    confirmTextColor: Colors.white,
+                                                                                                                                    barrierDismissible: false)
+                                                                                                                                : Get.dialog<void>(TbtDoneVegDialog(ptw_id: filterdData.permit_id ?? 0, id: controller.vegExecutionDetailsModel.value?.executionId ?? 0));
                                                                                                                       },
                                                                                                                       color: ColorValues.startColor,
                                                                                                                       icon: Icons.start,
