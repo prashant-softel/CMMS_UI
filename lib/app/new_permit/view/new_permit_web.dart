@@ -310,148 +310,230 @@ class NewPermitWeb extends GetView<NewPermitController> {
 
                         controller.jobModel?.id != null
                             ? Container(
-                                // alignment: Alignment.centerLeft,
                                 width: Get.width * .9,
-                                height: Get.height * .2,
+                                padding: EdgeInsets.all(10),
                                 margin: EdgeInsets.symmetric(
                                     horizontal: 9, vertical: 10),
-                                padding: EdgeInsets.all(10),
-                                // decoration: BoxDecoration(
-                                //   border: Border.all(color: Colors.black),
-                                // ),
-                                child: DataTable2(
-                                  border: TableBorder.all(
-                                    color: Colors.black,
-                                  ),
-                                  columnSpacing: 11,
-                                  columns: [
-                                    DataColumn2(
-                                        fixedWidth: 100,
-                                        label: Text('Job ID',
-                                            overflow: TextOverflow.ellipsis)),
-                                    DataColumn2(
-                                        fixedWidth: 180,
-                                        label: Text('Job Title',
-                                            overflow: TextOverflow.ellipsis)),
-                                    DataColumn2(
-                                        fixedWidth: Get.width * .12,
-                                        label: Text('Equipment Category',
-                                            overflow: TextOverflow.clip)),
-                                    DataColumn2(
-                                        fixedWidth: Get.width * .1,
-                                        label: Text('Block',
-                                            overflow: TextOverflow.ellipsis)),
-                                    DataColumn2(
-                                        fixedWidth: 200,
-                                        label: Text('Equipment Name',
-                                            overflow: TextOverflow.ellipsis)),
-                                    DataColumn2(
-                                        fixedWidth: Get.width * .1,
-                                        label: Text('Breakdown Time',
-                                            overflow: TextOverflow.ellipsis)),
-                                    DataColumn2(
-                                        fixedWidth: Get.width * .1,
-                                        label: Text('Assigned To',
-                                            overflow: TextOverflow.ellipsis)),
-                                  ],
-                                  rows: [
-                                    DataRow(cells: [
-                                      DataCell(
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    // Header Row
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          width: 100,
+                                          child: Text('Job ID',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
+                                        Container(
+                                          width: 180,
+                                          child: Text('Job Title',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
+                                        Container(
+                                          width: Get.width * .12,
+                                          child: Text('Equipment Category',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
+                                        Container(
+                                          width: Get.width * .1,
+                                          child: Text('Block',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
+                                        Container(
+                                          width: 200,
+                                          child: Text('Equipment Name',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
+                                        Container(
+                                          width: Get.width * .1,
+                                          child: Text('Breakdown Time',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
+                                        Container(
+                                          width: Get.width * .1,
+                                          child: Text('Assigned To',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10), // For spacing
+
+                                    // Data Row
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        // Job ID
                                         GestureDetector(
                                           onTap: () {
                                             controller.viewJobDetails();
                                           },
-                                          child: Text(
+                                          child: Container(
+                                            width: 100,
+                                            child: Text(
                                               '${int.tryParse('${controller.jobModel?.id ?? 0}')}',
                                               style: TextStyle(
                                                 decoration:
                                                     TextDecoration.underline,
-                                                decorationStyle:
-                                                    TextDecorationStyle.solid,
                                                 color: Color.fromARGB(
                                                     255, 5, 92, 163),
                                               ),
-                                              overflow: TextOverflow.ellipsis),
-                                        ),
-                                      ),
-                                      DataCell(
-                                        SizedBox(
-                                          child: Text(
-                                              '${controller.titleTextCtrlr.text}',
-                                              maxLines: 3),
-                                        ),
-                                      ),
-                                      DataCell(
-                                        SizedBox(
-                                          child: Column(
-                                            children: controller
-                                                .jobModel!.equipmentCatList!
-                                                .map((element) => Column(
-                                                      // mainAxisAlignment:
-                                                      //     MainAxisAlignment
-                                                      //         .start,
-                                                      // crossAxisAlignment:
-                                                      //     CrossAxisAlignment
-                                                      //         .start,
-                                                      children: [
-                                                        SizedBox(
-                                                          child: Text(
-                                                            "${element?.name}",
-                                                            maxLines: 3,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ))
-                                                .toList(),
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      DataCell(
-                                        SizedBox(
-                                          // width: Get.width * 0.2,
+
+                                        // Job Title
+                                        Container(
+                                          width: 180,
+                                          child: Text(
+                                            '${controller.titleTextCtrlr.text}',
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+
+                                        // Equipment Category with show more/less
+                                        Expanded(
+                                          child: Obx(() {
+                                            final equipmentCatList = controller
+                                                    .jobModel
+                                                    ?.equipmentCatList ??
+                                                [];
+
+                                            // Show first 3 or all depending on the showMore state
+                                            final visibleList =
+                                                controller.showMore.value
+                                                    ? equipmentCatList
+                                                    : equipmentCatList
+                                                        .take(3)
+                                                        .toList();
+
+                                            return Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                ...visibleList
+                                                    .map((element) => Text(
+                                                          "${element?.name}",
+                                                          style: TextStyle(
+                                                              fontSize: 16),
+                                                          maxLines: 1,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        )),
+                                              ],
+                                            );
+                                          }),
+                                        ),
+
+                                        // Block
+                                        Container(
+                                          width: Get.width * .1,
                                           child: Text(
                                             '${controller.selectedBlock}',
                                             maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
-                                      ),
-                                      DataCell(
-                                        SizedBox(
-                                          child: Column(
-                                            children: controller
-                                                .jobModel!.workingAreaList!
-                                                .map(
-                                                  (element) => Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      SizedBox(
-                                                        child: Text(
+
+                                        // Equipment Name with show more/less
+                                        Expanded(
+                                          child: Obx(() {
+                                            final workingAreaList = controller
+                                                    .jobModel
+                                                    ?.workingAreaList ??
+                                                [];
+
+                                            // Show first 3 or all depending on the showMore state
+                                            final visibleList =
+                                                controller.showMore.value
+                                                    ? workingAreaList
+                                                    : workingAreaList
+                                                        .take(3)
+                                                        .toList();
+
+                                            return Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                ...visibleList
+                                                    .map((element) => Text(
                                                           "${element?.name}",
-                                                          maxLines: 3,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )
-                                                .toList(),
+                                                          style: TextStyle(
+                                                              fontSize: 16),
+                                                          maxLines: 1,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        )),
+                                              ],
+                                            );
+                                          }),
+                                        ),
+
+                                        // Breakdown Time
+                                        Container(
+                                          width: Get.width * .1,
+                                          child: Text(
+                                            '${controller.jobModel?.breakdownTime}',
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
-                                      ),
-                                      DataCell(
-                                        Text(
-                                            '${controller.jobModel?.breakdownTime}',
-                                            overflow: TextOverflow.ellipsis),
-                                      ),
-                                      DataCell(
-                                        Text(
+
+                                        // Assigned To
+                                        Container(
+                                          width: Get.width * .1,
+                                          child: Text(
                                             '${controller.jobModel?.assignedName}',
-                                            overflow: TextOverflow.ellipsis),
-                                      ),
-                                    ]),
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+
+                                    Obx(() {
+                                      final equipmentCatList = controller
+                                              .jobModel?.equipmentCatList ??
+                                          [];
+                                      final workingAreaList = controller
+                                              .jobModel?.workingAreaList ??
+                                          [];
+
+                                      if (equipmentCatList.length > 3 ||
+                                          workingAreaList.length > 3) {
+                                        return TextButton(
+                                          onPressed: () {
+                                            controller.toggleShowMore();
+                                          },
+                                          child: Text(
+                                            controller.showMore.value
+                                                ? 'Show less'
+                                                : '... more',
+                                            style:
+                                                TextStyle(color: Colors.blue),
+                                          ),
+                                        );
+                                      } else {
+                                        return SizedBox.shrink();
+                                      }
+                                    }),
                                   ],
                                 ),
                               )

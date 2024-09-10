@@ -305,7 +305,7 @@ class NewPermitController extends GetxController {
   RxList<int?> selectedSopPermitIdList = <int>[].obs;
   int selectedSOPId = 0;
   String? jsaData;
-  String? sopData;
+  String? sopData;var showMore = false.obs;
   var isInventoryCategoryListLoaded = false.obs;
 
   ///Safety Measure List
@@ -719,7 +719,9 @@ class NewPermitController extends GetxController {
     );
     update(['inventory_detail_list']);
   }
-
+  void toggleShowMore() {
+    showMore.value = !showMore.value;
+  }
   void equipmentCategoriesSelected(_selectedEquipmentCategoryIds) {
     selectedEquipmentCategoryIdList.value = <int>[];
     for (var _selectedCategoryId in _selectedEquipmentCategoryIds) {
