@@ -230,8 +230,7 @@ class StockManagementGoodsOrdersController extends GetxController {
     stockManagementGoodsOrdersPresenter.clearTypeValue();
   }
 
-  RxString currentSortColumn = ''.obs;
-  RxBool isAscending = true.obs;
+
 
   void sortData(String columnName) {
     if (currentSortColumn.value == columnName) {

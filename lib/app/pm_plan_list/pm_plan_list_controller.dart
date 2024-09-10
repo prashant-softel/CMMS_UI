@@ -271,7 +271,8 @@ class PmPlanListController extends GetxController {
   void clearStoreData() {
     pmPlanListPresenter.clearValue();
   }
-   void sortData(String columnName) {
+
+  void sortData(String columnName) {
     if (currentSortColumn.value == columnName) {
       isAscending.value = !isAscending.value;
     } else {
@@ -286,27 +287,30 @@ class PmPlanListController extends GetxController {
         break;
       case 'Plan Title':
         pmPlanList.sort((a, b) => isAscending.value
-                   ? (a?.plan_name ?? '').compareTo(b?.plan_name ?? '')
+            ? (a?.plan_name ?? '').compareTo(b?.plan_name ?? '')
             : (b?.plan_name ?? '').compareTo(a?.plan_name ?? ''));
         break;
       case 'Start Date':
         pmPlanList.sort((a, b) => isAscending.value
-                   ? (a?.plan_date ?? '').compareTo(b?.plan_date ?? '')
+            ? (a?.plan_date ?? '').compareTo(b?.plan_date ?? '')
             : (b?.plan_date ?? '').compareTo(a?.plan_date ?? ''));
         break;
       case 'Next Schedule Date':
         pmPlanList.sort((a, b) => isAscending.value
-                   ? (a?.next_schedule_date ?? '').compareTo(b?.next_schedule_date ?? '')
-            : (b?.next_schedule_date ?? '').compareTo(a?.next_schedule_date ?? ''));
+            ? (a?.next_schedule_date ?? '')
+                .compareTo(b?.next_schedule_date ?? '')
+            : (b?.next_schedule_date ?? '')
+                .compareTo(a?.next_schedule_date ?? ''));
         break;
       case 'Frequency':
         pmPlanList.sort((a, b) => isAscending.value
-                   ? (a?.plan_freq_name ?? '').compareTo(b?.plan_freq_name ?? '')
+            ? (a?.plan_freq_name ?? '').compareTo(b?.plan_freq_name ?? '')
             : (b?.plan_freq_name ?? '').compareTo(a?.plan_freq_name ?? ''));
         break;
+
       case 'Created By':
         pmPlanList.sort((a, b) => isAscending.value
-                   ? (a?.created_by_name ?? '').compareTo(b?.created_by_name ?? '')
+            ? (a?.created_by_name ?? '').compareTo(b?.created_by_name ?? '')
             : (b?.created_by_name ?? '').compareTo(a?.created_by_name ?? ''));
         break;
       default:

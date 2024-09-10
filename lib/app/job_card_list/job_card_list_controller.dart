@@ -26,7 +26,7 @@ class JobCardListController extends GetxController {
   JobCardModel? jobListModel;
   RxList<String> jobListTableColumns = <String>[].obs;
   JobCardModel? selectedItem;
-   RxString currentSortColumn = ''.obs;
+  RxString currentSortColumn = ''.obs;
   RxBool isAscending = true.obs;
 
   RxString IdFilterText = ''.obs;
@@ -177,6 +177,7 @@ class JobCardListController extends GetxController {
   void clearStoreData() {
     jobCardPresenter.clearValue();
   }
+
   // sort
   void sortData(String columnName) {
     if (currentSortColumn.value == columnName) {
@@ -197,11 +198,11 @@ class JobCardListController extends GetxController {
             ? (a?.jobId ?? 0).compareTo(b?.jobId ?? 0)
             : (b?.jobId ?? 0).compareTo(a?.jobId ?? 0));
         break;
-case 'Permit No.':
-  jobList.sort((a, b) => isAscending.value
-      ? ((a?.permit_no as double?) ?? 0.0).compareTo((b?.permit_no as double?) ?? 0.0)
-      : ((b?.permit_no as double?) ?? 0.0).compareTo((a?.permit_no as double?) ?? 0.0));
-  break;
+      case 'Permit No.':
+        jobList.sort((a, b) => isAscending.value
+            ? (a?.permit_no ?? '').compareTo(b?.permit_no ?? '')
+            : (b?.permit_no ?? '').compareTo(a?.permit_no ?? ''));
+        break;
 
       case 'Assigned To':
         jobList.sort((a, b) => isAscending.value
@@ -229,5 +230,4 @@ case 'Permit No.':
     }
     update();
   }
-
 }

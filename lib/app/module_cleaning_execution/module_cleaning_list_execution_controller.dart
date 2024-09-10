@@ -279,8 +279,8 @@ class ModuleCleaningListExecutionController extends GetxController {
         break;
       case 'Done Date':
         mcTaskList.sort((a, b) => isAscending.value
-            ? a!.doneDate!.compareTo(b!.doneDate!)
-            : b!.doneDate!.compareTo(a!.doneDate!));
+            ? a!.abondond_done_date!.compareTo(b!.abondond_done_date!)
+            : b!.abondond_done_date!.compareTo(a!.abondond_done_date!));
         break;
       default:
         break;
