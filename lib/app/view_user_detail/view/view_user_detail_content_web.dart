@@ -167,10 +167,10 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                     'State: ',
                                     style: Styles.black17,
                                   ),
-                                  // Text(
-                                  //   'Access Group: ',
-                                  //   style: Styles.black17,
-                                  // ),
+                                  Text(
+                                    'Company Name: ',
+                                    style: Styles.black17,
+                                  ),
                                 ],
                               ),
                               Dimens.boxWidth3,
@@ -212,7 +212,11 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                               ?.state_name ??
                                           "",
                                       style: Styles.blue17),
-                                  // Text("Admin", style: Styles.blue17),
+                                  Text(
+                                      controller.userDetailModel.value
+                                              ?.company_name ??
+                                          "",
+                                      style: Styles.blue17),
                                 ],
                               ),
                               Spacer(),
