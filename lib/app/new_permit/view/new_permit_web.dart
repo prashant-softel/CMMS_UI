@@ -197,117 +197,219 @@ class NewPermitWeb extends GetView<NewPermitController> {
                         Divider(
                           color: ColorValues.greyLightColour,
                         ),
-                        // Edit from here for pm task
+
                         controller.pmtaskViewModel?.id != null
-                            ? Row(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      width: Get.width * 0.7,
-                                      height: Get.height * 0.2,
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal: 50, vertical: 20),
-                                      child: DataTable2(
-                                        border: TableBorder.all(
-                                          color: Colors.black,
+                            ? Container(
+                                width: Get.width * .9,
+                                padding: EdgeInsets.all(10),
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 9, vertical: 10),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: Text(
+                                            'Task ID',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
-                                        columns: [
-                                          DataColumn2(
-                                            fixedWidth: 105,
-                                            label: Text('Task ID'),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Text(
+                                            'Plan Title',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
                                           ),
-                                          DataColumn2(
-                                            label: Text('Plan Title'),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Text(
+                                            'Equipment Category',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
                                           ),
-                                          DataColumn2(
-                                            label: Text('Equipment Category'),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Text(
+                                            'Checklist Name',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
                                           ),
-                                          DataColumn2(
-                                            label: Text('Checklist Name'),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Text(
+                                            'Frequency',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
                                           ),
-                                          DataColumn2(
-                                            label: Text('Frequency'),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Text(
+                                            'Assigned To',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
                                           ),
-                                          DataColumn2(
-                                            fixedWidth: 200,
-                                            label: Text('Assigned To'),
-                                          ),
-                                        ],
-                                        rows: [
-                                          DataRow(
-                                            cells: [
-                                              DataCell(
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    controller.type ==
-                                                            AppConstants.kAudit
-                                                        ? controller
-                                                            .viewAudDetails()
-                                                        : controller
-                                                            .viewPMTDetails();
-                                                  },
-                                                  child: Text(
-                                                    controller.typee.value ==
-                                                            AppConstants.kAudit
-                                                        ? 'AUD${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}'
-                                                        : 'PMT${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}',
-                                                    style: TextStyle(
-                                                      decoration: TextDecoration
-                                                          .underline,
-                                                      decorationStyle:
-                                                          TextDecorationStyle
-                                                              .solid,
-                                                      color: Color.fromARGB(
-                                                          255, 5, 92, 163),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              DataCell(
-                                                Text(
-                                                  '${controller.pmtaskViewModel?.plan_title}',
-                                                ),
-                                              ),
-                                              DataCell(
-                                                Text(
-                                                    controller.typee.value ==
-                                                            AppConstants.kAudit
-                                                        ? "NA"
-                                                        : '${controller.pmtaskViewModel?.category_name}',
-                                                    overflow:
-                                                        TextOverflow.ellipsis),
-                                              ),
-                                              DataCell(
-                                                SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  child: Text(
-                                                    '${controller.allChecklistNames},',
-                                                  ),
-                                                ),
-                                              ),
-                                              DataCell(
-                                                Text(
-                                                    '${controller.pmtaskViewModel?.frequency_name}',
-                                                    overflow:
-                                                        TextOverflow.ellipsis),
-                                              ),
-                                              DataCell(
-                                                Text(
-                                                    '${controller.pmtaskViewModel?.assigned_to_name}',
-                                                    overflow:
-                                                        TextOverflow.ellipsis),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(height: 10),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              controller.type ==
+                                                      AppConstants.kAudit
+                                                  ? controller.viewAudDetails()
+                                                  : controller.viewPMTDetails();
+                                            },
+                                            child: Text(
+                                              controller.typee.value ==
+                                                      AppConstants.kAudit
+                                                  ? 'AUD${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}'
+                                                  : 'PMT${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}',
+                                              style: TextStyle(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                color: Color.fromARGB(
+                                                    255, 5, 92, 163),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+                                        // Plan Title
+                                        Expanded(
+                                          flex: 2,
+                                          child: Text(
+                                            '${controller.pmtaskViewModel?.plan_title}',
+                                          ),
+                                        ),
+
+                                        // Equipment Category
+                                        Expanded(
+                                          flex: 2,
+                                          child: Text(
+                                            controller.typee.value ==
+                                                    AppConstants.kAudit
+                                                ? 'NA'
+                                                : '${controller.pmtaskViewModel?.category_name}',
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Obx(() {
+                                            final workingAreaList = controller
+                                                    .pmtaskViewModel
+                                                    ?.schedules ??
+                                                [];
+
+                                            // Show first 3 or all depending on the showMore state
+                                            final visibleList =
+                                                controller.showMore.value
+                                                    ? controller.pmtaskViewModel
+                                                        ?.schedules
+                                                    : controller.pmtaskViewModel
+                                                        ?.schedules!
+                                                        .take(3)
+                                                        .toList();
+
+                                            // Use a Set to track unique checklist names
+                                            final uniqueChecklistNames =
+                                                <String>{};
+                                            final filteredList =
+                                                visibleList!.where((element) {
+                                              // Add the checklist name to the Set, return true if it's new (i.e., not a duplicate)
+                                              return uniqueChecklistNames.add(
+                                                  element?.checklist_name ??
+                                                      '');
+                                            }).toList();
+
+                                            return Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                ...filteredList
+                                                    .map((element) => Text(
+                                                          "${element?.checklist_name}",
+                                                          style: TextStyle(
+                                                              fontSize: 16),
+                                                          maxLines: 2,
+                                                        )),
+                                              ],
+                                            );
+                                          }),
+                                        ),
+                                        // Checklist Name
+                                        // Expanded(
+                                        //   flex: 2,
+                                        //   child: Text(
+                                        //     '${controller.allChecklistNames}',
+                                        //   ),
+                                        // ),
+
+                                        // Frequency
+                                        Expanded(
+                                          flex: 1,
+                                          child: Text(
+                                            '${controller.pmtaskViewModel?.frequency_name}',
+                                          ),
+                                        ),
+
+                                        // Assigned To
+                                        Expanded(
+                                          flex: 2,
+                                          child: Text(
+                                            '${controller.pmtaskViewModel?.assigned_to_name}',
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Obx(() {
+                                      final checklistList = controller
+                                              .pmtaskViewModel?.schedules ??
+                                          [];
+                                      final schedulesList = controller
+                                              .pmtaskViewModel?.schedules ??
+                                          [];
+
+                                      if (checklistList.length > 3 ||
+                                          schedulesList.length > 3) {
+                                        return TextButton(
+                                          onPressed: () {
+                                            controller.toggleShowMore();
+                                          },
+                                          child: Text(
+                                            controller.showMore.value
+                                                ? 'Show less'
+                                                : '... more',
+                                            style:
+                                                TextStyle(color: Colors.blue),
+                                          ),
+                                        );
+                                      } else {
+                                        return SizedBox.shrink();
+                                      }
+                                    }),
+                                  ],
+                                ),
                               )
                             : Dimens.box0,
-
                         controller.jobModel?.id != null
                             ? Container(
                                 width: Get.width * .9,
