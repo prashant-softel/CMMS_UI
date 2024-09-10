@@ -27,7 +27,9 @@ class JobListController extends GetxController {
   RxList<JobModel?> jobList = <JobModel?>[].obs;
   RxList<JobModel?> filteredData = <JobModel?>[].obs;
   bool openFromDateToStartDatePicker = false;
-
+  // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
   Rx<String> selectedBlock = ''.obs;
@@ -389,6 +391,71 @@ class JobListController extends GetxController {
 
   void clearStoreDataType() {
     jobListPresenter.clearTypeValue();
+  }
+
+  // sort
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+
+    switch (columnName) {
+      case 'ID':
+        jobList.sort((a, b) => isAscending.value
+            ? (a?.id ?? 0).compareTo(b?.id ?? 0)
+            : (b?.id ?? 0).compareTo(a?.id ?? 0));
+        break;
+      case 'Job Title':
+        jobList.sort((a, b) => isAscending.value
+            ? (a?.name ?? '').compareTo(b?.name ?? '')
+            : (b?.name ?? '').compareTo(a?.name ?? ''));
+        break;
+      case 'BreakdownTime':
+        jobList.sort((a, b) => isAscending.value
+            ? (a?.breakdownTime ?? DateTime(1970))
+                .compareTo(b?.breakdownTime ?? DateTime(1970))
+            : (b?.breakdownTime ?? DateTime(1970))
+                .compareTo(a?.breakdownTime ?? DateTime(1970)));
+        break;
+
+      case 'Equipment Category':
+        jobList.sort((a, b) => isAscending.value
+            ? (a?.equipmentCat ?? '').compareTo(b?.equipmentCat ?? '')
+            : (b?.equipmentCat ?? '').compareTo(a?.equipmentCat ?? ''));
+        break;
+      case 'Equipment':
+        jobList.sort((a, b) => isAscending.value
+            ? (a?.workingArea ?? '').compareTo(b?.workingArea ?? '')
+            : (b?.workingArea ?? '').compareTo(a?.workingArea ?? ''));
+        break;
+      case 'Fault':
+        jobList.sort((a, b) => isAscending.value
+            ? (a?.workType ?? '').compareTo(b?.workType ?? '')
+            : (b?.workType ?? '').compareTo(a?.workType ?? ''));
+        break;
+      case 'Raised By':
+        jobList.sort((a, b) => isAscending.value
+            ? (a?.raisedByName ?? '').compareTo(b?.raisedByName ?? '')
+            : (b?.raisedByName ?? '').compareTo(a?.raisedByName ?? ''));
+        break;
+      case 'Permit ID':
+        jobList.sort((a, b) => isAscending.value
+            ? (a?.permitId ?? '').compareTo(b?.permitId ?? '')
+            : (b?.permitId ?? '').compareTo(a?.permitId ?? ''));
+        break;
+
+      case 'Assigned To':
+        jobList.sort((a, b) => isAscending.value
+            ? (a?.assignedToName ?? '').compareTo(b?.assignedToName ?? '')
+            : (b?.assignedToName ?? '').compareTo(a?.assignedToName ?? ''));
+        break;
+      default:
+        break;
+    }
+    update();
   }
 
   ///

@@ -26,6 +26,8 @@ class JobCardListController extends GetxController {
   JobCardModel? jobListModel;
   RxList<String> jobListTableColumns = <String>[].obs;
   JobCardModel? selectedItem;
+   RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
 
   RxString IdFilterText = ''.obs;
   RxString JobCardIdFilterText = ''.obs;
@@ -175,4 +177,57 @@ class JobCardListController extends GetxController {
   void clearStoreData() {
     jobCardPresenter.clearValue();
   }
+  // sort
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+
+    switch (columnName) {
+      case 'Job Card Id':
+        jobList.sort((a, b) => isAscending.value
+            ? (a?.jobCardId ?? 0).compareTo(b?.jobCardId ?? 0)
+            : (b?.jobCardId ?? 0).compareTo(a?.jobCardId ?? 0));
+        break;
+      case 'Job Id':
+        jobList.sort((a, b) => isAscending.value
+            ? (a?.jobId ?? 0).compareTo(b?.jobId ?? 0)
+            : (b?.jobId ?? 0).compareTo(a?.jobId ?? 0));
+        break;
+case 'Permit No.':
+  jobList.sort((a, b) => isAscending.value
+      ? ((a?.permit_no as double?) ?? 0.0).compareTo((b?.permit_no as double?) ?? 0.0)
+      : ((b?.permit_no as double?) ?? 0.0).compareTo((a?.permit_no as double?) ?? 0.0));
+  break;
+
+      case 'Assigned To':
+        jobList.sort((a, b) => isAscending.value
+            ? (a?.job_assinged_to ?? '').compareTo(b?.job_assinged_to ?? '')
+            : (b?.job_assinged_to ?? '').compareTo(a?.job_assinged_to ?? ''));
+        break;
+      case 'Job Title':
+        jobList.sort((a, b) => isAscending.value
+            ? (a?.description ?? '').compareTo(b?.description ?? '')
+            : (b?.description ?? '').compareTo(a?.description ?? ''));
+        break;
+      case 'Start Time':
+        jobList.sort((a, b) => isAscending.value
+            ? (a?.start_time ?? '').compareTo(b?.start_time ?? '')
+            : (b?.start_time ?? '').compareTo(a?.start_time ?? ''));
+        break;
+      case 'End Time':
+        jobList.sort((a, b) => isAscending.value
+            ? (a?.end_time ?? '').compareTo(b?.end_time ?? '')
+            : (b?.end_time ?? '').compareTo(a?.end_time ?? ''));
+        break;
+
+      default:
+        break;
+    }
+    update();
+  }
+
 }

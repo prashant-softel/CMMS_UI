@@ -21,6 +21,9 @@ class PreventiveMaintenanceTaskController extends GetxController {
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
+  // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
   RxList<PmTaskListModel?> pmTaskList = <PmTaskListModel?>[].obs;
   RxList<PmTaskListModel?> filteredData = <PmTaskListModel>[].obs;
   bool openFromDateToStartDatePicker = false;
@@ -257,5 +260,61 @@ class PreventiveMaintenanceTaskController extends GetxController {
 
   void export() {
     getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, true);
+  }
+  //
+
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+
+    switch (columnName) {
+      case 'PM Task Id':
+        pmTaskList.sort((a, b) => isAscending.value
+            ? (a?.id ?? 0).compareTo(b?.id ?? 0)
+            : (b?.id ?? 0).compareTo(a?.id ?? 0));
+        break;
+      case 'PM Task Title':
+        pmTaskList.sort((a, b) => isAscending.value
+            ? (a?.name ?? '').compareTo(b?.name ?? '')
+            : (b?.name ?? '').compareTo(a?.name ?? ''));
+        break;
+      case 'Last Done Date':
+        pmTaskList.sort((a, b) => isAscending.value
+            ? (a?.last_done_date ?? '').compareTo(b?.last_done_date ?? '')
+            : (b?.last_done_date ?? '').compareTo(a?.last_done_date ?? ''));
+        break;
+      case 'Due Date':
+        pmTaskList.sort((a, b) => isAscending.value
+            ? (a?.due_date ?? '').compareTo(b?.due_date ?? '')
+            : (b?.due_date ?? '').compareTo(a?.due_date ?? ''));
+        break;
+      case 'Done Date':
+        pmTaskList.sort((a, b) => isAscending.value
+            ? (a?.done_date ?? '').compareTo(b?.done_date ?? '')
+            : (b?.done_date ?? '').compareTo(a?.done_date ?? ''));
+        break;
+      case 'Order Frequency':
+        pmTaskList.sort((a, b) => isAscending.value
+            ? (a?.frequency_name ?? '').compareTo(b?.frequency_name ?? '')
+            : (b?.frequency_name ?? '').compareTo(a?.frequency_name ?? ''));
+        break;
+      case 'Assigned To':
+        pmTaskList.sort((a, b) => isAscending.value
+            ? (a?.assigned_to_name ?? '').compareTo(b?.assigned_to_name ?? '')
+            : (b?.assigned_to_name ?? '').compareTo(a?.assigned_to_name ?? ''));
+        break;
+      case 'PTW':
+        pmTaskList.sort((a, b) => isAscending.value
+            ? (a?.permit_code ?? '').compareTo(b?.permit_code ?? '')
+            : (b?.permit_code ?? '').compareTo(a?.permit_code ?? ''));
+        break;
+      default:
+        break;
+    }
+    update();
   }
 }

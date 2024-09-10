@@ -29,7 +29,9 @@ class PmPlanListController extends GetxController {
   bool openFromDateToStartDatePicker = false;
   RxList<NewPermitModel?>? permitList = <NewPermitModel>[].obs;
   var permitDropdownValues = <String?>[].obs;
-
+  // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
   final selectedPermit = Rx<NewPermitModel?>(null);
   Rx<int?> selectedPermitId = 0.obs;
   Rx<bool> isPermitLinked = false.obs;
@@ -72,9 +74,9 @@ class PmPlanListController extends GetxController {
 
   final Map<String, double> columnwidth = {
     "Plan ID": 180,
-    "Plan Title": 350,
-    "Start Date": 200,
-    "Next Schedule Date": 200,
+    "Plan Title": 250,
+    "Start Date": 180,
+    "Next Schedule Date": 230,
     "Frequency ": 150,
     "Created By": 150,
   };
@@ -268,5 +270,48 @@ class PmPlanListController extends GetxController {
 
   void clearStoreData() {
     pmPlanListPresenter.clearValue();
+  }
+   void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+    switch (columnName) {
+      case 'Plan ID':
+        pmPlanList.sort((a, b) => isAscending.value
+            ? (a?.plan_id ?? 0).compareTo(b?.plan_id ?? 0)
+            : (b?.plan_id ?? 0).compareTo(a?.plan_id ?? 0));
+        break;
+      case 'Plan Title':
+        pmPlanList.sort((a, b) => isAscending.value
+                   ? (a?.plan_name ?? '').compareTo(b?.plan_name ?? '')
+            : (b?.plan_name ?? '').compareTo(a?.plan_name ?? ''));
+        break;
+      case 'Start Date':
+        pmPlanList.sort((a, b) => isAscending.value
+                   ? (a?.plan_date ?? '').compareTo(b?.plan_date ?? '')
+            : (b?.plan_date ?? '').compareTo(a?.plan_date ?? ''));
+        break;
+      case 'Next Schedule Date':
+        pmPlanList.sort((a, b) => isAscending.value
+                   ? (a?.next_schedule_date ?? '').compareTo(b?.next_schedule_date ?? '')
+            : (b?.next_schedule_date ?? '').compareTo(a?.next_schedule_date ?? ''));
+        break;
+      case 'Frequency':
+        pmPlanList.sort((a, b) => isAscending.value
+                   ? (a?.plan_freq_name ?? '').compareTo(b?.plan_freq_name ?? '')
+            : (b?.plan_freq_name ?? '').compareTo(a?.plan_freq_name ?? ''));
+        break;
+      case 'Created By':
+        pmPlanList.sort((a, b) => isAscending.value
+                   ? (a?.created_by_name ?? '').compareTo(b?.created_by_name ?? '')
+            : (b?.created_by_name ?? '').compareTo(a?.created_by_name ?? ''));
+        break;
+      default:
+        break;
+    }
+    update();
   }
 }
