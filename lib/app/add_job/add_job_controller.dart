@@ -197,6 +197,8 @@ class AddJobController extends GetxController {
       workTypeIds: workTypeIds,
     );
     toolsRequiredToWorkTypeList.value = list ?? <ToolsModel>[];
+    toolsRequiredToWorkTypeList
+        .sort((a, b) => a!.linkedToolName!.compareTo(b!.linkedToolName ?? ""));
 
     // str = toolsRequiredToWorkTypeList.join(" , ");
     // print({"str", str});
@@ -213,6 +215,7 @@ class AddJobController extends GetxController {
       for (var equimentCategory in _equipmentCategoryList) {
         equipmentCategoryList.add(equimentCategory);
       }
+      equipmentCategoryList.sort((a, b) => a!.name.compareTo(b!.name));
     }
   }
 
@@ -233,6 +236,7 @@ class AddJobController extends GetxController {
       isLoading: false,
     );
     workAreaList.value = _workAreaList;
+    workAreaList.sort((a, b) => a!.name!.compareTo(b!.name ?? ""));
 
     update(["workAreaList"]);
   }
@@ -247,6 +251,7 @@ class AddJobController extends GetxController {
       isLoading: false,
     );
     workTypeList.value = _workTypeList ?? <WorkTypeModel>[];
+    workTypeList.sort((a, b) => a!.name!.compareTo(b!.name ?? ""));
   }
 
   void checkForm() {
