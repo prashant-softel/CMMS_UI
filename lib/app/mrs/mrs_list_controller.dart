@@ -19,6 +19,9 @@ class MrsListController extends GetxController {
   int facilityId = 0;
   RxList<MrsListModel?> mrsList = <MrsListModel?>[].obs;
   RxList<MrsListModel?> filteredData = <MrsListModel>[].obs;
+  // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
 
   PaginationController paginationController = PaginationController(
     rowCount: 0,
@@ -210,5 +213,46 @@ class MrsListController extends GetxController {
     mrsListPresenter.clearStoreTaskWhereUsedData();
   }
 
+//soting
   void clearTypeValue() async => mrsListPresenter.clearTypeValue();
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+
+    switch (columnName) {
+      case 'MRS ID':
+        mrsList.sort((a, b) => isAscending.value
+            ? (a?.id ?? 0).compareTo(b?.id ?? 0)
+            : (b?.id ?? 0).compareTo(a?.id ?? 0));
+        break;
+      case 'MRS Details':
+        mrsList.sort((a, b) => isAscending.value
+            ? (a?.requested_by_name ?? '').compareTo(b?.requested_by_name ?? '')
+            : (b?.requested_by_name ?? '')
+                .compareTo(a?.requested_by_name ?? ''));
+        break;
+      case 'Order Date':
+        mrsList.sort((a, b) => isAscending.value
+            ? (a?.requestd_date ?? '').compareTo(b?.requestd_date ?? '')
+            : (b?.requestd_date ?? '').compareTo(a?.requestd_date ?? ''));
+        break;
+      case 'Activity':
+        mrsList.sort((a, b) => isAscending.value
+            ? (a?.activity ?? '').compareTo(b?.activity ?? '')
+            : (b?.activity ?? '').compareTo(a?.activity ?? ''));
+        break;
+      case 'Where Used':
+        mrsList.sort((a, b) => isAscending.value
+            ? (a?.whereUsedTypeId ?? '').compareTo(b?.whereUsedTypeId ?? '')
+            : (b?.whereUsedTypeId ?? '').compareTo(a?.whereUsedTypeId ?? ''));
+        break;
+      default:
+        break;
+    }
+    update();
+  }
 }

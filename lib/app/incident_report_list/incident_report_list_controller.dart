@@ -24,6 +24,9 @@ class IncidentReportListController extends GetxController {
   var rowList3 = <String>[].obs;
 
   bool openFromDateToStartDatePicker = false;
+  // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
 
   ///Failure Date Time For Web
   var failureDateTimeCtrlrWeb = TextEditingController();
@@ -111,7 +114,7 @@ class IncidentReportListController extends GetxController {
     "Title": 220,
     "Block Name": 200,
     "Equipment Name": 200,
-    "Approved By": 150,
+    "Approved By": 170,
     "Approved At": 150,
     "Reported By": 150,
     "Reported At": 150,
@@ -352,5 +355,60 @@ class IncidentReportListController extends GetxController {
   Future<void> editIncidentReport({int? id}) async {
     Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
     print('Argument$id');
+  }
+
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+
+    switch (columnName) {
+      case 'IR':
+        incidentReportList.sort((a, b) => isAscending.value
+            ? (a?.id ?? 0).compareTo(b?.id ?? 0)
+            : (b?.id ?? 0).compareTo(a?.id ?? 0));
+        break;
+      case 'Title':
+        incidentReportList.sort((a, b) => isAscending.value
+            ? (a?.title ?? '').compareTo(b?.title ?? '')
+            : (b?.title ?? '').compareTo(a?.title ?? ''));
+        break;
+      case 'Block Name':
+        incidentReportList.sort((a, b) => isAscending.value
+            ? (a?.block_name ?? '').compareTo(b?.block_name ?? '')
+            : (b?.block_name ?? '').compareTo(a?.block_name ?? ''));
+        break;
+      case 'Equipment Name"':
+        incidentReportList.sort((a, b) => isAscending.value
+            ? (a?.equipment_name ?? '').compareTo(b?.equipment_name ?? '')
+            : (b?.equipment_name ?? '').compareTo(a?.equipment_name ?? ''));
+        break;
+      case 'Approved By':
+        incidentReportList.sort((a, b) => isAscending.value
+            ? (a?.approved_by ?? '').compareTo(b?.approved_by ?? '')
+            : (b?.approved_by ?? '').compareTo(a?.approved_by ?? ''));
+        break;
+      case 'Approved At':
+        incidentReportList.sort((a, b) => isAscending.value
+            ? (a?.approved_at ?? '').compareTo(b?.approved_at ?? '')
+            : (b?.approved_at ?? '').compareTo(a?.approved_at ?? ''));
+        break;
+      case 'Reported By':
+        incidentReportList.sort((a, b) => isAscending.value
+            ? (a?.reported_by_name ?? '').compareTo(b?.reported_by_name ?? '')
+            : (b?.reported_by_name ?? '').compareTo(a?.reported_by_name ?? ''));
+        break;
+      case 'Reported At':
+        incidentReportList.sort((a, b) => isAscending.value
+            ? (a?.reported_at ?? '').compareTo(b?.reported_at ?? '')
+            : (b?.reported_at ?? '').compareTo(a?.reported_at ?? ''));
+        break;
+      default:
+        break;
+    }
+    update();
   }
 }

@@ -21,7 +21,9 @@ class VegetationPlanListController extends GetxController {
   VegetationPlanListModel? vegPlan;
   RxList<VegetationPlanListModel> filteredData =
       <VegetationPlanListModel>[].obs;
-
+  // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
   Rx<int> PlanId = 0.obs;
   RxString planIdFilterText = ''.obs;
   RxString planTitleFilterText = ''.obs;
@@ -244,4 +246,43 @@ class VegetationPlanListController extends GetxController {
   //   facilityIdStreamSubscription?.cancel();
   //   super.onClose();
   // }
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+
+    switch (columnName) {
+      case 'Plan Id':
+        vegetationPlanList.sort((a, b) => isAscending.value
+            ? (a.planId ?? 0).compareTo(b.planId ?? 0)
+            : (b.planId ?? 0).compareTo(a.planId ?? 0));
+        break;
+      case 'Plan Title':
+        vegetationPlanList.sort((a, b) => isAscending.value
+            ? (a.title ?? '').compareTo(b.title ?? '')
+            : (b.title ?? '').compareTo(a.title ?? ''));
+        break;
+      case 'No of Days':
+        vegetationPlanList.sort((a, b) => isAscending.value
+            ? (a.noOfCleaningDays ?? 0).compareTo(b.noOfCleaningDays ?? 0)
+            : (b.noOfCleaningDays ?? 0).compareTo(a.noOfCleaningDays ?? 0));
+        break;
+      case 'Created By':
+        vegetationPlanList.sort((a, b) => isAscending.value
+            ? (a.createdBy ?? '').compareTo(b.createdBy ?? '')
+            : (b.createdBy ?? '').compareTo(a.createdBy ?? ''));
+        break;
+      case 'Frequency':
+        vegetationPlanList.sort((a, b) => isAscending.value
+            ? (a.frequency ?? '').compareTo(b.frequency ?? '')
+            : (b.frequency ?? '').compareTo(a.frequency ?? ''));
+        break;
+      default:
+        break;
+    }
+    update();
+  }
 }
