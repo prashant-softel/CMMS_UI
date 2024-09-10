@@ -808,8 +808,22 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                             //  selectedData = filterdData;
                                                                                                                             filterdData.ptw_tbt_done == 1
                                                                                                                                 ? Get.dialog<void>(CustomCalibrationDialog(id: filterdData.scheduleId ?? 0, title: filterdData.scheduleId.toString(), starttype: 1))
+
                                                                                                                                 //controller.startMCExecutionScheduleButton(scheduleID: filterdData.scheduleId)
-                                                                                                                                : Get.dialog<void>(TbtDoneMcDialog(ptw_id: filterdData.permit_id ?? 0, id: controller.mcExecutionDetailsModel.value?.executionId ?? 0));
+                                                                                                                                : filterdData.ptw_tbt_done == 0 && filterdData.tbt_start == 0
+                                                                                                                                    ? Get.defaultDialog(
+                                                                                                                                        radius: 5,
+                                                                                                                                        title: 'Alert',
+                                                                                                                                        middleText: 'Unable to start task due to permit taken for ${controller.pmtaskViewModel.value!.start_time}',
+                                                                                                                                        textConfirm: 'OK',
+                                                                                                                                        onConfirm: () {
+                                                                                                                                          Get.back(); // Close the dialog
+                                                                                                                                          // Get.offAllNamed(Routes.pmTask);
+                                                                                                                                        },
+                                                                                                                                        buttonColor: ColorValues.appGreenColor,
+                                                                                                                                        confirmTextColor: Colors.white,
+                                                                                                                                        barrierDismissible: false)
+                                                                                                                                    : Get.dialog<void>(TbtDoneMcDialog(ptw_id: filterdData.permit_id ?? 0, id: controller.mcExecutionDetailsModel.value?.executionId ?? 0));
                                                                                                                             // print({
                                                                                                                             //   'scheduledata:':
                                                                                                                             //       filterdData.scheduleId

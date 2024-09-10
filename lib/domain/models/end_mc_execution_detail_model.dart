@@ -122,29 +122,29 @@ class EndMCExecutionDetailsModel {
 }
 
 class Schedules {
-  Schedules({
-    this.id,
-    this.scheduleId,
-    this.executionId,
-    this.cleaningDay,
-    this.cleaningTypeName,
-    this.scheduled,
-    this.cleaned,
-    this.abandoned,
-    this.pending,
-    this.waterUsed,
-    this.start_date,
-    this.remark,
-    this.remark_of_schedule,
-    this.status,
-    this.status_short,
-    this.equipments,
-    this.permit_id,
-    this.permit_code,
-    this.ptw_status,
-    this.ptw_tbt_done,
-    this.status_short_ptw,
-  });
+  Schedules(
+      {this.id,
+      this.scheduleId,
+      this.executionId,
+      this.cleaningDay,
+      this.cleaningTypeName,
+      this.scheduled,
+      this.cleaned,
+      this.abandoned,
+      this.pending,
+      this.waterUsed,
+      this.start_date,
+      this.remark,
+      this.remark_of_schedule,
+      this.status,
+      this.status_short,
+      this.equipments,
+      this.permit_id,
+      this.permit_code,
+      this.ptw_status,
+      this.ptw_tbt_done,
+      this.status_short_ptw,
+      this.tbt_start});
 
   int? id;
   int? scheduleId;
@@ -166,6 +166,8 @@ class Schedules {
   int? ptw_status;
   int? ptw_tbt_done;
   String? status_short_ptw;
+  int? tbt_start;
+
   List<EquipmentsList?>? equipments;
 
   factory Schedules.fromJson(Map<String, dynamic> json) => Schedules(
@@ -174,6 +176,7 @@ class Schedules {
         permit_code: json['permit_code'] ?? '',
         ptw_status: json['ptw_status'],
         ptw_tbt_done: json['ptw_tbt_done'],
+        tbt_start: json['tbt_start'] ?? 0,
         remark_of_schedule: json['remark_of_schedule'] ?? '',
         status_short_ptw: json['status_short_ptw'] == 'Invalid'
             ? ''
@@ -214,6 +217,7 @@ class Schedules {
         "start_date": start_date,
         "remark": remark ?? '',
         "status": status,
+        "tbt_start": tbt_start,
         "status_short": status_short ?? '',
         "permit_id": permit_id,
         "permit_code": permit_code ?? '',

@@ -138,10 +138,13 @@ class VegSchedules {
   int? ptw_status;
   int? ptw_tbt_done;
   String? status_short_ptw;
+  int? tbt_start;
+
   List<Equipments>? equipments;
 
   VegSchedules({
     this.id,
+    this.tbt_start,
     this.scheduleId,
     this.executionId,
     this.cleaningDay,
@@ -169,6 +172,7 @@ class VegSchedules {
       id: json['id'],
       scheduleId: json['scheduleId'],
       executionId: json['executionId'],
+      tbt_start: json['tbt_start'] ?? 0,
       cleaningDay: json['cleaningDay'],
       cleaningTypeName: json['cleaningTypeName'],
       scheduled: json['scheduled'],
@@ -197,6 +201,7 @@ class VegSchedules {
         'scheduleId': scheduleId,
         'executionId': executionId,
         'cleaningDay': cleaningDay,
+        "tbt_start": tbt_start,
         'cleaningTypeName': cleaningTypeName,
         'scheduled': scheduled,
         'cleaned': cleaned,
