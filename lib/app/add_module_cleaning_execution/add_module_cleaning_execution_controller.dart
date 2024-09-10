@@ -965,13 +965,13 @@ class AddModuleCleaningExecutionController extends GetxController {
 
     List<String> mcInfoLabelsRight = [
       'Planned By',
-      'Start Date Time',
+      'Schedule Date Time',
       'Planning Date Time',
       'Execution started by'
     ];
     List<String> mcInfoValuesRight = [
       '${mcExecutionDetailsModel.value?.plannedBy}',
-      '${mcExecutionDetailsModel.value?.status != 360 ? mcExecutionDetailsModel.value?.startDate : ''}',
+      '${mcExecutionDetailsModel.value?.status != 360 ? mcExecutionDetailsModel.value?.scheduledDate : ''}',
       '${plannedAtDateTimeCtrlrWeb.text}',
       '${mcExecutionDetailsModel.value?.startedBy ?? ''}',
     ];

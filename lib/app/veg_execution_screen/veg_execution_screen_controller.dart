@@ -669,7 +669,7 @@ class VegExecutionController extends GetxController {
     ];
     List<String> mcInfoValuesRight = [
       '${vegExecutionDetailsModel.value?.plannedBy}',
-      '${vegExecutionDetailsModel.value?.status != 360 ? vegExecutionDetailsModel.value?.startDate : ''}',
+      '${vegExecutionDetailsModel.value?.status != 360 ? vegExecutionDetailsModel.value?.scheduledDate : ''}',
       '${vegExecutionDetailsModel.value?.plannedAt}',
       '${vegExecutionDetailsModel.value?.startedBy ?? ''}',
     ];

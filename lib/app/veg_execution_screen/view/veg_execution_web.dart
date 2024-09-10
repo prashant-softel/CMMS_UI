@@ -234,7 +234,7 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                   style: Styles.black17,
                                                 ),
                                                 Text(
-                                                  'Start Date Time: ',
+                                                  'Schedule Date Time: ',
                                                   style: Styles.black17,
                                                 ),
                                               ],
@@ -255,7 +255,7 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                         controller
                                                                 .vegExecutionDetailsModel
                                                                 .value
-                                                                ?.startDate ??
+                                                                ?.scheduledDate ??
                                                             '',
                                                         style: Styles.blue17,
                                                       )

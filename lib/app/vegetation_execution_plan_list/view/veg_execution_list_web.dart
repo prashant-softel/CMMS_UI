@@ -490,7 +490,7 @@ class VegExcutionListDataSource extends DataTableSource {
           (VegExcutionList.noOfDays ?? '')
               .toString()
               .contains(controller.startDateFilterText.value.toLowerCase()) &&
-          (VegExcutionList.startDate ?? '')
+          (VegExcutionList.scheduledDate ?? '')
               .toString()
               .contains(controller.doneDateFilterText.value.toLowerCase()) &&
           (VegExcutionList.doneDate ?? '')
@@ -518,9 +518,9 @@ class VegExcutionListDataSource extends DataTableSource {
       '${VegExcutionListDetails?.responsibility ?? ''}',
       '${VegExcutionListDetails?.frequency ?? ''}',
       '${VegExcutionListDetails?.noOfDays ?? ''}',
-      VegExcutionListDetails?.startDate == "0001-01-01"
+      VegExcutionListDetails?.scheduledDate == "0001-01-01"
           ? "-"
-          : '${VegExcutionListDetails?.startDate ?? ''}',
+          : '${VegExcutionListDetails?.scheduledDate ?? ''}',
 
       VegExcutionListDetails?.status == 727
           ? '${VegExcutionListDetails?.abondond_done_date ?? ''}'

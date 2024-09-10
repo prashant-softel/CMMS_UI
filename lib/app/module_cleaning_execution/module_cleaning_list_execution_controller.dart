@@ -144,7 +144,7 @@ class ModuleCleaningListExecutionController extends GetxController {
                 false) ||
             (item?.noOfDays?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.startDate
+            (item?.scheduledDate
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
@@ -274,8 +274,8 @@ class ModuleCleaningListExecutionController extends GetxController {
         break;
       case 'Start Date':
         mcTaskList.sort((a, b) => isAscending.value
-            ? a!.startDate!.compareTo(b!.startDate!)
-            : b!.startDate!.compareTo(a!.startDate!));
+            ? a!.scheduledDate!.compareTo(b!.scheduledDate!)
+            : b!.scheduledDate!.compareTo(a!.scheduledDate!));
         break;
       case 'Done Date':
         mcTaskList.sort((a, b) => isAscending.value

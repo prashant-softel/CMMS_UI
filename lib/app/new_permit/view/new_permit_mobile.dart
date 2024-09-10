@@ -107,7 +107,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                   ),
                                   SizedBox(height: 5),
                                   Text(
-                                    'Start Date Time: ${controller.mcExecutionDetailsModel!.startDate ?? ""}',
+                                    'Start Date Time: ${controller.mcExecutionDetailsModel!.startedAt ?? ""}',
                                     style: TextStyle(
                                         overflow: TextOverflow.ellipsis),
                                   ),
@@ -165,7 +165,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                   ),
                                   SizedBox(height: 5),
                                   Text(
-                                    'Start Date Time: ${controller.vegExecutionDetailsModel!.startDate ?? ""}',
+                                    'Start Date Time: ${controller.vegExecutionDetailsModel!.scheduledDate ?? ""}',
                                     style: TextStyle(
                                         overflow: TextOverflow.ellipsis),
                                   ),

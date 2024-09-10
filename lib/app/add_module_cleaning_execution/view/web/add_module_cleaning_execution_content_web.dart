@@ -240,6 +240,10 @@ class AddModuleCleaningExecutionContentWeb
                                                   'Task ID: ',
                                                   style: Styles.black17,
                                                 ),
+                                                Text(
+                                                  'Frequency: ',
+                                                  style: Styles.black17,
+                                                ),
                                               ],
                                             ),
                                             Dimens.boxWidth2,
@@ -256,6 +260,10 @@ class AddModuleCleaningExecutionContentWeb
                                                   'MCT${controller.mcid}',
                                                   style: Styles.blue17,
                                                 ),
+                                                Text(
+                                                  '${controller.mcExecutionDetailsModel.value?.frequency}',
+                                                  style: Styles.blue17,
+                                                ),
                                               ],
                                             ),
                                             Spacer(),
@@ -267,8 +275,9 @@ class AddModuleCleaningExecutionContentWeb
                                                   'Plan Title: ',
                                                   style: Styles.black17,
                                                 ),
+                                                 
                                                 Text(
-                                                  'Frequency: ',
+                                                  'Start Time: ',
                                                   style: Styles.black17,
                                                 ),
                                               ],
@@ -283,7 +292,11 @@ class AddModuleCleaningExecutionContentWeb
                                                   style: Styles.blue17,
                                                 ),
                                                 Text(
-                                                  ' ${controller.mcExecutionDetailsModel.value?.frequency}',
+                                                   controller.mcExecutionDetailsModel
+                                                            .value?.status !=
+                                                        360
+                                                    ?
+                                                  ' ${controller.mcExecutionDetailsModel.value?.startedAt}':'',
                                                   style: Styles.blue17,
                                                 ),
                                               ],
@@ -297,10 +310,11 @@ class AddModuleCleaningExecutionContentWeb
                                                   'Planned By: ',
                                                   style: Styles.black17,
                                                 ),
-                                                Text(
-                                                  'Start Date Time: ',
+                                                 Text(
+                                                  'Execution started by: ',
                                                   style: Styles.black17,
                                                 ),
+                                                
                                               ],
                                             ),
 
@@ -312,18 +326,12 @@ class AddModuleCleaningExecutionContentWeb
                                                   ' ${controller.mcExecutionDetailsModel.value?.plannedBy}',
                                                   style: Styles.blue17,
                                                 ),
-                                                controller.mcExecutionDetailsModel
-                                                            .value?.status !=
-                                                        360
-                                                    ? Text(
-                                                        controller
-                                                                .mcExecutionDetailsModel
-                                                                .value
-                                                                ?.startDate ??
-                                                            '',
-                                                        style: Styles.blue17,
-                                                      )
-                                                    : Text("")
+                                               Text(
+                                                  ' ${controller.mcExecutionDetailsModel.value?.startedBy}',
+                                                  style: Styles.blue17,
+                                                ),
+                                               
+                                                // : Text("")
                                               ],
                                             ),
                                             Spacer(),
@@ -336,8 +344,8 @@ class AddModuleCleaningExecutionContentWeb
                                                   'Planning Date Time: ',
                                                   style: Styles.black17,
                                                 ),
-                                                Text(
-                                                  'Execution started by: ',
+                                               Text(
+                                                  'Schedule Date Time: ',
                                                   style: Styles.black17,
                                                 ),
                                               ],
@@ -348,13 +356,21 @@ class AddModuleCleaningExecutionContentWeb
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  ' ${controller.plannedAtDateTimeCtrlrWeb.text}',
+                                                   controller
+                                                          .mcExecutionDetailsModel
+                                                          .value
+                                                          ?.plannedAt ??
+                                                      '',
                                                   style: Styles.blue17,
-                                                ),
-                                                Text(
-                                                  ' ${controller.mcExecutionDetailsModel.value?.startedBy}',
+                                                ), Text(
+                                                  controller
+                                                          .mcExecutionDetailsModel
+                                                          .value
+                                                          ?.scheduledDate ??
+                                                      '',
                                                   style: Styles.blue17,
-                                                ),
+                                                )
+                                               
                                               ],
                                             ),
                                             Spacer(),
@@ -737,8 +753,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                             style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                                                           )
                                                                                                         : (mapData['key'] == "Actions")
-                                                                                                            ? 
-                                                                                                            Wrap(
+                                                                                                            ? Wrap(
                                                                                                                 children: [
                                                                                                                   controller.listSchedules!.firstWhere((e) => "${e?.scheduleId}" == record[0]['value'], orElse: () => Schedules(status: -1))?.permit_id == 0 && controller.mcExecutionDetailsModel.value?.status == 361
                                                                                                                       ? TableActionButton(
@@ -959,7 +974,6 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                       : Dimens.box0,
                                                                                                                 ],
                                                                                                               )
-                                                                                                        
                                                                                                             : Text(mapData['key'] ?? ''),
                                                       );
                                                     }).toList(),
