@@ -350,7 +350,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                           context)
                                                                       .size
                                                                       .width *
-                                                                  .10),
+                                                                  .15),
                                                               height: 33,
                                                               controller:
                                                                   controller,
