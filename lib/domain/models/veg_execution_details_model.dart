@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cmms/app/utils/utility.dart';
+
 VegExecutionDetailsModel vegExecutionDetailsModelFromJson(String str) =>
     VegExecutionDetailsModel.fromJson(json.decode(str));
 
@@ -65,12 +67,12 @@ class VegExecutionDetailsModel {
         description: json['description'],
         frequency: json['frequency'],
         assignedTo: json['assignedTo'],
-        scheduledDate: json['scheduledDate'],
+        scheduledDate: Utility.getFormatedyearMonthDay(json['scheduledDate']),
         noOfDays: json['noOfDays'],
         plannedBy: json['plannedBy'],
-        plannedAt: json['plannedAt'],
+        plannedAt: Utility.getFormatedyearMonthDay(json['plannedAt']),
         startedBy: json['startedBy'],
-        startedAt: json['startedAt'],
+        startedAt: Utility.getFormatedyearMonthDay(json['startedAt']),
         abandonedBy: json['abandonedBy'],
         abandonedAt: json['abandonedAt'],
         status: json['status'],
