@@ -8724,6 +8724,24 @@ class Repository {
           saveRolelistJsonString: saveRolelistJsonString);
 
       if (!res.hasError) {
+        var resp = res.data;
+        var parsedJson = json.decode(resp);
+        Get.dialog(
+          AlertDialog(
+            title: Text("Success"),
+            content: Text("${parsedJson['message']} [${parsedJson['id'][0]}]"),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Get.back(); // Pop the dialog
+                  Get.until(
+                      (route) => route.isFirst); // Navigate to the first route
+                },
+                child: Text("OK"),
+              ),
+            ],
+          ),
+        );
         return true;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'saveRoleAccess');
