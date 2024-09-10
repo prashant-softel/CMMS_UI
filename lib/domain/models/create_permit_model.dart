@@ -24,7 +24,7 @@ class CreatePermitModel {
 
   String? start_datetime;
   String? end_datetime;
-  String? description;
+  String? description;String?comment;
   String? title;
   List<LotoList>? Loto_list;
   List<LotoOtherDetails>? lotoOtherDetails;
@@ -70,14 +70,14 @@ class CreatePermitModel {
     this.TBT_Done_by,
     this.TBT_Done_at,
     this.PHYSICAL_ISO_REMARK,
-    this.is_physical_iso_required,
+    this.is_physical_iso_required,this.comment
   });
 
   factory CreatePermitModel.fromJson(Map<String, dynamic> json) =>
       CreatePermitModel(
         permit_id: json['permit_id'],
         approver_id: json["approver_id"],
-        issuer_id: json["issuer_id"],
+        issuer_id: json["issuer_id"],comment:json["comment"],
         lotoOtherDetails: json["lotoOtherDetails"] != null
             ? List<LotoOtherDetails>.from(json["lotoOtherDetails"]
                 ?.map((x) => LotoOtherDetails.fromJson(x)))
@@ -129,6 +129,7 @@ class CreatePermitModel {
 
   Map<String, dynamic> toJson() => {
         "permit_id": permit_id,
+        "comment":comment,
         "approver_id": approver_id,
         "issuer_id": issuer_id,
         "facility_id": facility_id,
