@@ -281,4 +281,5 @@ class VegetationPlanListController extends GetxController {
 
     update(); // Trigger UI update after sorting
   }
+  
 }

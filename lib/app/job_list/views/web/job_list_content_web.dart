@@ -289,19 +289,19 @@ class JobListContentWeb extends StatelessWidget {
                                         'Job Title',
                                         // ColumnSize.M,
                                         controller.jobDetailsFilterText,
-                                        250),
+                                        200),
                                     buildDataColumn(
                                         'breakdownTime',
                                         'BreakdownTime',
                                         // ColumnSize.L,
                                         controller.breakdownTimeFilterText,
-                                        150),
+                                        180),
                                     buildDataColumn(
                                         'equipmentCat',
                                         'Equipment Category',
                                         // ColumnSize.L,
                                         controller.equipmentCategoryFilterText,
-                                        200),
+                                        230),
                                     buildDataColumn(
                                         'workingArea',
                                         'Equipment',
@@ -319,7 +319,7 @@ class JobListContentWeb extends StatelessWidget {
                                         'Raised By',
                                         // ColumnSize.S,
                                         controller.raisedByNameFilterText,
-                                        100),
+                                        130),
 
                                     // buildDataColumn(
                                     //   'breakdownType',
@@ -332,7 +332,7 @@ class JobListContentWeb extends StatelessWidget {
                                         'Permit ID',
                                         // ColumnSize.S,
                                         controller.permitIdFilterText,
-                                        100),
+                                        130),
                                     buildDataColumn(
                                         'assignedToName',
                                         'Assigned To',
@@ -369,11 +369,40 @@ class JobListContentWeb extends StatelessWidget {
         DataColumn2(
       // size: columnSize,
       fixedWidth: fixedWidth,
+       onSort: header == "Actions"
+        ? null
+        : (int columnIndex, bool ascending) {
+            final controller = Get.find<JobListController>();
+            controller.sortData(header);
+          },
 
       label: //
           Column(
               mainAxisAlignment: MainAxisAlignment.center, //
               children: [
+                 Row(
+          children: [
+            Text(
+              header,
+              style: Styles.black16W500,
+            ),
+            if (header != "Actions")
+              Obx(() {
+                final controller = Get.find<JobListController>();
+
+                return AnimatedRotation(
+                  turns: controller.currentSortColumn.value == header
+                      ? (controller.isAscending.value ? 0.5 : 0.0)
+                      : 0.0,
+                  duration: Duration(milliseconds: 300),
+                  child: Icon(
+                    Icons.expand_more,
+                    size: 20,
+                  ),
+                );
+              }),
+          ],
+        ),
             // SizedBox(
             //   height: Get.height * 0.05,
             //   child: TextField(
@@ -404,13 +433,13 @@ class JobListContentWeb extends StatelessWidget {
             //     ),
             //   ),
             // ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                header,
-                style: Styles.black15W400,
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.centerLeft,
+            //   child: Text(
+            //     header,
+            //     style: Styles.black15W400,
+            //   ),
+            // ),
           ]),
       // ),
     );

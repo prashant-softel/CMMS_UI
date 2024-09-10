@@ -295,44 +295,47 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           //   ],
                                                           // ),
                                                           Dimens.boxHeight5,
-                                                          // Row(
-                                                          //   children: [
-                                                          //     CustomRichText(
-                                                          //         title:
-                                                          //             'Responsible Person'),
-                                                          //     Dimens.boxWidth3,
-                                                          //     LoginCustomTextfield(
-                                                          //         width: (MediaQuery.of(
-                                                          //                     context)
-                                                          //                 .size
-                                                          //                 .width *
-                                                          //             .2),
-                                                          //         textController:
-                                                          //             controller
-                                                          //                 .responsiblePersonCtrlr,
-                                                          //         //validate
-                                                          //         errorController: controller
-                                                          //                 .isResponsibleInvalid
-                                                          //                 .value
-                                                          //             ? "Required field"
-                                                          //             : null,
-                                                          //         onChanged:
-                                                          //             (value) {
-                                                          //           if (value
-                                                          //                   .trim()
-                                                          //                   .length >
-                                                          //               0) {
-                                                          //             controller
-                                                          //                 .isResponsibleInvalid
-                                                          //                 .value = false;
-                                                          //           } else {
-                                                          //             controller
-                                                          //                 .isResponsibleInvalid
-                                                          //                 .value = true;
-                                                          //           }
-                                                          //         }),
-                                                          //   ],
-                                                          // ),
+                                                           controller.obsId != 0
+                                                              ?
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Responsible Person'),
+                                                              Dimens.boxWidth3,
+                                                              LoginCustomTextfield(
+                                                                  width: (MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      .2),
+                                                                  textController:
+                                                                      controller
+                                                                          .responsiblePersonCtrlr,
+                                                                  //validate
+                                                                  errorController: controller
+                                                                          .isResponsibleInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isResponsibleInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isResponsibleInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }),
+                                                            ],
+                                                          )
+                                                            :SizedBox.shrink(),
                                                           Dimens.boxHeight5,
                                                           // Row(
                                                           //   children: [
@@ -380,38 +383,41 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           //   ],
                                                           // ),
                                                           Dimens.boxHeight5,
-                                                          // Row(
-                                                          //   children: [
-                                                          //     CustomRichText(
-                                                          //         title:
-                                                          //             'Cost Type'),
-                                                          //     Dimens.boxWidth3,
-                                                          //     Obx(
-                                                          //       () =>
-                                                          //           DropdownWebStock(
-                                                          //         width: MediaQuery.of(
-                                                          //                     context)
-                                                          //                 .size
-                                                          //                 .width /
-                                                          //             5,
-                                                          //         dropdownList:
-                                                          //             controller
-                                                          //                 .costType,
-                                                          //         isValueSelected:
-                                                          //             controller
-                                                          //                 .isCostTypeListSelected
-                                                          //                 .value,
-                                                          //         selectedValue:
-                                                          //             controller
-                                                          //                 .selectedCostTypeList
-                                                          //                 .value,
-                                                          //         onValueChanged:
-                                                          //             controller
-                                                          //                 .onValueChanged,
-                                                          //       ),
-                                                          //     ),
-                                                          //   ],
-                                                          // ),
+                                                          controller.obsId != 0
+                                                              ?
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Cost Type'),
+                                                              Dimens.boxWidth3,
+                                                              Obx(
+                                                                () =>
+                                                                    DropdownWebStock(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .costType,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isCostTypeListSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedCostTypeList
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          )
+                                                          :SizedBox.shrink(),
                                                           // Row(
                                                           //   children: [
                                                           //     CustomRichText(
@@ -632,57 +638,56 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             ],
                                                           ),
                                                           Dimens.boxHeight5,
-                                                          // Row(
-                                                          //   children: [
-                                                          //     CustomRichText(
-                                                          //         title:
-                                                          //             'Target Date'),
-                                                          //     Dimens.boxWidth3,
-                                                          //     CustomTextFieldForStock(
-                                                          //       width: MediaQuery.of(
-                                                          //                   context)
-                                                          //               .size
-                                                          //               .width /
-                                                          //           5,
-                                                          //       numberTextField:
-                                                          //           true,
-                                                          //       onTap: () {
-                                                          //         controller
-                                                          //                 .openTargetObsDatePicker =
-                                                          //             !controller
-                                                          //                 .openTargetObsDatePicker;
-                                                          //         controller
-                                                          //             .update([
-                                                          //           'stock_Mangement'
-                                                          //         ]);
-                                                          //       },
-                                                          //       textController:
-                                                          //           controller
-                                                          //               .targetDateTc,
-                                                          //       errorController:
-                                                          //           controller
-                                                          //                   .isTargetDateInvalid
-                                                          //                   .value
-                                                          //               ? "Required field"
-                                                          //               : null,
-                                                          //       onChanged:
-                                                          //           (value) {
-                                                          //         if (value
-                                                          //                 .trim()
-                                                          //                 .length >
-                                                          //             0) {
-                                                          //           controller
-                                                          //               .isTargetDateInvalid
-                                                          //               .value = false;
-                                                          //         } else {
-                                                          //           controller
-                                                          //               .isTargetDateInvalid
-                                                          //               .value = true;
-                                                          //         }
-                                                          //       },
-                                                          //     ),
-                                                          //   ],
-                                                          // ),
+                                                          controller.obsId != 0
+                                                              ? Row(
+                                                                  children: [
+                                                                    CustomRichText(
+                                                                        title:
+                                                                            'Target Date'),
+                                                                    Dimens
+                                                                        .boxWidth3,
+                                                                    CustomTextFieldForStock(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width /
+                                                                          5,
+                                                                      numberTextField:
+                                                                          true,
+                                                                      onTap:
+                                                                          () {
+                                                                        controller.openTargetObsDatePicker =
+                                                                            !controller.openTargetObsDatePicker;
+                                                                        controller
+                                                                            .update([
+                                                                          'stock_Mangement'
+                                                                        ]);
+                                                                      },
+                                                                      textController:
+                                                                          controller
+                                                                              .targetDateTc,
+                                                                      errorController: controller
+                                                                              .isTargetDateInvalid
+                                                                              .value
+                                                                          ? "Required field"
+                                                                          : null,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        if (value.trim().length >
+                                                                            0) {
+                                                                          controller
+                                                                              .isTargetDateInvalid
+                                                                              .value = false;
+                                                                        } else {
+                                                                          controller
+                                                                              .isTargetDateInvalid
+                                                                              .value = true;
+                                                                        }
+                                                                      },
+                                                                    ),
+                                                                  ],
+                                                                )
+                                                              : SizedBox
+                                                                  .shrink(),
                                                           Dimens.boxHeight5,
                                                         ],
                                                       ),
@@ -925,7 +930,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                             backgroundColor: ColorValues.cancelColor,
                             text: 'Cancel',
                             onPressed: () {
-                              Get.offAllNamed(Routes.misDashboard);
+                              Get.offNamed(Routes.misDashboard);
+                              controller.clearStoreData();
                             },
                           ),
                         ),

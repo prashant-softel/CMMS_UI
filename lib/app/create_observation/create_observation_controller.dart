@@ -90,7 +90,7 @@ class CreateObservationController extends GetxController {
           getFacilityList();
         });
         // Future.delayed(Duration(seconds: 1), () {
-        getIncidentRiskType(facilityId);
+        // getIncidentRiskType(facilityId);
         // });
         // Future.delayed(Duration(seconds: 1), () {
         getTypeOfObservationList();

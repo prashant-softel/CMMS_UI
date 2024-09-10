@@ -212,6 +212,7 @@ RxString currentSortColumn = ''.obs;
     mrsListPresenter.clearStoreTaskWhereUsedData();
   }
 
+//soting
   void clearTypeValue() async => mrsListPresenter.clearTypeValue();
   void sortData(String columnName) {
     if (currentSortColumn.value == columnName) {

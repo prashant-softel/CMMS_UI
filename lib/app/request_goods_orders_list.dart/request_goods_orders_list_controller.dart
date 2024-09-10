@@ -29,6 +29,7 @@ class PurchaseGoodsorderListController extends GetxController {
 
   RxString goDateFilterText = ''.obs;
   RxString currentSortColumn = ''.obs;
+  // For sorting
   RxBool isAscending = true.obs;
   RxString costFilterText = ''.obs;
 

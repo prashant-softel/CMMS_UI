@@ -458,7 +458,7 @@ DataColumn2 buildDataColumn(
 ) {
   return DataColumn2(
     fixedWidth: fixedWidth,
-    onSort: header == "Actions"  
+    onSort: header == "Actions"
         ? null
         : (int columnIndex, bool ascending) {
             final controller = Get.find<PurchaseGoodsorderListController>();

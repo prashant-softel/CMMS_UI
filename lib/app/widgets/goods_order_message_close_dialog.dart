@@ -81,7 +81,7 @@ class GoodsOrderMessageCloseDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                Get.offNamed(Routes.stockManagementGoodsOrdersScreen);
+                Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
               },
               child: const Text('Ok'),
             ),

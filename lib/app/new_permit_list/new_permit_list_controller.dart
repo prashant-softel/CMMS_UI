@@ -25,7 +25,9 @@ class NewPermitListController extends GetxController {
     this.newPermitListPresenter,
   );
   NewPermitListPresenter newPermitListPresenter;
-
+  // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
   final HomeController controller = Get.find();
 
   ///
@@ -49,10 +51,10 @@ class NewPermitListController extends GetxController {
     "Permit Id": 153,
     "Title": 150,
     "Permit Type Name": 200,
-    "Equipment Category": 200,
-    "Working Area": 153,
-    "Requested By": 130,
-    "Approved By": 150,
+    "Equipment Category": 220,
+    "Working Area": 173,
+    "Requested By": 170,
+    "Approved By": 170,
     // "Status": 100,
     // "Status code": 120,
   };
@@ -494,5 +496,55 @@ class NewPermitListController extends GetxController {
       return true;
     }
     return false;
+  }
+
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+
+    switch (columnName) {
+      case 'Permit Id':
+        newPermitList.sort((a, b) => isAscending.value
+            ? (a?.permitId ?? 0).compareTo(b?.permitId ?? 0)
+            : (b?.permitId ?? 0).compareTo(a?.permitId ?? 0));
+        break;
+      case 'Title':
+        newPermitList.sort((a, b) => isAscending.value
+                   ? (a?.description ?? '').compareTo(b?.description ?? '')
+            : (b?.description ?? '').compareTo(a?.description ?? ''));
+        break;
+      case 'Permit Type Name':
+        newPermitList.sort((a, b) => isAscending.value
+                   ? (a?.permitTypeName ?? '').compareTo(b?.permitTypeName ?? '')
+            : (b?.permitTypeName ?? '').compareTo(a?.permitTypeName ?? ''));
+        break;
+      case 'Equipment Category':
+        newPermitList.sort((a, b) => isAscending.value
+                   ? (a?.equipment_categories ?? '').compareTo(b?.equipment_categories ?? '')
+            : (b?.equipment_categories ?? '').compareTo(a?.equipment_categories ?? ''));
+        break;
+      case 'Working Area':
+        newPermitList.sort((a, b) => isAscending.value
+                   ? (a?.workingAreaName ?? '').compareTo(b?.workingAreaName ?? '')
+            : (b?.workingAreaName ?? '').compareTo(a?.workingAreaName ?? ''));
+        break;
+      case 'Requested By':
+        newPermitList.sort((a, b) => isAscending.value
+                   ? (a?.requestByName ?? '').compareTo(b?.requestByName ?? '')
+            : (b?.requestByName ?? '').compareTo(a?.requestByName ?? ''));
+        break;
+      case 'Approved By':
+        newPermitList.sort((a, b) => isAscending.value
+                   ? (a?.approvedByName ?? '').compareTo(b?.approvedByName ?? '')
+            : (b?.approvedByName ?? '').compareTo(a?.approvedByName ?? ''));
+        break;
+      default:
+        break;
+    }
+    update();
   }
 }

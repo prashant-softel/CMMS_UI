@@ -93,7 +93,7 @@ class MisDashboardController extends GetxController {
   }
 
   void goToCreateObservation() {
-    Get.toNamed(Routes.createObservation);
+    Get.offNamed(Routes.createObservation);
     misDashboardPresenter.clearValue();
   }
 
