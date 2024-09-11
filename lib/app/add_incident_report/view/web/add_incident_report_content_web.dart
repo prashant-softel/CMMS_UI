@@ -4325,41 +4325,32 @@ class _DetailsOfInjuredPersonState extends State<DetailsOfInjuredPerson> {
                       "Details of Injured Person",
                       style: Styles.blue700,
                     ),
-                    controller.incidentReportDetailsModel.value!.status ==
-                                181 ||
-                            controller.incidentReportDetailsModel.value!.id ==
-                                0 ||
-                            controller.incidentReportDetailsModel.value!.id ==
-                                null
-                        ? InkWell(
-                            onTap: () {
-                              controller.addDetailsOfInjuredPersonRowItem();
-                            },
-                            child: Container(
-                              height: 25,
-                              width: 90,
-                              decoration: BoxDecoration(
-                                color: ColorValues.addNewColor,
-                                border: Border.all(
-                                  color:
-                                      ColorValues.lightGreyColorWithOpacity35,
-                                  width: 1,
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  " + Add ",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w100,
-                                      color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          )
-                        : Dimens.box0,
+                    GestureDetector(
+                      onTap: () {
+                        controller.addDetailsOfInjuredPersonRowItem();
+                      },
+                      child: Container(
+                        height: 25,
+                        width: 90,
+                        decoration: BoxDecoration(
+                          color: ColorValues.addNewColor,
+                          border: Border.all(
+                            color: ColorValues.lightGreyColorWithOpacity35,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
+                        child: Center(
+                          child: Text(
+                            " + Add ",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -5436,42 +5427,32 @@ class DetailsOfOtherPerson extends StatelessWidget {
                       "Details of Other Injured Person",
                       style: Styles.blue700,
                     ),
-                    controller.incidentReportDetailsModel.value!.status ==
-                                181 ||
-                            controller.incidentReportDetailsModel.value!.id ==
-                                0 ||
-                            controller.incidentReportDetailsModel.value!.id ==
-                                null
-                        ? InkWell(
-                            onTap: () {
-                              controller
-                                  .addDetailsOfOtherInjuredPersonRowItem();
-                            },
-                            child: Container(
-                              height: 25,
-                              width: 90,
-                              decoration: BoxDecoration(
-                                color: ColorValues.addNewColor,
-                                border: Border.all(
-                                  color:
-                                      ColorValues.lightGreyColorWithOpacity35,
-                                  width: 1,
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  " + Add ",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w100,
-                                      color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          )
-                        : Dimens.box0,
+                    GestureDetector(
+                      onTap: () {
+                        controller.addDetailsOfOtherInjuredPersonRowItem();
+                      },
+                      child: Container(
+                        height: 25,
+                        width: 90,
+                        decoration: BoxDecoration(
+                          color: ColorValues.addNewColor,
+                          border: Border.all(
+                            color: ColorValues.lightGreyColorWithOpacity35,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
+                        child: Center(
+                          child: Text(
+                            " + Add ",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -6169,7 +6150,7 @@ class DetailsOfOtherPerson extends StatelessWidget {
                                                                             CrossAxisAlignment.start,
                                                                         children: [
                                                                           IgnorePointer(
-                                                                            ignoring: controller.incidentReportDetailsModel.value?.status == 181
+                                                                            ignoring: controller.incidentReportDetailsModel.value?.status == 183
                                                                                 ? true
                                                                                 : false,
                                                                             child:
