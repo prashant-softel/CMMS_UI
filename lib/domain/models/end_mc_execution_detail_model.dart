@@ -122,29 +122,31 @@ class EndMCExecutionDetailsModel {
 }
 
 class Schedules {
-  Schedules(
-      {this.id,
-      this.scheduleId,
-      this.executionId,
-      this.cleaningDay,
-      this.cleaningTypeName,
-      this.scheduled,
-      this.cleaned,
-      this.abandoned,
-      this.pending,
-      this.waterUsed,
-      this.start_date,
-      this.remark,
-      this.remark_of_schedule,
-      this.status,
-      this.status_short,
-      this.equipments,
-      this.permit_id,
-      this.permit_code,
-      this.ptw_status,
-      this.ptw_tbt_done,
-      this.status_short_ptw,
-      this.tbt_start});
+  Schedules({
+    this.id,
+    this.scheduleId,
+    this.executionId,
+    this.cleaningDay,
+    this.cleaningTypeName,
+    this.scheduled,
+    this.cleaned,
+    this.abandoned,
+    this.pending,
+    this.waterUsed,
+    this.start_date,
+    this.remark,
+    this.remark_of_schedule,
+    this.status,
+    this.status_short,
+    this.equipments,
+    this.permit_id,
+    this.permit_code,
+    this.ptw_status,
+    this.ptw_tbt_done,
+    this.status_short_ptw,
+    this.tbt_start,
+    this.startDate,
+  });
 
   int? id;
   int? scheduleId;
@@ -167,6 +169,7 @@ class Schedules {
   int? ptw_tbt_done;
   String? status_short_ptw;
   int? tbt_start;
+  String? startDate;
 
   List<EquipmentsList?>? equipments;
 
@@ -194,6 +197,7 @@ class Schedules {
         remark: json['remark'] ?? '',
         status_short: json['status_short'] ?? '',
         status: json['status'],
+        startDate:json['startDate'],
         equipments: json["equipments"] != null
             ? List<EquipmentsList>.from(
                 json["equipments"].map((x) => EquipmentsList.fromJson(x)))
@@ -218,6 +222,7 @@ class Schedules {
         "remark": remark ?? '',
         "status": status,
         "tbt_start": tbt_start,
+        "startDate":startDate,
         "status_short": status_short ?? '',
         "permit_id": permit_id,
         "permit_code": permit_code ?? '',
