@@ -814,7 +814,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                                     ? Get.defaultDialog(
                                                                                                                                         radius: 5,
                                                                                                                                         title: 'Alert',
-                                                                                                                                        middleText: 'Unable to start task due to permit taken for ${controller.pmtaskViewModel.value!.start_time}',
+                                                                                                                                        middleText: 'Unable to start task due to permit taken for ${filterdData.startDate}',
                                                                                                                                         textConfirm: 'OK',
                                                                                                                                         onConfirm: () {
                                                                                                                                           Get.back(); // Close the dialog

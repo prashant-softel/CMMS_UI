@@ -130,7 +130,7 @@ class VegSchedules {
   String? end_date;
   String? remark;
   String? remark_of_schedule;
-
+  String? startDate;
   int? status;
   String? status_short;
   int? permit_id;
@@ -143,6 +143,7 @@ class VegSchedules {
   List<Equipments>? equipments;
 
   VegSchedules({
+    this.startDate,
     this.id,
     this.tbt_start,
     this.scheduleId,
@@ -171,6 +172,7 @@ class VegSchedules {
   factory VegSchedules.fromJson(Map<String, dynamic> json) => VegSchedules(
       id: json['id'],
       scheduleId: json['scheduleId'],
+      startDate: json['startDate'],
       executionId: json['executionId'],
       tbt_start: json['tbt_start'] ?? 0,
       cleaningDay: json['cleaningDay'],
@@ -202,6 +204,7 @@ class VegSchedules {
         'executionId': executionId,
         'cleaningDay': cleaningDay,
         "tbt_start": tbt_start,
+        "startDate": startDate,
         'cleaningTypeName': cleaningTypeName,
         'scheduled': scheduled,
         'cleaned': cleaned,
