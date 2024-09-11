@@ -835,78 +835,98 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                   ? Dimens.box0
                                   : Container(
                                       width: Get.width * .9,
+                                      margin: Dimens.edgeInsets20,
                                       padding: EdgeInsets.all(10),
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal: 9, vertical: 10),
                                       decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.black),
+                                        color:
+                                            ColorValues.appBlueBackgroundColor,
+                                        border: Border.all(
+                                          color: ColorValues
+                                              .lightGreyColorWithOpacity35,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(
+                                            8), // Rounded corners
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(
+                                                0.1), // Light shadow effect
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 2),
+                                          ),
+                                        ],
                                       ),
                                       child: Column(
                                         children: [
                                           // Header row
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Expanded(
-                                                flex: 1,
-                                                child: Text(
-                                                  'Task ID',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10.0),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    'Task ID',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
                                                 ),
-                                              ),
-                                              Expanded(
-                                                flex: 2,
-                                                child: Text(
-                                                  'Plan Title',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                Expanded(
+                                                  flex: 2,
+                                                  child: Text(
+                                                    'Plan Title',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
                                                 ),
-                                              ),
-                                              Expanded(
-                                                flex: 2,
-                                                child: Text(
-                                                  'Equipment Category',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                Expanded(
+                                                  flex: 2,
+                                                  child: Text(
+                                                    'Equipment Category',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
                                                 ),
-                                              ),
-                                              Expanded(
-                                                flex: 2,
-                                                child: Text(
-                                                  'Equipment Name',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                Expanded(
+                                                  flex: 2,
+                                                  child: Text(
+                                                    'Equipment Name',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
                                                 ),
-                                              ),
-                                              Expanded(
-                                                flex: 1,
-                                                child: Text(
-                                                  'Start Date',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    'Start Date',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
                                                 ),
-                                              ),
-                                              Expanded(
-                                                flex: 1,
-                                                child: Text(
-                                                  'Assigned To',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    'Assigned To',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                           Divider(
-                                              color: Colors
-                                                  .grey), // Optional divider for visual separation
+                                              color: ColorValues
+                                                  .lightGreyColorWithOpacity35), // Optional divider for visual separation
                                           SizedBox(height: 10),
 
                                           // Data rows
