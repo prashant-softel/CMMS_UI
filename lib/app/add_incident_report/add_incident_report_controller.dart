@@ -2077,7 +2077,15 @@ class AddIncidentReportController extends GetxController {
       //Why why analysis for update
       List<WhyWhyAnalysis> whyWhyAnalysisItems = [];
       rowWhyWhyAnalysisItem.forEach((element) {
+        int why_item_id = 0;
+        if (element.isNotEmpty && element[0].containsKey("why_item_id")) {
+          why_item_id = element[0]["why_item_id"] != null &&
+                  element[0]["why_item_id"].toString().isNotEmpty
+              ? int.tryParse('${element[0]["why_item_id"]}') ?? 0
+              : 0;
+        }
         WhyWhyAnalysis item = WhyWhyAnalysis(
+          why_item_id: why_item_id,
           incidents_id: irId.value,
           why: element[0]["value"] ?? '0',
           cause: element[1]["value"] ?? '0',
@@ -2089,7 +2097,15 @@ class AddIncidentReportController extends GetxController {
       ///Root Cause for update
       List<RootCause> rootCauseItems = [];
       rowRootCauseItem.forEach((element) {
+        int root_item_id = 0;
+        if (element.isNotEmpty && element[0].containsKey("root_item_id")) {
+          root_item_id = element[0]["root_item_id"] != null &&
+                  element[0]["root_item_id"].toString().isNotEmpty
+              ? int.tryParse('${element[0]["root_item_id"]}') ?? 0
+              : 0;
+        }
         RootCause item = RootCause(
+          root_item_id: root_item_id,
           incidents_id: irId.value,
           cause: element[0]["value"] ?? '0',
         );
@@ -2100,7 +2116,15 @@ class AddIncidentReportController extends GetxController {
       ///Immediate correction for update
       List<ImmediateCorrection> immediateCorrectionItems = [];
       rowImmediateCorrectionItem.forEach((element) {
+        int ic_item_id = 0;
+        if (element.isNotEmpty && element[0].containsKey("ic_item_id")) {
+          ic_item_id = element[0]["ic_item_id"] != null &&
+                  element[0]["ic_item_id"].toString().isNotEmpty
+              ? int.tryParse('${element[0]["ic_item_id"]}') ?? 0
+              : 0;
+        }
         ImmediateCorrection item = ImmediateCorrection(
+          ic_item_id: ic_item_id,
           incidents_id: irId.value,
           details: element[0]["value"] ?? '0',
         );
@@ -2111,7 +2135,15 @@ class AddIncidentReportController extends GetxController {
       ///Proposed Action Plan for update
       List<ProposedActionPlan> proposedActionItems = [];
       rowItem.forEach((element) {
+        int proposed_item_id = 0;
+        if (element.isNotEmpty && element[0].containsKey("proposed_item_id")) {
+          proposed_item_id = element[0]["proposed_item_id"] != null &&
+                  element[0]["proposed_item_id"].toString().isNotEmpty
+              ? int.tryParse('${element[0]["proposed_item_id"]}') ?? 0
+              : 0;
+        }
         ProposedActionPlan item = ProposedActionPlan(
+          proposed_item_id: proposed_item_id,
           incidents_id: irId.value,
           actions_as_per_plan: element[0]["value"] ?? '0',
           responsibility: element[1]["value"],
