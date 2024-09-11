@@ -1005,7 +1005,7 @@ class AddIncidentReportController extends GetxController {
         {
           "key": "Name of Injured Person ",
           "value": '${element?.name}',
-          "otherinjured_item_id": "${element?.injured_item_id}",
+          "injured_item_id": "${element?.injured_item_id}",
         },
         {
           "key": "Gender ",
@@ -1753,7 +1753,7 @@ class AddIncidentReportController extends GetxController {
       List<DetailsOfOtherInjuredPerson> detailsOfOtherInjuredPersonItems = [];
       rowOtherInjuredPersonItem.forEach((element) {
         DetailsOfOtherInjuredPerson item = DetailsOfOtherInjuredPerson(
-          // Otherinjured_item_id: 0,
+          injured_item_id: 0,
           incidents_id: 0,
           name: element[0]["value"] ?? '0',
           person_type: 1,
@@ -1936,30 +1936,33 @@ class AddIncidentReportController extends GetxController {
 
       detailsOfInjuredPersonItems.add(item);
     });
+    //otherInjuredPerson
     List<DetailsOfOtherInjuredPerson> detailsOfOtherInjuredPersonItems = [];
     rowOtherInjuredPersonItem.forEach((element) {
-      int otherInjuredItemId = 0;
-      if (element.isNotEmpty &&
-          element[0].containsKey("otherinjured_item_id")) {
-        otherInjuredItemId = element[0]["otherinjured_item_id"] != null &&
-                element[0]["otherinjured_item_id"].toString().isNotEmpty
-            ? int.tryParse('${element[0]["otherinjured_item_id"]}') ?? 0
+      int injured_item_id = 0;
+      if (element.isNotEmpty && element[0].containsKey("injured_item_id")) {
+        injured_item_id = element[0]["injured_item_id"] != null &&
+                element[0]["injured_item_id"].toString().isNotEmpty
+            ? int.tryParse('${element[0]["injured_item_id"]}') ?? 0
             : 0;
       }
       DetailsOfOtherInjuredPerson item = DetailsOfOtherInjuredPerson(
-        injured_item_id: otherInjuredItemId,
-        incidents_id: irId.value,
-        name: element[0]["value"],
+        injured_item_id: injured_item_id,
+        incidents_id: 0,
+        name: element[0]["value"] ?? '0',
         person_type: 1,
         age: 30,
         sex: element[1]["value"] ?? '0',
-        designation: element[3]["value"] ?? '0',
-        address: element[4]["value"] ?? '0',
-        name_contractor: element[5]["value"],
-        body_part_and_nature_of_injury: element[6]["value"],
-        work_experience_years: int.tryParse('${element[7]["value"] ?? '0'}'),
-        plant_equipment_involved: element[8]["value"],
-        location_of_incident: element[9]["value"] ?? '0',
+        designation: element[2]["value"] ?? '0',
+        address: element[3]["value"] ?? '0',
+        name_contractor:
+            dropdownBusinessListMapperData[element[4]["value"]]?.name,
+        body_part_and_nature_of_injury:
+            dropdownBodyinjuredListMapperData[element[5]["value"]]?.name,
+        work_experience_years: int.tryParse('${element[6]["value"] ?? '0'}'),
+        plant_equipment_involved:
+            dropdownEquipmentNameMapperData[element[7]["value"]]?.name,
+        location_of_incident: element[8]["value"] ?? '0',
       );
 
       detailsOfOtherInjuredPersonItems.add(item);
@@ -2022,7 +2025,7 @@ class AddIncidentReportController extends GetxController {
       immediate_correction: [],
       proposed_action_plan: [],
       injured_person: detailsOfInjuredPersonItems,
-      Otherinjured_person: [],
+      Otherinjured_person: detailsOfOtherInjuredPersonItems,
     );
 
     var updateIncidentReportJsonString = updateIncidentReportModel.toJson();
@@ -2213,10 +2216,15 @@ class AddIncidentReportController extends GetxController {
       ///Details of Other Injured Person for update
       List<DetailsOfOtherInjuredPerson> detailsOfOtherInjuredPersonItems = [];
       rowOtherInjuredPersonItem.forEach((element) {
+        int injured_item_id = 0;
+        if (element.isNotEmpty && element[0].containsKey("injured_item_id")) {
+          injured_item_id = element[0]["injured_item_id"] != null &&
+                  element[0]["injured_item_id"].toString().isNotEmpty
+              ? int.tryParse('${element[0]["injured_item_id"]}') ?? 0
+              : 0;
+        }
         DetailsOfOtherInjuredPerson item = DetailsOfOtherInjuredPerson(
-          injured_item_id: element[0]["otherinjured_item_id"] == null
-              ? 0
-              : int.tryParse('${element[0]["otherinjured_item_id"] ?? '0'}'),
+          injured_item_id: injured_item_id,
           incidents_id: irId.value,
           name: element[0]["value"],
           person_type: 1,
