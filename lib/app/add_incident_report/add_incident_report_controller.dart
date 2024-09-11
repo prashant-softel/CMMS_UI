@@ -884,7 +884,11 @@ class AddIncidentReportController extends GetxController {
       rowWhyWhyAnalysisItem.value = [];
       _incidentReportDetails.why_why_analysis?.forEach((element) {
         rowWhyWhyAnalysisItem.value.add([
-          {'key': "Why ", "value": '${element?.why}'},
+          {
+            'key': "Why ",
+            "value": '${element?.why}',
+            "why_item_id": "${element?.why_item_id}",
+          },
           {'key': "Cause ", "value": '${element?.cause}'},
           {'key': "Action ", "value": ''},
         ]);
@@ -894,7 +898,11 @@ class AddIncidentReportController extends GetxController {
       rowRootCauseItem.value = [];
       _incidentReportDetails.root_cause?.forEach((element) {
         rowRootCauseItem.value.add([
-          {'key': "Cause ", "value": '${element?.cause}'},
+          {
+            'key': "Cause ",
+            "value": '${element?.cause}',
+            "root_item_id": "${element?.root_item_id}",
+          },
           {'key': "Action ", "value": ''},
         ]);
       });
@@ -903,7 +911,11 @@ class AddIncidentReportController extends GetxController {
       rowImmediateCorrectionItem.value = [];
       _incidentReportDetails.immediate_correction?.forEach((element) {
         rowImmediateCorrectionItem.value.add([
-          {'key': "Correction ", "value": '${element?.details}'},
+          {
+            'key': "Correction ",
+            "value": '${element?.details}',
+            "ic_item_id": "${element?.ic_item_id}",
+          },
           {'key': "Action ", "value": ''},
         ]);
       });
@@ -914,7 +926,8 @@ class AddIncidentReportController extends GetxController {
         rowItem.value.add([
           {
             'key': "Action as per plan ",
-            "value": '${element?.actions_as_per_plan}'
+            "value": '${element?.actions_as_per_plan}',
+            "proposed_item_id": "${element?.proposed_item_id}",
           },
           {
             "key": "Drop_down",
@@ -1340,7 +1353,7 @@ class AddIncidentReportController extends GetxController {
 
   void addWhyWhyAnalysisRowItem() {
     rowWhyWhyAnalysisItem.add([
-      {'key': "Why ", "value": ''},
+      {'key': "Why ", "value": '', "why_item_id": ''},
       {'key': "Cause ", "value": ''},
       {'key': "Action ", "value": ''},
     ]);
@@ -2078,12 +2091,14 @@ class AddIncidentReportController extends GetxController {
       List<WhyWhyAnalysis> whyWhyAnalysisItems = [];
       rowWhyWhyAnalysisItem.forEach((element) {
         int why_item_id = 0;
+
         if (element.isNotEmpty && element[0].containsKey("why_item_id")) {
           why_item_id = element[0]["why_item_id"] != null &&
                   element[0]["why_item_id"].toString().isNotEmpty
               ? int.tryParse('${element[0]["why_item_id"]}') ?? 0
               : 0;
         }
+
         WhyWhyAnalysis item = WhyWhyAnalysis(
           why_item_id: why_item_id,
           incidents_id: irId.value,
@@ -2091,6 +2106,7 @@ class AddIncidentReportController extends GetxController {
           cause: element[1]["value"] ?? '0',
         );
 
+        // Add the item to the list
         whyWhyAnalysisItems.add(item);
       });
 
