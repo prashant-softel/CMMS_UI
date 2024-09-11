@@ -202,7 +202,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
       if (pmtaskViewModel.value?.status == 161 ||
           pmtaskViewModel.value?.status == 162 ||
           pmtaskViewModel.value?.status == 163 ||
-          pmtaskViewModel.value?.status == 168) {
+          pmtaskViewModel.value?.status == 164) {
         preventiveMaintenanceTaskViewPresenter.saveStatusValue(
             status: pmtaskViewModel.value?.status.toString());
 
@@ -387,20 +387,20 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
                             textColor: ColorValues.whiteColor,
                           ),
                         ),
-                        Dimens.boxWidth10,
-                        Container(
-                          height: 35,
-                          child: CustomElevatedButton(
-                            text: "Execute",
-                            onPressed: () {
-                              Get.back();
+                        // Dimens.boxWidth10,
+                        // Container(
+                        //   height: 35,
+                        //   child: CustomElevatedButton(
+                        //     text: "Execute",
+                        //     onPressed: () {
+                        //       Get.back();
 
-                              gotoexecution();
-                            },
-                            backgroundColor: ColorValues.appYellowColor,
-                            textColor: ColorValues.whiteColor,
-                          ),
-                        ),
+                        //       gotoexecution();
+                        //     },
+                        //     backgroundColor: ColorValues.appYellowColor,
+                        //     textColor: ColorValues.whiteColor,
+                        //   ),
+                        // ),
                       ],
                     ),
                   ],
@@ -514,13 +514,12 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     }
   }
 
-  CancelPMTask(
-      {required PreventiveMaintenanceTaskViewController controller}) async {
+  CancelPMTask() async {
     {
       String _comment = commentCtrlr.text.trim();
 
-      CommentModel commentModel =
-          CommentModel(id: scheduleId.value, comment: _comment);
+      CommentModel commentModel = CommentModel(
+          id: scheduleId.value, comment: _comment, facilityId: facilityId);
       ClosePermitModel ptwClose = ClosePermitModel(
           id: pmtaskViewModel.value?.permit_id ?? 0,
           comment: _comment,

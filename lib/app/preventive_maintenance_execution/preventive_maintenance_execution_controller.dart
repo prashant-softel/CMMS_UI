@@ -552,7 +552,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       var CancelPMTaskJsonString = commentModel.toJson();
       var closePtwJsonString = ptwClose.toJson();
       final permitId = pmtaskViewModel.value!.permit_id;
-      bool shouldClosePermit =  permitId! > 0;
+      bool shouldClosePermit = permitId! > 0;
       final response =
           await preventiveMaintenanceExecutionPresenter.CancelPMTask(
         CancelPMTaskJsonString: CancelPMTaskJsonString,
@@ -561,7 +561,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
         isLoading: true,
       );
       if (response == true) {
-        Get.offAllNamed(Routes.pmTask);
+        // Get.offAllNamed(Routes.pmTask);
       }
     }
   }
