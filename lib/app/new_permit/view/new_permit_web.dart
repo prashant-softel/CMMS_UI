@@ -2975,14 +2975,38 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                   //         ))
                                                   //     : Dimens.box0,
                                                   Dimens.boxWidth20,
-                                                  controller.newPermitDetailsModel.value
-                                                                  ?.ptwStatus ==
+                                                  controller
+                                                                  .newPermitDetailsModel.value?.ptwStatus ==
                                                               124 ||
                                                           controller
                                                                   .newPermitDetailsModel
                                                                   .value
                                                                   ?.ptwStatus ==
-                                                              132
+                                                              132 ||
+                                                          controller
+                                                                      .newPermitDetailsModel
+                                                                      .value
+                                                                      ?.ptwStatus ==
+                                                                  126 &&
+                                                              controller
+                                                                      .newPermitDetailsModel
+                                                                      .value
+                                                                      ?.lstAssociatedPM![
+                                                                          0]!
+                                                                      .status ==
+                                                                  163 ||
+                                                          controller
+                                                                      .newPermitDetailsModel
+                                                                      .value
+                                                                      ?.ptwStatus ==
+                                                                  126 &&
+                                                              controller
+                                                                      .newPermitDetailsModel
+                                                                      .value
+                                                                      ?.lstAssociatedPM![
+                                                                          0]!
+                                                                      .status ==
+                                                                  164
                                                       ? Center(
                                                           child: Container(
                                                             height: 45,

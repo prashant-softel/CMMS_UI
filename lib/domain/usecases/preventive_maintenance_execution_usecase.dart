@@ -61,7 +61,8 @@ class PreventiveMaintenanceExecutionUsecase {
           CancelPMTaskJsonString: CancelPMTaskJsonString,
           closePtwJsonString: closePtwJsonString,
           shouldClosePermit: shouldClosePermit,
-          isLoading: isLoading);
+          isLoading: isLoading,
+          type: 1);
 
   Future<bool> UpdatePMTaskExecution(
           {updatePMTaskExecutionJsonString,

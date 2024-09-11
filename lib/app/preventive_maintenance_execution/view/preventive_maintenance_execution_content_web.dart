@@ -5,6 +5,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/execution_approve_dialog.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/observation_pm_execution_process_dialog.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
@@ -1081,51 +1082,63 @@ class PreventiveMaintenanceExecutionContentWeb
                                               confirmTextColor: Colors.white,
                                             );
                                           } else {
-                                            // Show confirmation dialog before canceling the task
                                             Get.dialog(
-                                              AlertDialog(
-                                                content: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: [
-                                                      Icon(Icons.cancel,
-                                                          size: 35,
-                                                          color: ColorValues
-                                                              .redColor),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Text(
-                                                        'Are you sure you want to cancel the task?',
-                                                        style: Styles
-                                                            .blackBold14w500,
-                                                      ),
-                                                    ]),
-                                                actions: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    children: [
-                                                      TextButton(
-                                                        onPressed: () {
-                                                          Get.back();
-                                                        },
-                                                        child: Text('NO'),
-                                                      ),
-                                                      TextButton(
-                                                        onPressed: () {
-                                                          Get.back();
-                                                          controller
-                                                              .CancelPMTask();
-                                                        },
-                                                        child: Text('YES'),
-                                                      ),
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                            );
+                                                CustonApproveRejectDialog(
+                                              text: "Cancel Task",
+                                              controller: controller,
+                                              buttonText: "Cancel Task",
+                                              style:
+                                                  Styles.redElevatedButtonStyle,
+                                              onPressed: () {
+                                                controller.CancelPMTask();
+                                                Get.back();
+                                              },
+                                            ));
+                                            // Show confirmation dialog before canceling the task
+                                            // Get.dialog(
+                                            //   AlertDialog(
+                                            //     content: Column(
+                                            //         mainAxisSize:
+                                            //             MainAxisSize.min,
+                                            //         children: [
+                                            //           Icon(Icons.cancel,
+                                            //               size: 35,
+                                            //               color: ColorValues
+                                            //                   .redColor),
+                                            //           SizedBox(
+                                            //             height: 10,
+                                            //           ),
+                                            //           Text(
+                                            //             'Are you sure you want to cancel the task?',
+                                            //             style: Styles
+                                            //                 .blackBold14w500,
+                                            //           ),
+                                            //         ]),
+                                            //     actions: [
+                                            //       Row(
+                                            //         mainAxisAlignment:
+                                            //             MainAxisAlignment
+                                            //                 .spaceEvenly,
+                                            //         children: [
+                                            //           TextButton(
+                                            //             onPressed: () {
+                                            //               Get.back();
+                                            //             },
+                                            //             child: Text('NO'),
+                                            //           ),
+                                            //           TextButton(
+                                            //             onPressed: () {
+                                            //               Get.back();
+                                            //               controller
+                                            //                   .CancelPMTask();
+                                            //             },
+                                            //             child: Text('YES'),
+                                            //           ),
+                                            //         ],
+                                            //       )
+                                            //     ],
+                                            //   ),
+                                            // );
                                           }
                                         },
                                       ),

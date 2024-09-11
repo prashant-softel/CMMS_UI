@@ -1029,12 +1029,12 @@ class Repository {
     }
   }
 
-  Future<bool> CancelPMTask({
-    bool? isLoading,
-    CancelPMTaskJsonString,
-    closePtwJsonString,
-    required bool shouldClosePermit,
-  }) async {
+  Future<bool> CancelPMTask(
+      {bool? isLoading,
+      CancelPMTaskJsonString,
+      closePtwJsonString,
+      required bool shouldClosePermit,
+      int? type}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -1047,11 +1047,14 @@ class Repository {
         var resp = res.data;
         var parsedJson = json.decode(resp);
         if (shouldClosePermit == false) {
-          Get.dialog<void>(PmTaskViewDialog(
-            data: parsedJson['message'],
-            taskId: parsedJson['id'][0],
-            type: 1,
-          ));
+          type == 1
+              ?         Get.offAllNamed(Routes.pmTask)
+
+              : Get.dialog<void>(PmTaskViewDialog(
+                  data: parsedJson['message'],
+                  taskId: parsedJson['id'][0],
+                  type: 1,
+                ));
         }
 
         if (shouldClosePermit) {
