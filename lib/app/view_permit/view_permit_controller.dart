@@ -124,7 +124,7 @@ class ViewPermitController extends GetxController {
 
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
-
+  var showMore = false.obs;
   TextEditingController extendReasonCommentTextFieldCtrlr =
       TextEditingController();
   TextEditingController timeTextFieldCtrlr = TextEditingController();
@@ -701,7 +701,9 @@ class ViewPermitController extends GetxController {
       }
     }
   }
-
+void toggleShowMore() {
+    showMore.value = !showMore.value;
+  }
   void checkcommentextend() {
     if (extendReasonCommentTextFieldCtrlr.text.trim().isEmpty) {
       isFormInvalid.value = true;

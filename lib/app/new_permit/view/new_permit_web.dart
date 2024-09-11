@@ -410,7 +410,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                               )
                             : Dimens.box0,
                         controller.jobModel?.id != null
-                            ? Container(
+                            ?
+                             Container(
                                 width: Get.width * .9,
                                 padding: EdgeInsets.all(10),
                                 margin: EdgeInsets.symmetric(
@@ -638,6 +639,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   ],
                                 ),
                               )
+                         
                             : Dimens.box0,
 
                         // hgvbjn,

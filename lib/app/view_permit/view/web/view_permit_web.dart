@@ -706,9 +706,8 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                         border: Border.all(color: Colors.black),
                                       ),
                                       child: Column(
-                                        // crossAxisAlignment:
-                                        //     CrossAxisAlignment.start,
                                         children: [
+                                          // Header row
                                           Row(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -770,13 +769,15 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                             ],
                                           ),
                                           SizedBox(height: 10),
+
+                                          // Data row
                                           Row(
-                                            // crossAxisAlignment:
-                                            //     CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Expanded(
                                                 flex: 1,
-                                                child: GestureDetector(
+                                                child: InkWell(
                                                   onTap: () {
                                                     controller
                                                         .clearStoreDataPMtaskId();
@@ -799,12 +800,12 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                         : Get.toNamed(
                                                             Routes.pmTaskView,
                                                             arguments: {
-                                                              'pmTaskId': controller
-                                                                  .listAssociatedPm?[
-                                                                      0]
-                                                                  ?.pmId
-                                                            },
-                                                          );
+                                                                'pmTaskId':
+                                                                    controller
+                                                                        .listAssociatedPm?[
+                                                                            0]
+                                                                        ?.pmId
+                                                              });
                                                   },
                                                   child: Text(
                                                     controller.type.value ==
@@ -840,44 +841,88 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                             .listAssociatedPm?[
                                                                 0]
                                                             ?.equipmentCat
-                                                            .toString() ??
+                                                            ?.toString() ??
                                                         ''),
                                               ),
 
-                                              // Checklist Name
+                                              // Equipment Names (handling "show more/less")
                                               Expanded(
                                                 flex: 2,
-                                                child: Text(
-                                                  controller.type.value ==
-                                                          AppConstants.kAudit
-                                                      ? "NA"
-                                                      : controller
+                                                child: Obx(() {
+                                                  // Splitting the equipment data string into a list
+                                                  final equipmentString =
+                                                      controller
                                                               .listAssociatedPm?[
                                                                   0]
-                                                              ?.equipment
-                                                              .toString() ??
-                                                          '',
-                                                ),
+                                                              ?.equipment ??
+                                                          '';
+                                                  final equipmentList =
+                                                      equipmentString
+                                                          .split(',');
+
+                                                  // Show only a limited number of items based on the showMore flag
+                                                  final equipmentToShow =
+                                                      controller.showMore.value
+                                                          ? equipmentList
+                                                          : equipmentList
+                                                              .take(2)
+                                                              .toList();
+
+                                                  return Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      // Displaying the equipment names
+                                                      for (var equipment
+                                                          in equipmentToShow)
+                                                        Text(equipment),
+
+                                                      // Show "Show more/less" button if more than 2 items exist
+                                                      if (equipmentList.length >
+                                                          2)
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            controller
+                                                                .toggleShowMore();
+                                                          },
+                                                          child: Text(
+                                                            controller.showMore
+                                                                    .value
+                                                                ? 'Show less'
+                                                                : 'Show more',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .blue),
+                                                          ),
+                                                        ),
+                                                    ],
+                                                  );
+                                                }),
                                               ),
 
-                                              // Frequency
+                                              // Start Date
                                               Expanded(
                                                 flex: 1,
-                                                child: Text(controller
-                                                        .listAssociatedPm?[0]
-                                                        ?.startDate
-                                                        .toString() ??
-                                                    ''),
+                                                child: Text(
+                                                  controller
+                                                          .listAssociatedPm?[0]
+                                                          ?.startDate
+                                                          ?.toString() ??
+                                                      '',
+                                                ),
                                               ),
 
                                               // Assigned To
                                               Expanded(
                                                 flex: 1,
-                                                child: Text(controller
-                                                        .listAssociatedPm?[0]
-                                                        ?.assignedTo
-                                                        .toString() ??
-                                                    ''),
+                                                child: Text(
+                                                  controller
+                                                          .listAssociatedPm?[0]
+                                                          ?.assignedTo
+                                                          ?.toString() ??
+                                                      '',
+                                                ),
                                               ),
                                             ],
                                           ),
