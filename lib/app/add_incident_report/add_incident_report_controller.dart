@@ -884,7 +884,11 @@ class AddIncidentReportController extends GetxController {
       rowWhyWhyAnalysisItem.value = [];
       _incidentReportDetails.why_why_analysis?.forEach((element) {
         rowWhyWhyAnalysisItem.value.add([
-          {'key': "Why ", "value": '${element?.why}'},
+          {
+            'key': "Why ",
+            "value": '${element?.why}',
+            "why_item_id": "${element?.why_item_id}",
+          },
           {'key': "Cause ", "value": '${element?.cause}'},
           {'key': "Action ", "value": ''},
         ]);
@@ -894,7 +898,11 @@ class AddIncidentReportController extends GetxController {
       rowRootCauseItem.value = [];
       _incidentReportDetails.root_cause?.forEach((element) {
         rowRootCauseItem.value.add([
-          {'key': "Cause ", "value": '${element?.cause}'},
+          {
+            'key': "Cause ",
+            "value": '${element?.cause}',
+            "root_item_id": "${element?.root_item_id}",
+          },
           {'key': "Action ", "value": ''},
         ]);
       });
@@ -903,7 +911,11 @@ class AddIncidentReportController extends GetxController {
       rowImmediateCorrectionItem.value = [];
       _incidentReportDetails.immediate_correction?.forEach((element) {
         rowImmediateCorrectionItem.value.add([
-          {'key': "Correction ", "value": '${element?.details}'},
+          {
+            'key': "Correction ",
+            "value": '${element?.details}',
+            "ic_item_id": "${element?.ic_item_id}",
+          },
           {'key': "Action ", "value": ''},
         ]);
       });
@@ -914,7 +926,8 @@ class AddIncidentReportController extends GetxController {
         rowItem.value.add([
           {
             'key': "Action as per plan ",
-            "value": '${element?.actions_as_per_plan}'
+            "value": '${element?.actions_as_per_plan}',
+            "proposed_item_id": "${element?.proposed_item_id}",
           },
           {
             "key": "Drop_down",
@@ -992,7 +1005,7 @@ class AddIncidentReportController extends GetxController {
         {
           "key": "Name of Injured Person ",
           "value": '${element?.name}',
-          "otherinjured_item_id": "${element?.injured_item_id}",
+          "injured_item_id": "${element?.injured_item_id}",
         },
         {
           "key": "Gender ",
@@ -1340,7 +1353,7 @@ class AddIncidentReportController extends GetxController {
 
   void addWhyWhyAnalysisRowItem() {
     rowWhyWhyAnalysisItem.add([
-      {'key': "Why ", "value": ''},
+      {'key': "Why ", "value": '', "why_item_id": ''},
       {'key': "Cause ", "value": ''},
       {'key': "Action ", "value": ''},
     ]);
@@ -1740,7 +1753,7 @@ class AddIncidentReportController extends GetxController {
       List<DetailsOfOtherInjuredPerson> detailsOfOtherInjuredPersonItems = [];
       rowOtherInjuredPersonItem.forEach((element) {
         DetailsOfOtherInjuredPerson item = DetailsOfOtherInjuredPerson(
-          // Otherinjured_item_id: 0,
+          injured_item_id: 0,
           incidents_id: 0,
           name: element[0]["value"] ?? '0',
           person_type: 1,
@@ -1923,30 +1936,33 @@ class AddIncidentReportController extends GetxController {
 
       detailsOfInjuredPersonItems.add(item);
     });
+    //otherInjuredPerson
     List<DetailsOfOtherInjuredPerson> detailsOfOtherInjuredPersonItems = [];
     rowOtherInjuredPersonItem.forEach((element) {
-      int otherInjuredItemId = 0;
-      if (element.isNotEmpty &&
-          element[0].containsKey("otherinjured_item_id")) {
-        otherInjuredItemId = element[0]["otherinjured_item_id"] != null &&
-                element[0]["otherinjured_item_id"].toString().isNotEmpty
-            ? int.tryParse('${element[0]["otherinjured_item_id"]}') ?? 0
+      int injured_item_id = 0;
+      if (element.isNotEmpty && element[0].containsKey("injured_item_id")) {
+        injured_item_id = element[0]["injured_item_id"] != null &&
+                element[0]["injured_item_id"].toString().isNotEmpty
+            ? int.tryParse('${element[0]["injured_item_id"]}') ?? 0
             : 0;
       }
       DetailsOfOtherInjuredPerson item = DetailsOfOtherInjuredPerson(
-        injured_item_id: otherInjuredItemId,
-        incidents_id: irId.value,
-        name: element[0]["value"],
+        injured_item_id: injured_item_id,
+        incidents_id: 0,
+        name: element[0]["value"] ?? '0',
         person_type: 1,
         age: 30,
         sex: element[1]["value"] ?? '0',
-        designation: element[3]["value"] ?? '0',
-        address: element[4]["value"] ?? '0',
-        name_contractor: element[5]["value"],
-        body_part_and_nature_of_injury: element[6]["value"],
-        work_experience_years: int.tryParse('${element[7]["value"] ?? '0'}'),
-        plant_equipment_involved: element[8]["value"],
-        location_of_incident: element[9]["value"] ?? '0',
+        designation: element[2]["value"] ?? '0',
+        address: element[3]["value"] ?? '0',
+        name_contractor:
+            dropdownBusinessListMapperData[element[4]["value"]]?.name,
+        body_part_and_nature_of_injury:
+            dropdownBodyinjuredListMapperData[element[5]["value"]]?.name,
+        work_experience_years: int.tryParse('${element[6]["value"] ?? '0'}'),
+        plant_equipment_involved:
+            dropdownEquipmentNameMapperData[element[7]["value"]]?.name,
+        location_of_incident: element[8]["value"] ?? '0',
       );
 
       detailsOfOtherInjuredPersonItems.add(item);
@@ -2009,7 +2025,7 @@ class AddIncidentReportController extends GetxController {
       immediate_correction: [],
       proposed_action_plan: [],
       injured_person: detailsOfInjuredPersonItems,
-      Otherinjured_person: [],
+      Otherinjured_person: detailsOfOtherInjuredPersonItems,
     );
 
     var updateIncidentReportJsonString = updateIncidentReportModel.toJson();
@@ -2078,12 +2094,14 @@ class AddIncidentReportController extends GetxController {
       List<WhyWhyAnalysis> whyWhyAnalysisItems = [];
       rowWhyWhyAnalysisItem.forEach((element) {
         int why_item_id = 0;
+
         if (element.isNotEmpty && element[0].containsKey("why_item_id")) {
           why_item_id = element[0]["why_item_id"] != null &&
                   element[0]["why_item_id"].toString().isNotEmpty
               ? int.tryParse('${element[0]["why_item_id"]}') ?? 0
               : 0;
         }
+
         WhyWhyAnalysis item = WhyWhyAnalysis(
           why_item_id: why_item_id,
           incidents_id: irId.value,
@@ -2091,6 +2109,7 @@ class AddIncidentReportController extends GetxController {
           cause: element[1]["value"] ?? '0',
         );
 
+        // Add the item to the list
         whyWhyAnalysisItems.add(item);
       });
 
@@ -2197,10 +2216,15 @@ class AddIncidentReportController extends GetxController {
       ///Details of Other Injured Person for update
       List<DetailsOfOtherInjuredPerson> detailsOfOtherInjuredPersonItems = [];
       rowOtherInjuredPersonItem.forEach((element) {
+        int injured_item_id = 0;
+        if (element.isNotEmpty && element[0].containsKey("injured_item_id")) {
+          injured_item_id = element[0]["injured_item_id"] != null &&
+                  element[0]["injured_item_id"].toString().isNotEmpty
+              ? int.tryParse('${element[0]["injured_item_id"]}') ?? 0
+              : 0;
+        }
         DetailsOfOtherInjuredPerson item = DetailsOfOtherInjuredPerson(
-          injured_item_id: element[0]["otherinjured_item_id"] == null
-              ? 0
-              : int.tryParse('${element[0]["otherinjured_item_id"] ?? '0'}'),
+          injured_item_id: injured_item_id,
           incidents_id: irId.value,
           name: element[0]["value"],
           person_type: 1,

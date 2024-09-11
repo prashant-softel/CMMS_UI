@@ -579,6 +579,7 @@ class FileList {
 ///Proposed Action Plan
 class ProposedActionPlanUpdate {
   ProposedActionPlanUpdate({
+    this.proposed_item_id,
     this.incidents_id,
     this.actions_as_per_plan,
     this.responsibility,
@@ -588,7 +589,7 @@ class ProposedActionPlanUpdate {
     this.id_Status,
     this.status_name,
   });
-
+  int? proposed_item_id;
   int? incidents_id;
   String? actions_as_per_plan;
   String? responsibility;
@@ -600,6 +601,7 @@ class ProposedActionPlanUpdate {
 
   factory ProposedActionPlanUpdate.fromJson(Map<String, dynamic> json) =>
       ProposedActionPlanUpdate(
+        proposed_item_id: json['proposed_item_id'],
         incidents_id: json['incidents_id'],
         actions_as_per_plan: json['actions_as_per_plan'],
         responsibility: json['responsibility'],
@@ -611,6 +613,7 @@ class ProposedActionPlanUpdate {
       );
 
   Map<String, dynamic> toJson() => {
+        "proposed_item_id": proposed_item_id,
         "incidents_id": incidents_id,
         "actions_as_per_plan": actions_as_per_plan,
         "responsibility": responsibility,
@@ -626,23 +629,27 @@ class ProposedActionPlanUpdate {
 class WhyWhyAnalysisUpdate {
   WhyWhyAnalysisUpdate({
     this.incidents_id,
+    this.why_item_id,
     this.why,
     this.cause,
   });
 
   int? incidents_id;
+  int? why_item_id;
   String? why;
   String? cause;
 
   factory WhyWhyAnalysisUpdate.fromJson(Map<String, dynamic> json) =>
       WhyWhyAnalysisUpdate(
         incidents_id: json['incidents_id'],
+        why_item_id: json['why_item_id'],
         why: json['why'],
         cause: json["cause"],
       );
 
   Map<String, dynamic> toJson() => {
         "incidents_id": incidents_id,
+        "why_item_id": why_item_id,
         "why": why,
         "cause": cause,
       };
@@ -678,21 +685,25 @@ class RootCauseUpdate {
 class ImmediateCorrectionUpdate {
   ImmediateCorrectionUpdate({
     this.incidents_id,
+    this.ic_item_id,
     this.details,
   });
 
   int? incidents_id;
   String? details;
+  int? ic_item_id;
 
   factory ImmediateCorrectionUpdate.fromJson(Map<String, dynamic> json) =>
       ImmediateCorrectionUpdate(
         incidents_id: json['incidents_id'],
         details: json["details"],
+        ic_item_id: json["ic_item_id"],
       );
 
   Map<String, dynamic> toJson() => {
         "incidents_id": incidents_id,
         "details": details,
+        "ic_item_id": ic_item_id,
       };
 }
 
