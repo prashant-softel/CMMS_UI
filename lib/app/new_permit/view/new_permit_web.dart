@@ -197,11 +197,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                         Divider(
                           color: ColorValues.greyLightColour,
                         ),
-                        (controller.pmtaskViewModel?.id != null &&
-                                ((controller.pmtaskViewModel?.schedules!
-                                            .length ??
-                                        0) >
-                                    3))
+
+                        controller.pmtaskViewModel?.id != null
                             ? Container(
                                 width: Get.width * .9,
                                 padding: EdgeInsets.all(10),
@@ -382,16 +379,17 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                         ),
                                       ],
                                     ),
-                                    Obx(() {
-                                      final checklistList = controller
-                                              .pmtaskViewModel?.schedules ??
-                                          [];
-                                      final schedulesList = controller
-                                              .pmtaskViewModel?.schedules ??
-                                          [];
-
-                                      if (checklistList.length > 3 ||
-                                          schedulesList.length > 3) {
+                                    if ((controller.pmtaskViewModel
+                                                        ?.schedules ??
+                                                    [])
+                                                .length >
+                                            3 ||
+                                        (controller.pmtaskViewModel
+                                                        ?.schedules ??
+                                                    [])
+                                                .length >
+                                            3)
+                                      Obx(() {
                                         return TextButton(
                                           onPressed: () {
                                             controller.toggleShowMore();
@@ -404,139 +402,38 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                 TextStyle(color: Colors.blue),
                                           ),
                                         );
-                                      } else {
-                                        return SizedBox.shrink();
-                                      }
-                                    }),
+                                      }),
+                                    // Obx(() {
+                                    //   final checklistList = controller
+                                    //           .pmtaskViewModel?.schedules ??
+                                    //       [];
+                                    //   final schedulesList = controller
+                                    //           .pmtaskViewModel?.schedules ??
+                                    //       [];
+
+                                    //   if (checklistList.length > 3 ||
+                                    //       schedulesList.length > 3) {
+                                    //     return TextButton(
+                                    //       onPressed: () {
+                                    //         controller.toggleShowMore();
+                                    //       },
+                                    //       child: Text(
+                                    //         controller.showMore.value
+                                    //             ? 'Show less'
+                                    //             : '... more',
+                                    //         style:
+                                    //             TextStyle(color: Colors.blue),
+                                    //       ),
+                                    //     );
+                                    //   } else {
+                                    //     return SizedBox.shrink();
+                                    //   }
+                                    // }),
                                   ],
                                 ),
                               )
-                            : controller.pmtaskViewModel?.id != null
-                                ? Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          width: Get.width * 0.7,
-                                          height: Get.height * 0.2,
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal: 50, vertical: 20),
-                                          child: DataTable2(
-                                            border: TableBorder.all(
-                                              color: Colors.black,
-                                            ),
-                                            columns: [
-                                              DataColumn2(
-                                                fixedWidth: 105,
-                                                label: Text('Task ID'),
-                                              ),
-                                              DataColumn2(
-                                                label: Text('Plan Title'),
-                                              ),
-                                              DataColumn2(
-                                                label:
-                                                    Text('Equipment Category'),
-                                              ),
-                                              DataColumn2(
-                                                label: Text('Checklist Name'),
-                                              ),
-                                              DataColumn2(
-                                                label: Text('Frequency'),
-                                              ),
-                                              DataColumn2(
-                                                fixedWidth: 200,
-                                                label: Text('Assigned To'),
-                                              ),
-                                            ],
-                                            rows: [
-                                              DataRow(
-                                                cells: [
-                                                  DataCell(
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        controller.type ==
-                                                                AppConstants
-                                                                    .kAudit
-                                                            ? controller
-                                                                .viewAudDetails()
-                                                            : controller
-                                                                .viewPMTDetails();
-                                                      },
-                                                      child: Text(
-                                                        controller.typee
-                                                                    .value ==
-                                                                AppConstants
-                                                                    .kAudit
-                                                            ? 'AUD${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}'
-                                                            : 'PMT${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}',
-                                                        style: TextStyle(
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .underline,
-                                                          decorationStyle:
-                                                              TextDecorationStyle
-                                                                  .solid,
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  DataCell(
-                                                    Text(
-                                                      '${controller.pmtaskViewModel?.plan_title}',
-                                                    ),
-                                                  ),
-                                                  DataCell(
-                                                    Text(
-                                                        controller.typee
-                                                                    .value ==
-                                                                AppConstants
-                                                                    .kAudit
-                                                            ? "NA"
-                                                            : '${controller.pmtaskViewModel?.category_name}',
-                                                        overflow: TextOverflow
-                                                            .ellipsis),
-                                                  ),
-                                                  DataCell(
-                                                    SingleChildScrollView(
-                                                      scrollDirection:
-                                                          Axis.horizontal,
-                                                      child: Text(
-                                                        '${controller.allChecklistNames},',
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  DataCell(
-                                                    Text(
-                                                        '${controller.pmtaskViewModel?.frequency_name}',
-                                                        overflow: TextOverflow
-                                                            .ellipsis),
-                                                  ),
-                                                  DataCell(
-                                                    Text(
-                                                        '${controller.pmtaskViewModel?.assigned_to_name}',
-                                                        overflow: TextOverflow
-                                                            .ellipsis),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                : Dimens.box0,
-
-                        (controller.jobModel?.id != null &&
-                                ((controller.jobModel?.equipmentCatList
-                                                ?.length ??
-                                            0) >
-                                        3 ||
-                                    (controller.jobModel?.workingAreaList
-                                                ?.length ??
-                                            0) >
-                                        3))
+                            : Dimens.box0,
+                        controller.jobModel?.id != null
                             ? Container(
                                 width: Get.width * .9,
                                 padding: EdgeInsets.all(10),
@@ -553,44 +450,44 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Container(
-                                          width: 100,
+                                        Expanded(
+                                          flex: 1,
                                           child: Text('Job ID',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold)),
                                         ),
-                                        Container(
-                                          width: 180,
+                                        Expanded(
+                                          flex: 2,
                                           child: Text('Job Title',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold)),
                                         ),
-                                        Container(
-                                          width: Get.width * .12,
+                                        Expanded(
+                                          flex: 2,
                                           child: Text('Equipment Category',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold)),
                                         ),
-                                        Container(
-                                          width: Get.width * .1,
+                                        Expanded(
+                                          flex: 2,
                                           child: Text('Block',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold)),
                                         ),
-                                        Container(
-                                          width: 200,
+                                        Expanded(
+                                          flex: 3,
                                           child: Text('Equipment Name',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold)),
                                         ),
-                                        Container(
-                                          width: Get.width * .1,
+                                        Expanded(
+                                          flex: 2,
                                           child: Text('Breakdown Time',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold)),
                                         ),
-                                        Container(
-                                          width: Get.width * .1,
+                                        Expanded(
+                                          flex: 2,
                                           child: Text('Assigned To',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold)),
@@ -606,13 +503,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        // Job ID
-                                        GestureDetector(
-                                          onTap: () {
-                                            controller.viewJobDetails();
-                                          },
-                                          child: Container(
-                                            width: 100,
+                                        Expanded(
+                                          flex: 1,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              controller.viewJobDetails();
+                                            },
                                             child: Text(
                                               '${int.tryParse('${controller.jobModel?.id ?? 0}')}',
                                               style: TextStyle(
@@ -625,108 +521,90 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                             ),
                                           ),
                                         ),
-
-                                        // Job Title
-                                        Container(
-                                          width: 180,
+                                        Expanded(
+                                          flex: 2,
                                           child: Text(
                                             '${controller.titleTextCtrlr.text}',
                                             maxLines: 3,
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
-
-                                        // Equipment Category with show more/less
                                         Expanded(
+                                          flex: 2,
                                           child: Obx(() {
                                             final equipmentCatList = controller
                                                     .jobModel
                                                     ?.equipmentCatList ??
                                                 [];
-
-                                            // Show first 3 or all depending on the showMore state
                                             final visibleList =
                                                 controller.showMore.value
                                                     ? equipmentCatList
                                                     : equipmentCatList
                                                         .take(3)
                                                         .toList();
-
                                             return Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
-                                              children: [
-                                                ...visibleList
-                                                    .map((element) => Text(
-                                                          "${element?.name}",
-                                                          style: TextStyle(
-                                                              fontSize: 16),
-                                                          maxLines: 1,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                        )),
-                                              ],
+                                              children: visibleList
+                                                  .map((element) => Text(
+                                                        "${element?.name}",
+                                                        style: TextStyle(
+                                                            fontSize: 16),
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ))
+                                                  .toList(),
                                             );
                                           }),
                                         ),
-
-                                        // Block
-                                        Container(
-                                          width: Get.width * .1,
+                                        Expanded(
+                                          flex: 2,
                                           child: Text(
                                             '${controller.selectedBlock}',
                                             maxLines: 3,
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
-
-                                        // Equipment Name with show more/less
                                         Expanded(
+                                          flex: 3,
                                           child: Obx(() {
                                             final workingAreaList = controller
                                                     .jobModel
                                                     ?.workingAreaList ??
                                                 [];
-
-                                            // Show first 3 or all depending on the showMore state
                                             final visibleList =
                                                 controller.showMore.value
                                                     ? workingAreaList
                                                     : workingAreaList
                                                         .take(3)
                                                         .toList();
-
                                             return Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
-                                              children: [
-                                                ...visibleList
-                                                    .map((element) => Text(
-                                                          "${element?.name}",
-                                                          style: TextStyle(
-                                                              fontSize: 16),
-                                                          maxLines: 1,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                        )),
-                                              ],
+                                              children: visibleList
+                                                  .map((element) => Text(
+                                                        "${element?.name}",
+                                                        style: TextStyle(
+                                                            fontSize: 16),
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ))
+                                                  .toList(),
                                             );
                                           }),
                                         ),
-
-                                        // Breakdown Time
-                                        Container(
-                                          width: Get.width * .1,
+                                        Expanded(
+                                          flex: 2,
                                           child: Text(
                                             '${controller.jobModel?.breakdownTime}',
                                             maxLines: 3,
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
-
-                                        // Assigned To
-                                        Container(
-                                          width: Get.width * .1,
+                                        Expanded(
+                                          flex: 2,
                                           child: Text(
                                             '${controller.jobModel?.assignedName}',
                                             maxLines: 3,
@@ -736,195 +614,33 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                       ],
                                     ),
 
-                                    Obx(() {
-                                      final equipmentCatList = controller
-                                              .jobModel?.equipmentCatList ??
-                                          [];
-                                      final workingAreaList = controller
-                                              .jobModel?.workingAreaList ??
-                                          [];
-
-                                      final shouldShowButton =
-                                          equipmentCatList.length > 3 ||
-                                              workingAreaList.length > 3;
-
-                                      return shouldShowButton
-                                          ? TextButton(
-                                              onPressed: () {
-                                                controller.toggleShowMore();
-                                              },
-                                              child: Text(
-                                                controller.showMore.value
-                                                    ? 'Show less'
-                                                    : '... more',
-                                                style: TextStyle(
-                                                    color: Colors.blue),
-                                              ),
-                                            )
-                                          : SizedBox.shrink();
-                                    }),
+                                    if ((controller.jobModel
+                                                        ?.equipmentCatList ??
+                                                    [])
+                                                .length >
+                                            3 ||
+                                        (controller.jobModel?.workingAreaList ??
+                                                    [])
+                                                .length >
+                                            3)
+                                      Obx(() {
+                                        return TextButton(
+                                          onPressed: () {
+                                            controller.toggleShowMore();
+                                          },
+                                          child: Text(
+                                            controller.showMore.value
+                                                ? 'Show less'
+                                                : '... more',
+                                            style:
+                                                TextStyle(color: Colors.blue),
+                                          ),
+                                        );
+                                      }),
                                   ],
                                 ),
                               )
-                            : controller.jobModel?.id != null
-                                ? Container(
-                                    // alignment: Alignment.centerLeft,
-                                    width: Get.width * .9,
-                                    height: Get.height * .2,
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: 9, vertical: 10),
-                                    padding: EdgeInsets.all(10),
-                                    // decoration: BoxDecoration(
-                                    //   border: Border.all(color: Colors.black),
-                                    // ),
-                                    child: DataTable2(
-                                      // border: TableBorder.all(
-                                      //   color: Colors.black,
-                                      // ),
-                                      columnSpacing: 11,
-                                      columns: [
-                                        DataColumn2(
-                                            fixedWidth: 100,
-                                            label: Text('Job ID',
-                                                overflow:
-                                                    TextOverflow.ellipsis)),
-                                        DataColumn2(
-                                            fixedWidth: 180,
-                                            label: Text('Job Title',
-                                                overflow:
-                                                    TextOverflow.ellipsis)),
-                                        DataColumn2(
-                                            fixedWidth: Get.width * .12,
-                                            label: Text('Equipment Category',
-                                                overflow: TextOverflow.clip)),
-                                        DataColumn2(
-                                            fixedWidth: Get.width * .1,
-                                            label: Text('Block',
-                                                overflow:
-                                                    TextOverflow.ellipsis)),
-                                        DataColumn2(
-                                            fixedWidth: 200,
-                                            label: Text('Equipment Name',
-                                                overflow:
-                                                    TextOverflow.ellipsis)),
-                                        DataColumn2(
-                                            fixedWidth: Get.width * .1,
-                                            label: Text('Breakdown Time',
-                                                overflow:
-                                                    TextOverflow.ellipsis)),
-                                        DataColumn2(
-                                            fixedWidth: Get.width * .1,
-                                            label: Text('Assigned To',
-                                                overflow:
-                                                    TextOverflow.ellipsis)),
-                                      ],
-                                      rows: [
-                                        DataRow(cells: [
-                                          DataCell(
-                                            GestureDetector(
-                                              onTap: () {
-                                                controller.viewJobDetails();
-                                              },
-                                              child: Text(
-                                                  '${int.tryParse('${controller.jobModel?.id ?? 0}')}',
-                                                  style: TextStyle(
-                                                    decoration: TextDecoration
-                                                        .underline,
-                                                    decorationStyle:
-                                                        TextDecorationStyle
-                                                            .solid,
-                                                    color: Color.fromARGB(
-                                                        255, 5, 92, 163),
-                                                  ),
-                                                  overflow:
-                                                      TextOverflow.ellipsis),
-                                            ),
-                                          ),
-                                          DataCell(
-                                            SizedBox(
-                                              child: Text(
-                                                  '${controller.titleTextCtrlr.text}',
-                                                  maxLines: 3),
-                                            ),
-                                          ),
-                                          DataCell(
-                                            SizedBox(
-                                              child: Column(
-                                                children: controller
-                                                    .jobModel!.equipmentCatList!
-                                                    .map((element) => Column(
-                                                          // mainAxisAlignment:
-                                                          //     MainAxisAlignment
-                                                          //         .start,
-                                                          // crossAxisAlignment:
-                                                          //     CrossAxisAlignment
-                                                          //         .start,
-                                                          children: [
-                                                            SizedBox(
-                                                              child: Text(
-                                                                "${element?.name}",
-                                                                maxLines: 3,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ))
-                                                    .toList(),
-                                              ),
-                                            ),
-                                          ),
-                                          DataCell(
-                                            SizedBox(
-                                              // width: Get.width * 0.2,
-                                              child: Text(
-                                                '${controller.selectedBlock}',
-                                                maxLines: 3,
-                                              ),
-                                            ),
-                                          ),
-                                          DataCell(
-                                            SizedBox(
-                                              child: Column(
-                                                children: controller
-                                                    .jobModel!.workingAreaList!
-                                                    .map(
-                                                      (element) => Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          SizedBox(
-                                                            child: Text(
-                                                              "${element?.name}",
-                                                              maxLines: 3,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    )
-                                                    .toList(),
-                                              ),
-                                            ),
-                                          ),
-                                          DataCell(
-                                            Text(
-                                                '${controller.jobModel?.breakdownTime}',
-                                                overflow:
-                                                    TextOverflow.ellipsis),
-                                          ),
-                                          DataCell(
-                                            Text(
-                                                '${controller.jobModel?.assignedName}',
-                                                overflow:
-                                                    TextOverflow.ellipsis),
-                                          ),
-                                        ]),
-                                      ],
-                                    ),
-                                  )
-                                : Dimens.box0,
+                            : Dimens.box0,
 
                         // hgvbjn,
                         controller.mcExecutionDetailsModel?.executionId != null
