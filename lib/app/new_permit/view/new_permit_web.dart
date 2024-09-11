@@ -241,7 +241,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                         Expanded(
                                           flex: 2,
                                           child: Text(
-                                            'Checklist Name',
+                                            'Equipment Name',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -335,9 +335,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                             final filteredList =
                                                 visibleList!.where((element) {
                                               // Add the checklist name to the Set, return true if it's new (i.e., not a duplicate)
-                                              return uniqueChecklistNames.add(
-                                                  element?.checklist_name ??
-                                                      '');
+                                              return uniqueChecklistNames
+                                                  .add(element.name ?? '');
                                             }).toList();
 
                                             return Column(
@@ -346,7 +345,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               children: [
                                                 ...filteredList
                                                     .map((element) => Text(
-                                                          "${element?.checklist_name}",
+                                                          "${element.name}",
                                                           style: TextStyle(
                                                               fontSize: 16),
                                                           maxLines: 2,
