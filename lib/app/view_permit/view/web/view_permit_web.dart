@@ -695,256 +695,196 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                         ],
                                       ),
                                     ),
-
                               controller.listAssociatedPm!.isEmpty
                                   ? Dimens.box0
                                   : Container(
-                                      margin: Dimens.edgeInsets20,
-                                      height: ((controller.listAssociatedPm
-                                                      ?.length ??
-                                                  0) *
-                                              50) +
-                                          125,
-                                      // width: MediaQuery.of(context)
-                                      //         .size
-                                      //         .width /
-                                      //     1.2,
+                                      width: Get.width * .9,
+                                      padding: EdgeInsets.all(10),
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: 9, vertical: 10),
                                       decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: ColorValues
-                                              .lightGreyColorWithOpacity35,
-                                          width: 1,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: ColorValues
-                                                .appBlueBackgroundColor,
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
+                                        border: Border.all(color: Colors.black),
                                       ),
                                       child: Column(
+                                        // crossAxisAlignment:
+                                        //     CrossAxisAlignment.start,
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: Row(
-                                              children: [
-                                                Text(
-                                                  "PM Task Linked To This Permit",
-                                                  style: Styles.blue700,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          // Divider(
-                                          //   color: ColorValues.greyLightColour,
-                                          // ),
-                                          Expanded(
-                                            child: DataTable2(
-                                              border: TableBorder.all(
-                                                  color: Color.fromARGB(
-                                                      255, 206, 229, 234)),
-                                              columns: [
-                                                DataColumn(
-                                                  label: Text(
-                                                    "Task Id",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
-                                                DataColumn(
-                                                  label: Text(
-                                                    "Task Title",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
-                                                DataColumn(
-                                                  label: Text(
-                                                    "Equipment\nCategory",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
-                                                DataColumn(
-                                                  label: Text(
-                                                    "Equipment",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
-                                                DataColumn(
-                                                  label: Text(
-                                                    "Due Date",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
-                                                DataColumn(
-                                                  label: Text(
-                                                    "Assigned To",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
-                                                DataColumn(
-                                                  label: Text(
-                                                    "Status",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
-                                              ],
-                                              rows: List<DataRow>.generate(
-                                                controller.listAssociatedPm
-                                                        ?.length ??
-                                                    0,
-                                                (index) => DataRow(
-                                                  cells: [
-                                                    DataCell(
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          controller
-                                                              .clearStoreDataPMtaskId();
-                                                          controller.type
-                                                                      .value ==
-                                                                  AppConstants
-                                                                      .kAudit
-                                                              ? Get.toNamed(
-                                                                  Routes
-                                                                      .viewAuditTask,
-                                                                  arguments: {
-                                                                      'auditTaskId': controller
-                                                                          .listAssociatedPm?[
-                                                                              index]
-                                                                          ?.pmId,
-                                                                      'type': controller
-                                                                          .type
-                                                                          .value
-                                                                    })
-                                                              : Get.toNamed(
-                                                                  Routes
-                                                                      .pmTaskView,
-                                                                  arguments: {
-                                                                    'pmTaskId': controller
-                                                                        .listAssociatedPm?[
-                                                                            index]
-                                                                        ?.pmId
-                                                                  },
-                                                                );
-                                                        },
-                                                        child: Text(
-                                                          controller.type
-                                                                      .value ==
-                                                                  AppConstants
-                                                                      .kAudit
-                                                              ? "AUD${controller.listAssociatedPm?[index]?.pmId.toString() ?? ''} "
-                                                              : "PMT${controller.listAssociatedPm?[index]?.pmId.toString() ?? ''}",
-                                                          style: TextStyle(
-                                                            decoration:
-                                                                TextDecoration
-                                                                    .underline,
-                                                            decorationStyle:
-                                                                TextDecorationStyle
-                                                                    .solid,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    DataCell(
-                                                      Text(controller
-                                                              .listAssociatedPm?[
-                                                                  index]
-                                                              ?.title
-                                                              .toString() ??
-                                                          ''),
-                                                    ),
-                                                    DataCell(
-                                                      Text(controller
-                                                                  .type.value ==
-                                                              AppConstants
-                                                                  .kAudit
-                                                          ? "NA"
-                                                          : controller
-                                                                  .listAssociatedPm?[
-                                                                      index]
-                                                                  ?.equipmentCat
-                                                                  .toString() ??
-                                                              ''),
-                                                    ),
-                                                    DataCell(
-                                                      SingleChildScrollView(
-                                                        scrollDirection:
-                                                            Axis.horizontal,
-                                                        child: Text(
-                                                          controller.type
-                                                                      .value ==
-                                                                  AppConstants
-                                                                      .kAudit
-                                                              ? "NA"
-                                                              : controller
-                                                                      .listAssociatedPm?[
-                                                                          index]
-                                                                      ?.equipment
-                                                                      .toString() ??
-                                                                  '',
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    DataCell(
-                                                      Text(controller
-                                                              .listAssociatedPm?[
-                                                                  index]
-                                                              ?.startDate
-                                                              .toString() ??
-                                                          ''),
-                                                    ),
-                                                    DataCell(
-                                                      Text(controller
-                                                              .listAssociatedPm?[
-                                                                  index]
-                                                              ?.assignedTo
-                                                              .toString() ??
-                                                          ''),
-                                                    ),
-                                                    DataCell(
-                                                      Text(controller
-                                                              .listAssociatedPm?[
-                                                                  index]
-                                                              ?.status_short
-                                                              .toString() ??
-                                                          ''),
-                                                    ),
-                                                  ],
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  'Task ID',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                 ),
                                               ),
-                                            ),
+                                              Expanded(
+                                                flex: 2,
+                                                child: Text(
+                                                  'Plan Title',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 2,
+                                                child: Text(
+                                                  'Equipment Category',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 2,
+                                                child: Text(
+                                                  'Equipment Name',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  'Start Date',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  'Assigned To',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 10),
+                                          Row(
+                                            // crossAxisAlignment:
+                                            //     CrossAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                flex: 1,
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    controller
+                                                        .clearStoreDataPMtaskId();
+                                                    controller.type.value ==
+                                                            AppConstants.kAudit
+                                                        ? Get.toNamed(
+                                                            Routes
+                                                                .viewAuditTask,
+                                                            arguments: {
+                                                                'auditTaskId':
+                                                                    controller
+                                                                        .listAssociatedPm?[
+                                                                            0]
+                                                                        ?.pmId,
+                                                                'type':
+                                                                    controller
+                                                                        .type
+                                                                        .value
+                                                              })
+                                                        : Get.toNamed(
+                                                            Routes.pmTaskView,
+                                                            arguments: {
+                                                              'pmTaskId': controller
+                                                                  .listAssociatedPm?[
+                                                                      0]
+                                                                  ?.pmId
+                                                            },
+                                                          );
+                                                  },
+                                                  child: Text(
+                                                    controller.type.value ==
+                                                            AppConstants.kAudit
+                                                        ? "AUD${controller.listAssociatedPm?[0]?.pmId.toString() ?? ''} "
+                                                        : "PMT${controller.listAssociatedPm?[0]?.pmId.toString() ?? ''}",
+                                                    style: TextStyle(
+                                                      decoration: TextDecoration
+                                                          .underline,
+                                                      color: Color.fromARGB(
+                                                          255, 5, 92, 163),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+
+                                              // Plan Title
+                                              Expanded(
+                                                flex: 2,
+                                                child: Text(
+                                                  '${controller.listAssociatedPm?[0]?.title}',
+                                                ),
+                                              ),
+
+                                              // Equipment Category
+                                              Expanded(
+                                                flex: 2,
+                                                child: Text(controller
+                                                            .type.value ==
+                                                        AppConstants.kAudit
+                                                    ? "NA"
+                                                    : controller
+                                                            .listAssociatedPm?[
+                                                                0]
+                                                            ?.equipmentCat
+                                                            .toString() ??
+                                                        ''),
+                                              ),
+
+                                              // Checklist Name
+                                              Expanded(
+                                                flex: 2,
+                                                child: Text(
+                                                  controller.type.value ==
+                                                          AppConstants.kAudit
+                                                      ? "NA"
+                                                      : controller
+                                                              .listAssociatedPm?[
+                                                                  0]
+                                                              ?.equipment
+                                                              .toString() ??
+                                                          '',
+                                                ),
+                                              ),
+
+                                              // Frequency
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(controller
+                                                        .listAssociatedPm?[0]
+                                                        ?.startDate
+                                                        .toString() ??
+                                                    ''),
+                                              ),
+
+                                              // Assigned To
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(controller
+                                                        .listAssociatedPm?[0]
+                                                        ?.assignedTo
+                                                        .toString() ??
+                                                    ''),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
                                     ),
+
                               //Mc linked to this permit
                               controller.lstAssociatedMc!.isEmpty
                                   ? Dimens.box0
