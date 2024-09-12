@@ -308,7 +308,10 @@ class NewPermitController extends GetxController {
   String? sopData;
   var showMore = false.obs;
   var isInventoryCategoryListLoaded = false.obs;
+  RxList<ListAssociatedJob?>? listAssociatedJobs = <ListAssociatedJob?>[].obs;
+  RxList<ListAssociatedPm?>? listAssociatedPm = <ListAssociatedPm?>[].obs;
   RxList<ListAssociatedMC?>? lstAssociatedMc = <ListAssociatedMC?>[].obs;
+  RxList<ListAssociatedVC?>? lstAssociatedVc = <ListAssociatedVC?>[].obs;
 
   ///Safety Measure List
   RxList<SafetyMeasureListModel> safetyMeasureList =
@@ -630,9 +633,20 @@ class NewPermitController extends GetxController {
       // selectedJobTypeList.value = newPermitDetailsModel.value.
       selectedPermitIssuerLists.value =
           newPermitDetailsModel.value?.issuedByName ?? '';
+
+      print({"MC Data of ptw", lstAssociatedMc});
+      listAssociatedJobs?.value =
+          newPermitDetailsModel.value?.lstAssociatedJobs ?? [];
+      listAssociatedPm?.value =
+          newPermitDetailsModel.value?.lstAssociatedPM ?? [];
+      print({"12233", listAssociatedPm});
       lstAssociatedMc?.value =
           newPermitDetailsModel.value?.lstAssociatedMC ?? [];
       print({"MC Data of ptw", lstAssociatedMc});
+      lstAssociatedVc?.value =
+          newPermitDetailsModel.value?.lstAssociatedVC ?? [];
+      print({"MC Data of ptw", lstAssociatedVc});
+
       selectedPermitApproverLists.value =
           newPermitDetailsModel.value?.approvedByName ?? '';
       listEmployee?.value = newPermitDetailsModel.value?.employee_list ?? [];

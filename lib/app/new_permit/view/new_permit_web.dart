@@ -1011,6 +1011,305 @@ class NewPermitWeb extends GetView<NewPermitController> {
                               )
                             : Dimens.box0,
 
+                        controller.listAssociatedJobs!.isEmpty
+                            ? Dimens.box0
+                            : Container(
+                                margin: Dimens.edgeInsets20,
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: ColorValues.appBlueBackgroundColor,
+                                  border: Border.all(
+                                    color:
+                                        ColorValues.lightGreyColorWithOpacity35,
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                      8), // Rounded corners
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(
+                                          0.1), // Light shadow effect
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  children: [
+                                    // Header row title
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10.0),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "Jobs Linked To This Permit",
+                                            style: Styles.blue700.copyWith(
+                                              fontSize: 18, // Adjust font size
+                                              fontWeight:
+                                                  FontWeight.bold, // Bold title
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Divider(
+                                      color: ColorValues
+                                          .lightGreyColorWithOpacity35, // Divider line
+                                      thickness: 1,
+                                    ),
+
+                                    // Header Row with titles
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8.0),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 1,
+                                            child: Text(
+                                              "Job ID",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                              "Job Title",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                              "Equipment Category",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                              "Equipment Name",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Text(
+                                              "Breakdown Time",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Text(
+                                              "Assigned To",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Text(
+                                              "Status",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Divider(
+                                      color: ColorValues
+                                          .lightGreyColorWithOpacity35, // Divider line
+                                      thickness: 1,
+                                    ),
+
+                                    // Display job data dynamically using rows and columns
+                                    Column(
+                                      children: List.generate(
+                                        controller.listAssociatedJobs?.length ??
+                                            0,
+                                        (index) {
+                                          return Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 8.0),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                // Job ID with clickable functionality
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      controller
+                                                          .viewJobDetails();
+                                                    },
+                                                    child: Text(
+                                                      'JOB${controller.listAssociatedJobs?[index]?.jobId?.toString() ?? ''}',
+                                                      style: TextStyle(
+                                                        decoration:
+                                                            TextDecoration
+                                                                .underline,
+                                                        color: Color.fromARGB(
+                                                            255, 5, 92, 163),
+                                                      ),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                // Job Title
+                                                Expanded(
+                                                  flex: 2,
+                                                  child: Text(
+                                                    controller
+                                                            .listAssociatedJobs?[
+                                                                index]
+                                                            ?.title ??
+                                                        '',
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight: FontWeight
+                                                          .normal, // Consistent font weight
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                // Equipment Category
+                                                Expanded(
+                                                  flex: 2,
+                                                  child: Text(
+                                                    controller
+                                                            .listAssociatedJobs?[
+                                                                index]
+                                                            ?.equipmentCat ??
+                                                        '',
+                                                    style:
+                                                        TextStyle(fontSize: 15),
+                                                  ),
+                                                ),
+
+                                                // Equipment Names (with "show more/less" functionality)
+                                                Expanded(
+                                                  flex: 2,
+                                                  child: Obx(() {
+                                                    final equipmentString =
+                                                        controller
+                                                                .listAssociatedJobs?[
+                                                                    index]
+                                                                ?.equipment ??
+                                                            '';
+                                                    final equipmentList =
+                                                        equipmentString
+                                                            .split(',');
+
+                                                    final equipmentToShow =
+                                                        controller
+                                                                .showMore.value
+                                                            ? equipmentList
+                                                            : equipmentList
+                                                                .take(2)
+                                                                .toList();
+
+                                                    return Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        // Display each equipment name
+                                                        for (var equipment
+                                                            in equipmentToShow)
+                                                          Text(equipment),
+
+                                                        // Show "Show more/less" button if more than 2 items exist
+                                                        if (equipmentList
+                                                                .length >
+                                                            2)
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              controller
+                                                                  .toggleShowMore();
+                                                            },
+                                                            child: Text(
+                                                              controller
+                                                                      .showMore
+                                                                      .value
+                                                                  ? 'Show less'
+                                                                  : 'Show more',
+                                                              style: TextStyle(
+                                                                color:
+                                                                    Colors.blue,
+                                                                fontSize:
+                                                                    14, // Slightly smaller button text
+                                                              ),
+                                                            ),
+                                                          ),
+                                                      ],
+                                                    );
+                                                  }),
+                                                ),
+
+                                                // Breakdown Time
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    controller
+                                                            .listAssociatedJobs?[
+                                                                index]
+                                                            ?.breakdownTime
+                                                            ?.toString() ??
+                                                        '',
+                                                    style:
+                                                        TextStyle(fontSize: 15),
+                                                  ),
+                                                ),
+
+                                                // Assigned To
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    controller
+                                                            .listAssociatedJobs?[
+                                                                index]
+                                                            ?.assignedTo ??
+                                                        '',
+                                                    style:
+                                                        TextStyle(fontSize: 15),
+                                                  ),
+                                                ),
+
+                                                // Status
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    controller
+                                                            .listAssociatedJobs?[
+                                                                index]
+                                                            ?.status_short ??
+                                                        '',
+                                                    style:
+                                                        TextStyle(fontSize: 15),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
                         IgnorePointer(
                           ignoring: controller
                                       .newPermitDetailsModel.value?.ptwStatus ==
