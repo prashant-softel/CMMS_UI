@@ -580,7 +580,7 @@ class CreateWarrantyClaimController extends GetxController {
             DateFormat('yyyy-MM-dd').format(startDate);
         warrantyStartDateTimeCtrlrWebBuffer =
             warrantyStartDateTimeCtrlrWeb.text;
-            isWStartDateInvalid.value = false; 
+        isWStartDateInvalid.value = false;
       }
       String? expirydate = inventoryDetailsModel.value?.expiry_date;
       if (expirydate != null && expirydate.isNotEmpty) {
@@ -588,15 +588,14 @@ class CreateWarrantyClaimController extends GetxController {
         warrantyEndDateTimeCtrlrWeb.text =
             DateFormat('yyyy-MM-dd').format(expiryDate);
         warrantyEndDateTimeCtrlrWebBuffer = warrantyEndDateTimeCtrlrWeb.text;
-        isWEndDateInvalid.value = false; 
+        isWEndDateInvalid.value = false;
       }
       costOfReplacementTextController.text =
           '${int.tryParse('${inventoryDetailsModel.value?.cost ?? ''}')}';
-           if (costOfReplacementTextController.text.isNotEmpty) {
+      if (costOfReplacementTextController.text.isNotEmpty) {
         isCostOfReplacementInvalid.value = false;
       }
-          
-          
+
       requestManufactureTextController.text =
           inventoryDetailsModel.value?.warrantyProviderName ?? '';
       if (requestManufactureTextController.text.isNotEmpty) {
@@ -1144,7 +1143,7 @@ class CreateWarrantyClaimController extends GetxController {
       isCorrectiveActionInvalid.value = true;
       isFormInvalid.value = true;
     }
-    
+
     if (commentCtrl.text == '') {
       isCommentInvalid.value = true;
       isFormInvalid.value = true;

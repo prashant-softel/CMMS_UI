@@ -430,6 +430,10 @@ class AddInventoryController extends GetxController {
           editAddInventoryDetailsModel.value?.warrantyTermTypeId ?? 0;
       selectedmanufacturerNameId =
           editAddInventoryDetailsModel.value?.warrantyProviderId ?? 0;
+      selectedBusinessTypeId =
+          editAddInventoryDetailsModel.value?.warrantyProviderId ?? 0;
+      selectedVender.value =
+          editAddInventoryDetailsModel.value?.warrantyProviderName ?? "";
       selectedsupplierrNameId =
           editAddInventoryDetailsModel.value?.supplierId ?? 0;
       selectedUnitCurrencyId =
