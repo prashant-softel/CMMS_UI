@@ -308,6 +308,7 @@ class NewPermitController extends GetxController {
   String? sopData;
   var showMore = false.obs;
   var isInventoryCategoryListLoaded = false.obs;
+  RxList<ListAssociatedMC?>? lstAssociatedMc = <ListAssociatedMC?>[].obs;
 
   ///Safety Measure List
   RxList<SafetyMeasureListModel> safetyMeasureList =
@@ -629,6 +630,9 @@ class NewPermitController extends GetxController {
       // selectedJobTypeList.value = newPermitDetailsModel.value.
       selectedPermitIssuerLists.value =
           newPermitDetailsModel.value?.issuedByName ?? '';
+      lstAssociatedMc?.value =
+          newPermitDetailsModel.value?.lstAssociatedMC ?? [];
+      print({"MC Data of ptw", lstAssociatedMc});
       selectedPermitApproverLists.value =
           newPermitDetailsModel.value?.approvedByName ?? '';
       listEmployee?.value = newPermitDetailsModel.value?.employee_list ?? [];
@@ -1446,7 +1450,9 @@ class NewPermitController extends GetxController {
         longitude: 0,
         comment: "",
         block_ids: selectedEmployeeNameIdList,
-        category_ids: selectedEquipmentCategoryIdList,
+        category_ids: typee.value == 5 || typee.value == 4
+            ? [8]
+            : selectedEquipmentCategoryIdList,
         uploadfile_ids: fileIds,
         is_loto_required: loto_map_list.length > 0 ? true : false,
         isolated_category_ids: selectedEquipmentIsolationIdList,
@@ -1570,7 +1576,9 @@ class NewPermitController extends GetxController {
         latitude: 0,
         longitude: 0,
         block_ids: selectedEmployeeNameIdList,
-        category_ids: selectedEquipmentCategoryIdList,
+        category_ids: typee.value == 5 || typee.value == 4
+            ? [8]
+            : selectedEquipmentCategoryIdList,
         is_loto_required: loto_map_list.length > 0 ? true : false,
         isolated_category_ids: selectedEquipmentIsolationIdList,
         Loto_list: loto_map_list,
@@ -1687,7 +1695,9 @@ class NewPermitController extends GetxController {
         latitude: 0,
         longitude: 0,
         block_ids: selectedEmployeeNameIdList,
-        category_ids: selectedEquipmentCategoryIdList,
+        category_ids: typee.value == 5 || typee.value == 4
+            ? [8]
+            : selectedEquipmentCategoryIdList,
         is_loto_required: loto_map_list.length > 0 ? true : false,
         isolated_category_ids: selectedEquipmentIsolationIdList,
         Loto_list: loto_map_list,
@@ -1852,7 +1862,9 @@ class NewPermitController extends GetxController {
         latitude: 0,
         longitude: 0,
         block_ids: selectedEmployeeNameIdList,
-        category_ids: selectedEquipmentCategoryIdList,
+        category_ids: typee.value == 5 || typee.value == 4
+            ? [8]
+            : selectedEquipmentCategoryIdList,
         uploadfile_ids: files,
         is_loto_required: loto_map_list.length > 0 ? true : false,
         isolated_category_ids: selectedEquipmentIsolationIdList,
@@ -1964,7 +1976,9 @@ class NewPermitController extends GetxController {
         latitude: 0,
         longitude: 0,
         block_ids: selectedEmployeeNameIdList,
-        category_ids: selectedEquipmentCategoryIdList,
+        category_ids: typee.value == 5 || typee.value == 4
+            ? [8]
+            : selectedEquipmentCategoryIdList,
         uploadfile_ids: fileIds,
         is_loto_required: loto_map_list.length > 0 ? true : false,
         isolated_category_ids: selectedEquipmentIsolationIdList,

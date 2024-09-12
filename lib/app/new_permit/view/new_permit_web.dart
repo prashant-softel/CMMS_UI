@@ -743,6 +743,174 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                 ),
                               )
                             : Dimens.box0,
+                        //Mc linked to this permit
+                        controller.lstAssociatedMc!.isEmpty
+                            ? Dimens.box0
+                            : Container(
+                                margin: Dimens.edgeInsets20,
+                                height:
+                                    ((controller.lstAssociatedMc?.length ?? 0) *
+                                            50) +
+                                        125,
+                                // width: MediaQuery.of(context)
+                                //         .size
+                                //         .width /
+                                //     1.2,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color:
+                                        ColorValues.lightGreyColorWithOpacity35,
+                                    width: 1,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: ColorValues.appBlueBackgroundColor,
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "MC Task Linked To This Permit",
+                                            style: Styles.blue700,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    // Divider(
+                                    //   color: ColorValues.greyLightColour,
+                                    // ),
+                                    Expanded(
+                                      child: DataTable2(
+                                        border: TableBorder.all(
+                                            color: Color.fromARGB(
+                                                255, 206, 229, 234)),
+                                        columns: [
+                                          DataColumn(
+                                            label: Text(
+                                              "Task Id",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          DataColumn(
+                                            label: Text(
+                                              "Task Title",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          DataColumn(
+                                            label: Text(
+                                              "Equipment\nCategory",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          DataColumn(
+                                            label: Text(
+                                              "Start Date",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          DataColumn(
+                                            label: Text(
+                                              "Assigned To",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          DataColumn(
+                                            label: Text(
+                                              "Status",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ],
+                                        rows: List<DataRow>.generate(
+                                          controller.lstAssociatedMc?.length ??
+                                              0,
+                                          (index) => DataRow(
+                                            cells: [
+                                              DataCell(
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    controller.viewMCTDetails();
+                                                  },
+                                                  child: Text(
+                                                      'MCT${int.tryParse('${controller.mcExecutionDetailsModel?.executionId ?? 0}')}',
+                                                      style: TextStyle(
+                                                        decoration:
+                                                            TextDecoration
+                                                                .underline,
+                                                        decorationStyle:
+                                                            TextDecorationStyle
+                                                                .solid,
+                                                        color: Color.fromARGB(
+                                                            255, 5, 92, 163),
+                                                      ),
+                                                      overflow: TextOverflow
+                                                          .ellipsis),
+                                                ),
+                                              ),
+                                              DataCell(
+                                                Text(controller
+                                                        .lstAssociatedMc?[index]
+                                                        ?.title
+                                                        .toString() ??
+                                                    ''),
+                                              ),
+                                              DataCell(
+                                                Text(controller
+                                                        .lstAssociatedMc?[index]
+                                                        ?.equipmentCat
+                                                        .toString() ??
+                                                    ''),
+                                              ),
+                                              DataCell(
+                                                Text(controller
+                                                        .lstAssociatedMc?[index]
+                                                        ?.startDate
+                                                        .toString() ??
+                                                    ''),
+                                              ),
+                                              DataCell(
+                                                Text(controller
+                                                        .lstAssociatedMc?[index]
+                                                        ?.assignedTo
+                                                        .toString() ??
+                                                    ''),
+                                              ),
+                                              DataCell(
+                                                Text(controller
+                                                        .lstAssociatedMc?[index]
+                                                        ?.status_short
+                                                        .toString() ??
+                                                    ''),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
 
                         controller.vegExecutionDetailsModel?.executionId != null
                             ? Container(

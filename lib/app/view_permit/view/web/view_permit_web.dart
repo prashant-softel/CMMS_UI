@@ -1190,15 +1190,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                             FontWeight.bold),
                                                   ),
                                                 ),
-                                                DataColumn(
-                                                  label: Text(
-                                                    "Equipment",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
+                                               
                                                 DataColumn(
                                                   label: Text(
                                                     "Start Date",
@@ -1283,20 +1275,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                               .toString() ??
                                                           ''),
                                                     ),
-                                                    DataCell(
-                                                      SingleChildScrollView(
-                                                        scrollDirection:
-                                                            Axis.horizontal,
-                                                        child: Text(
-                                                          controller
-                                                                  .lstAssociatedMc?[
-                                                                      index]
-                                                                  ?.equipment
-                                                                  .toString() ??
-                                                              '',
-                                                        ),
-                                                      ),
-                                                    ),
+                                                   
                                                     DataCell(
                                                       Text(controller
                                                               .lstAssociatedMc?[
@@ -1329,6 +1308,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                         ],
                                       ),
                                     ),
+                           
                               //veg linked to ptw
                               controller.lstAssociatedVc!.isEmpty
                                   ? Dimens.box0

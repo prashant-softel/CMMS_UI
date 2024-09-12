@@ -290,12 +290,11 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                                     .number,
                                                             inputFormatters: <TextInputFormatter>[
                                                               FilteringTextInputFormatter
-                                                                  .digitsOnly
+                                                                  .digitsOnly,
                                                             ],
                                                             textController:
                                                                 controller
                                                                     .durationInDayCtrlr,
-                                                            //validate
                                                             errorController: controller
                                                                     .isEstimatedInvalid
                                                                     .value
@@ -303,12 +302,107 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                                 : null,
                                                             onChanged: (value) {
                                                               if (value
-                                                                      .trim()
-                                                                      .length >
-                                                                  0) {
+                                                                  .trim()
+                                                                  .isNotEmpty) {
                                                                 controller
                                                                     .isEstimatedInvalid
                                                                     .value = false;
+
+                                                                int enteredDuration =
+                                                                    int.tryParse(
+                                                                            value) ??
+                                                                        0;
+
+                                                                int?
+                                                                    noOfCleaningDays =
+                                                                    controller
+                                                                        .mcPlanDetailsModel
+                                                                        .value
+                                                                        ?.noOfCleaningDays;
+
+                                                                if (noOfCleaningDays !=
+                                                                        null &&
+                                                                    enteredDuration <
+                                                                        noOfCleaningDays) {
+                                                                  showDialog(
+                                                                    barrierDismissible:
+                                                                        false,
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (BuildContext
+                                                                            context) {
+                                                                      return AlertDialog(
+                                                                        shape:
+                                                                            RoundedRectangleBorder(
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(20),
+                                                                        ),
+                                                                        backgroundColor:
+                                                                            Colors.white,
+                                                                        title:
+                                                                            Text(
+                                                                          'Error',
+                                                                          style:
+                                                                              TextStyle(
+                                                                            fontSize:
+                                                                                20,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            color:
+                                                                                Colors.red,
+                                                                          ),
+                                                                        ),
+                                                                        content:
+                                                                            Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.min,
+                                                                          children: [
+                                                                            Icon(
+                                                                              Icons.warning_amber_rounded,
+                                                                              color: Colors.red,
+                                                                              size: 50,
+                                                                            ),
+                                                                            SizedBox(height: 10),
+                                                                            Text(
+                                                                              "Estimated duration days ($noOfCleaningDays) is not equal to Scheduled days, please set the equipment's scheduled days first",
+                                                                              style: TextStyle(
+                                                                                fontSize: 16,
+                                                                                color: Colors.grey[700],
+                                                                              ),
+                                                                              textAlign: TextAlign.center,
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        actions: [
+                                                                          TextButton(
+                                                                            style:
+                                                                                TextButton.styleFrom(
+                                                                              backgroundColor: Colors.blue,
+                                                                              shape: RoundedRectangleBorder(
+                                                                                borderRadius: BorderRadius.circular(10),
+                                                                              ),
+                                                                            ),
+                                                                            child:
+                                                                                Text(
+                                                                              'OK',
+                                                                              style: TextStyle(
+                                                                                color: Colors.white,
+                                                                                fontWeight: FontWeight.bold,
+                                                                              ),
+                                                                            ),
+                                                                            onPressed:
+                                                                                () {
+                                                                              controller.durationInDayCtrlr.text = noOfCleaningDays.toString();
+
+                                                                              Navigator.of(context).pop(); // Close the dialog
+                                                                            },
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    },
+                                                                  );
+                                                                }
                                                               } else {
                                                                 controller
                                                                     .isEstimatedInvalid
@@ -415,7 +509,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                     ),
                                                     child: Center(
                                                       child: Text(
-                                                        "Set Equipments",
+                                                        "Set Equipments ",
                                                         style: TextStyle(
                                                             fontSize: 18,
                                                             fontWeight:
@@ -579,7 +673,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                               ),
                                                               child: Center(
                                                                 child: Text(
-                                                                  "Set Equipments",
+                                                                  "Equipment ",
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           18,
