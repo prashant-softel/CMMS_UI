@@ -506,69 +506,127 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                                 title:
                                                                     'Estimated Duration In Day'),
                                                             Dimens.boxWidth10,
-                                                            Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Colors
-                                                                        .black26,
-                                                                    offset:
-                                                                        const Offset(
-                                                                            5.0,
-                                                                            5.0),
-                                                                    blurRadius:
-                                                                        5.0,
-                                                                    spreadRadius:
-                                                                        1.0,
-                                                                  ),
-                                                                ],
-                                                                color: ColorValues
-                                                                    .whiteColor,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                              ),
-                                                              child:
-                                                                  LoginCustomTextfield(
-                                                                width:
-                                                                    (Get.width *
-                                                                        .2),
-                                                                keyboardType:
-                                                                    TextInputType
-                                                                        .number,
-                                                                inputFormatters: <TextInputFormatter>[
-                                                                  FilteringTextInputFormatter
-                                                                      .digitsOnly
-                                                                ],
-                                                                textController:
-                                                                    controller
-                                                                        .durationInDayCtrlr,
-                                                                errorController:
-                                                                    controller
-                                                                            .isDurationInvalid
-                                                                            .value
-                                                                        ? "Required field"
-                                                                        : null,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  if (value
-                                                                          .trim()
-                                                                          .length >
-                                                                      0) {
-                                                                    controller
-                                                                        .isDurationInvalid
-                                                                        .value = false;
-                                                                  } else {
-                                                                    controller
-                                                                        .isDurationInvalid
-                                                                        .value = true;
-                                                                  }
-                                                                },
-                                                                enabled: controller
-                                                                    .isDurationEditable
-                                                                    .value,
+                                                            Obx(
+                                                              () => SizedBox(
+                                                                child:
+                                                                    LoginCustomTextfield(
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  inputFormatters: <TextInputFormatter>[
+                                                                    FilteringTextInputFormatter
+                                                                        .digitsOnly,
+                                                                  ],
+                                                                  textController:
+                                                                      controller
+                                                                          .durationInDayCtrlr,
+                                                                  errorController: controller
+                                                                          .isDurationInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                        .trim()
+                                                                        .isNotEmpty) {
+                                                                      controller
+                                                                          .isDurationInvalid
+                                                                          .value = false;
+
+                                                                      int enteredDuration =
+                                                                          int.tryParse(value) ??
+                                                                              0;
+
+                                                                      int? noOfCleaningDays = controller
+                                                                          .vegPlanDetailsModel
+                                                                          .value
+                                                                          ?.noOfCleaningDays;
+
+                                                                      if (noOfCleaningDays !=
+                                                                              null &&
+                                                                          enteredDuration <
+                                                                              noOfCleaningDays) {
+                                                                        showDialog(
+                                                                          barrierDismissible:
+                                                                              false,
+                                                                          context:
+                                                                              context,
+                                                                          builder:
+                                                                              (BuildContext context) {
+                                                                            return AlertDialog(
+                                                                              shape: RoundedRectangleBorder(
+                                                                                borderRadius: BorderRadius.circular(20),
+                                                                              ),
+                                                                              backgroundColor: Colors.white,
+                                                                              title: Text(
+                                                                                'Error',
+                                                                                style: TextStyle(
+                                                                                  fontSize: 20,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                  color: Colors.red,
+                                                                                ),
+                                                                              ),
+                                                                              content: Column(
+                                                                                mainAxisSize: MainAxisSize.min,
+                                                                                children: [
+                                                                                  Icon(
+                                                                                    Icons.warning_amber_rounded,
+                                                                                    color: Colors.red,
+                                                                                    size: 50,
+                                                                                  ),
+                                                                                  SizedBox(height: 10),
+                                                                                  Text(
+                                                                                    "Estimated duration days ($noOfCleaningDays) is not equal to Scheduled days, please set the equipment's scheduled days first",
+                                                                                    style: TextStyle(
+                                                                                      fontSize: 16,
+                                                                                      color: Colors.grey[700],
+                                                                                    ),
+                                                                                    textAlign: TextAlign.center,
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                              actions: [
+                                                                                TextButton(
+                                                                                  style: TextButton.styleFrom(
+                                                                                    backgroundColor: Colors.blue,
+                                                                                    shape: RoundedRectangleBorder(
+                                                                                      borderRadius: BorderRadius.circular(10),
+                                                                                    ),
+                                                                                  ),
+                                                                                  child: Text(
+                                                                                    'OK',
+                                                                                    style: TextStyle(
+                                                                                      color: Colors.white,
+                                                                                      fontWeight: FontWeight.bold,
+                                                                                    ),
+                                                                                  ),
+                                                                                  onPressed: () {
+                                                                                    controller.durationInDayCtrlr.text = noOfCleaningDays.toString();
+
+                                                                                    Navigator.of(context).pop();
+                                                                                  },
+                                                                                ),
+                                                                              ],
+                                                                            );
+                                                                          },
+                                                                        );
+                                                                      }
+                                                                    } else {
+                                                                      controller
+                                                                          .isDurationInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  },
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  enabled: controller
+                                                                      .isDurationEditable
+                                                                      .value,
+                                                                ),
                                                               ),
                                                             ),
                                                           ],
