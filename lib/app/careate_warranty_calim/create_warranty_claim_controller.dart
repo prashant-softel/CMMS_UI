@@ -569,6 +569,10 @@ class CreateWarrantyClaimController extends GetxController {
           inventoryDetailsModel.value?.serialNumber ?? '';
       manufacturerNameTextController.text =
           inventoryDetailsModel.value?.manufacturerName ?? '';
+      if (manufacturerNameTextController.text.isNotEmpty) {
+        isManufactureInvalid.value = false;
+      }
+
       String? startDateStr = inventoryDetailsModel.value?.start_date;
       if (startDateStr != null && startDateStr.isNotEmpty) {
         DateTime startDate = DateTime.parse(startDateStr);
@@ -576,6 +580,7 @@ class CreateWarrantyClaimController extends GetxController {
             DateFormat('yyyy-MM-dd').format(startDate);
         warrantyStartDateTimeCtrlrWebBuffer =
             warrantyStartDateTimeCtrlrWeb.text;
+            isWStartDateInvalid.value = false; 
       }
       String? expirydate = inventoryDetailsModel.value?.expiry_date;
       if (expirydate != null && expirydate.isNotEmpty) {
@@ -583,12 +588,20 @@ class CreateWarrantyClaimController extends GetxController {
         warrantyEndDateTimeCtrlrWeb.text =
             DateFormat('yyyy-MM-dd').format(expiryDate);
         warrantyEndDateTimeCtrlrWebBuffer = warrantyEndDateTimeCtrlrWeb.text;
+        isWEndDateInvalid.value = false; 
       }
-
       costOfReplacementTextController.text =
           '${int.tryParse('${inventoryDetailsModel.value?.cost ?? ''}')}';
+           if (costOfReplacementTextController.text.isNotEmpty) {
+        isCostOfReplacementInvalid.value = false;
+      }
+          
+          
       requestManufactureTextController.text =
           inventoryDetailsModel.value?.warrantyProviderName ?? '';
+      if (requestManufactureTextController.text.isNotEmpty) {
+        isRequestWarrantyInvalid.value = false;
+      }
     }
   }
 
@@ -942,8 +955,7 @@ class CreateWarrantyClaimController extends GetxController {
                 affectedPartEqipmentNameList[affectedPartIndex]?.id ?? 0;
             selectedAffectedPartName =
                 affectedPartEqipmentNameList[affectedPartIndex]?.name ?? '';
-            selectedEquipmentCategory.value = value;
-            isEquipmentCategorySelected.value = true;
+
             if (selectedAffectedPartId > 0) {
               isAffectedPartSelected.value = true;
             }
@@ -963,6 +975,13 @@ class CreateWarrantyClaimController extends GetxController {
             selectedInventoryCategoryId =
                 equipmentCategoryList[invCatListIndex]!.id ?? 0;
             getInventoryList();
+
+            if (selectedInventoryCategoryId > 0) {
+              isEquipmentCategorySelected.value = true;
+            }
+            selectedEquipmentCategory.value = value;
+
+            // }
           } else {
             selectedInventoryCategoryId = 0;
           }
@@ -1071,12 +1090,12 @@ class CreateWarrantyClaimController extends GetxController {
       isUnitCurrencySelected.value = false;
       isFormInvalid.value = true;
     }
-    if (affectedSerialNoTextController.text == '') {
-      isAffectedsrnoInvalid.value = true;
-      isFormInvalid.value = true;
-    }
-    if (failureDateTimeCtrlrWebBuffer == null) {
-      isAffectedsrnoInvalid.value = true;
+    // if (affectedSerialNoTextController.text == '') {
+    //   isAffectedsrnoInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
+    if (failureDateTimeCtrlrWeb.text == '') {
+      isFailureDateTimeInvalid.value = true;
       isFormInvalid.value = true;
     }
     if (manufacturerNameTextController.text == '') {
@@ -1125,6 +1144,11 @@ class CreateWarrantyClaimController extends GetxController {
       isCorrectiveActionInvalid.value = true;
       isFormInvalid.value = true;
     }
+    
+    if (commentCtrl.text == '') {
+      isCommentInvalid.value = true;
+      isFormInvalid.value = true;
+    }
   }
 
   ///Create Warranty Claim
@@ -1133,10 +1157,10 @@ class CreateWarrantyClaimController extends GetxController {
     List<dynamic>? affectedFileIds,
   }) async {
     {
-      // checkForm();
-      // if (isFormInvalid.value) {
-      //   return;
-      // }
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
 
       String _warrantyClaimTitle =
           htmlEscape.convert(warrantyClaimTitleTextController.text.trim());
@@ -1264,6 +1288,10 @@ class CreateWarrantyClaimController extends GetxController {
     List<dynamic>? affectedFileIds,
   }) async {
     {
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
       // checkSaveDraftForm();
       // if (isFormInvalid.value) {
       //   return;
@@ -1371,10 +1399,10 @@ class CreateWarrantyClaimController extends GetxController {
     List<dynamic>? fileIds,
     List<dynamic>? affectedFileIds,
   }) async {
-    // checkForm();
-    // if (isFormInvalid.value) {
-    //   return;
-    // }
+    checkForm();
+    if (isFormInvalid.value) {
+      return;
+    }
     String _warrantyClaimTitle =
         htmlEscape.convert(warrantyClaimTitleTextController.text.trim());
     String _description =
@@ -1455,10 +1483,10 @@ class CreateWarrantyClaimController extends GetxController {
     List<dynamic>? fileIds,
     List<dynamic>? affectedFileIds,
   }) async {
-    // checkForm();
-    // if (isFormInvalid.value) {
-    //   return;
-    // }
+    checkForm();
+    if (isFormInvalid.value) {
+      return;
+    }
     String _warrantyClaimTitle =
         htmlEscape.convert(warrantyClaimTitleTextController.text.trim());
     String _description =

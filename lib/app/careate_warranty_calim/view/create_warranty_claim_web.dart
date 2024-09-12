@@ -788,24 +788,24 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                       textController:
                                                                           controller
                                                                               .affectedSerialNoTextController,
-                                                                      errorController: controller
-                                                                              .isAffectedsrnoInvalid
-                                                                              .value
-                                                                          ? "Required field"
-                                                                          : null,
-                                                                      onChanged:
-                                                                          (value) {
-                                                                        if (value.trim().length >
-                                                                            1) {
-                                                                          controller
-                                                                              .isAffectedsrnoInvalid
-                                                                              .value = false;
-                                                                        } else {
-                                                                          controller
-                                                                              .isAffectedsrnoInvalid
-                                                                              .value = true;
-                                                                        }
-                                                                      },
+                                                                      // errorController: controller
+                                                                      //         .isAffectedsrnoInvalid
+                                                                      //         .value
+                                                                      //     ? "Required field"
+                                                                      //     : null,
+                                                                      // onChanged:
+                                                                      //     (value) {
+                                                                      //   if (value.trim().length >
+                                                                      //       1) {
+                                                                      //     controller
+                                                                      //         .isAffectedsrnoInvalid
+                                                                      //         .value = false;
+                                                                      //   } else {
+                                                                      //     controller
+                                                                      //         .isAffectedsrnoInvalid
+                                                                      //         .value = true;
+                                                                      //   }
+                                                                      // },
                                                                     ),
                                                                   ),
                                                                 ],
@@ -1250,6 +1250,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                         if (value.trim().length >
                                                                             1) {
                                                                           controller
+                                                                        
                                                                               .isAppliedAtInvalid
                                                                               .value = false;
                                                                         } else {
@@ -2823,6 +2824,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                               child: CustomElevatedButton(
                                 backgroundColor: ColorValues.appGreenColor,
                                 onPressed: () {
+                                  controller.isFormInvalid.value = false;
                                   controller.saveAsDraft(
                                     fileIds: dropzoneController.fileIds,
                                     affectedFileIds:
@@ -3012,6 +3014,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
   }
 
   Future pickFailureDateTime_web(BuildContext context) async {
+  controller.isFailureDateTimeInvalid.value = false;
     var dateTime = controller.selectedFailureDateTimeWeb.value;
     final date = await pickDate_web(context);
     if (date == null) {
@@ -3144,6 +3147,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
   }
 
   Future pickcurrentStartDate_web(BuildContext context) async {
+       controller.isAppliedAtInvalid.value = false;
     var dateTime = controller.selectedcurrentStartDate.value;
     final date = await pickDate2_web(context);
     if (date == null) {
