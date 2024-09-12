@@ -121,6 +121,9 @@ class NewPermitMobile extends GetView<NewPermitController> {
                               ),
                             )
                           : Dimens.box0,
+
+                          
+                          
                       controller.vegExecutionDetailsModel?.executionId != null
                           ? Container(
                               padding: EdgeInsets.all(10),
