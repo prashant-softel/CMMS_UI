@@ -1228,60 +1228,224 @@ class PreventiveMaintenanceTaskViewContentWeb
                               backgroundColor: ColorValues.redColor,
                               text: "Cancel Task",
                               onPressed: () {
-                                Get.dialog(CustonApproveRejectDialog(
-                                  text: "Cancel Task",
-                                  controller: controller,
-                                  buttonText: "Cancel Task",
-                                  style: Styles.redElevatedButtonStyle,
-                                  onPressed: () {
-                                    controller.CancelPMTask();
-                                    Get.back();
-                                  },
-                                ));
-                                // controller.CancelPMTask();
+                                var firstTask = controller
+                                    .listMrsByTaskId?.value
+                                    .firstWhereOrNull(
+                                  (element) =>
+                                      element?.jobCardId != 0 ||
+                                      element?.pmId != 0,
+                                );
 
-                                // _isDeleteDialog() {
-                                // Get.dialog(
-                                //   AlertDialog(
-                                //     content: Column(
-                                //         mainAxisSize: MainAxisSize.min,
-                                //         children: [
-                                //           Icon(Icons.cancel,
-                                //               size: 35,
-                                //               color: ColorValues.redColor),
-                                //           SizedBox(
-                                //             height: 10,
-                                //           ),
-                                //           Text(
-                                //             'Are you sure you want to cancel the task?',
-                                //             style: Styles.blackBold14w500,
-                                //           ),
-                                //         ]),
-                                //     actions: [
-                                //       Row(
-                                //         mainAxisAlignment:
-                                //             MainAxisAlignment.spaceEvenly,
-                                //         children: [
-                                //           TextButton(
-                                //             onPressed: () {
-                                //               Get.back();
-                                //             },
-                                //             child: Text('NO'),
-                                //           ),
-                                //           TextButton(
-                                //             onPressed: () {
-                                //               Get.back();
-                                //               controller.CancelPMTask(
-                                //                   controller: controller);
-                                //             },
-                                //             child: Text('YES'),
-                                //           ),
-                                //         ],
-                                //       )
-                                //     ],
-                                //   ),
-                                // );
-                                // // }
+                                if (firstTask?.mrs_return_ID == 0 &&
+                                    controller.allTrue.value == false) {
+                                  Get.dialog(AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15.0)),
+                                    ),
+                                    insetPadding: Dimens.edgeInsets10_0_10_0,
+                                    contentPadding: EdgeInsets.zero,
+                                    title: Text(
+                                      'Alert',
+                                      //'Please return all items!',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    content: Builder(builder: (context) {
+                                      return Container(
+                                        padding: Dimens.edgeInsets05_0_5_0,
+                                        height: 40,
+                                        width: 400,
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Divider(
+                                                color:
+                                                    ColorValues.greyLightColour,
+                                                thickness: 1,
+                                              ),
+                                              Text(
+                                                'Please return all items!',
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ]),
+                                      );
+                                    }),
+                                    actions: [
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            // Dimens.boxWidth10,
+                                            ElevatedButton(
+                                              style: Styles
+                                                  .darkRedElevatedButtonStyle,
+                                              onPressed: () {
+                                                Get.back();
+                                              },
+                                              child: const Text('Cancel'),
+                                            ),
+                                            Dimens.boxWidth20,
+                                            ElevatedButton(
+                                              style: Styles
+                                                  .greenElevatedButtonStyle,
+                                              onPressed: () {
+                                                controller.clearMrsStoreData();
+                                                controller
+                                                    .clearStoreDataJobId();
+
+                                                controller.clearTypeStoreData();
+                                                controller.clearStoreTaskData();
+                                                controller
+                                                    .clearStoreTaskActivityData();
+                                                controller
+                                                    .clearStoreTasktoActorData();
+                                                controller
+                                                    .clearStoreTaskWhereUsedData();
+                                                controller
+                                                    .clearStoreTaskfromActorData();
+
+                                                controller
+                                                    .getMrsListByModuleTask(
+                                                        taskId: controller
+                                                            .scheduleId.value);
+                                                // controller.clearStoreTaskData();
+                                                // controller
+                                                //     .clearStoreTaskActivityData();
+                                                // controller
+                                                //     .clearStoreTasktoActorData();
+                                                // controller
+                                                //     .clearStoreTaskWhereUsedData();
+                                                // controller
+                                                //     .clearStoreTaskfromActorData();
+
+                                                Get.toNamed(
+                                                    Routes.mrsReturnScreen,
+                                                    arguments: {
+                                                      'type': 2,
+                                                      "whereUsed": 27,
+                                                      "fromActorTypeId": 3,
+                                                      "to_actor_type_id": 2,
+                                                      "pmTaskId": controller
+                                                              .pmtaskViewModel
+                                                              .value
+                                                              ?.id ??
+                                                          0,
+                                                      "activity": controller
+                                                          .pmtaskViewModel
+                                                          .value
+                                                          ?.plan_title,
+                                                      "mrsId": controller
+                                                              .listMrsByTaskId!
+                                                              .firstWhere(
+                                                                  (element) =>
+                                                                      element
+                                                                          ?.mrsId !=
+                                                                      0,
+                                                                  orElse: null)!
+                                                              .mrsId ??
+                                                          0
+                                                    });
+                                              },
+                                              child: Text('Return MRS'),
+                                            ),
+                                          ]),
+                                    ],
+                                  ));
+
+                                  // Get.defaultDialog(
+                                  //   radius: 5,
+                                  //   title: 'Alert',
+                                  //   middleText: 'Please return all items!',
+                                  //   textConfirm: 'OK',
+                                  //   onConfirm: () {
+                                  //     Get.back(); // Action on confirm
+                                  //   },
+                                  //   textCancel: 'Return MRS',
+                                  //   onCancel: () {
+                                  //     Get.back(); // Action on cancel
+                                  //   },
+                                  //   buttonColor: ColorValues
+                                  //       .appGreenColor, // Button color for confirm
+                                  //   cancelTextColor:
+                                  //       Colors.red, // Button color for cancel
+                                  //   confirmTextColor:
+                                  //       Colors.white, // Text color for confirm
+                                  // );
+                                } else if (firstTask?.status != 323 &&
+                                    controller.listMrsByTaskId!.isNotEmpty &&
+                                    controller.allTrue.value == false) {
+                                  Get.defaultDialog(
+                                    radius: 5,
+                                    title: 'Alert',
+                                    middleText:
+                                        'Please get Return MRS approved!',
+                                    textConfirm: 'OK',
+                                    onConfirm: () {
+                                      Get.back(); // Close the dialog
+                                    },
+                                    buttonColor: ColorValues.appGreenColor,
+                                    confirmTextColor: Colors.white,
+                                  );
+                                } else {
+                                  Get.dialog(CustonApproveRejectDialog(
+                                    text: "Cancel Task",
+                                    controller: controller,
+                                    buttonText: "Cancel Task",
+                                    style: Styles.redElevatedButtonStyle,
+                                    onPressed: () {
+                                      controller.CancelPMTask();
+                                      Get.back();
+                                    },
+                                  ));
+
+                                  // controller.CancelPMTask();
+
+                                  // _isDeleteDialog() {
+                                  // Get.dialog(
+                                  //   AlertDialog(
+                                  //     content: Column(
+                                  //         mainAxisSize: MainAxisSize.min,
+                                  //         children: [
+                                  //           Icon(Icons.cancel,
+                                  //               size: 35,
+                                  //               color: ColorValues.redColor),
+                                  //           SizedBox(
+                                  //             height: 10,
+                                  //           ),
+                                  //           Text(
+                                  //             'Are you sure you want to cancel the task?',
+                                  //             style: Styles.blackBold14w500,
+                                  //           ),
+                                  //         ]),
+                                  //     actions: [
+                                  //       Row(
+                                  //         mainAxisAlignment:
+                                  //             MainAxisAlignment.spaceEvenly,
+                                  //         children: [
+                                  //           TextButton(
+                                  //             onPressed: () {
+                                  //               Get.back();
+                                  //             },
+                                  //             child: Text('NO'),
+                                  //           ),
+                                  //           TextButton(
+                                  //             onPressed: () {
+                                  //               Get.back();
+                                  //               controller.CancelPMTask(
+                                  //                   controller: controller);
+                                  //             },
+                                  //             child: Text('YES'),
+                                  //           ),
+                                  //         ],
+                                  //       )
+                                  //     ],
+                                  //   ),
+                                  // );
+                                }
                               },
                             ),
                           )

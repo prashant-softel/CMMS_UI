@@ -82,6 +82,10 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
       EndMCExecutionDetailsModel().obs;
   int storeStatus = 0;
+  Rx<bool> allTrue = false.obs;
+  var itemExistsWithZeroDifference = <bool>[].obs;
+  var returnitemExists = <int>[].obs;
+
   //////////////////////////////////
 
   @override
@@ -151,8 +155,21 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     for (var item in listMrsByTaskId!.value) {
       cmmrsItems.value = item!.cmmrsItems!;
     }
-    print({"listMrsByTaskId", listMrsByTaskId});
+    _processJsonData();
+    allTrue.value = itemExistsWithZeroDifference.every((item) => item);
+
     // update(["taskLinkdToPermitList"]);
+  }
+
+  void _processJsonData() {
+    itemExistsWithZeroDifference.value = cmmrsItems!.map((element) {
+      double issuedQty = element?.issued_qty ?? 0;
+      double usedQty = element?.used_qty ?? 0;
+      return (issuedQty - usedQty) == 0;
+    }).toList();
+    returnitemExists.value = cmmrsItems!.map((element) {
+      return element?.mrs_return_ID ?? 0;
+    }).toList();
   }
 
   Future<void> getHistory(int facilityId) async {
