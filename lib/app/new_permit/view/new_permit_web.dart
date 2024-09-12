@@ -432,7 +432,261 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   ],
                                 ),
                               )
-                            : Dimens.box0,
+                            : controller.listAssociatedPm!.isEmpty
+                                ? Dimens.box0
+                                : Container(
+                                    width: Get.width * .9,
+                                    margin: Dimens.edgeInsets20,
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: ColorValues.appBlueBackgroundColor,
+                                      border: Border.all(
+                                        color: ColorValues
+                                            .lightGreyColorWithOpacity35,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(
+                                          8), // Rounded corners
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(
+                                              0.1), // Light shadow effect
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        // Header row
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10.0),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  'Task ID',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 2,
+                                                child: Text(
+                                                  'Plan Title',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 2,
+                                                child: Text(
+                                                  'Equipment Category',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 2,
+                                                child: Text(
+                                                  'Equipment Name',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  'Start Date',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  'Assigned To',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Divider(
+                                            color: ColorValues
+                                                .lightGreyColorWithOpacity35), // Optional divider for visual separation
+                                        SizedBox(height: 10),
+
+                                        // Data rows
+                                        Column(
+                                          children: List.generate(
+                                              controller.listAssociatedPm
+                                                      ?.length ??
+                                                  0, (index) {
+                                            return Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 8.0),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  // Task ID
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        controller.type ==
+                                                                AppConstants
+                                                                    .kAudit
+                                                            ? controller
+                                                                .viewAudDetails()
+                                                            : controller
+                                                                .viewPMTDetails();
+                                                      },
+                                                      child: Text(
+                                                        controller.typee
+                                                                    .value ==
+                                                                AppConstants
+                                                                    .kAudit
+                                                            ? 'AUD${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}'
+                                                            : 'PMT${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}',
+                                                        style: TextStyle(
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .underline,
+                                                          color: Color.fromARGB(
+                                                              255, 5, 92, 163),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+
+                                                  // Plan Title
+                                                  Expanded(
+                                                    flex: 2,
+                                                    child: Text(
+                                                      '${controller.listAssociatedPm?[index]?.title}',
+                                                    ),
+                                                  ),
+
+                                                  // Equipment Category
+                                                  Expanded(
+                                                    flex: 2,
+                                                    child: Text(
+                                                      controller.type ==
+                                                              AppConstants
+                                                                  .kAudit
+                                                          ? "NA"
+                                                          : controller
+                                                                  .listAssociatedPm?[
+                                                                      index]
+                                                                  ?.equipmentCat
+                                                                  ?.toString() ??
+                                                              '',
+                                                    ),
+                                                  ),
+
+                                                  // Equipment Names (handling "show more/less")
+                                                  Expanded(
+                                                    flex: 2,
+                                                    child: Obx(() {
+                                                      final equipmentString =
+                                                          controller
+                                                                  .listAssociatedPm?[
+                                                                      index]
+                                                                  ?.equipment ??
+                                                              '';
+                                                      final equipmentList =
+                                                          equipmentString
+                                                              .split(',');
+
+                                                      final equipmentToShow =
+                                                          controller.showMore
+                                                                  .value
+                                                              ? equipmentList
+                                                              : equipmentList
+                                                                  .take(2)
+                                                                  .toList();
+
+                                                      return Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          for (var equipment
+                                                              in equipmentToShow)
+                                                            Text(equipment),
+                                                          if (equipmentList
+                                                                  .length >
+                                                              2)
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                controller
+                                                                    .toggleShowMore();
+                                                              },
+                                                              child: Text(
+                                                                controller
+                                                                        .showMore
+                                                                        .value
+                                                                    ? 'Show less'
+                                                                    : 'Show more',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .blue),
+                                                              ),
+                                                            ),
+                                                        ],
+                                                      );
+                                                    }),
+                                                  ),
+
+                                                  // Start Date
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                      controller
+                                                              .listAssociatedPm?[
+                                                                  index]
+                                                              ?.startDate
+                                                              ?.toString() ??
+                                                          '',
+                                                    ),
+                                                  ),
+
+                                                  // Assigned To
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                      controller
+                                                              .listAssociatedPm?[
+                                                                  index]
+                                                              ?.assignedTo
+                                                              ?.toString() ??
+                                                          '',
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          }),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
                         controller.jobModel?.id != null
                             ? Container(
                                 width: Get.width * .9,
@@ -640,7 +894,319 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   ],
                                 ),
                               )
-                            : Dimens.box0,
+                            : controller.listAssociatedJobs!.isEmpty
+                                ? Dimens.box0
+                                : Container(
+                                    margin: Dimens.edgeInsets20,
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: ColorValues.appBlueBackgroundColor,
+                                      border: Border.all(
+                                        color: ColorValues
+                                            .lightGreyColorWithOpacity35,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(
+                                          8), // Rounded corners
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(
+                                              0.1), // Light shadow effect
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        // Header row title
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10.0),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                "Jobs Linked To This Permit",
+                                                style: Styles.blue700.copyWith(
+                                                  fontSize:
+                                                      18, // Adjust font size
+                                                  fontWeight: FontWeight
+                                                      .bold, // Bold title
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Divider(
+                                          color: ColorValues
+                                              .lightGreyColorWithOpacity35, // Divider line
+                                          thickness: 1,
+                                        ),
+
+                                        // Header Row with titles
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8.0),
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  "Job ID",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 2,
+                                                child: Text(
+                                                  "Job Title",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 2,
+                                                child: Text(
+                                                  "Equipment Category",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 2,
+                                                child: Text(
+                                                  "Equipment Name",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  "Breakdown Time",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  "Assigned To",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  "Status",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Divider(
+                                          color: ColorValues
+                                              .lightGreyColorWithOpacity35, // Divider line
+                                          thickness: 1,
+                                        ),
+
+                                        // Display job data dynamically using rows and columns
+                                        Column(
+                                          children: List.generate(
+                                            controller.listAssociatedJobs
+                                                    ?.length ??
+                                                0,
+                                            (index) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8.0),
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    // Job ID with clickable functionality
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child: GestureDetector(
+                                                        onTap: () {
+                                                          controller
+                                                              .viewJobDetails();
+                                                        },
+                                                        child: Text(
+                                                          'JOB${controller.listAssociatedJobs?[index]?.jobId?.toString() ?? ''}',
+                                                          style: TextStyle(
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .underline,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163),
+                                                          ),
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
+                                                      ),
+                                                    ),
+
+                                                    // Job Title
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: Text(
+                                                        controller
+                                                                .listAssociatedJobs?[
+                                                                    index]
+                                                                ?.title ??
+                                                            '',
+                                                        style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight: FontWeight
+                                                              .normal, // Consistent font weight
+                                                        ),
+                                                      ),
+                                                    ),
+
+                                                    // Equipment Category
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: Text(
+                                                        controller
+                                                                .listAssociatedJobs?[
+                                                                    index]
+                                                                ?.equipmentCat ??
+                                                            '',
+                                                        style: TextStyle(
+                                                            fontSize: 15),
+                                                      ),
+                                                    ),
+
+                                                    // Equipment Names (with "show more/less" functionality)
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: Obx(() {
+                                                        final equipmentString =
+                                                            controller
+                                                                    .listAssociatedJobs?[
+                                                                        index]
+                                                                    ?.equipment ??
+                                                                '';
+                                                        final equipmentList =
+                                                            equipmentString
+                                                                .split(',');
+
+                                                        final equipmentToShow =
+                                                            controller.showMore
+                                                                    .value
+                                                                ? equipmentList
+                                                                : equipmentList
+                                                                    .take(2)
+                                                                    .toList();
+
+                                                        return Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            // Display each equipment name
+                                                            for (var equipment
+                                                                in equipmentToShow)
+                                                              Text(equipment),
+
+                                                            // Show "Show more/less" button if more than 2 items exist
+                                                            if (equipmentList
+                                                                    .length >
+                                                                2)
+                                                              TextButton(
+                                                                onPressed: () {
+                                                                  controller
+                                                                      .toggleShowMore();
+                                                                },
+                                                                child: Text(
+                                                                  controller
+                                                                          .showMore
+                                                                          .value
+                                                                      ? 'Show less'
+                                                                      : 'Show more',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Colors
+                                                                        .blue,
+                                                                    fontSize:
+                                                                        14, // Slightly smaller button text
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                          ],
+                                                        );
+                                                      }),
+                                                    ),
+
+                                                    // Breakdown Time
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child: Text(
+                                                        controller
+                                                                .listAssociatedJobs?[
+                                                                    index]
+                                                                ?.breakdownTime
+                                                                ?.toString() ??
+                                                            '',
+                                                        style: TextStyle(
+                                                            fontSize: 15),
+                                                      ),
+                                                    ),
+
+                                                    // Assigned To
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child: Text(
+                                                        controller
+                                                                .listAssociatedJobs?[
+                                                                    index]
+                                                                ?.assignedTo ??
+                                                            '',
+                                                        style: TextStyle(
+                                                            fontSize: 15),
+                                                      ),
+                                                    ),
+
+                                                    // Status
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child: Text(
+                                                        controller
+                                                                .listAssociatedJobs?[
+                                                                    index]
+                                                                ?.status_short ??
+                                                            '',
+                                                        style: TextStyle(
+                                                            fontSize: 15),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
 
                         // hgvbjn,
                         controller.mcExecutionDetailsModel?.executionId != null
@@ -742,176 +1308,194 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   ],
                                 ),
                               )
-                            : Dimens.box0,
-                        //Mc linked to this permit
-                        controller.lstAssociatedMc!.isEmpty
-                            ? Dimens.box0
-                            : Container(
-                                margin: Dimens.edgeInsets20,
-                                height:
-                                    ((controller.lstAssociatedMc?.length ?? 0) *
-                                            50) +
-                                        125,
-                                // width: MediaQuery.of(context)
-                                //         .size
-                                //         .width /
-                                //     1.2,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color:
-                                        ColorValues.lightGreyColorWithOpacity35,
-                                    width: 1,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: ColorValues.appBlueBackgroundColor,
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            "MC Task Linked To This Permit",
-                                            style: Styles.blue700,
-                                          ),
-                                        ],
+                            : controller.lstAssociatedMc!.isEmpty
+                                ? Dimens.box0
+                                : Container(
+                                    margin: Dimens.edgeInsets20,
+                                    height:
+                                        ((controller.lstAssociatedMc?.length ??
+                                                    0) *
+                                                50) +
+                                            125,
+                                    // width: MediaQuery.of(context)
+                                    //         .size
+                                    //         .width /
+                                    //     1.2,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: ColorValues
+                                            .lightGreyColorWithOpacity35,
+                                        width: 1,
                                       ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: ColorValues
+                                              .appBlueBackgroundColor,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
                                     ),
-                                    // Divider(
-                                    //   color: ColorValues.greyLightColour,
-                                    // ),
-                                    Expanded(
-                                      child: DataTable2(
-                                        border: TableBorder.all(
-                                            color: Color.fromARGB(
-                                                255, 206, 229, 234)),
-                                        columns: [
-                                          DataColumn(
-                                            label: Text(
-                                              "Task Id",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          DataColumn(
-                                            label: Text(
-                                              "Task Title",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          DataColumn(
-                                            label: Text(
-                                              "Equipment\nCategory",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          DataColumn(
-                                            label: Text(
-                                              "Start Date",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          DataColumn(
-                                            label: Text(
-                                              "Assigned To",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          DataColumn(
-                                            label: Text(
-                                              "Status",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ],
-                                        rows: List<DataRow>.generate(
-                                          controller.lstAssociatedMc?.length ??
-                                              0,
-                                          (index) => DataRow(
-                                            cells: [
-                                              DataCell(
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    controller.viewMCTDetails();
-                                                  },
-                                                  child: Text(
-                                                      'MCT${int.tryParse('${controller.mcExecutionDetailsModel?.executionId ?? 0}')}',
-                                                      style: TextStyle(
-                                                        decoration:
-                                                            TextDecoration
-                                                                .underline,
-                                                        decorationStyle:
-                                                            TextDecorationStyle
-                                                                .solid,
-                                                        color: Color.fromARGB(
-                                                            255, 5, 92, 163),
-                                                      ),
-                                                      overflow: TextOverflow
-                                                          .ellipsis),
-                                                ),
-                                              ),
-                                              DataCell(
-                                                Text(controller
-                                                        .lstAssociatedMc?[index]
-                                                        ?.title
-                                                        .toString() ??
-                                                    ''),
-                                              ),
-                                              DataCell(
-                                                Text(controller
-                                                        .lstAssociatedMc?[index]
-                                                        ?.equipmentCat
-                                                        .toString() ??
-                                                    ''),
-                                              ),
-                                              DataCell(
-                                                Text(controller
-                                                        .lstAssociatedMc?[index]
-                                                        ?.startDate
-                                                        .toString() ??
-                                                    ''),
-                                              ),
-                                              DataCell(
-                                                Text(controller
-                                                        .lstAssociatedMc?[index]
-                                                        ?.assignedTo
-                                                        .toString() ??
-                                                    ''),
-                                              ),
-                                              DataCell(
-                                                Text(controller
-                                                        .lstAssociatedMc?[index]
-                                                        ?.status_short
-                                                        .toString() ??
-                                                    ''),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                "MC Task Linked To This Permit",
+                                                style: Styles.blue700,
                                               ),
                                             ],
                                           ),
                                         ),
-                                      ),
+                                        // Divider(
+                                        //   color: ColorValues.greyLightColour,
+                                        // ),
+                                        Expanded(
+                                          child: DataTable2(
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn(
+                                                label: Text(
+                                                  "Task Id",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Text(
+                                                  "Task Title",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Text(
+                                                  "Equipment\nCategory",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Text(
+                                                  "Start Date",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Text(
+                                                  "Assigned To",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Text(
+                                                  "Status",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller.lstAssociatedMc
+                                                      ?.length ??
+                                                  0,
+                                              (index) => DataRow(
+                                                cells: [
+                                                  DataCell(
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        controller
+                                                            .viewMCTDetails();
+                                                      },
+                                                      child: Text(
+                                                          'MCT${int.tryParse('${controller.lstAssociatedMc?[index]?.executionId ?? 0}')}',
+                                                          style: TextStyle(
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .underline,
+                                                            decorationStyle:
+                                                                TextDecorationStyle
+                                                                    .solid,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163),
+                                                          ),
+                                                          overflow: TextOverflow
+                                                              .ellipsis),
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Text(controller
+                                                            .lstAssociatedMc?[
+                                                                index]
+                                                            ?.title
+                                                            .toString() ??
+                                                        ''),
+                                                  ),
+                                                  DataCell(
+                                                    Text(controller
+                                                            .lstAssociatedMc?[
+                                                                index]
+                                                            ?.equipmentCat
+                                                            .toString() ??
+                                                        ''),
+                                                  ),
+                                                  DataCell(
+                                                    Text(controller
+                                                            .lstAssociatedMc?[
+                                                                index]
+                                                            ?.startDate
+                                                            .toString() ??
+                                                        ''),
+                                                  ),
+                                                  DataCell(
+                                                    Text(controller
+                                                            .lstAssociatedMc?[
+                                                                index]
+                                                            ?.assignedTo
+                                                            .toString() ??
+                                                        ''),
+                                                  ),
+                                                  DataCell(
+                                                    Text(controller
+                                                            .lstAssociatedMc?[
+                                                                index]
+                                                            ?.status_short
+                                                            .toString() ??
+                                                        ''),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              ),
+                                  ),
 
+                        //Mc linked to this permit
                         controller.vegExecutionDetailsModel?.executionId != null
                             ? Container(
                                 width: Get.width * .8,
@@ -1009,306 +1593,200 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   ],
                                 ),
                               )
-                            : Dimens.box0,
-
-                        controller.listAssociatedJobs!.isEmpty
-                            ? Dimens.box0
-                            : Container(
-                                margin: Dimens.edgeInsets20,
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color: ColorValues.appBlueBackgroundColor,
-                                  border: Border.all(
-                                    color:
-                                        ColorValues.lightGreyColorWithOpacity35,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(
-                                      8), // Rounded corners
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(
-                                          0.1), // Light shadow effect
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: Column(
-                                  children: [
-                                    // Header row title
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10.0),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            "Jobs Linked To This Permit",
-                                            style: Styles.blue700.copyWith(
-                                              fontSize: 18, // Adjust font size
-                                              fontWeight:
-                                                  FontWeight.bold, // Bold title
-                                            ),
-                                          ),
-                                        ],
+                            : controller.lstAssociatedVc!.isEmpty
+                                ? Dimens.box0
+                                : Container(
+                                    margin: Dimens.edgeInsets20,
+                                    height:
+                                        ((controller.lstAssociatedVc?.length ??
+                                                    0) *
+                                                50) +
+                                            125,
+                                    // width: MediaQuery.of(context)
+                                    //         .size
+                                    //         .width /
+                                    //     1.2,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: ColorValues
+                                            .lightGreyColorWithOpacity35,
+                                        width: 1,
                                       ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: ColorValues
+                                              .appBlueBackgroundColor,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
                                     ),
-                                    Divider(
-                                      color: ColorValues
-                                          .lightGreyColorWithOpacity35, // Divider line
-                                      thickness: 1,
-                                    ),
-
-                                    // Header Row with titles
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            flex: 1,
-                                            child: Text(
-                                              "Job ID",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                "VEG Task Linked To This Permit",
+                                                style: Styles.blue700,
+                                              ),
+                                            ],
                                           ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Text(
-                                              "Job Title",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Text(
-                                              "Equipment Category",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Text(
-                                              "Equipment Name",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Text(
-                                              "Breakdown Time",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Text(
-                                              "Assigned To",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Text(
-                                              "Status",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Divider(
-                                      color: ColorValues
-                                          .lightGreyColorWithOpacity35, // Divider line
-                                      thickness: 1,
-                                    ),
-
-                                    // Display job data dynamically using rows and columns
-                                    Column(
-                                      children: List.generate(
-                                        controller.listAssociatedJobs?.length ??
-                                            0,
-                                        (index) {
-                                          return Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 8.0),
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                // Job ID with clickable functionality
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: GestureDetector(
-                                                    onTap: () {
-                                                      controller
-                                                          .viewJobDetails();
-                                                    },
-                                                    child: Text(
-                                                      'JOB${controller.listAssociatedJobs?[index]?.jobId?.toString() ?? ''}',
-                                                      style: TextStyle(
-                                                        decoration:
-                                                            TextDecoration
-                                                                .underline,
-                                                        color: Color.fromARGB(
-                                                            255, 5, 92, 163),
-                                                      ),
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
-                                                  ),
-                                                ),
-
-                                                // Job Title
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: Text(
-                                                    controller
-                                                            .listAssociatedJobs?[
-                                                                index]
-                                                            ?.title ??
-                                                        '',
-                                                    style: TextStyle(
+                                        ),
+                                        // Divider(
+                                        //   color: ColorValues.greyLightColour,
+                                        // ),
+                                        Expanded(
+                                          child: DataTable2(
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn(
+                                                label: Text(
+                                                  "Task Id",
+                                                  style: TextStyle(
                                                       fontSize: 15,
-                                                      fontWeight: FontWeight
-                                                          .normal, // Consistent font weight
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Text(
+                                                  "Task Title",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Text(
+                                                  "Equipment\nCategory",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Text(
+                                                  "Start Date",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Text(
+                                                  "Assigned To",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Text(
+                                                  "Status",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller.lstAssociatedVc
+                                                      ?.length ??
+                                                  0,
+                                              (index) => DataRow(
+                                                cells: [
+                                                  DataCell(
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        // controller
+                                                        // .clearStoreDataPMtaskId();
+                                                        Get.offAllNamed(
+                                                            Routes
+                                                                .vegExecutionScreen,
+                                                            arguments: {
+                                                              'vegexe': controller
+                                                                  .lstAssociatedVc?[
+                                                                      index]!
+                                                                  .executionId,
+                                                              'vegid': controller
+                                                                  .lstAssociatedVc?[
+                                                                      index]!
+                                                                  .plan_id,
+                                                            });
+                                                      },
+                                                      child: Text(
+                                                        'VET${int.tryParse('${controller.lstAssociatedVc?[index]?.executionId ?? 0}')}',
+                                                        style: TextStyle(
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .underline,
+                                                          decorationStyle:
+                                                              TextDecorationStyle
+                                                                  .solid,
+                                                          color: Color.fromARGB(
+                                                              255, 5, 92, 163),
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-
-                                                // Equipment Category
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: Text(
-                                                    controller
-                                                            .listAssociatedJobs?[
+                                                  DataCell(
+                                                    Text(controller
+                                                            .lstAssociatedVc?[
                                                                 index]
-                                                            ?.equipmentCat ??
-                                                        '',
-                                                    style:
-                                                        TextStyle(fontSize: 15),
+                                                            ?.title
+                                                            .toString() ??
+                                                        ''),
                                                   ),
-                                                ),
-
-                                                // Equipment Names (with "show more/less" functionality)
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: Obx(() {
-                                                    final equipmentString =
-                                                        controller
-                                                                .listAssociatedJobs?[
-                                                                    index]
-                                                                ?.equipment ??
-                                                            '';
-                                                    final equipmentList =
-                                                        equipmentString
-                                                            .split(',');
-
-                                                    final equipmentToShow =
-                                                        controller
-                                                                .showMore.value
-                                                            ? equipmentList
-                                                            : equipmentList
-                                                                .take(2)
-                                                                .toList();
-
-                                                    return Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        // Display each equipment name
-                                                        for (var equipment
-                                                            in equipmentToShow)
-                                                          Text(equipment),
-
-                                                        // Show "Show more/less" button if more than 2 items exist
-                                                        if (equipmentList
-                                                                .length >
-                                                            2)
-                                                          TextButton(
-                                                            onPressed: () {
-                                                              controller
-                                                                  .toggleShowMore();
-                                                            },
-                                                            child: Text(
-                                                              controller
-                                                                      .showMore
-                                                                      .value
-                                                                  ? 'Show less'
-                                                                  : 'Show more',
-                                                              style: TextStyle(
-                                                                color:
-                                                                    Colors.blue,
-                                                                fontSize:
-                                                                    14, // Slightly smaller button text
-                                                              ),
-                                                            ),
-                                                          ),
-                                                      ],
-                                                    );
-                                                  }),
-                                                ),
-
-                                                // Breakdown Time
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Text(
-                                                    controller
-                                                            .listAssociatedJobs?[
+                                                  DataCell(
+                                                    Text(controller
+                                                            .lstAssociatedVc?[
                                                                 index]
-                                                            ?.breakdownTime
-                                                            ?.toString() ??
-                                                        '',
-                                                    style:
-                                                        TextStyle(fontSize: 15),
+                                                            ?.equipmentCat
+                                                            .toString() ??
+                                                        ''),
                                                   ),
-                                                ),
-
-                                                // Assigned To
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Text(
-                                                    controller
-                                                            .listAssociatedJobs?[
+                                                  DataCell(
+                                                    Text(controller
+                                                            .lstAssociatedVc?[
                                                                 index]
-                                                            ?.assignedTo ??
-                                                        '',
-                                                    style:
-                                                        TextStyle(fontSize: 15),
+                                                            ?.startDate
+                                                            .toString() ??
+                                                        ''),
                                                   ),
-                                                ),
-
-                                                // Status
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Text(
-                                                    controller
-                                                            .listAssociatedJobs?[
+                                                  DataCell(
+                                                    Text(controller
+                                                            .lstAssociatedVc?[
                                                                 index]
-                                                            ?.status_short ??
-                                                        '',
-                                                    style:
-                                                        TextStyle(fontSize: 15),
+                                                            ?.assignedTo
+                                                            .toString() ??
+                                                        ''),
                                                   ),
-                                                ),
-                                              ],
+                                                  DataCell(
+                                                    Text(controller
+                                                            .lstAssociatedVc?[
+                                                                index]
+                                                            ?.status_short
+                                                            .toString() ??
+                                                        ''),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          );
-                                        },
-                                      ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              ),
+                                  ),
 
                         IgnorePointer(
                           ignoring: controller
