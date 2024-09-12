@@ -1989,8 +1989,10 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                             'Initial Value: $initialValue');
 
                                                                         return IgnorePointer(
-                                                                          ignoring:
-                                                                              controller.typee == 4,
+                                                                          ignoring: controller.lstAssociatedMc?.length != 0 ||
+                                                                              controller.lstAssociatedVc?.length != 0 ||
+                                                                              controller.typee == 4 ||
+                                                                              controller.typee == 5,
                                                                           child:
                                                                               CustomMultiSelectDialogField(
                                                                             title:
