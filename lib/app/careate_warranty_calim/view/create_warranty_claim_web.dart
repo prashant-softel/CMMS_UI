@@ -1250,7 +1250,6 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                         if (value.trim().length >
                                                                             1) {
                                                                           controller
-                                                                        
                                                                               .isAppliedAtInvalid
                                                                               .value = false;
                                                                         } else {
@@ -2365,7 +2364,6 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                 ],
                                                               ),
                                                             ),
-                                                        
                                                           ],
                                                         ),
                                                       ],
@@ -2662,7 +2660,6 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                         fontWeight:
                                                                             FontWeight.bold),
                                                                   )),
-                                                               
                                                                   DataColumn(
                                                                       label:
                                                                           Text(
@@ -2694,7 +2691,6 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                             '')),
                                                                         DataCell(Text(controller.historyList?[index]?.comment.toString() ??
                                                                             '')),
-
                                                                         DataCell(Text(controller.historyList?[index]?.status_name.toString() ??
                                                                             '')),
                                                                       ]),
@@ -3014,7 +3010,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
   }
 
   Future pickFailureDateTime_web(BuildContext context) async {
-  controller.isFailureDateTimeInvalid.value = false;
+    controller.isFailureDateTimeInvalid.value = false;
     var dateTime = controller.selectedFailureDateTimeWeb.value;
     final date = await pickDate_web(context);
     if (date == null) {
@@ -3093,10 +3089,11 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
             style: TextStyle(color: color),
           ),
           value: severity,
-          groupValue: controller.selectedSeverity.value,
+          groupValue:
+              controller.selectedSeverity.value, 
           onChanged: (value) {
             controller.setSelectedSeverity(value as String);
-            print('DAta:${controller.selectedSeverity.value}');
+            print('Data: ${controller.selectedSeverity.value}');
           },
         ),
       );
@@ -3147,7 +3144,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
   }
 
   Future pickcurrentStartDate_web(BuildContext context) async {
-       controller.isAppliedAtInvalid.value = false;
+    controller.isAppliedAtInvalid.value = false;
     var dateTime = controller.selectedcurrentStartDate.value;
     final date = await pickDate2_web(context);
     if (date == null) {

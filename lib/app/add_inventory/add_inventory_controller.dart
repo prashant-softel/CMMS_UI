@@ -9,6 +9,8 @@ import 'package:cmms/app/add_inventory/add_inventory_presenter.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
@@ -228,6 +230,15 @@ class AddInventoryController extends GetxController {
       AddInventoryDetailsModel().obs;
   RxList<AddInventoryDetailsModel?>? editAddInventoryDetailsList =
       <AddInventoryDetailsModel?>[].obs;
+  RxList<BusinessTypeModel?> businessCategoryList = <BusinessTypeModel>[].obs;
+  Rx<bool> isSelectedBusinessType = true.obs;
+  Rx<String?> selectedBusinessType = ''.obs;
+  int selectedBusinessTypeId = 0;
+  //vender
+  RxList<BusinessListModel?> venderNameList = <BusinessListModel>[].obs;
+  Rx<bool> isVenderNameSelected = true.obs;
+  Rx<String> selectedVender = ''.obs;
+  int selectedvenderId = 0;
 
   ///
   Rx<int> inventoryId = 0.obs;
@@ -247,6 +258,7 @@ class AddInventoryController extends GetxController {
         getWarrantyUsageTermList();
         getUnitCurrencyList();
         getmanufacturerList();
+        getBusinessTypeList();
         getSupplierList();
         getInventoryCategoryList();
         getInventoryTypeList(isLoading: true, facilityId: facilityId);
@@ -418,6 +430,10 @@ class AddInventoryController extends GetxController {
           editAddInventoryDetailsModel.value?.warrantyTermTypeId ?? 0;
       selectedmanufacturerNameId =
           editAddInventoryDetailsModel.value?.warrantyProviderId ?? 0;
+      selectedBusinessTypeId =
+          editAddInventoryDetailsModel.value?.warrantyProviderId ?? 0;
+      selectedVender.value =
+          editAddInventoryDetailsModel.value?.warrantyProviderName ?? "";
       selectedsupplierrNameId =
           editAddInventoryDetailsModel.value?.supplierId ?? 0;
       selectedUnitCurrencyId =
@@ -637,7 +653,7 @@ class AddInventoryController extends GetxController {
             start_date: _startDate,
             expiry_date: _expiryDate,
             certificate_number: _certificateNoCtrlr,
-            warranty_provider_id: selectedmanufacturerNameId,
+            warranty_provider_id: selectedvenderId,
             warranty_type: selectedWarrentyNameId,
             warranty_term_type: selectedwarrantyUsageTermNameId,
             parent_equipment_no: _parentEquipmentNoCtrlr,
@@ -661,6 +677,27 @@ class AddInventoryController extends GetxController {
       isLoading: true,
     );
     return true;
+  }
+
+  Future<void> getBusinessTypeList() async {
+    print("$selectedBusinessTypeId");
+    final list = await addInventoryPresenter.getBusinessTypeList();
+
+    for (var _equipmentCategoryList in list) {
+      businessCategoryList.add(_equipmentCategoryList);
+    }
+  }
+
+  void getVenderNameList(int selectedBusinessTypeId, int facilityId) async {
+    venderNameList.value = <BusinessListModel>[];
+    final _venderNameList = await addInventoryPresenter.getVenderNameList(
+      facilityId: facilityId,
+      isLoading: true,
+      businessType: selectedBusinessTypeId,
+    );
+    for (var supplier_list in _venderNameList) {
+      venderNameList.add(supplier_list);
+    }
   }
 
   void getInventoryList() async {
@@ -782,7 +819,7 @@ class AddInventoryController extends GetxController {
             start_date: _startDate,
             expiry_date: _expiryDate,
             certificate_number: _certificateNoCtrlr,
-            warranty_provider_id: selectedmanufacturerNameId,
+            warranty_provider_id: selectedvenderId,
             warranty_type: selectedWarrentyNameId,
             warranty_term_type: selectedwarrantyUsageTermNameId,
             parent_equipment_no: _parentEquipmentNoCtrlr,
@@ -1097,7 +1134,25 @@ class AddInventoryController extends GetxController {
           }
         }
         break;
+      case const (RxList<BusinessTypeModel>):
+        {
+          if (value != "Please Select") {
+            int equipmentIndex =
+                businessCategoryList.indexWhere((x) => x?.name == value);
+            selectedBusinessTypeId =
+                businessCategoryList[equipmentIndex]?.id ?? 0;
+            isSelectedBusinessType.value == true;
+            selectedBusinessType.value = value;
+            // selectedVender.value = "";
+            // selectedvenderId = 0;
+            // print({"selectedBusinessTypeId", selectedBusinessTypeId});
+            getVenderNameList(selectedBusinessTypeId, facilityId);
+          } else {
+            selectedBusinessTypeId = 0;
+          }
+        }
 
+        break;
       case const (RxList<InventoryTypeListModel>):
         {
           if (value != "Please Select") {
@@ -1107,6 +1162,19 @@ class AddInventoryController extends GetxController {
             isTypeNameSelected.value = true;
           } else {
             selectedTypeNameId = 0;
+          }
+        }
+        break;
+      case const (RxList<BusinessListModel>):
+        {
+          if (value != "Please Select") {
+            int facilityIndex =
+                venderNameList.indexWhere((x) => x?.name == value);
+            selectedvenderId = venderNameList[facilityIndex]?.id ?? 0;
+            selectedVender.value = value;
+            isVenderNameSelected.value = true;
+          } else {
+            selectedvenderId = 0;
           }
         }
         break;
