@@ -3,6 +3,7 @@ import 'package:cmms/domain/models/add_inventory_details_model.dart';
 import 'package:cmms/domain/models/add_inventory_model.dart';
 
 import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
@@ -148,6 +149,26 @@ class AddInventoryUsecase {
     return repository.getUnitCurrencyList(
       isLoading: isLoading,
       facilityId: facilityId,
+    );
+  }
+
+  Future<List<BusinessTypeModel>> getBusinessTypeList({
+    required int? businessType,
+    required bool isLoading,
+  }) async =>
+      await repository.getBusinessTypeList(
+        businessType: businessType,
+        isLoading: isLoading,
+      );
+  Future<List<BusinessListModel>> getVenderNameList({
+    required bool isLoading,
+    required int facilityId,
+    required int? businessType,
+  }) async {
+    return repository.getBusinessList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+      businessType: businessType,
     );
   }
 

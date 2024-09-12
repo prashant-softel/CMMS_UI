@@ -4,6 +4,7 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload3_details_widget.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_dropzone3.dart';
@@ -196,19 +197,52 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                         width:
                                             MediaQuery.of(context).size.width /
                                                 5,
-                                        dropdownList: controller
-                                            .manufacturerModelNameList,
+                                        dropdownList:
+                                            controller.businessCategoryList,
                                         isValueSelected: controller
-                                            .iswarrantymanufacturerSelected
-                                            .value,
+                                            .isSelectedBusinessType.value,
                                         selectedValue: controller
-                                            .selectedmanufacturerName.value,
+                                            .selectedBusinessType.value,
                                         onValueChanged:
                                             controller.onValueChanged,
                                       ),
                                     ),
                                   ),
                                 ],
+                              ),
+                              Dimens.boxHeight10,
+                              Container(
+                                margin: EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: [
+                                    CustomRichText(
+                                        includeAsterisk: false,
+                                        title: "Vender"),
+                                    SizedBox(width: 10),
+                                    SizedBox(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: DropdownWebStock(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              5,
+                                          dropdownList:
+                                              controller.venderNameList,
+                                          isValueSelected: controller
+                                              .isVenderNameSelected.value,
+                                          selectedValue:
+                                              controller.selectedVender.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                               // Dimens.boxHeight10,
                               SizedBox(height: 10),
