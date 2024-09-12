@@ -232,10 +232,10 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                       minWidth: 100,
                                     ),
                                     child: LoginCustomTextfield(
-                                      keyboardType: TextInputType.number,
-                                      inputFormatters: <TextInputFormatter>[
-                                        FilteringTextInputFormatter.digitsOnly
-                                      ],
+                                      // keyboardType: TextInputType.number,
+                                      // inputFormatters: <TextInputFormatter>[
+                                      //   FilteringTextInputFormatter.digitsOnly
+                                      // ],
                                       textController:
                                           controller.certificateNoCtrlr,
                                       // errorController: controller
