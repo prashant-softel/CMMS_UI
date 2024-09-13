@@ -1,36 +1,39 @@
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/utils/user_access_constants.dart';
-import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_controller.dart';
+import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-import 'package:cmms/app/app.dart';
-import 'package:cmms/app/inventory_list/inventory_list_controller.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-class InventoryListContentWeb extends StatefulWidget {
-  InventoryListContentWeb({
+class WarrantyCertificatesListContentWeb extends StatefulWidget {
+  WarrantyCertificatesListContentWeb({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<InventoryListContentWeb> createState() => _InventoryWebState();
+  State<WarrantyCertificatesListContentWeb> createState() =>
+      _WarrantyCertificatesListContentWebState();
 }
 
-class _InventoryWebState extends State<InventoryListContentWeb> {
+class _WarrantyCertificatesListContentWebState
+    extends State<WarrantyCertificatesListContentWeb> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<InventoryListController>(
+    return GetBuilder<WarrantyCertificatesListController>(
         id: 'stock_Mangement_Date',
         builder: (controller) {
           return SelectionArea(
             child: Obx(
               () {
-                final dataSource = InventoryListDataSource(controller);
+                final dataSource =
+                    WarrantyClaimCertificateListDataSource(controller);
                 return SingleChildScrollView(
                   child: Column(
                     children: [
@@ -58,7 +61,15 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                               Icons.home,
                               color: ColorValues.greyLightColor,
                             ),
-                            Text("DASHBOARD", style: Styles.greyLight14),
+                            InkWell(
+                              onTap: () {
+                                Get.offNamed(Routes.home);
+                              },
+                              child: Text(
+                                "DASHBOARD",
+                                style: Styles.greyLight14,
+                              ),
+                            ),
                             InkWell(
                               onTap: () {
                                 Get.offNamed(Routes.masterDashboard);
@@ -66,10 +77,8 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                               child:
                                   Text(" / MASTER", style: Styles.greyLight14),
                             ),
-                            Text(
-                              " / ASSETS LIST",
-                              style: Styles.greyLight14,
-                            ),
+                            Text(" / WARRANTY CLAIM CERTIFICATE LIST",
+                                style: Styles.greyLight14)
                           ],
                         ),
                       ),
@@ -96,10 +105,10 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "ASSETS LIST",
+                                          "Warranty Claim Certificate List",
                                           style: Styles.blackBold16,
                                         ),
-                                        Spacer(),
+                                        // Spacer(),
                                         // Row(
                                         //   children: [
                                         //     CustomRichText(title: 'Date Range'),
@@ -123,58 +132,28 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                         //     ),
                                         //   ],
                                         // ),
-                                        varUserAccessModel.value.access_list!
-                                                    .where((e) =>
-                                                        e.feature_id ==
-                                                            UserAccessConstants
-                                                                .kMasterFeatureId &&
-                                                        e.add ==
-                                                            UserAccessConstants
-                                                                .kHaveAddAccess)
-                                                    .length >
-                                                0
-                                            ? ActionButton(
-                                                icon: Icons.upload,
-                                                label: 'importAsset'.tr,
-                                                onPressed: () {
-                                                  controller
-                                                      .clearValueimportType();
-                                                  Get.toNamed(
-                                                      Routes.importInventory,
-                                                      arguments: {
-                                                        'importType':
-                                                            AppConstants
-                                                                .kImportAsset
-                                                      });
-                                                },
-                                                color: ColorValues
-                                                    .appDarkBlueColor,
-                                              )
-                                            : Dimens.box0,
                                         // Dimens.boxWidth10,
-                                        SizedBox(width: 10),
-                                        varUserAccessModel.value.access_list!
-                                                    .where((e) =>
-                                                        e.feature_id ==
-                                                            UserAccessConstants
-                                                                .kMasterFeatureId &&
-                                                        e.add ==
-                                                            UserAccessConstants
-                                                                .kHaveAddAccess)
-                                                    .length >
-                                                0
-                                            ? ActionButton(
-                                                icon: Icons.add,
-                                                label: "Add New",
-                                                onPressed: () {
-                                                  controller.clearStoreData();
-
-                                                  Get.offNamed(Routes
-                                                      .addInventoryScreen);
-                                                },
-                                                color: ColorValues.addNewColor,
-                                              )
-                                            : Dimens.box0,
+                                        // varUserAccessModel.value.access_list!
+                                        //             .where((e) =>
+                                        //                 e.feature_id ==
+                                        //                     UserAccessConstants
+                                        //                         .kWarrantyClaimFeatureId &&
+                                        //                 e.add ==
+                                        //                     UserAccessConstants
+                                        //                         .kHaveAddAccess)
+                                        //             .length >
+                                        //         0
+                                        //     ? ActionButton(
+                                        //         icon: Icons.add,
+                                        //         label: "Add Warranty Claim",
+                                        //         onPressed: () {
+                                        //           // controller.clearStoreData();
+                                        //           Get.toNamed(Routes
+                                        //               .newWarrantyClaimList);
+                                        //         },
+                                        //         color: ColorValues.addNewColor,
+                                        //       )
+                                        //     : Dimens.box0
                                       ],
                                     ),
                                   ),
@@ -195,19 +174,11 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                               right: 8,
                                               left: 8),
                                           decoration: BoxDecoration(
-                                              color:
-                                                  ColorValues.appLightBlueColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  offset:
-                                                      const Offset(4.0, 2.0),
-                                                  blurRadius: 5.0,
-                                                  spreadRadius: 1.0,
-                                                ),
-                                              ]),
+                                            color:
+                                                ColorValues.appLightBlueColor,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
                                           child: Text(
                                             'Column Visibility',
                                             style: TextStyle(
@@ -251,58 +222,61 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                           // Handle column selection
                                         },
                                       ),
-                                      Container(
-                                        decoration: BoxDecoration(boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: const Offset(2.0, 1.0),
-                                            blurRadius: 5.0,
-                                            spreadRadius: 1.0,
-                                          )
-                                        ]),
-                                        height: 35,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {
-                                              controller.export();
-                                            },
-                                            text: 'Excel'),
-                                      ),
+
+                                      // Container(
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'Copy'),
+                                      // ),
+                                      // Container(
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'Excel'),
+                                      // ),
+                                      // Container(
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'PDF'),
+                                      // ),
                                       Spacer(),
                                       Container(
                                         width: 300,
                                         height: 40,
+                                        // margin: Dimens.edgeInsets0_0_16_0,
                                         margin: EdgeInsets.only(right: 5),
                                         child: TextField(
-                                          style: GoogleFonts.lato(
-                                            textStyle: TextStyle(
-                                                fontSize: 16.0,
-                                                height: 1.0,
-                                                color: Colors.black),
-                                          ),
-                                          onChanged: (value) =>
-                                              controller.search(value),
+                                          onChanged: (value) {
+                                            controller.search(value);
+                                          },
                                           decoration: InputDecoration(
                                             enabledBorder:
                                                 const OutlineInputBorder(
                                               borderSide: const BorderSide(
-                                                color: Colors.grey,
-                                                width: 0.0,
-                                              ),
+                                                  color: Colors.grey,
+                                                  width: 0.0),
                                             ),
                                             focusedBorder:
                                                 const OutlineInputBorder(
                                               borderSide: const BorderSide(
-                                                color: Colors.grey,
-                                                width: 0.0,
-                                              ),
+                                                  color: Colors.grey,
+                                                  width: 0.0),
                                             ),
                                             contentPadding:
-                                                Dimens.edgeInsets05_10,
+                                                Dimens.edgeInsets10_0_0_0,
                                             hintText: 'search'.tr,
-                                            hintStyle: Styles.grey16,
+                                            hintStyle: Styles.grey12,
                                           ),
                                         ),
                                       ),
@@ -316,7 +290,7 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                       ? Center(child: Text('No data'))
                                       : controller.isLoading.value == true
                                           ? Center(
-                                              child: Text('Data Loading......'))
+                                              child: Text("Data Loading......"))
                                           : Expanded(
                                               child: ValueListenableBuilder(
                                                   valueListenable: controller
@@ -324,7 +298,7 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                                   builder:
                                                       (context, value, child) {
                                                     final dataSource =
-                                                        InventoryListDataSource(
+                                                        WarrantyClaimCertificateListDataSource(
                                                             controller);
 
                                                     return PaginatedDataTable2(
@@ -333,8 +307,8 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                                       source:
                                                           dataSource, // Custom DataSource class
                                                       // headingRowHeight:
-                                                      //     Get.height * 0.1\,
-                                                      minWidth: Get.width * 1.2,
+                                                      //     Get.height * 0.12,
+                                                      minWidth: 2500,
                                                       showCheckboxColumn: false,
                                                       rowsPerPage:
                                                           10, // Number of rows per page
@@ -360,7 +334,7 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                                         buildDataColumn(
                                                           'Actions',
                                                           controller
-                                                              .userDateFilterText,
+                                                              .actionFilterText,
                                                           150,
                                                         ),
                                                       ],
@@ -371,6 +345,54 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                               ),
                             ),
                           ),
+                          if (controller.openFromDateToStartDatePicker)
+                            Positioned(
+                              right: 150,
+                              top: 85,
+                              child: DatePickerWidget(
+                                selectionMode:
+                                    DateRangePickerSelectionMode.range,
+                                monthCellStyle: DateRangePickerMonthCellStyle(
+                                  todayCellDecoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: ColorValues.appDarkBlueColor),
+                                ), // last date of this year
+                                // controller: DateRangePickerController(),
+                                initialSelectedRange: PickerDateRange(
+                                  controller.fromDate.value,
+                                  controller.toDate.value,
+                                ),
+
+                                onSubmit: (value) {
+                                  print('po valu ${value.toString()}');
+                                  PickerDateRange? data =
+                                      value as PickerDateRange;
+
+                                  var pickUpDate =
+                                      DateTime.parse(data.startDate.toString());
+                                  controller.fromDate.value = pickUpDate;
+                                  var dropDate =
+                                      DateTime.parse(data.endDate.toString());
+                                  dropDate != null
+                                      ? controller.toDate.value = dropDate
+                                      : controller.toDate.value = pickUpDate;
+
+                                  // controller.getWarrantyClaimtListByDate();
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
+                                  controller.update(['stock_Mangement_Date']);
+
+                                  // Get.toNamed(
+                                  //   Routes.stockManagementGoodsOrdersScreen,
+                                  // );
+                                },
+                                onCancel: () {
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
+                                  controller.update(['stock_Mangement_Date']);
+                                },
+                              ),
+                            ),
                         ],
                       ),
                     ],
@@ -396,52 +418,20 @@ DataColumn2 buildDataColumn(
       DataColumn2(
     // size: columnSize,
     fixedWidth: fixedWidth,
-      onSort: header == "Actions"
-        ? null
-        : (int columnIndex, bool ascending) {
-            final controller = Get.find<InventoryListController>();
-            controller.sortData(header);
-          },
 
     label: //
         Column(
             mainAxisAlignment: MainAxisAlignment.center, //
             children: [
-              Row(
-          children: [
-            Text(
-              header,
-              style: Styles.black16W500,
-            ),
-            if (header != "Actions")
-              Obx(() {
-                final controller = Get.find<InventoryListController>();
-
-                return AnimatedRotation(
-                  turns: controller.currentSortColumn.value == header
-                      ? (controller.isAscending.value ? 0.5 : 0.0)
-                      : 0.0,
-                  duration: Duration(milliseconds: 300),
-                  child: Icon(
-                    Icons.expand_more,
-                    size: 20,
-                  ),
-                );
-              }),
-          ],
-        ),
           // SizedBox(
           //   height: Get.height * 0.05,
           //   child: TextField(
-          //     style: GoogleFonts.lato(
-          //       textStyle:
-          //           TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-          //     ),
           //     onChanged: (value) {
           //       filterText.value = value;
           //       //   onSearchCallBack(value);
           //     },
           //     textAlign: TextAlign.left,
+          //     style: TextStyle(height: 1.0),
           //     decoration: InputDecoration(
           //       hintText: 'Filter',
           //       contentPadding:
@@ -461,86 +451,79 @@ DataColumn2 buildDataColumn(
           //     ),
           //   ),
           // ),
-          // Align(
-          //   alignment: Alignment.centerLeft,
-          //   child: Text(
-          //     header,
-          //     style: Styles.black16W500,
-          //   ),
-          // ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              header,
+              style: Styles.black16W500,
+            ),
+          ),
         ]),
     // ),
   );
 }
 
-class InventoryListDataSource extends DataTableSource {
-  final InventoryListController controller;
+class WarrantyClaimCertificateListDataSource extends DataTableSource {
+  final WarrantyCertificatesListController controller;
 
-  late List<InventoryModel?> filterInventoryList;
+  late List<InventoryModel?> filteredWarrantyClaimCertificateList;
 
-  InventoryListDataSource(this.controller) {
-    filtersInventoryList();
+  WarrantyClaimCertificateListDataSource(this.controller) {
+    filtersWarramtyClaimCertificate();
   }
 
   ///
-  void filtersInventoryList() {
-    filterInventoryList = <InventoryModel?>[];
-    filterInventoryList = controller.inventoryList.where((InventoryList) {
-      return (InventoryList!.id ?? '')
+  void filtersWarramtyClaimCertificate() {
+    filteredWarrantyClaimCertificateList = <InventoryModel?>[];
+    filteredWarrantyClaimCertificateList =
+        controller.inventoryList.where((WarrantyClaimCertificateList) {
+      return (WarrantyClaimCertificateList?.name ?? '')
+              .toString()
+              .contains(controller.nameFilterText.value.toLowerCase()) &&
+          (WarrantyClaimCertificateList?.serialNumber ?? '')
+              .toString()
+              .contains(
+                  controller.serialNumberFilterText.value.toLowerCase()) &&
+          (WarrantyClaimCertificateList?.id ?? '')
               .toString()
               .contains(controller.idFilterText.value.toLowerCase()) &&
-          (InventoryList.name ?? '').toString().contains(controller
-              .assetsNameFilterText.value
-              .toLowerCase()
-              .toUpperCase()
-              .toString()) &&
-          (InventoryList.serialNumber ?? '').toString().contains(controller
-              .serialNoFilterText.value
-              .toLowerCase()
-              .toUpperCase()
-              .toString()) &&
-          (InventoryList.parentName ?? '').toString().contains(controller
-              .parrentAssetFilterText.value
-              .toLowerCase()
-              .toUpperCase()
-              .toString()) &&
-          (InventoryList.categoryName ?? '').toString().contains(controller
-              .catergoryFilterText.value
-              .toLowerCase()
-              .toUpperCase()
-              .toString()) &&
-          (InventoryList.blockName ?? '').toString().contains(controller
-              .assetFacilityNameFilterText.value
-              .toLowerCase()
-              .toUpperCase()
+          (WarrantyClaimCertificateList?.parentName ?? '')
               .toString()
-              .toLowerCase()
-              .toUpperCase()
-              .toString());
+              .contains(controller.parentNameFilterText.value.toLowerCase()) &&
+          (WarrantyClaimCertificateList?.categoryName ?? '')
+              .toString()
+              .contains(
+                  controller.categoryNameFilterText.value.toLowerCase()) &&
+          (WarrantyClaimCertificateList?.operatorName ?? '')
+              .toString()
+              .contains(
+                  controller.operatorNameFilterText.value.toLowerCase()) &&
+          (WarrantyClaimCertificateList?.status ?? '')
+              .toString()
+              .contains(controller.statusFilterText.value.toLowerCase());
 
       // Add other filter conditions as needed
     }).toList();
-    // print({"filterInventoryList": filterInventoryList});
+    // print({"filteredGoodsOrderList": filteredGoodsOrderList});
   }
 
   @override
   DataRow? getRow(int index) {
     // print({"getRow call"});
-    final InventoryListDetails = filterInventoryList[index];
+    final WarrantyClaimCertificateListDetails =
+        filteredWarrantyClaimCertificateList[index];
 
-    controller.id.value = InventoryListDetails?.id ?? 0;
+    controller.id.value = WarrantyClaimCertificateListDetails?.id ?? 0;
     var cellsBuffer = [
-      // '${InventoryListDetails?.id ?? ''}',
+      '${WarrantyClaimCertificateListDetails?.name ?? ''}',
+      '${WarrantyClaimCertificateListDetails?.serialNumber ?? ''}',
       "id",
-      '${InventoryListDetails?.name ?? ''}',
-
-      '${InventoryListDetails?.serialNumber ?? ''}',
-
-      '${InventoryListDetails?.parentName ?? ''}',
-      '${InventoryListDetails?.categoryName ?? ''}',
-      '${InventoryListDetails?.blockName ?? ''}',
-      // '${InventoryListDetails?.description ?? ''}',
-      'Actions',
+      '${WarrantyClaimCertificateListDetails?.parentName ?? ''}',
+      '${WarrantyClaimCertificateListDetails?.categoryName ?? ''}',
+      '${WarrantyClaimCertificateListDetails?.operatorName ?? ''}',
+      '${WarrantyClaimCertificateListDetails?.status ?? ''}',
+      // '${WarrantyClaimListDetails?.status ?? ''}',
+      // 'Actions',
     ];
     var cells = [];
     int i = 0;
@@ -565,117 +548,110 @@ class InventoryListDataSource extends DataTableSource {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: (value == 'id')
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${InventoryListDetails?.id}',
-                      ),
-                      Dimens.boxHeight10,
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          padding: Dimens.edgeInsets8_2_8_2,
-                          decoration: BoxDecoration(
-                            color: controller.inventoryList
-                                        .firstWhere(
-                                          (e) =>
-                                              e?.id == InventoryListDetails!.id,
-                                          orElse: () => InventoryModel(id: 00),
-                                        )
-                                        ?.status ==
-                                    302
-                                ? ColorValues.yellowColor
-                                : ColorValues.addNewColor,
-                            borderRadius: BorderRadius.circular(4),
+            child:
+                (value == '${WarrantyClaimCertificateListDetails?.name ?? ''}')
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${WarrantyClaimCertificateListDetails?.name}',
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          child: Text(
-                            '${InventoryListDetails?.status}',
-                            style: Styles.white10.copyWith(
-                              color: Colors.white,
+                          Dimens.boxHeight10,
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              padding: Dimens.edgeInsets8_2_8_2,
+                              decoration: BoxDecoration(
+                                  color: controller.inventoryList
+                                              .firstWhere(
+                                                (e) =>
+                                                    e?.id ==
+                                                    WarrantyClaimCertificateListDetails!
+                                                        .id,
+                                                orElse: () =>
+                                                    InventoryModel(id: 00),
+                                              )
+                                              ?.status ==
+                                          "In Operation"
+                                      ? ColorValues.appGreenColor
+                                      : ColorValues.appRedColor),
+                              child: Text(
+                                '${WarrantyClaimCertificateListDetails?.status}',
+                                style: Styles.white10.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                    ],
-                  )
-                : (value == 'Actions')
-                    ? Wrap(children: [
-                        TableActionButton(
-                          color: ColorValues.viewColor,
-                          icon: Icons.visibility,
-                          message: 'View',
-                          onPress: () {
-                            controller.clearStoreData();
-                            int inventoryId = InventoryListDetails?.id ?? 0;
-                            if (inventoryId != 0) {
-                              Get.toNamed(Routes.viewAddInventoryScreen,
-                                  arguments: {
-                                    'inventoryId': inventoryId,
-                                  });
-                            }
-                          },
-                          // onPress: () {
-                          //   // controller.viewAddInventoryDetails(
-                          //   //     id: int.tryParse('${record[2]}'));
-                          //   // Get.toNamed(Routes.viewAddInventoryScreen);
-                          // },
-                        ),
-                        //),p
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kMasterFeatureId &&
-                                        e.edit ==
-                                            UserAccessConstants.kHaveEditAccess)
-                                    .length >
-                                0
-                            ? TableActionButton(
-                                color: ColorValues.editColor,
-                                icon: Icons.edit,
-                                message: 'Edit',
-                                onPress: () {
-                                  controller.clearStoreData();
-
-                                  int inventoryId =
-                                      InventoryListDetails?.id ?? 0;
-                                  if (inventoryId != 0) {
-                                    Get.toNamed(Routes.addInventoryScreen,
-                                        arguments: {
-                                          'inventoryId': inventoryId,
-                                        });
-                                  }
-                                },
-                                // onPress: () {
-                                //   // controller.showAddInventoryDetails(
-                                //   //     id: int.tryParse('${record[2]}'));
-                                //   // print('AddInV:${record[2]}');
-                                // },
-                              )
-                            : Dimens.box0
-                        //),
-                      ])
-                    : Text(value.toString()),
+                        ],
+                      )
+                    : (value == 'id')
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '${WarrantyClaimCertificateListDetails?.id}',
+                              ),
+                              Dimens.boxHeight10,
+                              // Align(
+                              //   alignment: Alignment.centerRight,
+                              //   child: Container(
+                              //     padding: Dimens.edgeInsets8_2_8_2,
+                              //     decoration: BoxDecoration(
+                              //         color: controller.warrantyClaimList
+                              //                     .firstWhere(
+                              //                       (e) =>
+                              //                           e?.wc_id ==
+                              //                           WarrantyClaimListDetails!.wc_id,
+                              //                       orElse: () =>
+                              //                           WarrantyClaimModel(wc_id: 00),
+                              //                     )
+                              //                     ?.status ==
+                              //                 "Waiting for Submit Approval"
+                              //             ? ColorValues.appGreenColor
+                              //             : ColorValues.appRedColor),
+                              //     child: Text(
+                              //       '${WarrantyClaimListDetails?.status}',
+                              //       style: Styles.white10.copyWith(
+                              //         color: Colors.white,
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
+                            ],
+                          )
+                        : (value == 'Actions')
+                            ? Wrap(children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    TableActionButton(
+                                      color: ColorValues.viewColor,
+                                      icon: Icons.visibility,
+                                      message: 'View',
+                                      onPress: () {
+                                        // controller.viewAddInventoryDetails(id: int.tryParse('${record[2]}'));
+                                        // Get.toNamed(Routes.viewAddInventoryScreen);
+                                      },
+                                    ),
+                                  ],
+                                )
+                              ])
+                            : Text(value.toString()),
           ),
         );
       }).toList(),
       //   ],
-      onSelectChanged: (_) {
-        controller.clearStoreData();
-        int inventoryId = InventoryListDetails?.id ?? 0;
-        if (inventoryId != 0) {
-          Get.toNamed(Routes.viewAddInventoryScreen, arguments: {
-            'inventoryId': inventoryId,
-          });
-        }
-      },
+      // onSelectChanged: (_) {
+      //   // controller.clearStoreData();
+      //   // controller.viewWarrantyClaim(wc_id: WarrantyClaimListDetails?.wc_id);
+      // },
     );
   }
 
   @override
-  int get rowCount => filterInventoryList.length;
+  int get rowCount => filteredWarrantyClaimCertificateList.length;
 
   @override
   bool get isRowCountApproximate => false;
@@ -684,18 +660,19 @@ class InventoryListDataSource extends DataTableSource {
   int get selectedRowCount => 0;
 }
 
-
-
+///////from below
 
 // import 'package:cmms/app/app.dart';
 // import 'package:cmms/app/inventory_list/inventory_list_controller.dart';
 // import 'package:cmms/app/navigators/app_pages.dart';
+// import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_controller.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 // import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-// class InventoryListContentWeb extends GetView<InventoryListController> {
-//   InventoryListContentWeb({super.key});
+// class WarrantyCertificatesListContentWeb
+//     extends GetView<WarrantyCertificatesListController> {
+//   WarrantyCertificatesListContentWeb({super.key});
 
 //   ///
 
@@ -738,35 +715,36 @@ class InventoryListDataSource extends DataTableSource {
 //                   },
 //                   child: Text(" / ASSETS", style: Styles.greyMediumLight12),
 //                 ),
-//                 Text(" / ASSETS LIST", style: Styles.greyMediumLight12),
-//                 Spacer(),
+//                 Text(" / WARRANTY CERTIFICATES LIST",
+//                     style: Styles.greyMediumLight12),
+//                 // Spacer(),
 //                 // ActionButton(
 //                 //   icon: Icons.download,
 //                 //   label: 'exportAsset'.tr,
 //                 //   onPressed: () {},
 //                 //   color: ColorValues.appLightBlueColor,
 //                 // ),
-//                 Dimens.boxWidth10,
-//                 ActionButton(
-//                   icon: Icons.upload,
-//                   label: 'importAsset'.tr,
-//                   onPressed: () {
-//                     Get.toNamed(Routes.importInventory, arguments: 1);
-//                   },
-//                   color: ColorValues.appDarkBlueColor,
-//                 ),
-//                 Dimens.boxWidth10,
-//                 ActionButton(
-//                   icon: Icons.add,
-//                   label: 'addAsset'.tr,
-//                   onPressed: () {
-//                     Get.toNamed(
-//                       Routes.addInventoryScreen,
-//                     );
-//                   },
-//                   color: ColorValues.appGreenColor,
-//                 ),
-//                 Dimens.boxWidth10,
+//                 // Dimens.boxWidth10,
+//                 // ActionButton(
+//                 //   icon: Icons.upload,
+//                 //   label: 'importAsset'.tr,
+//                 //   onPressed: () {
+//                 //     Get.toNamed(Routes.importInventory, arguments: 1);
+//                 //   },
+//                 //   color: ColorValues.appDarkBlueColor,
+//                 // ),
+//                 // Dimens.boxWidth10,
+//                 // ActionButton(
+//                 //   icon: Icons.add,
+//                 //   label: 'addAsset'.tr,
+//                 //   onPressed: () {
+//                 //     Get.toNamed(
+//                 //       Routes.addInventoryScreen,
+//                 //     );
+//                 //   },
+//                 //   color: ColorValues.appGreenColor,
+//                 // ),
+//                 // Dimens.boxWidth10,
 //                 // ActionButton(
 //                 //   icon: Icons.close,
 //                 //   label: 'retireAsset'.tr,
@@ -844,7 +822,7 @@ class InventoryListDataSource extends DataTableSource {
 //           ///
 //           Expanded(
 //             child: Container(
-//               child: GetBuilder<InventoryListController>(
+//               child: GetBuilder<WarrantyCertificatesListController>(
 //                   id: 'inventory_list',
 //                   builder: (_controller) {
 //                     return //
@@ -886,128 +864,126 @@ class InventoryListDataSource extends DataTableSource {
 //                                                   onTap: () {
 //                                                     print('${value} $record');
 //                                                   },
-//                                                   child:
-//                                                       value.runtimeType
-//                                                                   .toString() ==
-//                                                               'AssetName'
-//                                                           ? Builder(builder:
-//                                                               (context) {
-//                                                               final val = value
-//                                                                   as AssetName;
-//                                                               return Column(
-//                                                                 children: [
-//                                                                   Text(
-//                                                                       '${val.name}'),
-//                                                                   Spacer(),
-//                                                                   // Align(
-//                                                                   //   alignment: Alignment
-//                                                                   //       .centerRight,
-//                                                                   //   child: Container(
-//                                                                   //     padding: Dimens
-//                                                                   //         .edgeInsets8_2_8_2,
-//                                                                   //     decoration:
-//                                                                   //         BoxDecoration(
-//                                                                   //       color: val.requirementStatus ==
-//                                                                   //               1
-//                                                                   //           ? ColorValues
-//                                                                   //               .appRedColor
-//                                                                   //           : ColorValues
-//                                                                   //               .appGreenColor,
-//                                                                   //       borderRadius:
-//                                                                   //           BorderRadius
-//                                                                   //               .circular(
-//                                                                   //                   4),
-//                                                                   //     ),
-//                                                                   //     // child: Text(
-//                                                                   //     //   val.name == 1
-//                                                                   //     //       ? 'requirementRejected'
-//                                                                   //     //           .tr
-//                                                                   //     //       : 'requirementAccepted'
-//                                                                   //     //           .tr,
-//                                                                   //     //   style: Styles
-//                                                                   //     //       .white10
-//                                                                   //     //       .copyWith(
-//                                                                   //     //     color: Colors
-//                                                                   //     //         .white,
-//                                                                   //     //   ),
-//                                                                   //     // ),
-//                                                                   //   ),
+//                                                   child: value.runtimeType
+//                                                               .toString() ==
+//                                                           'AssetName'
+//                                                       ? Builder(
+//                                                           builder: (context) {
+//                                                           final val = value
+//                                                               as AssetName;
+//                                                           return Column(
+//                                                             children: [
+//                                                               Text(
+//                                                                   '${val.name}'),
+//                                                               Spacer(),
+//                                                               // Align(
+//                                                               //   alignment: Alignment
+//                                                               //       .centerRight,
+//                                                               //   child: Container(
+//                                                               //     padding: Dimens
+//                                                               //         .edgeInsets8_2_8_2,
+//                                                               //     decoration:
+//                                                               //         BoxDecoration(
+//                                                               //       color: val.requirementStatus ==
+//                                                               //               1
+//                                                               //           ? ColorValues
+//                                                               //               .appRedColor
+//                                                               //           : ColorValues
+//                                                               //               .appGreenColor,
+//                                                               //       borderRadius:
+//                                                               //           BorderRadius
+//                                                               //               .circular(
+//                                                               //                   4),
+//                                                               //     ),
+//                                                               //     // child: Text(
+//                                                               //     //   val.name == 1
+//                                                               //     //       ? 'requirementRejected'
+//                                                               //     //           .tr
+//                                                               //     //       : 'requirementAccepted'
+//                                                               //     //           .tr,
+//                                                               //     //   style: Styles
+//                                                               //     //       .white10
+//                                                               //     //       .copyWith(
+//                                                               //     //     color: Colors
+//                                                               //     //         .white,
+//                                                               //     //   ),
+//                                                               //     // ),
+//                                                               //   ),
+//                                                               // ),
+
+//                                                               Dimens
+//                                                                   .boxHeight10,
+//                                                             ],
+//                                                           );
+//                                                         })
+//                                                       : value == 'Actions'
+//                                                           ? Wrap(
+//                                                               children: [
+//                                                                 Row(children: [
+//                                                                   TableActionButton(
+//                                                                     color: ColorValues
+//                                                                         .viewColor,
+//                                                                     icon: Icons
+//                                                                         .visibility,
+//                                                                     message:
+//                                                                         'View',
+//                                                                     onPress:
+//                                                                         () {
+//                                                                       // controller.viewAddInventoryDetails(id: int.tryParse('${record[2]}'));
+//                                                                       // Get.toNamed(Routes.viewAddInventoryScreen);
+//                                                                     },
+//                                                                   ),
+//                                                                   //),p
+
+//                                                                   TableActionButton(
+//                                                                     color: ColorValues
+//                                                                         .appLightBlueColor,
+//                                                                     icon: Icons
+//                                                                         .edit,
+//                                                                     message:
+//                                                                         'Edit',
+//                                                                     onPress:
+//                                                                         () {
+//                                                                       // controller.showAddInventoryDetails(id: int.tryParse('${record[2]}'));
+//                                                                       // print('AddInV:${record[2]}');
+//                                                                     },
+//                                                                   ),
 //                                                                   // ),
 
-//                                                                   Dimens
-//                                                                       .boxHeight10,
-//                                                                 ],
-//                                                               );
-//                                                             })
-//                                                           : value == 'Actions'
-//                                                               ? Wrap(
-//                                                                   children: [
-//                                                                     Row(
-//                                                                         children: [
-//                                                                           TableActionButton(
-//                                                                             color:
-//                                                                                 ColorValues.viewColor,
-//                                                                             icon:
-//                                                                                 Icons.visibility,
-//                                                                             message:
-//                                                                                 'View',
-//                                                                             onPress:
-//                                                                                 () {
-//                                                                               controller.viewAddInventoryDetails(id: int.tryParse('${record[2]}'));
-//                                                                               Get.toNamed(Routes.viewAddInventoryScreen);
-//                                                                             },
-//                                                                           ),
-//                                                                           //),p
-
-//                                                                           TableActionButton(
-//                                                                             color:
-//                                                                                 ColorValues.appLightBlueColor,
-//                                                                             icon:
-//                                                                                 Icons.edit,
-//                                                                             message:
-//                                                                                 'Edit',
-//                                                                             onPress:
-//                                                                                 () {
-//                                                                               controller.showAddInventoryDetails(id: int.tryParse('${record[2]}'));
-//                                                                               print('AddInV:${record[2]}');
-//                                                                             },
-//                                                                           ),
-//                                                                           //),
-
-//                                                                           TableActionButton(
-//                                                                             color:
-//                                                                                 ColorValues.appRedColor,
-//                                                                             icon:
-//                                                                                 Icons.delete,
-//                                                                             message:
-//                                                                                 'Delete',
-//                                                                             onPress:
-//                                                                                 () {},
-//                                                                           ),
-//                                                                           //),
-//                                                                         ]),
-//                                                                     // TableActionButton(
-//                                                                     //   color: ColorValues
-//                                                                     //       .appGreenColor,
-//                                                                     //   icon: Icons
-//                                                                     //       .visibility,
-//                                                                     //  message:
-//                                                                     ////       'Approve Request',
-//                                                                     //   onPress: () {},
-//                                                                     // ),
-//                                                                     // TableActionButton(
-//                                                                     //   color: ColorValues
-//                                                                     //       .appRedColor,
-//                                                                     //   icon: Icons
-//                                                                     //       .visibility,
-//                                                                     //  message:
-//                                                                     //       'Reject Request',
-//                                                                     //   onPress: () {},
-//                                                                     // ),
-//                                                                   ],
-//                                                                 )
-//                                                               : Text(value
-//                                                                   .toString()),
+//                                                                   TableActionButton(
+//                                                                     color: ColorValues
+//                                                                         .appRedColor,
+//                                                                     icon: Icons
+//                                                                         .delete,
+//                                                                     message:
+//                                                                         'Delete',
+//                                                                     onPress:
+//                                                                         () {},
+//                                                                   ),
+//                                                                   //),
+//                                                                 ]),
+//                                                                 // TableActionButton(
+//                                                                 //   color: ColorValues
+//                                                                 //       .appGreenColor,
+//                                                                 //   icon: Icons
+//                                                                 //       .visibility,
+//                                                                 //  message:
+//                                                                 ////       'Approve Request',
+//                                                                 //   onPress: () {},
+//                                                                 // ),
+//                                                                 // TableActionButton(
+//                                                                 //   color: ColorValues
+//                                                                 //       .appRedColor,
+//                                                                 //   icon: Icons
+//                                                                 //       .visibility,
+//                                                                 //  message:
+//                                                                 //       'Reject Request',
+//                                                                 //   onPress: () {},
+//                                                                 // ),
+//                                                               ],
+//                                                             )
+//                                                           : Text(
+//                                                               value.toString()),
 //                                                 ),
 //                                               );
 //                                             },
@@ -1076,11 +1052,11 @@ class InventoryListDataSource extends DataTableSource {
 //                                                                     .visibility,
 //                                                                 message: 'View',
 //                                                                 onPress: () {
-//                                                                   controller.viewAddInventoryDetails(
-//                                                                       id: int.tryParse(
-//                                                                           '${record[2]}'));
-//                                                                   Get.toNamed(Routes
-//                                                                       .viewAddInventoryScreen);
+//                                                                   // controller.viewAddInventoryDetails(
+//                                                                   //     id: int.tryParse(
+//                                                                   //         '${record[2]}'));
+//                                                                   // Get.toNamed(Routes
+//                                                                   //     .viewAddInventoryScreen);
 //                                                                 },
 //                                                               ),
 //                                                               //),p
@@ -1092,11 +1068,11 @@ class InventoryListDataSource extends DataTableSource {
 //                                                                     Icons.edit,
 //                                                                 message: 'Edit',
 //                                                                 onPress: () {
-//                                                                   controller.showAddInventoryDetails(
-//                                                                       id: int.tryParse(
-//                                                                           '${record[2]}'));
-//                                                                   print(
-//                                                                       'AddInV:${record[2]}');
+//                                                                   // controller.showAddInventoryDetails(
+//                                                                   //     id: int.tryParse(
+//                                                                   //         '${record[2]}'));
+//                                                                   // print(
+//                                                                   //     'AddInV:${record[2]}');
 //                                                                 },
 //                                                               ),
 //                                                               //),
@@ -1135,7 +1111,7 @@ class InventoryListDataSource extends DataTableSource {
 //                                                       : Padding(
 //                                                           padding:
 //                                                               const EdgeInsets
-//                                                                   .only(
+//                                                                       .only(
 //                                                                   left: 25),
 //                                                           child: Text(
 //                                                               value.toString()),

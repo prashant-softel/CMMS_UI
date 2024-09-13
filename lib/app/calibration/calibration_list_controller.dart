@@ -40,7 +40,9 @@ class CalibrationListController extends GetxController {
   int facilityId = 0;
   RxList<CalibrationListModel?> calibrationList = <CalibrationListModel?>[].obs;
   RxList<CalibrationListModel?> filteredData = <CalibrationListModel>[].obs;
-
+  // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
   CalibrationListModel? calibrationListModel;
   RxList<String> CalibrationListTableColumns = <String>[].obs;
   PaginationController paginationController = PaginationController(
@@ -76,8 +78,8 @@ class CalibrationListController extends GetxController {
   });
   final Map<String, double> columnwidth = {
     "Calibration Id": 200,
-    "Equipment Category": 200,
-    "Equipment Name": 250,
+    "Equipment Category": 220,
+    "Equipment Name": 230,
     "Serial No.": 200,
     // "Schedule Start Date": 200,
     // "Calibration Certificates":250,
@@ -1059,5 +1061,67 @@ class CalibrationListController extends GetxController {
 
   void clearStoreData() {
     calibrationListPresenter.clearValue();
+  }
+  // calibrationList
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+    switch (columnName) {
+      case 'Calibration Id':
+        calibrationList.sort((a, b) => isAscending.value
+            ? (a?.calibration_id ?? 0).compareTo(b?.calibration_id ?? 0)
+            : (b?.calibration_id ?? 0).compareTo(a?.calibration_id ?? 0));
+        break;
+      case 'Equipment Category':
+        calibrationList.sort((a, b) => isAscending.value
+            ? (a?.category_name ?? '').compareTo(b?.category_name ?? '')
+            : (b?.category_name ?? '').compareTo(a?.category_name ?? ''));
+        break;
+      case 'Equipment Name':
+        calibrationList.sort((a, b) => isAscending.value
+            ? (a?.asset_name ?? '').compareTo(b?.asset_name ?? '')
+            : (b?.asset_name ?? '').compareTo(a?.asset_name ?? ''));
+        break;
+      case 'Serial No.':
+        calibrationList.sort((a, b) => isAscending.value
+            ? (a?.asset_serial ?? '')
+                .compareTo(b?.asset_serial ?? '')
+            : (b?.asset_serial ?? '')
+                .compareTo(a?.asset_serial ?? ''));
+        break;
+      case 'Last Done date':
+        calibrationList.sort((a, b) => isAscending.value
+            ? (a?.last_calibration_date ?? '').compareTo(b?.last_calibration_date ?? '')
+            : (b?.last_calibration_date ?? '').compareTo(a?.last_calibration_date ?? ''));
+        break;
+
+      case 'Due Date':
+        calibrationList.sort((a, b) => isAscending.value
+            ? (a?.calibration_due_date ?? '').compareTo(b?.calibration_due_date ?? '')
+            : (b?.calibration_due_date ?? '').compareTo(a?.calibration_due_date ?? ''));
+        break;
+      case 'Done date':
+        calibrationList.sort((a, b) => isAscending.value
+            ? (a?.calibration_date ?? '').compareTo(b?.calibration_date ?? '')
+            : (b?.calibration_date ?? '').compareTo(a?.calibration_date ?? ''));
+        break;
+      case 'Frequency':
+        calibrationList.sort((a, b) => isAscending.value
+            ? (a?.frequency_name ?? '').compareTo(b?.frequency_name ?? '')
+            : (b?.frequency_name ?? '').compareTo(a?.frequency_name ?? ''));
+        break;
+      case 'Is Damage':
+        calibrationList.sort((a, b) => isAscending.value
+            ? (a?.is_damaged ?? 0).compareTo(b?.is_damaged ?? 0)
+            : (b?.is_damaged ?? 0).compareTo(a?.is_damaged ?? 0));
+        break;
+      default:
+        break;
+    }
+    update();
   }
 }
