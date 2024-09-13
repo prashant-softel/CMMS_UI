@@ -1,11 +1,9 @@
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
-import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/wc_certificates_list/wc_certificates_list_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
+import 'package:cmms/domain/models/wc_certificate_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,8 +11,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
-import '../../utils/user_access_constants.dart';
-import '../../widgets/action_button.dart';
 import '../../widgets/table_action_button.dart';
 
 class WcCertificatesListWeb extends StatefulWidget {
@@ -34,7 +30,7 @@ class _WcCertificatesListWebState extends State<WcCertificatesListWeb> {
         builder: (controller) {
           return Obx(
             () {
-              final dataSource = ModuleCleaningPlanListDataSource(controller);
+              final dataSource = WcCertificatesListDataSource(controller);
               return SelectionArea(
                 child: SingleChildScrollView(
                   child: Column(
@@ -76,10 +72,10 @@ class _WcCertificatesListWebState extends State<WcCertificatesListWeb> {
                               onTap: () {
                                 Get.offNamed(Routes.moduleCleaningDashboard);
                               },
-                              child: Text(" / MODULE CLEANING",
-                                  style: Styles.greyLight14),
+                              child:
+                                  Text(" / MASTER", style: Styles.greyLight14),
                             ),
-                            Text(" / MODULE CLEANING PLANNING",
+                            Text(" / WC CERTIFICATES LIST",
                                 style: Styles.greyLight14)
                           ],
                         ),
@@ -107,36 +103,10 @@ class _WcCertificatesListWebState extends State<WcCertificatesListWeb> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Module Cleaning Planning",
+                                          "WC Certificates List",
                                           style: Styles.blackBold16,
                                         ),
                                         Spacer(),
-                                        Dimens.boxWidth10,
-                                        varUserAccessModel.value.access_list!
-                                                    .where((e) =>
-                                                        e.feature_id ==
-                                                            UserAccessConstants
-                                                                .kModuleCleaningplanFeatureId &&
-                                                        e.add ==
-                                                            UserAccessConstants
-                                                                .kHaveAddAccess)
-                                                    .length >
-                                                0
-                                            ? ActionButton(
-                                                icon: Icons.add,
-                                                label: "Add New",
-                                                onPressed: () {
-                                                  controller
-                                                      .clearStoreDataMcid();
-                                                  controller
-                                                      .clearStoreDataPlanid();
-
-                                                  Get.offNamed(Routes
-                                                      .moduleCleaningPlanning);
-                                                },
-                                                color: ColorValues.addNewColor,
-                                              )
-                                            : Dimens.box0
                                       ],
                                     ),
                                   ),
@@ -213,25 +183,25 @@ class _WcCertificatesListWebState extends State<WcCertificatesListWeb> {
                                           // Handle column selection
                                         },
                                       ),
-                                      Container(
-                                        decoration: BoxDecoration(boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: const Offset(2.0, 1.0),
-                                            blurRadius: 5.0,
-                                            spreadRadius: 1.0,
-                                          )
-                                        ]),
-                                        height: 35,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {
-                                              controller.export();
-                                            },
-                                            text: 'Excel'),
-                                      ),
+                                      // Container(
+                                      //   decoration: BoxDecoration(boxShadow: [
+                                      //     BoxShadow(
+                                      //       color: Colors.black26,
+                                      //       offset: const Offset(2.0, 1.0),
+                                      //       blurRadius: 5.0,
+                                      //       spreadRadius: 1.0,
+                                      //     )
+                                      //   ]),
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {
+                                      //         controller.export();
+                                      //       },
+                                      //       text: 'Excel'),
+                                      // ),
                                       Spacer(),
                                       Container(
                                         width: 300,
@@ -273,7 +243,7 @@ class _WcCertificatesListWebState extends State<WcCertificatesListWeb> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.moduleCleaningListPlan.isEmpty ==
+                                  controller.wcCertificateList.isEmpty ==
                                               true &&
                                           controller.isLoading == false
                                       ? Center(child: Text("No Data"))
@@ -287,20 +257,16 @@ class _WcCertificatesListWebState extends State<WcCertificatesListWeb> {
                                                   builder:
                                                       (context, value, child) {
                                                     final dataSource =
-                                                        ModuleCleaningPlanListDataSource(
+                                                        WcCertificatesListDataSource(
                                                             controller);
 
                                                     return PaginatedDataTable2(
                                                       columnSpacing: 10,
                                                       dataRowHeight: 70,
-                                                      source:
-                                                          dataSource, // Custom DataSource class
-                                                      // headingRowHeight:
-                                                      //     Get.height * 0.12,
-                                                      minWidth: Get.width * 1.2,
+                                                      source: dataSource,
+                                                      minWidth: 2300,
                                                       showCheckboxColumn: false,
-                                                      rowsPerPage:
-                                                          10, // Number of rows per page
+                                                      rowsPerPage: 10,
                                                       availableRowsPerPage: [
                                                         10,
                                                         20,
@@ -323,7 +289,7 @@ class _WcCertificatesListWebState extends State<WcCertificatesListWeb> {
                                                         buildDataColumn(
                                                           'Actions',
                                                           controller
-                                                              .planIdFilterText,
+                                                              .assetsIdFilterText,
                                                           150,
                                                         ),
                                                       ],
@@ -357,7 +323,7 @@ DataColumn2 buildDataColumn(
         ? null
         : (int columnIndex, bool ascending) {
             final controller = Get.find<WcCertificatesListController>();
-            controller.sortData(header);
+            controller.sortData(header); 
           },
     label: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -390,58 +356,56 @@ DataColumn2 buildDataColumn(
   );
 }
 
-class ModuleCleaningPlanListDataSource extends DataTableSource {
+class WcCertificatesListDataSource extends DataTableSource {
   final WcCertificatesListController controller;
 
-  late List<ModuleCleaningListPlanModel?> filteredModuleCleaningList;
+  late List<WcCertificatesListModel?> filteredWcCertificatesList;
 
-  ModuleCleaningPlanListDataSource(this.controller) {
+  WcCertificatesListDataSource(this.controller) {
     filtersModuleCliningPlan();
   }
 
   ///
   void filtersModuleCliningPlan() {
-    filteredModuleCleaningList = <ModuleCleaningListPlanModel?>[];
-    filteredModuleCleaningList =
-        controller.moduleCleaningListPlan.where((GoodsOrderList) {
-      return (GoodsOrderList.planId ?? '')
+    filteredWcCertificatesList = <WcCertificatesListModel?>[];
+    filteredWcCertificatesList =
+        controller.wcCertificateList.where((wcCertificateList) {
+      return (wcCertificateList.assetId ?? '')
               .toString()
-              .contains(controller.planIdFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.title ?? '')
-              .toString()
-              .contains(controller.planTitleFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.noOfCleaningDays ?? '')
-              .toString()
-              .contains(controller.noOfDaysFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.createdBy ?? '')
-              .toString()
-              .contains(controller.createdByFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.frequency ?? '')
-              .toString()
-              .contains(controller.frequencyFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.status ?? '')
-              .toString()
-              .contains(controller.statusFilterText.value.toLowerCase());
+              .contains(controller.assetNameFilterText.value.toLowerCase()) &&
+          (wcCertificateList.assetName ?? '').toString().contains(
+              controller.categoryNameFilterText.value.toLowerCase()) &&
+          (wcCertificateList.categoryName ?? '').toString().contains(
+              controller.warrantyDescriptionFilterText.value.toLowerCase()) &&
+          (wcCertificateList.warrantyDescription ?? '').toString().contains(
+              controller.warrantyTypeNameFilterText.value.toLowerCase()) &&
+          (wcCertificateList.warrantyTypeName ?? '').toString().contains(
+              controller.warrantyStartDateFilterText.value.toLowerCase()) &&
+          (wcCertificateList.warrantyStartDate ?? '').toString().contains(
+              controller.warrantyStartDateFilterText.value.toLowerCase());
 
       // Add other filter conditions as needed
     }).toList();
-    // print({"filteredModuleCleaningList": filteredModuleCleaningList});
+    // print({"filteredWcCertificatesList": filteredWcCertificatesList});
   }
 
   @override
   DataRow? getRow(int index) {
     // print({"getRow call"});
-    final ModuleCleaningPlanningListDetails = filteredModuleCleaningList[index];
+    final wcCertificatesList = filteredWcCertificatesList[index];
 
-    controller.PlanId.value = ModuleCleaningPlanningListDetails?.planId ?? 0;
+    controller.assetsId.value = wcCertificatesList?.assetId ?? 0;
     var cellsBuffer = [
-      "planId",
-      '${ModuleCleaningPlanningListDetails?.title ?? ''}',
-      '${ModuleCleaningPlanningListDetails?.noOfCleaningDays ?? ''}',
-      '${ModuleCleaningPlanningListDetails?.createdBy ?? ''}',
-      '${ModuleCleaningPlanningListDetails?.frequency ?? ''}',
-      // '${ModuleCleaningPlanningListDetails?.status ?? ''}',
-
+      "asset_id",
+      '${wcCertificatesList?.assetName ?? ''}',
+      '${wcCertificatesList?.categoryName ?? ''}',
+      '${wcCertificatesList?.warrantyDescription ?? ''}',
+      '${wcCertificatesList?.warrantyTypeName ?? ''}',
+      '${wcCertificatesList?.warrantyTermName ?? ''}',
+      '${wcCertificatesList?.warrantyStartDate ?? ''}',
+      '${wcCertificatesList?.warrantyExpiryDate ?? ''}',
+      '${wcCertificatesList?.certificateNumber ?? ''}',
+      '${wcCertificatesList?.warrantyProviderName ?? ''}',
       'Actions',
     ];
     var cells = [];
@@ -467,54 +431,51 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: (value == 'planId')
+            child: (value == 'asset_id')
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'MCP${ModuleCleaningPlanningListDetails?.planId}',
+                        'WCC${wcCertificatesList?.assetId}',
                       ),
                       Dimens.boxHeight10,
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-                        decoration: BoxDecoration(
-                          color: controller.moduleCleaningListPlan
-                                      .firstWhere(
-                                        (e) =>
-                                            e.planId ==
-                                            ModuleCleaningPlanningListDetails!
-                                                .planId,
-                                        orElse: () =>
-                                            ModuleCleaningListPlanModel(
-                                                planId: 00),
-                                      )
-                                      .status ==
-                                  353
-                              ? ColorValues.approveColor
-                              : controller.moduleCleaningListPlan
-                                          .firstWhere(
-                                            (e) =>
-                                                e.planId ==
-                                                ModuleCleaningPlanningListDetails!
-                                                    .planId,
-                                            orElse: () =>
-                                                ModuleCleaningListPlanModel(
-                                                    planId: 00),
-                                          )
-                                          .status ==
-                                      351
-                                  ? ColorValues.yellowColor
-                                  : ColorValues.redColor,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Text(
-                          '${ModuleCleaningPlanningListDetails?.status_short}',
-                          style: Styles.white11.copyWith(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+                      // Container(
+                      //   padding:
+                      //       EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                      //   decoration: BoxDecoration(
+                      //     color: controller.wcCertificateList
+                      //                 .firstWhere(
+                      //                   (e) =>
+                      //                       e.planId ==
+                      //                       wcCertificatesList!.planId,
+                      //                   orElse: () =>
+                      //                       WcCertificatesListModel(planId: 00),
+                      //                 )
+                      //                 .status ==
+                      //             353
+                      //         ? ColorValues.approveColor
+                      //         : controller.wcCertificateList
+                      //                     .firstWhere(
+                      //                       (e) =>
+                      //                           e.planId ==
+                      //                           wcCertificatesList!.planId,
+                      //                       orElse: () =>
+                      //                           WcCertificatesListModel(
+                      //                               planId: 00),
+                      //                     )
+                      //                     .status ==
+                      //                 351
+                      //             ? ColorValues.yellowColor
+                      //             : ColorValues.redColor,
+                      //     borderRadius: BorderRadius.circular(4),
+                      //   ),
+                      //   child: Text(
+                      //     '${wcCertificatesList?.status_short}',
+                      //     style: Styles.white11.copyWith(
+                      //       color: Colors.white,
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   )
                 : (value == 'Actions')
@@ -524,178 +485,21 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                           icon: Icons.remove_red_eye_outlined,
                           message: 'view',
                           onPress: () {
-                            int id =
-                                ModuleCleaningPlanningListDetails?.planId ?? 0;
-                            if (id != 0) {
-                              controller.clearStoreDataMcid();
-                              controller.clearStoreDataPlanid();
-                              Get.toNamed(Routes.viewMcPlaning,
-                                  arguments: {'mcid': id});
-                            }
+                            int id = wcCertificatesList?.assetId ?? 0;
                           },
                         ),
-                        varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kModuleCleaningplanFeatureId &&
-                                            e.edit ==
-                                                UserAccessConstants
-                                                    .kHaveEditAccess)
-                                        .length >
-                                    0 &&
-                                controller.moduleCleaningListPlan
-                                        .firstWhere(
-                                          (e) =>
-                                              e.planId ==
-                                              ModuleCleaningPlanningListDetails!
-                                                  .planId,
-                                          orElse: () =>
-                                              ModuleCleaningListPlanModel(
-                                                  planId: 00),
-                                        )
-                                        .status ==
-                                    351
-                            ? TableActionButton(
-                                color: ColorValues.editColor,
-                                icon: Icons.edit,
-                                message: 'Edit',
-                                onPress: () {
-                                  controller.clearStoreDataMcid();
-                                  controller.clearStoreDataPlanid();
-                                  int id = ModuleCleaningPlanningListDetails
-                                          ?.planId ??
-                                      0;
-                                  if (id != 0) {
-                                    Get.toNamed(Routes.moduleCleaningPlanning,
-                                        arguments: {
-                                          "mcid": id,
-                                          "planId":
-                                              ModuleCleaningPlanningListDetails
-                                                  ?.planId
-                                        });
-                                  }
-                                },
-                              )
-                            : Dimens.box0,
-                        varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kModuleCleaningplanFeatureId &&
-                                            e.add ==
-                                                UserAccessConstants
-                                                    .kHaveAddAccess)
-                                        .length >
-                                    0 &&
-                                controller.moduleCleaningListPlan
-                                        .firstWhere(
-                                          (e) =>
-                                              e.planId ==
-                                              ModuleCleaningPlanningListDetails!
-                                                  .planId,
-                                          orElse: () =>
-                                              ModuleCleaningListPlanModel(
-                                                  planId: 00),
-                                        )
-                                        .status ==
-                                    352
-                            ? TableActionButton(
-                                color: Color.fromARGB(255, 116, 78, 130),
-                                icon: Icons.ads_click,
-                                message: 'Resubmit',
-                                onPress: () {
-                                  controller.clearStoreDataMcid();
-                                  controller.clearStoreDataPlanid();
-                                  int id = ModuleCleaningPlanningListDetails
-                                          ?.planId ??
-                                      0;
-
-                                  if (id != 0) {
-                                    Get.toNamed(Routes.moduleCleaningPlanning,
-                                        arguments: {
-                                          "mcid": id,
-                                          "mcType": 1,
-                                          "planId":
-                                              ModuleCleaningPlanningListDetails
-                                                  ?.planId
-                                        });
-                                  }
-                                },
-                              )
-                            : Dimens.box0,
-                        // controller.moduleCleaningListPlan
-                        //                 .firstWhere(
-                        //                   (e) =>
-                        //                       e.planId ==
-                        //                       ModuleCleaningPlanningListDetails!
-                        //                           .planId,
-                        //                   orElse: () =>
-                        //                       ModuleCleaningListPlanModel(
-                        //                           planId: 00),
-                        //                 )
-                        //                 .status ==
-                        //             353 ||
-                        controller.moduleCleaningListPlan
-                                        .firstWhere(
-                                          (e) =>
-                                              e.planId ==
-                                              ModuleCleaningPlanningListDetails!
-                                                  .planId,
-                                          orElse: () =>
-                                              ModuleCleaningListPlanModel(
-                                                  planId: 00),
-                                        )
-                                        .status ==
-                                    351 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kModuleCleaningplanFeatureId &&
-                                            e.approve ==
-                                                UserAccessConstants
-                                                    .kHaveApproveAccess)
-                                        .length >
-                                    0
-                            ? TableActionButton(
-                                color: ColorValues.appGreenColor,
-                                icon: Icons.check,
-                                message: 'Approve/Reject',
-                                onPress: () {
-                                  controller.clearStoreDataMcid();
-                                  controller.clearStoreDataPlanid();
-                                  int id = ModuleCleaningPlanningListDetails
-                                          ?.planId ??
-                                      0;
-                                  if (id != 0) {
-                                    controller.clearStoreDataMcid();
-                                    controller.clearStoreDataPlanid();
-                                    Get.toNamed(Routes.viewMcPlaning,
-                                        arguments: {'mcid': id});
-                                  }
-                                },
-                              )
-                            : Dimens.box0,
                       ])
                     : Text(value.toString()),
           ),
         );
       }).toList(),
       //   ],
-      onSelectChanged: (_) {
-        int id = ModuleCleaningPlanningListDetails?.planId ?? 0;
-        if (id != 0) {
-          controller.clearStoreDataMcid();
-          controller.clearStoreDataPlanid();
-          Get.toNamed(Routes.viewMcPlaning, arguments: {'mcid': id});
-        }
-      },
+      onSelectChanged: (_) {},
     );
   }
 
   @override
-  int get rowCount => filteredModuleCleaningList.length;
+  int get rowCount => filteredWcCertificatesList.length;
 
   @override
   bool get isRowCountApproximate => false;

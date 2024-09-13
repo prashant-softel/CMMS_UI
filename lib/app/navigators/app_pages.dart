@@ -289,6 +289,8 @@ import 'package:cmms/app/water_data/view/water_data_screen.dart';
 import 'package:cmms/app/water_data/water_data_binding.dart';
 import 'package:cmms/app/water_data_list/view/water_data_list_screen.dart';
 import 'package:cmms/app/water_data_list/water_data_list_binding.dart';
+import 'package:cmms/app/wc_certificates_list/view/wc_certificates_list_screen.dart';
+import 'package:cmms/app/wc_certificates_list/wc_certificates_list_binding.dart';
 import 'package:cmms/app/work_type/view/work_type_screen.dart';
 import 'package:cmms/app/work_type/work_type_binding.dart';
 import 'package:cmms/app/view_compliance/view_compliance_binding.dart';
@@ -1525,6 +1527,11 @@ class AppPages {
       name: _Paths.cumulativeReport,
       page: CumulativeReportScreen.new,
       binding: CumulativeReportBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.wcCertificatesList,
+      page: WcCertificatesListScreen.new,
+      binding: WcCertificatesListBinding(),
     ),
   ];
 }

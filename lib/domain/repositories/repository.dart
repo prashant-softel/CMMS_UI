@@ -138,6 +138,7 @@ import 'package:cmms/domain/models/waste_data_list_model.dart';
 import 'package:cmms/domain/models/waste_data_month_model.dart';
 import 'package:cmms/domain/models/water_data_list_model.dart';
 import 'package:cmms/domain/models/water_data_month.dart';
+import 'package:cmms/domain/models/wc_certificate_list_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -1048,8 +1049,7 @@ class Repository {
         var parsedJson = json.decode(resp);
         if (shouldClosePermit == false) {
           type == 1
-              ?         Get.offAllNamed(Routes.pmTask)
-
+              ? Get.offAllNamed(Routes.pmTask)
               : Get.dialog<void>(PmTaskViewDialog(
                   data: parsedJson['message'],
                   taskId: parsedJson['id'][0],
@@ -2814,6 +2814,43 @@ class Repository {
         }
 
         return _moduleCleaningListPlan.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'getModuleCleaningListPlan');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<WcCertificatesListModel>> getwcCertifiacteList(
+      {required int? facility_id,
+      required bool isLoading,
+      bool? isExport}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getwcCertifiacteList(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+
+      if (!res.hasError) {
+        final jsonWcCertificates = jsonDecode(res.data);
+
+        final List<WcCertificatesListModel> _wcCertificatesList =
+            jsonWcCertificates
+                .map<WcCertificatesListModel>((m) =>
+                    WcCertificatesListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _wcCertificatesList.reversed.toList();
       } //
       else {
         Utility.showDialog(

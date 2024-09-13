@@ -259,6 +259,7 @@ abstract class Routes {
   static const grievanceSummary = _Paths.grievanceSummary;
   static const cmmsReport = _Paths.cmmsReport;
   static const cumulativeReport = _Paths.cumulativeReport;
+  static const wcCertificatesList = _Paths.wcCertificatesList;
 }
 
 abstract class _Paths {
@@ -516,4 +517,5 @@ abstract class _Paths {
   static const grievanceSummary = '/grievance-summary';
   static const cmmsReport = '/cmms-report';
   static const cumulativeReport = '/cumulative-report';
+  static const wcCertificatesList = '/wcCertificatesList';
 }

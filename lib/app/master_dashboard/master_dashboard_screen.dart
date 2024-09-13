@@ -1438,10 +1438,10 @@ class MastersDashboard extends GetView<MastersController> {
                                                     title:
                                                         "WC Certificates List",
                                                     onTap: () {
-                                                      // Get.toNamed(
-                                                      //   Routes
-                                                      //       // .warrantyCertificatesList,
-                                                      // );
+                                                      Get.toNamed(
+                                                        Routes
+                                                            .wcCertificatesList,
+                                                      );
                                                     })
                                                 : Dimens.box0,
                                             varUserAccessModel
