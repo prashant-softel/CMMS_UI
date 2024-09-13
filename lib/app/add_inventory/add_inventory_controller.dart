@@ -438,6 +438,9 @@ class AddInventoryController extends GetxController {
           editAddInventoryDetailsModel.value?.supplierId ?? 0;
       selectedUnitCurrencyId =
           editAddInventoryDetailsModel.value?.currencyId ?? 0;
+      if (selectedBusinessTypeId > 0) {
+        getVenderNameList(selectedBusinessTypeId, facilityId);
+      }
       selectedvenderId = editAddInventoryDetailsModel.value?.voendor_id ?? 0;
 
       selectedVender.value =
