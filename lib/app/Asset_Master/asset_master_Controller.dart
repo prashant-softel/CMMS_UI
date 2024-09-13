@@ -39,6 +39,9 @@ class AssetMasterController extends GetxController {
   // final HomeController homecontroller = Get.put( HomeController.new);
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
+       // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
   Rx<bool> isLoading = true.obs;
@@ -436,5 +439,71 @@ class AssetMasterController extends GetxController {
 
   void clearStoreTaskWhereUsedData() {
     moduleListPresenter.clearStoreTaskWhereUsedData();
+  }
+    void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+    switch (columnName) {
+      case 'MDM Code':
+        moduleList!.sort((a, b) => isAscending.value
+            ? (a?.asset_code ?? '').compareTo(b?.asset_code ?? '')
+            : (b?.asset_code ?? '').compareTo(a?.asset_code ?? ''));
+        break;
+      case 'Material Name':
+        moduleList!.sort((a, b) => isAscending.value
+            ? (a?.asset_name ?? '').compareTo(b?.asset_name ?? '')
+            : (b?.asset_name ?? '').compareTo(a?.asset_name ?? ''));
+        break;
+      case 'AC/DC':
+        moduleList!.sort((a, b) => isAscending.value
+            ? (a?.section ?? '').compareTo(b?.section ?? '')
+            : (b?.section ?? '').compareTo(a?.section ?? ''));
+        break;
+      case 'Material Type':
+        moduleList!.sort((a, b) => isAscending.value
+            ? (a?.asset_type ?? '')
+                .compareTo(b?.asset_type ?? '')
+            : (b?.asset_type ?? '')
+                .compareTo(a?.asset_type ?? ''));
+        break;
+      case 'Material Category':
+        moduleList!.sort((a, b) => isAscending.value
+            ? (a?.cat_name ?? '').compareTo(b?.cat_name ?? '')
+            : (b?.cat_name ?? '').compareTo(a?.cat_name ?? ''));
+        break;
+
+      case 'Min. Qty':
+        moduleList!.sort((a, b) => isAscending.value
+            ? (a?.min_qty ?? 0).compareTo(b?.min_qty ?? 0)
+            : (b?.min_qty ?? 0).compareTo(a?.min_qty ?? 0));
+        break;
+      case 'Reorder Qty':
+        moduleList!.sort((a, b) => isAscending.value
+            ? (a?.reorder_qty ?? 0).compareTo(b?.reorder_qty ?? 0)
+            : (b?.reorder_qty ?? 0).compareTo(a?.reorder_qty ?? 0));
+        break;
+      case 'Description':
+        moduleList!.sort((a, b) => isAscending.value
+            ? (a?.description ?? '').compareTo(b?.description ?? '')
+            : (b?.description ?? '').compareTo(a?.description ?? ''));
+        break;
+      case 'Unit Of Measurement':
+        moduleList!.sort((a, b) => isAscending.value
+            ? (a?.measurement ?? '').compareTo(b?.measurement ?? '')
+            : (b?.measurement ?? '').compareTo(a?.measurement ?? ''));
+        break;
+      case 'Approval Required':
+        moduleList!.sort((a, b) => isAscending.value
+            ? (a?.approval_required ?? '').compareTo(b?.approval_required ?? '')
+            : (b?.approval_required ?? '').compareTo(a?.approval_required ?? ''));
+        break;
+      default:
+        break;
+    }
+    update();
   }
 }

@@ -22,6 +22,9 @@ class FaultyMaterialReportController extends GetxController {
       <FaultyMaterialReportModel?>[].obs;
   RxList<FaultyMaterialReportModel?> filteredData =
       <FaultyMaterialReportModel?>[].obs;
+       // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
 
   FaultyMaterialReportModel? faultyMaterialReportModel;
 
@@ -176,5 +179,45 @@ class FaultyMaterialReportController extends GetxController {
   void getPlantStockListByDate() {
     getFaultyMaterialReportList(
         facilityId, formattedTodate1, formattedFromdate1);
+  }
+   void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+    switch (columnName) {
+      case 'Assets Name':
+        faultyMaterialReportList.sort((a, b) => isAscending.value
+            ? (a?.asset_name ?? '').compareTo(b?.asset_name ?? '')
+            : (b?.asset_name ?? '').compareTo(a?.asset_name ?? ''));
+        break;
+      case 'Serial Number':
+        faultyMaterialReportList.sort((a, b) => isAscending.value
+            ? (a?.serial_number ?? '').compareTo(b?.serial_number ?? '')
+            : (b?.serial_number ?? '').compareTo(a?.serial_number ?? ''));
+        break;
+      case 'Inserted DateTime':
+        faultyMaterialReportList.sort((a, b) => isAscending.value
+            ? (a?.lastInsetedDateTime ?? '').compareTo(b?.lastInsetedDateTime ?? '')
+            : (b?.lastInsetedDateTime ?? '').compareTo(a?.lastInsetedDateTime ?? ''));
+        break;
+      case 'Remark':
+        faultyMaterialReportList.sort((a, b) => isAscending.value
+            ? (a?.remarks ?? '')
+                .compareTo(b?.remarks ?? '')
+            : (b?.remarks ?? '')
+                .compareTo(a?.remarks ?? ''));
+        break;
+      case 'Returned By':
+        faultyMaterialReportList.sort((a, b) => isAscending.value
+            ? (a?.createdByName ?? '').compareTo(b?.createdByName ?? '')
+            : (b?.createdByName ?? '').compareTo(a?.createdByName ?? ''));
+        break;
+      default:
+        break;
+    }
+    update();
   }
 }

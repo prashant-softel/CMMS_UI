@@ -19,7 +19,9 @@ class ReturnMrsListController extends GetxController {
   RxList<ReturnMrsListModel?> mrsList = <ReturnMrsListModel?>[].obs;
   RxList<ReturnMrsListModel?> filteredData = <ReturnMrsListModel?>[].obs;
   bool openFromDateToStartDatePicker = false;
-
+  // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
@@ -172,5 +174,45 @@ class ReturnMrsListController extends GetxController {
 
   void clearStoreData() {
     returnmrsListPresenter.clearValue();
+  }
+   void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+    switch (columnName) {
+      case 'RMRS ID':
+        mrsList.sort((a, b) => isAscending.value
+            ? (a?.id ?? 0).compareTo(b?.id ?? 0)
+            : (b?.id ?? 0).compareTo(a?.id ?? 0));
+        break;
+      case 'RMRS Details':
+        mrsList.sort((a, b) => isAscending.value
+            ? (a?.requested_by_name ?? '').compareTo(b?.requested_by_name ?? '')
+            : (b?.requested_by_name ?? '').compareTo(a?.requested_by_name ?? ''));
+        break;
+      case 'Order Date':
+        mrsList.sort((a, b) => isAscending.value
+            ? (a?.approval_date ?? '').compareTo(b?.approval_date ?? '')
+            : (b?.approval_date ?? '').compareTo(a?.approval_date ?? ''));
+        break;
+      case 'Activity':
+        mrsList.sort((a, b) => isAscending.value
+            ? (a?.activity ?? '')
+                .compareTo(b?.activity ?? '')
+            : (b?.activity ?? '')
+                .compareTo(a?.activity ?? ''));
+        break;
+      case 'Where Used':
+        mrsList.sort((a, b) => isAscending.value
+            ? (a?.whereUsedType ?? '').compareTo(b?.whereUsedType ?? '')
+            : (b?.whereUsedType ?? '').compareTo(a?.whereUsedType ?? ''));
+        break;
+      default:
+        break;
+    }
+    update();
   }
 }

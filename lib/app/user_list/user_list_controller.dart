@@ -28,7 +28,9 @@ class UserListController extends GetxController {
   UserListModel? userListModel;
   RxList<String> userListTableColumns = <String>[].obs;
   UserListModel? selectedItem;
-
+// For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
   RxString idFilterText = ''.obs;
   RxString userLoginIdFilterText = ''.obs;
   RxString userRoleFilterText = ''.obs;
@@ -57,8 +59,8 @@ class UserListController extends GetxController {
     "Role": 200,
     "Designation": 200,
     "Contact Number": 200,
-    "Created On": 123,
-    "Updated On": 123,
+    "Created On": 143,
+    "Updated On": 153,
     "Facilities": 200
   };
   Map<String, RxString> filterText = {};
@@ -205,5 +207,61 @@ class UserListController extends GetxController {
 
   void export() {
     getUserList(facilityId, true);
+  }
+   void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+    switch (columnName) {
+      case 'Profile':
+        userList.sort((a, b) => isAscending.value
+            ? (a.photoPath ?? '').compareTo(b.photoPath ?? '')
+            : (b.photoPath ?? '').compareTo(a.photoPath ?? ''));
+        break;
+      case 'User Login ID':
+        userList.sort((a, b) => isAscending.value
+            ? (a.name ?? '').compareTo(b.name ?? '')
+            : (b.name ?? '').compareTo(a.name ?? ''));
+        break;
+      case 'Role':
+        userList.sort((a, b) => isAscending.value
+            ? (a.role_name ?? '').compareTo(b.role_name ?? '')
+            : (b.role_name ?? '').compareTo(a.role_name ?? ''));
+        break;
+      case 'Designation':
+        userList.sort((a, b) => isAscending.value
+            ? (a.designation ?? '')
+                .compareTo(b.designation ?? '')
+            : (b.designation ?? '')
+                .compareTo(a.designation ?? ''));
+        break;
+      case 'Contact Number':
+        userList.sort((a, b) => isAscending.value
+            ? (a.mobileNumber ?? '').compareTo(b.mobileNumber ?? '')
+            : (b.mobileNumber ?? '').compareTo(a.mobileNumber ?? ''));
+        break;
+
+      case 'Created On':
+        userList.sort((a, b) => isAscending.value
+            ? (a.created_at ?? '').compareTo(b.created_at ?? '')
+            : (b.created_at ?? '').compareTo(a.created_at ?? ''));
+        break;
+      case 'Updated On':
+        userList.sort((a, b) => isAscending.value
+            ? (a.updated_at ?? '').compareTo(b.updated_at ?? '')
+            : (b.updated_at ?? '').compareTo(a.updated_at ?? ''));
+        break;
+      // case 'Facilities':
+      //   userList.sort((a, b) => isAscending.value
+      //       ? (a.facilities ?? 0).compareTo(b.facilities ?? '')
+      //       : (b.facilities ?? '').compareTo(a.facilities ?? ''));
+      //   break;
+      default:
+        break;
+    }
+    update();
   }
 }
