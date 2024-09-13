@@ -435,6 +435,12 @@ class _PlantStockReportContentWebState
         DataColumn2(
       // size: columnSize,
       fixedWidth: fixedWidth,
+      onSort: header == "Actions"
+        ? null
+        : (int columnIndex, bool ascending) {
+            final controller = Get.find<PlantStockReportController>();
+            controller.sortData(header);
+          },
 
       label: //
           Column(
@@ -471,13 +477,36 @@ class _PlantStockReportContentWebState
             //     ),
             //   ),
             // ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                header,
-                style: Styles.black16W500,
-              ),
+             Row(
+          children: [
+            Text(
+              header,
+              style: Styles.black16W500,
             ),
+            if (header != "Actions")
+              Obx(() {
+                final controller = Get.find<PlantStockReportController>();
+
+                return AnimatedRotation(
+                  turns: controller.currentSortColumn.value == header
+                      ? (controller.isAscending.value ? 0.5 : 0.0)
+                      : 0.0,
+                  duration: Duration(milliseconds: 300),
+                  child: Icon(
+                    Icons.expand_more,
+                    size: 20,
+                  ),
+                );
+              }),
+          ],
+        ),
+            // Align(
+            //   alignment: Alignment.centerLeft,
+            //   child: Text(
+            //     header,
+            //     style: Styles.black16W500,
+            //   ),
+            // ),
           ]),
       // ),
     );

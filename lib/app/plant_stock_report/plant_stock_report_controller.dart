@@ -20,10 +20,12 @@ class PlantStockReportController extends GetxController {
   final HomeController homecontroller = Get.find();
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  RxList<PlantStockListModel?>? plantStockList = <PlantStockListModel?>[].obs;
+  RxList<PlantStockListModel?>plantStockList = <PlantStockListModel?>[].obs;
   RxList<StockDetails?> StockDetailsList = <StockDetails?>[].obs;
   RxList<StockDetails?> filteredData = <StockDetails?>[].obs;
-
+  // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
@@ -258,5 +260,56 @@ class PlantStockReportController extends GetxController {
 
   void clearStoreendData() {
     pantStockReportPresenter.clearendValue();
+  }
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+    switch (columnName) {
+      case 'Assets Name':
+        StockDetailsList.sort((a, b) => isAscending.value
+            ? (a?.name ?? '').compareTo(b?.name ?? '')
+            : (b?.name ?? '').compareTo(a?.name ?? ''));
+        break;
+      case 'Assets Code':
+        StockDetailsList.sort((a, b) => isAscending.value
+            ? (a?.asset_code ?? '').compareTo(b?.asset_code ?? '')
+            : (b?.asset_code ?? '').compareTo(a?.asset_code ?? ''));
+        break;
+      case 'Assets Type':
+        StockDetailsList.sort((a, b) => isAscending.value
+            ? (a?.asset_type ?? '').compareTo(b?.asset_type ?? '')
+            : (b?.asset_type ?? '').compareTo(a?.asset_type ?? ''));
+        break;
+      case 'Opening':
+        StockDetailsList.sort((a, b) => isAscending.value
+            ? (a?.opening ?? 0)
+                .compareTo(b?.opening ?? 0)
+            : (b?.opening ?? 0)
+                .compareTo(a?.opening ?? 0));
+        break;
+      case 'Inward':
+        StockDetailsList.sort((a, b) => isAscending.value
+            ? (a?.inward ?? 0).compareTo(b?.inward ?? 0)
+            : (b?.inward ?? 0).compareTo(a?.inward ?? 0));
+        break;
+
+      case 'Outward':
+        StockDetailsList.sort((a, b) => isAscending.value
+            ? (a?.outward ?? 0).compareTo(b?.outward ?? 0)
+            : (b?.outward ?? 0).compareTo(a?.outward ?? 0));
+        break;
+      case 'Balance':
+        StockDetailsList.sort((a, b) => isAscending.value
+            ? (a?.balance ?? 0).compareTo(b?.balance ?? 0)
+            : (b?.balance ?? 0).compareTo(a?.balance ?? 0));
+        break;
+      default:
+        break;
+    }
+    update();
   }
 }
