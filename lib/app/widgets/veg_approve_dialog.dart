@@ -8,8 +8,9 @@ import '../theme/styles.dart';
 
 class ApproveVegPlan extends GetView {
   int? id;
+  int? type;
 
-  ApproveVegPlan({super.key, this.id});
+  ApproveVegPlan({super.key, this.id, this.type});
   final ViewVegPlanController _controller = Get.find();
 
   @override
@@ -22,7 +23,7 @@ class ApproveVegPlan extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          "Approve MC Plan",
+          type == 1 ? "Reject MC Plan" : "Approve MC Plan",
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -87,15 +88,27 @@ class ApproveVegPlan extends GetView {
             SizedBox(
               width: 10,
             ),
-            ElevatedButton(
-              style: Styles.greenElevatedButtonStyle,
-              onPressed: () {
-                _controller.vegPlanApprovedButton(id: id);
+            type == 1
+                ? ElevatedButton(
+                    style: Styles.redElevatedButtonStyle,
+                    onPressed: () {
+                      _controller.vegPlanRejectButton(
+                        id: id,
+                      );
 
-                Get.back();
-              },
-              child: Text('Approve Veg Plan'),
-            ),
+                      Get.back();
+                    },
+                    child: Text('Reject'),
+                  )
+                : ElevatedButton(
+                    style: Styles.greenElevatedButtonStyle,
+                    onPressed: () {
+                      _controller.vegPlanApprovedButton(id: id);
+
+                      Get.back();
+                    },
+                    child: Text('Approve'),
+                  ),
           ]),
         ],
       );

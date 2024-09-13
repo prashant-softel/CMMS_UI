@@ -60,17 +60,41 @@ class VegPlanMessageApproveDialog extends GetView {
                   onPressed: () {
                     Get.offAllNamed(Routes.vegetationPlanListScreen);
                   },
-                  child: const Text('Vegetation List'),
+                  child: const Text('Plan List'),
                 ),
               ),
               Dimens.boxWidth10,
               Center(
                 child: ElevatedButton(
                   style: Styles.yellowElevatedButtonStyle,
-                  onPressed: () {
-                    Get.offAllNamed(Routes.viewVegetationPlanScreen);
+                  onPressed: () async {
+                    Get.back();
+
+                    try {
+                      await controller.setUserId();
+
+                      if (id != 0) {
+                        Future.delayed(Duration(seconds: 1), () {
+                          controller.getVegPlanDetail(
+                              planId: controller.id.value,
+                              facilityId: controller.facilityId);
+                          controller.getVegHistory(
+                              id: controller.id.value,
+                              facilityId: controller.facilityId);
+                        });
+                      }
+
+                      Future.delayed(Duration(seconds: 1), () {
+                        controller.getVegEquipmentModelList(
+                            controller.facilityId, true);
+                      });
+                      // getMcPlanHistory(id: id.value);
+                    } catch (e) {
+                      print(e);
+                    }
+                    // Get.offAllNamed(Routes.viewVegetationPlanScreen);
                   },
-                  child: const Text('View Vegetation Plan'),
+                  child: const Text('View Plan'),
                 ),
               ),
               Dimens.boxWidth10,

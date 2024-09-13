@@ -1,39 +1,40 @@
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/theme/styles.dart';
-import 'package:cmms/app/utils/user_access_constants.dart';
-import 'package:cmms/app/vegetation_plan_list/vegetation_plan_list_controller.dart';
-import 'package:cmms/app/widgets/action_button.dart';
+import 'package:cmms/app/wc_certificates_list/wc_certificates_list_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/table_action_button.dart';
-import 'package:cmms/domain/models/vegetation_list_plan_model.dart';
+import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class VegetationPlanListWeb extends StatefulWidget {
-  VegetationPlanListWeb({
+import '../../theme/color_values.dart';
+import '../../theme/styles.dart';
+import '../../utils/user_access_constants.dart';
+import '../../widgets/action_button.dart';
+import '../../widgets/table_action_button.dart';
+
+class WcCertificatesListWeb extends StatefulWidget {
+  WcCertificatesListWeb({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<VegetationPlanListWeb> createState() => _VegetationPlanListWebState();
+  State<WcCertificatesListWeb> createState() => _WcCertificatesListWebState();
 }
 
-class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
-  final homecontroller = Get.find<HomeController>();
+class _WcCertificatesListWebState extends State<WcCertificatesListWeb> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<VegetationPlanListController>(
+    return GetBuilder<WcCertificatesListController>(
         id: 'stock_Mangement_Date',
         builder: (controller) {
           return Obx(
             () {
+              final dataSource = ModuleCleaningPlanListDataSource(controller);
               return SelectionArea(
                 child: SingleChildScrollView(
                   child: Column(
@@ -73,12 +74,12 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.offNamed(Routes.vegetationDashboard);
+                                Get.offNamed(Routes.moduleCleaningDashboard);
                               },
-                              child: Text(" / VEGETATION CONTROL",
+                              child: Text(" / MODULE CLEANING",
                                   style: Styles.greyLight14),
                             ),
-                            Text(" / VEGETATION CONTROL PLANNING",
+                            Text(" / MODULE CLEANING PLANNING",
                                 style: Styles.greyLight14)
                           ],
                         ),
@@ -88,8 +89,8 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
                           Container(
                             width: Get.width * 7,
                             margin:
-                                EdgeInsets.only(left: 10, top: 10, right: 10),
-                            height: Get.height * .85,
+                                EdgeInsets.only(left: 10, top: 15, right: 10),
+                            height: Get.height * 0.85 - 5,
                             child: Card(
                               color: Color.fromARGB(255, 245, 248, 250),
                               elevation: 10,
@@ -106,7 +107,7 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Vegetation Plan List",
+                                          "Module Cleaning Planning",
                                           style: Styles.blackBold16,
                                         ),
                                         Spacer(),
@@ -115,7 +116,7 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
                                                     .where((e) =>
                                                         e.feature_id ==
                                                             UserAccessConstants
-                                                                .kVegetationControlFeatureId &&
+                                                                .kModuleCleaningplanFeatureId &&
                                                         e.add ==
                                                             UserAccessConstants
                                                                 .kHaveAddAccess)
@@ -125,13 +126,17 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
                                                 icon: Icons.add,
                                                 label: "Add New",
                                                 onPressed: () {
-                                                  controller.clearStoreData();
+                                                  controller
+                                                      .clearStoreDataMcid();
+                                                  controller
+                                                      .clearStoreDataPlanid();
+
                                                   Get.offNamed(Routes
-                                                      .addVegetationPlanScreen);
+                                                      .moduleCleaningPlanning);
                                                 },
                                                 color: ColorValues.addNewColor,
                                               )
-                                            : Dimens.box0,
+                                            : Dimens.box0
                                       ],
                                     ),
                                   ),
@@ -268,13 +273,13 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.vegetationPlanList.isEmpty ==
+                                  controller.moduleCleaningListPlan.isEmpty ==
                                               true &&
                                           controller.isLoading == false
-                                      ? Center(child: Text('No data'))
+                                      ? Center(child: Text("No Data"))
                                       : controller.isLoading.value == true
                                           ? Center(
-                                              child: Text('Data Loading......'))
+                                              child: Text("Data Loading......"))
                                           : Expanded(
                                               child: ValueListenableBuilder(
                                                   valueListenable: controller
@@ -282,16 +287,20 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
                                                   builder:
                                                       (context, value, child) {
                                                     final dataSource =
-                                                        VegetationPlanListDataSource(
+                                                        ModuleCleaningPlanListDataSource(
                                                             controller);
 
                                                     return PaginatedDataTable2(
                                                       columnSpacing: 10,
-                                                      dataRowHeight: 55,
-                                                      source: dataSource,
-                                                      minWidth: Get.width * 0.7,
+                                                      dataRowHeight: 70,
+                                                      source:
+                                                          dataSource, // Custom DataSource class
+                                                      // headingRowHeight:
+                                                      //     Get.height * 0.12,
+                                                      minWidth: Get.width * 1.2,
                                                       showCheckboxColumn: false,
-                                                      rowsPerPage: 10,
+                                                      rowsPerPage:
+                                                          10, // Number of rows per page
                                                       availableRowsPerPage: [
                                                         10,
                                                         20,
@@ -307,14 +316,15 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
                                                               controller
                                                                       .filterText[
                                                                   entry.key]!,
-                                                              // controller.columnwidth[
-                                                              //     entry.key],
+                                                              controller
+                                                                      .columnwidth[
+                                                                  entry.key],
                                                             ),
                                                         buildDataColumn(
                                                           'Actions',
                                                           controller
                                                               .planIdFilterText,
-                                                          // 150,
+                                                          150,
                                                         ),
                                                       ],
                                                     );
@@ -339,12 +349,14 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
 DataColumn2 buildDataColumn(
   String header,
   RxString filterText,
+  double? fixedWidth,
 ) {
   return DataColumn2(
+    fixedWidth: fixedWidth,
     onSort: header == "Actions"
-        ? null // Disable sorting for "Actions"
+        ? null
         : (int columnIndex, bool ascending) {
-            final controller = Get.find<VegetationPlanListController>();
+            final controller = Get.find<WcCertificatesListController>();
             controller.sortData(header);
           },
     label: Column(
@@ -356,10 +368,10 @@ DataColumn2 buildDataColumn(
               header,
               style: Styles.black16W500,
             ),
-            if (header !=
-                "Actions") // Don't show the sorting icon for "Actions"
+            if (header != "Actions")
               Obx(() {
-                final controller = Get.find<VegetationPlanListController>();
+                final controller = Get.find<WcCertificatesListController>();
+
                 return AnimatedRotation(
                   turns: controller.currentSortColumn.value == header
                       ? (controller.isAscending.value ? 0.5 : 0.0)
@@ -378,56 +390,58 @@ DataColumn2 buildDataColumn(
   );
 }
 
-class VegetationPlanListDataSource extends DataTableSource {
-  final VegetationPlanListController controller;
+class ModuleCleaningPlanListDataSource extends DataTableSource {
+  final WcCertificatesListController controller;
 
-  late List<VegetationPlanListModel?> filteredVegetationList;
+  late List<ModuleCleaningListPlanModel?> filteredModuleCleaningList;
 
-  VegetationPlanListDataSource(this.controller) {
-    filtersVegetationPlan();
+  ModuleCleaningPlanListDataSource(this.controller) {
+    filtersModuleCliningPlan();
   }
 
   ///
-  void filtersVegetationPlan() {
-    filteredVegetationList = <VegetationPlanListModel?>[];
-    filteredVegetationList = controller.vegetationPlanList.where((item) {
-      return (item.planId ?? '')
+  void filtersModuleCliningPlan() {
+    filteredModuleCleaningList = <ModuleCleaningListPlanModel?>[];
+    filteredModuleCleaningList =
+        controller.moduleCleaningListPlan.where((GoodsOrderList) {
+      return (GoodsOrderList.planId ?? '')
               .toString()
               .contains(controller.planIdFilterText.value.toLowerCase()) &&
-          (item.title ?? '')
+          (GoodsOrderList.title ?? '')
               .toString()
               .contains(controller.planTitleFilterText.value.toLowerCase()) &&
-          (item.noOfCleaningDays ?? '')
+          (GoodsOrderList.noOfCleaningDays ?? '')
               .toString()
               .contains(controller.noOfDaysFilterText.value.toLowerCase()) &&
-          (item.createdBy ?? '')
+          (GoodsOrderList.createdBy ?? '')
               .toString()
               .contains(controller.createdByFilterText.value.toLowerCase()) &&
-          (item.frequency ?? '')
+          (GoodsOrderList.frequency ?? '')
               .toString()
               .contains(controller.frequencyFilterText.value.toLowerCase()) &&
-          (item.statusShort ?? '')
+          (GoodsOrderList.status ?? '')
               .toString()
               .contains(controller.statusFilterText.value.toLowerCase());
 
       // Add other filter conditions as needed
     }).toList();
-    // print({"filteredVegetationList": filteredVegetationList});
+    // print({"filteredModuleCleaningList": filteredModuleCleaningList});
   }
 
   @override
   DataRow? getRow(int index) {
     // print({"getRow call"});
-    final VegetationListDetails = filteredVegetationList[index];
+    final ModuleCleaningPlanningListDetails = filteredModuleCleaningList[index];
 
-    controller.PlanId.value = VegetationListDetails?.planId ?? 0;
+    controller.PlanId.value = ModuleCleaningPlanningListDetails?.planId ?? 0;
     var cellsBuffer = [
       "planId",
-      '${VegetationListDetails?.title ?? ''}',
-      '${VegetationListDetails?.noOfCleaningDays ?? ''}',
-      '${VegetationListDetails?.createdBy ?? ''}',
-      '${VegetationListDetails?.frequency ?? ''}',
-      // '${VegetationListDetails?.status ?? ''}',
+      '${ModuleCleaningPlanningListDetails?.title ?? ''}',
+      '${ModuleCleaningPlanningListDetails?.noOfCleaningDays ?? ''}',
+      '${ModuleCleaningPlanningListDetails?.createdBy ?? ''}',
+      '${ModuleCleaningPlanningListDetails?.frequency ?? ''}',
+      // '${ModuleCleaningPlanningListDetails?.status ?? ''}',
+
       'Actions',
     ];
     var cells = [];
@@ -458,46 +472,46 @@ class VegetationPlanListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'VC ${VegetationListDetails?.planId}',
+                        'MCP${ModuleCleaningPlanningListDetails?.planId}',
                       ),
                       Dimens.boxHeight10,
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Container(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-                          decoration: BoxDecoration(
-                            color: controller.vegetationPlanList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.planId ==
-                                              VegetationListDetails!.planId,
-                                          orElse: () => VegetationPlanListModel(
-                                              planId: 00),
-                                        )
-                                        .status ==
-                                    704
-                                ? ColorValues.approveColor
-                                : controller.vegetationPlanList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.planId ==
-                                                  VegetationListDetails!.planId,
-                                              orElse: () =>
-                                                  VegetationPlanListModel(
-                                                      planId: 00),
-                                            )
-                                            .status ==
-                                        702
-                                    ? ColorValues.yellowColor
-                                    : ColorValues.redColor,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            ' ${VegetationListDetails?.statusShort}',
-                            style: Styles.white11.copyWith(
-                              color: Colors.white,
-                            ),
+                      Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                        decoration: BoxDecoration(
+                          color: controller.moduleCleaningListPlan
+                                      .firstWhere(
+                                        (e) =>
+                                            e.planId ==
+                                            ModuleCleaningPlanningListDetails!
+                                                .planId,
+                                        orElse: () =>
+                                            ModuleCleaningListPlanModel(
+                                                planId: 00),
+                                      )
+                                      .status ==
+                                  353
+                              ? ColorValues.approveColor
+                              : controller.moduleCleaningListPlan
+                                          .firstWhere(
+                                            (e) =>
+                                                e.planId ==
+                                                ModuleCleaningPlanningListDetails!
+                                                    .planId,
+                                            orElse: () =>
+                                                ModuleCleaningListPlanModel(
+                                                    planId: 00),
+                                          )
+                                          .status ==
+                                      351
+                                  ? ColorValues.yellowColor
+                                  : ColorValues.redColor,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          '${ModuleCleaningPlanningListDetails?.status_short}',
+                          style: Styles.white11.copyWith(
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -510,13 +524,13 @@ class VegetationPlanListDataSource extends DataTableSource {
                           icon: Icons.remove_red_eye_outlined,
                           message: 'view',
                           onPress: () {
-                            controller.clearStoreData();
-                            int id = VegetationListDetails?.planId ?? 0;
+                            int id =
+                                ModuleCleaningPlanningListDetails?.planId ?? 0;
                             if (id != 0) {
-                              Get.toNamed(
-                                Routes.viewVegetationPlanScreen,
-                                arguments: {'vegid': id},
-                              );
+                              controller.clearStoreDataMcid();
+                              controller.clearStoreDataPlanid();
+                              Get.toNamed(Routes.viewMcPlaning,
+                                  arguments: {'mcid': id});
                             }
                           },
                         ),
@@ -524,123 +538,121 @@ class VegetationPlanListDataSource extends DataTableSource {
                                         .where((e) =>
                                             e.feature_id ==
                                                 UserAccessConstants
-                                                    .kVegetationControlFeatureId &&
+                                                    .kModuleCleaningplanFeatureId &&
                                             e.edit ==
                                                 UserAccessConstants
                                                     .kHaveEditAccess)
                                         .length >
                                     0 &&
-                                controller.vegetationPlanList
+                                controller.moduleCleaningListPlan
                                         .firstWhere(
                                           (e) =>
                                               e.planId ==
-                                              VegetationListDetails!.planId,
-                                          orElse: () => VegetationPlanListModel(
-                                              planId: 00),
+                                              ModuleCleaningPlanningListDetails!
+                                                  .planId,
+                                          orElse: () =>
+                                              ModuleCleaningListPlanModel(
+                                                  planId: 00),
                                         )
                                         .status ==
-                                    702
+                                    351
                             ? TableActionButton(
                                 color: ColorValues.editColor,
                                 icon: Icons.edit,
                                 message: 'Edit',
                                 onPress: () {
-                                  controller.clearStoreData();
-                                  int id = VegetationListDetails?.planId ?? 0;
+                                  controller.clearStoreDataMcid();
+                                  controller.clearStoreDataPlanid();
+                                  int id = ModuleCleaningPlanningListDetails
+                                          ?.planId ??
+                                      0;
                                   if (id != 0) {
-                                    Get.toNamed(
-                                      Routes.addVegetationPlanScreen,
-                                      arguments: {"vegid": id},
-                                    );
-                                  }
-                                },
-                              )
-                            : Dimens.box0,
-                        // varUserAccessModel.value.access_list!
-                        //                 .where((e) =>
-                        //                     e.feature_id ==
-                        //                         UserAccessConstants
-                        //                             .kVegetationControlFeatureId &&
-                        //                     e.delete ==
-                        //                         UserAccessConstants
-                        //                             .kHaveEditAccess)
-                        //                 .length >
-                        //             0 &&
-                        //         controller.vegetationPlanList
-                        //                 .firstWhere(
-                        //                   (e) =>
-                        //                       e.planId ==
-                        //                       VegetationListDetails!.planId,
-                        //                   orElse: () => VegetationPlanListModel(
-                        //                       planId: 00),
-                        //                 )
-                        //                 .status ==
-                        //             702
-                        //     ? TableActionButton(
-                        //         color: ColorValues.deleteColor,
-                        //         icon: Icons.delete,
-                        //         message: 'Delete',
-                        //         onPress: () {
-                        //           controller.clearStoreData();
-                        //           controller.isDeleteDialog(
-                        //             planName: VegetationListDetails?.title,
-                        //             planId: VegetationListDetails?.planId,
-                        //           );
-                        //         },
-                        //       )
-                        //     : Dimens.box0,
-                        varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kVegetationControlFeatureId &&
-                                            e.add ==
-                                                UserAccessConstants
-                                                    .kHaveAddAccess)
-                                        .length >
-                                    0 &&
-                                controller.vegetationPlanList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.planId ==
-                                              VegetationListDetails!.planId,
-                                          orElse: () => VegetationPlanListModel(
-                                              planId: 00),
-                                        )
-                                        .status ==
-                                    703
-                            ? TableActionButton(
-                                color: Color.fromARGB(255, 116, 78, 130),
-                                icon: Icons.ads_click,
-                                message: 'Resubmit',
-                                onPress: () {
-                                  controller.clearStoreData();
-                                  int id = VegetationListDetails?.planId ?? 0;
-                                  if (id != 0) {
-                                    Get.toNamed(Routes.addVegetationPlanScreen,
+                                    Get.toNamed(Routes.moduleCleaningPlanning,
                                         arguments: {
-                                          "vegid": id,
-                                          "vegType": 1,
+                                          "mcid": id,
+                                          "planId":
+                                              ModuleCleaningPlanningListDetails
+                                                  ?.planId
                                         });
                                   }
                                 },
                               )
                             : Dimens.box0,
-                        controller.vegetationPlanList
+                        varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kModuleCleaningplanFeatureId &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0 &&
+                                controller.moduleCleaningListPlan
                                         .firstWhere(
                                           (e) =>
                                               e.planId ==
-                                              VegetationListDetails!.planId,
-                                          orElse: () => VegetationPlanListModel(
-                                              planId: 00),
+                                              ModuleCleaningPlanningListDetails!
+                                                  .planId,
+                                          orElse: () =>
+                                              ModuleCleaningListPlanModel(
+                                                  planId: 00),
                                         )
                                         .status ==
-                                    702 &&
+                                    352
+                            ? TableActionButton(
+                                color: Color.fromARGB(255, 116, 78, 130),
+                                icon: Icons.ads_click,
+                                message: 'Resubmit',
+                                onPress: () {
+                                  controller.clearStoreDataMcid();
+                                  controller.clearStoreDataPlanid();
+                                  int id = ModuleCleaningPlanningListDetails
+                                          ?.planId ??
+                                      0;
+
+                                  if (id != 0) {
+                                    Get.toNamed(Routes.moduleCleaningPlanning,
+                                        arguments: {
+                                          "mcid": id,
+                                          "mcType": 1,
+                                          "planId":
+                                              ModuleCleaningPlanningListDetails
+                                                  ?.planId
+                                        });
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
+                        // controller.moduleCleaningListPlan
+                        //                 .firstWhere(
+                        //                   (e) =>
+                        //                       e.planId ==
+                        //                       ModuleCleaningPlanningListDetails!
+                        //                           .planId,
+                        //                   orElse: () =>
+                        //                       ModuleCleaningListPlanModel(
+                        //                           planId: 00),
+                        //                 )
+                        //                 .status ==
+                        //             353 ||
+                        controller.moduleCleaningListPlan
+                                        .firstWhere(
+                                          (e) =>
+                                              e.planId ==
+                                              ModuleCleaningPlanningListDetails!
+                                                  .planId,
+                                          orElse: () =>
+                                              ModuleCleaningListPlanModel(
+                                                  planId: 00),
+                                        )
+                                        .status ==
+                                    351 &&
                                 varUserAccessModel.value.access_list!
                                         .where((e) =>
                                             e.feature_id ==
                                                 UserAccessConstants
-                                                    .kVegetationControlFeatureId &&
+                                                    .kModuleCleaningplanFeatureId &&
                                             e.approve ==
                                                 UserAccessConstants
                                                     .kHaveApproveAccess)
@@ -651,37 +663,39 @@ class VegetationPlanListDataSource extends DataTableSource {
                                 icon: Icons.check,
                                 message: 'Approve/Reject',
                                 onPress: () {
-                                  controller.clearStoreData();
-                                  int id = VegetationListDetails?.planId ?? 0;
+                                  controller.clearStoreDataMcid();
+                                  controller.clearStoreDataPlanid();
+                                  int id = ModuleCleaningPlanningListDetails
+                                          ?.planId ??
+                                      0;
                                   if (id != 0) {
-                                    Get.toNamed(
-                                      Routes.viewVegetationPlanScreen,
-                                      arguments: {'vegid': id, "type": 1},
-                                    );
+                                    controller.clearStoreDataMcid();
+                                    controller.clearStoreDataPlanid();
+                                    Get.toNamed(Routes.viewMcPlaning,
+                                        arguments: {'mcid': id});
                                   }
                                 },
                               )
-                            : Dimens.box0
+                            : Dimens.box0,
                       ])
                     : Text(value.toString()),
           ),
         );
       }).toList(),
+      //   ],
       onSelectChanged: (_) {
-        controller.clearStoreData();
-        int id = VegetationListDetails?.planId ?? 0;
+        int id = ModuleCleaningPlanningListDetails?.planId ?? 0;
         if (id != 0) {
-          Get.toNamed(
-            Routes.viewVegetationPlanScreen,
-            arguments: {'vegid': id},
-          );
+          controller.clearStoreDataMcid();
+          controller.clearStoreDataPlanid();
+          Get.toNamed(Routes.viewMcPlaning, arguments: {'mcid': id});
         }
       },
     );
   }
 
   @override
-  int get rowCount => filteredVegetationList.length;
+  int get rowCount => filteredModuleCleaningList.length;
 
   @override
   bool get isRowCountApproximate => false;
