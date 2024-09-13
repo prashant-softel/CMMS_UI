@@ -8,13 +8,13 @@ List<WarrantyCertificateModel> WarrantyCertificateModelFromJson(String str) =>
     List<WarrantyCertificateModel>.from(
         json.decode(str).map((x) => WarrantyCertificateModel.fromJson(x)));
 
-String WarrantyCertificateModelToJson(List<WarrantyCertificateModel> data) =>
+String wcCertificateModelToJson(List<WarrantyCertificateModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class WarrantyCertificateModel {
   WarrantyCertificateModel({
-     this.asset_id,
-     this.categoryId,
+    this.asset_id,
+    this.categoryId,
     this.asset_name,
     this.warrantyTypeId,
     this.warranty_provider,
@@ -30,7 +30,6 @@ class WarrantyCertificateModel {
     this.warrantyProviderId,
     this.warrantyProviderName,
     this.warranty_term_type,
-
   });
 
   int? asset_id;
@@ -38,8 +37,7 @@ class WarrantyCertificateModel {
   String? asset_name;
   int? warrantyTypeId;
   int? warranty_provider;
-  String
-  ? categoryName;
+  String? categoryName;
   String? warranty_description;
   String? warrantyTypeName;
   int? warrantyTermId;
@@ -73,21 +71,21 @@ class WarrantyCertificateModel {
       );
 
   Map<String, dynamic> toJson() => {
-    "asset_id": asset_id,
-    "categoryId": categoryId,
-    "asset_name": asset_name,
-    "warrantyTypeId": warrantyTypeId,
-    "warranty_provider": warranty_provider,
-    "categoryName": categoryName,
-    "warranty_description": warranty_description,
-    "warrantyTypeName": warrantyTypeName,
-    "warrantyTermId": warrantyTermId,
-    "certificate_number": certificate_number,
-    "warranty_certificate_file_path": warranty_certificate_file_path,
-    "warrantyStartDate": warrantyStartDate,
-    "warrantyExpiryDate": warrantyExpiryDate,
-    "warrantyProviderId": warrantyProviderId,
-    "warrantyProviderName": warrantyProviderName,
-    "warranty_term_type": warranty_term_type,
+        "asset_id": asset_id,
+        "categoryId": categoryId,
+        "asset_name": asset_name,
+        "warrantyTypeId": warrantyTypeId,
+        "warranty_provider": warranty_provider,
+        "categoryName": categoryName,
+        "warranty_description": warranty_description,
+        "warrantyTypeName": warrantyTypeName,
+        "warrantyTermId": warrantyTermId,
+        "certificate_number": certificate_number,
+        "warranty_certificate_file_path": warranty_certificate_file_path,
+        "warrantyStartDate": warrantyStartDate,
+        "warrantyExpiryDate": warrantyExpiryDate,
+        "warrantyProviderId": warrantyProviderId,
+        "warrantyProviderName": warrantyProviderName,
+        "warranty_term_type": warranty_term_type,
       };
 }

@@ -1440,7 +1440,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                     onTap: () {
                                                       // Get.toNamed(
                                                       //   Routes
-                                                      //       // .warrantyCertificatesList,
+                                                      //       .wcCertificatesList,
                                                       // );
                                                     })
                                                 : Dimens.box0,

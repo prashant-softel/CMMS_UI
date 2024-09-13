@@ -1205,6 +1205,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getwcCertifiacteList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      // 'MC/GetMCPlanList?facilityId=$facility_id',
+      'GetWarrantyCertificate?facility_id=$facility_id&from_date=2023-09-01&to_date=2040-09-01',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> permitIssueButton({
     required String auth,
     bool? isLoading,

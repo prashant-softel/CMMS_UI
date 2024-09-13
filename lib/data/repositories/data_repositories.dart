@@ -872,6 +872,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getwcCertifiacteList({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getwcCertifiacteList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
+
   Future<ResponseModel> getNewPermitList({
     required String auth,
     int? facilityId,
