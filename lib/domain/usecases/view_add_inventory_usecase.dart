@@ -1,6 +1,7 @@
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/add_inventory_details_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
@@ -75,7 +76,25 @@ class ViewAddInventoryUsecase {
       BusinessType: BusinessType,
     );
   }
-
+Future<List<BusinessTypeModel>> getBusinessTypeList({
+    required int? businessType,
+    required bool isLoading,
+  }) async =>
+      await _repository.getBusinessTypeList(
+        businessType: businessType,
+        isLoading: isLoading,
+      );
+  Future<List<BusinessListModel>> getVenderNameList({
+    required bool isLoading,
+    required int facilityId,
+    required int? businessType,
+  }) async {
+    return _repository.getBusinessList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+      businessType: businessType,
+    );
+  }
   Future<List<BlockModel?>?> getBlocksList({
     String? auth,
     int? facilityId,
