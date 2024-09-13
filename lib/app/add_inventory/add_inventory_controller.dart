@@ -432,12 +432,16 @@ class AddInventoryController extends GetxController {
           editAddInventoryDetailsModel.value?.warrantyProviderId ?? 0;
       selectedBusinessTypeId =
           editAddInventoryDetailsModel.value?.warrantyProviderId ?? 0;
-      selectedVender.value =
+      selectedBusinessType.value =
           editAddInventoryDetailsModel.value?.warrantyProviderName ?? "";
       selectedsupplierrNameId =
           editAddInventoryDetailsModel.value?.supplierId ?? 0;
       selectedUnitCurrencyId =
           editAddInventoryDetailsModel.value?.currencyId ?? 0;
+      selectedvenderId = editAddInventoryDetailsModel.value?.voendor_id ?? 0;
+
+      selectedVender.value =
+          editAddInventoryDetailsModel.value?.warranty_vendor_name ?? "";
 
       calibrationRemaingCtrlr.text =
           "${int.tryParse("${editAddInventoryDetailsModel.value?.calibrationReminderDays ?? 0}")}";
@@ -653,7 +657,8 @@ class AddInventoryController extends GetxController {
             start_date: _startDate,
             expiry_date: _expiryDate,
             certificate_number: _certificateNoCtrlr,
-            warranty_provider_id: selectedvenderId,
+            warranty_provider_id: selectedBusinessTypeId,
+            Warranty_vendor_Id: selectedvenderId,
             warranty_type: selectedWarrentyNameId,
             warranty_term_type: selectedwarrantyUsageTermNameId,
             parent_equipment_no: _parentEquipmentNoCtrlr,
@@ -818,8 +823,9 @@ class AddInventoryController extends GetxController {
             calibrationLastDate: _calibrationLastDate,
             start_date: _startDate,
             expiry_date: _expiryDate,
+            warranty_provider_id: selectedBusinessTypeId,
+            Warranty_vendor_Id: selectedvenderId,
             certificate_number: _certificateNoCtrlr,
-            warranty_provider_id: selectedvenderId,
             warranty_type: selectedWarrentyNameId,
             warranty_term_type: selectedwarrantyUsageTermNameId,
             parent_equipment_no: _parentEquipmentNoCtrlr,
@@ -1143,8 +1149,8 @@ class AddInventoryController extends GetxController {
                 businessCategoryList[equipmentIndex]?.id ?? 0;
             isSelectedBusinessType.value == true;
             selectedBusinessType.value = value;
-            // selectedVender.value = "";
-            // selectedvenderId = 0;
+            selectedVender.value = "";
+            selectedvenderId = 0;
             // print({"selectedBusinessTypeId", selectedBusinessTypeId});
             getVenderNameList(selectedBusinessTypeId, facilityId);
           } else {

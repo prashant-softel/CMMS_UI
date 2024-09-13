@@ -23,6 +23,7 @@ class AddInventoryRequestModel {
   String? expiry_date;
   int? ownerId;
   int? warranty_provider_id;
+  int? Warranty_vendor_Id;
   int? operatorId;
   int? manufacturerId;
   int? supplierId;
@@ -80,7 +81,7 @@ class AddInventoryRequestModel {
       this.area,
       this.cost,
       this.currencyId,
-      // this.currency,
+      this.Warranty_vendor_Id,
       // this.attachments,
       this.assetdescription,
       this.lstWarrantyDetail,
@@ -95,7 +96,7 @@ class AddInventoryRequestModel {
     id = json['id'];
     uplaodfile_of_warranty = json['uplaodfile_of_warranty'];
     uplaodfile_of_calibration = json['uplaodfile_of_calibration'];
-
+    Warranty_vendor_Id = json['Warranty_vendor_Id'];
     name = json['name'];
     description = json['description'];
     assetdescription = json['assetdescription'];
@@ -152,7 +153,7 @@ class AddInventoryRequestModel {
     data["id"] = this.id;
     data["uplaodfile_of_warranty"] = this.uplaodfile_of_warranty;
     data["uplaodfile_of_calibration"] = this.uplaodfile_of_calibration;
-
+    data["Warranty_vendor_Id"] = this.Warranty_vendor_Id;
     data['name'] = this.name;
     data['description'] = this.description;
     data['assetdescription'] = this.assetdescription;
