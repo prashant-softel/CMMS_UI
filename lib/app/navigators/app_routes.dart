@@ -45,7 +45,6 @@ abstract class Routes {
   static const preventiveMaintenanceMapping =
       _Paths.preventiveMaintenanceMapping;
   static const calibrationList = _Paths.calibrationList;
-  static const warrantyCertificatesList = _Paths.warrantyCertificatesList;
 
   static const CalibrationHistory = _Paths.calibrationHistory;
   static const viewWarrantyClaim = _Paths.viewWarrantyClaim;
@@ -158,7 +157,7 @@ abstract class Routes {
   static const moduleCleaningListPlan = _Paths.moduleCleaningListPlan;
   static const insuranceStatus = _Paths.insuranceStatus;
   static const calibrationCertificate = _Paths.calibrationCertificate;
-  static const warrantyCertificate = _Paths.warrantyCertificate;
+
   static const moduleCleaningListExecution = _Paths.moduleCleaningListExecution;
   static const returnMrsList = _Paths.returnMrsList;
   static const issueMrsApprove = _Paths.issueMrsApprove;
@@ -320,7 +319,7 @@ abstract class _Paths {
 
   static const preventiveMaintenanceMapping = '/pm-mapping-screen';
   static const calibrationList = '/calibration-list-screen';
-  static const warrantyCertificatesList = '/warranty-certificates-list-screen';
+
   static const calibrationHistory = '/calibration-history-screen';
   static const viewWarrantyClaim = '/view-warranty-claim';
   static const newWarrantyClaimList = '/new-warranty-claim';
@@ -415,7 +414,7 @@ abstract class _Paths {
 
   static const insuranceStatus = '/insuranceStatus';
   static const calibrationCertificate = '/calibrationCertificate';
-  static const warrantyCertificate = '/warrantyCertificate';
+
   static const moduleCleaningListExecution = '/module-cleaning-list-execution';
   static const returnMrsList = '/return-mrs';
   static const issueMrsApprove = '/issue-mrs-approve-reject';

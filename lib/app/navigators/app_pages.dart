@@ -278,8 +278,7 @@ import 'package:cmms/app/view_waste_data/view/view_waste_data_screen.dart';
 import 'package:cmms/app/view_waste_data/view_waste_data_binding.dart';
 import 'package:cmms/app/view_water_data/view/view_water_data_screen.dart';
 import 'package:cmms/app/view_water_data/view_water_data_binding.dart';
-import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_binding.dart';
-import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_screen.dart';
+
 import 'package:cmms/app/warranty_claim_list/warranty_claim_binding.dart';
 import 'package:cmms/app/careate_warranty_calim/view/create_warranty_claim_web.dart';
 import 'package:cmms/app/waste_data/views/waste_data_screen.dart';
@@ -418,8 +417,7 @@ import '../designation_List/view/designation_list_screen.dart';
 import '../designation_List/designation_list_binding.dart';
 import '../competency_list/view/competency_list_screen.dart';
 import '../competency_list/competency_list_binding.dart';
-import '../warranty_certificate/view/warranty_certificate_screen.dart';
-import '../warranty_certificate/warranty_certificate_binding.dart';
+
 import 'package:cmms/app/new_permit/new_binding.dart';
 
 // coverage:ignore-file
@@ -592,11 +590,7 @@ class AppPages {
       page: CalibrationListScreen.new,
       binding: CalibrationListBinding(),
     ),
-    GetPage<dynamic>(
-      name: _Paths.warrantyCertificatesList,
-      page: WarrantyCertificatesListScreen.new,
-      binding: WarrantyCertificatesListBinding(),
-    ),
+
     GetPage<dynamic>(
       name: _Paths.calibrationHistory,
       page: CalibrationHistoryScreen.new,
@@ -1042,11 +1036,7 @@ class AppPages {
       page: CalibrationCertificateScreen.new,
       binding: CalibrationCertificateBinding(),
     ),
-    GetPage<dynamic>(
-      name: _Paths.warrantyCertificate,
-      page: WarrantyCertificateScreen.new,
-      binding: WarrantyCertificateBinding(),
-    ),
+   
     GetPage<dynamic>(
       name: _Paths.moduleCleaningListExecution,
       page: ModuleCleaningListExecutionScreen.new,
