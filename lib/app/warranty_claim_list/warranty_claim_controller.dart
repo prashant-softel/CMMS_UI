@@ -34,6 +34,9 @@ class WarrantyClaimController extends GetxController {
   FocusNode wtitleFocus = FocusNode();
   ScrollController wtitleScroll = ScrollController();
   var itemCount = 0.obs;
+   // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
 
   //Additional Email work
   var rowList = <String>[].obs;
@@ -253,7 +256,7 @@ class WarrantyClaimController extends GetxController {
     "Warranty Claim Title": 220,
     "Date Of Claim": 200,
     "Claim Status": 250,
-    "Equipment Serial No.": 200,
+    "Equipment Serial No.": 230,
     "Equipment Category": 250,
     "Equipment Name": 250,
     "Estimated Cost": 250,
@@ -1214,5 +1217,61 @@ class WarrantyClaimController extends GetxController {
 
   void getWarrantyClaimtListByDate() {
     getWarrantyClaimList(facilityId, formattedFromdate, formattedTodate);
+  }
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+    switch (columnName) {
+      case 'Id':
+        warrantyClaimList.sort((a, b) => isAscending.value
+            ? (a?.wc_id ?? 0).compareTo(b?.wc_id ?? 0)
+            : (b?.wc_id ?? 0).compareTo(a?.wc_id ?? 0));
+        break;
+      case 'Warranty Claim Title':
+        warrantyClaimList.sort((a, b) => isAscending.value
+            ? (a?.warranty_claim_title ?? '').compareTo(b?.warranty_claim_title ?? '')
+            : (b?.warranty_claim_title ?? '').compareTo(a?.warranty_claim_title ?? ''));
+        break;
+      case 'Date Of Claim':
+        warrantyClaimList.sort((a, b) => isAscending.value
+            ? (a?.date_of_claim ?? '').compareTo(b?.date_of_claim ?? '')
+            : (b?.date_of_claim ?? '').compareTo(a?.date_of_claim ?? ''));
+        break;
+      case 'Claim Status':
+        warrantyClaimList.sort((a, b) => isAscending.value
+            ? (a?.long_claim_status ?? '')
+                .compareTo(b?.long_claim_status ?? '')
+            : (b?.long_claim_status ?? '')
+                .compareTo(a?.long_claim_status ?? ''));
+        break;
+      case 'Equipment Serial No.':
+        warrantyClaimList.sort((a, b) => isAscending.value
+            ? (a?.equipment_sr_no ?? '').compareTo(b?.equipment_sr_no ?? '')
+            : (b?.equipment_sr_no ?? '').compareTo(a?.equipment_sr_no ?? ''));
+        break;
+
+      case 'Equipment Category':
+        warrantyClaimList.sort((a, b) => isAscending.value
+            ? (a?.equipment_category ?? '').compareTo(b?.equipment_category ?? '')
+            : (b?.equipment_category ?? '').compareTo(a?.equipment_category ?? ''));
+        break;
+      case 'Equipment Name':
+        warrantyClaimList.sort((a, b) => isAscending.value
+            ? (a?.equipment_name ?? '').compareTo(b?.equipment_name ?? '')
+            : (b?.equipment_name ?? '').compareTo(a?.equipment_name ?? ''));
+        break;
+      case 'Estimated Cost':
+        warrantyClaimList.sort((a, b) => isAscending.value
+            ? (a?.estimated_cost ?? 0).compareTo(b?.estimated_cost ?? 0)
+            : (b?.estimated_cost ?? 0).compareTo(a?.estimated_cost ?? 0));
+        break;
+      default:
+        break;
+    }
+    update();
   }
 }
