@@ -193,11 +193,11 @@ class _WarrantyTabWidgetState extends State<ViewWarrantyTabWidget> {
                                       width:
                                           MediaQuery.of(context).size.width / 5,
                                       dropdownList:
-                                          controller.manufacturerModelNameList,
+                                          controller.businessCategoryList,
                                       isValueSelected: controller
-                                          .iswarrantymanufacturerSelected.value,
-                                      selectedValue: controller
-                                          .selectedmanufacturerName.value,
+                                          .isSelectedBusinessType.value,
+                                      selectedValue:
+                                          controller.selectedBusinessType.value,
                                       onValueChanged: controller.onValueChanged,
                                     ),
                                   ),
@@ -205,6 +205,35 @@ class _WarrantyTabWidgetState extends State<ViewWarrantyTabWidget> {
                               ],
                             ),
                           ),
+                          SizedBox(height: 10),
+                          IgnorePointer(
+                            child: Row(
+                              children: [
+                                CustomRichText(
+                                    includeAsterisk: false, title: "Vender"),
+                                SizedBox(width: 10),
+                                SizedBox(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: DropdownWebStock(
+                                      width:
+                                          MediaQuery.of(context).size.width / 5,
+                                      dropdownList: controller.venderNameList,
+                                      isValueSelected:
+                                          controller.isVenderNameSelected.value,
+                                      selectedValue:
+                                          controller.selectedVender.value,
+                                      onValueChanged: controller.onValueChanged,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          // Dimens.boxHeight10,
+
                           Dimens.boxHeight10,
                           IgnorePointer(
                             child: Row(

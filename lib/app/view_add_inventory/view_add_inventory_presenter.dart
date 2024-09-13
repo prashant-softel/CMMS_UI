@@ -1,5 +1,7 @@
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/add_inventory_details_model.dart';
+import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
@@ -165,6 +167,25 @@ class ViewAddInventoryPresenter {
   }) async {
     return viewaddInventoryUsecase.getSupplierList(
         isLoading: isLoading, BusinessType: BusinessType);
+  }  Future<List<BusinessTypeModel>> getBusinessTypeList({
+    int? businessType,
+    bool? isLoading,
+  }) async =>
+      await viewaddInventoryUsecase.getBusinessTypeList(
+        isLoading: isLoading ?? false,
+        businessType: businessType,
+      );
+  Future<List<BusinessListModel>> getVenderNameList({
+    required bool isLoading,
+    required int facilityId,
+    required int? businessType,
+    int? blockId,
+  }) async {
+    return viewaddInventoryUsecase.getVenderNameList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+      businessType: businessType,
+    );
   }
 
   Future<String?> getValue() async => await viewaddInventoryUsecase.getValue();
