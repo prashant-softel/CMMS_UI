@@ -172,43 +172,68 @@ class WcCertificatesListController extends GetxController {
     wcCertificateList.value = filteredList;
   }
 
-  // void sortData(String columnName) {
-  //   if (currentSortColumn.value == columnName) {
-  //     isAscending.value = !isAscending.value;
-  //   } else {
-  //     currentSortColumn.value = columnName;
-  //     isAscending.value = true;
-  //   }
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
 
-  //   switch (columnName) {
-  //     case 'Plan Id':
-  //       wcCertificateList.sort((a, b) => isAscending.value
-  //           ? a.planId!.compareTo(b.planId!)
-  //           : b.planId!.compareTo(a.planId!));
-  //       break;
-  //     case 'Plan Title':
-  //       wcCertificateList.sort((a, b) => isAscending.value
-  //           ? a.title!.compareTo(b.title!)
-  //           : b.title!.compareTo(a.title!));
-  //       break;
-  //     case 'No of Days':
-  //       wcCertificateList.sort((a, b) => isAscending.value
-  //           ? a.noOfCleaningDays!.compareTo(b.noOfCleaningDays!)
-  //           : b.noOfCleaningDays!.compareTo(a.noOfCleaningDays!));
-  //       break;
-  //     case 'Created By':
-  //       wcCertificateList.sort((a, b) => isAscending.value
-  //           ? a.createdBy!.compareTo(b.createdBy!)
-  //           : b.createdBy!.compareTo(a.createdBy!));
-  //       break;
-  //     case 'Frequency':
-  //       wcCertificateList.sort((a, b) => isAscending.value
-  //           ? a.frequency!.compareTo(b.frequency!)
-  //           : b.frequency!.compareTo(a.frequency!));
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //   update();
-  // }
+    switch (columnName) {
+      case 'Asset Id':
+        wcCertificateList.sort((a, b) => isAscending.value
+            ? a.assetId!.compareTo(b.assetId!)
+            : b.assetId!.compareTo(a.assetId!));
+        break;
+      case 'Asset Name':
+        wcCertificateList.sort((a, b) => isAscending.value
+            ? a.assetName!.compareTo(b.assetName!)
+            : b.assetName!.compareTo(a.assetName!));
+        break;
+      case 'Category Name':
+        wcCertificateList.sort((a, b) => isAscending.value
+            ? a.categoryName!.compareTo(b.categoryName!)
+            : b.categoryName!.compareTo(a.categoryName!));
+        break;
+      case 'Description':
+        wcCertificateList.sort((a, b) => isAscending.value
+            ? a.warrantyDescription!.compareTo(b.warrantyDescription!)
+            : b.warrantyDescription!.compareTo(a.warrantyDescription!));
+        break;
+      case 'Warranty Type':
+        wcCertificateList.sort((a, b) => isAscending.value
+            ? a.warrantyTypeName!.compareTo(b.warrantyTypeName!)
+            : b.warrantyTypeName!.compareTo(a.warrantyTypeName!));
+        break;
+      case 'Warranty Term':
+        wcCertificateList.sort((a, b) => isAscending.value
+            ? a.warrantyTermName!.compareTo(b.warrantyTermName!)
+            : b.warrantyTermName!.compareTo(a.warrantyTermName!));
+        break;
+      case 'Start Date':
+        wcCertificateList.sort((a, b) => isAscending.value
+            ? a.warrantyStartDate!.compareTo(b.warrantyStartDate!)
+            : b.warrantyStartDate!.compareTo(a.warrantyStartDate!));
+        break;
+      case 'Expiry Date':
+        wcCertificateList.sort((a, b) => isAscending.value
+            ? a.warrantyExpiryDate!.compareTo(b.warrantyExpiryDate!)
+            : b.warrantyExpiryDate!.compareTo(a.warrantyExpiryDate!));
+        break;
+      case 'Certificate Number':
+        wcCertificateList.sort((a, b) => isAscending.value
+            ? a.certificateNumber!.compareTo(b.certificateNumber!)
+            : b.certificateNumber!.compareTo(a.certificateNumber!));
+        break;
+      case 'Provider Name':
+        wcCertificateList.sort((a, b) => isAscending.value
+            ? a.warrantyProviderName!.compareTo(b.warrantyProviderName!)
+            : b.warrantyProviderName!.compareTo(a.warrantyProviderName!));
+        break;
+      default:
+        break;
+    }
+    update(); // Notify listeners about the change
+  }
 }

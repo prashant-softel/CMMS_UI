@@ -323,7 +323,7 @@ DataColumn2 buildDataColumn(
         ? null
         : (int columnIndex, bool ascending) {
             final controller = Get.find<WcCertificatesListController>();
-            // controller.sortData(header);
+            controller.sortData(header); 
           },
     label: Column(
       mainAxisAlignment: MainAxisAlignment.center,
