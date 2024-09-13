@@ -263,14 +263,10 @@ class _WcCertificatesListWebState extends State<WcCertificatesListWeb> {
                                                     return PaginatedDataTable2(
                                                       columnSpacing: 10,
                                                       dataRowHeight: 70,
-                                                      source:
-                                                          dataSource, // Custom DataSource class
-                                                      // headingRowHeight:
-                                                      //     Get.height * 0.12,
-                                                      minWidth: Get.width * 1.2,
+                                                      source: dataSource,
+                                                      minWidth: 2300,
                                                       showCheckboxColumn: false,
-                                                      rowsPerPage:
-                                                          10, // Number of rows per page
+                                                      rowsPerPage: 10,
                                                       availableRowsPerPage: [
                                                         10,
                                                         20,

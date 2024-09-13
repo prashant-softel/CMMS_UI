@@ -52,15 +52,15 @@ class WcCertificatesListController extends GetxController {
     'Provider Name': true,
   });
   final Map<String, double> columnwidth = {
-    'Asset Id': 200,
+    'Asset Id': 150,
     'Asset Name': 200,
     'Category Name': 200,
     'Description': 200,
     'Warranty Type': 200,
     'Warranty Term': 200,
-    'Start Date': 200,
-    'Expiry Date': 200,
-    'Certificate Number': 200,
+    'Start Date': 150,
+    'Expiry Date': 150,
+    'Certificate Number': 300,
     'Provider Name': 200,
   };
 

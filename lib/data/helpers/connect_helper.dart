@@ -1211,8 +1211,7 @@ class ConnectHelper {
     int? facility_id,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      // 'MC/GetMCPlanList?facilityId=$facility_id',
-      'GetWarrantyCertificate?facility_id=$facility_id&from_date=2023-09-01&to_date=2040-09-01',
+      'Inventory/GetWarrantyCertificate?facility_id=$facility_id&from_date=2023-09-01&to_date=2040-09-01',
       Request.getMultiparts,
       null,
       isLoading,
