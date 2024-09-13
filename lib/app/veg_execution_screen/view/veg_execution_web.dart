@@ -226,10 +226,15 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                   ' ${controller.vegExecutionDetailsModel.value?.title}',
                                                   style: Styles.blue17,
                                                 ),
-                                                Text(
-                                                  '${controller.vegExecutionDetailsModel.value?.startedAt}',
+                                                 Text(
+                                                  controller.vegExecutionDetailsModel
+                                                              .value?.status !=
+                                                          721
+                                                      ? ' ${controller.vegExecutionDetailsModel.value?.startedAt}'
+                                                      : '',
                                                   style: Styles.blue17,
                                                 ),
+                                               
                                               ],
                                             ),
                                             Spacer(),

@@ -4,6 +4,7 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload3_details_widget.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_dropzone3.dart';
@@ -180,6 +181,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                           ),
                           Spacer(),
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Row(
                                 children: [
@@ -196,13 +198,40 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                         width:
                                             MediaQuery.of(context).size.width /
                                                 5,
-                                        dropdownList: controller
-                                            .manufacturerModelNameList,
+                                        dropdownList:
+                                            controller.businessCategoryList,
                                         isValueSelected: controller
-                                            .iswarrantymanufacturerSelected
-                                            .value,
+                                            .isSelectedBusinessType.value,
                                         selectedValue: controller
-                                            .selectedmanufacturerName.value,
+                                            .selectedBusinessType.value,
+                                        onValueChanged:
+                                            controller.onValueChanged,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              // Dimens.boxHeight10,
+                              SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  CustomRichText(
+                                      includeAsterisk: false, title: "Vender"),
+                                  SizedBox(width: 10),
+                                  SizedBox(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: DropdownWebStock(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                5,
+                                        dropdownList: controller.venderNameList,
+                                        isValueSelected: controller
+                                            .isVenderNameSelected.value,
+                                        selectedValue:
+                                            controller.selectedVender.value,
                                         onValueChanged:
                                             controller.onValueChanged,
                                       ),
@@ -218,70 +247,36 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                       includeAsterisk: false,
                                       title: "Certificate Number"),
                                   SizedBox(width: 10),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                      color: Color(0xFE50000),
-                                      width: 0.5,
-                                    )),
-                                    height: MediaQuery.of(context).size.height *
-                                        0.040,
-                                    constraints: BoxConstraints(
-                                      maxWidth:
-                                          MediaQuery.of(context).size.width / 5,
-                                      minWidth: 100,
-                                    ),
-                                    child: LoginCustomTextfield(
-                                      // keyboardType: TextInputType.number,
-                                      // inputFormatters: <TextInputFormatter>[
-                                      //   FilteringTextInputFormatter.digitsOnly
-                                      // ],
-                                      textController:
-                                          controller.certificateNoCtrlr,
-                                      // errorController: controller
-                                      //         .isCertificateNumberInvalid.value
-                                      //     ? "Required field"
-                                      //     : null,
-                                      // onChanged: (value) {
-                                      //   if (value.trim().length > 1) {
-                                      //     controller.isCertificateNumberInvalid
-                                      //         .value = false;
-                                      //   } else {
-                                      //     controller.isCertificateNumberInvalid
-                                      //         .value = true;
-                                      //   }
-                                      // }
-                                    ),
+                                  LoginCustomTextfield(
+                                    width: (MediaQuery.of(context).size.width *
+                                        .2),
+                                    textController:
+                                        controller.certificateNoCtrlr,
+                                    // errorController:
+                                    //     controller.isDescriptionInvalid.value
+                                    //         ? "Required field"
+                                    //         : null,
+                                    // onChanged: (value) {
+                                    //   if (value.trim().length > 1) {
+                                    //     controller.isDescriptionInvalid.value =
+                                    //         false;
+                                    //   } else {
+                                    //     controller.isDescriptionInvalid.value =
+                                    //         true;
+                                    //   }
+                                    // }
+                                    // focusnode: controller.wdescFocus,
+                                    // scroll: controller.wdescScroll,
                                   ),
                                 ],
                               ),
-                              // Dimens.boxHeight10,
-                              SizedBox(height: 10),
-                              // Container(
-                              //   child: Row(
-                              //     mainAxisSize: MainAxisSize.min,
-                              //     children: [
-                              //       Text(
-                              //         'Warranty Certificate',
-                              //         style: Styles.blackBold16,
-                              //       ),
-                              //       SizedBox(width: 10),
-                              //       ActionButton(
-                              //         label: 'Upload certification file',
-                              //         onPressed: () {},
-                              //         icon: Icons.file_upload_outlined,
-                              //         color: ColorValues.appLightBlueColor,
-                              //       )
-                              //     ],
-                              //   ),
-                              // ),
                               // Dimens.boxHeight10,
                               SizedBox(height: 10),
                               Row(
                                 children: [
                                   CustomRichText(
                                       includeAsterisk: false,
-                                      title: ' Expire Date:'),
+                                      title: 'Expire Date:'),
                                   SizedBox(width: 10),
                                   CustomTextFieldForStock(
                                     width:

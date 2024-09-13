@@ -76,6 +76,8 @@ class AddInventoryDetailsModel {
   String? warrantyType;
   String? warranty_term_type;
   String? warrantyStatus;
+  int? voendor_id;
+  String? warranty_vendor_name;
   List<FileList>? calibration_file;
   List<FileList>? warranty_file;
   List<FileList>? inventory_image;
@@ -83,6 +85,8 @@ class AddInventoryDetailsModel {
   AddInventoryDetailsModel(
       {this.id,
       this.name,
+      this.warranty_vendor_name,
+      this.voendor_id,
       this.calibration_file,
       this.warranty_file,
       this.inventory_image,
@@ -158,7 +162,8 @@ class AddInventoryDetailsModel {
   // Factory method to create a AddInventoryDetailsModel instance from JSON
   factory AddInventoryDetailsModel.fromJson(Map<String, dynamic> json) {
     return AddInventoryDetailsModel(
-      id: json['id'],
+      id: json['id'], voendor_id: json['voendor_id'],
+      warranty_vendor_name: json["warranty_vendor_name"],
       name: json['name'],
       facilityId: json['facilityId'],
       facilityName: json['facilityName'],

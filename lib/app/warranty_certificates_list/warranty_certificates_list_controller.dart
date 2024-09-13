@@ -18,9 +18,6 @@ class WarrantyCertificatesListController extends GetxController {
   RxList<InventoryModel?> inventoryList = <InventoryModel?>[].obs;
   RxList<InventoryModel?> filteredData = <InventoryModel?>[].obs;
   RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
-    // For sorting
-  RxString currentSortColumn = ''.obs;
-  RxBool isAscending = true.obs;
 
   InventoryModel? inventoryModelList;
   RxList<String> inventoryListTableColumns = <String>[].obs;
@@ -197,55 +194,4 @@ class WarrantyCertificatesListController extends GetxController {
   //   Get.toNamed(Routes.addInventoryScreen);
   //   print('Argument5:$id');
   // }
-   void sortData(String columnName) {
-    if (currentSortColumn.value == columnName) {
-      isAscending.value = !isAscending.value;
-    } else {
-      currentSortColumn.value = columnName;
-      isAscending.value = true;
-    }
-    switch (columnName) {
-      case 'Name':
-        inventoryList.sort((a, b) => isAscending.value
-            ? (a?.name ?? '').compareTo(b?.name ?? '')
-            : (b?.name ?? '').compareTo(a?.name ?? ''));
-        break;
-      case 'Serial Number':
-        inventoryList.sort((a, b) => isAscending.value
-            ? (a?.serialNumber ?? '').compareTo(b?.serialNumber ?? '')
-            : (b?.serialNumber ?? '').compareTo(a?.serialNumber ?? ''));
-        break;
-      case 'Id':
-        inventoryList.sort((a, b) => isAscending.value
-            ? (a?.id ?? 0).compareTo(b?.id ?? 0)
-            : (b?.id ?? 0).compareTo(a?.id ?? 0));
-        break;
-      case 'Parent Name':
-        inventoryList.sort((a, b) => isAscending.value
-            ? (a?.parentName ?? '')
-                .compareTo(b?.parentName ?? '')
-            : (b?.parentName ?? '')
-                .compareTo(a?.parentName ?? ''));
-        break;
-      case 'Category':
-        inventoryList.sort((a, b) => isAscending.value
-            ? (a?.categoryName ?? '').compareTo(b?.categoryName ?? '')
-            : (b?.categoryName ?? '').compareTo(a?.categoryName ?? ''));
-        break;
-
-      case 'Asset Facility Name':
-        inventoryList.sort((a, b) => isAscending.value
-            ? (a?.customerName ?? '').compareTo(b?.customerName ?? '')
-            : (b?.customerName ?? '').compareTo(a?.customerName ?? ''));
-        break;
-      case 'Status':
-        inventoryList.sort((a, b) => isAscending.value
-            ? (a?.status ?? '').compareTo(b?.status ?? '')
-            : (b?.status ?? '').compareTo(a?.status ?? ''));
-        break;
-      default:
-        break;
-    }
-    update();
-  }
 }

@@ -469,9 +469,10 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                 text: "Reject",
                                 icon: Icons.close,
                                 onPressed: () {
-                                  controller.vegPlanRejectButton(
-                                    id: controller.id.value,
-                                  );
+                                  Get.dialog(ApproveVegPlan(
+                                    id: controller.id.value,type:1
+                                  ));
+
                                 },
                               ),
                             ),
