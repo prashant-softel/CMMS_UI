@@ -1036,7 +1036,7 @@ class AppPages {
       page: CalibrationCertificateScreen.new,
       binding: CalibrationCertificateBinding(),
     ),
-   
+
     GetPage<dynamic>(
       name: _Paths.moduleCleaningListExecution,
       page: ModuleCleaningListExecutionScreen.new,
