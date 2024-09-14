@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/calender_view_dashboard/calendar_view_dashboard_presenter.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
 // import 'package:cmms/breakdown_maintenance/breakdown_presenter.dart';
@@ -42,9 +43,9 @@ class CalendarViewDashbordController extends GetxController {
     }
   }
 
-  Future<void> goToDocumentManager() async {
-    // Get.toNamed(
-    //   // Routes.documentManager,
-    // );
+  Future<void> goToCalenderViewScreen() async {
+    Get.toNamed(
+      Routes.calendarView,
+    );
   }
 }

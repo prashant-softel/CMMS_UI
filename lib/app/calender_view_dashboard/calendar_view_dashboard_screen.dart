@@ -7,8 +7,6 @@ import 'package:get/get.dart';
 
 import '../onHover.dart';
 
-
-
 class CalendarViewDashbordScreen
     extends GetView<CalendarViewDashbordController> {
   CalendarViewDashbordScreen({super.key});
@@ -21,7 +19,6 @@ class CalendarViewDashbordScreen
     var size = Get;
 
     final double itemHeight = (size.height - kToolbarHeight - 50) / 9;
-
 
     final double itemWidth = size.width / 2;
 
@@ -108,7 +105,8 @@ class CalendarViewDashbordScreen
                                         return createContentTile(
                                             title: "Calender View ",
                                             onTap: () {
-                                              // controller.goToDocumentManager();
+                                              controller
+                                                  .goToCalenderViewScreen();
                                             });
                                       }))),
                                     ],

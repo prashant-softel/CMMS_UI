@@ -70,7 +70,7 @@ class _WcCertificatesListWebState extends State<WcCertificatesListWeb> {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.offNamed(Routes.moduleCleaningDashboard);
+                                Get.offNamed(Routes.masterDashboard);
                               },
                               child:
                                   Text(" / MASTER", style: Styles.greyLight14),
