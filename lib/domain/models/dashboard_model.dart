@@ -404,7 +404,7 @@ class AllChartview {
 
   factory AllChartview.fromJson(Map<String, dynamic> parsedJson) =>
       AllChartview(
-        key: parsedJson['key'],
+        key: parsedJson['key'] == null ? "" : parsedJson['key'],
         value: parsedJson['value'],
       );
 

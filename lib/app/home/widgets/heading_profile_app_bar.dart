@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/domain/repositories/repository.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +13,8 @@ class HeadingProfileAppBar extends GetView<HomeController> {
     super.key,
   });
 
-  final HomeController controller = Get.find<HomeController>();
+  final HomeController controller = Get.find<HomeController>();  var repository = Get.find<Repository>();
+
   String title;
   @override
   Widget build(BuildContext context) {
@@ -202,7 +204,7 @@ class HeadingProfileAppBar extends GetView<HomeController> {
                 child: Text('NO'),
               ),
               TextButton(
-                onPressed: () {
+                onPressed: () {repository.deleteAllSecuredValues();
                   Get.offAllNamed(Routes.login);
                 },
                 child: Text('YES'),

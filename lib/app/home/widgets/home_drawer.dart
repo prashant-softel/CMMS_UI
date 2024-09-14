@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../navigators/app_pages.dart';
@@ -6,6 +7,7 @@ import '../../navigators/app_pages.dart';
 class HomeDrawer extends GetView<HomeController> {
   HomeDrawer({super.key});
   final HomeController controller = Get.find<HomeController>();
+  var repository = Get.find<Repository>();
 
   @override
   Widget build(BuildContext context) {
@@ -330,6 +332,7 @@ class HomeDrawer extends GetView<HomeController> {
                 ),
                 TextButton(
                   onPressed: () {
+                    repository.deleteAllSecuredValues();
                     Get.offAllNamed(Routes.login);
                   },
                   child: Text('YES'),

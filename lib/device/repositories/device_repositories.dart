@@ -116,12 +116,14 @@ class DeviceRepository extends DomainRepository {
   @override
   void deleteSecuredValue(String key) {
     _flutterSecureStorage.delete(key: key);
+    _getBox().delete(key);
   }
 
   /// Delete all data from secure storage
   @override
   void deleteAllSecuredValues() {
     _flutterSecureStorage.deleteAll();
+    _getBox().clear();
   }
 
   @override
