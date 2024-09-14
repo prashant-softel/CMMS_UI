@@ -375,12 +375,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createNewPermit(
-        auth: auth,
-        newPermit: newPermit,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createNewPermit(
+          auth: auth,
+          newPermit: newPermit,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response Create Permit: ${resourceData}');
@@ -418,13 +420,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createNewPermitForJob(
-        auth: auth,
-        newPermit: newPermit,
-        jobId: jobId,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createNewPermitForJob(
+          auth: auth,
+          newPermit: newPermit,
+          jobId: jobId,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response Create Permit For Job: ${resourceData}');
@@ -463,13 +467,15 @@ class Repository {
       activity, bool? isLoading, type, vegplanId, vegexid, facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createNewPermitForPm(
-        auth: auth,
-        newPermit: newPermit,
-        pmTaskId: pmTaskId,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createNewPermitForPm(
+          auth: auth,
+          newPermit: newPermit,
+          pmTaskId: pmTaskId,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response Create Permit For Job: ${resourceData}');
@@ -519,15 +525,17 @@ class Repository {
       bool? resubmit, int? type, vegplanId, vegexid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateNewPermit(
-          auth: auth,
-          newPermit: newPermit,
-          isLoading: isLoading ?? false,
-          resubmit: resubmit,
-          type: type,
-          vegplanId: vegplanId,
-          vegexid: vegexid);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateNewPermit(
+            auth: auth,
+            newPermit: newPermit,
+            isLoading: isLoading ?? false,
+            resubmit: resubmit,
+            type: type,
+            vegplanId: vegplanId,
+            vegexid: vegexid);
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response Update Permit: ${resourceData}');
@@ -562,15 +570,17 @@ class Repository {
       bool? resubmit, int? type, vegplanId, vegexid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.resubmitPermit(
-          auth: auth,
-          newPermit: newPermit,
-          isLoading: isLoading ?? false,
-          resubmit: resubmit,
-          type: type,
-          vegplanId: vegplanId,
-          vegexid: vegexid);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.resubmitPermit(
+            auth: auth,
+            newPermit: newPermit,
+            isLoading: isLoading ?? false,
+            resubmit: resubmit,
+            type: type,
+            vegplanId: vegplanId,
+            vegexid: vegexid);
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response resubmitPermit : ${resourceData}');
@@ -607,12 +617,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createSOP(
-        auth: auth,
-        createSop: createSop,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createSOP(
+          auth: auth,
+          createSop: createSop,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response Create SOp: ${resourceData}');
@@ -650,12 +662,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createWarrantyClaim(
-        auth: auth,
-        createWarrantyClaim: createWarrantyClaim,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createWarrantyClaim(
+          auth: auth,
+          createWarrantyClaim: createWarrantyClaim,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response Create Warranty Claim: ${resourceData}');
@@ -694,12 +708,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createIncidentReport(
-        auth: auth,
-        createIncidentReport: createIncidentReport,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createIncidentReport(
+          auth: auth,
+          createIncidentReport: createIncidentReport,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response Create Incident Report: ${resourceData}');
@@ -738,14 +754,16 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createEscalationMatrix(
-        auth: auth,
-        createEscalationMatrix: createEscalationMatrix,
-        moduleId: moduleId,
-        statusId: statusId,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createEscalationMatrix(
+          auth: auth,
+          createEscalationMatrix: createEscalationMatrix,
+          moduleId: moduleId,
+          statusId: statusId,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response Escalation Matrix Report: ${resourceData}');
@@ -783,15 +801,18 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.escalateModule(
-        auth: auth,
-        moduleId: moduleId,
-        statusId: statusId,
-        facilityId: facilityId,
-        isLoading: isLoading ?? false,
-      );
-      var resourceData = res.data;
-      print('Response Escalation Matrix Report: ${resourceData}');
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.escalateModule(
+          auth: auth,
+          moduleId: moduleId,
+          statusId: statusId,
+          facilityId: facilityId,
+          isLoading: isLoading ?? false,
+        );
+        var resourceData = res.data;
+        print('Response Escalation Matrix Report: ${resourceData}');
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -814,12 +835,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getEscalationDetail(
-        auth: auth,
-        moduleId: moduleId,
-        statusId: statusId,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getEscalationDetail(
+          auth: auth,
+          moduleId: moduleId,
+          statusId: statusId,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           final List<EscalationDetails> _escalationDetails =
@@ -846,10 +870,13 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getEscalationMatrixList(
-        isLoading: isLoading,
-        auth: auth,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getEscalationMatrixList(
+          isLoading: isLoading,
+          auth: auth,
+        );
+      }
       print('Escalation Matrix List Data: ${res.data}');
 
       if (!res.hasError) {
@@ -870,12 +897,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createGoodsOrder(
-        auth: auth,
-        createGo: createGo,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createGoodsOrder(
+          auth: auth,
+          createGo: createGo,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Create Goods order : ${resourceData}');
@@ -910,11 +939,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.uploadDocumentNew(
-        auth: auth,
-        uploadDocument: uploadDocument,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.uploadDocumentNew(
+          auth: auth,
+          uploadDocument: uploadDocument,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       if (!res.hasError) {
         Fluttertoast.showToast(
@@ -936,13 +968,15 @@ class Repository {
       createCompliance, bool? isLoading, int? position) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createCompliance(
-        auth: auth,
-        createCompliance: createCompliance,
-        isLoading: isLoading ?? false,
-        position: position,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createCompliance(
+          auth: auth,
+          createCompliance: createCompliance,
+          isLoading: isLoading ?? false,
+          position: position,
+        );
+      }
       var resourceData = res.data;
 
       print('Response create Statutory Compliance order : ${resourceData}');
@@ -976,10 +1010,13 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.approvePmTaskExecution(
-          auth: auth,
-          isLoading: isLoading,
-          approvetoJsonString: json.encode(approvetoJsonString));
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approvePmTaskExecution(
+            auth: auth,
+            isLoading: isLoading,
+            approvetoJsonString: json.encode(approvetoJsonString));
+      }
       print({"res.data", res.data});
       if (!res.hasError) {
         // Fluttertoast.showToast(msg: "Approved Successfully!", fontSize: 45.0);
@@ -1006,11 +1043,14 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.approveCancelPmTaskExecution(
-          auth: auth,
-          isLoading: isLoading,
-          approveCanceltoJsonString: json.encode(approveCanceltoJsonString));
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approveCancelPmTaskExecution(
+            auth: auth,
+            isLoading: isLoading,
+            approveCanceltoJsonString: json.encode(approveCanceltoJsonString));
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         var resp = res.data;
         var parsedJson = json.decode(resp);
@@ -1039,11 +1079,14 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.CancelPMTask(
-          auth: auth,
-          isLoading: isLoading,
-          CancelPMTaskJsonString: json.encode(CancelPMTaskJsonString));
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.CancelPMTask(
+            auth: auth,
+            isLoading: isLoading,
+            CancelPMTaskJsonString: json.encode(CancelPMTaskJsonString));
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         var resp = res.data;
         var parsedJson = json.decode(resp);
@@ -1076,11 +1119,14 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.rejectPmTaskExecution(
-          auth: auth,
-          isLoading: isLoading,
-          rejecttoJsonString: json.encode(rejecttoJsonString));
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectPmTaskExecution(
+            auth: auth,
+            isLoading: isLoading,
+            rejecttoJsonString: json.encode(rejecttoJsonString));
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         var resp = res.data;
         var parsedJson = json.decode(resp);
@@ -1107,11 +1153,14 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.rejectCancelPmTaskExecution(
-          auth: auth,
-          isLoading: isLoading,
-          rejectCanceltoJsonString: json.encode(rejectCanceltoJsonString));
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectCancelPmTaskExecution(
+            auth: auth,
+            isLoading: isLoading,
+            rejectCanceltoJsonString: json.encode(rejectCanceltoJsonString));
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         var resp = res.data;
         var parsedJson = json.decode(resp);
@@ -1137,13 +1186,15 @@ class Repository {
       createObs, bool? isLoading, int? position) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createObs(
-        auth: auth,
-        createObs: createObs,
-        isLoading: isLoading ?? false,
-        position: position,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createObs(
+          auth: auth,
+          createObs: createObs,
+          isLoading: isLoading ?? false,
+          position: position,
+        );
+      }
       var resourceData = res.data;
 
       print('Response create Observation order : ${resourceData}');
@@ -1176,12 +1227,14 @@ class Repository {
       createoccupational, bool? isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createoccupational(
-        auth: auth,
-        createoccupational: createoccupational,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createoccupational(
+          auth: auth,
+          createoccupational: createoccupational,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response create Occupational order : ${resourceData}');
@@ -1215,12 +1268,14 @@ class Repository {
       createvisitsandnotices, bool? isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createvisitsandnotices(
-        auth: auth,
-        createvisitsandnotices: createvisitsandnotices,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createvisitsandnotices(
+          auth: auth,
+          createvisitsandnotices: createvisitsandnotices,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response create Occupational order : ${resourceData}');
@@ -1255,12 +1310,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateVisitAndNoticeDetails(
-        auth: auth,
-        updateRegularVisit: updateRegularVisit,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateVisitAndNoticeDetails(
+          auth: auth,
+          updateRegularVisit: updateRegularVisit,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response  : ${resourceData}');
@@ -1291,12 +1348,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateKaizenDetails(
-        auth: auth,
-        updateKaizen: updateKaizen,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateKaizenDetails(
+          auth: auth,
+          updateKaizen: updateKaizen,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response  : ${resourceData}');
@@ -1326,12 +1385,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updatePlantationDetails(
-        auth: auth,
-        updatePlantation: updatePlantation,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updatePlantationDetails(
+          auth: auth,
+          updatePlantation: updatePlantation,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response  : ${resourceData}');
@@ -1361,12 +1422,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateFuelConsumption(
-        auth: auth,
-        updateFueldata: updateFueldata,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateFuelConsumption(
+          auth: auth,
+          updateFueldata: updateFueldata,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response  : ${resourceData}');
@@ -1394,12 +1457,14 @@ class Repository {
       createfuledata, bool? isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createfuledata(
-        auth: auth,
-        createfuledata: createfuledata,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createfuledata(
+          auth: auth,
+          createfuledata: createfuledata,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response create fule data order : ${resourceData}');
@@ -1433,12 +1498,14 @@ class Repository {
       createkaizensdata, bool? isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createkaizensdata(
-        auth: auth,
-        createkaizensdata: createkaizensdata,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createkaizensdata(
+          auth: auth,
+          createkaizensdata: createkaizensdata,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response create fule data order : ${resourceData}');
@@ -1472,12 +1539,14 @@ class Repository {
       createplantationdata, bool? isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createplantationdata(
-        auth: auth,
-        createplantationdata: createplantationdata,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createplantationdata(
+          auth: auth,
+          createplantationdata: createplantationdata,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response create fule data order : ${resourceData}');
@@ -1513,12 +1582,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateHealthData(
-        auth: auth,
-        updateHealthData: updateHealthData,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateHealthData(
+          auth: auth,
+          updateHealthData: updateHealthData,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Create Health Data : ${resourceData}');
@@ -1546,12 +1617,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createWaterData(
-        auth: auth,
-        createWaterData: createWaterData,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createWaterData(
+          auth: auth,
+          createWaterData: createWaterData,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Create Water data : ${resourceData}');
@@ -1586,12 +1659,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateWaterData(
-        auth: auth,
-        updateWaterData: updateWaterData,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateWaterData(
+          auth: auth,
+          updateWaterData: updateWaterData,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Create Water data : ${resourceData}');
@@ -1625,16 +1700,18 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getWasteDataList(
-        facility_id: facility_id,
-        start_date: start_date,
-        end_date: end_date,
-        isLoading: isLoading,
-        isHazardous: isHazardous,
-        auth: auth,
-      );
-      print('water data list: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getWasteDataList(
+          facility_id: facility_id,
+          start_date: start_date,
+          end_date: end_date,
+          isLoading: isLoading,
+          isHazardous: isHazardous,
+          auth: auth,
+        );
+        print('water data list: ${res.data}');
+      }
       if (!res.hasError) {
         final jsonWasteDataListModels = jsonDecode(res.data);
 
@@ -1662,12 +1739,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createWasteData(
-        auth: auth,
-        createWasteData: createWasteData,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createWasteData(
+          auth: auth,
+          createWasteData: createWasteData,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Create Water data : ${resourceData}');
@@ -1694,12 +1773,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateWasteData(
-        auth: auth,
-        createWasteData: createWasteData,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateWasteData(
+          auth: auth,
+          createWasteData: createWasteData,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Create Water data : ${resourceData}');
@@ -1726,12 +1807,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.submitPurchaseOrderData(
-        auth: auth,
-        createGoReq: createGoReq,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.submitPurchaseOrderData(
+          auth: auth,
+          createGoReq: createGoReq,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Create Goods order req  : ${resourceData}');
@@ -1766,12 +1849,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updatePurchaseOrderData(
-        auth: auth,
-        createGoReq: createGoReq,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updatePurchaseOrderData(
+          auth: auth,
+          createGoReq: createGoReq,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response update  req order : ${resourceData}');
@@ -1803,12 +1888,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateGoodsOrder(
-        auth: auth,
-        createGo: createGo,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateGoodsOrder(
+          auth: auth,
+          createGo: createGo,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response update Goods order : ${resourceData}');
@@ -1839,12 +1926,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateGOReceive(
-        auth: auth,
-        createGo: createGo,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateGOReceive(
+          auth: auth,
+          createGo: createGo,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response update Goods order : ${resourceData}');
@@ -1874,12 +1963,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateGOReceiveIsSubmit0(
-        auth: auth,
-        createGo: createGo,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateGOReceiveIsSubmit0(
+          auth: auth,
+          createGo: createGo,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response update Goods order : ${resourceData}');
@@ -1910,12 +2001,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateWarrantyClaim(
-        auth: auth,
-        updateWarrantyClaim: updateWarrantyClaim,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateWarrantyClaim(
+          auth: auth,
+          updateWarrantyClaim: updateWarrantyClaim,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response Update Warranty Claim: ${resourceData}');
@@ -1953,12 +2046,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.resubmitWarrantyClaim(
-        auth: auth,
-        updateWarrantyClaim: updateWarrantyClaim,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.resubmitWarrantyClaim(
+          auth: auth,
+          updateWarrantyClaim: updateWarrantyClaim,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response Update Warranty Claim: ${resourceData}');
@@ -1997,12 +2092,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateIncidentReport(
-        auth: auth,
-        updateIncidentReport: json.encode(updateIncidentReport),
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateIncidentReport(
+          auth: auth,
+          updateIncidentReport: json.encode(updateIncidentReport),
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response Update Incident Report: ${resourceData}');
@@ -2040,12 +2137,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateIRSecondStep(
-        auth: auth,
-        updateIncidentReport: updateIncidentReport,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateIRSecondStep(
+          auth: auth,
+          updateIncidentReport: updateIncidentReport,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response Update Incident Report: ${resourceData}');
@@ -2084,13 +2183,15 @@ class Repository {
       int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateMCScheduleExecution(
-          auth: auth,
-          updateMCScheduleExecutionJsonString:
-              json.encode(updateMCScheduleExecutionJsonString),
-          isLoading: isLoading ?? false,
-          facility_id: facility_id);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateMCScheduleExecution(
+            auth: auth,
+            updateMCScheduleExecutionJsonString:
+                json.encode(updateMCScheduleExecutionJsonString),
+            isLoading: isLoading ?? false,
+            facility_id: facility_id);
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response MC Schedule Execution Report: ${resourceData}');
@@ -2187,13 +2288,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getInventoryAssetsList(
-        facility_id: facility_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('getinventoryList: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getInventoryAssetsList(
+          facility_id: facility_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('getinventoryList: ${res.data}');
+      }
       if (!res.hasError) {
         final jsoninventoryListModels = jsonDecode(res.data);
         // print(res.data); `6
@@ -2318,15 +2421,17 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getGoodsOrdersList(
-        facility_id: facility_id,
-        start_date: start_date,
-        end_date: end_date,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('getGoodsOrdersList: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getGoodsOrdersList(
+          facility_id: facility_id,
+          start_date: start_date,
+          end_date: end_date,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('getGoodsOrdersList: ${res.data}');
+      }
       if (!res.hasError) {
         final jsonGoodsOrdersListModels = jsonDecode(res.data);
         // print(res.data); `6
@@ -2411,15 +2516,17 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getStatutoryDataList(
-        facility_id: facility_id,
-        start_date: start_date,
-        end_date: end_date,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('getStatutoryDataList: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getStatutoryDataList(
+          facility_id: facility_id,
+          start_date: start_date,
+          end_date: end_date,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('getStatutoryDataList: ${res.data}');
+      }
       if (!res.hasError) {
         final jsonStatutoryListModels = jsonDecode(res.data);
         // print(res.data); `6
@@ -2505,15 +2612,17 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getObservationDataList(
-        facility_id: facility_id,
-        start_date: start_date,
-        end_date: end_date,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('getObservationDataList: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getObservationDataList(
+          facility_id: facility_id,
+          start_date: start_date,
+          end_date: end_date,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('getObservationDataList: ${res.data}');
+      }
       if (!res.hasError) {
         final jsonObservationListModels = jsonDecode(res.data);
         // print(res.data); `6
@@ -2548,15 +2657,17 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getWaterDataList(
-        facility_id: facility_id,
-        start_date: start_date,
-        end_date: end_date,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('water data list: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getWaterDataList(
+          facility_id: facility_id,
+          start_date: start_date,
+          end_date: end_date,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('water data list: ${res.data}');
+      }
       if (!res.hasError) {
         final jsonWaterDataListModels = jsonDecode(res.data);
 
@@ -2589,17 +2700,19 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.transactionReport(
-        facility_id: facility_id,
-        start_date: start_date,
-        end_date: end_date ?? "",
-        isLoading: isLoading,
-        actorID: actorID,
-        actorType: actorType,
-        auth: auth,
-      );
-      print('getGoodsOrdersList: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.transactionReport(
+          facility_id: facility_id,
+          start_date: start_date,
+          end_date: end_date ?? "",
+          isLoading: isLoading,
+          actorID: actorID,
+          actorType: actorType,
+          auth: auth,
+        );
+        print('getGoodsOrdersList: ${res.data}');
+      }
       if (!res.hasError) {
         final jsonTransactionReportListModels = jsonDecode(res.data);
         // print(res.data); `6
@@ -2633,14 +2746,16 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getDocUploadList(
-        facility_id: facility_id,
-        start_date: start_date,
-        end_date: end_date,
-        isLoading: isLoading,
-        auth: auth,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getDocUploadList(
+          facility_id: facility_id,
+          start_date: start_date,
+          end_date: end_date,
+          isLoading: isLoading,
+          auth: auth,
+        );
+      }
       if (!res.hasError) {
         final jsonDocUploadListModels = jsonDecode(res.data);
         // print(res.data);
@@ -2674,15 +2789,17 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getRequestOrderList(
-        facility_id: facility_id,
-        start_date: start_date,
-        end_date: end_date,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('getGoodsOrdersList: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getRequestOrderList(
+          facility_id: facility_id,
+          start_date: start_date,
+          end_date: end_date,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('getGoodsOrdersList: ${res.data}');
+      }
       if (!res.hasError) {
         final jsonGoodsOrdersListModels = jsonDecode(res.data);
         // print(res.data);
@@ -2751,13 +2868,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getModuleCleaningListPlan(
-        facility_id: facility_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('getModuleCleaningListPlan: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getModuleCleaningListPlan(
+          facility_id: facility_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('getModuleCleaningListPlan: ${res.data}');
+      }
       if (!res.hasError) {
         final jsonModuleCleaningListPlan = jsonDecode(res.data);
         // print(res.data);
@@ -2834,12 +2953,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getwcCertifiacteList(
-        facility_id: facility_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getwcCertifiacteList(
+          facility_id: facility_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+      }
       if (!res.hasError) {
         final jsonWcCertificates = jsonDecode(res.data);
 
@@ -2871,15 +2992,17 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getInventoryList(
-        facilityId: facilityId,
-        blockId: blockId,
-        categoryIds: categoryIds,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      // print('Inventory List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getInventoryList(
+          facilityId: facilityId,
+          blockId: blockId,
+          categoryIds: categoryIds,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        // print('Inventory List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var inventoryList = inventoryModelFromJson(res.data);
         return inventoryList;
@@ -2912,7 +3035,7 @@ class Repository {
 //       );
 //       // print('Inventory List Data: ${res.data}');
 
-//       if (!res.hasError) {
+//       }if (!res.hasError) {
 //         var affectedPartList = inventoryModel2FromJson(res.data);
 //         return affectedPartList;
 //       }
@@ -2938,15 +3061,18 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getBusinessList(
-        businessType: businessType,
-        // blockId: blockId,
-        // categoryIds: categoryIds ?? "",
-        // businessType: businessType,
-        isLoading: isLoading,
-        facilityId: facilityId,
-        auth: auth,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getBusinessList(
+          businessType: businessType,
+          // blockId: blockId,
+          // categoryIds: categoryIds ?? "",
+          // businessType: businessType,
+          isLoading: isLoading,
+          facilityId: facilityId,
+          auth: auth,
+        );
+      }
       if (!res.hasError) {
         var businessList = businessListModelFromJson(res.data);
         return businessList;
@@ -2968,11 +3094,14 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getmanufacturerList(
-        BusinessType: BusinessType,
-        isLoading: isLoading,
-        auth: auth,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getmanufacturerList(
+          BusinessType: BusinessType,
+          isLoading: isLoading,
+          auth: auth,
+        );
+      }
       if (!res.hasError) {
         var businessList = manufacturerListModelFromJson(res.data);
         return businessList;
@@ -2994,11 +3123,14 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getSupplierList(
-        BusinessType: BusinessType,
-        isLoading: isLoading,
-        auth: auth,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getSupplierList(
+          BusinessType: BusinessType,
+          isLoading: isLoading,
+          auth: auth,
+        );
+      }
       if (!res.hasError) {
         var businessList = supplierNameListModelFromJson(res.data);
         return businessList;
@@ -3021,13 +3153,16 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getViewPermitDetail(
-        auth: auth,
-        permitId: permitId,
-        facilityId: facilityId,
-        isLoading: isLoading ?? false,
-      );
-      print({"Viewpermitdetail", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getViewPermitDetail(
+          auth: auth,
+          permitId: permitId,
+          facilityId: facilityId,
+          isLoading: isLoading ?? false,
+        );
+        print({"Viewpermitdetail", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           final NewPermitDetailModel _viewPermitDetailModel =
@@ -3055,15 +3190,17 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getViewWarrantyClaimDetail(
-        auth: auth,
-        wc_id: wc_id,
-        facilityId: facilityId,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getViewWarrantyClaimDetail(
+          auth: auth,
+          wc_id: wc_id,
+          facilityId: facilityId,
+          isLoading: isLoading ?? false,
+        );
 
-      print({"ViewWarrantyClaimdetail", res.data});
-
+        print({"ViewWarrantyClaimdetail", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           final ViewWarrantyClaimModel _viewWarrantyClaimDetailModel =
@@ -3092,15 +3229,17 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getMCExecutionDetail(
-        auth: auth,
-        executionId: executionId,
-        facilityId: facilityId,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getMCExecutionDetail(
+          auth: auth,
+          executionId: executionId,
+          facilityId: facilityId,
+          isLoading: isLoading ?? false,
+        );
 
-      print({"MCExecutiondetail", res.data});
-
+        print({"MCExecutiondetail", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           final EndMCExecutionDetailsModel _endMCExecutionDetailModel =
@@ -3128,15 +3267,17 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getMcPlanDetail(
-        auth: auth,
-        planId: planId,
-        facilityId: facilityId,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getMcPlanDetail(
+          auth: auth,
+          planId: planId,
+          facilityId: facilityId,
+          isLoading: isLoading ?? false,
+        );
 
-      // print({"MCPlandetail", res.data});
-
+        // print({"MCPlandetail", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           final McPalningDetailsModel _mcPlanDetailModel =
@@ -3163,14 +3304,16 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getIncidentReportDetail(
-        auth: auth,
-        id: id,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getIncidentReportDetail(
+          auth: auth,
+          id: id,
+          isLoading: isLoading ?? false,
+        );
 
-      print({"IncidentReportdetail", res.data});
-
+        print({"IncidentReportdetail", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           final IncidentReportDetailsModel _incidentReportDetailModel =
@@ -3197,14 +3340,16 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getPurchaseDetailsById(
-        auth: auth,
-        id: id,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPurchaseDetailsById(
+          auth: auth,
+          id: id,
+          isLoading: isLoading ?? false,
+        );
 
-      print({"getPurchaseDetailsByID", res.data});
-
+        print({"getPurchaseDetailsByID", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           final GetPurchaseDetailsByIDModel
@@ -3233,15 +3378,17 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getRoDetailsByID(
-        auth: auth,
-        requestID: requestID,
-        facilityId: facilityId,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getRoDetailsByID(
+          auth: auth,
+          requestID: requestID,
+          facilityId: facilityId,
+          isLoading: isLoading ?? false,
+        );
 
-      print({"getRoDetailsByID", res.data});
-
+        print({"getRoDetailsByID", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var _getPurchaseDetailsByIDModelFromJson =
@@ -3269,15 +3416,17 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getRoDetailsByIDs(
-        auth: auth,
-        requestID: requestID,
-        facilityId: facilityId,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getRoDetailsByIDs(
+          auth: auth,
+          requestID: requestID,
+          facilityId: facilityId,
+          isLoading: isLoading ?? false,
+        );
 
-      print({"getRoDetailsByID", res.data});
-
+        print({"getRoDetailsByID", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var _getPurchaseDetailsByIDModelFromJson =
@@ -3305,14 +3454,16 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getInventoryDetail(
-        auth: auth,
-        id: id,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getInventoryDetail(
+          auth: auth,
+          id: id,
+          isLoading: isLoading ?? false,
+        );
 
-      print({"inventorydetail", res.data});
-
+        print({"inventorydetail", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           final InventoryDetailsModel _inventoryDetailModel =
@@ -3341,14 +3492,16 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getAddInventoryDetail(
-        auth: auth,
-        id: id,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAddInventoryDetail(
+          auth: auth,
+          id: id,
+          isLoading: isLoading ?? false,
+        );
 
-      print({"AddInventorydetail", res.data});
-
+        print({"AddInventorydetail", res.data});
+      }
       if (!res.hasError) {
         final AddInventoryDetailsModel _addInventoryDetailModel =
             addInventoryDetailModelFromJson(res.data);
@@ -3373,14 +3526,16 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getStatutoryDetail(
-        auth: auth,
-        id: id,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getStatutoryDetail(
+          auth: auth,
+          id: id,
+          isLoading: isLoading ?? false,
+        );
 
-      print({"GetStatutoryById", res.data});
-
+        print({"GetStatutoryById", res.data});
+      }
       if (!res.hasError) {
         final GetStatutoryById __getStatutoryDetailModel =
             getStatutoryByIdModelFromJson(res.data);
@@ -3403,14 +3558,16 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getObsDetail(
-        auth: auth,
-        id: id,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getObsDetail(
+          auth: auth,
+          id: id,
+          isLoading: isLoading ?? false,
+        );
 
-      print({"GetObservationById", res.data});
-
+        print({"GetObservationById", res.data});
+      }
       if (!res.hasError) {
         final GetObservationById _getObservationDetailModel =
             getObservationByIdModelFromJson(res.data);
@@ -3434,12 +3591,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.viewObsCloseButton(
-        auth: auth,
-        viewobsCloseJsonString: viewobsCloseJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.viewObsCloseButton(
+          auth: auth,
+          viewobsCloseJsonString: viewobsCloseJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -3473,13 +3632,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getUnitCurrencyList(
-        facilityId: facilityId,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Unit Currency List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getUnitCurrencyList(
+          facilityId: facilityId,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Unit Currency List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var unitCurrencyList = currencyListModelFromJson(res.data);
         return unitCurrencyList;
@@ -3499,13 +3660,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getStatutoryComplianceDropDown(
-        facilityId: facilityId,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Unit Statutory ComplianceList Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getStatutoryComplianceDropDown(
+          facilityId: facilityId,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Unit Statutory ComplianceList Data: ${res.data}');
+      }
       if (!res.hasError) {
         var statutoryComplianceList =
             statutoryComplianceModelFromJson(res.data);
@@ -3526,13 +3689,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.statusOfAplication(
-        facilityId: facilityId,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Unit Compliance Status Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.statusOfAplication(
+          facilityId: facilityId,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Unit Compliance Status Data: ${res.data}');
+      }
       if (!res.hasError) {
         var statusOfAplicationList = ComplianceStatusModelFromJson(res.data);
         return statusOfAplicationList;
@@ -3554,13 +3719,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getTypeOfWaterList(
-        facilityId: facilityId,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Water Source List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getTypeOfWaterList(
+          facilityId: facilityId,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Water Source List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var typeOfWaterList = waterSourceListModelFromJson(res.data);
         return typeOfWaterList;
@@ -3582,13 +3749,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getTypeOfWasteList(
-        facilityId: facilityId,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Waste Source List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getTypeOfWasteList(
+          facilityId: facilityId,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Waste Source List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var typeOfWasteList = wasteSourceListModelFromJson(res.data);
         return typeOfWasteList;
@@ -3606,9 +3775,11 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getWaterTypeById(
-          auth: auth, waterTypeId: waterTypeId, isLoading: isLoading);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getWaterTypeById(
+            auth: auth, waterTypeId: waterTypeId, isLoading: isLoading);
+      }
       if (!res.hasError) {
         final jsonWaterType = jsonDecode(res.data);
         final WaterSource _waterType = jsonWaterType
@@ -3633,12 +3804,14 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createWaterType(
-        auth: auth,
-        waterTypeJson: waterTypeJson,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createWaterType(
+          auth: auth,
+          waterTypeJson: waterTypeJson,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -3658,12 +3831,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateWaterType(
-        auth: auth,
-        waterTypeJson: waterTypeJson,
-        isLoading: isLoading,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateWaterType(
+          auth: auth,
+          waterTypeJson: waterTypeJson,
+          isLoading: isLoading,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -3683,12 +3859,14 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteWaterType(
-        auth: auth,
-        waterTypeId: waterTypeId,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteWaterType(
+          auth: auth,
+          waterTypeId: waterTypeId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -3705,12 +3883,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.goodsOrderApprovedButton(
-        auth: auth,
-        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.goodsOrderApprovedButton(
+          auth: auth,
+          goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -3741,13 +3921,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.complianceApprovedButton(
-        auth: auth,
-        complianceApprovedJsonString: complianceApprovedJsonString,
-        isLoading: isLoading ?? false,
-        position: position,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.complianceApprovedButton(
+          auth: auth,
+          complianceApprovedJsonString: complianceApprovedJsonString,
+          isLoading: isLoading ?? false,
+          position: position,
+        );
+      }
       var resourceData = res.data;
 
       print('compliance Approved Json : ${resourceData}');
@@ -3776,12 +3958,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.approveIncidentReportButton(
-        auth: auth,
-        incidentReportApproveJsonString: incidentReportApproveJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approveIncidentReportButton(
+          auth: auth,
+          incidentReportApproveJsonString: incidentReportApproveJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Incident Report Approve: ${resourceData}');
@@ -3811,12 +3995,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.approveIncidentReportButton2ndStep(
-        auth: auth,
-        incidentReportApproveJsonString: incidentReportApproveJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approveIncidentReportButton2ndStep(
+          auth: auth,
+          incidentReportApproveJsonString: incidentReportApproveJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Incident Report Approve: ${resourceData}');
@@ -3846,12 +4032,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.approveIrButton(
-        auth: auth,
-        incidentReportApproveJsonString: incidentReportApproveJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approveIrButton(
+          auth: auth,
+          incidentReportApproveJsonString: incidentReportApproveJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response IR Approve: ${resourceData}');
@@ -3878,12 +4066,14 @@ class Repository {
       mcRejectJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.mcPlanRejectButton(
-          auth: auth,
-          mcRejectJsonString: json.encode(mcRejectJsonString),
-          isLoading: isLoading ?? false,
-          facility_id: facility_id);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.mcPlanRejectButton(
+            auth: auth,
+            mcRejectJsonString: json.encode(mcRejectJsonString),
+            isLoading: isLoading ?? false,
+            facility_id: facility_id);
+      }
       var resourceData = res.data;
 
       print('Response MC Reject: ${resourceData}');
@@ -3910,12 +4100,14 @@ class Repository {
       mcApproveJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.mcPlanApprovedButton(
-          auth: auth,
-          mcApproveJsonString: json.encode(mcApproveJsonString),
-          isLoading: isLoading ?? false,
-          facility_id: facility_id);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.mcPlanApprovedButton(
+            auth: auth,
+            mcApproveJsonString: json.encode(mcApproveJsonString),
+            isLoading: isLoading ?? false,
+            facility_id: facility_id);
+      }
       var resourceData = res.data;
 
       print('Response MC Approve: ${resourceData}');
@@ -3942,13 +4134,15 @@ class Repository {
       mcExecutionApproveJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.mcExecutionApprovedButton(
-          auth: auth,
-          mcExecutionApproveJsonString:
-              json.encode(mcExecutionApproveJsonString),
-          isLoading: isLoading ?? false,
-          facility_id: facility_id);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.mcExecutionApprovedButton(
+            auth: auth,
+            mcExecutionApproveJsonString:
+                json.encode(mcExecutionApproveJsonString),
+            isLoading: isLoading ?? false,
+            facility_id: facility_id);
+      }
       var resourceData = res.data;
 
       print('Response MC Execution Approve: ${resourceData}');
@@ -3979,12 +4173,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.wcApprovedButton(
-        auth: auth,
-        WCApproveJsonString: WCApproveJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.wcApprovedButton(
+          auth: auth,
+          WCApproveJsonString: WCApproveJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response WC Approve: ${resourceData}');
@@ -4014,12 +4210,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.wcRejectdButton(
-        auth: auth,
-        WCRejectJsonString: json.encode(WCRejectJsonString),
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.wcRejectdButton(
+          auth: auth,
+          WCRejectJsonString: json.encode(WCRejectJsonString),
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response WC Reject: ${resourceData}');
@@ -4048,12 +4246,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.closeWCApprovedButton(
-        auth: auth,
-        WCApproveJsonString: WCApproveJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.closeWCApprovedButton(
+          auth: auth,
+          WCApproveJsonString: WCApproveJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response WC Approve: ${resourceData}');
@@ -4083,12 +4283,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.closeWCRejectdButton(
-        auth: auth,
-        WCRejectJsonString: WCRejectJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.closeWCRejectdButton(
+          auth: auth,
+          WCRejectJsonString: WCRejectJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response WC Reject: ${resourceData}');
@@ -4117,12 +4319,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateWarranty(
-        auth: auth,
-        updateWarrantyClaim: updateWarrantyClaim,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateWarranty(
+          auth: auth,
+          updateWarrantyClaim: updateWarrantyClaim,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response WC Reject: ${resourceData}');
@@ -4151,12 +4355,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.closeWarranty(
-        auth: auth,
-        updateWarrantyClaim: updateWarrantyClaim,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.closeWarranty(
+          auth: auth,
+          updateWarrantyClaim: updateWarrantyClaim,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response WC Reject: ${resourceData}');
@@ -4185,13 +4391,15 @@ class Repository {
       int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.rejectMcExecutionApprovedButton(
-          auth: auth,
-          rejectMcExecutionApproveJsonString:
-              json.encode(rejectMcExecutionApproveJsonString),
-          isLoading: isLoading ?? false,
-          facility_id: facility_id);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectMcExecutionApprovedButton(
+            auth: auth,
+            rejectMcExecutionApproveJsonString:
+                json.encode(rejectMcExecutionApproveJsonString),
+            isLoading: isLoading ?? false,
+            facility_id: facility_id);
+      }
       var resourceData = res.data;
 
       print('Response MC Execution Reject: ${resourceData}');
@@ -4220,12 +4428,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.pmPlanApprovedButton(
-        auth: auth,
-        pmPlanApproveJsonString: json.encode(pmPlanApproveJsonString),
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.pmPlanApprovedButton(
+          auth: auth,
+          pmPlanApproveJsonString: json.encode(pmPlanApproveJsonString),
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -4254,12 +4464,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.goodsOrderRejectButton(
-        auth: auth,
-        goodsOrderRejectJsonString: goodsOrderRejectJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.goodsOrderRejectButton(
+          auth: auth,
+          goodsOrderRejectJsonString: goodsOrderRejectJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -4289,12 +4501,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.rejectIncidentReportButton(
-        auth: auth,
-        incidentReportRejectJsonString: incidentReportRejectJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectIncidentReportButton(
+          auth: auth,
+          incidentReportRejectJsonString: incidentReportRejectJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Incident report Reject: ${resourceData}');
@@ -4323,12 +4537,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.rejectIrButton(
-        auth: auth,
-        incidentReportRejectJsonString: incidentReportRejectJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectIrButton(
+          auth: auth,
+          incidentReportRejectJsonString: incidentReportRejectJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Incident report Reject: ${resourceData}');
@@ -4357,12 +4573,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.approveGOReceiveButton(
-        auth: auth,
-        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approveGOReceiveButton(
+          auth: auth,
+          goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -4391,12 +4609,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.rejectGOReceiveButton(
-        auth: auth,
-        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectGOReceiveButton(
+          auth: auth,
+          goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -4425,12 +4645,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.pmPlanRejectButton(
-        auth: auth,
-        pmPlanRejectJsonString: json.encode(pmPlanRejectJsonString),
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.pmPlanRejectButton(
+          auth: auth,
+          pmPlanRejectJsonString: json.encode(pmPlanRejectJsonString),
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -4459,12 +4681,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.auditTaskApprovedButton(
-        auth: auth,
-        auditTaskApproveJsonString: auditTaskApproveJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.auditTaskApprovedButton(
+          auth: auth,
+          auditTaskApproveJsonString: auditTaskApproveJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -4495,12 +4719,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.auditTaskCloseButton(
-        auth: auth,
-        auditTaskCloseJsonString: auditTaskCloseJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.auditTaskCloseButton(
+          auth: auth,
+          auditTaskCloseJsonString: auditTaskCloseJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -4538,12 +4764,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.auditTaskCloseRejectButton(
-        auth: auth,
-        auditTaskCloseRejectJsonString: auditTaskCloseRejectJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.auditTaskCloseRejectButton(
+          auth: auth,
+          auditTaskCloseRejectJsonString: auditTaskCloseRejectJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -4573,12 +4801,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.auditTaskCloseApproveButton(
-        auth: auth,
-        auditTaskCloseApproveJsonString: auditTaskCloseApproveJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.auditTaskCloseApproveButton(
+          auth: auth,
+          auditTaskCloseApproveJsonString: auditTaskCloseApproveJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -4608,12 +4838,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.auditTaskRejectButton(
-        auth: auth,
-        auditTaskRejectJsonString: auditTaskRejectJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.auditTaskRejectButton(
+          auth: auth,
+          auditTaskRejectJsonString: auditTaskRejectJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -4642,12 +4874,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.auditTaskSkipButton(
-        auth: auth,
-        auditTaskSkipJsonString: auditTaskSkipJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.auditTaskSkipButton(
+          auth: auth,
+          auditTaskSkipJsonString: auditTaskSkipJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -4676,12 +4910,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.startAuditTask(
-        auth: auth,
-        auditTaskId: auditTaskId,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.startAuditTask(
+          auth: auth,
+          auditTaskId: auditTaskId,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -4706,11 +4942,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getAuditTaskDetails(
-        auth: auth,
-        auditTaskId: auditTaskId,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAuditTaskDetails(
+          auth: auth,
+          auditTaskId: auditTaskId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final PmtaskViewModel _auditTaskViewModel =
             pmtaskViewModelFromJson(res.data);
@@ -4735,13 +4974,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.assignAuditTask(
-        auth: auth,
-        assignId: assignId,
-        taskId: taskId,
-        isLoading: isLoading,
-      );
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.assignAuditTask(
+          auth: auth,
+          assignId: assignId,
+          taskId: taskId,
+          isLoading: isLoading,
+        );
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         return true;
       } else {
@@ -4760,12 +5002,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.goodsOrderCloseButton(
-        auth: auth,
-        goodsOrderCloseJsonString: goodsOrderCloseJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.goodsOrderCloseButton(
+          auth: auth,
+          goodsOrderCloseJsonString: goodsOrderCloseJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -4797,13 +5041,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.updatePaidBy(
-        facilityId: facilityId,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Paid List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updatePaidBy(
+          facilityId: facilityId,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Paid List Data: ${res.data}');
+      }
       if (!res.hasError) {
         final jsonFacilityModels = jsonDecode(res.data);
         final List<PaiedModel> _paid = jsonFacilityModels
@@ -4829,17 +5075,19 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getInventoryDetailList(
-        // facilityId: facilityId,
-        // blockId: blockId,
-        // categoryIds: categoryIds,
-        id: id,
-        facilityId: facilityId,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Inventory Detail List5: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getInventoryDetailList(
+          // facilityId: facilityId,
+          // blockId: blockId,
+          // categoryIds: categoryIds,
+          id: id,
+          facilityId: facilityId,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Inventory Detail List5: ${res.data}');
+      }
       if (!res.hasError) {
         var inventoryDetailList = inventoryDetailModelFromJson(res.data);
         return inventoryDetailList;
@@ -4862,13 +5110,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getEmployeeList(
-        facility_id: facility_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Employee List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getEmployeeList(
+          facility_id: facility_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Employee List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var employeeList = employeeListModelFromJson(res.data);
         return employeeList;
@@ -4891,13 +5141,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getRiskTypeList(
-        facility_id: facility_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Risk Type List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getRiskTypeList(
+          facility_id: facility_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Risk Type List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var riskTypeList = riskTypeModelFromJson(res.data);
         return riskTypeList;
@@ -4920,13 +5172,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getEmployeesList(
-        facility_id: facility_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Employee List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getEmployeesList(
+          facility_id: facility_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Employee List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var employeeList = employeeListModel2FromJson(res.data);
         return employeeList;
@@ -4946,13 +5200,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getEmployeeListByFacilityId(
-        facility_id: facility_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Employee List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getEmployeeListByFacilityId(
+          facility_id: facility_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Employee List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var employeeList = employeeModelFromJson(res.data);
         return employeeList;
@@ -4975,14 +5231,16 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getAssignedToEmployee(
-        facilityId: facility_id,
-        featureId: featureId,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Employee List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAssignedToEmployee(
+          facilityId: facility_id,
+          featureId: featureId,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Employee List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var employeeList = employeeListModelFromJson(res.data);
         return employeeList;
@@ -5003,14 +5261,16 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getAssignedToEmployee(
-        facilityId: facility_id,
-        featureId: featureId,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Employee List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAssignedToEmployee(
+          facilityId: facility_id,
+          featureId: featureId,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Employee List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var employeeList = employeeListModelFromJson(res.data);
         return employeeList;
@@ -5032,13 +5292,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getPermitIssuerList(
-        facility_id: facility_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('PermitIssuer List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPermitIssuerList(
+          facility_id: facility_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('PermitIssuer List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var permitIssuerList = employeeListModelFromJson(res.data);
         return permitIssuerList;
@@ -5060,13 +5322,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getPermitApproverList(
-        facility_id: facility_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('PermitApprover List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPermitApproverList(
+          facility_id: facility_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('PermitApprover List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var permitApproverList = employeeListModel2FromJson(res.data);
         return permitApproverList;
@@ -5087,12 +5351,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getJobTypePermitList(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Job Type List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getJobTypePermitList(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Job Type List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var jobTypeList = jobTypeListModelFromJson(res.data);
         return jobTypeList;
@@ -5112,13 +5378,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getSopPermitList(
-        job_type_id: job_type_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('SOP List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getSopPermitList(
+          job_type_id: job_type_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('SOP List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var sopPermitList = sopListModelFromJson(res.data);
         return sopPermitList;
@@ -5138,13 +5406,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getAssetTypeList(
-        job_type_id: job_type_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Asset type List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAssetTypeList(
+          job_type_id: job_type_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Asset type List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var assetTypeList = assetTypeListModelFromJson(res.data);
         return assetTypeList;
@@ -5164,13 +5434,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getFacilityTypeList(
-        // job_type_id: job_type_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Asset type List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getFacilityTypeList(
+          // job_type_id: job_type_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Asset type List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var facilityTypeList = FacilityTypeListModelFromJson(res.data);
         return facilityTypeList;
@@ -5190,13 +5462,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getSPVList(
-        job_type_id: job_type_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Asset type List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getSPVList(
+          job_type_id: job_type_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Asset type List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var facilityTypeList = SPVListModelFromJson(res.data);
         return facilityTypeList.reversed.toList();
@@ -5213,10 +5487,13 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getBodyInjuredData(
-        isLoading: isLoading,
-        auth: auth,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getBodyInjuredData(
+          isLoading: isLoading,
+          auth: auth,
+        );
+      }
       if (!res.hasError) {
         var bodyinjuredList = bodyInjuredModelFromJson(res.data);
         return bodyinjuredList;
@@ -5240,13 +5517,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getBlockTypeList(
-        job_type_id: job_type_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Asset type List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getBlockTypeList(
+          job_type_id: job_type_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Asset type List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var blockTypeList = BlockTypeListModelFromJson(res.data);
         return blockTypeList;
@@ -5266,13 +5545,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getSafetyMeasureList(
-        permit_type_id: permit_type_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Safety Measure List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getSafetyMeasureList(
+          permit_type_id: permit_type_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Safety Measure List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var safetyMeasureList = safetyMeasureListModelFromJson(res.data);
         return safetyMeasureList;
@@ -5294,14 +5575,16 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getPermitConditionList(
-        isCancle: isCancle,
-        facilityId: facilityId,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('PermitCondition List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPermitConditionList(
+          isCancle: isCancle,
+          facilityId: facilityId,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('PermitCondition List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var permitConditionList = permitCancelListModelFromJson(res.data);
         return permitConditionList;
@@ -5322,13 +5605,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getPermitCloseConditionList(
-        isClose: isClose,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('PermitCloseCondition List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPermitCloseConditionList(
+          isClose: isClose,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('PermitCloseCondition List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var permitCloseConditionList = permitCancelListModelFromJson(res.data);
         return permitCloseConditionList;
@@ -5349,13 +5634,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getPermitExtendConditionList(
-        isExtend: isExtend,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('PermitExtendCondition List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPermitExtendConditionList(
+          isExtend: isExtend,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('PermitExtendCondition List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var permitExtendConditionList = permitCancelListModelFromJson(res.data);
         return permitExtendConditionList;
@@ -5379,17 +5666,19 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getWarrantyClaimList(
-        facilityId: facilityId,
-        blockId: blockId,
-        categoryIds: categoryIds,
-        start_date: start_date,
-        end_date: end_date,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      // print('WarrantyClaim: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getWarrantyClaimList(
+          facilityId: facilityId,
+          blockId: blockId,
+          categoryIds: categoryIds,
+          start_date: start_date,
+          end_date: end_date,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        // print('WarrantyClaim: ${res.data}');
+      }
       if (!res.hasError) {
         var warrantyClaimList = warrantyClaimModelFromJson(res.data);
         return warrantyClaimList.reversed.toList();
@@ -5419,15 +5708,17 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getIncidentReportList(
-        facility_id: facility_id,
-        start_date: start_date,
-        end_date: end_date,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('IncidentReportList: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getIncidentReportList(
+          facility_id: facility_id,
+          start_date: start_date,
+          end_date: end_date,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('IncidentReportList: ${res.data}');
+      }
       if (!res.hasError) {
         // var incidentReportList = incidentReportListModelFromJson(res.data);
         // return incidentReportList.reversed.toList();
@@ -5501,12 +5792,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getHealthDatalist(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('IncidentReportList: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getHealthDatalist(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('IncidentReportList: ${res.data}');
+      }
       if (!res.hasError) {
         // var incidentReportList = GetOccupationalListFromJson(res.data);
         // return incidentReportList.reversed.toList();
@@ -5579,12 +5872,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getFuelConsumption(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('FuelConsumption: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getFuelConsumption(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('FuelConsumption: ${res.data}');
+      }
       if (!res.hasError) {
         // var incidentReportList = GetOccupationalListFromJson(res.data);
         // return incidentReportList.reversed.toList();
@@ -5660,12 +5955,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getkaizensdata(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Kaizens Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getkaizensdata(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Kaizens Data: ${res.data}');
+      }
       if (!res.hasError) {
         // var incidentReportList = GetOccupationalListFromJson(res.data);
         // return incidentReportList.reversed.toList();
@@ -5738,12 +6035,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getplantationdata(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Plantation Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getplantationdata(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Plantation Data: ${res.data}');
+      }
       if (!res.hasError) {
         // var incidentReportList = GetOccupationalListFromJson(res.data);
         // return incidentReportList.reversed.toList();
@@ -5815,12 +6114,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getVisitsAndNoticesDatalist(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Visit and Notice List: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getVisitsAndNoticesDatalist(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Visit and Notice List: ${res.data}');
+      }
       if (!res.hasError) {
         // var incidentReportList = GetOccupationalListFromJson(res.data);
         // return incidentReportList.reversed.toList();
@@ -5902,13 +6203,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getEquipmentModelList(
-        facilityId: facilityId,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('EquipmentModelList:${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getEquipmentModelList(
+          facilityId: facilityId,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('EquipmentModelList:${res.data}');
+      }
       if (!res.hasError) {
         var equipmentList = equipmentListModelFromJson(res.data);
         return equipmentList;
@@ -5933,14 +6236,16 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getMCTaskEquipmentList(
-        taskId: taskId,
-        facilityId: facilityId,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('EquipmentModelList:${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getMCTaskEquipmentList(
+          taskId: taskId,
+          facilityId: facilityId,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('EquipmentModelList:${res.data}');
+      }
       if (!res.hasError) {
         var equipmentList = equipmentTaskListModelFromJson(res.data);
         return equipmentList;
@@ -5967,15 +6272,17 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getMCTaskList(
-        facility_id: facility_id,
-        isLoading: isLoading,
-        start_date: start_date,
-        end_date: end_date,
-        auth: auth,
-      );
-      print('MCTaskList: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getMCTaskList(
+          facility_id: facility_id,
+          isLoading: isLoading,
+          start_date: start_date,
+          end_date: end_date,
+          auth: auth,
+        );
+        print('MCTaskList: ${res.data}');
+      }
       if (!res.hasError) {
         // var mcTaskList = mcTaskListModelFromJson(res.data);
         // return mcTaskList.reversed.toList();
@@ -6057,12 +6364,14 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.getWorkTypeList(
-        categoryIds: categoryIds,
-        isLoading: isLoading,
-        auth: auth,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getWorkTypeList(
+          categoryIds: categoryIds,
+          isLoading: isLoading,
+          auth: auth,
+        );
+      }
       if (!res.hasError) {
         var workTypeList = workTypeModelFromJson(res.data);
         return workTypeList;
@@ -6084,12 +6393,14 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.getBlockList(
-        isLoading: isLoading,
-        auth: auth,
-        facilityId: facilityId,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getBlockList(
+          isLoading: isLoading,
+          auth: auth,
+          facilityId: facilityId,
+        );
+      }
       if (!res.hasError) {
         var _lstBlocks = blockModelFromJson(res.data);
         return _lstBlocks;
@@ -6110,12 +6421,14 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.getEquipmentList(
-        isLoading: isLoading,
-        auth: auth,
-        facilityId: facilityId,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getEquipmentList(
+          isLoading: isLoading,
+          auth: auth,
+          facilityId: facilityId,
+        );
+      }
       if (!res.hasError) {
         return equipmentFromJson(res.data);
       } else {
@@ -6139,14 +6452,17 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
       int userId = varUserAccessModel.value.user_id ?? 0;
 
-      final res = await _dataRepository.getJobList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        userId: userId,
-        self_view: self_view,
-        isLoading: isLoading ?? false,
-      );
-      // print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getJobList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          userId: userId,
+          self_view: self_view,
+          isLoading: isLoading ?? false,
+        );
+        // print({"res.data", res.data});
+      }
       if (!res.hasError) {
         final jsonJobModels = jsonDecode(res.data);
         final List<JobModel> _jobModelList = jsonJobModels
@@ -6223,16 +6539,19 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getGrievanceList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-        self_view: self_view,
-        start_date: start_date,
-        end_date: end_date,
-      );
-      print({"res.data", res.data});
-      print(res);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getGrievanceList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          self_view: self_view,
+          start_date: start_date,
+          end_date: end_date,
+        );
+        print({"res.data", res.data});
+        print(res);
+      }
       if (!res.hasError) {
         final jsonGrievanceModels = jsonDecode(res.data);
         final List<GrievanceListModel> _grievanceModelList = jsonGrievanceModels
@@ -6254,9 +6573,11 @@ class Repository {
   Future<List<GrievanceTypeModel?>?> getGrievanceType({bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getGrievanceType(
-          auth: auth, isLoading: isLoading);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getGrievanceType(
+            auth: auth, isLoading: isLoading);
+      }
       if (!res.hasError) {
         final jsonGrievanceType = jsonDecode(res.data);
         final List<GrievanceTypeModel> _grievanceType = jsonGrievanceType
@@ -6280,9 +6601,11 @@ class Repository {
       {bool? isLoading, int? grievanceTypeId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getGrievanceTypeById(
-          auth: auth, grievanceTypeId: grievanceTypeId, isLoading: isLoading);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getGrievanceTypeById(
+            auth: auth, grievanceTypeId: grievanceTypeId, isLoading: isLoading);
+      }
       if (!res.hasError) {
         final jsonGrievanceType = jsonDecode(res.data);
         final GrievanceTypeModel _grievanceType = jsonGrievanceType
@@ -6305,9 +6628,11 @@ class Repository {
       {bool? isLoading, int? id}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getGrievanceDetails(
-          auth: auth, id: id, isLoading: isLoading);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getGrievanceDetails(
+            auth: auth, id: id, isLoading: isLoading);
+      }
       if (!res.hasError) {
         // final jsonGrievanceType = jsonDecode(res.data);
         final GrievanceListModel _grievanceDetails =
@@ -6330,12 +6655,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateGrievanceDetails(
-        auth: auth,
-        grievanceJson: grievanceJson,
-        isLoading: isLoading,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateGrievanceDetails(
+          auth: auth,
+          grievanceJson: grievanceJson,
+          isLoading: isLoading,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         var responseMap = json.decode(res.data);
         return responseMap;
@@ -6353,12 +6681,14 @@ class Repository {
   Future<void> deleteGrievanceDetails({int? Id, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteGrievanceDetails(
-        auth: auth,
-        Id: Id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteGrievanceDetails(
+          auth: auth,
+          Id: Id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -6373,12 +6703,14 @@ class Repository {
   Future<void> deleteKaizen({int? Id, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteKaizen(
-        auth: auth,
-        Id: Id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteKaizen(
+          auth: auth,
+          Id: Id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -6393,12 +6725,14 @@ class Repository {
   Future<void> deleteHealth({int? Id, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteHealth(
-        auth: auth,
-        Id: Id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteHealth(
+          auth: auth,
+          Id: Id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -6413,12 +6747,14 @@ class Repository {
   Future<void> deleteVisitNotice({int? Id, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteVisitNotice(
-        auth: auth,
-        Id: Id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteVisitNotice(
+          auth: auth,
+          Id: Id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -6433,12 +6769,14 @@ class Repository {
   Future<void> deleteFuel({int? Id, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteFuel(
-        auth: auth,
-        Id: Id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteFuel(
+          auth: auth,
+          Id: Id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -6453,12 +6791,14 @@ class Repository {
   Future<void> deletePlantation({int? Id, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deletePlantation(
-        auth: auth,
-        Id: Id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deletePlantation(
+          auth: auth,
+          Id: Id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -6472,12 +6812,14 @@ class Repository {
   Future<bool> createGrievanceType({bool? isLoading, grievanceJson}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createGrievanceType(
-        auth: auth,
-        grievanceJson: grievanceJson,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createGrievanceType(
+          auth: auth,
+          grievanceJson: grievanceJson,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -6497,12 +6839,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateGrievanceType(
-        auth: auth,
-        grievanceJson: grievanceJson,
-        isLoading: isLoading,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateGrievanceType(
+          auth: auth,
+          grievanceJson: grievanceJson,
+          isLoading: isLoading,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -6520,12 +6865,14 @@ class Repository {
       {int? grievanceTypeId, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteGrievanceType(
-        auth: auth,
-        grievanceTypeId: grievanceTypeId,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteGrievanceType(
+          auth: auth,
+          grievanceTypeId: grievanceTypeId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -6542,12 +6889,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.submitPurchaseOrderData(
-        auth: auth,
-        createGoReq: createGoReq,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.submitPurchaseOrderData(
+          auth: auth,
+          createGoReq: createGoReq,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Create Goods order req  : ${resourceData}');
@@ -6582,12 +6931,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.saveGrievance(
-        auth: auth,
-        grievance: grievance,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.saveGrievance(
+          auth: auth,
+          grievance: grievance,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -6621,19 +6972,22 @@ class Repository {
 
       int userId = varUserAccessModel.value.user_id ?? 0;
 
-      final res = await _dataRepository.getNewPermitList(
-        auth: auth,
-        // facilityId: 45,
-        // userId: 33,
-        facilityId: facilityId,
-        start_date: start_date,
-        self_view: self_view,
-        non_expired: non_expired,
-        end_date: end_date,
-        userId: userId,
-        // userId: 33,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getNewPermitList(
+          auth: auth,
+          // facilityId: 45,
+          // userId: 33,
+          facilityId: facilityId,
+          start_date: start_date,
+          self_view: self_view,
+          non_expired: non_expired,
+          end_date: end_date,
+          userId: userId,
+          // userId: 33,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonNewPermitListModels = jsonDecode(res.data);
         final List<NewPermitModel> _newPermitModelList = jsonNewPermitListModels
@@ -6696,14 +7050,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.permitIssueButton(
-        auth: auth,
-        comment: comment,
-        id: id,
-        isLoading: isLoading ?? false,
-      );
-      print('PermitIssuerResponse5: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.permitIssueButton(
+          auth: auth,
+          comment: comment,
+          id: id,
+          isLoading: isLoading ?? false,
+        );
+        print('PermitIssuerResponse5: ${res.data}');
+      }
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
@@ -6724,14 +7080,17 @@ class Repository {
       int? vegid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.permitApprovedButton(
-        auth: auth,
-        rejectCancelPermitJsonString: json.encode(rejectCancelPermitJsonString),
-        ptwStatus: ptwStatus,
-        jobId: jobId,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.permitApprovedButton(
+          auth: auth,
+          rejectCancelPermitJsonString:
+              json.encode(rejectCancelPermitJsonString),
+          ptwStatus: ptwStatus,
+          jobId: jobId,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Approve Extened Response: ${resourceData}');
@@ -6786,7 +7145,7 @@ class Repository {
   //     );
   //     print('PermitApproved&ExtendApproveResponse5: ${res.data}');
 
-  //     if (!res.hasError) {
+  //     }if (!res.hasError) {
   //       //  return _permitIssueModel;
   //     } else {
   //       Utility.showDialog(res.errorCode.toString() + 'permitIssueButton');
@@ -6804,14 +7163,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.permitCancelByIssuerButton(
-        auth: auth,
-        comment: comment,
-        id: id,
-        isLoading: isLoading ?? false,
-      );
-      print('PermitCancelByIssuerResponse: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.permitCancelByIssuerButton(
+          auth: auth,
+          comment: comment,
+          id: id,
+          isLoading: isLoading ?? false,
+        );
+        print('PermitCancelByIssuerResponse: ${res.data}');
+      }
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
@@ -6834,14 +7195,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.permitCancelRequestButton(
-          auth: auth,
-          cancelPermitJsonString: json.encode(cancelPermitJsonString),
-          isLoading: isLoading ?? false,
-          jobId: jobId,
-          type: type);
-      print('PermitCancelRequestResponse: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.permitCancelRequestButton(
+            auth: auth,
+            cancelPermitJsonString: json.encode(cancelPermitJsonString),
+            isLoading: isLoading ?? false,
+            jobId: jobId,
+            type: type);
+        print('PermitCancelRequestResponse: ${res.data}');
+      }
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
@@ -6862,13 +7225,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.permitCancelByApproverButton(
-        auth: auth,
-        ptwStatus: ptwStatus,
-        cancelByApproverJsonString: json.encode(cancelByApproverJsonString),
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.permitCancelByApproverButton(
+          auth: auth,
+          ptwStatus: ptwStatus,
+          cancelByApproverJsonString: json.encode(cancelByApproverJsonString),
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('PermitCancelByApprover Response: ${resourceData}');
@@ -6898,12 +7263,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.permitCancelRejectButton(
-        auth: auth,
-        rejectCancelPermitJsonString: json.encode(rejectCancelPermitJsonString),
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.permitCancelRejectButton(
+          auth: auth,
+          rejectCancelPermitJsonString:
+              json.encode(rejectCancelPermitJsonString),
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Permit Cancel Reject Response: ${resourceData}');
@@ -6942,7 +7310,7 @@ class Repository {
   //     );
   //     print('PermitCancelRejectResponse: ${res.data}');
 
-  //     if (!res.hasError) {
+  //     }if (!res.hasError) {
   //       //  return _permitIssueModel;
   //     } else {
   //       Utility.showDialog(
@@ -6964,13 +7332,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.permitExtendButton(
-          auth: auth,
-          extendPermitJsonString: json.encode(extendPermitJsonString),
-          isLoading: isLoading ?? false,
-          jobId: jobId);
-      print('PermitExtendRequestResponse: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.permitExtendButton(
+            auth: auth,
+            extendPermitJsonString: json.encode(extendPermitJsonString),
+            isLoading: isLoading ?? false,
+            jobId: jobId);
+        print('PermitExtendRequestResponse: ${res.data}');
+      }
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
@@ -6994,14 +7364,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.permitCloseButton(
-          auth: auth,
-          closePermitJsonString: json.encode(closePermitJsonString),
-          isLoading: isLoading ?? false,
-          jobId: jobId,
-          closetype: closetype);
-      print('PermitCloseRequestResponse: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.permitCloseButton(
+            auth: auth,
+            closePermitJsonString: json.encode(closePermitJsonString),
+            isLoading: isLoading ?? false,
+            jobId: jobId,
+            closetype: closetype);
+        print('PermitCloseRequestResponse: ${res.data}');
+      }
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
@@ -7019,12 +7391,14 @@ class Repository {
       abandoneJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.abandonExecutionButton(
-          auth: auth,
-          abandoneJsonString: json.encode(abandoneJsonString),
-          isLoading: isLoading ?? false,
-          facility_id: facility_id);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.abandonExecutionButton(
+            auth: auth,
+            abandoneJsonString: json.encode(abandoneJsonString),
+            isLoading: isLoading ?? false,
+            facility_id: facility_id);
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response Abandon Execution: ${resourceData}');
@@ -7061,12 +7435,14 @@ class Repository {
       abandoneScheduleJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.abandonScheduleExecutionButton(
-          auth: auth,
-          abandoneScheduleJsonString: json.encode(abandoneScheduleJsonString),
-          isLoading: isLoading ?? false,
-          facility_id: facility_id);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.abandonScheduleExecutionButton(
+            auth: auth,
+            abandoneScheduleJsonString: json.encode(abandoneScheduleJsonString),
+            isLoading: isLoading ?? false,
+            facility_id: facility_id);
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response Abandon Schedule Execution: ${resourceData}');
@@ -7104,12 +7480,14 @@ class Repository {
       endJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.endMCExecutionButton(
-          auth: auth,
-          endJsonString: json.encode(endJsonString),
-          isLoading: isLoading ?? false,
-          facility_id: facility_id);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.endMCExecutionButton(
+            auth: auth,
+            endJsonString: json.encode(endJsonString),
+            isLoading: isLoading ?? false,
+            facility_id: facility_id);
+      }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
       print('Response END Execution: ${resourceData}');
@@ -7146,13 +7524,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.startMCExecutionButton(
-          auth: auth,
-          executionId: executionId,
-          isLoading: isLoading ?? false,
-          facility_id: facility_id);
-      print('StartExecutionResponse55: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.startMCExecutionButton(
+            auth: auth,
+            executionId: executionId,
+            isLoading: isLoading ?? false,
+            facility_id: facility_id);
+        print('StartExecutionResponse55: ${res.data}');
+      }
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
@@ -7168,13 +7548,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.endMcExecutionButton(
-          auth: auth,
-          executionId: executionId,
-          isLoading: isLoading ?? false,
-          facility_id: facility_id);
-      print('endExecutionResponse55: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.endMcExecutionButton(
+            auth: auth,
+            executionId: executionId,
+            isLoading: isLoading ?? false,
+            facility_id: facility_id);
+        print('endExecutionResponse55: ${res.data}');
+      }
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
@@ -7190,13 +7572,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.startMCExecutionScheduleButton(
-          auth: auth,
-          scheduleId: scheduleId,
-          isLoading: isLoading ?? false,
-          facility_id: facility_id);
-      print('StartScheduleExecutionResponse55: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.startMCExecutionScheduleButton(
+            auth: auth,
+            scheduleId: scheduleId,
+            isLoading: isLoading ?? false,
+            facility_id: facility_id);
+        print('StartScheduleExecutionResponse55: ${res.data}');
+      }
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
@@ -7213,13 +7597,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.endMCScheduleExecutionButton(
-          auth: auth,
-          scheduleId: scheduleId,
-          isLoading: isLoading ?? false,
-          facility_id: facility_id);
-      print('EndScheduleExecutionResponse55: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.endMCScheduleExecutionButton(
+            auth: auth,
+            scheduleId: scheduleId,
+            isLoading: isLoading ?? false,
+            facility_id: facility_id);
+        print('EndScheduleExecutionResponse55: ${res.data}');
+      }
       if (res.errorCode == 200) {
         var responseMap = json.decode(res.data);
         permitCloseButton(closePtwJsonString, isLoading, 0, 4);
@@ -7254,7 +7640,7 @@ class Repository {
   //     );
   //     // print('PermitRejectResponse55: ${res.data}');
 
-  //     if (!res.hasError) {
+  //     }if (!res.hasError) {
   //       //  return _permitIssueModel;
   //     } else {
   //       Utility.showDialog(res.errorCode.toString() + 'permitRejectButton');
@@ -7275,18 +7661,20 @@ class Repository {
       int? vegid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.permitRejectButton(
-          auth: auth,
-          rejectExtendPermitJsonString:
-              json.encode(rejectExtendPermitJsonString),
-          id: id,
-          ptwStatus: ptwStatus,
-          jobId: jobId,
-          isLoading: isLoading ?? false,
-          type: type,
-          vegexe: vegexe,
-          vegid: vegid);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.permitRejectButton(
+            auth: auth,
+            rejectExtendPermitJsonString:
+                json.encode(rejectExtendPermitJsonString),
+            id: id,
+            ptwStatus: ptwStatus,
+            jobId: jobId,
+            isLoading: isLoading ?? false,
+            type: type,
+            vegexe: vegexe,
+            vegid: vegid);
+      }
       var resourceData = res.data;
 
       print('Response Permit Extend Reject Response: ${resourceData}');
@@ -7319,14 +7707,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.incidentReportRejectButton(
-        auth: auth,
-        comment: comment,
-        id: id,
-        isLoading: isLoading ?? false,
-      );
-      // print('IncidentReportRejectResponse: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.incidentReportRejectButton(
+          auth: auth,
+          comment: comment,
+          id: id,
+          isLoading: isLoading ?? false,
+        );
+        // print('IncidentReportRejectResponse: ${res.data}');
+      }
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
@@ -7346,13 +7736,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.incidentReportApproveButton(
-        auth: auth,
-        incidentId: incidentId,
-        isLoading: isLoading ?? false,
-      );
-      // print('IncidentReportApproveResponse: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.incidentReportApproveButton(
+          auth: auth,
+          incidentId: incidentId,
+          isLoading: isLoading ?? false,
+        );
+        // print('IncidentReportApproveResponse: ${res.data}');
+      }
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
@@ -7386,7 +7778,7 @@ class Repository {
   //     );
   //     print('NewPermitResponseData: ${res.data}');
 
-  //     if (!res.hasError) {
+  //     }if (!res.hasError) {
   //       var newPermitList = newPermitListFromJson(res.data);
   //       return newPermitList;
   //     }
@@ -7400,10 +7792,13 @@ class Repository {
   Future<List<FacilityModel?>?> getFacilityList(bool? isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getFacilityList(
-        auth: auth,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getFacilityList(
+          auth: auth,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final jsonFacilityModels = jsonDecode(res.data);
         final List<FacilityModel> _facilityModelList = jsonFacilityModels
@@ -7427,10 +7822,13 @@ class Repository {
   Future<List<FacilityModel?>?> getFacilityListByUserId(bool? isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getFacilityListByUserId(
-        auth: auth,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getFacilityListByUserId(
+          auth: auth,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final jsonFacilityModels = jsonDecode(res.data);
         final List<FacilityModel> _facilityModelList = jsonFacilityModels
@@ -7455,9 +7853,11 @@ class Repository {
       bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getTypePermitList(
-          auth: auth, isLoading: isLoading, facility_id: facility_id);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getTypePermitList(
+            auth: auth, isLoading: isLoading, facility_id: facility_id);
+      }
       if (!res.hasError) {
         final jsonTypePermitModels = jsonDecode(res.data);
         final List<TypePermitModel> _typePermitModelList = jsonTypePermitModels
@@ -7481,9 +7881,11 @@ class Repository {
       bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getModulesList(
-          auth: auth, isLoading: isLoading, facility_id: facility_id);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getModulesList(
+            auth: auth, isLoading: isLoading, facility_id: facility_id);
+      }
       if (!res.hasError) {
         final jsonModuleListModels = jsonDecode(res.data);
         final List<ModuleListModel> _typePermitModelList = jsonModuleListModels
@@ -7510,12 +7912,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getBlocksList(
-        auth: auth,
-        isLoading: isLoading ?? false,
-        facilityId: facilityId ?? 0,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getBlocksList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId ?? 0,
+        );
+      }
       if (!res.hasError) {
         final jsonFacilityModels = jsonDecode(res.data);
         final List<BlockModel> _blockModelList = jsonFacilityModels
@@ -7542,12 +7946,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getInventoryCategoryList(
-        auth: auth,
-        isLoading: isLoading,
-        facilityId: facilityId,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getInventoryCategoryList(
+          auth: auth,
+          isLoading: isLoading,
+          facilityId: facilityId,
+        );
+      }
       if (!res.hasError) {
         final jsonInventoryCategoryModels = jsonDecode(res.data);
         final List<InventoryCategoryModel> _inventoryCategoryModelList =
@@ -7580,12 +7986,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getInventoryCategoryList(
-        auth: auth,
-        isLoading: isLoading,
-        facilityId: facilityId,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getInventoryCategoryList(
+          auth: auth,
+          isLoading: isLoading,
+          facilityId: facilityId,
+        );
+      }
       if (!res.hasError) {
         final jsonInventoryCategoryModels = jsonDecode(res.data);
         final List<InventoryCategoryModel2> _inventoryCategoryModelList =
@@ -7618,12 +8026,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getInventoryCategoryList(
-        auth: auth,
-        isLoading: isLoading,
-        facilityId: facilityId,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getInventoryCategoryList(
+          auth: auth,
+          isLoading: isLoading,
+          facilityId: facilityId,
+        );
+      }
       if (!res.hasError) {
         final jsonInventoryCategoryModels = jsonDecode(res.data);
         final List<InventoryCategoryModel2> _inventoryCategoryModelList =
@@ -7656,12 +8066,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getInventoryIsolationList(
-        auth: auth,
-        isLoading: isLoading,
-        facilityId: facilityId,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getInventoryIsolationList(
+          auth: auth,
+          isLoading: isLoading,
+          facilityId: facilityId,
+        );
+      }
       if (!res.hasError) {
         final jsonInventoryIsolationModels = jsonDecode(res.data);
         final List<InventoryCategoryModel> _inventoryIsolationModelList =
@@ -7693,13 +8105,15 @@ class Repository {
       required String categoryIds}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getInventoryEquipmentNameList(
-          isLoading: isLoading,
-          facilityId: facilityId,
-          blockId: blockId,
-          categoryIds: categoryIds,
-          auth: auth);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getInventoryEquipmentNameList(
+            isLoading: isLoading,
+            facilityId: facilityId,
+            blockId: blockId,
+            categoryIds: categoryIds,
+            auth: auth);
+      }
       if (!res.hasError) {
         final jsonInventoryNameModels = jsonDecode(res.data);
         final List<InventoryModel> _inventoryNameModelList =
@@ -7730,11 +8144,13 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getFrequencyList(
-        auth: auth,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getFrequencyList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonFrequencyModels = jsonDecode(res.data);
         final List<FrequencyModel> _frequencyModelList = jsonFrequencyModels
@@ -7759,12 +8175,14 @@ class Repository {
       createMcPlans, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createMcPlan(
-          auth: auth,
-          createMcPlans: createMcPlans,
-          isLoading: isLoading ?? false,
-          facilityId: facilityId);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createMcPlan(
+            auth: auth,
+            createMcPlans: createMcPlans,
+            isLoading: isLoading ?? false,
+            facilityId: facilityId);
+      }
       var resourceData = res.data;
 
       print('Response Create MC  : ${resourceData}');
@@ -7797,12 +8215,14 @@ class Repository {
       updateMcPlans, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateMcPlan(
-          auth: auth,
-          updateMcPlans: updateMcPlans,
-          isLoading: isLoading ?? false,
-          facility_id: facility_id);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateMcPlan(
+            auth: auth,
+            updateMcPlans: updateMcPlans,
+            isLoading: isLoading ?? false,
+            facility_id: facility_id);
+      }
       var resourceData = res.data;
 
       print('Response Update MC : ${resourceData}');
@@ -7841,14 +8261,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.getJobDetails(
-        auth: auth,
-        jobId: jobId,
-        facilityId: facilityId,
-        userId: userId,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getJobDetails(
+          auth: auth,
+          jobId: jobId,
+          facilityId: facilityId,
+          userId: userId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final _jsonJobDetailsModel = jobDetailsModelFromJson(res.data);
 
@@ -7876,14 +8298,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.getjobDetailsModel(
-        auth: auth,
-        jobId: jobId,
-        facilityId: facilityId,
-        userId: userId,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getjobDetailsModel(
+          auth: auth,
+          jobId: jobId,
+          facilityId: facilityId,
+          userId: userId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final jsonCalibrationListModelModels = jsonDecode(res.data);
 
@@ -7918,13 +8342,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.getPermitList(
-        auth: auth,
-        facilityId: facilityId,
-        selfView: selfView,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPermitList(
+          auth: auth,
+          facilityId: facilityId,
+          selfView: selfView,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final jsonNewPermitModels = jsonDecode(res.data);
         final List<NewPermitModel> _newPermitList = jsonNewPermitModels
@@ -7953,13 +8379,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.assignToMC(
-          auth: auth,
-          assignId: assignId,
-          taskId: taskId,
-          isLoading: isLoading,
-          facility_id: facility_id);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.assignToMC(
+            auth: auth,
+            assignId: assignId,
+            taskId: taskId,
+            isLoading: isLoading,
+            facility_id: facility_id);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         return true;
       } else {
@@ -7980,13 +8409,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.assignToVeg(
-          auth: auth,
-          assignId: assignId,
-          taskId: taskId,
-          isLoading: isLoading,
-          facilityId: facilityId);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.assignToVeg(
+            auth: auth,
+            assignId: assignId,
+            taskId: taskId,
+            isLoading: isLoading,
+            facilityId: facilityId);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         return true;
       } else {
@@ -8006,12 +8438,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getAssignedToList(
-        auth: auth,
-        isLoading: isLoading,
-        facilityId: facilityId,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAssignedToList(
+          auth: auth,
+          isLoading: isLoading,
+          facilityId: facilityId,
+        );
+      }
       if (!res.hasError) {
         final jsonEmployeeModels = jsonDecode(res.data);
         final List<EmployeeModel> _employeeModelList = jsonEmployeeModels
@@ -8039,14 +8473,16 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getAssignedToListWOAttend(
-        auth: auth,
-        isLoading: isLoading,
-        facilityId: facilityId,
-        featureId: featureId,
-        isattendanceneeded: isattendanceneeded,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAssignedToListWOAttend(
+          auth: auth,
+          isLoading: isLoading,
+          facilityId: facilityId,
+          featureId: featureId,
+          isattendanceneeded: isattendanceneeded,
+        );
+      }
       if (!res.hasError) {
         final jsonEmployeeModels = jsonDecode(res.data);
         final List<EmployeeModel> _employeeModelList = jsonEmployeeModels
@@ -8074,13 +8510,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getAssignedToEmployee(
-        auth: auth,
-        isLoading: isLoading,
-        featureId: featureId,
-        facilityId: facilityId,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAssignedToEmployee(
+          auth: auth,
+          isLoading: isLoading,
+          featureId: featureId,
+          facilityId: facilityId,
+        );
+      }
       if (!res.hasError) {
         final jsonEmployeeModels = jsonDecode(res.data);
         final List<EmployeeModel> _employeeModelList = jsonEmployeeModels
@@ -8107,12 +8545,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getToolsRequiredToWorkTypeList(
-        workTypeIds: workTypeIds,
-        auth: auth,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getToolsRequiredToWorkTypeList(
+          workTypeIds: workTypeIds,
+          auth: auth,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonEmployeeModels = jsonDecode(res.data);
         final List<ToolsModel> _employeeModelList = jsonEmployeeModels
@@ -8142,13 +8582,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.linkToPermit(
-        auth: auth,
-        jobId: jobId,
-        permitId: permitId,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.linkToPermit(
+          auth: auth,
+          jobId: jobId,
+          permitId: permitId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -8174,12 +8616,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.saveJob(
-        auth: auth,
-        job: job,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.saveJob(
+          auth: auth,
+          job: job,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -8204,12 +8648,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateJob(
-        auth: auth,
-        job: job,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateJob(
+          auth: auth,
+          job: job,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -8235,13 +8681,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.assignReAssignJob(
-        auth: auth,
-        jobId: jobId,
-        assignedToId: assignedToId,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.assignReAssignJob(
+          auth: auth,
+          jobId: jobId,
+          assignedToId: assignedToId,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -8267,12 +8715,14 @@ class Repository {
     required bool isLoading,
   }) async {
     try {
-      final res = await _dataRepository.getUserAccessList(
-        auth: auth,
-        userId: userId,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getUserAccessList(
+          auth: auth,
+          userId: userId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         saveValue(LocalKeys.setUserAccess, res.data);
         Get.offAndToNamed(Routes.home);
@@ -8292,11 +8742,13 @@ class Repository {
       {bool? isLoading, checklistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createCheckList(
-          auth: auth,
-          isLoading: isLoading,
-          checklistJsonString: checklistJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createCheckList(
+            auth: auth,
+            isLoading: isLoading,
+            checklistJsonString: checklistJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -8314,11 +8766,13 @@ class Repository {
       {bool? isLoading, modulelistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createModuleList(
-          auth: auth,
-          isLoading: isLoading,
-          modulelistJsonString: modulelistJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createModuleList(
+            auth: auth,
+            isLoading: isLoading,
+            modulelistJsonString: modulelistJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -8340,14 +8794,16 @@ class Repository {
       int? categoryId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getPreventiveCheckListForPm(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          type: type,
-          isLoading: isLoading ?? false,
-          categoryId: categoryId,
-          frequencyid: frequencyid);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPreventiveCheckListForPm(
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            type: type,
+            isLoading: isLoading ?? false,
+            categoryId: categoryId,
+            frequencyid: frequencyid);
+      }
       if (!res.hasError) {
         final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
         // print(res.data);
@@ -8378,14 +8834,16 @@ class Repository {
       int? categoryId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getPreventiveCheckListForAudit(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          type: type,
-          isLoading: isLoading ?? false,
-          categoryId: categoryId,
-          frequencyid: frequencyid);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPreventiveCheckListForAudit(
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            type: type,
+            isLoading: isLoading ?? false,
+            categoryId: categoryId,
+            frequencyid: frequencyid);
+      }
       if (!res.hasError) {
         final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
         // print(res.data);
@@ -8417,14 +8875,16 @@ class Repository {
       int? categoryId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getPreventiveCheckList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          type: type,
-          isLoading: isLoading ?? false,
-          categoryId: categoryId,
-          frequencyid: frequencyid);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPreventiveCheckList(
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            type: type,
+            isLoading: isLoading ?? false,
+            categoryId: categoryId,
+            frequencyid: frequencyid);
+      }
       if (!res.hasError) {
         final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
         // print(res.data);
@@ -8485,13 +8945,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getdashboardList(
-          auth: auth,
-          facilityId: facilityId ?? "",
-          isLoading: isLoading ?? false,
-          startDate: startDate,
-          endDate: endDate);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getdashboardList(
+            auth: auth,
+            facilityId: facilityId ?? "",
+            isLoading: isLoading ?? false,
+            startDate: startDate,
+            endDate: endDate);
+      }
       if (!res.hasError) {
         final jsonDashboardModelModels = jsonDecode(res.data);
         // print(res.data);
@@ -8520,11 +8982,13 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getModuleList(
-        auth: auth,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getModuleList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonModuleListModelModels = jsonDecode(res.data);
         // print(res.data);
@@ -8550,11 +9014,13 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getModuleList(
-        auth: auth,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getModuleList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonModuleListModelModels = jsonDecode(res.data);
         // print(res.data);
@@ -8580,11 +9046,14 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getStatusList(
-        auth: auth,
-        moduleId: moduleId,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getStatusList(
+          auth: auth,
+          moduleId: moduleId,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final StatusList _statusList = statusListFromJson(res.data);
         return _statusList;
@@ -8605,13 +9074,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getInventoryTypeList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        // type: type,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getInventoryTypeList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          // type: type,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonInventoryTypeListModelModels = jsonDecode(res.data);
         // print(res.data);
@@ -8639,12 +9110,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getInventoryStatusList(
-        auth: auth,
-        // facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getInventoryStatusList(
+          auth: auth,
+          // facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonInventoryStatusListModel = jsonDecode(res.data);
         // print(res.data);
@@ -8671,13 +9144,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       //print({"checkid", selectedchecklistId});
-      final res = await _dataRepository.getCheckPointlist(
-          auth: auth,
-          selectedchecklistId: selectedchecklistId ?? 0,
-          isLoading: isLoading ?? false,
-          facilityId: facilityId,
-          type: type);
-      //print({"checkpoint list", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getCheckPointlist(
+            auth: auth,
+            selectedchecklistId: selectedchecklistId ?? 0,
+            isLoading: isLoading ?? false,
+            facilityId: facilityId,
+            type: type);
+        //print({"checkpoint list", res.data});
+      }
       if (!res.hasError) {
         final jsonPreventiveCheckPointModels = jsonDecode(res.data);
 
@@ -8737,11 +9213,13 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.createCheckpoint(
-          auth: auth,
-          isLoading: isLoading,
-          checkpointJsonString: checkpointJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createCheckpoint(
+            auth: auth,
+            isLoading: isLoading,
+            checkpointJsonString: checkpointJsonString);
+      }
       if (!res.hasError) {
         return true;
       } else {
@@ -8758,11 +9236,13 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.saveRoleAccess(
-          auth: auth,
-          isLoading: isLoading,
-          saveRolelistJsonString: saveRolelistJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.saveRoleAccess(
+            auth: auth,
+            isLoading: isLoading,
+            saveRolelistJsonString: saveRolelistJsonString);
+      }
       if (!res.hasError) {
         var resp = res.data;
         var parsedJson = json.decode(resp);
@@ -8799,12 +9279,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.uploadFiles(
-        auth: auth,
-        fileUploadModel: fileUploadModel,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.uploadFiles(
+          auth: auth,
+          fileUploadModel: fileUploadModel,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -8828,12 +9310,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getJobCardDetails(
-        auth: auth,
-        jobCardId: jobCardId,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getJobCardDetails(
+          auth: auth,
+          jobCardId: jobCardId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final jsonJobCardDetailsModels = jsonDecode(res.data);
         final List<JobCardDetailsModel> _jobCardDetailsList =
@@ -8864,12 +9348,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createJobCard(
-        auth: auth,
-        jobId: jobId,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createJobCard(
+          auth: auth,
+          jobId: jobId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         // if (res.errorCode == 200) {
         //   var responseMap = json.decode(res.data);
@@ -8902,13 +9388,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.startJobCard(
-        auth: auth,
-        jcCard: jcCard,
-        jobCard: jobCard,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.startJobCard(
+          auth: auth,
+          jcCard: jcCard,
+          jobCard: jobCard,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         // Fluttertoast.showToast(
         //     msg: "Start Job Card Successfully...", fontSize: 16.0);
@@ -8917,7 +9405,7 @@ class Repository {
         //     arguments: {'JcId': int.tryParse("$jcCard")});
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       }
-      // if (!res.hasError) {
+      // }if (!res.hasError) {
       //   if (res.errorCode == 200) {
       //     var responseMap = json.decode(res.data);
       //     Get.offAllNamed(Routes.jobDetails);
@@ -8941,13 +9429,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getPermitDetails(
-        auth: auth,
-        permitId: permitId,
-        facilityId: facilityId,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPermitDetails(
+          auth: auth,
+          permitId: permitId,
+          facilityId: facilityId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final PermitDetailsModel _permitDetailsModel =
             permitDetailsModelFromJson(res.data);
@@ -8972,14 +9462,16 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getJobCardHistory(
-        auth: auth,
-        moduleType: moduleType,
-        jobCardId: jobCardId,
-        facilityId: facilityId,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getJobCardHistory(
+          auth: auth,
+          moduleType: moduleType,
+          jobCardId: jobCardId,
+          facilityId: facilityId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final jsonJobCardDetailsModels = jsonDecode(res.data);
         final List<HistoryModel> _jobCardDetailsList = jsonJobCardDetailsModels
@@ -9009,14 +9501,16 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getViewPlanHistory(
-        auth: auth,
-        moduleType: moduleType,
-        pmPlanId: pmPlanId,
-        facilityId: facilityId,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getViewPlanHistory(
+          auth: auth,
+          moduleType: moduleType,
+          pmPlanId: pmPlanId,
+          facilityId: facilityId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final jsonPMPlanDetailsModels = jsonDecode(res.data);
         final List<HistoryModel> _pmPlanDetailsList = jsonPMPlanDetailsModels
@@ -9047,15 +9541,17 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getPermitHistory(
-        auth: auth,
-        moduleType: moduleType,
-        facilityId: facilityId,
-        permitId: permitId,
-        isLoading: isLoading,
-      );
-      // print('Permit History: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPermitHistory(
+          auth: auth,
+          moduleType: moduleType,
+          facilityId: facilityId,
+          permitId: permitId,
+          isLoading: isLoading,
+        );
+        // print('Permit History: ${res.data}');
+      }
       if (!res.hasError) {
         final jsonPermitDetailsModels = jsonDecode(res.data);
         final List<HistoryModel> _permitDetailsList = jsonPermitDetailsModels
@@ -9085,12 +9581,15 @@ class Repository {
     // final res = ResponseModel(data: '', hasError: false);
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateJobCard(
-        auth: auth,
-        jobCard: json.encode(jobCard),
-        isLoading: isLoading,
-      );
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateJobCard(
+          auth: auth,
+          jobCard: json.encode(jobCard),
+          isLoading: isLoading,
+        );
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -9116,12 +9615,14 @@ class Repository {
     // final res = ResponseModel(data: '', hasError: false);
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.carryForwardJob(
-        auth: auth,
-        jobCard: json.encode(jobCard),
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.carryForwardJob(
+          auth: auth,
+          jobCard: json.encode(jobCard),
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -9146,12 +9647,14 @@ class Repository {
     // final res = ResponseModel(data: '', hasError: false);
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.closeJob(
-        auth: auth,
-        jobCard: json.encode(jobCard),
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.closeJob(
+          auth: auth,
+          jobCard: json.encode(jobCard),
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -9180,12 +9683,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.approveRequestCalibration(
-          auth: auth,
-          isLoading: isLoading,
-          approveCalibrationtoJsonString:
-              json.encode(approveCalibrationtoJsonString));
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approveRequestCalibration(
+            auth: auth,
+            isLoading: isLoading,
+            approveCalibrationtoJsonString:
+                json.encode(approveCalibrationtoJsonString));
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -9209,14 +9715,16 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getHistory(
-        auth: auth,
-        isLoading: isLoading,
-        moduleType: moduleType,
-        id: id,
-        facilityId: facilityId ?? 0,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getHistory(
+          auth: auth,
+          isLoading: isLoading,
+          moduleType: moduleType,
+          id: id,
+          facilityId: facilityId ?? 0,
+        );
+      }
       if (!res.hasError) {
         final jsonHistoryModels = jsonDecode(res.data);
         final List<HistoryModel> _historyModelList = jsonHistoryModels
@@ -9244,13 +9752,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getJobsLinkdToPermitList(
-        auth: auth,
-        isLoading: isLoading,
-        facilityId: facilityId,
-        permitId: permitId,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getJobsLinkdToPermitList(
+          auth: auth,
+          isLoading: isLoading,
+          facilityId: facilityId,
+          permitId: permitId,
+        );
+      }
       if (!res.hasError) {
         final jsonLinkedJobsToPermitModel = jsonDecode(res.data);
         final List<LinkedJobsToPermitModel> _linkedJobsToPermit =
@@ -9280,12 +9790,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getMrsListByModule(
-          auth: auth,
-          isLoading: isLoading,
-          jobId: jobId,
-          facilityId: facilityId);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getMrsListByModule(
+            auth: auth,
+            isLoading: isLoading,
+            jobId: jobId,
+            facilityId: facilityId);
+      }
       if (!res.hasError) {
         final jsonMrsListByModuleModel = jsonDecode(res.data);
         final List<MRSListByJobIdModel> _mrsListByModule =
@@ -9314,11 +9826,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getMrsListByModuleTask(
-        auth: auth,
-        isLoading: isLoading,
-        taskId: taskId,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getMrsListByModuleTask(
+          auth: auth,
+          isLoading: isLoading,
+          taskId: taskId,
+        );
+      }
       if (!res.hasError) {
         final jsonMrsListByModuleModel = jsonDecode(res.data);
         final List<MRSListByJobIdModel> _mrsListByModule =
@@ -9343,12 +9858,14 @@ class Repository {
   Future<void> deleteCkeckpoint(Object check_point_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteCkeckpoint(
-        auth: auth,
-        check_point_id: check_point_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteCkeckpoint(
+          auth: auth,
+          check_point_id: check_point_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -9362,12 +9879,14 @@ class Repository {
   Future<void> deletePmPlan(Object planId, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deletePmPlan(
-        auth: auth,
-        planId: planId,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deletePmPlan(
+          auth: auth,
+          planId: planId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -9384,11 +9903,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getPmMappingList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPmMappingList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonPmMappingListModels = jsonDecode(res.data);
         final List<PmMappingListModel> _pmMappingListModel =
@@ -9413,11 +9935,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.savePmMapping(
-        auth: auth,
-        pmJsonString: pmJsonString,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.savePmMapping(
+          auth: auth,
+          pmJsonString: pmJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -9440,12 +9965,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getCalibrationList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
-      // print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getCalibrationList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+        );
+        // print(res.data);
+      }
       if (!res.hasError) {
         final jsonCalibrationListModelModels = jsonDecode(res.data);
 
@@ -9471,11 +9999,14 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.requestCalibration(
-          auth: auth,
-          isLoading: isLoading,
-          requestCalibration: requestCalibration);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.requestCalibration(
+            auth: auth,
+            isLoading: isLoading,
+            requestCalibration: requestCalibration);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -9496,12 +10027,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.rejectRequestCalibration(
-          auth: auth,
-          isLoading: isLoading,
-          rejectCalibrationtoJsonString:
-              json.encode(rejectCalibrationtoJsonString));
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectRequestCalibration(
+            auth: auth,
+            isLoading: isLoading,
+            rejectCalibrationtoJsonString:
+                json.encode(rejectCalibrationtoJsonString));
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -9521,12 +10055,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.skipCalibration(
-          auth: auth,
-          isLoading: isLoading,
-          skipCalibrationtoJsonString:
-              json.encode(skipCalibrationtoJsonString));
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.skipCalibration(
+            auth: auth,
+            isLoading: isLoading,
+            skipCalibrationtoJsonString:
+                json.encode(skipCalibrationtoJsonString));
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -9545,11 +10082,14 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.approveJobCards(
-          auth: auth,
-          isLoading: isLoading,
-          approveJsonString: json.encode(approveJsonString));
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approveJobCards(
+            auth: auth,
+            isLoading: isLoading,
+            approveJsonString: json.encode(approveJsonString));
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: 'Job approved!', fontSize: 45.0);
         // Get.offAllNamed(Routes.jobList);
@@ -9569,11 +10109,14 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.rejectJobCard(
-          auth: auth,
-          isLoading: isLoading,
-          rejectJsonString: json.encode(rejectJsonString));
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectJobCard(
+            auth: auth,
+            isLoading: isLoading,
+            rejectJsonString: json.encode(rejectJsonString));
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -9593,11 +10136,14 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.approvecloseJob(
-          auth: auth,
-          isLoading: isLoading,
-          approveJsonString: json.encode(approveJsonString));
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approvecloseJob(
+            auth: auth,
+            isLoading: isLoading,
+            approveJsonString: json.encode(approveJsonString));
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         // permitCloseButton(closePtwJsonString, isLoading, 0, 0);
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -9617,11 +10163,14 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.rejectcloseJob(
-          auth: auth,
-          isLoading: isLoading,
-          rejectJsonString: json.encode(rejectJsonString));
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectcloseJob(
+            auth: auth,
+            isLoading: isLoading,
+            rejectJsonString: json.encode(rejectJsonString));
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -9641,12 +10190,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.approveCloseCalibration(
-          auth: auth,
-          isLoading: isLoading,
-          approveCalibrationtoJsonString:
-              json.encode(approveCalibrationtoJsonString));
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approveCloseCalibration(
+            auth: auth,
+            isLoading: isLoading,
+            approveCalibrationtoJsonString:
+                json.encode(approveCalibrationtoJsonString));
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -9666,12 +10218,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.rejectCloseCalibration(
-          auth: auth,
-          isLoading: isLoading,
-          rejectCalibrationtoJsonString:
-              json.encode(rejectCalibrationtoJsonString));
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectCloseCalibration(
+            auth: auth,
+            isLoading: isLoading,
+            rejectCalibrationtoJsonString:
+                json.encode(rejectCalibrationtoJsonString));
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -9691,12 +10246,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.closeCalibration(
-          auth: auth,
-          isLoading: isLoading,
-          closeCalibrationtoJsonString:
-              json.encode(closeCalibrationtoJsonString));
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.closeCalibration(
+            auth: auth,
+            isLoading: isLoading,
+            closeCalibrationtoJsonString:
+                json.encode(closeCalibrationtoJsonString));
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -9716,12 +10274,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.completeCalibration(
-          auth: auth,
-          isLoading: isLoading,
-          completeCalibrationtoJsonString:
-              json.encode(completeCalibrationtoJsonString));
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.completeCalibration(
+            auth: auth,
+            isLoading: isLoading,
+            completeCalibrationtoJsonString:
+                json.encode(completeCalibrationtoJsonString));
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -9743,13 +10304,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getPMScheduleData(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        selectedEquipmentId: selectedEquipmentId,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPMScheduleData(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          selectedEquipmentId: selectedEquipmentId,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonSetPmSchedultModels = jsonDecode(res.data);
         // print(res.data);
@@ -9778,11 +10341,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.savePmSchedule(
-        auth: auth,
-        pmScheduleJsonString: pmScheduleJsonString,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.savePmSchedule(
+          auth: auth,
+          pmScheduleJsonString: pmScheduleJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -9807,13 +10373,16 @@ class Repository {
       bool? isExport) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getPmTaskList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          isLoading: isLoading ?? false,
-          startDate: startDate,
-          endDate: endDate);
-      // print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPmTaskList(
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            isLoading: isLoading ?? false,
+            startDate: startDate,
+            endDate: endDate);
+        // print(res.data);
+      }
       if (!res.hasError) {
         final jsonPmTaskListModelModels = jsonDecode(res.data);
 
@@ -9892,14 +10461,17 @@ class Repository {
       int? type) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getAuditTaskList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          isLoading: isLoading ?? false,
-          startDate: startDate,
-          endDate: endDate,
-          type: type);
-      // print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAuditTaskList(
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            isLoading: isLoading ?? false,
+            startDate: startDate,
+            endDate: endDate,
+            type: type);
+        // print(res.data);
+      }
       if (!res.hasError) {
         final jsonPmTaskListModelModels = jsonDecode(res.data);
 
@@ -9978,15 +10550,17 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getNewPermitDetail(
-        auth: auth,
-        permitId: permitId,
-        facilityId: facilityId,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getNewPermitDetail(
+          auth: auth,
+          permitId: permitId,
+          facilityId: facilityId,
+          isLoading: isLoading ?? false,
+        );
 
-      print({"permitdetail", res.data});
-
+        print({"permitdetail", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           final NewPermitDetailModel _newPermitDetailModel =
@@ -10011,12 +10585,16 @@ class Repository {
       int? scheduleId, bool? isLoading, int facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getPmtaskViewList(
-        auth: auth,
-        scheduleId: scheduleId,
-        facilityId: facilityId,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPmtaskViewList(
+          auth: auth,
+          scheduleId: scheduleId,
+          facilityId: facilityId,
+          isLoading: isLoading,
+        );
+      }
+
       // print(res.data);
       if (!res.hasError) {
         final PmtaskViewModel _permitDetailsModel =
@@ -10040,13 +10618,16 @@ class Repository {
       int? importType, bool isLoading, int facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.browseFiles(
-          auth: auth,
-          fileBytes: fileBytes,
-          fileName: fileName,
-          importType: importType ?? 0,
-          isLoading: isLoading,
-          facilityId: facilityId);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.browseFiles(
+            auth: auth,
+            fileBytes: fileBytes,
+            fileName: fileName,
+            importType: importType ?? 0,
+            isLoading: isLoading,
+            facilityId: facilityId);
+      }
       print("file upload:${res}");
       return res;
     } //
@@ -10063,12 +10644,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.browsePmFiles(
-        auth: auth,
-        fileBytes: fileBytes,
-        fileName: fileName,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.browsePmFiles(
+          auth: auth,
+          fileBytes: fileBytes,
+          fileName: fileName,
+          isLoading: isLoading,
+        );
+      }
       if (res != null) {
         print("file upload:${res}");
         return res;
@@ -10087,12 +10671,14 @@ class Repository {
   Future<void> deleteCkecklist(Object checklist_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteCkecklist(
-        auth: auth,
-        checklist_id: checklist_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteCkecklist(
+          auth: auth,
+          checklist_id: checklist_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -10107,12 +10693,14 @@ class Repository {
       Object worktypetool_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteWorkTypeTool(
-        auth: auth,
-        worktypetool_id: worktypetool_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteWorkTypeTool(
+          auth: auth,
+          worktypetool_id: worktypetool_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -10126,12 +10714,14 @@ class Repository {
   Future<void> deleteModulelist(Object module_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteModulelist(
-        auth: auth,
-        module_id: module_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteModulelist(
+          auth: auth,
+          module_id: module_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -10148,12 +10738,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateChecklistNumber(
-        auth: auth,
-        isLoading: isLoading,
-        checklistJsonString: checklistJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateChecklistNumber(
+          auth: auth,
+          isLoading: isLoading,
+          checklistJsonString: checklistJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -10173,12 +10766,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateWorkTypeTool(
-        auth: auth,
-        isLoading: isLoading,
-        worktypetoolJsonString: worktypetoolJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateWorkTypeTool(
+          auth: auth,
+          isLoading: isLoading,
+          worktypetoolJsonString: worktypetoolJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -10198,12 +10794,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateModulelistNumber(
-        auth: auth,
-        isLoading: isLoading,
-        modulelistJsonString: modulelistJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateModulelistNumber(
+          auth: auth,
+          isLoading: isLoading,
+          modulelistJsonString: modulelistJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -10221,11 +10820,13 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.updateCheckPoint(
-          auth: auth,
-          isLoading: isLoading,
-          checkpointJsonString: checkpointJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateCheckPoint(
+            auth: auth,
+            isLoading: isLoading,
+            checkpointJsonString: checkpointJsonString);
+      }
       if (!res.hasError) {
         return true;
       } else {
@@ -10243,12 +10844,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.updateSafetyMeasure(
-          auth: auth,
-          isLoading: isLoading,
-          createSafetyMeasureJsonString: createSafetyMeasureJsonString);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateSafetyMeasure(
+            auth: auth,
+            isLoading: isLoading,
+            createSafetyMeasureJsonString: createSafetyMeasureJsonString);
 
-      print('Response updateSafetyMeasure: ${res.data}');
+        print('Response updateSafetyMeasure: ${res.data}');
+      }
       if (!res.hasError) {
         return true;
       } else {
@@ -10266,11 +10870,13 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getCountryList(
-        auth: auth,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getCountryList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonCountryModels = jsonDecode(res.data);
         final List<CountryModel> _countryModelList = jsonCountryModels
@@ -10296,11 +10902,13 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getBloodList(
-        auth: auth,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getBloodList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonBloodModels = jsonDecode(res.data);
         final List<BloodModel> _bloodModelList = jsonBloodModels
@@ -10325,11 +10933,13 @@ class Repository {
       bool? isLoading, int? selectedCountryId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getStateListnew(
-          auth: auth,
-          isLoading: isLoading ?? false,
-          selectedCountryId: selectedCountryId);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getStateListnew(
+            auth: auth,
+            isLoading: isLoading ?? false,
+            selectedCountryId: selectedCountryId);
+      }
       if (!res.hasError) {
         final jsonStateModels = jsonDecode(res.data);
         final List<StateModel> _stateModelList = jsonStateModels
@@ -10354,11 +10964,13 @@ class Repository {
       bool? isLoading, int? selectedStateId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getCityList(
-          auth: auth,
-          isLoading: isLoading ?? false,
-          selectedStateId: selectedStateId);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getCityList(
+            auth: auth,
+            isLoading: isLoading ?? false,
+            selectedStateId: selectedStateId);
+      }
       if (!res.hasError) {
         final jsoncityModels = jsonDecode(res.data);
         final List<CityModel> _cityModelList = jsoncityModels
@@ -10385,11 +10997,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getRoleAccessList(
-        auth: auth,
-        roleId: roleId,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getRoleAccessList(
+          auth: auth,
+          roleId: roleId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final AccessLevelModel _accessLevelModel =
             accessLevelModelFromJson(res.data);
@@ -10412,11 +11027,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getRoleNotificationList(
-        auth: auth,
-        roleId: roleId,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getRoleNotificationList(
+          auth: auth,
+          roleId: roleId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final GetNotificationModel _getNotificationModel =
             getNotificationModelFromJson(res.data);
@@ -10439,11 +11057,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getUserAccessListById(
-        auth: auth,
-        userId: userId,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getUserAccessListById(
+          auth: auth,
+          userId: userId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final GetAccessLevelByIdModel _accessLevelModel =
             getaccessLevelModelFromJson(res.data);
@@ -10466,11 +11087,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getUserAccessListByUserId(
-        auth: auth,
-        userId: userId,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getUserAccessListByUserId(
+          auth: auth,
+          userId: userId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final AccessLevelModel _accessLevelModel =
             accessLevelModelFromJson(res.data);
@@ -10493,11 +11117,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getUserNotificationListById(
-        auth: auth,
-        userId: userId,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getUserNotificationListById(
+          auth: auth,
+          userId: userId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final GetNotificationModel _getNotificationByUserIdModel =
             getNotificationModelFromJson(res.data);
@@ -10520,11 +11147,13 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getRoleList(
-        auth: auth,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getRoleList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonRoleModels = jsonDecode(res.data);
         final List<RoleModel> _roleModelList = jsonRoleModels
@@ -10552,12 +11181,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getCumulativeReportList(
-          auth: auth,
-          isLoading: isLoading ?? false,
-          selectedFacilityIdList: selectedFacilityIdList,
-          module_id: module_id);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getCumulativeReportList(
+            auth: auth,
+            isLoading: isLoading ?? false,
+            selectedFacilityIdList: selectedFacilityIdList,
+            module_id: module_id);
+      }
       if (!res.hasError) {
         final jsonCumulativereports = jsonDecode(res.data);
         final List<Cumulativereport> _CumulativereportList =
@@ -10584,12 +11215,14 @@ class Repository {
       int? facilityId, bool? isLoading, bool? isExport) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getUserList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getUserList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonUserListModelModels = jsonDecode(res.data);
         // print(res.data);
@@ -10669,12 +11302,14 @@ class Repository {
       int? facilityId, bool? isLoading, bool? isExport) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.jobCardList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.jobCardList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonJobCardListModelModels = jsonDecode(res.data);
         // print(res.data);
@@ -10777,12 +11412,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getUserList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getUserList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonUserListModelModels = jsonDecode(res.data);
         // print(res.data);
@@ -10809,11 +11446,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getUserDetails(
-        auth: auth,
-        userId: userId,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getUserDetails(
+          auth: auth,
+          userId: userId,
+          isLoading: isLoading,
+        );
+      }
       final response = res.data;
       print("Result: $response");
       if (!res.hasError) {
@@ -10840,11 +11480,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.saveAccessLevel(
-        auth: auth,
-        accessLevelJsonString: accessLevelJsonString,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.saveAccessLevel(
+          auth: auth,
+          accessLevelJsonString: accessLevelJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -10865,11 +11508,14 @@ class Repository {
       {bool? isLoading, adduserJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.addUser(
-          auth: auth,
-          isLoading: isLoading,
-          adduserJsonString: adduserJsonString);
-      // print({"resp", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.addUser(
+            auth: auth,
+            isLoading: isLoading,
+            adduserJsonString: adduserJsonString);
+        // print({"resp", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -10891,11 +11537,14 @@ class Repository {
       {bool? isLoading, adduserJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateUser(
-          auth: auth,
-          isLoading: isLoading,
-          adduserJsonString: adduserJsonString);
-      print({"resp", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateUser(
+            auth: auth,
+            isLoading: isLoading,
+            adduserJsonString: adduserJsonString);
+        print({"resp", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -10918,11 +11567,13 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getWarrantyTypeList(
-        auth: auth,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getWarrantyTypeList(
+          auth: auth,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final jsongetWarrantyTypeList = jsonDecode(res.data);
         final List<WarrantyTypeModel> _warrantyTypeListModelList =
@@ -10951,11 +11602,14 @@ class Repository {
       pmExecutionJsonString, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updatePmExecution(
-          auth: auth,
-          pmExecutionJsonString: pmExecutionJsonString,
-          isLoading: isLoading ?? false,
-          facility_id: facility_id);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updatePmExecution(
+            auth: auth,
+            pmExecutionJsonString: pmExecutionJsonString,
+            isLoading: isLoading ?? false,
+            facility_id: facility_id);
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -10978,11 +11632,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateAuditTaskExecution(
-        auth: auth,
-        auditExecutionJsonString: auditExecutionJsonString,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateAuditTaskExecution(
+          auth: auth,
+          auditExecutionJsonString: auditExecutionJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -11003,12 +11660,15 @@ class Repository {
       Uint8List? fileBytes, String fileName, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.uploadImge(
-        auth: auth,
-        fileBytes: fileBytes,
-        fileName: fileName,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.uploadImge(
+          auth: auth,
+          fileBytes: fileBytes,
+          fileName: fileName,
+          isLoading: isLoading,
+        );
+      }
       print("file upload");
       return res;
     } //
@@ -11022,12 +11682,15 @@ class Repository {
       Uint8List? fileBytes, String fileName, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.uploadImgeInventory(
-        auth: auth,
-        fileBytes: fileBytes,
-        fileName: fileName,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.uploadImgeInventory(
+          auth: auth,
+          fileBytes: fileBytes,
+          fileName: fileName,
+          isLoading: isLoading,
+        );
+      }
       print("file upload");
       return res;
     } //
@@ -11043,11 +11706,13 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getWarrantyUsageTermList(
-        auth: auth,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getWarrantyUsageTermList(
+          auth: auth,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final jsongetWarrantyUsageTermList = jsonDecode(res.data);
         final List<WarrantyUsageTermListModel> _warrantyUsageTermListModelList =
@@ -11079,13 +11744,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getWarrantyList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        type: type,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getWarrantyList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          type: type,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonModuleListModelModels = jsonDecode(res.data);
         // print(res.data);
@@ -11116,11 +11783,14 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getBusinessTypeList(
-        businessType: businessType,
-        isLoading: isLoading,
-        auth: auth,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getBusinessTypeList(
+          businessType: businessType,
+          isLoading: isLoading,
+          auth: auth,
+        );
+      }
       if (!res.hasError) {
         var businessList = BusinessTypeModelFromJson(res.data);
         return businessList;
@@ -11143,12 +11813,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getAssetList(
-        auth: auth,
-        isLoading: isLoading ?? false,
-        facilityId: facilityId ?? 0,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAssetList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId ?? 0,
+        );
+      }
       if (!res.hasError) {
         final jsonFacilityModels = jsonDecode(res.data);
         final List<GetAssetDataModel> _getAssetList = jsonFacilityModels
@@ -11174,12 +11846,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.approveGoodsOrder(
-        auth: auth,
-        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approveGoodsOrder(
+          auth: auth,
+          goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -11211,7 +11885,7 @@ class Repository {
   //         isLoading: isLoading,
   //         approvetoJsonString: approvetoJsonString);
   //     print({"res.data", res.data});
-  //     if (!res.hasError) {
+  //     }if (!res.hasError) {
   //       Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
   //       return true;
@@ -11231,12 +11905,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.rejectGoodsOrder(
-        auth: auth,
-        goodsOrderRejectJsonString: goodsOrderRejectJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectGoodsOrder(
+          auth: auth,
+          goodsOrderRejectJsonString: goodsOrderRejectJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -11267,15 +11943,17 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getRoHistory(
-        auth: auth,
-        moduleType: moduleType,
-        id: id,
-        facilityId: facilityId,
-        isLoading: isLoading,
-      );
-      // print('Permit History: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getRoHistory(
+          auth: auth,
+          moduleType: moduleType,
+          id: id,
+          facilityId: facilityId,
+          isLoading: isLoading,
+        );
+        // print('Permit History: ${res.data}');
+      }
       if (!res.hasError) {
         final jsonGoDetailsModels = jsonDecode(res.data);
         final List<HistoryModel> _goDetailsList = jsonGoDetailsModels
@@ -11306,7 +11984,7 @@ class Repository {
   //         isLoading: isLoading,
   //         rejecttoJsonString: rejecttoJsonString);
   //     print({"res.data", res.data});
-  //     if (!res.hasError) {
+  //     }if (!res.hasError) {
   //       Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
   //       return true;
@@ -11324,11 +12002,13 @@ class Repository {
       {bool? isLoading, businesslistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createBusinessList(
-          auth: auth,
-          isLoading: isLoading,
-          businesslistJsonString: businesslistJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createBusinessList(
+            auth: auth,
+            isLoading: isLoading,
+            businesslistJsonString: businesslistJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -11345,11 +12025,13 @@ class Repository {
   Future<bool> createSPVlist({bool? isLoading, businesslistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createSPVlist(
-          auth: auth,
-          isLoading: isLoading,
-          businesslistJsonString: businesslistJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createSPVlist(
+            auth: auth,
+            isLoading: isLoading,
+            businesslistJsonString: businesslistJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -11369,11 +12051,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.saveNotification(
-        auth: auth,
-        saveNotificationJsonString: saveNotificationJsonString,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.saveNotification(
+          auth: auth,
+          saveNotificationJsonString: saveNotificationJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -11393,11 +12078,14 @@ class Repository {
   Future<bool> AddInventory({bool? isLoading, addInventoryJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.AddInventory(
-          auth: auth,
-          isLoading: isLoading,
-          addInventoryJsonString: addInventoryJsonString);
-      print({"resp", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.AddInventory(
+            auth: auth,
+            isLoading: isLoading,
+            addInventoryJsonString: addInventoryJsonString);
+        print({"resp", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
 
@@ -11419,11 +12107,14 @@ class Repository {
       {bool? isLoading, addInventoryJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateInventory(
-          auth: auth,
-          isLoading: isLoading,
-          addInventoryJsonString: json.encode(addInventoryJsonString));
-      print({"resp", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateInventory(
+            auth: auth,
+            isLoading: isLoading,
+            addInventoryJsonString: json.encode(addInventoryJsonString));
+        print({"resp", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: "Data update successfully...", fontSize: 16.0);
@@ -11449,13 +12140,15 @@ class Repository {
       int? categoryId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.inventoryList(
-          facilityId: facilityId,
-          isLoading: isLoading,
-          auth: auth,
-          categoryId: categoryId);
-      // print('Inventory List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.inventoryList(
+            facilityId: facilityId,
+            isLoading: isLoading,
+            auth: auth,
+            categoryId: categoryId);
+        // print('Inventory List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var inventoryList = inventoryModelFromJson(res.data);
         return inventoryList.reversed.toList();
@@ -11477,13 +12170,15 @@ class Repository {
       int? categoryId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.inventoryListviaCategory(
-          facilityId: facilityId,
-          isLoading: isLoading,
-          auth: auth,
-          categoryId: categoryId);
-      // print('Inventory List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.inventoryListviaCategory(
+            facilityId: facilityId,
+            isLoading: isLoading,
+            auth: auth,
+            categoryId: categoryId);
+        // print('Inventory List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var inventoryList = inventoryModelFromJson(res.data);
         return inventoryList.reversed.toList();
@@ -11502,12 +12197,14 @@ class Repository {
   Future<bool> startCalibration(Object calibrationId, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.startCalibration(
-        auth: auth,
-        calibrationId: calibrationId,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.startCalibration(
+          auth: auth,
+          calibrationId: calibrationId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         return true;
         //get delete response back from API
@@ -11525,11 +12222,13 @@ class Repository {
       {bool? isLoading, facilitylistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createFacilityType(
-          auth: auth,
-          isLoading: isLoading,
-          facilitylistJsonString: facilitylistJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createFacilityType(
+            auth: auth,
+            isLoading: isLoading,
+            facilitylistJsonString: facilitylistJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -11551,12 +12250,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getCalibrationView(
-        auth: auth,
-        calibrationId: calibrationId,
-        facilityId: facilityId,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getCalibrationView(
+          auth: auth,
+          calibrationId: calibrationId,
+          facilityId: facilityId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final CalibrationDetailModel _calibrationDetailsModel =
             calibrationDetailModelFromJson(res.data);
@@ -11580,11 +12282,13 @@ class Repository {
   Future<bool> createBlockType({bool? isLoading, blockTypeJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createBlockType(
-          auth: auth,
-          isLoading: isLoading,
-          facilitylistJsonString: blockTypeJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createBlockType(
+            auth: auth,
+            isLoading: isLoading,
+            facilitylistJsonString: blockTypeJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -11606,13 +12310,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getAssetMasterList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        type: type,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAssetMasterList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          type: type,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonModuleListModelModels = jsonDecode(res.data);
         // print(res.data);
@@ -11672,11 +12378,13 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getDesignationList(
-        auth: auth,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getDesignationList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonRoleModels = jsonDecode(res.data);
         final List<DesignationModel> _roleModelList = jsonRoleModels
@@ -11700,12 +12408,14 @@ class Repository {
   Future<void> deleteBusinessList(Object business_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteBusinessList(
-        auth: auth,
-        business_id: business_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteBusinessList(
+          auth: auth,
+          business_id: business_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -11719,12 +12429,14 @@ class Repository {
   Future<void> deleteBlock(Object business_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteBlock(
-        auth: auth,
-        business_id: business_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteBlock(
+          auth: auth,
+          business_id: business_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -11738,12 +12450,14 @@ class Repository {
   Future<void> deleteSPV(Object business_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteSPV(
-        auth: auth,
-        business_id: business_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteSPV(
+          auth: auth,
+          business_id: business_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -11758,9 +12472,11 @@ class Repository {
       Object id, bool isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteGoodsOrders(
-          auth: auth, id: id, isLoading: isLoading, facility_id: facility_id);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteGoodsOrders(
+            auth: auth, id: id, isLoading: isLoading, facility_id: facility_id);
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -11777,12 +12493,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateBusinesslist(
-        auth: auth,
-        isLoading: isLoading,
-        modulelistJsonString: modulelistJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateBusinesslist(
+          auth: auth,
+          isLoading: isLoading,
+          modulelistJsonString: modulelistJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -11802,12 +12521,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateSPV(
-        auth: auth,
-        isLoading: isLoading,
-        modulelistJsonString: modulelistJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateSPV(
+          auth: auth,
+          isLoading: isLoading,
+          modulelistJsonString: modulelistJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -11827,12 +12549,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateFacilityList(
-        auth: auth,
-        isLoading: isLoading,
-        modulelistJsonString: modulelistJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateFacilityList(
+          auth: auth,
+          isLoading: isLoading,
+          modulelistJsonString: modulelistJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -11851,11 +12576,13 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getCompetencyList(
-        auth: auth,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getCompetencyList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
         // print(res.data);
@@ -11879,11 +12606,13 @@ class Repository {
   Future<bool> createCompetency({bool? isLoading, competencyJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createCompetency(
-          auth: auth,
-          isLoading: isLoading,
-          competencyJsonString: competencyJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createCompetency(
+            auth: auth,
+            isLoading: isLoading,
+            competencyJsonString: competencyJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -11903,12 +12632,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateCompetency(
-        auth: auth,
-        isLoading: isLoading,
-        competencyJsonString: competencyJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateCompetency(
+          auth: auth,
+          isLoading: isLoading,
+          competencyJsonString: competencyJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -11925,12 +12657,14 @@ class Repository {
   Future<void> deleteCompetencyList(Object checklist_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteCompetencyList(
-        auth: auth,
-        checklist_id: checklist_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteCompetencyList(
+          auth: auth,
+          checklist_id: checklist_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -11944,11 +12678,13 @@ class Repository {
   Future<bool> createPermitType({bool? isLoading, checklistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createPermitType(
-          auth: auth,
-          isLoading: isLoading,
-          checklistJsonString: checklistJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createPermitType(
+            auth: auth,
+            isLoading: isLoading,
+            checklistJsonString: checklistJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -11965,12 +12701,14 @@ class Repository {
   Future<void> deletePermitType(Object permit_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deletePermitType(
-        auth: auth,
-        permit_id: permit_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deletePermitType(
+          auth: auth,
+          permit_id: permit_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -11984,12 +12722,14 @@ class Repository {
   Future<void> deleteSafetyMeasure(Object id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteSafetyMeasure(
-        auth: auth,
-        id: id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteSafetyMeasure(
+          auth: auth,
+          id: id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -12006,12 +12746,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updatePermitType(
-        auth: auth,
-        isLoading: isLoading,
-        checklistJsonString: checklistJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updatePermitType(
+          auth: auth,
+          isLoading: isLoading,
+          checklistJsonString: checklistJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -12028,11 +12771,13 @@ class Repository {
   Future<bool> createRoleList({bool? isLoading, modulelistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createRoleList(
-          auth: auth,
-          isLoading: isLoading,
-          modulelistJsonString: modulelistJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createRoleList(
+            auth: auth,
+            isLoading: isLoading,
+            modulelistJsonString: modulelistJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -12052,12 +12797,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateRoleList(
-        auth: auth,
-        isLoading: isLoading,
-        modulelistJsonString: modulelistJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateRoleList(
+          auth: auth,
+          isLoading: isLoading,
+          modulelistJsonString: modulelistJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -12074,12 +12822,14 @@ class Repository {
   Future<void> deleteRole(Object module_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteRole(
-        auth: auth,
-        module_id: module_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteRole(
+          auth: auth,
+          module_id: module_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -12094,11 +12844,13 @@ class Repository {
       {bool? isLoading, designationJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createDesignation(
-          auth: auth,
-          isLoading: isLoading,
-          designationJsonString: designationJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createDesignation(
+            auth: auth,
+            isLoading: isLoading,
+            designationJsonString: designationJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -12116,11 +12868,13 @@ class Repository {
       {bool? isLoading, designationJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createResponsibility(
-          auth: auth,
-          isLoading: isLoading,
-          designationJsonString: designationJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createResponsibility(
+            auth: auth,
+            isLoading: isLoading,
+            designationJsonString: designationJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -12140,12 +12894,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateDesignation(
-        auth: auth,
-        isLoading: isLoading,
-        designationJsonString: designationJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateDesignation(
+          auth: auth,
+          isLoading: isLoading,
+          designationJsonString: designationJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -12165,12 +12922,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateResponsibility(
-        auth: auth,
-        isLoading: isLoading,
-        designationJsonString: json.encode(designationJsonString),
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateResponsibility(
+          auth: auth,
+          isLoading: isLoading,
+          designationJsonString: json.encode(designationJsonString),
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -12187,12 +12947,14 @@ class Repository {
   Future<void> deleteDesignation(Object module_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteDesignation(
-        auth: auth,
-        module_id: module_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteDesignation(
+          auth: auth,
+          module_id: module_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -12206,12 +12968,14 @@ class Repository {
   Future<void> deleteResponsibility(Object module_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteResponsibility(
-        auth: auth,
-        module_id: module_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteResponsibility(
+          auth: auth,
+          module_id: module_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -12226,11 +12990,13 @@ class Repository {
       {bool? isLoading, businessTypeJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createBusinessType(
-          auth: auth,
-          isLoading: isLoading,
-          businessTypeJsonString: businessTypeJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createBusinessType(
+            auth: auth,
+            isLoading: isLoading,
+            businessTypeJsonString: businessTypeJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -12248,12 +13014,14 @@ class Repository {
       Object businesstype_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteBusinessType(
-        auth: auth,
-        businesstype_id: businesstype_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteBusinessType(
+          auth: auth,
+          businesstype_id: businesstype_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -12270,12 +13038,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateBusinessType(
-        auth: auth,
-        isLoading: isLoading,
-        businessTypeJsonString: businessTypeJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateBusinessType(
+          auth: auth,
+          isLoading: isLoading,
+          businessTypeJsonString: businessTypeJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -12294,14 +13065,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       int userId = varUserAccessModel.value.user_id ?? 0;
-      final res = await _dataRepository.getMrsList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          isLoading: isLoading ?? false,
-          startDate: startDate,
-          endDate: endDate,
-          userId: userId);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getMrsList(
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            isLoading: isLoading ?? false,
+            startDate: startDate,
+            endDate: endDate,
+            userId: userId);
+      }
       if (!res.hasError) {
         final jsonMrsListModelModels = jsonDecode(res.data);
         // print(res.data);
@@ -12375,15 +13148,17 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       int userId = varUserAccessModel.value.user_id ?? 0;
-      final res = await _dataRepository.getPlantStockList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          isLoading: isLoading ?? false,
-          startDate: startDate,
-          endDate: endDate,
-          userId: userId,
-          selectedAssetsNameIdList: selectedAssetsNameIdList);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPlantStockList(
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            isLoading: isLoading ?? false,
+            startDate: startDate,
+            endDate: endDate,
+            userId: userId,
+            selectedAssetsNameIdList: selectedAssetsNameIdList);
+      }
       if (!res.hasError) {
         final jsonPlantStockListModels = jsonDecode(res.data);
         final List<PlantStockListModel> _plantStockListModels =
@@ -12445,12 +13220,14 @@ class Repository {
       int? facilityId, bool? isLoading, int? mrsId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getPlantStockListReturn(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          isLoading: isLoading ?? false,
-          mrsId: mrsId);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPlantStockListReturn(
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            isLoading: isLoading ?? false,
+            mrsId: mrsId);
+      }
       if (!res.hasError) {
         final jsonPlantStockListModels = jsonDecode(res.data);
         // print(res.data);
@@ -12477,12 +13254,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getEquipmentAssetsList(
-        auth: auth,
-        isLoading: isLoading ?? false,
-        facilityId: facilityId ?? 0,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getEquipmentAssetsList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId ?? 0,
+        );
+      }
       if (!res.hasError) {
         final jsonFacilityModels = jsonDecode(res.data);
         final List<GetAssetItemsModel> _getAssetList = jsonFacilityModels
@@ -12505,12 +13284,14 @@ class Repository {
   Future<void> deleteFacility(Object business_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteFacility(
-        auth: auth,
-        business_id: business_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteFacility(
+          auth: auth,
+          business_id: business_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -12528,13 +13309,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createMrs(
-        auth: auth,
-        createMrsJsonString: createMrsJsonString,
-        type: type,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createMrs(
+          auth: auth,
+          createMrsJsonString: createMrsJsonString,
+          type: type,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Create Goods order : ${resourceData}');
@@ -12567,13 +13350,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getIncidentRiskTypeList(
-        // job_type_id: job_type_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Asset type List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getIncidentRiskTypeList(
+          // job_type_id: job_type_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Asset type List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var facilityTypeList = IncidentRiskTypeListModelFromJson(res.data);
         return facilityTypeList;
@@ -12593,13 +13378,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getInsuranceProvider(
-        // job_type_id: job_type_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Asset type List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getInsuranceProvider(
+          // job_type_id: job_type_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Asset type List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var facilityTypeList = InsuranceProviderModelFromJson(res.data);
         return facilityTypeList;
@@ -12614,11 +13401,13 @@ class Repository {
   Future<bool> createRiskType({bool? isLoading, riskTypeJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createRiskType(
-          auth: auth,
-          isLoading: isLoading,
-          riskTypeJsonString: riskTypeJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createRiskType(
+            auth: auth,
+            isLoading: isLoading,
+            riskTypeJsonString: riskTypeJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -12635,12 +13424,14 @@ class Repository {
   Future<void> deleteRiskType(Object businesstype_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteRiskType(
-        auth: auth,
-        businesstype_id: businesstype_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteRiskType(
+          auth: auth,
+          businesstype_id: businesstype_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -12657,12 +13448,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateRiskType(
-        auth: auth,
-        isLoading: isLoading,
-        riskTypeJsonString: riskTypeJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateRiskType(
+          auth: auth,
+          isLoading: isLoading,
+          riskTypeJsonString: riskTypeJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -12683,11 +13477,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getMrsDetails(
-          auth: auth,
-          mrsId: mrsId,
-          isLoading: isLoading,
-          facilityId: facilityId);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getMrsDetails(
+            auth: auth,
+            mrsId: mrsId,
+            isLoading: isLoading,
+            facilityId: facilityId);
+      }
       if (!res.hasError) {
         final MrsDetailsModel _mrsDetailModel =
             mrsDetailsModelFromJson(res.data);
@@ -12711,12 +13508,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getPmPlanDetails(
-        auth: auth,
-        pmPlanId: pmPlanId,
-        facilityId: facilityId,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPmPlanDetails(
+          auth: auth,
+          pmPlanId: pmPlanId,
+          facilityId: facilityId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final PMPlanDetail _pmPlanDetailModel = pmPlanDetailFromJson(res.data);
         return _pmPlanDetailModel;
@@ -12738,12 +13538,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateInventoryStatus(
-        auth: auth,
-        isLoading: isLoading,
-        checklistJsonString: checklistJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateInventoryStatus(
+          auth: auth,
+          isLoading: isLoading,
+          checklistJsonString: checklistJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -12761,12 +13564,14 @@ class Repository {
       Object check_point_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteInventoryStatus(
-        auth: auth,
-        check_point_id: check_point_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteInventoryStatus(
+          auth: auth,
+          check_point_id: check_point_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -12782,11 +13587,13 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.createInventoryStatus(
-          auth: auth,
-          isLoading: isLoading,
-          checkpointJsonString: checklistJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createInventoryStatus(
+            auth: auth,
+            isLoading: isLoading,
+            checkpointJsonString: checklistJsonString);
+      }
       if (!res.hasError) {
         return true;
       } else {
@@ -12805,12 +13612,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateInventoryType(
-        auth: auth,
-        isLoading: isLoading,
-        checklistJsonString: checklistJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateInventoryType(
+          auth: auth,
+          isLoading: isLoading,
+          checklistJsonString: checklistJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -12828,12 +13638,14 @@ class Repository {
       Object check_point_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteInventoryType(
-        auth: auth,
-        check_point_id: check_point_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteInventoryType(
+          auth: auth,
+          check_point_id: check_point_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -12849,11 +13661,13 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.createInventoryType(
-          auth: auth,
-          isLoading: isLoading,
-          checkpointJsonString: checklistJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createInventoryType(
+            auth: auth,
+            isLoading: isLoading,
+            checkpointJsonString: checklistJsonString);
+      }
       if (!res.hasError) {
         return true;
       } else {
@@ -12872,12 +13686,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateInventoryCategory(
-        auth: auth,
-        isLoading: isLoading,
-        checklistJsonString: checklistJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateInventoryCategory(
+          auth: auth,
+          isLoading: isLoading,
+          checklistJsonString: checklistJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -12895,12 +13712,14 @@ class Repository {
       Object check_point_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteInventoryCategory(
-        auth: auth,
-        check_point_id: check_point_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteInventoryCategory(
+          auth: auth,
+          check_point_id: check_point_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -12916,11 +13735,13 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.createInventoryCategory(
-          auth: auth,
-          isLoading: isLoading,
-          checkpointJsonString: checklistJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createInventoryCategory(
+            auth: auth,
+            isLoading: isLoading,
+            checkpointJsonString: checklistJsonString);
+      }
       if (!res.hasError) {
         return true;
       } else {
@@ -12941,13 +13762,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.approveMrs(
-          auth: auth,
-          isLoading: isLoading,
-          type: type,
-          approvetoJsonString: approvetoJsonString,
-          facility_id: facility_id);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approveMrs(
+            auth: auth,
+            isLoading: isLoading,
+            type: type,
+            approvetoJsonString: approvetoJsonString,
+            facility_id: facility_id);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: "MRS approved!", fontSize: 45.0);
 
@@ -12968,12 +13792,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateBlockType(
-        auth: auth,
-        isLoading: isLoading,
-        checklistJsonString: modulelistJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateBlockType(
+          auth: auth,
+          isLoading: isLoading,
+          checklistJsonString: modulelistJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -12992,12 +13819,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.rejectMrs(
-          auth: auth,
-          isLoading: isLoading,
-          rejecttoJsonString: rejecttoJsonString,
-          facility_id: facility_id);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectMrs(
+            auth: auth,
+            isLoading: isLoading,
+            rejecttoJsonString: rejecttoJsonString,
+            facility_id: facility_id);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -13018,12 +13848,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.editMrs(
-        auth: auth,
-        editMrsJsonString: editMrsJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.editMrs(
+          auth: auth,
+          editMrsJsonString: editMrsJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: "MRS updated Successfully...", fontSize: 16.0);
@@ -13046,12 +13878,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getInsuranceStatus(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Asset type List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getInsuranceStatus(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Asset type List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var facilityTypeList = InsuranceStatusModelFromJson(res.data);
         return facilityTypeList;
@@ -13070,13 +13904,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getCalibrationCertificate(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        type: type,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getCalibrationCertificate(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          type: type,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonCalibrationCertificate = jsonDecode(res.data);
         // print(res.data);
@@ -13105,12 +13941,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getWarrantyCertificate(
-        auth: auth,
-        type: type,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getWarrantyCertificate(
+          auth: auth,
+          type: type,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonWarrantyCertificate = jsonDecode(res.data);
         // print(res.data);
@@ -13137,11 +13975,13 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.saveRoleNotification(
-          auth: auth,
-          isLoading: isLoading,
-          saveRoleNotificationJsonString: saveRoleNotificationJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.saveRoleNotification(
+            auth: auth,
+            isLoading: isLoading,
+            saveRoleNotificationJsonString: saveRoleNotificationJsonString);
+      }
       if (!res.hasError) {
         return true;
       } else {
@@ -13159,13 +13999,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.issueMrs(
-          auth: auth,
-          isLoading: isLoading,
-          type: type,
-          issuetoJsonString: issuetoJsonString,
-          facility_id: facility_id);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.issueMrs(
+            auth: auth,
+            isLoading: isLoading,
+            type: type,
+            issuetoJsonString: issuetoJsonString,
+            facility_id: facility_id);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: 'MRS issued!', fontSize: 45.0);
 
@@ -13185,12 +14028,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.approveIssueMrs(
-          auth: auth,
-          isLoading: isLoading,
-          issuemrsapprovetoJsonString: issuemrsapprovetoJsonString,
-          facility_id: facility_id);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approveIssueMrs(
+            auth: auth,
+            isLoading: isLoading,
+            issuemrsapprovetoJsonString: issuemrsapprovetoJsonString,
+            facility_id: facility_id);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: "MRS approved!", fontSize: 45.0);
 
@@ -13210,12 +14056,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.rejectIssueMrs(
-          auth: auth,
-          isLoading: isLoading,
-          rejectIssuetoJsonString: rejectIssuetoJsonString,
-          facility_id: facility_id);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectIssueMrs(
+            auth: auth,
+            isLoading: isLoading,
+            rejectIssuetoJsonString: rejectIssuetoJsonString,
+            facility_id: facility_id);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -13235,12 +14084,14 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       int userId = varUserAccessModel.value.user_id ?? 0;
-      final res = await _dataRepository.getReturnMrsList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          isLoading: isLoading ?? false,
-          userId: userId);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getReturnMrsList(
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            isLoading: isLoading ?? false,
+            userId: userId);
+      }
       if (!res.hasError) {
         final jsonReturnMrsListModelModels = jsonDecode(res.data);
         // print(res.data);
@@ -13308,15 +14159,17 @@ class Repository {
       permitId, bool? isLoading, type, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.scheduleLinkToPermit(
-          auth: auth,
-          scheduleId: scheduleId,
-          permitId: permitId,
-          activity: activity,
-          isLoading: isLoading ?? false,
-          type: type,
-          facilityId: facilityId);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.scheduleLinkToPermit(
+            auth: auth,
+            scheduleId: scheduleId,
+            permitId: permitId,
+            activity: activity,
+            isLoading: isLoading ?? false,
+            type: type,
+            facilityId: facilityId);
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -13346,17 +14199,19 @@ class Repository {
       int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.vegscheduleLinkToPermit(
-          auth: auth,
-          scheduleId: scheduleId,
-          permitId: permitId,
-          activity: activity,
-          isLoading: isLoading ?? false,
-          type: type,
-          vegplanId: vegplanId,
-          vegexid: vegexid,
-          facilityId: facilityId);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.vegscheduleLinkToPermit(
+            auth: auth,
+            scheduleId: scheduleId,
+            permitId: permitId,
+            activity: activity,
+            isLoading: isLoading ?? false,
+            type: type,
+            vegplanId: vegplanId,
+            vegexid: vegexid,
+            facilityId: facilityId);
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -13379,12 +14234,14 @@ class Repository {
       scheduleId, bool? isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.setPmTask(
-          auth: auth,
-          scheduleId: scheduleId,
-          isLoading: isLoading ?? false,
-          facility_id: facility_id);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.setPmTask(
+            auth: auth,
+            scheduleId: scheduleId,
+            isLoading: isLoading ?? false,
+            facility_id: facility_id);
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -13407,11 +14264,14 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.approveReturnMrs(
-          auth: auth,
-          isLoading: isLoading,
-          approvetoJsonString: approvetoJsonString);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approveReturnMrs(
+            auth: auth,
+            isLoading: isLoading,
+            approvetoJsonString: approvetoJsonString);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -13430,11 +14290,14 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.rejectRetrunMrs(
-          auth: auth,
-          isLoading: isLoading,
-          rejecttoJsonString: rejecttoJsonString);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectRetrunMrs(
+            auth: auth,
+            isLoading: isLoading,
+            rejecttoJsonString: rejecttoJsonString);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -13456,12 +14319,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getReturnMrsDetails(
-        auth: auth,
-        mrsId: mrsId,
-        facilityId: facilityId,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getReturnMrsDetails(
+          auth: auth,
+          mrsId: mrsId,
+          facilityId: facilityId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final ReturnMrsDetailsModel _returnMrsDetailModel =
             returnMrsDetailsModelFromJson(res.data);
@@ -13482,11 +14348,13 @@ class Repository {
   Future<bool> createJobType({bool? isLoading, jobTypeJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createJobType(
-          auth: auth,
-          isLoading: isLoading,
-          jobTypeJsonString: jobTypeJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createJobType(
+            auth: auth,
+            isLoading: isLoading,
+            jobTypeJsonString: jobTypeJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -13505,12 +14373,14 @@ class Repository {
       {bool? isLoading, safetyMeasurelistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createSafetyMeasure(
-          auth: auth,
-          isLoading: isLoading,
-          safetyMeasurelistJsonString: safetyMeasurelistJsonString);
-      print({"SafetyMeasureResponse:", res.data});
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createSafetyMeasure(
+            auth: auth,
+            isLoading: isLoading,
+            safetyMeasurelistJsonString: safetyMeasurelistJsonString);
+        print({"SafetyMeasureResponse:", res.data});
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -13527,12 +14397,14 @@ class Repository {
   Future<void> deleteJobType(Object check_point_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteJobType(
-        auth: auth,
-        check_point_id: check_point_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteJobType(
+          auth: auth,
+          check_point_id: check_point_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -13549,12 +14421,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateTbt(
-        auth: auth,
-        isLoading: isLoading,
-        tbtJsonString: tbtJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateTbt(
+          auth: auth,
+          isLoading: isLoading,
+          tbtJsonString: tbtJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -13571,12 +14446,14 @@ class Repository {
   Future<void> deleteSopType(Object check_point_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteSopType(
-        auth: auth,
-        check_point_id: check_point_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteSopType(
+          auth: auth,
+          check_point_id: check_point_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -13593,12 +14470,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateSop(
-        auth: auth,
-        isLoading: isLoading,
-        tbtJsonString: tbtJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateSop(
+          auth: auth,
+          isLoading: isLoading,
+          tbtJsonString: tbtJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -13620,12 +14500,14 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.getCmmsItemList(
-          auth: auth,
-          isLoading: isLoading ?? false,
-          facilityId: facilityId ?? 0,
-          userId: userId);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getCmmsItemList(
+            auth: auth,
+            isLoading: isLoading ?? false,
+            facilityId: facilityId ?? 0,
+            userId: userId);
+      }
       if (!res.hasError) {
         final EmployeeStockListModel _employeeStockListModel =
             employeeStockListModelFromJson(res.data);
@@ -13647,12 +14529,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createReturnMrs(
-        auth: auth,
-        createReturnMrsJsonString: createReturnMrsJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createReturnMrs(
+          auth: auth,
+          createReturnMrsJsonString: createReturnMrsJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Create Goods order : ${resourceData}');
@@ -13682,12 +14566,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateReturnMrs(
-        auth: auth,
-        createReturnMrsJsonString: createReturnMrsJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateReturnMrs(
+          auth: auth,
+          createReturnMrsJsonString: createReturnMrsJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Create Goods order : ${resourceData}');
@@ -13718,14 +14604,16 @@ class Repository {
       dynamic endDate) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getFaultyMaterialReportList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-        startDate: startDate,
-        endDate: endDate,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getFaultyMaterialReportList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate,
+        );
+      }
       if (!res.hasError) {
         final jsonFaultyMaterialReportModels = jsonDecode(res.data);
         // print(res.data);
@@ -13753,14 +14641,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.getEmployeeStockReportList(
-          auth: auth,
-          isLoading: isLoading ?? false,
-          facilityId: facilityId ?? 0,
-          userId: userId,
-          startDate: startDate,
-          endDate: endDate);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getEmployeeStockReportList(
+            auth: auth,
+            isLoading: isLoading ?? false,
+            facilityId: facilityId ?? 0,
+            userId: userId,
+            startDate: startDate,
+            endDate: endDate);
+      }
       if (!res.hasError) {
         final jsonPlantStockListModels = jsonDecode(res.data);
         // print(res.data);
@@ -13791,13 +14681,16 @@ class Repository {
       bool? isExport) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getPmPlanList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          isLoading: isLoading ?? false,
-          startDate: startDate,
-          endDate: endDate);
-      // print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPmPlanList(
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            isLoading: isLoading ?? false,
+            startDate: startDate,
+            endDate: endDate);
+        // print(res.data);
+      }
       if (!res.hasError) {
         final jsonPmPlanListModelModels = jsonDecode(res.data);
 
@@ -13867,12 +14760,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createPmPlan(
-        auth: auth,
-        createPmPlanJsonString: createPmPlanJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createPmPlan(
+          auth: auth,
+          createPmPlanJsonString: createPmPlanJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Create Goods order : ${resourceData}');
@@ -13903,12 +14798,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updatePmPlan(
-        auth: auth,
-        createPmPlanJsonString: createPmPlanJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updatePmPlan(
+          auth: auth,
+          createPmPlanJsonString: createPmPlanJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Create Goods order : ${resourceData}');
@@ -13938,12 +14835,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.approveShecduleExecution(
-          auth: auth,
-          isLoading: isLoading,
-          approvetoJsonString: json.encode(approvetoJsonString),
-          facility_id: facility_id);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approveShecduleExecution(
+            auth: auth,
+            isLoading: isLoading,
+            approvetoJsonString: json.encode(approvetoJsonString),
+            facility_id: facility_id);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -13963,12 +14863,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.rejectShecduleExecution(
-          auth: auth,
-          isLoading: isLoading,
-          rejecttoJsonString: json.encode(rejecttoJsonString),
-          facility_id: facility_id);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectShecduleExecution(
+            auth: auth,
+            isLoading: isLoading,
+            rejecttoJsonString: json.encode(rejecttoJsonString),
+            facility_id: facility_id);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -13988,12 +14891,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.endApproveExecution(
-          auth: auth,
-          isLoading: isLoading,
-          facility_id: facility_id,
-          approvetoJsonString: json.encode(approvetoJsonString));
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.endApproveExecution(
+            auth: auth,
+            isLoading: isLoading,
+            facility_id: facility_id,
+            approvetoJsonString: json.encode(approvetoJsonString));
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -14013,12 +14919,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.endRejectExecution(
-          auth: auth,
-          isLoading: isLoading,
-          rejecttoJsonString: json.encode(rejecttoJsonString),
-          facility_id: facility_id);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.endRejectExecution(
+            auth: auth,
+            isLoading: isLoading,
+            rejecttoJsonString: json.encode(rejecttoJsonString),
+            facility_id: facility_id);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -14038,12 +14947,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.abandonedApproveExecution(
-          auth: auth,
-          isLoading: isLoading,
-          approvetoJsonString: json.encode(approvetoJsonString),
-          facility_id: facility_id);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.abandonedApproveExecution(
+            auth: auth,
+            isLoading: isLoading,
+            approvetoJsonString: json.encode(approvetoJsonString),
+            facility_id: facility_id);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -14063,12 +14975,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.abandoneRejectExecution(
-          auth: auth,
-          isLoading: isLoading,
-          rejecttoJsonString: json.encode(rejecttoJsonString),
-          facility_id: facility_id);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.abandoneRejectExecution(
+            auth: auth,
+            isLoading: isLoading,
+            rejecttoJsonString: json.encode(rejecttoJsonString),
+            facility_id: facility_id);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -14091,13 +15006,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.ClosePMTaskExecution(
-        auth: auth,
-        isLoading: isLoading,
-        ClosePMTaskExecutionJsonString: json.encode(closetoJsonString),
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.ClosePMTaskExecution(
+          auth: auth,
+          isLoading: isLoading,
+          ClosePMTaskExecutionJsonString: json.encode(closetoJsonString),
+        );
 
-      print({"res.data", res.data});
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: "PM Task Closed Successfully!", fontSize: 45.0);
@@ -14121,13 +15039,16 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.assignToPmTask(
-          auth: auth,
-          assignId: assignId,
-          taskId: taskId,
-          isLoading: isLoading,
-          facility_id: facility_id);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.assignToPmTask(
+            auth: auth,
+            assignId: assignId,
+            taskId: taskId,
+            isLoading: isLoading,
+            facility_id: facility_id);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         return true;
       } else {
@@ -14147,12 +15068,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.UpdatePMTaskExecution(
-          auth: auth,
-          isLoading: isLoading,
-          updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
-          facility_id: facility_id);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.UpdatePMTaskExecution(
+            auth: auth,
+            isLoading: isLoading,
+            updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
+            facility_id: facility_id);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         // Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -14177,15 +15101,18 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.cloneSchedule(
-          auth: auth,
-          from_schedule_id: from_schedule_id,
-          to_schedule_id: to_schedule_id,
-          taskId: taskId,
-          cloneJobs: cloneJobs,
-          isloading: isloading,
-          facility_id: facility_id);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.cloneSchedule(
+            auth: auth,
+            from_schedule_id: from_schedule_id,
+            to_schedule_id: to_schedule_id,
+            taskId: taskId,
+            cloneJobs: cloneJobs,
+            isloading: isloading,
+            facility_id: facility_id);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         // Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -14208,13 +15135,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getAssetCategoryList(
-        // job_type_id: job_type_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Asset type List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAssetCategoryList(
+          // job_type_id: job_type_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Asset type List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var facilityTypeList = AssetCategoryModelFromJson(res.data);
         return facilityTypeList;
@@ -14233,12 +15162,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getAssetTypeSMList(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Asset type List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAssetTypeSMList(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Asset type List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var assetTypeList = AssetTypeListSMModelFromJson(res.data);
         return assetTypeList;
@@ -14260,14 +15191,17 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getUnitMeasurementList(
-        // facilityId: businessType,
-        // blockId: blockId,
-        // categoryIds: categoryIds ?? "",
-        // businessType: businessType,
-        isLoading: isLoading,
-        auth: auth,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getUnitMeasurementList(
+          // facilityId: businessType,
+          // blockId: blockId,
+          // categoryIds: categoryIds ?? "",
+          // businessType: businessType,
+          isLoading: isLoading,
+          auth: auth,
+        );
+      }
       if (!res.hasError) {
         var businessList = UnitMeasurementModelFromJson(res.data);
         return businessList;
@@ -14287,11 +15221,13 @@ class Repository {
       {bool? isLoading, checkAuditJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createAuditNumber(
-          auth: auth,
-          isLoading: isLoading,
-          checkAuditJsonString: checkAuditJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createAuditNumber(
+            auth: auth,
+            isLoading: isLoading,
+            checkAuditJsonString: checkAuditJsonString);
+      }
       if (!res.hasError) {
         Get.offAllNamed(Routes.auditListScreen);
 
@@ -14311,11 +15247,13 @@ class Repository {
       {bool? isLoading, checkAuditJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateAuditNumber(
-          auth: auth,
-          isLoading: isLoading,
-          checkAuditJsonString: checkAuditJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateAuditNumber(
+            auth: auth,
+            isLoading: isLoading,
+            checkAuditJsonString: checkAuditJsonString);
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: " update Successfully...", fontSize: 16.0);
 
@@ -14334,12 +15272,14 @@ class Repository {
   Future<void> deleteAuditPlan(Object planId, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteAuditPlan(
-        auth: auth,
-        planId: planId,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteAuditPlan(
+          auth: auth,
+          planId: planId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -14359,14 +15299,17 @@ class Repository {
       int? type) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getAuditPlanList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          isLoading: isLoading ?? false,
-          startDate: startDate,
-          endDate: endDate,
-          type: type);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAuditPlanList(
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            isLoading: isLoading ?? false,
+            startDate: startDate,
+            endDate: endDate,
+            type: type);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         final jsonAuditPlanListModelModels = jsonDecode(res.data);
 
@@ -14435,11 +15378,13 @@ class Repository {
   Future<bool> createAssetSM({bool? isLoading, assetListJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createAssetSM(
-          auth: auth,
-          isLoading: isLoading,
-          assetListJsonString: assetListJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createAssetSM(
+            auth: auth,
+            isLoading: isLoading,
+            assetListJsonString: assetListJsonString);
+      }
       var resourceData = res.data;
       if (!res.hasError) {
         if (res.errorCode == 200) {
@@ -14466,11 +15411,14 @@ class Repository {
   Future<bool> transferItem({bool? isLoading, transferItemJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.transferItem(
-          auth: auth,
-          isLoading: isLoading,
-          transferItemJsonString: transferItemJsonString);
-      print({"res.datanew", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.transferItem(
+            auth: auth,
+            isLoading: isLoading,
+            transferItemJsonString: transferItemJsonString);
+        print({"res.datanew", res.data});
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -14492,12 +15440,15 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getAuditPlanDetails(
-        auth: auth,
-        auditPlanId: auditPlanId,
-        facilityId: facilityId,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAuditPlanDetails(
+          auth: auth,
+          auditPlanId: auditPlanId,
+          facilityId: facilityId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final AuditPlanDetailModel _auditPlanDetailModel =
             auditPlanDetailModelFromJson(res.data);
@@ -14520,12 +15471,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.auditPlanApprovedButton(
-        auth: auth,
-        auditPlanApproveJsonString: auditPlanApproveJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.auditPlanApprovedButton(
+          auth: auth,
+          auditPlanApproveJsonString: auditPlanApproveJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -14554,12 +15507,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.auditPlanRejectButton(
-        auth: auth,
-        auditPlanRejectJsonString: auditPlanRejectJsonString,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.auditPlanRejectButton(
+          auth: auth,
+          auditPlanRejectJsonString: auditPlanRejectJsonString,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
 
       print('Response Goods Order Approve: ${resourceData}');
@@ -14587,11 +15542,13 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getResponsibilityList(
-        auth: auth,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getResponsibilityList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         final jsonResponsibiltyModels = jsonDecode(res.data);
         final List<DesignationModel> _ResponsibiltyModelList =
@@ -14618,10 +15575,13 @@ class Repository {
       {bool? isLoading, bodyInjuredJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createBodyInjured(
-          auth: auth,
-          isLoading: isLoading,
-          bodyInjuredJsonString: bodyInjuredJsonString);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createBodyInjured(
+            auth: auth,
+            isLoading: isLoading,
+            bodyInjuredJsonString: bodyInjuredJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -14641,12 +15601,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateBodyInjured(
-        auth: auth,
-        isLoading: isLoading,
-        bodyInjuredJsonString: bodyInjuredJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateBodyInjured(
+          auth: auth,
+          isLoading: isLoading,
+          bodyInjuredJsonString: bodyInjuredJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -14663,12 +15626,14 @@ class Repository {
   Future<void> deleteBodyInjured(Object bodypart_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteBodyInjured(
-        auth: auth,
-        bodypart_id: bodypart_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteBodyInjured(
+          auth: auth,
+          bodypart_id: bodypart_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -14688,11 +15653,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getBodyInjuredList(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Risk Type List Data: ${res.data}');
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getBodyInjuredList(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Risk Type List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var bodyInjuredList = bodyInjuredModelFromJson(res.data);
         return bodyInjuredList;
@@ -14712,13 +15680,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getVegetationPlanList(
-        facility_id: facility_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('getVegetationPlanList: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getVegetationPlanList(
+          facility_id: facility_id,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('getVegetationPlanList: ${res.data}');
+      }
       if (!res.hasError) {
         final jsonVegetationPlanList = jsonDecode(res.data);
         // print(res.data);
@@ -14787,12 +15757,14 @@ class Repository {
       createVegetationPlans, bool? isLoading, int? facility_Id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createVegetationPlan(
-          auth: auth,
-          createVegetationPlans: createVegetationPlans,
-          isLoading: isLoading ?? false,
-          facility_Id: facility_Id);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createVegetationPlan(
+            auth: auth,
+            createVegetationPlans: createVegetationPlans,
+            isLoading: isLoading ?? false,
+            facility_Id: facility_Id);
+      }
       var resourceData = res.data;
 
       print('Response Create veg  : ${resourceData}');
@@ -14829,13 +15801,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getVegEquipmentModelList(
-        facilityId: facilityId,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('EquipmentModelList:${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getVegEquipmentModelList(
+          facilityId: facilityId,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('EquipmentModelList:${res.data}');
+      }
       if (!res.hasError) {
         var equipmentList = getVegetationEquipmentModelFromJson(res.data);
         return equipmentList;
@@ -14857,15 +15831,17 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getVegPlanDetail(
-        auth: auth,
-        planId: planId,
-        facilityId: facilityId,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getVegPlanDetail(
+          auth: auth,
+          planId: planId,
+          facilityId: facilityId,
+          isLoading: isLoading ?? false,
+        );
 
-      // print({"MCPlandetail", res.data});
-
+        // print({"MCPlandetail", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           final VegPlanDetailModel _vegPlanDetailModel =
@@ -14890,12 +15866,14 @@ class Repository {
       vegApproveJsonString, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.vegPlanApprovedButton(
-          auth: auth,
-          vegApproveJsonString: vegApproveJsonString,
-          isLoading: isLoading ?? false,
-          facilityId: facilityId);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.vegPlanApprovedButton(
+            auth: auth,
+            vegApproveJsonString: vegApproveJsonString,
+            isLoading: isLoading ?? false,
+            facilityId: facilityId);
+      }
       var resourceData = res.data;
 
       print('Response vegetation Approve: ${resourceData}');
@@ -14922,12 +15900,14 @@ class Repository {
       vegRejectJsonString, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.vegPlanRejectButton(
-          auth: auth,
-          vegRejectJsonString: json.encode(vegRejectJsonString),
-          isLoading: isLoading ?? false,
-          facilityId: facilityId);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.vegPlanRejectButton(
+            auth: auth,
+            vegRejectJsonString: json.encode(vegRejectJsonString),
+            isLoading: isLoading ?? false,
+            facilityId: facilityId);
+      }
       var resourceData = res.data;
 
       print('Response veg Reject: ${resourceData}');
@@ -14954,12 +15934,14 @@ class Repository {
       {bool? isLoading, required int planId, int? facilityId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteVegPlan(
-          auth: auth,
-          planId: planId,
-          isLoading: isLoading,
-          facilityId: facilityId);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteVegPlan(
+            auth: auth,
+            planId: planId,
+            isLoading: isLoading,
+            facilityId: facilityId);
+      }
       if (!res.hasError) {
       } else {
         Utility.showDialog(res.errorCode.toString(), 'deleteVegPlan');
@@ -14972,12 +15954,14 @@ class Repository {
   Future<void> deleteUser(Object user_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteUser(
-        auth: auth,
-        user_id: user_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteUser(
+          auth: auth,
+          user_id: user_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -14992,12 +15976,14 @@ class Repository {
       Object task_id, bool isLoading, int? facility_id) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deletePmTask(
-          auth: auth,
-          task_id: task_id,
-          isLoading: isLoading,
-          facility_id: facility_id);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deletePmTask(
+            auth: auth,
+            task_id: task_id,
+            isLoading: isLoading,
+            facility_id: facility_id);
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -15012,12 +15998,14 @@ class Repository {
       updateVegPlans, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateVegPlan(
-          auth: auth,
-          updateVegPlans: updateVegPlans,
-          isLoading: isLoading ?? false,
-          facilityId: facilityId);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateVegPlan(
+            auth: auth,
+            updateVegPlans: updateVegPlans,
+            isLoading: isLoading ?? false,
+            facilityId: facilityId);
+      }
       var resourceData = res.data;
 
       print('Response Update Veg : ${resourceData}');
@@ -15059,17 +16047,19 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getVegTaskList(
-        facility_id: facility_id,
-        startDate: startDate,
-        endDate: endDate,
-        isLoading: isLoading,
-        // start_date: start_date,
-        // end_date: end_date,
-        auth: auth,
-      );
-      print('VegTaskList: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getVegTaskList(
+          facility_id: facility_id,
+          startDate: startDate,
+          endDate: endDate,
+          isLoading: isLoading,
+          // start_date: start_date,
+          // end_date: end_date,
+          auth: auth,
+        );
+        print('VegTaskList: ${res.data}');
+      }
       if (!res.hasError) {
         // var vegTaskList = VegTaskListModelFromJson(res.data);
         // return vegTaskList.reversed.toList();
@@ -15145,15 +16135,17 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getVegExecutionDetail(
-        auth: auth,
-        facilityId: facilityId,
-        executionId: executionId,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getVegExecutionDetail(
+          auth: auth,
+          facilityId: facilityId,
+          executionId: executionId,
+          isLoading: isLoading ?? false,
+        );
 
-      print({"VegExecutiondetail", res.data});
-
+        print({"VegExecutiondetail", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           final VegExecutionDetailsModel _endVegExecutionDetailModel =
@@ -15181,13 +16173,16 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getVegTaskEquipmentList(
-        executionId: executionId,
-        facilityId: facilityId,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print({"VegExecutiondetail", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getVegTaskEquipmentList(
+          executionId: executionId,
+          facilityId: facilityId,
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print({"VegExecutiondetail", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           final List<VegTaskEquipmentList> vegtask =
@@ -15210,12 +16205,15 @@ class Repository {
       int? executionId, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.startVegExecutionButton(
-          auth: auth,
-          executionId: executionId,
-          isLoading: isLoading ?? false,
-          facilityId: facilityId);
-      print('StartExecutionResponse55: ${res.data}');
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.startVegExecutionButton(
+            auth: auth,
+            executionId: executionId,
+            isLoading: isLoading ?? false,
+            facilityId: facilityId);
+        print('StartExecutionResponse55: ${res.data}');
+      }
       if (!res.hasError) {
       } else {
         Utility.showDialog(res.errorCode.toString(), 'startVegExecutionButton');
@@ -15229,12 +16227,15 @@ class Repository {
       int? executionId, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.endVegExecutionButton(
-          auth: auth,
-          executionId: executionId,
-          isLoading: isLoading ?? false,
-          facilityId: facilityId);
-      print('endExecutionResponse55: ${res.data}');
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.endVegExecutionButton(
+            auth: auth,
+            executionId: executionId,
+            isLoading: isLoading ?? false,
+            facilityId: facilityId);
+        print('endExecutionResponse55: ${res.data}');
+      }
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
@@ -15249,11 +16250,14 @@ class Repository {
       abandoneJsonString, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.abandonVegExecutionButton(
-          auth: auth,
-          abandoneJsonString: json.encode(abandoneJsonString),
-          isLoading: isLoading ?? false,
-          facilityId: facilityId);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.abandonVegExecutionButton(
+            auth: auth,
+            abandoneJsonString: json.encode(abandoneJsonString),
+            isLoading: isLoading ?? false,
+            facilityId: facilityId);
+      }
       var resourceData = res.data;
       print('Response Abandon Execution: ${resourceData}');
       if (!res.hasError) {
@@ -15277,13 +16281,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.startVegExecutionScheduleButton(
-          auth: auth,
-          scheduleId: scheduleId,
-          isLoading: isLoading ?? false,
-          facilityId: facilityId);
-      print('StartScheduleExecutionResponse55: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.startVegExecutionScheduleButton(
+            auth: auth,
+            scheduleId: scheduleId,
+            isLoading: isLoading ?? false,
+            facilityId: facilityId);
+        print('StartScheduleExecutionResponse55: ${res.data}');
+      }
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
@@ -15300,13 +16306,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final res = await _dataRepository.endVegScheduleExecutionButton(
-          auth: auth,
-          scheduleId: scheduleId,
-          isLoading: isLoading ?? false,
-          facilityId: facilityId);
-      print('EndScheduleExecutionResponse55: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.endVegScheduleExecutionButton(
+            auth: auth,
+            scheduleId: scheduleId,
+            isLoading: isLoading ?? false,
+            facilityId: facilityId);
+        print('EndScheduleExecutionResponse55: ${res.data}');
+      }
       if (!res.hasError) {
         var responseMap = json.decode(res.data);
         permitCloseButton(closePtwJsonString, isLoading, 0, 5);
@@ -15328,11 +16336,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.abandonVegScheduleExecutionButton(
-        auth: auth,
-        abandoneScheduleJsonString: json.encode(abandoneScheduleJsonString),
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.abandonVegScheduleExecutionButton(
+          auth: auth,
+          abandoneScheduleJsonString: json.encode(abandoneScheduleJsonString),
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       print('Response Abandon Schedule Execution: ${resourceData}');
       if (!res.hasError) {
@@ -15355,11 +16366,14 @@ class Repository {
       {updateVegJson, bool? isLoading, int? facilityId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateVegScheduleExecution(
-          auth: auth,
-          updateVegJson: json.encode(updateVegJson),
-          isLoading: isLoading ?? false,
-          facilityId: facilityId);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateVegScheduleExecution(
+            auth: auth,
+            updateVegJson: json.encode(updateVegJson),
+            isLoading: isLoading ?? false,
+            facilityId: facilityId);
+      }
       var resourceData = res.data;
       print('Response MC Schedule Execution Report: ${resourceData}');
       if (!res.hasError) {
@@ -15382,12 +16396,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.vegapproveShecduleExecution(
-          auth: auth,
-          isLoading: isLoading,
-          approvetoJsonString: json.encode(approvetoJsonString),
-          facilityId: facilityId);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.vegapproveShecduleExecution(
+            auth: auth,
+            isLoading: isLoading,
+            approvetoJsonString: json.encode(approvetoJsonString),
+            facilityId: facilityId);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -15407,12 +16424,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.vegrejectShecduleExecution(
-          auth: auth,
-          isLoading: isLoading,
-          rejecttoJsonString: json.encode(rejecttoJsonString),
-          facilityId: facilityId);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.vegrejectShecduleExecution(
+            auth: auth,
+            isLoading: isLoading,
+            rejecttoJsonString: json.encode(rejecttoJsonString),
+            facilityId: facilityId);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -15432,12 +16452,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.vegendApproveExecution(
-          auth: auth,
-          isLoading: isLoading,
-          approvetoJsonString: json.encode(approvetoJsonString),
-          facilityId: facilityId);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.vegendApproveExecution(
+            auth: auth,
+            isLoading: isLoading,
+            approvetoJsonString: json.encode(approvetoJsonString),
+            facilityId: facilityId);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -15457,12 +16480,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.vegendRejectExecution(
-          auth: auth,
-          isLoading: isLoading,
-          rejecttoJsonString: json.encode(rejecttoJsonString),
-          facilityId: facilityId);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.vegendRejectExecution(
+            auth: auth,
+            isLoading: isLoading,
+            rejecttoJsonString: json.encode(rejecttoJsonString),
+            facilityId: facilityId);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -15482,12 +16508,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.vegabandonedApproveExecution(
-          auth: auth,
-          isLoading: isLoading,
-          approvetoJsonString: json.encode(approvetoJsonString),
-          facilityId: facilityId);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.vegabandonedApproveExecution(
+            auth: auth,
+            isLoading: isLoading,
+            approvetoJsonString: json.encode(approvetoJsonString),
+            facilityId: facilityId);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -15507,12 +16536,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.vegabandoneRejectExecution(
-          auth: auth,
-          isLoading: isLoading,
-          rejecttoJsonString: json.encode(rejecttoJsonString),
-          facilityId: facilityId);
-      print({"res.data", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.vegabandoneRejectExecution(
+            auth: auth,
+            isLoading: isLoading,
+            rejecttoJsonString: json.encode(rejecttoJsonString),
+            facilityId: facilityId);
+        print({"res.data", res.data});
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
@@ -15531,11 +16563,13 @@ class Repository {
       {bool? isLoading, incidentRiskTypeJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createIncidentRiskType(
-          auth: auth,
-          isLoading: isLoading,
-          incidentRiskTypeJsonString: incidentRiskTypeJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createIncidentRiskType(
+            auth: auth,
+            isLoading: isLoading,
+            incidentRiskTypeJsonString: incidentRiskTypeJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -15560,14 +16594,16 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getIncidentRiskType(
-        // facility_id: facility_id,
-        isLoading: isLoading,
-        facilityId: facilityId,
-        auth: auth,
-      );
-      print('Incident Risk Type List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getIncidentRiskType(
+          // facility_id: facility_id,
+          isLoading: isLoading,
+          facilityId: facilityId,
+          auth: auth,
+        );
+        print('Incident Risk Type List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var incidentriskTypeList = incidentRiskTypeModelFromJson(res.data);
         return incidentriskTypeList;
@@ -15585,12 +16621,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateIncidentRiskType(
-        auth: auth,
-        isLoading: isLoading,
-        incidentRiskTypeJsonString: incidentRiskTypeJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateIncidentRiskType(
+          auth: auth,
+          isLoading: isLoading,
+          incidentRiskTypeJsonString: incidentRiskTypeJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -15608,12 +16647,14 @@ class Repository {
       Object risktype_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteIncidentRiskType(
-        auth: auth,
-        risktype_id: risktype_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteIncidentRiskType(
+          auth: auth,
+          risktype_id: risktype_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -15627,10 +16668,13 @@ class Repository {
   Future<bool> createWorkType({bool? isLoading, worktypeJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createWorkType(
-          auth: auth,
-          isLoading: isLoading,
-          worktypeJsonString: worktypeJsonString);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createWorkType(
+            auth: auth,
+            isLoading: isLoading,
+            worktypeJsonString: worktypeJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -15648,10 +16692,13 @@ class Repository {
       {bool? isLoading, worktypetoolJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createWorkTypeTool(
-          auth: auth,
-          isLoading: isLoading,
-          worktypetoolJsonString: worktypetoolJsonString);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createWorkTypeTool(
+            auth: auth,
+            isLoading: isLoading,
+            worktypetoolJsonString: worktypetoolJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -15668,12 +16715,14 @@ class Repository {
   Future<void> deleteWorkType(Object worktype_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteWorkType(
-        auth: auth,
-        worktype_id: worktype_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteWorkType(
+          auth: auth,
+          worktype_id: worktype_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -15690,12 +16739,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateWorkType(
-        auth: auth,
-        isLoading: isLoading,
-        worktypeJsonString: worktypeJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateWorkType(
+          auth: auth,
+          isLoading: isLoading,
+          worktypeJsonString: worktypeJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -15713,12 +16765,14 @@ class Repository {
       {bool? isLoading, required String? tool_name}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createToolType(
-        auth: auth,
-        isLoading: isLoading,
-        tool_name: tool_name,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createToolType(
+          auth: auth,
+          isLoading: isLoading,
+          tool_name: tool_name,
+        );
+      }
       if (!res.hasError) {
         return true;
       } else {
@@ -15734,9 +16788,11 @@ class Repository {
   Future<bool> createfreq({bool? isLoading, freqJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createfreq(
-          auth: auth, isLoading: isLoading, freqJsonString: freqJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createfreq(
+            auth: auth, isLoading: isLoading, freqJsonString: freqJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -15757,12 +16813,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getWasteTypeList(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Waste Source List Data: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getWasteTypeList(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Waste Source List Data: ${res.data}');
+      }
       if (!res.hasError) {
         var typeOfWasteList = wasteSourceListModelFromJson(res.data);
         return typeOfWasteList;
@@ -15780,12 +16838,14 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createWasteType(
-        auth: auth,
-        wasteTypeJson: wasteTypeJson,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createWasteType(
+          auth: auth,
+          wasteTypeJson: wasteTypeJson,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -15805,12 +16865,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateWasteType(
-        auth: auth,
-        wasteTypeJson: wasteTypeJson,
-        isLoading: isLoading,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateWasteType(
+          auth: auth,
+          wasteTypeJson: wasteTypeJson,
+          isLoading: isLoading,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -15830,12 +16893,14 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteWasteType(
-        auth: auth,
-        wasteTypeId: wasteTypeId,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteWasteType(
+          auth: auth,
+          wasteTypeId: wasteTypeId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -15854,14 +16919,17 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getWaterDataMonthDetail(
-        auth: auth,
-        month: month,
-        year: year,
-        facilityId: facilityId,
-        isLoading: isLoading ?? false,
-      );
-      print({"water data by month", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getWaterDataMonthDetail(
+          auth: auth,
+          month: month,
+          year: year,
+          facilityId: facilityId,
+          isLoading: isLoading ?? false,
+        );
+        print({"water data by month", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var waterDataMonthDetails =
@@ -15890,15 +16958,18 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getPlantStockMonthDetail(
-        auth: auth,
-        start_date: start_date,
-        end_date: end_date,
-        assetItemID: assetItemID,
-        facilityID: facilityID,
-        isLoading: isLoading ?? false,
-      );
-      print({"Plant Stock By Months", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getPlantStockMonthDetail(
+          auth: auth,
+          start_date: start_date,
+          end_date: end_date,
+          assetItemID: assetItemID,
+          facilityID: facilityID,
+          isLoading: isLoading ?? false,
+        );
+        print({"Plant Stock By Months", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var plantStockMonthDetails =
@@ -15927,16 +16998,18 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getDocuementListById(
-        auth: auth,
-        start_date: start_date,
-        end_date: end_date,
-        docUploadId: docUploadId,
-        facilityID: facilityID,
-        sub_doc_name: sub_doc_name,
-        isLoading: isLoading ?? false,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getDocuementListById(
+          auth: auth,
+          start_date: start_date,
+          end_date: end_date,
+          docUploadId: docUploadId,
+          facilityID: facilityID,
+          sub_doc_name: sub_doc_name,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var viewDocUploadDetails = viewDocUploadModelFromJson(res.data);
@@ -15962,15 +17035,18 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getWasteDataMonthDetail(
-        auth: auth,
-        month: month,
-        year: year,
-        facilityId: facilityId,
-        hazardous: hazardous,
-        isLoading: isLoading ?? false,
-      );
-      print({"waste data by month", res.data});
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getWasteDataMonthDetail(
+          auth: auth,
+          month: month,
+          year: year,
+          facilityId: facilityId,
+          hazardous: hazardous,
+          isLoading: isLoading ?? false,
+        );
+        print({"waste data by month", res.data});
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           List<WasteDataMonthModel> wasteDataMonthDetails =
@@ -15997,12 +17073,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getSourceObservationList(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Source Of Obervation: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getSourceObservationList(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Source Of Obervation: ${res.data}');
+      }
       if (!res.hasError) {
         var Sourcetype = sourceofobservationFromJson(res.data);
         return Sourcetype;
@@ -16020,11 +17098,13 @@ class Repository {
       {bool? isLoading, businesslistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createSourceOfObslist(
-          auth: auth,
-          isLoading: isLoading,
-          businesslistJsonString: businesslistJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createSourceOfObslist(
+            auth: auth,
+            isLoading: isLoading,
+            businesslistJsonString: businesslistJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -16046,12 +17126,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updatesourceOfObs(
-        auth: auth,
-        isLoading: isLoading,
-        modulelistJsonString: modulelistJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updatesourceOfObs(
+          auth: auth,
+          isLoading: isLoading,
+          modulelistJsonString: modulelistJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -16069,12 +17152,14 @@ class Repository {
   Future<void> deleteSourceOfObs(Object business_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteSourceOfObs(
-        auth: auth,
-        business_id: business_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteSourceOfObs(
+          auth: auth,
+          business_id: business_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -16097,12 +17182,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getTypeOfObservationList(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Type Of Obervation: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getTypeOfObservationList(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Type Of Obervation: ${res.data}');
+      }
       if (!res.hasError) {
         var Sourcetype = TypeofobservationFromJson(res.data);
         return Sourcetype;
@@ -16119,11 +17206,13 @@ class Repository {
       {bool? isLoading, businesslistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createTypeOfObslist(
-          auth: auth,
-          isLoading: isLoading,
-          businesslistJsonString: businesslistJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createTypeOfObslist(
+            auth: auth,
+            isLoading: isLoading,
+            businesslistJsonString: businesslistJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -16144,12 +17233,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updatetypeOfObs(
-        auth: auth,
-        isLoading: isLoading,
-        modulelistJsonString: modulelistJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updatetypeOfObs(
+          auth: auth,
+          isLoading: isLoading,
+          modulelistJsonString: modulelistJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -16167,12 +17259,14 @@ class Repository {
   Future<void> deleteTypeOfObs(Object business_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteTypeOfObs(
-        auth: auth,
-        business_id: business_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteTypeOfObs(
+          auth: auth,
+          business_id: business_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -16190,12 +17284,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.addAttendance(
-        auth: auth,
-        jsonEmployeeAttendance: jsonEmployeeAttendance,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.addAttendance(
+          auth: auth,
+          jsonEmployeeAttendance: jsonEmployeeAttendance,
+          isLoading: isLoading,
+        );
+      }
       var resourceData = res.data;
       print('Response Create Permit For Job: ${resourceData}');
 
@@ -16227,12 +17323,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getAttendanceList(
-        auth: auth,
-        facilityId: facilityId,
-        year: year,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAttendanceList(
+          auth: auth,
+          facilityId: facilityId,
+          year: year,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         var attendanceDataList = AttendanceListModelFromJson(res.data);
         return attendanceDataList;
@@ -16251,10 +17350,13 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getChecklistInspection(
-        auth: auth,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getChecklistInspection(
+          auth: auth,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         var checklistInspectionList = ChecklistInspectionModel.fromJson({
           "checklist": [
@@ -16322,12 +17424,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getAttendanceDetail(
-        auth: auth,
-        facilityId: facilityId,
-        date: date,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAttendanceDetail(
+          auth: auth,
+          facilityId: facilityId,
+          date: date,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         var response = json.decode(res.data);
         AttendaceModel attendanceModel = AttendaceModel.fromJson(response);
@@ -16350,13 +17455,16 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getAttendanceListMonthwise(
-        auth: auth,
-        facilityId: facilityId,
-        start_date: start_date,
-        end_date: end_date,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAttendanceListMonthwise(
+          auth: auth,
+          facilityId: facilityId,
+          start_date: start_date,
+          end_date: end_date,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         var response = json.decode(res.data);
         AttendanceMonthModel attendanceModel =
@@ -16383,16 +17491,19 @@ class Repository {
       bool? isExport}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getDSMData(
-        auth: auth,
-        selectedYear: selectedYear,
-        selectedMonth: selectedMonth,
-        selectedState: selectedState,
-        selectedSpv: selectedSpv,
-        selectedSite: selectedSite,
-        selectedDSMType: selectedDSMType,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getDSMData(
+          auth: auth,
+          selectedYear: selectedYear,
+          selectedMonth: selectedMonth,
+          selectedState: selectedState,
+          selectedSpv: selectedSpv,
+          selectedSite: selectedSite,
+          selectedDSMType: selectedDSMType,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         final jsonDSMDataModels = jsonDecode(res.data);
 
@@ -16456,10 +17567,13 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.getdsmType(
-        isLoading: isLoading,
-        auth: auth,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getdsmType(
+          isLoading: isLoading,
+          auth: auth,
+        );
+      }
       if (!res.hasError) {
         var dsmTypeList = StatusModelFromJson(res.data);
         return dsmTypeList.reversed.toList();
@@ -16481,12 +17595,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getMaterialList(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Material Category: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getMaterialList(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Material Category: ${res.data}');
+      }
       if (!res.hasError) {
         final List<dynamic> Sourcetype = jsonDecode(res.data);
         final List<MaterialCategoryListModel> _materialcategory =
@@ -16529,11 +17645,13 @@ class Repository {
       {bool? isLoading, mcategorylistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createMaterialCategory(
-          auth: auth,
-          isLoading: isLoading,
-          mcategorylistJsonString: mcategorylistJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createMaterialCategory(
+            auth: auth,
+            isLoading: isLoading,
+            mcategorylistJsonString: mcategorylistJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -16554,12 +17672,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateMaterialCategory(
-        auth: auth,
-        isLoading: isLoading,
-        modulelistJsonString: modulelistJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateMaterialCategory(
+          auth: auth,
+          isLoading: isLoading,
+          modulelistJsonString: modulelistJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -16578,12 +17699,14 @@ class Repository {
       Object materialcat_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteMaterialCategory(
-        auth: auth,
-        materialcat_id: materialcat_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteMaterialCategory(
+          auth: auth,
+          materialcat_id: materialcat_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -16602,11 +17725,14 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.addCourse(
-        auth: auth,
-        courseJson: courseJson,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.addCourse(
+          auth: auth,
+          courseJson: courseJson,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       print('Add Course Response: ${resourceData}');
       if (!res.hasError) {
@@ -16633,11 +17759,14 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateCourse(
-        auth: auth,
-        courseJson: courseJson,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateCourse(
+          auth: auth,
+          courseJson: courseJson,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       print('Add Course Response: ${resourceData}');
       if (!res.hasError) {
@@ -16661,11 +17790,14 @@ class Repository {
   Future<void> deleteTrainingCourse({int? courseId, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteTrainingCourse(
-        auth: auth,
-        courseId: courseId,
-        isLoading: isLoading,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteTrainingCourse(
+          auth: auth,
+          courseId: courseId,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
       } else {
         Utility.showDialog(res.errorCode.toString(), 'delete course');
@@ -16684,14 +17816,17 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.getTrainingCourseList(
-        auth: auth,
-        facilityId: facility_id,
-        startDate: start_date,
-        endDate: end_date,
-        isLoading: isLoading,
-      );
-      print('Get Training Course List: ${res.data}');
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getTrainingCourseList(
+          auth: auth,
+          facilityId: facility_id,
+          startDate: start_date,
+          endDate: end_date,
+          isLoading: isLoading,
+        );
+        print('Get Training Course List: ${res.data}');
+      }
       if (!res.hasError) {
         final jsonTrainingCourseListModels = jsonDecode(res.data);
         final List<TrainingCourseListModel> _trainingList =
@@ -16718,12 +17853,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.getCourseDetails(
-        auth: auth,
-        courseId: courseId,
-        isLoading: isLoading,
-      );
-      print('Get Training Course List: ${res.data}');
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getCourseDetails(
+          auth: auth,
+          courseId: courseId,
+          isLoading: isLoading,
+        );
+        print('Get Training Course List: ${res.data}');
+      }
       if (!res.hasError) {
         final jsonTrainingCourseListModels = jsonDecode(res.data);
         final List<TrainingCourseListModel> _trainingList =
@@ -16754,11 +17892,14 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.scheduleCourse(
-        auth: auth,
-        scheduleCourseJson: scheduleCourseJson,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.scheduleCourse(
+          auth: auth,
+          scheduleCourseJson: scheduleCourseJson,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       print('Add Course Response: ${resourceData}');
       if (!res.hasError) {
@@ -16782,11 +17923,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.approveCourseSchedule(
-        auth: auth,
-        approveSchedule: approveSchedule,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approveCourseSchedule(
+          auth: auth,
+          approveSchedule: approveSchedule,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -16808,11 +17952,14 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.rejectCourseSchedule(
-        auth: auth,
-        rejectSchedule: rejectSchedule,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectCourseSchedule(
+          auth: auth,
+          rejectSchedule: rejectSchedule,
+          isLoading: isLoading ?? false,
+        );
+      }
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
@@ -16834,11 +17981,14 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.executeScheduleCourse(
-        auth: auth,
-        executeCourseJson: executeCourseJson,
-        isLoading: isLoading ?? false,
-      );
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.executeScheduleCourse(
+          auth: auth,
+          executeCourseJson: executeCourseJson,
+          isLoading: isLoading ?? false,
+        );
+      }
       var resourceData = res.data;
       print('Add Course Response: ${resourceData}');
       if (!res.hasError) {
@@ -16863,12 +18013,15 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.getScheduleCourseDetails(
-        auth: auth,
-        schedule_id: schedule_id,
-        isLoading: isLoading,
-      );
-      print('Get Schedule Training Course Details: ${res.data}');
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getScheduleCourseDetails(
+          auth: auth,
+          schedule_id: schedule_id,
+          isLoading: isLoading,
+        );
+        print('Get Schedule Training Course Details: ${res.data}');
+      }
       if (!res.hasError) {
         final jsonScheduleCourseDetails = jsonDecode(res.data);
         final List<ScheduleCourseDetails> _trainingList =
@@ -16903,12 +18056,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getCourseCategory(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Course Category: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getCourseCategory(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Course Category: ${res.data}');
+      }
       if (!res.hasError) {
         var Sourcetype = CourseCategoryModelFromJson(res.data);
         return Sourcetype;
@@ -16925,11 +18080,13 @@ class Repository {
       {bool? isLoading, CourseCategoryJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createCourseCategory(
-          auth: auth,
-          isLoading: isLoading,
-          CourseCategoryJsonString: CourseCategoryJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createCourseCategory(
+            auth: auth,
+            isLoading: isLoading,
+            CourseCategoryJsonString: CourseCategoryJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -16950,12 +18107,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateCourseCategory(
-        auth: auth,
-        isLoading: isLoading,
-        CourseCategoryJsonString: CourseCategoryJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateCourseCategory(
+          auth: auth,
+          isLoading: isLoading,
+          CourseCategoryJsonString: CourseCategoryJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -16973,12 +18133,14 @@ class Repository {
   Future<void> deleteCourseCategory(Object category_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteCourseCategory(
-        auth: auth,
-        category_id: category_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteCourseCategory(
+          auth: auth,
+          category_id: category_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -16999,12 +18161,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getTargetedGroup(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Course Category: ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getTargetedGroup(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Course Category: ${res.data}');
+      }
       if (!res.hasError) {
         var Sourcetype = CourseCategoryModelFromJson(res.data);
         return Sourcetype;
@@ -17021,11 +18185,13 @@ class Repository {
       {bool? isLoading, CourseCategoryJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createTargetedGroup(
-          auth: auth,
-          isLoading: isLoading,
-          CourseCategoryJsonString: CourseCategoryJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createTargetedGroup(
+            auth: auth,
+            isLoading: isLoading,
+            CourseCategoryJsonString: CourseCategoryJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -17046,12 +18212,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateTargetedGroup(
-        auth: auth,
-        isLoading: isLoading,
-        CourseCategoryJsonString: CourseCategoryJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateTargetedGroup(
+          auth: auth,
+          isLoading: isLoading,
+          CourseCategoryJsonString: CourseCategoryJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -17069,12 +18238,14 @@ class Repository {
   Future<void> deleteTargetedGroup(Object category_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteTargetedGroup(
-        auth: auth,
-        category_id: category_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteTargetedGroup(
+          auth: auth,
+          category_id: category_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -17095,12 +18266,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getStatutoryCompliance(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Statutory Compliance ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getStatutoryCompliance(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Statutory Compliance ${res.data}');
+      }
       if (!res.hasError) {
         var Sourcetype = statutoryComplianceModelFromJson(res.data);
         return Sourcetype;
@@ -17117,11 +18290,13 @@ class Repository {
       {bool? isLoading, StatutoryComplianceJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createStatutoryCompliance(
-          auth: auth,
-          isLoading: isLoading,
-          StatutoryComplianceJsonString: StatutoryComplianceJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createStatutoryCompliance(
+            auth: auth,
+            isLoading: isLoading,
+            StatutoryComplianceJsonString: StatutoryComplianceJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -17142,12 +18317,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateStatutoryCompliance(
-        auth: auth,
-        isLoading: isLoading,
-        StatutoryComplianceJsonString: StatutoryComplianceJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateStatutoryCompliance(
+          auth: auth,
+          isLoading: isLoading,
+          StatutoryComplianceJsonString: StatutoryComplianceJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         Fluttertoast.showToast(msg: "Updated Successfully...", fontSize: 16.0);
         Get.offAllNamed(
@@ -17171,12 +18349,14 @@ class Repository {
       Object StatutoryCompliance_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteStatutoryCompliance(
-        auth: auth,
-        StatutoryCompliance_id: StatutoryCompliance_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteStatutoryCompliance(
+          auth: auth,
+          StatutoryCompliance_id: StatutoryCompliance_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -17198,12 +18378,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getComplianceStatus(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Compliance Status ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getComplianceStatus(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Compliance Status ${res.data}');
+      }
       if (!res.hasError) {
         var Sourcetype = ComplianceStatusModelFromJson(res.data);
         return Sourcetype;
@@ -17220,11 +18402,13 @@ class Repository {
       {bool? isLoading, ComplianceStatusJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createComplianceStatus(
-          auth: auth,
-          isLoading: isLoading,
-          ComplianceStatusJsonString: ComplianceStatusJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createComplianceStatus(
+            auth: auth,
+            isLoading: isLoading,
+            ComplianceStatusJsonString: ComplianceStatusJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -17245,12 +18429,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateComplianceStatus(
-        auth: auth,
-        isLoading: isLoading,
-        ComplianceStatusJsonString: ComplianceStatusJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateComplianceStatus(
+          auth: auth,
+          isLoading: isLoading,
+          ComplianceStatusJsonString: ComplianceStatusJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -17270,12 +18457,14 @@ class Repository {
       Object ComplianceStatus_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteComplianceStatus(
-        auth: auth,
-        ComplianceStatus_id: ComplianceStatus_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteComplianceStatus(
+          auth: auth,
+          ComplianceStatus_id: ComplianceStatus_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -17297,12 +18486,14 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getDocumentMaster(
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('Compliance Status ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getDocumentMaster(
+          isLoading: isLoading,
+          auth: auth,
+        );
+        print('Compliance Status ${res.data}');
+      }
       if (!res.hasError) {
         var Sourcetype = DocumentMasterModelFromJson(res.data);
         return Sourcetype;
@@ -17319,11 +18510,13 @@ class Repository {
       {bool? isLoading, DocumentMasterJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.createDocumentMaster(
-          auth: auth,
-          isLoading: isLoading,
-          DocumentMasterJsonString: DocumentMasterJsonString);
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.createDocumentMaster(
+            auth: auth,
+            isLoading: isLoading,
+            DocumentMasterJsonString: DocumentMasterJsonString);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -17344,12 +18537,15 @@ class Repository {
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateDocumentMaster(
-        auth: auth,
-        isLoading: isLoading,
-        DocumentMasterJsonString: DocumentMasterJsonString,
-      );
-      print(res.data);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateDocumentMaster(
+          auth: auth,
+          isLoading: isLoading,
+          DocumentMasterJsonString: DocumentMasterJsonString,
+        );
+        print(res.data);
+      }
       if (!res.hasError) {
         return true;
       } //
@@ -17368,12 +18564,14 @@ class Repository {
       Object DocumentMaster_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.deleteDocumentMaster(
-        auth: auth,
-        DocumentMaster_id: DocumentMaster_id,
-        isLoading: isLoading,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.deleteDocumentMaster(
+          auth: auth,
+          DocumentMaster_id: DocumentMaster_id,
+          isLoading: isLoading,
+        );
+      }
       if (!res.hasError) {
         //get delete response back from API
       } else {
@@ -17392,13 +18590,15 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getStatutoryHistory(
-        auth: auth,
-        compliance_id: compliance_id,
-        isLoading: isLoading,
-      );
-      print('Compliance Status ${res.data}');
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getStatutoryHistory(
+          auth: auth,
+          compliance_id: compliance_id,
+          isLoading: isLoading,
+        );
+        print('Compliance Status ${res.data}');
+      }
       if (!res.hasError) {
         var historyStatutory = statutoryHistoryFromJson(res.data);
         return historyStatutory.reversed.toList();
@@ -17419,14 +18619,17 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.getScheduleCourseList(
-        auth: auth,
-        facilityId: facility_id,
-        startDate: start_date,
-        endDate: end_date,
-        isLoading: isLoading,
-      );
-      print('Get Schedule Course List: ${res.data}');
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getScheduleCourseList(
+          auth: auth,
+          facilityId: facility_id,
+          startDate: start_date,
+          endDate: end_date,
+          isLoading: isLoading,
+        );
+        print('Get Schedule Course List: ${res.data}');
+      }
       if (!res.hasError) {
         final jsonscheduleCourseListModels = jsonDecode(res.data);
         final List<ScheduleCourseListModel> _trainingList =
@@ -17455,14 +18658,16 @@ class Repository {
         throw ArgumentError('facility_id cannot be null');
       }
 
-      final res = await _dataRepository.getObservationSummary(
-        auth: auth,
-        isLoading: isLoading,
-        facility_id: facility_id,
-        fromDate: fromDate,
-        toDate: toDate,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getObservationSummary(
+          auth: auth,
+          isLoading: isLoading,
+          facility_id: facility_id,
+          fromDate: fromDate,
+          toDate: toDate,
+        );
+      }
       if (!res.hasError) {
         // String jsonObservationSummaryModels = jsonDecode(res.data);
         final List<ObservationSummaryModel> _observationSummaryModelList =
@@ -17488,14 +18693,16 @@ class Repository {
         throw ArgumentError('facility_id cannot be null');
       }
 
-      final res = await _dataRepository.getTrainingSummary(
-        auth: auth,
-        isLoading: isLoading,
-        facility_id: facility_id,
-        fromDate: fromDate,
-        toDate: toDate,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getTrainingSummary(
+          auth: auth,
+          isLoading: isLoading,
+          facility_id: facility_id,
+          fromDate: fromDate,
+          toDate: toDate,
+        );
+      }
       if (!res.hasError) {
         // String jsonObservationSummaryModels = jsonDecode(res.data);
 
@@ -17522,14 +18729,16 @@ class Repository {
         throw ArgumentError('facility_id cannot be null');
       }
 
-      final res = await _dataRepository.getGrievanceSummary(
-        auth: auth,
-        isLoading: isLoading,
-        facility_id: facility_id,
-        fromDate: fromDate,
-        toDate: toDate,
-      );
-
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getGrievanceSummary(
+          auth: auth,
+          isLoading: isLoading,
+          facility_id: facility_id,
+          fromDate: fromDate,
+          toDate: toDate,
+        );
+      }
       if (!res.hasError) {
         // String jsonObservationSummaryModels = jsonDecode(res.data);
         final List<GrievanceReportModel> _grievanceSummaryModelList =

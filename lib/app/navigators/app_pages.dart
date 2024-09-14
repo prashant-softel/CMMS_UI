@@ -626,7 +626,8 @@ class AppPages {
       binding: PreventiveMaintenanceTaskBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.pmExecution,
+      name:
+          '/pm-execution-screen/:pmTaskId', // Define the route with a dynamic path parameter
       page: PreventiveMaintenanceExecutionScreen.new,
       binding: PreventiveMaintenanceExecutionBinding(),
     ),

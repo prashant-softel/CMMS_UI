@@ -239,6 +239,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  var repository = Get.find<Repository>();
+
   // BranchContentMetaData metadata = BranchContentMetaData();
   // BranchUniversalObject? buo;
   // BranchLinkProperties lp = BranchLinkProperties();
@@ -287,6 +289,24 @@ class _MyAppState extends State<MyApp> {
                 initialRoute: AppPages.initial,
                 translations: TranslationsFile(),
                 enableLog: true,
+                routingCallback: (routing) async {
+                  // Retrieve token from repository (secure storage)
+                  var token =
+                      await repository.getSecuredValue(LocalKeys.authToken);
+
+                  // Log current and previous route
+                  // print({
+                  //   "current_route": routing?.current,
+                  //   "previous_route": routing?.previous
+                  // });
+
+                  // Redirect to login if no token is found and user is not on the login page
+                  if (routing != null &&
+                      routing.current != Routes.login &&
+                      token.isEmpty) {
+                    Get.offNamed(Routes.login); // Redirect to login
+                  }
+                },
               ),
             ),
             Align(

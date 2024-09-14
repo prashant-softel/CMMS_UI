@@ -5645,16 +5645,19 @@ class ConnectHelper {
     required int facilityId,
     bool? isLoading,
   }) async {
-    var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskDetail?task_id=$scheduleId&facility_id=$facilityId',
-      Request.get,
-      null,
-      isLoading ?? false,
-      {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $auth',
-      },
-    );
+    var responseModel;
+    if (auth!.isNotEmpty) {
+      responseModel = await apiWrapper.makeRequest(
+        'PMScheduleView/GetPMTaskDetail?task_id=$scheduleId&facility_id=$facilityId',
+        Request.get,
+        null,
+        isLoading ?? false,
+        {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    }
     return responseModel;
   }
 

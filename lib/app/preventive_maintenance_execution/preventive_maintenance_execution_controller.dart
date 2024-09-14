@@ -105,18 +105,18 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       facilityIdStreamSubscription =
           homeController.facilityId$.listen((event) async {
         facilityId = event;
-        if (facilityId > 0) {
-          isFacilitySelected.value = true;
-          if (scheduleId != 0) {
-            await getPmtaskViewList(
-                scheduleId: scheduleId.value,
-                isloading: true,
-                facilityId: facilityId);
+        // if (facilityId > 0) {
+        isFacilitySelected.value = true;
+        if (scheduleId != 0) {
+          await getPmtaskViewList(
+              scheduleId: scheduleId.value,
+              isloading: true,
+              facilityId: facilityId);
 
-            getHistory();
-            getLocation();
-          }
+          getHistory();
+          getLocation();
         }
+        //}
       });
 
       super.onInit();
@@ -224,22 +224,25 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   }
 
   Future<void> setScheduleId() async {
-    try {
-      final _scheduleId =
-          await preventiveMaintenanceExecutionPresenter.getValue();
+    // try {
 
-      if (_scheduleId == null || _scheduleId == '' || _scheduleId == "null") {
-        var dataFromPreviousScreen = Get.arguments;
+    // final _scheduleId =
+    //     await preventiveMaintenanceExecutionPresenter.getValue();
 
-        scheduleId.value = dataFromPreviousScreen['pmTaskId'];
-        preventiveMaintenanceExecutionPresenter.saveValue(
-            pmTaskId: scheduleId.value.toString());
-      } else {
-        scheduleId.value = int.tryParse(_scheduleId) ?? 0;
-      }
-    } catch (e) {
-      Utility.showDialog(e.toString(), 'pmTaskId');
-    }
+    // if (_scheduleId == null || _scheduleId == '' || _scheduleId == "null") {
+    // var dataFromPreviousScreen = Get.arguments;
+    final String? pmTaskId = Get.parameters['pmTaskId'];
+
+    scheduleId.value =
+        int.tryParse(pmTaskId ?? "") ?? 0; //dataFromPreviousScreen['pmTaskId'];
+    //   preventiveMaintenanceExecutionPresenter.saveValue(
+    //       pmTaskId: scheduleId.value.toString());
+    // } else {
+    //   scheduleId.value = int.tryParse(_scheduleId) ?? 0;
+    // }
+    // } catch (e) {
+    // Utility.showDialog(e.toString(), 'pmTaskId');
+    // }
   }
 
   Future<void> getHistory() async {
@@ -416,7 +419,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
         await preventiveMaintenanceExecutionPresenter.updatePmExecution(
             pmExecutionJsonString: pmExecutionJsonString,
             isLoading: true,
-            facility_id: facilityId);
+            facility_id: pmtaskViewModel.value?.facility_id);
     _updatedailog();
   }
 
@@ -675,7 +678,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
         await preventiveMaintenanceExecutionPresenter.UpdatePMTaskExecution(
             updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
             isLoading: true,
-            facility_id: facilityId);
+            facility_id: pmtaskViewModel.value?.facility_id);
     if (response == true) {
       _updatedailog();
     }
@@ -715,7 +718,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
             taskId: scheduleId.value,
             cloneJobs: cloneJobs,
             isloading: true,
-            facility_id: facilityId);
+            facility_id: pmtaskViewModel.value?.facility_id);
     if (response == true) {
       _updatedailog();
     }

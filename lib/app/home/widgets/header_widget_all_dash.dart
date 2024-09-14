@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ class HeaderWidgetAllDash extends GetView<HomeController> {
   HeaderWidgetAllDash({super.key});
 
   final HomeController controller = Get.find<HomeController>();
+  var repository = Get.find<Repository>();
 
   @override
   Widget build(BuildContext context) {
@@ -186,6 +188,7 @@ class HeaderWidgetAllDash extends GetView<HomeController> {
               ),
               TextButton(
                 onPressed: () {
+                  repository.deleteAllSecuredValues();
                   Get.offAllNamed(Routes.login);
                 },
                 child: Text('YES'),

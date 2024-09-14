@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/dashboard_controller.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
@@ -5,6 +7,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/dash_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -28,6 +31,8 @@ class DashBoardHomeWeb extends StatefulWidget {
 
 class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
     with SingleTickerProviderStateMixin {
+  var repository = Get.find<Repository>();
+
   late TabController _tabController;
   bool _isTaskbarVisible = false;
   void initState() {
@@ -300,7 +305,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                     color: Color(0xffD2D0D0)),
                                                 InkWell(
                                                   onTap: () {
-                                                    _isDeleteDialog();
+                                                    _isDeleteDialog(repository);
                                                   },
                                                   child: Row(
                                                     children: [
@@ -6688,7 +6693,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
         });
   }
 
-  _isDeleteDialog() {
+  _isDeleteDialog(Repository repository) {
     Get.dialog(
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -6713,6 +6718,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
               ),
               TextButton(
                 onPressed: () {
+                  repository.deleteAllSecuredValues();
                   Get.offAllNamed(Routes.login);
                 },
                 child: Text('YES'),
