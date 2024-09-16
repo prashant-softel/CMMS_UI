@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cmms/app/calendar_view/calendar_view_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/doc_upload_list_model.dart';
 import 'package:cmms/domain/models/view_doc_upload.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class CalendarViewController extends GetxController {
 
   var docUploadDateTc = TextEditingController();
   StreamSubscription<int>? facilityIdStreamSubscription;
-  Rx<int> facilityId = 0.obs;
+  int facilityId = 0;
   Rx<int> selectedDocUploadId = 0.obs;
   RxList<ViewDocUpload> viewDocUploadList = <ViewDocUpload>[].obs;
   RxList<double> totalColumn = <double>[].obs;
@@ -26,11 +27,46 @@ class CalendarViewController extends GetxController {
   GetDocUploadListModel? selectedItem;
   var subDocName = TextEditingController();
 
+  // dashbord data
+  RxList<DashboardModel?> dashboardList = <DashboardModel?>[].obs;
+
+  RxList<Itemlist?> allItems = <Itemlist?>[].obs;
+  String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
   String get end_date => DateFormat('yyyy-MM-dd').format(toDate.value);
   String get start_date => DateFormat('yyyy-MM-dd').format(fromDate.value);
 
   @override
   void onInit() async {
+    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+      facilityId = event;
+
+      if (facilityId != 0) {
+        Future.delayed(Duration(seconds: 1), () {
+          getdashboardList();
+        });
+      }
+    });
+
     super.onInit();
+  }
+
+  Future<void> getdashboardList() async {
+    dashboardList.value = <DashboardModel>[];
+    allItems.value = <Itemlist>[];
+
+    String lststrFacilityIds = homecontroller.selectedFacilityIdList.join(',');
+
+    print({"facilityData1": lststrFacilityIds});
+
+    final _dashboardList = await calendarViewPresenter.getdashboardList(
+        facilityId: lststrFacilityIds,
+        endDate: formattedTodate1,
+        startDate: formattedFromdate1,
+        isLoading: true);
   }
 }
