@@ -28,6 +28,9 @@ class ObservationListController extends GetxController {
   GetObservationList? getObservationListModel;
   RxList<String> getObservationListTableColumns = <String>[].obs;
   bool openFromDateToStartDatePicker = false;
+      // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
 
   PaginationController paginationController = PaginationController(
     rowCount: 0,
@@ -77,8 +80,8 @@ class ObservationListController extends GetxController {
   final Map<String, double> columnwidth = {
     "Id": 120,
     "Month": 100,
-    "Observation Date": 100,
-    "Contractor Name": 180,
+    "Observation Date": 200,
+    "Contractor Name": 200,
     "Location": 150,
     "Type": 180,
     "Source": 180,
@@ -86,7 +89,7 @@ class ObservationListController extends GetxController {
     "Observation Made": 200,
     "Responsible": 150,
     "Target Date": 150,
-    "Action Taken": 150,
+    "Action Taken": 180,
     "Closed Date": 150,
     "Cost type": 150,
     // "Status": 150,
@@ -222,6 +225,92 @@ class ObservationListController extends GetxController {
   void getobslistbydate() {
     getObservationDataList(
         facilityId, formattedTodate1, formattedFromdate1, true);
+  }
+   void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+    switch (columnName) {
+      case 'Id':
+        getObservationList.sort((a, b) => isAscending.value
+            ? (a.id ?? 0).compareTo(b.id ?? 0)
+            : (b.id ?? 0).compareTo(a.id ?? 0));
+        break;
+      case 'Month':
+        getObservationList.sort((a, b) => isAscending.value
+            ? (a.month_of_observation ?? '').compareTo(b.month_of_observation ?? '')
+            : (b.month_of_observation ?? '').compareTo(a.month_of_observation ?? ''));
+        break;
+      case 'Observation Date':
+        getObservationList.sort((a, b) => isAscending.value
+            ? (a.date_of_observation ?? '').compareTo(b.date_of_observation ?? '')
+            : (b.date_of_observation ?? '').compareTo(a.date_of_observation ?? ''));
+        break;
+      case 'Contractor Name':
+        getObservationList.sort((a, b) => isAscending.value
+            ? (a.contractor_name ?? '')
+                .compareTo(b.contractor_name ?? '')
+            : (b.contractor_name ?? '')
+                .compareTo(a.contractor_name ?? ''));
+        break;
+      case 'Location':
+        getObservationList.sort((a, b) => isAscending.value
+            ? (a.location_of_observation ?? '').compareTo(b.location_of_observation ?? '')
+            : (b.location_of_observation ?? '').compareTo(a.location_of_observation ?? ''));
+        break;
+
+      case 'Type':
+        getObservationList.sort((a, b) => isAscending.value
+            ? (a.type_of_observation ?? 0).compareTo(b.type_of_observation ?? 0)
+            : (b.type_of_observation ?? 0).compareTo(a.type_of_observation ?? 0));
+        break;
+      case 'Source':
+        getObservationList.sort((a, b) => isAscending.value
+            ? (a.source_of_observation ?? 0).compareTo(b.source_of_observation ?? 0)
+            : (b.source_of_observation ?? 0).compareTo(a.source_of_observation ?? 0));
+        break;
+      case 'Risk Type':
+        getObservationList.sort((a, b) => isAscending.value
+            ? (a.risk_type ?? '').compareTo(b.risk_type ?? '')
+            : (b.risk_type ?? '').compareTo(a.risk_type ?? ''));
+        break;
+      case 'Observation Made':
+        getObservationList.sort((a, b) => isAscending.value
+            ? (a.type_of_observation_name ?? '').compareTo(b.type_of_observation_name ?? '')
+            : (b.type_of_observation_name ?? '').compareTo(a.type_of_observation_name ?? ''));
+        break;
+      case 'Responsible':
+        getObservationList.sort((a, b) => isAscending.value
+            ? (a.responsible_person ?? '').compareTo(b.responsible_person ?? '')
+            : (b.responsible_person ?? '').compareTo(a.responsible_person ?? ''));
+        break;
+      case 'Target Date':
+        getObservationList.sort((a, b) => isAscending.value
+            ? (a.target_date ?? '').compareTo(b.target_date ?? '')
+            : (b.target_date ?? '').compareTo(a.target_date ?? ''));
+        break;
+      case 'Action Taken':
+        getObservationList.sort((a, b) => isAscending.value
+            ? (a.action_taken ?? '').compareTo(b.action_taken ?? '')
+            : (b.action_taken ?? '').compareTo(a.action_taken ?? ''));
+        break;
+      case 'Closed Date':
+        getObservationList.sort((a, b) => isAscending.value
+            ? (a.closed_date ?? '').compareTo(b.closed_date ?? '')
+            : (b.closed_date ?? '').compareTo(a.closed_date ?? ''));
+        break;
+      case 'Cost type':
+        getObservationList.sort((a, b) => isAscending.value
+            ? (a.cost_type ?? 0).compareTo(b.cost_type ?? 0)
+            : (b.cost_type ?? 0).compareTo(a.cost_type ?? 0));
+        break;
+      default:
+        break;
+    }
+    update();
   }
 }
 

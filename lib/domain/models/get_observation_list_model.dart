@@ -78,40 +78,47 @@ class GetObservationList {
   });
 
   factory GetObservationList.fromJson(Map<String, dynamic> json) {
-    return GetObservationList(
-      id: json['id'],
-      contractor_name: json['contractor_name'],
-      date_of_observation:
-          Utility.getFormatedyearMonthDay(json['date_of_observation']),
-      responsible_person: json['responsible_person'],
-      type_of_observation: json['type_of_observation'],
-      cost_type: json['cost_type'],
-      source_of_observation: json['source_of_observation'],
-      observation_description: json['observation_description'],
-      target_date: Utility.getFormatedyearMonthDay(json['target_date']),
-      contact_number: json['contact_number'],
-      created_at: json['created_at'],
-      facility_id: json['facility_id'],
-      preventive_action: json['preventive_action'],
-      risk_type_id: json['risk_type_id'],
-      risk_type_name: json['risk_type_name'],
-      updated_at: json['updated_at'],
-      updated_by: json['updated_by'],
-      corrective_action: json['corrective_action'],
-      days_remaining: json['days_remaining'],
-      location_of_observation: json['location_of_observation'],
-      month_of_observation: json['month_of_observation'],
-      short_status: json['short_status'],
-      observation_status: json['observation_status'],
-      type_of_observation_name: json['type_of_observation_name'],
-      source_of_observation_name: json['source_of_observation_name'],
-      status_code: json['status_code'],
-      risk_type: json['risk_type'],
-      action_taken: json['action_taken'],
-      closer_date: Utility.getFormatedyearMonthDay(json['closer_date']),
-      closed_date: Utility.getFormatedyearMonthDay(json['closed_date']),
-    );
-  }
+  return GetObservationList(
+    id: json['id'],
+    contractor_name: json['contractor_name'] ?? '',
+    date_of_observation: json['date_of_observation'] != null 
+      ? Utility.getFormatedyearMonthDay(json['date_of_observation']) 
+      : null,
+    responsible_person: json['responsible_person'] ?? '',
+    type_of_observation: json['type_of_observation'],
+    cost_type: json['cost_type'],
+    source_of_observation: json['source_of_observation'],
+    observation_description: json['observation_description'] ?? '',
+    target_date: json['target_date'] != null 
+      ? Utility.getFormatedyearMonthDay(json['target_date']) 
+      : null,
+    contact_number: json['contact_number'] ?? '',
+    created_at: json['created_at'] ?? '',
+    facility_id: json['facility_id'],
+    preventive_action: json['preventive_action'] ?? '',
+    risk_type_id: json['risk_type_id'],
+    risk_type_name: json['risk_type_name'] ?? '',
+    updated_at: json['updated_at'] ?? '',
+    updated_by: json['updated_by'] ?? '',
+    corrective_action: json['corrective_action'] ?? '',
+    days_remaining: json['days_remaining'] ?? '',
+    location_of_observation: json['location_of_observation'] ?? '',
+    month_of_observation: json['month_of_observation'] ?? '',
+    short_status: json['short_status'] ?? '',
+    observation_status: json['observation_status'] ?? '',
+    type_of_observation_name: json['type_of_observation_name'] ?? '',
+    source_of_observation_name: json['source_of_observation_name'] ?? '',
+    status_code: json['status_code'],
+    risk_type: json['risk_type'] ?? '',
+    action_taken: json['action_taken'] ?? '',
+    closer_date: json['closer_date'] != null 
+      ? Utility.getFormatedyearMonthDay(json['closer_date']) 
+      : null,
+    closed_date: json['closed_date'] != null 
+      ? Utility.getFormatedyearMonthDay(json['closed_date']) 
+      : null,
+  );
+}
 
   Map<String, dynamic> toJson() => {
         'id': id,
