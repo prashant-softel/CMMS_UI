@@ -23,6 +23,9 @@ class DocumentManagerController extends GetxController {
   RxString addedAtFilterText = ''.obs;
   RxString addedByFilterText = ''.obs;
   GetDocUploadListModel? selectedItem;
+    // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
 
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
@@ -40,7 +43,7 @@ class DocumentManagerController extends GetxController {
     "Sub Doc Name": 220,
     "Renew Date": 250,
     "Added At": 200,
-    "Added By": 100,
+    "Added By": 130,
   };
 
   Map<String, RxString> filterText = {};
@@ -215,5 +218,50 @@ class DocumentManagerController extends GetxController {
 
   void export() {
     getDocUploadList(facilityId, formattedTodate1, formattedFromdate1, true);
+  }
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+    switch (columnName) {
+      case 'Doc ID':
+        docUploadList.sort((a, b) => isAscending.value
+            ? (a.id ?? 0).compareTo(b.id ?? 0)
+            : (b.id ?? 0).compareTo(a.id ?? 0));
+        break;
+      case 'Doc Name':
+        docUploadList.sort((a, b) => isAscending.value
+            ? (a.doc_master_name ?? '').compareTo(b.doc_master_name ?? '')
+            : (b.doc_master_name ?? '').compareTo(a.doc_master_name ?? ''));
+        break;
+      case 'Sub Doc Name':
+        docUploadList.sort((a, b) => isAscending.value
+            ? (a.subDocName ?? '').compareTo(b.subDocName ?? '')
+            : (b.subDocName ?? '').compareTo(a.subDocName ?? ''));
+        break;
+  case 'Renew Date':
+  docUploadList.sort((a, b) => isAscending.value
+      ? ((a.renewDates ?? '') as String).compareTo((b.renewDates ?? '') as String)
+      : ((b.renewDates ?? '') as String).compareTo((a.renewDates ?? '') as String));
+  break;
+
+      case 'Added At':
+        docUploadList.sort((a, b) => isAscending.value
+            ? ((a.created_at ?? '')as String).compareTo((b.created_at ?? '')as String)
+            : ((b.created_at ?? '')as String).compareTo((a.created_at ?? '')as String));
+        break;
+
+      case 'Added By':
+        docUploadList.sort((a, b) => isAscending.value
+            ? (a.created_by ?? '').compareTo(b.created_by ?? '')
+            : (b.created_by ?? '').compareTo(a.created_by ?? ''));
+        break;
+      default:
+        break;
+    }
+    update();
   }
 }

@@ -36,6 +36,9 @@ class ImportDsmListChargesListController extends GetxController {
   RxString ActionFilterText = ''.obs;
   RxList<StatusModel?> dsmTypes = <StatusModel>[].obs;
   RxBool isExpanded = false.obs;
+    // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
 
   RxList<GenderModel> month = <GenderModel>[
     GenderModel(name: 'Jan', id: 1),
@@ -69,18 +72,18 @@ class ImportDsmListChargesListController extends GetxController {
   });
 
   final Map<String, double> columnwidth = {
-    "Financial Year": 150,
-    "Month": 110,
+    "Financial Year": 190,
+    "Month": 150,
     "State": 200,
     "SPV": 150,
     "Site": 130,
-    "DSM Type": 150,
-    "ForeCasterName": 200,
+    "DSM Type": 180,
+    "ForeCasterName": 240,
     // "Category": 150,
-    "DSM Penalty": 155,
-    "Actual KWH": 150,
-    "Schedule KWH": 170,
-    "DSM Percentage": 160,
+    "DSM Penalty": 195,
+    "Actual KWH": 200,
+    "Schedule KWH": 220,
+    "DSM Percentage": 200,
   };
 
   RxString fy = ''.obs;
@@ -348,5 +351,76 @@ class ImportDsmListChargesListController extends GetxController {
 
   void clearStoreData() {
     importDsmListDsmChargesListPresenter.clearValue();
+  }
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+    switch (columnName) {
+      case 'Financial Year':
+        dsmDataList.sort((a, b) => isAscending.value
+            ? (a?.fy ?? '').compareTo(b?.fy ?? '')
+            : (b?.fy ?? '').compareTo(a?.fy ?? ''));
+        break;
+      case 'Month':
+        dsmDataList.sort((a, b) => isAscending.value
+            ? (a?.month ?? '').compareTo(b?.month ?? '')
+            : (b?.month ?? '').compareTo(a?.month ?? ''));
+        break;
+      case 'State':
+        dsmDataList.sort((a, b) => isAscending.value
+            ? (a?.state ?? '').compareTo(b?.state ?? '')
+            : (b?.state ?? '').compareTo(a?.state ?? ''));
+        break;
+      case 'SPV':
+        dsmDataList.sort((a, b) => isAscending.value
+            ? (a?.spv ?? '')
+                .compareTo(b?.spv ?? '')
+            : (b?.spv ?? '')
+                .compareTo(a?.spv ?? ''));
+        break;
+      case 'Site':
+        dsmDataList.sort((a, b) => isAscending.value
+            ? (a?.site ?? '').compareTo(b?.site ?? '')
+            : (b?.site ?? '').compareTo(a?.site ?? ''));
+        break;
+
+      case 'DSM Type':
+        dsmDataList.sort((a, b) => isAscending.value
+            ? (a?.dsmtype ?? '').compareTo(b?.dsmtype ?? '')
+            : (b?.dsmtype ?? '').compareTo(a?.dsmtype ?? ''));
+        break;
+      case 'ForeCasterName':
+        dsmDataList.sort((a, b) => isAscending.value
+            ? (a?.forcasterName ?? '').compareTo(b?.forcasterName ?? '')
+            : (b?.forcasterName ?? '').compareTo(a?.forcasterName ?? ''));
+        break;
+      case 'DSM Penalty':
+        dsmDataList.sort((a, b) => isAscending.value
+            ? (a?.dsmPenalty ?? 0).compareTo(b?.dsmPenalty ?? 0)
+            : (b?.dsmPenalty ?? 0).compareTo(a?.dsmPenalty ?? 0));
+        break;
+      case 'Actual KWH':
+        dsmDataList.sort((a, b) => isAscending.value
+            ? (a?.actualKwh ?? 0).compareTo(b?.actualKwh ?? 0)
+            : (b?.actualKwh ?? 0).compareTo(a?.actualKwh ?? 0));
+        break;
+      case 'Schedule KWH':
+        dsmDataList.sort((a, b) => isAscending.value
+            ? (a?.scheduleKwh ?? 0).compareTo(b?.scheduleKwh ?? 0)
+            : (b?.scheduleKwh ?? 0).compareTo(a?.scheduleKwh ?? 0));
+        break;
+      case 'DSM Percentage':
+        dsmDataList.sort((a, b) => isAscending.value
+            ? (a?.dsmPer ?? 0).compareTo(b?.dsmPer ?? 0)
+            : (b?.dsmPer ?? 0).compareTo(a?.dsmPer ?? 0));
+        break;
+      default:
+        break;
+    }
+    update();
   }
 }

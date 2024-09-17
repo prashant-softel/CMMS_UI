@@ -28,653 +28,655 @@ class ImportDsmListChargesListContentWeb
       builder: (controller) {
         // return Obx(() {
 
-        return SelectionArea(
-          child: Column(
-            children: [
-              HeaderWidget(),
-              Container(
-                height: 45,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromARGB(255, 227, 224, 224),
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color:
-                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(0, 2),
+        return Obx(()=>
+           SelectionArea(
+            child: Column(
+              children: [
+                HeaderWidget(),
+                Container(
+                  height: 45,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color.fromARGB(255, 227, 224, 224),
+                      width: 1,
                     ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.home,
-                      color: ColorValues.greyLightColor,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.offNamed(Routes.home);
-                      },
-                      child: Text(
-                        "DASHBOARD",
-                        style: Styles.greyLight14,
+                    boxShadow: [
+                      BoxShadow(
+                        color:
+                            Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, 2),
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.offNamed(Routes.dsmDashboardScreen);
-                      },
-                      child:
-                          Text(" / DSM DASHBOARD", style: Styles.greyLight14),
-                    ),
-                    Text(" / IMPORT F&S DSM LIST", style: Styles.greyLight14),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: ScrollConfiguration(
-                  behavior: ScrollConfiguration.of(context)
-                      .copyWith(scrollbars: false),
-                  child: SingleChildScrollView(
-                    child: Container(
-                      width: Get.width * 7,
-                      margin: EdgeInsets.all(10),
-                      height: Get.height * .84,
-                      child: Card(
-                        color: Color.fromARGB(255, 245, 248, 250),
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.home,
+                        color: ColorValues.greyLightColor,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.home);
+                        },
+                        child: Text(
+                          "DASHBOARD",
+                          style: Styles.greyLight14,
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Obx(() {
-                              return AnimatedContainer(
-                                duration: Duration(milliseconds: 300),
-                                height: controller.isExpanded.value ? 215 : 40,
-                                width: double.infinity,
-                                child: Stack(
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Dimens.boxWidth5,
-                                            Text(
-                                              "F&S DSM CHARGES LIST",
-                                              style: Styles.blackBold16,
-                                            ),
-                                            Spacer(),
-                                            Container(
-                                              margin: EdgeInsets.only(
-                                                  right: 10, top: 5),
-                                              child: ActionButton(
-                                                icon: Icons.file_open_outlined,
-                                                label: "Import Report",
-                                                onPressed: () {
-                                                  controller
-                                                      .goToImportDsmChargesScreen();
-                                                },
-                                                color: ColorValues.addNewColor,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.dsmDashboardScreen);
+                        },
+                        child:
+                            Text(" / DSM DASHBOARD", style: Styles.greyLight14),
+                      ),
+                      Text(" / IMPORT F&S DSM LIST", style: Styles.greyLight14),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: ScrollConfiguration(
+                    behavior: ScrollConfiguration.of(context)
+                        .copyWith(scrollbars: false),
+                    child: SingleChildScrollView(
+                      child: Container(
+                        width: Get.width * 7,
+                        margin: EdgeInsets.all(10),
+                        height: Get.height * .84,
+                        child: Card(
+                          color: Color.fromARGB(255, 245, 248, 250),
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Obx(() {
+                                return AnimatedContainer(
+                                  duration: Duration(milliseconds: 300),
+                                  height: controller.isExpanded.value ? 215 : 40,
+                                  width: double.infinity,
+                                  child: Stack(
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Dimens.boxWidth5,
+                                              Text(
+                                                "F&S DSM CHARGES LIST",
+                                                style: Styles.blackBold16,
                                               ),
-                                            )
-                                          ],
-                                        ),
-                                        if (controller.isExpanded.value)
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10.0,
-                                                vertical: 10.0),
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                              title:
-                                                                  "Select Years : ",
-                                                              includeAsterisk:
-                                                                  false,
-                                                            ),
-                                                            SizedBox(
-                                                              width: Get.width *
-                                                                  .17, // Fixed width for dropdown
-                                                              child:
-                                                                  CustomMultiDropdown(
-                                                                title:
-                                                                    'Select Years',
-                                                                buttonText:
-                                                                    'Select Years',
-                                                                initialValue:
-                                                                    controller
-                                                                        .selectedYears,
-                                                                items: controller
-                                                                        .year
-                                                                        ?.map(
-                                                                          (years) =>
-                                                                              DropdownItem<Object>(
-                                                                            label:
-                                                                                years.name,
-                                                                            value:
-                                                                                years.name,
-                                                                          ),
-                                                                        )
-                                                                        .toList() ??
-                                                                    [],
-                                                                onConfirm:
-                                                                    (selectedOptionsList) {
-                                                                  controller
-                                                                      .yearsSelected(
-                                                                          selectedOptionsList);
-                                                                },
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight10,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                              title:
-                                                                  "Select SPV : ",
-                                                              includeAsterisk:
-                                                                  false,
-                                                            ),
-                                                            SizedBox(
-                                                              width: Get.width *
-                                                                  .17, // Fixed width for dropdown
-                                                              child:
-                                                                  CustomMultiDropdown(
-                                                                title:
-                                                                    'Select SPV',
-                                                                buttonText:
-                                                                    'Select SPV',
-                                                                initialValue:
-                                                                    controller
-                                                                        .selectedSpv,
-                                                                items: controller
-                                                                        .spvList
-                                                                        ?.map(
-                                                                          (spv) =>
-                                                                              DropdownItem<Object>(
-                                                                            label:
-                                                                                spv?.name ?? "",
-                                                                            value:
-                                                                                spv?.id ?? 0,
-                                                                          ),
-                                                                        )
-                                                                        .toList() ??
-                                                                    [],
-                                                                onConfirm:
-                                                                    (selectedOptionsList) {
-                                                                  controller
-                                                                      .spvSelected(
-                                                                          selectedOptionsList);
-                                                                },
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(width: 10),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                              title:
-                                                                  "Select Months : ",
-                                                              includeAsterisk:
-                                                                  false,
-                                                            ),
-                                                            SizedBox(
-                                                              width: Get.width *
-                                                                  .17, // Fixed width for dropdown
-                                                              child:
-                                                                  CustomMultiDropdown(
-                                                                title:
-                                                                    'Select Months',
-                                                                buttonText:
-                                                                    'Select Months',
-                                                                initialValue:
-                                                                    controller
-                                                                        .selectedMonths,
-                                                                items: controller
-                                                                        .month
-                                                                        ?.map(
-                                                                          (months) =>
-                                                                              DropdownItem<Object>(
-                                                                            label:
-                                                                                months.name,
-                                                                            value:
-                                                                                months.name,
-                                                                          ),
-                                                                        )
-                                                                        .toList() ??
-                                                                    [],
-                                                                onConfirm:
-                                                                    (selectedOptionsList) {
-                                                                  controller
-                                                                      .monthsSelected(
-                                                                          selectedOptionsList);
-                                                                },
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight10,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                              title:
-                                                                  "Select States : ",
-                                                              includeAsterisk:
-                                                                  false,
-                                                            ),
-                                                            SizedBox(
-                                                              width: Get.width *
-                                                                  .17, // Fixed width for dropdown
-                                                              child:
-                                                                  CustomMultiDropdown(
-                                                                title:
-                                                                    'Select States',
-                                                                buttonText:
-                                                                    'Select States',
-                                                                initialValue:
-                                                                    controller
-                                                                        .selectedState,
-                                                                items: controller
-                                                                        .stateList
-                                                                        ?.map(
-                                                                          (state) =>
-                                                                              DropdownItem<Object>(
-                                                                            label:
-                                                                                state?.name ?? "",
-                                                                            value:
-                                                                                state?.id ?? 0,
-                                                                          ),
-                                                                        )
-                                                                        .toList() ??
-                                                                    [],
-                                                                onConfirm:
-                                                                    (selectedOptionsList) {
-                                                                  controller
-                                                                      .stateSelected(
-                                                                          selectedOptionsList);
-                                                                },
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(width: 10),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                              title:
-                                                                  "Select Facilities : ",
-                                                              includeAsterisk:
-                                                                  false,
-                                                            ),
-                                                            SizedBox(
-                                                              width: Get.width *
-                                                                  .17, // Fixed width for dropdown
-                                                              child:
-                                                                  CustomMultiDropdown(
-                                                                title:
-                                                                    'Select Facilities',
-                                                                buttonText:
-                                                                    'Select Facilities',
-                                                                initialValue:
-                                                                    controller
-                                                                        .selectedFacilities,
-                                                                items: controller
-                                                                        .facilityNameList
-                                                                        ?.map(
-                                                                          (facility) =>
-                                                                              DropdownItem<Object>(
-                                                                            label:
-                                                                                facility?.name ?? "",
-                                                                            value:
-                                                                                facility?.id ?? 0,
-                                                                          ),
-                                                                        )
-                                                                        .toList() ??
-                                                                    [],
-                                                                onConfirm:
-                                                                    (selectedOptionsList) {
-                                                                  controller
-                                                                      .facilitySelected(
-                                                                          selectedOptionsList);
-                                                                },
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight10,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                              title:
-                                                                  "Select DSM Type : ",
-                                                              includeAsterisk:
-                                                                  false,
-                                                            ),
-                                                            SizedBox(
-                                                              width: Get.width *
-                                                                  .17, // Fixed width for dropdown
-                                                              child:
-                                                                  CustomMultiDropdown(
-                                                                title:
-                                                                    'Select DSM Type',
-                                                                buttonText:
-                                                                    'Select DSM Type',
-                                                                initialValue:
-                                                                    controller
-                                                                        .selectedDSMType,
-                                                                items: controller
-                                                                        .dsmTypes
-                                                                        ?.map(
-                                                                          (dsmtype) =>
-                                                                              DropdownItem<Object>(
-                                                                            label:
-                                                                                dsmtype?.name ?? "",
-                                                                            value:
-                                                                                dsmtype?.id ?? 0,
-                                                                          ),
-                                                                        )
-                                                                        .toList() ??
-                                                                    [],
-                                                                onConfirm:
-                                                                    (selectedOptionsList) {
-                                                                  controller
-                                                                      .selectedDSMTypes(
-                                                                          selectedOptionsList);
-                                                                },
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
+                                              Spacer(),
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                    right: 10, top: 5),
+                                                child: ActionButton(
+                                                  icon: Icons.file_open_outlined,
+                                                  label: "Import Report",
+                                                  onPressed: () {
+                                                    controller
+                                                        .goToImportDsmChargesScreen();
+                                                  },
+                                                  color: ColorValues.addNewColor,
                                                 ),
-                                                Dimens.boxHeight10,
-                                                Align(
-                                                  alignment: Alignment.center,
-                                                  child: Container(
-                                                    height: 35,
-                                                    child: CustomElevatedButton(
-                                                      backgroundColor:
-                                                          ColorValues
-                                                              .navyBlueColor,
-                                                      text: "Apply",
-                                                      onPressed: () {
-                                                        controller
-                                                            .getDSMDataList(
-                                                                false);
-                                                        Get.back();
-                                                      },
+                                              )
+                                            ],
+                                          ),
+                                          if (controller.isExpanded.value)
+                                            Padding(
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 10.0,
+                                                  vertical: 10.0),
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                title:
+                                                                    "Select Years : ",
+                                                                includeAsterisk:
+                                                                    false,
+                                                              ),
+                                                              SizedBox(
+                                                                width: Get.width *
+                                                                    .17, // Fixed width for dropdown
+                                                                child:
+                                                                    CustomMultiDropdown(
+                                                                  title:
+                                                                      'Select Years',
+                                                                  buttonText:
+                                                                      'Select Years',
+                                                                  initialValue:
+                                                                      controller
+                                                                          .selectedYears,
+                                                                  items: controller
+                                                                          .year
+                                                                          ?.map(
+                                                                            (years) =>
+                                                                                DropdownItem<Object>(
+                                                                              label:
+                                                                                  years.name,
+                                                                              value:
+                                                                                  years.name,
+                                                                            ),
+                                                                          )
+                                                                          .toList() ??
+                                                                      [],
+                                                                  onConfirm:
+                                                                      (selectedOptionsList) {
+                                                                    controller
+                                                                        .yearsSelected(
+                                                                            selectedOptionsList);
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight10,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                title:
+                                                                    "Select SPV : ",
+                                                                includeAsterisk:
+                                                                    false,
+                                                              ),
+                                                              SizedBox(
+                                                                width: Get.width *
+                                                                    .17, // Fixed width for dropdown
+                                                                child:
+                                                                    CustomMultiDropdown(
+                                                                  title:
+                                                                      'Select SPV',
+                                                                  buttonText:
+                                                                      'Select SPV',
+                                                                  initialValue:
+                                                                      controller
+                                                                          .selectedSpv,
+                                                                  items: controller
+                                                                          .spvList
+                                                                          ?.map(
+                                                                            (spv) =>
+                                                                                DropdownItem<Object>(
+                                                                              label:
+                                                                                  spv?.name ?? "",
+                                                                              value:
+                                                                                  spv?.id ?? 0,
+                                                                            ),
+                                                                          )
+                                                                          .toList() ??
+                                                                      [],
+                                                                  onConfirm:
+                                                                      (selectedOptionsList) {
+                                                                    controller
+                                                                        .spvSelected(
+                                                                            selectedOptionsList);
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(width: 10),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                title:
+                                                                    "Select Months : ",
+                                                                includeAsterisk:
+                                                                    false,
+                                                              ),
+                                                              SizedBox(
+                                                                width: Get.width *
+                                                                    .17, // Fixed width for dropdown
+                                                                child:
+                                                                    CustomMultiDropdown(
+                                                                  title:
+                                                                      'Select Months',
+                                                                  buttonText:
+                                                                      'Select Months',
+                                                                  initialValue:
+                                                                      controller
+                                                                          .selectedMonths,
+                                                                  items: controller
+                                                                          .month
+                                                                          ?.map(
+                                                                            (months) =>
+                                                                                DropdownItem<Object>(
+                                                                              label:
+                                                                                  months.name,
+                                                                              value:
+                                                                                  months.name,
+                                                                            ),
+                                                                          )
+                                                                          .toList() ??
+                                                                      [],
+                                                                  onConfirm:
+                                                                      (selectedOptionsList) {
+                                                                    controller
+                                                                        .monthsSelected(
+                                                                            selectedOptionsList);
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight10,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                title:
+                                                                    "Select States : ",
+                                                                includeAsterisk:
+                                                                    false,
+                                                              ),
+                                                              SizedBox(
+                                                                width: Get.width *
+                                                                    .17, // Fixed width for dropdown
+                                                                child:
+                                                                    CustomMultiDropdown(
+                                                                  title:
+                                                                      'Select States',
+                                                                  buttonText:
+                                                                      'Select States',
+                                                                  initialValue:
+                                                                      controller
+                                                                          .selectedState,
+                                                                  items: controller
+                                                                          .stateList
+                                                                          ?.map(
+                                                                            (state) =>
+                                                                                DropdownItem<Object>(
+                                                                              label:
+                                                                                  state?.name ?? "",
+                                                                              value:
+                                                                                  state?.id ?? 0,
+                                                                            ),
+                                                                          )
+                                                                          .toList() ??
+                                                                      [],
+                                                                  onConfirm:
+                                                                      (selectedOptionsList) {
+                                                                    controller
+                                                                        .stateSelected(
+                                                                            selectedOptionsList);
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(width: 10),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                title:
+                                                                    "Select Facilities : ",
+                                                                includeAsterisk:
+                                                                    false,
+                                                              ),
+                                                              SizedBox(
+                                                                width: Get.width *
+                                                                    .17, // Fixed width for dropdown
+                                                                child:
+                                                                    CustomMultiDropdown(
+                                                                  title:
+                                                                      'Select Facilities',
+                                                                  buttonText:
+                                                                      'Select Facilities',
+                                                                  initialValue:
+                                                                      controller
+                                                                          .selectedFacilities,
+                                                                  items: controller
+                                                                          .facilityNameList
+                                                                          ?.map(
+                                                                            (facility) =>
+                                                                                DropdownItem<Object>(
+                                                                              label:
+                                                                                  facility?.name ?? "",
+                                                                              value:
+                                                                                  facility?.id ?? 0,
+                                                                            ),
+                                                                          )
+                                                                          .toList() ??
+                                                                      [],
+                                                                  onConfirm:
+                                                                      (selectedOptionsList) {
+                                                                    controller
+                                                                        .facilitySelected(
+                                                                            selectedOptionsList);
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight10,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                title:
+                                                                    "Select DSM Type : ",
+                                                                includeAsterisk:
+                                                                    false,
+                                                              ),
+                                                              SizedBox(
+                                                                width: Get.width *
+                                                                    .17, // Fixed width for dropdown
+                                                                child:
+                                                                    CustomMultiDropdown(
+                                                                  title:
+                                                                      'Select DSM Type',
+                                                                  buttonText:
+                                                                      'Select DSM Type',
+                                                                  initialValue:
+                                                                      controller
+                                                                          .selectedDSMType,
+                                                                  items: controller
+                                                                          .dsmTypes
+                                                                          ?.map(
+                                                                            (dsmtype) =>
+                                                                                DropdownItem<Object>(
+                                                                              label:
+                                                                                  dsmtype?.name ?? "",
+                                                                              value:
+                                                                                  dsmtype?.id ?? 0,
+                                                                            ),
+                                                                          )
+                                                                          .toList() ??
+                                                                      [],
+                                                                  onConfirm:
+                                                                      (selectedOptionsList) {
+                                                                    controller
+                                                                        .selectedDSMTypes(
+                                                                            selectedOptionsList);
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Dimens.boxHeight10,
+                                                  Align(
+                                                    alignment: Alignment.center,
+                                                    child: Container(
+                                                      height: 35,
+                                                      child: CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .navyBlueColor,
+                                                        text: "Apply",
+                                                        onPressed: () {
+                                                          controller
+                                                              .getDSMDataList(
+                                                                  false);
+                                                          Get.back();
+                                                        },
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
+                                        ],
+                                      ),
+                                      Positioned(
+                                        top: 5,
+                                        right: 160,
+                                        child: InkWell(
+                                          onTap: () {
+                                            controller.toggleContainer();
+                                          },
+                                          child: Icon(
+                                            Icons.filter_alt_outlined,
+                                            color: Colors.black,
+                                            size: 30,
                                           ),
-                                      ],
-                                    ),
-                                    Positioned(
-                                      top: 5,
-                                      right: 160,
-                                      child: InkWell(
-                                        onTap: () {
-                                          controller.toggleContainer();
-                                        },
-                                        child: Icon(
-                                          Icons.filter_alt_outlined,
-                                          color: Colors.black,
-                                          size: 30,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }),
+                              Divider(
+                                color: ColorValues.greyLightColour,
+                              ),
+                              Dimens.boxHeight10,
+                              Row(
+                                children: [
+                                  PopupMenuButton<String>(
+                                    tooltip: "",
+                                    elevation: 25.0,
+                                    child: Container(
+                                      height: 35,
+                                      margin: EdgeInsets.only(left: 10),
+                                      padding: EdgeInsets.only(
+                                          top: 4, bottom: 4, right: 8, left: 8),
+                                      decoration: BoxDecoration(
+                                          color: ColorValues.appLightBlueColor,
+                                          borderRadius: BorderRadius.circular(5),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black26,
+                                              offset: const Offset(4.0, 2.0),
+                                              blurRadius: 5.0,
+                                              spreadRadius: 1.0,
+                                            ),
+                                          ]),
+                                      child: Text(
+                                        'Column Visibility',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                              );
-                            }),
-                            Divider(
-                              color: ColorValues.greyLightColour,
-                            ),
-                            Dimens.boxHeight10,
-                            Row(
-                              children: [
-                                PopupMenuButton<String>(
-                                  tooltip: "",
-                                  elevation: 25.0,
-                                  child: Container(
+                                    itemBuilder: (BuildContext context) =>
+                                        <PopupMenuEntry<String>>[]..addAll(
+                                            controller
+                                                .columnVisibility.value.entries
+                                                .map(
+                                              (e) {
+                                                return PopupMenuItem<String>(
+                                                  child: ValueListenableBuilder(
+                                                    valueListenable: controller
+                                                        .columnVisibility,
+                                                    builder: (
+                                                      context,
+                                                      value,
+                                                      child,
+                                                    ) {
+                                                      return Row(
+                                                        children: [
+                                                          Checkbox(
+                                                            value: value[e.key],
+                                                            onChanged:
+                                                                (newValue) {
+                                                              controller
+                                                                  .setColumnVisibility(
+                                                                e.key,
+                                                                newValue!,
+                                                              );
+                                                            },
+                                                          ),
+                                                          Text(e.key),
+                                                        ],
+                                                      );
+                                                    },
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                    onSelected: (String value) {},
+                                  ),
+                                  Dimens.boxWidth5,
+                                  Container(
                                     height: 35,
                                     margin: EdgeInsets.only(left: 10),
-                                    padding: EdgeInsets.only(
-                                        top: 4, bottom: 4, right: 8, left: 8),
-                                    decoration: BoxDecoration(
-                                        color: ColorValues.appLightBlueColor,
-                                        borderRadius: BorderRadius.circular(5),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: const Offset(4.0, 2.0),
-                                            blurRadius: 5.0,
-                                            spreadRadius: 1.0,
+                                    child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appLightBlueColor,
+                                        onPressed: () {
+                                          controller.export();
+                                        },
+                                        text: 'Excel'),
+                                  ),
+                                  // PopupMenuButton<Widget>(
+                                  //   constraints: BoxConstraints(minWidth: 460),
+                                  //   elevation: 25.0,
+                                  //   child: Container(
+                                  //     height: 35,
+                                  //     margin: EdgeInsets.only(left: 10),
+                                  //     padding: EdgeInsets.only(
+                                  //         top: 4, bottom: 4, right: 8, left: 8),
+                                  //     decoration: BoxDecoration(
+                                  //         color: ColorValues.appLightBlueColor,
+                                  //         borderRadius: BorderRadius.circular(5),
+                                  //         boxShadow: [
+                                  //           BoxShadow(
+                                  //             color: Colors.black26,
+                                  //             offset: const Offset(4.0, 2.0),
+                                  //             blurRadius: 5.0,
+                                  //             spreadRadius: 1.0,
+                                  //           ),
+                                  //         ]),
+                                  //     child: Text(
+                                  //       'Filter',
+                                  //       style: TextStyle(
+                                  //         color: Colors.white,
+                                  //         fontSize: 16,
+                                  //         fontWeight: FontWeight.w400,
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  //   itemBuilder: (BuildContext context) =>
+                                  //       buildFilterPopupMenu(context),
+                                  // ),
+          
+                                  Spacer(),
+                                  Container(
+                                    width: 300,
+                                    height: 40,
+                                    margin: Dimens.edgeInsets0_0_16_0,
+                                    child: TextField(
+                                      style: GoogleFonts.lato(
+                                        textStyle: TextStyle(
+                                            fontSize: 16.0,
+                                            height: 1.0,
+                                            color: Colors.black),
+                                      ),
+                                      onChanged: (value) {
+                                        controller.search(value);
+                                      },
+                                      decoration: InputDecoration(
+                                        enabledBorder: const OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: Colors.grey,
+                                            width: 0.0,
                                           ),
-                                        ]),
-                                    child: Text(
-                                      'Column Visibility',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
+                                        ),
+                                        focusedBorder: const OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: Colors.grey,
+                                            width: 0.0,
+                                          ),
+                                        ),
+                                        contentPadding: Dimens.edgeInsets05_10,
+                                        hintText: 'search'.tr,
+                                        hintStyle: Styles.grey16,
                                       ),
                                     ),
                                   ),
-                                  itemBuilder: (BuildContext context) =>
-                                      <PopupMenuEntry<String>>[]..addAll(
-                                          controller
-                                              .columnVisibility.value.entries
-                                              .map(
-                                            (e) {
-                                              return PopupMenuItem<String>(
-                                                child: ValueListenableBuilder(
-                                                  valueListenable: controller
-                                                      .columnVisibility,
-                                                  builder: (
-                                                    context,
-                                                    value,
-                                                    child,
-                                                  ) {
-                                                    return Row(
-                                                      children: [
-                                                        Checkbox(
-                                                          value: value[e.key],
-                                                          onChanged:
-                                                              (newValue) {
-                                                            controller
-                                                                .setColumnVisibility(
-                                                              e.key,
-                                                              newValue!,
-                                                            );
-                                                          },
-                                                        ),
-                                                        Text(e.key),
-                                                      ],
-                                                    );
-                                                  },
-                                                ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              controller.dsmDataList.isEmpty == true &&
+                                      controller.isLoading == false
+                                  ? Center(
+                                      child: Text('No data'),
+                                    )
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"),
+                                        )
+                                      : Expanded(
+                                          child: ValueListenableBuilder(
+                                            valueListenable:
+                                                controller.columnVisibility,
+                                            builder: (context, value, child) {
+                                              final dataSource =
+                                                  DSMDataSource(controller);
+                                              return PaginatedDataTable2(
+                                                dataRowHeight: 45,
+                                                source: dataSource,
+                                                minWidth: Get.width * 2,
+                                                rowsPerPage: 10,
+                                                availableRowsPerPage: [
+                                                  10,
+                                                  20,
+                                                  30,
+                                                  50
+                                                ],
+                                                columns: [
+                                                  for (var entry in value.entries)
+                                                    if (entry.value)
+                                                      buildDataColumn(
+                                                        entry.key,
+                                                        controller.filterText[
+                                                            entry.key]!,
+                                                        controller.columnwidth[
+                                                            entry.key],
+                                                      ),
+                                                ],
                                               );
                                             },
                                           ),
                                         ),
-                                  onSelected: (String value) {},
-                                ),
-                                Dimens.boxWidth5,
-                                Container(
-                                  height: 35,
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appLightBlueColor,
-                                      onPressed: () {
-                                        controller.export();
-                                      },
-                                      text: 'Excel'),
-                                ),
-                                // PopupMenuButton<Widget>(
-                                //   constraints: BoxConstraints(minWidth: 460),
-                                //   elevation: 25.0,
-                                //   child: Container(
-                                //     height: 35,
-                                //     margin: EdgeInsets.only(left: 10),
-                                //     padding: EdgeInsets.only(
-                                //         top: 4, bottom: 4, right: 8, left: 8),
-                                //     decoration: BoxDecoration(
-                                //         color: ColorValues.appLightBlueColor,
-                                //         borderRadius: BorderRadius.circular(5),
-                                //         boxShadow: [
-                                //           BoxShadow(
-                                //             color: Colors.black26,
-                                //             offset: const Offset(4.0, 2.0),
-                                //             blurRadius: 5.0,
-                                //             spreadRadius: 1.0,
-                                //           ),
-                                //         ]),
-                                //     child: Text(
-                                //       'Filter',
-                                //       style: TextStyle(
-                                //         color: Colors.white,
-                                //         fontSize: 16,
-                                //         fontWeight: FontWeight.w400,
-                                //       ),
-                                //     ),
-                                //   ),
-                                //   itemBuilder: (BuildContext context) =>
-                                //       buildFilterPopupMenu(context),
-                                // ),
-
-                                Spacer(),
-                                Container(
-                                  width: 300,
-                                  height: 40,
-                                  margin: Dimens.edgeInsets0_0_16_0,
-                                  child: TextField(
-                                    style: GoogleFonts.lato(
-                                      textStyle: TextStyle(
-                                          fontSize: 16.0,
-                                          height: 1.0,
-                                          color: Colors.black),
-                                    ),
-                                    onChanged: (value) {
-                                      controller.search(value);
-                                    },
-                                    decoration: InputDecoration(
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.grey,
-                                          width: 0.0,
-                                        ),
-                                      ),
-                                      focusedBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.grey,
-                                          width: 0.0,
-                                        ),
-                                      ),
-                                      contentPadding: Dimens.edgeInsets05_10,
-                                      hintText: 'search'.tr,
-                                      hintStyle: Styles.grey16,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            controller.dsmDataList.isEmpty == true &&
-                                    controller.isLoading == false
-                                ? Center(
-                                    child: Text('No data'),
-                                  )
-                                : controller.isLoading.value == true
-                                    ? Center(
-                                        child: Text("Data Loading......"),
-                                      )
-                                    : Expanded(
-                                        child: ValueListenableBuilder(
-                                          valueListenable:
-                                              controller.columnVisibility,
-                                          builder: (context, value, child) {
-                                            final dataSource =
-                                                DSMDataSource(controller);
-                                            return PaginatedDataTable2(
-                                              dataRowHeight: 45,
-                                              source: dataSource,
-                                              minWidth: Get.width * 2,
-                                              rowsPerPage: 10,
-                                              availableRowsPerPage: [
-                                                10,
-                                                20,
-                                                30,
-                                                50
-                                              ],
-                                              columns: [
-                                                for (var entry in value.entries)
-                                                  if (entry.value)
-                                                    buildDataColumn(
-                                                      entry.key,
-                                                      controller.filterText[
-                                                          entry.key]!,
-                                                      controller.columnwidth[
-                                                          entry.key],
-                                                    ),
-                                              ],
-                                            );
-                                          },
-                                        ),
-                                      ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -885,16 +887,45 @@ class ImportDsmListChargesListContentWeb
   ) {
     return DataColumn2(
       fixedWidth: fixedWidth,
+        onSort: header == "Actions"
+        ? null
+        : (int columnIndex, bool ascending) {
+            final controller = Get.find<ImportDsmListChargesListController>();
+            controller.sortData(header);
+          },
       label: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
+           Row(
+          children: [
+            Text(
               header,
-              style: Styles.black15W400,
+              style: Styles.black16W500,
             ),
-          ),
+            if (header != "Actions")
+              Obx(() {
+                final controller = Get.find<ImportDsmListChargesListController>();
+
+                return AnimatedRotation(
+                  turns: controller.currentSortColumn.value == header
+                      ? (controller.isAscending.value ? 0.5 : 0.0)
+                      : 0.0,
+                  duration: Duration(milliseconds: 300),
+                  child: Icon(
+                    Icons.expand_more,
+                    size: 20,
+                  ),
+                );
+              }),
+          ],
+        ),
+          // Align(
+          //   alignment: Alignment.centerLeft,
+          //   child: Text(
+          //     header,
+          //     style: Styles.black15W400,
+          //   ),
+          // ),
         ],
       ),
     );

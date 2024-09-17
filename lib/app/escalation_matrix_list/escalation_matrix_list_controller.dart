@@ -29,6 +29,9 @@ class EscalationMatrixListController extends GetxController {
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   RxInt facilityId = 0.obs;
+ // For sorting
+  RxString currentSortColumn = ''.obs;
+  RxBool isAscending = true.obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "Module ID": true,
@@ -41,7 +44,7 @@ class EscalationMatrixListController extends GetxController {
     "Module ID": 150,
     "Module Name": 400,
     "Status Name": 400,
-    "No Of Escalation": 200,
+    "No Of Escalation": 230,
   };
 
   RxString ModuleIdFilterText = ''.obs;
@@ -172,5 +175,38 @@ class EscalationMatrixListController extends GetxController {
       isLoading: true,
     );
     if (responseCreateEscalationMatrixModel == null) {}
+  }
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+    switch (columnName) {
+      case 'Module ID':
+        matrixlist.sort((a, b) => isAscending.value
+            ? (a.moduleId ?? 0).compareTo(b.moduleId ?? 0)
+            : (b.moduleId ?? 0).compareTo(a.moduleId ?? 0));
+        break;
+      case 'Module Name':
+        matrixlist.sort((a, b) => isAscending.value
+            ? (a.moduleName ?? '').compareTo(b.moduleName ?? '')
+            : (b.moduleName ?? '').compareTo(a.moduleName ?? ''));
+        break;
+      case 'Status Name':
+        matrixlist.sort((a, b) => isAscending.value
+            ? (a.statusName ?? '').compareTo(b.statusName ?? '')
+            : (b.statusName ?? '').compareTo(a.statusName ?? ''));
+        break;
+case 'No Of Escalation':
+  matrixlist.sort((a, b) => isAscending.value
+      ? ((a.escalation ?? '') as String).compareTo((b.escalation ?? '') as String)
+      : ((b.escalation ?? '') as String).compareTo((a.escalation ?? '') as String));
+  break;
+      default:
+        break;
+    }
+    update();
   }
 }
