@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'package:cmms/app/calendar_view/calendar_view_presenter.dart';
+import 'package:cmms/app/calendar_view/view/calendar_view_web.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
-import 'package:cmms/domain/models/doc_upload_list_model.dart';
+// import 'package:cmms/domain/models/doc_upload_list_model.dart';
 import 'package:cmms/domain/models/view_doc_upload.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,7 +25,7 @@ class CalendarViewController extends GetxController {
   Rx<DateTime> toDate = DateTime.now().obs;
   bool openFromDateToStartDatePicker = false;
 
-  GetDocUploadListModel? selectedItem;
+  // GetDocUploadListModel? selectedItem;
   var subDocName = TextEditingController();
 
   // dashbord data
@@ -56,8 +57,7 @@ class CalendarViewController extends GetxController {
   }
 
   Future<void> getdashboardList() async {
-    dashboardList.value = <DashboardModel>[];
-    allItems.value = <Itemlist>[];
+    allItems.clear(); // Clear previous data
 
     String lststrFacilityIds = homecontroller.selectedFacilityIdList.join(',');
 
@@ -68,5 +68,43 @@ class CalendarViewController extends GetxController {
         endDate: formattedTodate1,
         startDate: formattedFromdate1,
         isLoading: true);
+    dashboardList.value = _dashboardList ?? [];
+
+    // Process the dashboard list and populate allItems
+    for (var module in dashboardList) {
+      if (module?.module_name == 'Breakdown Maintenance' ||
+          module?.module_name == 'Preventive Maintenance' ||
+          module?.module_name == 'Module Cleaning') {
+        var details = module?.cmDashboadDetails;
+        allItems.addAll(details?.item_list ?? []);
+      }
+    }
+  }
+
+  List<Meeting> getDataSource() {
+    print("Creating data source from allItems.");
+    final List<Meeting> meetings = <Meeting>[];
+
+    // Iterate over allItems to create meeting entries
+    for (var item in allItems) {
+      final DateTime startTime =
+          DateTime.parse(item?.start_date ?? "2024-09-11T09:13:00");
+      final DateTime endTime = item?.end_date == null
+          ? DateTime.parse(item?.end_date ?? '2024-09-11T09:13:00')
+          : DateTime.parse(item?.start_date ?? "2024-09-11T09:13:00");
+      final String eventName = item?.wo_number ?? "";
+      final bool isAllDay = false;
+
+      meetings.add(Meeting(
+        eventName,
+        startTime,
+        endTime,
+        Colors
+            .blue, // You can dynamically change the color based on item properties if needed
+        isAllDay,
+      ));
+    }
+
+    return meetings;
   }
 }
