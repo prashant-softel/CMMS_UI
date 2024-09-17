@@ -6,6 +6,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
@@ -303,36 +304,99 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                   title:
                                                                       'Responsible Person'),
                                                               Dimens.boxWidth3,
-                                                              LoginCustomTextfield(
-                                                                  width: (MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      .2),
-                                                                  textController:
-                                                                      controller
-                                                                          .responsiblePersonCtrlr,
-                                                                  //validate
-                                                                  errorController: controller
-                                                                          .isResponsibleInvalid
-                                                                          .value
-                                                                      ? "Required field"
-                                                                      : null,
-                                                                  onChanged:
-                                                                      (value) {
-                                                                    if (value
-                                                                            .trim()
-                                                                            .length >
-                                                                        0) {
-                                                                      controller
-                                                                          .isResponsibleInvalid
-                                                                          .value = false;
-                                                                    } else {
-                                                                      controller
-                                                                          .isResponsibleInvalid
-                                                                          .value = true;
-                                                                    }
-                                                                  }),
+                                                                Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                              border:
+                                                                  Border.all(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        227,
+                                                                        224,
+                                                                        224),
+                                                                width: 1,
+                                                              ),
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Color.fromARGB(
+                                                                          255,
+                                                                          236,
+                                                                          234,
+                                                                          234)
+                                                                      .withOpacity(
+                                                                          0.5),
+                                                                  spreadRadius:
+                                                                      2,
+                                                                  blurRadius: 5,
+                                                                  offset:
+                                                                      Offset(
+                                                                          0, 2),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            width: (MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                .2),
+                                                            child:
+                                                               DropdownWebWidget(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                          controller:
+                                                              controller,
+                                                          dropdownList: controller
+                                                              .assignedToList,
+                                                          isValueSelected:
+                                                              controller
+                                                                  .isAssignedToSelected
+                                                                  .value,
+                                                          selectedValue: controller
+                                                              .selectedAssignedTo
+                                                              .value,
+                                                          onValueChanged:
+                                                              controller
+                                                                  .onValueChanged,
+                                                        ),
+                                                          ),
+                                                              // LoginCustomTextfield(
+                                                              //     width: (MediaQuery.of(
+                                                              //                 context)
+                                                              //             .size
+                                                              //             .width *
+                                                              //         .2),
+                                                              //     textController:
+                                                              //         controller
+                                                              //             .responsiblePersonCtrlr,
+                                                              //     //validate
+                                                              //     errorController: controller
+                                                              //             .isResponsibleInvalid
+                                                              //             .value
+                                                              //         ? "Required field"
+                                                              //         : null,
+                                                              //     onChanged:
+                                                              //         (value) {
+                                                              //       if (value
+                                                              //               .trim()
+                                                              //               .length >
+                                                              //           0) {
+                                                              //         controller
+                                                              //             .isResponsibleInvalid
+                                                              //             .value = false;
+                                                              //       } else {
+                                                              //         controller
+                                                              //             .isResponsibleInvalid
+                                                              //             .value = true;
+                                                              //       }
+                                                              //     }),
                                                             ],
                                                           )
                                                             :SizedBox.shrink(),

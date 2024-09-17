@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -62,6 +63,18 @@ class CreateObservationPresenter {
       isLoading: isLoading ?? false,
     );
   }
+  Future<List<EmployeeModel?>?> getAssignedToList({
+    String? auth,
+    int? facilityId,
+    int? featureId,
+    bool? isLoading,
+  }) async =>
+      await createObservationUsecase.getAssignedToList(
+        auth: auth ?? "",
+        facilityId: facilityId ?? 0,
+        featureId: featureId ?? 0,
+        isLoading: isLoading ?? false,
+      );
 
   Future<Map<String, dynamic>?> createObs(
       {createObs, required bool isLoading, int? position}) async {
