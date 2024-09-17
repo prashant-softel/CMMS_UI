@@ -1,3 +1,4 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/create_observation/create_observation_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
@@ -296,110 +297,108 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           //   ],
                                                           // ),
                                                           Dimens.boxHeight5,
-                                                           controller.obsId != 0
-                                                              ?
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Responsible Person'),
-                                                              Dimens.boxWidth3,
-                                                                Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10),
-                                                              border:
-                                                                  Border.all(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        227,
-                                                                        224,
-                                                                        224),
-                                                                width: 1,
-                                                              ),
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Color.fromARGB(
-                                                                          255,
-                                                                          236,
-                                                                          234,
-                                                                          234)
-                                                                      .withOpacity(
-                                                                          0.5),
-                                                                  spreadRadius:
-                                                                      2,
-                                                                  blurRadius: 5,
-                                                                  offset:
-                                                                      Offset(
-                                                                          0, 2),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            width: (MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                .2),
-                                                            child:
-                                                               DropdownWebWidget(
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
-                                                          controller:
-                                                              controller,
-                                                          dropdownList: controller
-                                                              .assignedToList,
-                                                          isValueSelected:
-                                                              controller
-                                                                  .isAssignedToSelected
-                                                                  .value,
-                                                          selectedValue: controller
-                                                              .selectedAssignedTo
-                                                              .value,
-                                                          onValueChanged:
-                                                              controller
-                                                                  .onValueChanged,
-                                                        ),
-                                                          ),
-                                                              // LoginCustomTextfield(
-                                                              //     width: (MediaQuery.of(
-                                                              //                 context)
-                                                              //             .size
-                                                              //             .width *
-                                                              //         .2),
-                                                              //     textController:
-                                                              //         controller
-                                                              //             .responsiblePersonCtrlr,
-                                                              //     //validate
-                                                              //     errorController: controller
-                                                              //             .isResponsibleInvalid
-                                                              //             .value
-                                                              //         ? "Required field"
-                                                              //         : null,
-                                                              //     onChanged:
-                                                              //         (value) {
-                                                              //       if (value
-                                                              //               .trim()
-                                                              //               .length >
-                                                              //           0) {
-                                                              //         controller
-                                                              //             .isResponsibleInvalid
-                                                              //             .value = false;
-                                                              //       } else {
-                                                              //         controller
-                                                              //             .isResponsibleInvalid
-                                                              //             .value = true;
-                                                              //       }
-                                                              //     }),
-                                                            ],
-                                                          )
-                                                            :SizedBox.shrink(),
+                                                          controller.obsId !=
+                                                                      0 ||
+                                                                  controller.getObsById.value
+                                                                              ?.status_code !=
+                                                                          551 &&
+                                                                      controller
+                                                                              .getObsById
+                                                                              .value
+                                                                              ?.status_code !=
+                                                                          111
+                                                              ? Row(
+                                                                  children: [
+                                                                    CustomRichText(
+                                                                        title:
+                                                                            'Responsible Person'),
+                                                                    Dimens
+                                                                        .boxWidth3,
+                                                                    Container(
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(10),
+                                                                        border:
+                                                                            Border.all(
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              227,
+                                                                              224,
+                                                                              224),
+                                                                          width:
+                                                                              1,
+                                                                        ),
+                                                                        boxShadow: [
+                                                                          BoxShadow(
+                                                                            color:
+                                                                                Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                                                                            spreadRadius:
+                                                                                2,
+                                                                            blurRadius:
+                                                                                5,
+                                                                            offset:
+                                                                                Offset(0, 2),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      width: (MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          .2),
+                                                                      child:
+                                                                          DropdownWebWidget(
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width /
+                                                                                5,
+                                                                        controller:
+                                                                            controller,
+                                                                        dropdownList:
+                                                                            controller.assignedToList,
+                                                                        isValueSelected: controller
+                                                                            .isAssignedToSelected
+                                                                            .value,
+                                                                        selectedValue: controller
+                                                                            .selectedAssignedTo
+                                                                            .value,
+                                                                        onValueChanged:
+                                                                            controller.onValueChanged,
+                                                                      ),
+                                                                    ),
+                                                                    // LoginCustomTextfield(
+                                                                    //     width: (MediaQuery.of(
+                                                                    //                 context)
+                                                                    //             .size
+                                                                    //             .width *
+                                                                    //         .2),
+                                                                    //     textController:
+                                                                    //         controller
+                                                                    //             .responsiblePersonCtrlr,
+                                                                    //     //validate
+                                                                    //     errorController: controller
+                                                                    //             .isResponsibleInvalid
+                                                                    //             .value
+                                                                    //         ? "Required field"
+                                                                    //         : null,
+                                                                    //     onChanged:
+                                                                    //         (value) {
+                                                                    //       if (value
+                                                                    //               .trim()
+                                                                    //               .length >
+                                                                    //           0) {
+                                                                    //         controller
+                                                                    //             .isResponsibleInvalid
+                                                                    //             .value = false;
+                                                                    //       } else {
+                                                                    //         controller
+                                                                    //             .isResponsibleInvalid
+                                                                    //             .value = true;
+                                                                    //       }
+                                                                    //     }),
+                                                                  ],
+                                                                )
+                                                              : SizedBox
+                                                                  .shrink(),
                                                           Dimens.boxHeight5,
                                                           // Row(
                                                           //   children: [
@@ -448,40 +447,35 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           // ),
                                                           Dimens.boxHeight5,
                                                           controller.obsId != 0
-                                                              ?
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Cost Type'),
-                                                              Dimens.boxWidth3,
-                                                              Obx(
-                                                                () =>
-                                                                    DropdownWebStock(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      5,
-                                                                  dropdownList:
-                                                                      controller
-                                                                          .costType,
-                                                                  isValueSelected:
-                                                                      controller
-                                                                          .isCostTypeListSelected
-                                                                          .value,
-                                                                  selectedValue:
-                                                                      controller
-                                                                          .selectedCostTypeList
-                                                                          .value,
-                                                                  onValueChanged:
-                                                                      controller
-                                                                          .onValueChanged,
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          )
-                                                          :SizedBox.shrink(),
+                                                              ? Row(
+                                                                  children: [
+                                                                    CustomRichText(
+                                                                        title:
+                                                                            'Cost Type'),
+                                                                    Dimens
+                                                                        .boxWidth3,
+                                                                    Obx(
+                                                                      () =>
+                                                                          DropdownWebStock(
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width /
+                                                                                5,
+                                                                        dropdownList:
+                                                                            controller.costType,
+                                                                        isValueSelected: controller
+                                                                            .isCostTypeListSelected
+                                                                            .value,
+                                                                        selectedValue: controller
+                                                                            .selectedCostTypeList
+                                                                            .value,
+                                                                        onValueChanged:
+                                                                            controller.onValueChanged,
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                )
+                                                              : SizedBox
+                                                                  .shrink(),
                                                           // Row(
                                                           //   children: [
                                                           //     CustomRichText(
@@ -1020,10 +1014,35 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                   backgroundColor: ColorValues.submitColor,
                                   text: 'Update',
                                   onPressed: () {
-                                    controller.isFormInvalid.value = false;
-                                    controller.createObs(
+                                    // Check if the requester_id is different from the user_id
+                                    if (controller
+                                            .getObsById.value!.createdid !=
+                                        varUserAccessModel.value.user_id) {
+                                      // Show the Invalid User dialog if the IDs do not match
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text("Invalid User"),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                onPressed: () {
+                                                  Get.back(); // Close the dialog
+                                                },
+                                                child: Text("OK"),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      // If IDs match, continue with the existing logic
+                                      controller.isFormInvalid.value = false;
+                                      controller.createObs(
                                         position: 0,
-                                        fileIds: dropzoneController.fileIds);
+                                        fileIds: dropzoneController.fileIds,
+                                      );
+                                    }
                                   },
                                 ),
                               ),
