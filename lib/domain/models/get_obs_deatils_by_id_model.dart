@@ -13,11 +13,13 @@ class GetObservationById {
   int? status_code;
   String? risk_type_name;
   String? preventive_action;
-  String? responsible_person;
+  int? responsible_person;
+  String? responsible_person_name;
   String? contact_number;
   String? short_status;
-
   int? cost_type;
+  int? createdid;
+  int? updateid;
   String? cost_name;
   String? date_of_observation;
   int? type_of_observation;
@@ -42,8 +44,11 @@ class GetObservationById {
     this.risk_type_name,
     this.preventive_action,
     this.responsible_person,
+    this.responsible_person_name,
     this.contact_number,
     this.cost_type,
+    this.createdid,
+    this.updateid,
     this.cost_name,
     this.short_status,
     this.date_of_observation,
@@ -79,7 +84,10 @@ class GetObservationById {
       observation_description: json['observation_description'],
       preventive_action: json['preventive_action'],
       responsible_person: json['responsible_person'],
+      responsible_person_name: json['responsible_person_name'],
       created_by: json['created_by'],
+      updateid: json['updateid'],
+      createdid: json['createdid'],
       created_at: Utility.getFormatedyearMonthDay(json['created_at']),
       updated_by: json['updated_by'],
       updated_at: json['updated_at'],
