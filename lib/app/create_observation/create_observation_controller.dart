@@ -199,7 +199,8 @@ class CreateObservationController extends GetxController {
       getObsById.value = _getObsDetail;
 
       contactNumberCtrlr.text = getObsById.value?.contact_number ?? '';
-      responsiblePersonCtrlr.text = getObsById.value?.responsible_person ?? '';
+     selectedAssignedToId.value = getObsById.value?.responsible_person ?? 0;
+      selectedAssignedTo.value = getObsById.value?.responsible_person_name ?? '';
       contractorNameCtrlr.text = getObsById.value?.contractor_name ?? "";
       correctivePreventiveCtrlr.text =
           getObsById.value?.preventive_action ?? "";
