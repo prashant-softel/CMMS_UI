@@ -146,7 +146,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                           .pmtaskViewModel
                                                                           .value
                                                                           ?.status ==
-                                                                      168 ||
+                                                                      170 ||
                                                                   controller
                                                                           .pmtaskViewModel
                                                                           .value
@@ -1150,7 +1150,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                     .kHaveAddAccess)
                                         .length >
                                     0 ||
-                            controller.pmtaskViewModel.value?.status == 166 &&
+                            controller.pmtaskViewModel.value?.status == 168 &&
                                 varUserAccessModel.value.access_list!
                                         .where((e) =>
                                             e.feature_id ==
@@ -1550,7 +1550,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                             ),
                           )
                         : Dimens.box0,
-                    controller.pmtaskViewModel.value?.status == 168 &&
+                    controller.pmtaskViewModel.value?.status == 170 &&
                             varUserAccessModel.value.access_list!
                                     .where((e) =>
                                         e.feature_id ==
@@ -1583,7 +1583,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                           )
                         : Dimens.box0,
                     Dimens.boxWidth5,
-                    controller.pmtaskViewModel.value?.status == 168 &&
+                    controller.pmtaskViewModel.value?.status == 170 &&
                             varUserAccessModel.value.access_list!
                                     .where((e) =>
                                         e.feature_id ==

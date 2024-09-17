@@ -1033,7 +1033,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                         : Dimens.box0,
                                     Dimens.boxWidth3,
                                     controller.pmtaskViewModel.value?.status ==
-                                            166
+                                            168
                                         ? Dimens.box0
                                         : Container(
                                             height: 35,

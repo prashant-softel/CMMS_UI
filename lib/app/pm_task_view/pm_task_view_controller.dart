@@ -456,7 +456,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   // }
   Future<void> gotoexecution() async {
     String pmTaskId = scheduleId.value.toString(); // Get the schedule ID
-    Get.offNamed('/pm-execution-screen/$pmTaskId'); // Pass the ID in the path
+    Get.offNamed('${Routes.pmExecution}/$pmTaskId'); // Pass the ID in the path
   }
 
   createNewPermit() {
