@@ -35,7 +35,7 @@ class CreateObservationController extends GetxController {
      Rx<String> selectedAssignedTo = ''.obs;
   Rx<bool> isAssignedToSelected = true.obs;
    Rx<int> selectedAssignedToId = 0.obs;
-  Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
+
 
   bool openTargetObsDatePicker = false;
   var obsDateTc = TextEditingController();

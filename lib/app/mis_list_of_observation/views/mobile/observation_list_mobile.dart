@@ -331,7 +331,8 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 Expanded(
                                                   child: Text(
                                                     obsListModel
-                                                            .responsible_person ??
+                                                            .responsible_person
+                                                            .toString() ??
                                                         '',
                                                     style: const TextStyle(
                                                       fontWeight:
@@ -381,8 +382,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    obsListModel
-                                                            .action_taken ??
+                                                    obsListModel.action_taken ??
                                                         '',
                                                     style: const TextStyle(
                                                       fontWeight:
@@ -432,7 +432,8 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 ),
                                                 Expanded(
                                                   child: Text(
-                                                    obsListModel.cost_type?.toString() ??
+                                                    obsListModel.cost_type
+                                                            ?.toString() ??
                                                         '',
                                                     style: const TextStyle(
                                                       fontWeight:

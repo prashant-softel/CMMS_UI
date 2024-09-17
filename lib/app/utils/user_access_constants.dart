@@ -132,8 +132,8 @@ abstract class UserAccessConstants {
   //Statutory
   static int kStatutoryFeatureId = 51;
   static String kFeatureStatutoryName = "Statutory";
-  
-   //hfe Report
+
+  //hfe Report
   static int kObservationFeatureId = 51;
   static String kFeatureObservationName = "Observation";
 
@@ -163,9 +163,6 @@ abstract class UserAccessConstants {
   //DashBoard
   static int kDashboardFeatureId = 1;
   static String kFeatureDashBoardName = "DashBoard";
-  //observation
-    static int kObservationFeatureId = 52;
-  static String kFeatureObservationName = "Observation";
 
   ///USER ACCESS
   static int kHaveAddAccess = 1;

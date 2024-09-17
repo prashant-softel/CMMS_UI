@@ -3843,7 +3843,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                     },
                                                                   );
                                                                   return null;
-                                                                } else if (controller
+                                                                } else if 
+                                                                (controller
                                                                         .newPermitDetailsModel
                                                                         .value!
                                                                         .requester_id !=
