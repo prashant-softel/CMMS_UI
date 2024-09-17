@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -70,5 +71,19 @@ class CreateObservationUsecase {
   }) async =>
       await repository.getSourceObservationList(
         isLoading: isLoading,
+      );
+Future<List<EmployeeModel?>?> getAssignedToList({
+    String? auth,
+    int? facilityId,
+    int? featureId,
+    int? isattendanceneeded,
+    bool? isLoading,
+  }) async =>
+      await repository.getAssignedToListWOAttend(
+        auth,
+        facilityId,
+        featureId,
+        isattendanceneeded,
+        isLoading,
       );
 }

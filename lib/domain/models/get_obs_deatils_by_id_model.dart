@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:cmms/app/utils/utility.dart';
 
-
 GetObservationById getObservationByIdModelFromJson(String str) =>
     GetObservationById.fromJson(json.decode(str));
 
@@ -18,7 +17,8 @@ class GetObservationById {
   String? contact_number;
   String? short_status;
 
-  String? cost_type;
+  int? cost_type;
+  String? cost_name;
   String? date_of_observation;
   int? type_of_observation;
   String? type_of_observation_name;
@@ -44,6 +44,7 @@ class GetObservationById {
     this.responsible_person,
     this.contact_number,
     this.cost_type,
+    this.cost_name,
     this.short_status,
     this.date_of_observation,
     this.type_of_observation,
@@ -54,7 +55,7 @@ class GetObservationById {
     this.target_date,
     this.observation_description,
     this.created_at,
-     this.file_list,
+    this.file_list,
     this.created_by,
     this.updated_at,
     this.updated_by,
@@ -68,7 +69,10 @@ class GetObservationById {
       short_status: json['short_status'],
       contact_number: json['contact_number'],
       contractor_name: json['contractor_name'],
-      cost_type: json['cost_type'],
+      cost_type:
+          json['cost_type'],
+      cost_name:
+          json['cost_name'],
       location_of_observation: json['location_of_observation'],
       date_of_observation:
           Utility.getFormatedyearMonthDay(json['date_of_observation']),
@@ -93,6 +97,7 @@ class GetObservationById {
     );
   }
 }
+
 class FileList {
   FileList({
     this.id,

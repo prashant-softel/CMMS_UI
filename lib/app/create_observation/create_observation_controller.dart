@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'package:cmms/app/create_observation/create_observation_presenter.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/create_obs_model.dart';
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/source_of_obs_list_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
@@ -28,6 +31,11 @@ class CreateObservationController extends GetxController {
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   bool openObsDatePicker = false;
   bool openTargetDatePicker = false;
+    RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
+     Rx<String> selectedAssignedTo = ''.obs;
+  Rx<bool> isAssignedToSelected = true.obs;
+   Rx<int> selectedAssignedToId = 0.obs;
+  Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
 
   bool openTargetObsDatePicker = false;
   var obsDateTc = TextEditingController();
@@ -57,10 +65,12 @@ class CreateObservationController extends GetxController {
   Rx<String> selectedTypeOfObs = ''.obs;
   Rx<bool> isSelectedTypeOfObs = true.obs;
   int sourceOfObsId = 0;
+
   RxList<SourceOfObservationListModel?> sourceOfObsList =
       <SourceOfObservationListModel>[].obs;
   Rx<GetObservationById?> getObsById = GetObservationById().obs;
   Rx<String> selectedSourceOfObs = ''.obs;
+   int selectedFacilityId = 0;
   Rx<bool> isSelectedSourceOfObs = true.obs;
   RxBool isFormInvalid = false.obs;
   Rx<bool> isObsDateTcInvalid = false.obs;
@@ -97,6 +107,7 @@ class CreateObservationController extends GetxController {
         // });
         // Future.delayed(Duration(seconds: 1), () {
         getSourceObservationList();
+         getAssignedToList();
         // });
       });
       if (obsId.value != 0) {
@@ -192,7 +203,7 @@ class CreateObservationController extends GetxController {
       contractorNameCtrlr.text = getObsById.value?.contractor_name ?? "";
       correctivePreventiveCtrlr.text =
           getObsById.value?.preventive_action ?? "";
-      selectedCostTypeList.value = getObsById.value?.cost_type ?? "";
+      selectedCostTypeList.value = getObsById.value?.cost_name ?? "";
       discriptionCtrlr.text = getObsById.value?.observation_description ?? "";
       locationOfObservationCtrlr.text =
           getObsById.value?.location_of_observation ?? "";
@@ -245,8 +256,8 @@ class CreateObservationController extends GetxController {
   //   }
     
     String _contractorNameCtrlr = contractorNameCtrlr.text.trim();
-    // String _correctivePreventiveCtrlr = correctivePreventiveCtrlr.text.trim();
-    // String _responsiblePersonCtrlr = responsiblePersonCtrlr.text.trim();
+    String _correctivePreventiveCtrlr = correctivePreventiveCtrlr.text.trim();
+    String _responsiblePersonCtrlr = responsiblePersonCtrlr.text.trim();
     String _contactNumberCtrlr = contactNumberCtrlr.text.trim();
     String _obsDateTc = obsDateTc.text.trim();
     String _discriptionCtrlr = discriptionCtrlr.text.trim();
@@ -255,7 +266,8 @@ class CreateObservationController extends GetxController {
     
     // Assigning the correct id based on the selected cost type
     int idToSend = position == 1 ? 0 : obsId.value;
-    
+    String? targetDateToSend = position == 1 ? null : targetDateTc.text.trim();
+
     CreateObsModel createObsModel = CreateObsModel(
       id: idToSend,
       facility_id: facilityId,
@@ -265,11 +277,13 @@ class CreateObservationController extends GetxController {
       date_of_observation: _obsDateTc,
       location_of_observation: _locationOfObservationCtrlr,
       observation_description: _discriptionCtrlr,
-      // preventive_action: _correctivePreventiveCtrlr,
-      // responsible_person: _responsiblePersonCtrlr,
+
+      preventive_action: _correctivePreventiveCtrlr,
+      responsible_person: selectedAssignedToId.value,
+      //  assignedId: selectedAssignedToId.value,
       risk_type_id: incidenttypeId,
       source_of_observation: sourceOfObsId,
-      // target_date: _targetDateTc,
+      target_date: targetDateToSend,
       type_of_observation: typeOfObsId,
       uploadfileIds: fileIds,
     );
@@ -294,7 +308,50 @@ class CreateObservationController extends GetxController {
     print(e);
   }
 }
+void onDropdownValueChanged(dynamic list, dynamic value) {
+    switch (list.runtimeType) {
 
+    case const (RxList<EmployeeModel>):
+        {
+          if (value != "Please Select") {
+            int assignedToIndex =
+                assignedToList.indexWhere((x) => x?.name == value);
+            selectedAssignedToId.value =
+                assignedToList[assignedToIndex]?.id ?? 0;
+            isAssignedToSelected.value = true;
+            selectedAssignedTo.value = value;
+          } else {
+            selectedAssignedToId.value = 0;
+          }
+        }
+        break;
+      default:
+        {
+          //statements;
+        }
+        break;
+    }
+  }
+    String? getAssignedToName(int _selectedAssignedToId) {
+    final item =
+        assignedToList.firstWhere((item) => item?.id == _selectedAssignedToId);
+    final _selectedAssignedToName = item?.name ?? '';
+    return _selectedAssignedToName;
+  }
+  
+  Future<void> getAssignedToList() async {
+    assignedToList.clear();
+    final _assignedToList =
+        await createObservationPresenter.getAssignedToList(
+            facilityId: facilityId,
+            featureId: UserAccessConstants.kModuleCleaningplanFeatureId);
+
+    if (_assignedToList != null) {
+      for (var assignedTo in _assignedToList) {
+        assignedToList.add(assignedTo);
+      }
+    }
+  }
   void checkObs() {
     if (selectedRiskTypeList.value == '') {
       isRiskTypeListSelected.value = false;

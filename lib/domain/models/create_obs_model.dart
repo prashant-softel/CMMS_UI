@@ -7,10 +7,9 @@ class CreateObsModel {
   int? id;
   int? facility_id;
   String? contractor_name;
-
   int? risk_type_id;
   String? preventive_action;
-  String? responsible_person;
+  int? responsible_person;
   String? contact_number;
 
   int? cost_type;
