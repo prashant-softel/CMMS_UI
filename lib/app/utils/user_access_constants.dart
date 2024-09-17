@@ -129,6 +129,14 @@ abstract class UserAccessConstants {
   static int kHfeMasterFeatureId = 65;
   static String kFeatureHfeMasterName = "Hfe Master";
 
+  //Statutory
+  static int kStatutoryFeatureId = 51;
+  static String kFeatureStatutoryName = "Statutory";
+  
+   //hfe Report
+  static int kObservationFeatureId = 51;
+  static String kFeatureObservationName = "Observation";
+
   //Warranty
   static int kWarrantyFeatureId = 64;
   static String kFeatureWarrantyName = "Warranty";
