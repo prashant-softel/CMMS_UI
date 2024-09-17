@@ -192,7 +192,7 @@ class CreateObservationController extends GetxController {
       contractorNameCtrlr.text = getObsById.value?.contractor_name ?? "";
       correctivePreventiveCtrlr.text =
           getObsById.value?.preventive_action ?? "";
-      selectedCostTypeList.value = getObsById.value?.cost_type ?? "";
+      selectedCostTypeList.value = getObsById.value?.cost_name ?? "";
       discriptionCtrlr.text = getObsById.value?.observation_description ?? "";
       locationOfObservationCtrlr.text =
           getObsById.value?.location_of_observation ?? "";
@@ -245,8 +245,8 @@ class CreateObservationController extends GetxController {
   //   }
     
     String _contractorNameCtrlr = contractorNameCtrlr.text.trim();
-    // String _correctivePreventiveCtrlr = correctivePreventiveCtrlr.text.trim();
-    // String _responsiblePersonCtrlr = responsiblePersonCtrlr.text.trim();
+    String _correctivePreventiveCtrlr = correctivePreventiveCtrlr.text.trim();
+    String _responsiblePersonCtrlr = responsiblePersonCtrlr.text.trim();
     String _contactNumberCtrlr = contactNumberCtrlr.text.trim();
     String _obsDateTc = obsDateTc.text.trim();
     String _discriptionCtrlr = discriptionCtrlr.text.trim();
@@ -255,7 +255,8 @@ class CreateObservationController extends GetxController {
     
     // Assigning the correct id based on the selected cost type
     int idToSend = position == 1 ? 0 : obsId.value;
-    
+    String? targetDateToSend = position == 1 ? null : targetDateTc.text.trim();
+
     CreateObsModel createObsModel = CreateObsModel(
       id: idToSend,
       facility_id: facilityId,
@@ -265,11 +266,12 @@ class CreateObservationController extends GetxController {
       date_of_observation: _obsDateTc,
       location_of_observation: _locationOfObservationCtrlr,
       observation_description: _discriptionCtrlr,
-      // preventive_action: _correctivePreventiveCtrlr,
-      // responsible_person: _responsiblePersonCtrlr,
+
+      preventive_action: _correctivePreventiveCtrlr,
+      responsible_person: _responsiblePersonCtrlr,
       risk_type_id: incidenttypeId,
       source_of_observation: sourceOfObsId,
-      // target_date: _targetDateTc,
+      target_date: targetDateToSend,
       type_of_observation: typeOfObsId,
       uploadfileIds: fileIds,
     );
