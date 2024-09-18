@@ -85,22 +85,27 @@ class CalendarViewController extends GetxController {
     print("Creating data source from allItems.");
     final List<Meeting> meetings = <Meeting>[];
 
-    // Iterate over allItems to create meeting entries
     for (var item in allItems) {
-      final DateTime startTime =
-          DateTime.parse(item?.start_date ?? "2024-09-11T09:13:00");
-      final DateTime endTime = item?.end_date == null
-          ? DateTime.parse(item?.start_date ?? "2024-09-11T09:13:00")
-          : DateTime.parse(item?.end_date ?? '2024-09-11T09:13:00');
-      final String eventName = item?.wo_number ?? "";
+      final String? startDateString = item?.start_date;
+      final DateTime? start_date =
+          startDateString != null ? DateTime.tryParse(startDateString) : null;
+
+      final String? endDateString = item?.end_date;
+      final DateTime? end_date =
+          endDateString != null ? DateTime.tryParse(endDateString) : start_date;
+
+      if (start_date == null) {
+        continue;
+      }
+
+      final String eventName = item?.wo_decription ?? "";
       final bool isAllDay = false;
 
       meetings.add(Meeting(
         eventName,
-        startTime,
-        endTime,
-        Colors
-            .blue, // You can dynamically change the color based on item properties if needed
+        start_date,
+        end_date ?? start_date,
+        Colors.blue,
         isAllDay,
       ));
     }
