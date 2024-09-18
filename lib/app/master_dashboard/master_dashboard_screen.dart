@@ -1628,28 +1628,29 @@ class MastersDashboard extends GetView<MastersController> {
                                                   ? (itemWidth / itemHeight)
                                                   : 5,
                                           children: <Widget>[
-                                            varUserAccessModel
-                                                        .value.access_list!
-                                                        .where((e) =>
-                                                            e.feature_id ==
-                                                                UserAccessConstants
-                                                                    .kHfeMasterFeatureId &&
-                                                            e.view ==
-                                                                UserAccessConstants
-                                                                    .kHaveViewAccess)
-                                                        .length >
-                                                    0
-                                                ? OnHover(
-                                                    builder: (((isHovered) {
-                                                    return createContentTile(
-                                                        title:
-                                                            "Type of observation",
-                                                        onTap: () {
-                                                          controller
-                                                              .goToTypeOfObservation();
-                                                        });
-                                                  })))
-                                                : Dimens.box0,
+                                            //for future use
+                                            // varUserAccessModel
+                                            //             .value.access_list!
+                                            //             .where((e) =>
+                                            //                 e.feature_id ==
+                                            //                     UserAccessConstants
+                                            //                         .kHfeMasterFeatureId &&
+                                            //                 e.view ==
+                                            //                     UserAccessConstants
+                                            //                         .kHaveViewAccess)
+                                            //             .length >
+                                            //         0
+                                            //     ? OnHover(
+                                            //         builder: (((isHovered) {
+                                            //         return createContentTile(
+                                            //             title:
+                                            //                 "Type of observation",
+                                            //             onTap: () {
+                                            //               controller
+                                            //                   .goToTypeOfObservation();
+                                            //             });
+                                            //       })))
+                                                // : Dimens.box0,
                                             varUserAccessModel
                                                         .value.access_list!
                                                         .where((e) =>
@@ -1672,27 +1673,28 @@ class MastersDashboard extends GetView<MastersController> {
                                                         });
                                                   })))
                                                 : Dimens.box0,
-                                            varUserAccessModel
-                                                        .value.access_list!
-                                                        .where((e) =>
-                                                            e.feature_id ==
-                                                                UserAccessConstants
-                                                                    .kHfeMasterFeatureId &&
-                                                            e.view ==
-                                                                UserAccessConstants
-                                                                    .kHaveViewAccess)
-                                                        .length >
-                                                    0
-                                                ? OnHover(
-                                                    builder: (((isHovered) {
-                                                    return createContentTile(
-                                                        title: "Risk Type",
-                                                        onTap: () {
-                                                          controller
-                                                              .goToRiskType();
-                                                        });
-                                                  })))
-                                                : Dimens.box0,
+                                                //for future use 
+                                            // varUserAccessModel
+                                            //             .value.access_list!
+                                            //             .where((e) =>
+                                            //                 e.feature_id ==
+                                            //                     UserAccessConstants
+                                            //                         .kHfeMasterFeatureId &&
+                                            //                 e.view ==
+                                            //                     UserAccessConstants
+                                            //                         .kHaveViewAccess)
+                                            //             .length >
+                                            //         0
+                                            //     ? OnHover(
+                                            //         builder: (((isHovered) {
+                                            //         return createContentTile(
+                                            //             title: "Risk Type",
+                                            //             onTap: () {
+                                            //               controller
+                                            //                   .goToRiskType();
+                                            //             });
+                                            //       })))
+                                            //     : Dimens.box0,
                                           ],
                                         )
                                       : Dimens.box0,
