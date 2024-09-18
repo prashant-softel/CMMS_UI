@@ -144,4 +144,8 @@ class CalendarViewController extends GetxController {
     print('Selected facility IDs: ${homecontroller.selectedFacilityIdList}');
     getdashboardList();
   }
+
+  void getDashBordListByDate() {
+    getdashboardList();
+  }
 }
