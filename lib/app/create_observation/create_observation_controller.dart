@@ -54,6 +54,9 @@ class CreateObservationController extends GetxController {
   int selectedRiskTypeId = 0;
   int incidenttypeId = 0;
   int typeOfObsId = 0;
+
+  Rx<int> type = 0.obs;
+
   RxList<GenderModel?>? costType = <GenderModel?>[
     GenderModel(id: 1, name: "Capex"),
     GenderModel(id: 2, name: "Opex"),
@@ -128,6 +131,7 @@ class CreateObservationController extends GetxController {
         var dataFromPreviousScreen = Get.arguments;
 
         obsId.value = dataFromPreviousScreen['obsId'];
+        type.value = dataFromPreviousScreen['type'];
 
         createObservationPresenter.saveValue(obsId: obsId.value.toString());
       } else {
