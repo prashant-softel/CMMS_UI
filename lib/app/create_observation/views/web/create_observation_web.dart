@@ -258,55 +258,67 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             ],
                                                           ),
                                                           Dimens.boxHeight5,
-                                                          // Row(
-                                                          //   children: [
-                                                          //     CustomRichText(
-                                                          //         title:
-                                                          //             'Corrective/Preventive Action'),
-                                                          //     Dimens.boxWidth3,
-                                                          //     LoginCustomTextfield(
-                                                          //         width: (MediaQuery.of(
-                                                          //                     context)
-                                                          //                 .size
-                                                          //                 .width *
-                                                          //             .2),
-                                                          //         textController:
-                                                          //             controller
-                                                          //                 .correctivePreventiveCtrlr,
-                                                          //         //validate
-                                                          //         errorController: controller
-                                                          //                 .isCorrectiveInvalid
-                                                          //                 .value
-                                                          //             ? "Required field"
-                                                          //             : null,
-                                                          //         onChanged:
-                                                          //             (value) {
-                                                          //           if (value
-                                                          //                   .trim()
-                                                          //                   .length >
-                                                          //               0) {
-                                                          //             controller
-                                                          //                 .isCorrectiveInvalid
-                                                          //                 .value = false;
-                                                          //           } else {
-                                                          //             controller
-                                                          //                 .isCorrectiveInvalid
-                                                          //                 .value = true;
-                                                          //           }
-                                                          //         }),
-                                                          //   ],
-                                                          // ),
-                                                          Dimens.boxHeight5,
                                                           controller.obsId !=
-                                                                      0 ||
-                                                                  controller.getObsById.value
-                                                                              ?.status_code !=
-                                                                          551 &&
-                                                                      controller
-                                                                              .getObsById
-                                                                              .value
-                                                                              ?.status_code !=
-                                                                          111
+                                                                      0 &&
+                                                                  controller
+                                                                          .getObsById
+                                                                          .value!
+                                                                          .createdid !=
+                                                                      varUserAccessModel
+                                                                          .value
+                                                                          .user_id
+                                                              ? Row(
+                                                                  children: [
+                                                                    CustomRichText(
+                                                                        title:
+                                                                            'Corrective/Preventive Action'),
+                                                                    Dimens
+                                                                        .boxWidth3,
+                                                                    LoginCustomTextfield(
+                                                                        width: (MediaQuery.of(context).size.width *
+                                                                            .2),
+                                                                        textController:
+                                                                            controller
+                                                                                .correctivePreventiveCtrlr,
+                                                                        //validate
+                                                                        errorController: controller.isCorrectiveInvalid.value
+                                                                            ? "Required field"
+                                                                            : null,
+                                                                        onChanged:
+                                                                            (value) {
+                                                                          if (value.trim().length >
+                                                                              0) {
+                                                                            controller.isCorrectiveInvalid.value =
+                                                                                false;
+                                                                          } else {
+                                                                            controller.isCorrectiveInvalid.value =
+                                                                                true;
+                                                                          }
+                                                                        }),
+                                                                  ],
+                                                                )
+                                                              : SizedBox
+                                                                  .shrink(),
+                                                          Dimens.boxHeight5,
+                                                          // controller.obsId !=
+                                                          //             0 ||
+                                                          //         controller.getObsById.value
+                                                          //                     ?.status_code !=
+                                                          //                 551 &&
+                                                          //             controller
+                                                          //                     .getObsById
+                                                          //                     .value
+                                                          //                     ?.status_code !=
+                                                          //                 111
+                                                          controller.obsId !=
+                                                                      0 &&
+                                                                  controller
+                                                                          .getObsById
+                                                                          .value!
+                                                                          .createdid !=
+                                                                      varUserAccessModel
+                                                                          .value
+                                                                          .user_id
                                                               ? Row(
                                                                   children: [
                                                                     CustomRichText(
@@ -446,7 +458,15 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           //   ],
                                                           // ),
                                                           Dimens.boxHeight5,
-                                                          controller.obsId != 0
+                                                          controller.obsId !=
+                                                                      0 &&
+                                                                  controller
+                                                                          .getObsById
+                                                                          .value!
+                                                                          .createdid !=
+                                                                      varUserAccessModel
+                                                                          .value
+                                                                          .user_id
                                                               ? Row(
                                                                   children: [
                                                                     CustomRichText(
@@ -696,7 +716,15 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             ],
                                                           ),
                                                           Dimens.boxHeight5,
-                                                          controller.obsId != 0
+                                                          controller.obsId !=
+                                                                      0 &&
+                                                                  controller
+                                                                          .getObsById
+                                                                          .value!
+                                                                          .createdid !=
+                                                                      varUserAccessModel
+                                                                          .value
+                                                                          .user_id
                                                               ? Row(
                                                                   children: [
                                                                     CustomRichText(
