@@ -1058,6 +1058,24 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                   },
                                 ),
                               ),
+                        Dimens.boxWidth15,
+                        controller.obsId != 0
+                            ? Container(
+                                height: 40,
+                                child: CustomElevatedButton(
+                                  backgroundColor:
+                                      Color.fromARGB(255, 10, 69, 133),
+                                  text: 'Assign',
+                                  onPressed: () {
+                                    controller.isFormInvalid.value = false;
+                                    controller.createObs(
+                                      position: 2,
+                                      fileIds: dropzoneController.fileIds,
+                                    );
+                                  },
+                                ),
+                              )
+                            : Dimens.box0,
                         Spacer(),
                       ],
                     )
