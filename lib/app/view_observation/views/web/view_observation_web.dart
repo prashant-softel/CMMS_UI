@@ -219,7 +219,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                                 style: Styles
                                                                     .blue17),
                                                             Text(
-                                                                "${controller.getObsById.value?.responsible_person_name ?? ""}",
+                                                                "${controller.getObsById.value?.assigned_to_name ?? ""}",
                                                                 style: Styles
                                                                     .blue17),
                                                             Text(
@@ -309,7 +309,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                           ),
                                         ),
                                         SizedBox(height: 20),
-                                         Container(
+                                        Container(
                                           margin: Dimens.edgeInsets20,
                                           height:
                                               ((controller.file_list?.length ??
