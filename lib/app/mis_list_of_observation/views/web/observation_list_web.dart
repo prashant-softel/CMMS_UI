@@ -480,7 +480,7 @@ class ObservationListDataSource extends DataTableSource {
               .contains(controller.actionTakenFilterText.value.toLowerCase()) &&
           (ObservationList.corrective_action ?? '').toString().contains(
               controller.dateofObservationFilterText.value.toLowerCase()) &&
-          (ObservationList.cost_type ?? '').toString().contains(
+          (ObservationList.cost_name ?? '') .toString().contains(
               controller.dateofObservationFilterText.value.toLowerCase()) &&
           (ObservationList.corrective_action ?? '')
               .toString()
@@ -511,11 +511,11 @@ class ObservationListDataSource extends DataTableSource {
       '${ObservationListDetails?.source_of_observation_name ?? ''}',
       '${ObservationListDetails?.risk_type ?? ''}',
       '${ObservationListDetails?.observation_description ?? ''}',
-      '${ObservationListDetails?.responsible_person ?? ''}',
+      '${ObservationListDetails?.responsible_person_name ?? ''}',
       '${ObservationListDetails?.target_date ?? ''}',
       '${ObservationListDetails?.action_taken ?? ''}',
       closedDate,
-      '${ObservationListDetails?.cost_type ?? ''}',
+      '${ObservationListDetails?.cost_name ?? ''}',
       // '${ObservationListDetails?.status_code ?? ''}',
 
       'Actions',

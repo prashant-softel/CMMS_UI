@@ -80,7 +80,7 @@ class ObservationListController extends GetxController {
   final Map<String, double> columnwidth = {
     "Id": 120,
     "Month": 100,
-    "Observation Date": 200,
+    "Observation Date": 270,
     "Contractor Name": 200,
     "Location": 150,
     "Type": 180,
@@ -163,7 +163,7 @@ class ObservationListController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.cost_type?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+            (item.cost_name?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item.id?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
@@ -314,8 +314,8 @@ class ObservationListController extends GetxController {
         break;
       case 'Cost type':
         getObservationList.sort((a, b) => isAscending.value
-            ? (a.cost_type ?? 0).compareTo(b.cost_type ?? 0)
-            : (b.cost_type ?? 0).compareTo(a.cost_type ?? 0));
+            ? (a.cost_name ?? '').compareTo(b.cost_name ?? '')
+            : (b.cost_name ?? '').compareTo(a.cost_name ?? ''));
         break;
       default:
         break;
