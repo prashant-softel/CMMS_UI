@@ -136,4 +136,12 @@ class CalendarViewController extends GetxController {
 
     return meetings;
   }
+
+  void selectedMultiFacility(List<int> _selectedFacilityIds) {
+    homecontroller.selectedFacilityIdList.clear(); // Clear the existing list
+    homecontroller.selectedFacilityIdList
+        .addAll(_selectedFacilityIds); // Add the new selections
+    print('Selected facility IDs: ${homecontroller.selectedFacilityIdList}');
+    getdashboardList();
+  }
 }
