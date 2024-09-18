@@ -261,12 +261,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           controller.obsId !=
                                                                       0 &&
                                                                   controller
-                                                                          .getObsById
-                                                                          .value!
-                                                                          .createdid !=
-                                                                      varUserAccessModel
-                                                                          .value
-                                                                          .user_id
+                                                                          .type ==
+                                                                      1
                                                               ? Row(
                                                                   children: [
                                                                     CustomRichText(
@@ -313,12 +309,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           controller.obsId !=
                                                                       0 &&
                                                                   controller
-                                                                          .getObsById
-                                                                          .value!
-                                                                          .createdid !=
-                                                                      varUserAccessModel
-                                                                          .value
-                                                                          .user_id
+                                                                          .type ==
+                                                                      1
                                                               ? Row(
                                                                   children: [
                                                                     CustomRichText(
@@ -461,12 +453,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           controller.obsId !=
                                                                       0 &&
                                                                   controller
-                                                                          .getObsById
-                                                                          .value!
-                                                                          .createdid !=
-                                                                      varUserAccessModel
-                                                                          .value
-                                                                          .user_id
+                                                                          .type ==
+                                                                      1
                                                               ? Row(
                                                                   children: [
                                                                     CustomRichText(
@@ -719,12 +707,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           controller.obsId !=
                                                                       0 &&
                                                                   controller
-                                                                          .getObsById
-                                                                          .value!
-                                                                          .createdid !=
-                                                                      varUserAccessModel
-                                                                          .value
-                                                                          .user_id
+                                                                          .type ==
+                                                                      1
                                                               ? Row(
                                                                   children: [
                                                                     CustomRichText(

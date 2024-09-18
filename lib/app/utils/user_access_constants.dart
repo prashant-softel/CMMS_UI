@@ -134,7 +134,7 @@ abstract class UserAccessConstants {
   static String kFeatureStatutoryName = "Statutory";
 
   //hfe Report
-  static int kObservationFeatureId = 51;
+  static int kObservationFeatureId = 52;
   static String kFeatureObservationName = "Observation";
 
   //Warranty

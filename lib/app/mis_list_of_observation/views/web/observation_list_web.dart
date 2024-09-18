@@ -1,4 +1,4 @@
-
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/mis_list_of_observation/observation_list_controller.dart';
@@ -6,6 +6,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -414,39 +415,38 @@ DataColumn2 buildDataColumn(
   return //
       DataColumn2(
     fixedWidth: fixedWidth,
-     onSort: header == "Actions"
+    onSort: header == "Actions"
         ? null
         : (int columnIndex, bool ascending) {
             final controller = Get.find<ObservationListController>();
             controller.sortData(header);
           },
-
     label: Column(
         mainAxisAlignment: MainAxisAlignment.center, //
         children: [
-           Row(
-          children: [
-            Text(
-              header,
-              style: Styles.black16W500,
-            ),
-            if (header != "Actions")
-              Obx(() {
-                final controller = Get.find<ObservationListController>();
+          Row(
+            children: [
+              Text(
+                header,
+                style: Styles.black16W500,
+              ),
+              if (header != "Actions")
+                Obx(() {
+                  final controller = Get.find<ObservationListController>();
 
-                return AnimatedRotation(
-                  turns: controller.currentSortColumn.value == header
-                      ? (controller.isAscending.value ? 0.5 : 0.0)
-                      : 0.0,
-                  duration: Duration(milliseconds: 300),
-                  child: Icon(
-                    Icons.expand_more,
-                    size: 20,
-                  ),
-                );
-              }),
-          ],
-        ),
+                  return AnimatedRotation(
+                    turns: controller.currentSortColumn.value == header
+                        ? (controller.isAscending.value ? 0.5 : 0.0)
+                        : 0.0,
+                    duration: Duration(milliseconds: 300),
+                    child: Icon(
+                      Icons.expand_more,
+                      size: 20,
+                    ),
+                  );
+                }),
+            ],
+          ),
           // Align(
           //   alignment: Alignment.centerLeft,
           //   child: Text(
@@ -480,7 +480,7 @@ class ObservationListDataSource extends DataTableSource {
               .contains(controller.actionTakenFilterText.value.toLowerCase()) &&
           (ObservationList.corrective_action ?? '').toString().contains(
               controller.dateofObservationFilterText.value.toLowerCase()) &&
-          (ObservationList.cost_name ?? '') .toString().contains(
+          (ObservationList.cost_name ?? '').toString().contains(
               controller.dateofObservationFilterText.value.toLowerCase()) &&
           (ObservationList.corrective_action ?? '')
               .toString()
@@ -597,25 +597,55 @@ class ObservationListDataSource extends DataTableSource {
                               }
                             },
                           ),
-                          ObservationListDetails!.status_code != 552
+                          varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id ==
+                                              UserAccessConstants
+                                                  .kObservationFeatureId &&
+                                          e.approve ==
+                                              UserAccessConstants
+                                                  .kHaveApproveAccess)
+                                      .length >
+                                  0
                               ? TableActionButton(
                                   color: ColorValues.editColor,
                                   icon: Icons.edit,
-                                  message: 'Edit',
+                                  message: 'Edit assign',
                                   onPress: () {
                                     // controller.clearStoreData();
-                                    int obsId = ObservationListDetails.id ?? 0;
+                                    int obsId = ObservationListDetails!.id ?? 0;
                                     if (obsId != 0) {
                                       Get.toNamed(
                                         Routes.createObservation,
                                         arguments: {
                                           'obsId': ObservationListDetails.id,
+                                          'type': 1
                                         },
                                       );
                                     }
                                   },
                                 )
-                              : Dimens.box0,
+                              : ObservationListDetails!.status_code != 552
+                                  ? TableActionButton(
+                                      color: ColorValues.editColor,
+                                      icon: Icons.edit,
+                                      message: 'Edit',
+                                      onPress: () {
+                                        // controller.clearStoreData();
+                                        int obsId =
+                                            ObservationListDetails.id ?? 0;
+                                        if (obsId != 0) {
+                                          Get.toNamed(
+                                            Routes.createObservation,
+                                            arguments: {
+                                              'obsId':
+                                                  ObservationListDetails.id,
+                                            },
+                                          );
+                                        }
+                                      },
+                                    )
+                                  : Dimens.box0,
                         ],
                       )
                     : Text(value.toString()),
