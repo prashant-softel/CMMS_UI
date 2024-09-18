@@ -9,7 +9,8 @@ class CreateObsModel {
   String? contractor_name;
   int? risk_type_id;
   String? preventive_action;
-  int? responsible_person;
+  int? assigned_to_id;
+
   String? contact_number;
 
   int? cost_type;
@@ -27,7 +28,7 @@ class CreateObsModel {
     this.contractor_name,
     this.risk_type_id,
     this.preventive_action,
-    this.responsible_person,
+    this.assigned_to_id,
     this.contact_number,
     this.cost_type,
     this.date_of_observation,
@@ -46,7 +47,7 @@ class CreateObsModel {
       contractor_name: json['contractor_name'],
       risk_type_id: json['risk_type_id'],
       preventive_action: json['preventive_action'],
-      responsible_person: json['responsible_person'],
+      assigned_to_id: json['assigned_to_id'],
       contact_number: json['contact_number'],
       cost_type: json['cost_type'],
       date_of_observation: json['date_of_observation'],
@@ -64,7 +65,7 @@ class CreateObsModel {
         "contractor_name": contractor_name,
         "risk_type_id": risk_type_id,
         "preventive_action": preventive_action,
-        "responsible_person": responsible_person,
+        "assigned_to_id": assigned_to_id,
         "contact_number": contact_number,
         "cost_type": cost_type,
         "date_of_observation": date_of_observation,

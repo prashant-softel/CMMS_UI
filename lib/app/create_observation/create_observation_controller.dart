@@ -198,9 +198,8 @@ class CreateObservationController extends GetxController {
       getObsById.value = _getObsDetail;
 
       contactNumberCtrlr.text = getObsById.value?.contact_number ?? '';
-      selectedAssignedToId.value = getObsById.value?.responsible_person ?? 0;
-      selectedAssignedTo.value =
-          getObsById.value?.responsible_person_name ?? '';
+      selectedAssignedToId.value = getObsById.value?.assigned_to_id ?? 0;
+      selectedAssignedTo.value = getObsById.value?.assigned_to_name ?? '';
       contractorNameCtrlr.text = getObsById.value?.contractor_name ?? "";
       correctivePreventiveCtrlr.text =
           getObsById.value?.preventive_action ?? "";
@@ -285,7 +284,7 @@ class CreateObservationController extends GetxController {
         observation_description: _discriptionCtrlr,
 
         preventive_action: _correctivePreventiveCtrlr,
-        responsible_person: selectedAssignedToId.value,
+        assigned_to_id: selectedAssignedToId.value,
         //  assignedId: selectedAssignedToId.value,
         risk_type_id: incidenttypeId,
         source_of_observation: sourceOfObsId,
