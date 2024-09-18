@@ -90,8 +90,8 @@ class CalendarViewController extends GetxController {
       final DateTime startTime =
           DateTime.parse(item?.start_date ?? "2024-09-11T09:13:00");
       final DateTime endTime = item?.end_date == null
-          ? DateTime.parse(item?.end_date ?? '2024-09-11T09:13:00')
-          : DateTime.parse(item?.start_date ?? "2024-09-11T09:13:00");
+          ? DateTime.parse(item?.start_date ?? "2024-09-11T09:13:00")
+          : DateTime.parse(item?.end_date ?? '2024-09-11T09:13:00');
       final String eventName = item?.wo_number ?? "";
       final bool isAllDay = false;
 
