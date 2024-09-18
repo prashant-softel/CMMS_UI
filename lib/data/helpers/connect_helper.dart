@@ -3782,10 +3782,18 @@ class ConnectHelper {
 
   Future<ResponseModel> createObs(
       {required String auth, createObs, bool? isLoading, int? position}) async {
+    String url;
+
+    if (position == 1) {
+      url = 'MISMaster/CreateObservation';
+    } else if (position == 2) {
+      url = 'MISMaster/AssingtoObservation';
+    } else {
+      url = 'MISMaster/UpdateObservation';
+    }
+
     var responseModel = await apiWrapper.makeRequest(
-      position == 1
-          ? 'MISMaster/CreateObservation'
-          : 'MISMaster/UpdateObservation',
+      url,
       Request.post,
       createObs,
       isLoading ?? false,
@@ -3795,12 +3803,9 @@ class ConnectHelper {
       },
     );
 
-    print('Create Observation Response:${responseModel.data}');
+    print('Create Observation Response: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    // if (res.e != null) {
-    //   Get.dialog<void>(WarrantyClaimErrorDialog());
-    // } else {
 
     return responseModel;
   }

@@ -85,6 +85,15 @@ class CalendarViewController extends GetxController {
     print("Creating data source from allItems.");
     final List<Meeting> meetings = <Meeting>[];
 
+    // Define a map for module name and corresponding color
+    final Map<String, Color> moduleColors = {
+      'Breakdown Maintenance': Colors.red,
+      'Preventive Maintenance': Colors.green,
+      'Module Cleaning': Colors.orange,
+      'Incident Report': Colors.purple,
+      'Stock Management': Colors.blue, // Add more as needed
+    };
+
     for (var item in allItems) {
       final String? startDateString = item?.start_date;
       final DateTime? start_date =
@@ -101,11 +110,23 @@ class CalendarViewController extends GetxController {
       final String eventName = item?.wo_decription ?? "";
       final bool isAllDay = false;
 
+      // Use the module name from the parent dashboard item
+      final String? moduleName = dashboardList
+          .firstWhere(
+              (dashboard) =>
+                  dashboard?.cmDashboadDetails?.item_list?.contains(item) ??
+                  false, // Ensure the closure returns bool
+              orElse: () => null)
+          ?.module_name;
+
+      final Color moduleColor = moduleColors[moduleName] ??
+          Colors.grey; // Default to grey if module name is not found
+
       meetings.add(Meeting(
         eventName,
         start_date,
         end_date ?? start_date,
-        Colors.blue,
+        moduleColor,
         isAllDay,
       ));
     }

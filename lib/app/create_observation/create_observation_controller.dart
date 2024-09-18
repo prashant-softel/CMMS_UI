@@ -273,7 +273,7 @@ class CreateObservationController extends GetxController {
       // String _targetDateTc = targetDateTc.text.trim();
 
       // Assigning the correct id based on the selected cost type
-      int idToSend = position == 1 ? 0 : obsId.value;
+      int idToSend = position == 1 || position == 2 ? 0 : obsId.value;
       String? targetDateToSend =
           position == 1 ? null : targetDateTc.text.trim();
 
