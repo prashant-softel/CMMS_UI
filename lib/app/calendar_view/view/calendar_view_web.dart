@@ -8,8 +8,6 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:get/get.dart';
 
 class CalendarViewWeb extends GetView<CalendarViewController> {
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,9 +71,6 @@ class CalendarViewWeb extends GetView<CalendarViewController> {
                     CalendarView.week,
                     CalendarView.workWeek,
                     CalendarView.month,
-                    CalendarView.timelineDay,
-                    CalendarView.timelineWeek,
-                    CalendarView.timelineWorkWeek,
                     CalendarView.timelineMonth
                   ],
                   dataSource: MeetingDataSource(controller.getDataSource()),

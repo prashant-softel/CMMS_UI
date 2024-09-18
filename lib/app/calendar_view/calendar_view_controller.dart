@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cmms/app/calendar_view/calendar_view_presenter.dart';
 import 'package:cmms/app/calendar_view/view/calendar_view_web.dart';
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
 // import 'package:cmms/domain/models/doc_upload_list_model.dart';
 import 'package:cmms/domain/models/view_doc_upload.dart';
@@ -74,7 +75,9 @@ class CalendarViewController extends GetxController {
     for (var module in dashboardList) {
       if (module?.module_name == 'Breakdown Maintenance' ||
           module?.module_name == 'Preventive Maintenance' ||
-          module?.module_name == 'Module Cleaning') {
+          module?.module_name == 'Module Cleaning' ||
+          module?.module_name == 'Incident Report' ||
+          module?.module_name == 'Stock Management') {
         var details = module?.cmDashboadDetails;
         allItems.addAll(details?.item_list ?? []);
       }
@@ -87,11 +90,11 @@ class CalendarViewController extends GetxController {
 
     // Define a map for module name and corresponding color
     final Map<String, Color> moduleColors = {
-      'Breakdown Maintenance': Colors.red,
-      'Preventive Maintenance': Colors.green,
-      'Module Cleaning': Colors.orange,
-      'Incident Report': Colors.purple,
-      'Stock Management': Colors.blue, // Add more as needed
+      'Breakdown Maintenance': ColorValues.appGreenColor,
+      'Preventive Maintenance': ColorValues.appDarkBlueColor,
+      'Module Cleaning': Color.fromARGB(255, 133, 97, 163),
+      'Incident Report': Color.fromARGB(255, 78, 126, 129),
+      'Stock Management': ColorValues.facebookButtonColor
     };
 
     for (var item in allItems) {
