@@ -31,11 +31,10 @@ class CreateObservationController extends GetxController {
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   bool openObsDatePicker = false;
   bool openTargetDatePicker = false;
-    RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
-     Rx<String> selectedAssignedTo = ''.obs;
+  RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
+  Rx<String> selectedAssignedTo = ''.obs;
   Rx<bool> isAssignedToSelected = true.obs;
-   Rx<int> selectedAssignedToId = 0.obs;
-
+  Rx<int> selectedAssignedToId = 0.obs;
 
   bool openTargetObsDatePicker = false;
   var obsDateTc = TextEditingController();
@@ -70,7 +69,7 @@ class CreateObservationController extends GetxController {
       <SourceOfObservationListModel>[].obs;
   Rx<GetObservationById?> getObsById = GetObservationById().obs;
   Rx<String> selectedSourceOfObs = ''.obs;
-   int selectedFacilityId = 0;
+  int selectedFacilityId = 0;
   Rx<bool> isSelectedSourceOfObs = true.obs;
   RxBool isFormInvalid = false.obs;
   Rx<bool> isObsDateTcInvalid = false.obs;
@@ -107,7 +106,7 @@ class CreateObservationController extends GetxController {
         // });
         // Future.delayed(Duration(seconds: 1), () {
         getSourceObservationList();
-         getAssignedToList();
+        getAssignedToList();
         // });
       });
       if (obsId.value != 0) {
@@ -199,8 +198,9 @@ class CreateObservationController extends GetxController {
       getObsById.value = _getObsDetail;
 
       contactNumberCtrlr.text = getObsById.value?.contact_number ?? '';
-     selectedAssignedToId.value = getObsById.value?.responsible_person ?? 0;
-      selectedAssignedTo.value = getObsById.value?.responsible_person_name ?? '';
+      selectedAssignedToId.value = getObsById.value?.responsible_person ?? 0;
+      selectedAssignedTo.value =
+          getObsById.value?.responsible_person_name ?? '';
       contractorNameCtrlr.text = getObsById.value?.contractor_name ?? "";
       correctivePreventiveCtrlr.text =
           getObsById.value?.preventive_action ?? "";
@@ -215,6 +215,9 @@ class CreateObservationController extends GetxController {
           getObsById.value?.type_of_observation_name ?? '';
       selectedSourceOfObs.value =
           getObsById.value?.source_of_observation_name ?? '';
+      sourceOfObsId = getObsById.value?.source_of_observation ?? 0;
+      incidenttypeId = getObsById.value?.risk_type_id ?? 0;
+      typeOfObsId = getObsById.value?.type_of_observation ?? 0;
     }
   }
 
@@ -250,69 +253,71 @@ class CreateObservationController extends GetxController {
   }
 
   void createObs({int? position, List<dynamic>? fileIds}) async {
-  try {
-  //   checkObs();
-  //   if (isFormInvalid.value) {
-  //     return;
-  //   }
-    
-    String _contractorNameCtrlr = contractorNameCtrlr.text.trim();
-    String _correctivePreventiveCtrlr = correctivePreventiveCtrlr.text.trim();
-    String _responsiblePersonCtrlr = responsiblePersonCtrlr.text.trim();
-    String _contactNumberCtrlr = contactNumberCtrlr.text.trim();
-    String _obsDateTc = obsDateTc.text.trim();
-    String _discriptionCtrlr = discriptionCtrlr.text.trim();
-    String _locationOfObservationCtrlr = locationOfObservationCtrlr.text.trim();
-    // String _targetDateTc = targetDateTc.text.trim();
-    
-    // Assigning the correct id based on the selected cost type
-    int idToSend = position == 1 ? 0 : obsId.value;
-    String? targetDateToSend = position == 1 ? null : targetDateTc.text.trim();
+    try {
+      //   checkObs();
+      //   if (isFormInvalid.value) {
+      //     return;
+      //   }
 
-    CreateObsModel createObsModel = CreateObsModel(
-      id: idToSend,
-      facility_id: facilityId,
-      contact_number: _contactNumberCtrlr,
-      contractor_name: _contractorNameCtrlr,
-      cost_type: selectedCostTypeId, // Sending the selected cost type ID
-      date_of_observation: _obsDateTc,
-      location_of_observation: _locationOfObservationCtrlr,
-      observation_description: _discriptionCtrlr,
+      String _contractorNameCtrlr = contractorNameCtrlr.text.trim();
+      String _correctivePreventiveCtrlr = correctivePreventiveCtrlr.text.trim();
+      // String _responsiblePersonCtrlr = responsiblePersonCtrlr.text.trim();
+      String _contactNumberCtrlr = contactNumberCtrlr.text.trim();
+      String _obsDateTc = obsDateTc.text.trim();
+      String _discriptionCtrlr = discriptionCtrlr.text.trim();
+      String _locationOfObservationCtrlr =
+          locationOfObservationCtrlr.text.trim();
+      // String _targetDateTc = targetDateTc.text.trim();
 
-      preventive_action: _correctivePreventiveCtrlr,
-      responsible_person: selectedAssignedToId.value,
-      //  assignedId: selectedAssignedToId.value,
-      risk_type_id: incidenttypeId,
-      source_of_observation: sourceOfObsId,
-      target_date: targetDateToSend,
-      type_of_observation: typeOfObsId,
-      uploadfileIds: fileIds,
-    );
+      // Assigning the correct id based on the selected cost type
+      int idToSend = position == 1 ? 0 : obsId.value;
+      String? targetDateToSend =
+          position == 1 ? null : targetDateTc.text.trim();
 
-    // Convert the CreateObsModel instance to JSON
-    var createObsModelJsonString = createObsModel.toJson();
+      CreateObsModel createObsModel = CreateObsModel(
+        id: idToSend,
+        facility_id: facilityId,
+        contact_number: _contactNumberCtrlr,
+        contractor_name: _contractorNameCtrlr,
+        cost_type: selectedCostTypeId, // Sending the selected cost type ID
+        date_of_observation: _obsDateTc,
+        location_of_observation: _locationOfObservationCtrlr,
+        observation_description: _discriptionCtrlr,
 
-    // Call the createObs function from the presenter
-    Map<String, dynamic>? responseCreateObsModel =
-        await createObservationPresenter.createObs(
-      createObs: createObsModelJsonString,
-      isLoading: true,
-      position: position,
-    );
+        preventive_action: _correctivePreventiveCtrlr,
+        responsible_person: selectedAssignedToId.value,
+        //  assignedId: selectedAssignedToId.value,
+        risk_type_id: incidenttypeId,
+        source_of_observation: sourceOfObsId,
+        target_date: targetDateToSend,
+        type_of_observation: typeOfObsId,
+        uploadfileIds: fileIds,
+      );
 
-    if (responseCreateObsModel == null) {
-      // Handle response if needed
+      // Convert the CreateObsModel instance to JSON
+      var createObsModelJsonString = createObsModel.toJson();
+
+      // Call the createObs function from the presenter
+      Map<String, dynamic>? responseCreateObsModel =
+          await createObservationPresenter.createObs(
+        createObs: createObsModelJsonString,
+        isLoading: true,
+        position: position,
+      );
+
+      if (responseCreateObsModel == null) {
+        // Handle response if needed
+      }
+
+      print('Create Observation data: $createObsModelJsonString');
+    } catch (e) {
+      print(e);
     }
-
-    print('Create Observation data: $createObsModelJsonString');
-  } catch (e) {
-    print(e);
   }
-}
-void onDropdownValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
 
-    case const (RxList<EmployeeModel>):
+  void onDropdownValueChanged(dynamic list, dynamic value) {
+    switch (list.runtimeType) {
+      case const (RxList<EmployeeModel>):
         {
           if (value != "Please Select") {
             int assignedToIndex =
@@ -333,19 +338,19 @@ void onDropdownValueChanged(dynamic list, dynamic value) {
         break;
     }
   }
-    String? getAssignedToName(int _selectedAssignedToId) {
+
+  String? getAssignedToName(int _selectedAssignedToId) {
     final item =
         assignedToList.firstWhere((item) => item?.id == _selectedAssignedToId);
     final _selectedAssignedToName = item?.name ?? '';
     return _selectedAssignedToName;
   }
-  
+
   Future<void> getAssignedToList() async {
     assignedToList.clear();
-    final _assignedToList =
-        await createObservationPresenter.getAssignedToList(
-            facilityId: facilityId,
-            featureId: UserAccessConstants.kModuleCleaningplanFeatureId);
+    final _assignedToList = await createObservationPresenter.getAssignedToList(
+        facilityId: facilityId,
+        featureId: UserAccessConstants.kModuleCleaningplanFeatureId);
 
     if (_assignedToList != null) {
       for (var assignedTo in _assignedToList) {
@@ -353,6 +358,7 @@ void onDropdownValueChanged(dynamic list, dynamic value) {
       }
     }
   }
+
   void checkObs() {
     if (selectedRiskTypeList.value == '') {
       isRiskTypeListSelected.value = false;
@@ -516,19 +522,20 @@ void onDropdownValueChanged(dynamic list, dynamic value) {
         }
         break;
       case const (RxList<GenderModel>):
-  {
-    if (value.toString() != "Please Select") {
-      int costTypeIndex = costType?.indexWhere((x) => x?.name == value.toString()) ?? -1;
-      if (costTypeIndex != -1 && costType?[costTypeIndex] != null) {
-        selectedCostTypeId = costType![costTypeIndex]!.id ?? 0;
-        selectedCostTypeList.value = value.toString();
-        isCostTypeListSelected.value = true;
-      }
-    } else {
-      selectedCostTypeId = 0;
-    }
-  }
-  break;
+        {
+          if (value.toString() != "Please Select") {
+            int costTypeIndex =
+                costType?.indexWhere((x) => x?.name == value.toString()) ?? -1;
+            if (costTypeIndex != -1 && costType?[costTypeIndex] != null) {
+              selectedCostTypeId = costType![costTypeIndex]!.id ?? 0;
+              selectedCostTypeList.value = value.toString();
+              isCostTypeListSelected.value = true;
+            }
+          } else {
+            selectedCostTypeId = 0;
+          }
+        }
+        break;
     }
   }
 }

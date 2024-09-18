@@ -63,13 +63,13 @@ class ObservationListController extends GetxController {
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "Id": true,
     "Month": true,
-    "Date of Observation": true,
+    "Date of Obs": true,
     "Contractor Name": true,
     "Location": true,
     "Type": true,
     "Source": true,
     "Risk Type": true,
-    "Observation Made": true,
+    "Obs Made": true,
     "Responsible": true,
     "Target Date": true,
     "Action Taken": true,
@@ -86,7 +86,7 @@ class ObservationListController extends GetxController {
     "Type": 180,
     "Source": 180,
     "Risk Type": 150,
-    "Observation Made": 200,
+    "Obs Made": 200,
     "Responsible": 150,
     "Target Date": 150,
     "Action Taken": 180,
@@ -108,13 +108,13 @@ class ObservationListController extends GetxController {
     this.filterText = {
       "Id": idFilterText,
       "Month": monthFilterText,
-      "Date of Observation": dateofObservationFilterText,
+      "Date of Obs": dateofObservationFilterText,
       "Contractor Name": contractorNameFilterText,
       "Location": locationFilterText,
       "Type": typeFilterText,
       "Source": sourceFilterText,
       "Risk Type": riskTypeFilterText,
-      "Observation Made": correctiveFilterText,
+      "Obs Made": correctiveFilterText,
       "Responsible": responsibleFilterText,
       "Target Date": targetDateFilterText,
       "Action Taken": actionTakenFilterText,
@@ -285,7 +285,7 @@ class ObservationListController extends GetxController {
             ? (a.risk_type ?? '').compareTo(b.risk_type ?? '')
             : (b.risk_type ?? '').compareTo(a.risk_type ?? ''));
         break;
-      case 'Observation Made':
+      case 'Obs Made':
         getObservationList.sort((a, b) => isAscending.value
             ? (a.type_of_observation_name ?? '')
                 .compareTo(b.type_of_observation_name ?? '')
