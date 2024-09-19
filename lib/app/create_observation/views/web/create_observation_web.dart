@@ -471,56 +471,59 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                 .end,
                                                         children: [
                                                           Dimens.boxWidth5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Date of Observation'),
-                                                              Dimens.boxWidth3,
-                                                              CustomTextFieldForStock(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                numberTextField:
-                                                                    true,
-                                                                onTap: () {
-                                                                  controller
-                                                                          .openObsDatePicker =
-                                                                      !controller
-                                                                          .openObsDatePicker;
-                                                                  controller
-                                                                      .update([
-                                                                    'stock_Mangement'
-                                                                  ]);
-                                                                },
-                                                                textController:
+                                                          IgnorePointer(
+                                                            ignoring: true,
+                                                            child: Row(
+                                                              children: [
+                                                                CustomRichText(
+                                                                    title:
+                                                                        'Date of Observation'),
+                                                                Dimens.boxWidth3,
+                                                                CustomTextFieldForStock(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  numberTextField:
+                                                                      true,
+                                                                  onTap: () {
                                                                     controller
-                                                                        .obsDateTc,
-                                                                errorController:
+                                                                            .openObsDatePicker =
+                                                                        !controller
+                                                                            .openObsDatePicker;
                                                                     controller
-                                                                            .isObsDateTcInvalid
-                                                                            .value
-                                                                        ? "Required field"
-                                                                        : null,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  if (value
-                                                                          .trim()
-                                                                          .length >
-                                                                      0) {
-                                                                    controller
-                                                                        .isObsDateTcInvalid
-                                                                        .value = false;
-                                                                  } else {
-                                                                    controller
-                                                                        .isObsDateTcInvalid
-                                                                        .value = true;
-                                                                  }
-                                                                },
-                                                              ),
-                                                            ],
+                                                                        .update([
+                                                                      'stock_Mangement'
+                                                                    ]);
+                                                                  },
+                                                                  textController:
+                                                                      controller
+                                                                          .obsDateTc,
+                                                                  errorController:
+                                                                      controller
+                                                                              .isObsDateTcInvalid
+                                                                              .value
+                                                                          ? "Required field"
+                                                                          : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isObsDateTcInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isObsDateTcInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  },
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
                                                           Dimens.boxHeight5,
                                                           Row(

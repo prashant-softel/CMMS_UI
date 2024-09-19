@@ -14,6 +14,7 @@ import 'package:cmms/domain/models/type_model.dart';
 import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import '../home/home_controller.dart';
 
@@ -57,9 +58,10 @@ class CreateObservationController extends GetxController {
 
   Rx<int> type = 0.obs;
 
-  RxList<GenderModel?>? costType = <GenderModel?>[
-    GenderModel(id: 1, name: "Capex"),
-    GenderModel(id: 2, name: "Opex"),
+
+RxList<TypeModel> costType = <TypeModel>[
+    TypeModel(name: 'Capex', id: "1"),
+    TypeModel(name: 'Opex', id: "2"),
   ].obs;
   Rx<bool> isCostTypeListSelected = true.obs;
   Rx<String> selectedCostTypeList = ''.obs;
@@ -87,7 +89,7 @@ class CreateObservationController extends GetxController {
   Rx<bool> islocationofObservationInvalid = false.obs;
   Rx<DateTime> selectedObsTime = DateTime.now().obs;
   Rx<DateTime> selectedTargetTime = DateTime.now().obs;
-   Rx<int> selectedCostTypeId = 0.obs;
+int selectedCostTypeId = 0;
 // GetObservationList? selectedItem;
   Rx<bool> isLoading = true.obs;
   int facilityId = 0;
@@ -110,6 +112,7 @@ class CreateObservationController extends GetxController {
         // Future.delayed(Duration(seconds: 1), () {
         getSourceObservationList();
         getAssignedToList();
+        obsDateTc.text = DateFormat('yyyy-MM-dd').format(DateTime.now());
         // });
       });
       if (obsId.value != 0) {
@@ -282,7 +285,7 @@ class CreateObservationController extends GetxController {
         facility_id: facilityId,
         contact_number: _contactNumberCtrlr,
         contractor_name: _contractorNameCtrlr,
-        cost_type: selectedCostTypeId.value, // Sending the selected cost type ID
+        cost_type: selectedCostTypeId, // Sending the selected cost type ID
         date_of_observation: _obsDateTc,
         location_of_observation: _locationOfObservationCtrlr,
         observation_description: _discriptionCtrlr,
@@ -517,18 +520,16 @@ class CreateObservationController extends GetxController {
           }
         }
         break;
-      case const (RxList<GenderModel>):
+      case const (RxList<TypeModel>):
         {
-          if (value.toString() != "Please Select") {
-            int costTypeIndex =
-                costType?.indexWhere((x) => x?.name == value.toString()) ?? -1;
-            if (costTypeIndex != -1 && costType?[costTypeIndex] != null) {
-           selectedCostTypeId.value = costType![costTypeIndex]!.id ?? 0;
-              selectedCostTypeList.value = value.toString();
-              isCostTypeListSelected.value = true;
-            }
+          if (value != "Please Select") {
+            int costTypeIndex = costType.indexWhere((x) => x.name == value);
+            selectedCostTypeId =
+                int.tryParse(costType[costTypeIndex].id ?? '0') ?? 0;
+            selectedCostTypeList.value = value;
+            isCostTypeListSelected.value = true;
           } else {
-            selectedCostTypeId = 0.obs;
+            selectedCostTypeId = 0;
           }
         }
         break;

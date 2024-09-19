@@ -90,6 +90,7 @@ class GetObservationList {
 
   factory GetObservationList.fromJson(Map<String, dynamic> json) {
     return GetObservationList(
+      
       id: json['id'],
       observation_type: json['observation_type'],
       facility_id: json['facility_id'],
@@ -102,17 +103,20 @@ class GetObservationList {
       contact_number: json['contact_number'] ?? '',
       cost_type: json['cost_type'],
       cost_name: json['cost_name'] ?? '',
-      closed_date: json['closed_date'] ?? '',
+      // closed_date: json['closed_date'] ?? '',
+      closed_date: Utility.getFormatedyearMonthDay(json['closed_date']),
       observation_status: json['observation_status'] ?? '',
       date_of_observation: json['date_of_observation'] ?? '',
       type_of_observation: json['type_of_observation'],
       closer_date: json['closer_date'] ?? '',
+       
       location_of_observation: json['location_of_observation'] ?? '',
       remaining_days: json['remaining_days'] != null
           ? json['remaining_days'].toString() // Convert int to String
           : null, // Handle null case
       source_of_observation: json['source_of_observation'],
-      target_date: json['target_date'] ?? '',
+      // target_date: json['target_date'] ?? '',
+      target_date: Utility.getFormatedyearMonthDay(json['target_date']),
       corrective_action: json['corrective_action'] ?? '',
       observation_description: json['observation_description'] ?? '',
       type_of_observation_name: json['type_of_observation_name'] ?? '',

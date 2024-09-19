@@ -512,10 +512,18 @@ class ObservationListDataSource extends DataTableSource {
       '${ObservationListDetails?.risk_type ?? ''}',
       '${ObservationListDetails?.observation_description ?? ''}',
       '${ObservationListDetails?.assigned_to_name ?? ''}',
-      '${ObservationListDetails?.target_date ?? ''}',
+      // '${ObservationListDetails?.target_date ?? ''}',
+
+      ObservationListDetails?.target_date == "0001-01-01"
+          ? "-"
+          : '${ObservationListDetails?.target_date ?? '-'}',
       '${ObservationListDetails?.action_taken ?? ''}',
-      closedDate,
+      ObservationListDetails?.closed_date == "0001-01-01"
+          ? "-"
+          : '${ObservationListDetails?.closed_date ?? '-'}',
+      // closedDate,
       '${ObservationListDetails?.cost_name ?? ''}',
+      '${ObservationListDetails?.remaining_days ?? ''}',
       // '${ObservationListDetails?.status_code ?? ''}',
 
       'Actions',

@@ -10,6 +10,7 @@ class CreateCheckpoint {
   int failure_weightage;
   int?type_of_observation;
   int? risk_type;
+  int? cost_type;
   CreateCheckpoint(
       {required this.check_point,
       required this.checklist_id,
@@ -21,7 +22,8 @@ class CreateCheckpoint {
       this.checkpoint_type,
       this.type,
       this.type_of_observation,
-      this.risk_type
+      this.risk_type,
+      this.cost_type
       });
 
   factory CreateCheckpoint.fromJson(Map<String, dynamic> json) =>
@@ -37,6 +39,7 @@ class CreateCheckpoint {
         is_document_required: json['is_document_required'],
         type_of_observation: json['type_of_observation'],
         risk_type: json['risk_type'],
+        cost_type: json['cost_type'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -51,6 +54,7 @@ class CreateCheckpoint {
         'type': type,
         'type_of_observation': type_of_observation,
         'risk_type': risk_type,
+        'cost_type': cost_type,
 
       };
 }
