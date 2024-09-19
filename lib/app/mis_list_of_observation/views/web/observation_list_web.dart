@@ -657,6 +657,29 @@ class ObservationListDataSource extends DataTableSource {
                                       },
                                     )
                                   : Dimens.box0,
+                          ObservationListDetails!.status_code == 552 &&
+                                  controller
+                                          .getObservationListModel!.createdid !=
+                                      varUserAccessModel.value.user_id
+                              ? TableActionButton(
+                                  color: ColorValues.closeColor,
+                                  icon: Icons.close,
+                                  message: 'Close',
+                                  onPress: () {
+                                    // controller.clearStoreData();
+                                    int obsId = ObservationListDetails!.id ?? 0;
+                                    if (obsId != 0) {
+                                      Get.offAllNamed(
+                                        Routes.createObservation,
+                                        arguments: {
+                                          'obsId': ObservationListDetails.id,
+                                          'type': 1
+                                        },
+                                      );
+                                    }
+                                  },
+                                )
+                              : Dimens.box0,
                         ],
                       )
                     : Text(value.toString()),

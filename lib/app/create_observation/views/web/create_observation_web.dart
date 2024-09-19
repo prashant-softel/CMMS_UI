@@ -3,6 +3,7 @@ import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/create_observation/create_observation_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -1153,7 +1154,19 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                   )
                                 : Dimens.box0,
                         Dimens.boxWidth15,
-                        controller.obsId != 0 && controller.type == 1
+                        controller.obsId != 0 &&
+                                controller.type == 1 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kObservationFeatureId &&
+                                            e.approve ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
+                                    0 &&
+                                controller.getObsById.value!.status_code == 555
                             ? Container(
                                 height: 40,
                                 child: CustomElevatedButton(
@@ -1172,7 +1185,9 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                             : Dimens.box0,
                         Dimens.boxWidth15,
                         controller.getObsById.value!.status_code == 552 &&
-                                controller.obsId != 0
+                                controller.obsId != 0 &&
+                                controller.getObsById.value!.createdid !=
+                                    varUserAccessModel.value.user_id
                             ? Container(
                                 height: 45,
                                 child: CustomElevatedButton(
