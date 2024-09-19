@@ -82,7 +82,7 @@ class ObservationListController extends GetxController {
   final Map<String, double> columnwidth = {
     "Id": 120,
     "Month": 100,
-    "Observation Date": 290,
+    "Observation Date": 295,
     "Contractor Name": 200,
     "Location": 150,
     "Type": 100,

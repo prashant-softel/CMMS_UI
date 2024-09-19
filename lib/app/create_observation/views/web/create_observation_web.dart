@@ -478,7 +478,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                 CustomRichText(
                                                                     title:
                                                                         'Date of Observation'),
-                                                                Dimens.boxWidth3,
+                                                                Dimens
+                                                                    .boxWidth3,
                                                                 CustomTextFieldForStock(
                                                                   width: MediaQuery.of(
                                                                               context)
@@ -500,12 +501,11 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                   textController:
                                                                       controller
                                                                           .obsDateTc,
-                                                                  errorController:
-                                                                      controller
-                                                                              .isObsDateTcInvalid
-                                                                              .value
-                                                                          ? "Required field"
-                                                                          : null,
+                                                                  errorController: controller
+                                                                          .isObsDateTcInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
                                                                   onChanged:
                                                                       (value) {
                                                                     if (value
@@ -765,74 +765,153 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                       ),
                                                     ]),
                                                   ),
-                                                  Dimens.boxHeight20,
-                                                     controller.obsId !=
-                                                                      0 &&
-                                                                  controller
-                                                                          .type ==
-                                                                      1
-                                                              ?
-                                                  Padding(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 20),
-                                                    child: Row(children: [
-                                                      Text(
-                                                          'Corrective/Preventive Action: ',
-                                                          style: Styles.blue14),
-                                                      Expanded(
-                                                        child: TextField(
-                                                          controller: controller
-                                                              .correctivePreventiveCtrlr,
-                                                          style:
-                                                              GoogleFonts.lato(
-                                                            textStyle: TextStyle(
-                                                                fontSize: 16.0,
-                                                                height: 1.0,
-                                                                color: Colors
-                                                                    .black),
-                                                          ),
-                                                          decoration:
-                                                              InputDecoration(
-                                                            disabledBorder:
-                                                                OutlineInputBorder(
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                color: ColorValues
-                                                                    .appLightGreyColor,
-                                                                width: 1.0,
+                                                  Dimens.boxHeight10,
+                                                  controller.obsId != 0 &&
+                                                          controller.type == 1
+                                                      ? Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                                  horizontal:
+                                                                      20),
+                                                          child: Row(children: [
+                                                            Text(
+                                                                'Corrective/Preventive Action: ',
+                                                                style: Styles
+                                                                    .blue14),
+                                                            Expanded(
+                                                              child: TextField(
+                                                                controller:
+                                                                    controller
+                                                                        .correctivePreventiveCtrlr,
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .lato(
+                                                                  textStyle: TextStyle(
+                                                                      fontSize:
+                                                                          16.0,
+                                                                      height:
+                                                                          1.0,
+                                                                      color: Colors
+                                                                          .black),
+                                                                ),
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  disabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: ColorValues
+                                                                          .appLightGreyColor,
+                                                                      width:
+                                                                          1.0,
+                                                                    ),
+                                                                  ),
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: ColorValues
+                                                                          .appLightBlueColor,
+                                                                      width:
+                                                                          1.0,
+                                                                    ),
+                                                                  ),
+                                                                  focusedBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: ColorValues
+                                                                          .appLightBlueColor,
+                                                                      width:
+                                                                          1.0,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .multiline,
+                                                                minLines: 3,
+                                                                maxLines: null,
                                                               ),
                                                             ),
-                                                            enabledBorder:
-                                                                OutlineInputBorder(
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                color: ColorValues
-                                                                    .appLightBlueColor,
-                                                                width: 1.0,
+                                                          ]),
+                                                        )
+                                                      : SizedBox.shrink(),
+                                                  Dimens.boxHeight15,
+                                                  controller.getObsById.value!
+                                                              .status_code ==
+                                                          552
+                                                      ? Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                                  horizontal:
+                                                                      20),
+                                                          child: Row(children: [
+                                                            Text(
+                                                                'Action Taken : ',
+                                                                style: Styles
+                                                                    .blue14),
+                                                            Expanded(
+                                                              child: TextField(
+                                                                controller:
+                                                                    controller
+                                                                        .action_takenCtrlr,
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .lato(
+                                                                  textStyle: TextStyle(
+                                                                      fontSize:
+                                                                          16.0,
+                                                                      height:
+                                                                          1.0,
+                                                                      color: Colors
+                                                                          .black),
+                                                                ),
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  disabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: ColorValues
+                                                                          .appLightGreyColor,
+                                                                      width:
+                                                                          1.0,
+                                                                    ),
+                                                                  ),
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: ColorValues
+                                                                          .appLightBlueColor,
+                                                                      width:
+                                                                          1.0,
+                                                                    ),
+                                                                  ),
+                                                                  focusedBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: ColorValues
+                                                                          .appLightBlueColor,
+                                                                      width:
+                                                                          1.0,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .multiline,
+                                                                minLines: 3,
+                                                                maxLines: null,
                                                               ),
                                                             ),
-                                                            focusedBorder:
-                                                                OutlineInputBorder(
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                color: ColorValues
-                                                                    .appLightBlueColor,
-                                                                width: 1.0,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .multiline,
-                                                          minLines: 3,
-                                                          maxLines: null,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                  )
-                                                  : SizedBox
-                                                         .shrink(),
+                                                          ]),
+                                                        )
+                                                      : Dimens.box0,
                                                   Dimens.boxHeight15,
                                                   Center(
                                                     child: Container(
@@ -1031,52 +1110,56 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                   },
                                 ),
                               )
-                            : Container(
-                                height: 40,
-                                child: CustomElevatedButton(
-                                  backgroundColor: ColorValues.submitColor,
-                                  text: 'Update',
-                                  onPressed: () {
-                                    // Check if the requester_id is different from the user_id
-                                    if (controller
-                                            .getObsById.value!.createdid !=
-                                        varUserAccessModel.value.user_id) {
-                                      // Show the Invalid User dialog if the IDs do not match
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: Text("Invalid User"),
-                                            actions: <Widget>[
-                                              TextButton(
-                                                onPressed: () {
-                                                  Get.back(); // Close the dialog
-                                                },
-                                                child: Text("OK"),
-                                              ),
-                                            ],
+                            : controller.type != 1
+                                ? Container(
+                                    height: 40,
+                                    child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.submitColor,
+                                      text: 'Update',
+                                      onPressed: () {
+                                        // Check if the requester_id is different from the user_id
+                                        if (controller
+                                                .getObsById.value!.createdid !=
+                                            varUserAccessModel.value.user_id) {
+                                          // Show the Invalid User dialog if the IDs do not match
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: Text(
+                                                    "Invalid User for Update"),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Get.back(); // Close the dialog
+                                                    },
+                                                    child: Text("OK"),
+                                                  ),
+                                                ],
+                                              );
+                                            },
                                           );
-                                        },
-                                      );
-                                    } else {
-                                      // If IDs match, continue with the existing logic
-                                      controller.isFormInvalid.value = false;
-                                      controller.createObs(
-                                        position: 0,
-                                        fileIds: dropzoneController.fileIds,
-                                      );
-                                    }
-                                  },
-                                ),
-                              ),
+                                        } else {
+                                          // If IDs match, continue with the existing logic
+                                          controller.isFormInvalid.value =
+                                              false;
+                                          controller.createObs(
+                                            position: 0,
+                                            fileIds: dropzoneController.fileIds,
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  )
+                                : Dimens.box0,
                         Dimens.boxWidth15,
-                        controller.obsId != 0
+                        controller.obsId != 0 && controller.type == 1
                             ? Container(
                                 height: 40,
                                 child: CustomElevatedButton(
                                   backgroundColor:
                                       Color.fromARGB(255, 10, 69, 133),
-                                  text: 'Assign',
+                                  text: 'Update/Assign',
                                   onPressed: () {
                                     controller.isFormInvalid.value = false;
                                     controller.createObs(

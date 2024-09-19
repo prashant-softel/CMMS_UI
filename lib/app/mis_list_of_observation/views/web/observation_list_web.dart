@@ -76,7 +76,7 @@ class _ObservationWebState extends State<ObservationListWeb> {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.offNamed(Routes.misDashboard);
+                                Get.offAllNamed(Routes.misDashboard);
                               },
                               child: Text(" / MIS", style: Styles.greyLight14),
                             ),
@@ -522,7 +522,10 @@ class ObservationListDataSource extends DataTableSource {
           ? "-"
           : '${ObservationListDetails?.closed_date ?? '-'}',
       // closedDate,
-      '${ObservationListDetails?.cost_name ?? ''}',
+
+      ObservationListDetails?.cost_name == "Empty"
+          ? "-"
+          : '${ObservationListDetails?.cost_name ?? '-'}',
       '${ObservationListDetails?.remaining_days ?? ''}',
       // '${ObservationListDetails?.status_code ?? ''}',
 
@@ -575,7 +578,7 @@ class ObservationListDataSource extends DataTableSource {
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            '${ObservationListDetails.observation_status}',
+                            '${ObservationListDetails.short_status}',
                             style: Styles.white10.copyWith(
                               color: Colors.white,
                             ),
@@ -654,7 +657,6 @@ class ObservationListDataSource extends DataTableSource {
                                       },
                                     )
                                   : Dimens.box0,
-                                  
                         ],
                       )
                     : Text(value.toString()),

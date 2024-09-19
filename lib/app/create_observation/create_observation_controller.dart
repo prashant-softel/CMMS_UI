@@ -47,6 +47,8 @@ class CreateObservationController extends GetxController {
   var costTypeCtrlr = TextEditingController();
   var locationOfObservationCtrlr = TextEditingController();
   var discriptionCtrlr = TextEditingController();
+  var action_takenCtrlr = TextEditingController();
+
   RxList<RiskTypeModel> incidentrisktypeList = <RiskTypeModel>[].obs;
   Rx<bool> isRiskTypeListSelected = true.obs;
   Rx<bool> isTypeOfObsListSelected = true.obs;
@@ -58,8 +60,7 @@ class CreateObservationController extends GetxController {
 
   Rx<int> type = 0.obs;
 
-
-RxList<TypeModel> costType = <TypeModel>[
+  RxList<TypeModel> costType = <TypeModel>[
     TypeModel(name: 'Capex', id: "1"),
     TypeModel(name: 'Opex', id: "2"),
   ].obs;
@@ -89,7 +90,7 @@ RxList<TypeModel> costType = <TypeModel>[
   Rx<bool> islocationofObservationInvalid = false.obs;
   Rx<DateTime> selectedObsTime = DateTime.now().obs;
   Rx<DateTime> selectedTargetTime = DateTime.now().obs;
-int selectedCostTypeId = 0;
+  int selectedCostTypeId = 0;
 // GetObservationList? selectedItem;
   Rx<bool> isLoading = true.obs;
   int facilityId = 0;
@@ -210,11 +211,15 @@ int selectedCostTypeId = 0;
       contractorNameCtrlr.text = getObsById.value?.contractor_name ?? "";
       correctivePreventiveCtrlr.text =
           getObsById.value?.preventive_action ?? "";
-      selectedCostTypeList.value = getObsById.value?.cost_name ?? "";
+      selectedCostTypeList.value = getObsById.value?.cost_name == "Empty"
+          ? ""
+          : getObsById.value?.cost_name.toString() ?? "";
       discriptionCtrlr.text = getObsById.value?.observation_description ?? "";
       locationOfObservationCtrlr.text =
           getObsById.value?.location_of_observation ?? "";
-      targetDateTc.text = getObsById.value?.target_date ?? "";
+      targetDateTc.text = getObsById.value?.target_date == '0001-01-01'
+          ? ""
+          : getObsById.value?.target_date ?? "";
       obsDateTc.text = getObsById.value?.date_of_observation ?? "";
       selectedRiskTypeList.value = getObsById.value?.risk_type_name ?? '';
       selectedTypeOfObs.value =
@@ -271,34 +276,35 @@ int selectedCostTypeId = 0;
       String _contactNumberCtrlr = contactNumberCtrlr.text.trim();
       String _obsDateTc = obsDateTc.text.trim();
       String _discriptionCtrlr = discriptionCtrlr.text.trim();
+      String _action_takenCtrlr = discriptionCtrlr.text.trim();
+
       String _locationOfObservationCtrlr =
           locationOfObservationCtrlr.text.trim();
       // String _targetDateTc = targetDateTc.text.trim();
 
       // Assigning the correct id based on the selected cost type
-     int idToSend = position == 1 ? 0 : obsId.value;
+      int idToSend = position == 1 ? 0 : obsId.value;
       String? targetDateToSend =
           position == 1 ? null : targetDateTc.text.trim();
 
       CreateObsModel createObsModel = CreateObsModel(
-        id: idToSend,
-        facility_id: facilityId,
-        contact_number: _contactNumberCtrlr,
-        contractor_name: _contractorNameCtrlr,
-        cost_type: selectedCostTypeId, // Sending the selected cost type ID
-        date_of_observation: _obsDateTc,
-        location_of_observation: _locationOfObservationCtrlr,
-        observation_description: _discriptionCtrlr,
-
-        preventive_action: _correctivePreventiveCtrlr,
-        assigned_to_id: selectedAssignedToId.value,
-        //  assignedId: selectedAssignedToId.value,
-        risk_type_id: incidenttypeId,
-        source_of_observation: sourceOfObsId,
-        target_date: targetDateToSend,
-        type_of_observation: typeOfObsId,
-        uploadfileIds: fileIds,
-      );
+          id: idToSend,
+          facility_id: facilityId,
+          contact_number: _contactNumberCtrlr,
+          contractor_name: _contractorNameCtrlr,
+          cost_type: selectedCostTypeId, // Sending the selected cost type ID
+          date_of_observation: _obsDateTc,
+          location_of_observation: _locationOfObservationCtrlr,
+          observation_description: _discriptionCtrlr,
+          preventive_action: _correctivePreventiveCtrlr,
+          assigned_to_id: selectedAssignedToId.value,
+          //  assignedId: selectedAssignedToId.value,
+          risk_type_id: incidenttypeId,
+          source_of_observation: sourceOfObsId,
+          target_date: position == 1 || position == 2 ? targetDateToSend : null,
+          type_of_observation: typeOfObsId,
+          uploadfileIds: fileIds,
+          action_taken: _action_takenCtrlr);
 
       // Convert the CreateObsModel instance to JSON
       var createObsModelJsonString = createObsModel.toJson();
@@ -320,8 +326,6 @@ int selectedCostTypeId = 0;
       print(e);
     }
   }
-
-
 
   String? getAssignedToName(int _selectedAssignedToId) {
     final item =
@@ -458,7 +462,6 @@ int selectedCostTypeId = 0;
   void onValueChanged(dynamic list, dynamic value) {
     print("$value");
     switch (list.runtimeType) {
-
       case const (RxList<EmployeeModel>):
         {
           if (value != "Please Select") {
