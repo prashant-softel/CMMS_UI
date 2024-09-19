@@ -2,6 +2,7 @@ import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/doc_upload/doc_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
@@ -321,7 +322,8 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                                             onPressed:
                                                                 () async {
                                                               String baseUrl =
-                                                                  'http://172.20.43.9:83/';
+                                                                  UrlPath
+                                                                      .deployUrl;
                                                               String fileName =
                                                                   controller
                                                                           .selectedItem
@@ -477,7 +479,7 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                                   ColorValues.submitColor,
                                               text: "ReNew Upload",
                                               onPressed: () {
-                                                  controller.isFormInvalid.value =
+                                                controller.isFormInvalid.value =
                                                     false;
                                                 controller
                                                     .reNewUploadDocumentNew(

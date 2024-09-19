@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';import 'package:cmms/app/utils/url_path.dart';
 
 class ViewIncidentReportContentWeb
     extends GetView<ViewIncidentReportController> {
@@ -293,7 +293,6 @@ class ViewIncidentReportContentWeb
                                                 ),
                                               ),
 
-                                       
                                               ///Details Of Injured Person
                                               controller
                                                       .detailsOfInjuredPersonList!
@@ -726,7 +725,6 @@ class ViewIncidentReportContentWeb
                                                               ),
                                                             ),
                                                           ),
-                                                      
                                                         ],
                                                       ),
                                                     ),
@@ -848,7 +846,7 @@ class ViewIncidentReportContentWeb
                                                                             onPress:
                                                                                 () async {
                                                                               // String baseUrl = "http://65.0.20.19/CMMS_API/";
-                                                                              String baseUrl = 'http://172.20.43.9:83/';
+                                                                              String baseUrl = UrlPath.deployUrl;
                                                                               String fileName = controller.file_list![index]?.fileName ?? "";
                                                                               String fullUrl = baseUrl + fileName;
                                                                               if (await canLaunch(fullUrl)) {
@@ -856,7 +854,7 @@ class ViewIncidentReportContentWeb
                                                                               } else {
                                                                                 throw 'Could not launch $fullUrl';
                                                                               }
-                                                                              // String baseUrl = 'http://172.20.43.9:83/';
+                                                                              // String baseUrl = UrlPath.deployUrl;
                                                                             },
                                                                           )
                                                                         ],
@@ -1107,8 +1105,7 @@ class ViewIncidentReportContentWeb
                                               controller.whyWhyAnalysisList!
                                                       .isEmpty
                                                   ? Dimens.box0
-                                                  : 
-                                                  Container(
+                                                  : Container(
                                                       margin:
                                                           Dimens.edgeInsets20,
                                                       height: ((controller
@@ -1219,8 +1216,7 @@ class ViewIncidentReportContentWeb
                                               ///Root Cause Analysis
                                               controller.rootCauseList!.isEmpty
                                                   ? Dimens.box0
-                                                  : 
-                                                  Container(
+                                                  : Container(
                                                       margin:
                                                           Dimens.edgeInsets20,
                                                       height: ((controller

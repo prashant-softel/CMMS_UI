@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -312,7 +312,7 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                                                 message: 'view',
                                                 onPress: () async {
                                                   String baseUrl =
-                                                      'http://172.20.43.9:83/';
+                                                      UrlPath.deployUrl;
                                                   String fileName = controller
                                                           .editAddInventoryDetailsModel
                                                           .value!
@@ -328,7 +328,7 @@ class _CalibrationTabWidgetState extends State<ViewCalibrationTabWidget> {
                                                   } else {
                                                     throw 'Could not launch $fullUrl';
                                                   }
-                                                  // String baseUrl = 'http://172.20.43.9:83/';
+                                                  // String baseUrl = UrlPath.deployUrl;
                                                 },
                                               ),
                                             ],

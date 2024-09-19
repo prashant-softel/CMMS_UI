@@ -19,7 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';import 'package:cmms/app/utils/url_path.dart';
 
 class ViewPermitWeb extends GetView<ViewPermitController> {
   ViewPermitWeb({super.key});
@@ -1190,7 +1190,6 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                             FontWeight.bold),
                                                   ),
                                                 ),
-                                               
                                                 DataColumn(
                                                   label: Text(
                                                     "Start Date",
@@ -1275,7 +1274,6 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                               .toString() ??
                                                           ''),
                                                     ),
-                                                   
                                                     DataCell(
                                                       Text(controller
                                                               .lstAssociatedMc?[
@@ -1308,7 +1306,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                         ],
                                       ),
                                     ),
-                           
+
                               //veg linked to ptw
                               controller.lstAssociatedVc!.isEmpty
                                   ? Dimens.box0
@@ -1388,7 +1386,6 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                             FontWeight.bold),
                                                   ),
                                                 ),
-                                               
                                                 DataColumn(
                                                   label: Text(
                                                     "Start Date",
@@ -1477,7 +1474,6 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                               .toString() ??
                                                           ''),
                                                     ),
-                                                    
                                                     DataCell(
                                                       Text(controller
                                                               .lstAssociatedVc?[
@@ -1912,7 +1908,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                           // String baseUrl =
                                                           //     'http://65.0.20.19/CMMS_API/';
                                                           String baseUrl =
-                                                              'http://172.20.43.9:83/';
+                                                              UrlPath.deployUrl;
                                                           String endpoint =
                                                               '${controller.sopData}';
 
@@ -1945,7 +1941,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                         // String baseUrl =
                                                         //     'http://65.0.20.19/CMMS_API/';
                                                         String baseUrl =
-                                                            'http://172.20.43.9:83/';
+                                                            UrlPath.deployUrl;
                                                         String endpoint =
                                                             '${controller.jsaData}';
                                                         String fullUrl =
@@ -3015,7 +3011,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                         // String baseUrl =
                                                         //     "http://65.0.20.19/CMMS_API/";
                                                         String baseUrl =
-                                                            'http://172.20.43.9:83/';
+                                                            UrlPath.deployUrl;
                                                         String fileName =
                                                             controller
                                                                     .file_list![
@@ -3030,7 +3026,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                         } else {
                                                           throw 'Could not launch $fullUrl';
                                                         }
-                                                        // String baseUrl = 'http://172.20.43.9:83/';
+                                                        // String baseUrl = UrlPath.deployUrl;
                                                       },
                                                     )
                                                   ],

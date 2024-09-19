@@ -22,6 +22,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:cmms/app/utils/url_path.dart';
 
 class NewPermitWeb extends GetView<NewPermitController> {
   NewPermitWeb({Key? key}) : super(key: key);
@@ -2758,7 +2759,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                 //     baseUrl =
                                                                 //     "http://65.0.20.19/CMMS_API/";
                                                                 String baseUrl =
-                                                                    'http://172.20.43.9:83/';
+                                                                    UrlPath
+                                                                        .deployUrl;
                                                                 String
                                                                     fileName =
                                                                     controller
@@ -2775,7 +2777,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                 } else {
                                                                   throw 'Could not launch $fullUrl';
                                                                 }
-                                                                // String baseUrl = 'http://172.20.43.9:83/';
+                                                                // String baseUrl = UrlPath.deployUrl;
                                                               },
                                                             ),
                                                             controller
@@ -3843,8 +3845,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                     },
                                                                   );
                                                                   return null;
-                                                                } else if 
-                                                                (controller
+                                                                } else if (controller
                                                                         .newPermitDetailsModel
                                                                         .value!
                                                                         .requester_id !=

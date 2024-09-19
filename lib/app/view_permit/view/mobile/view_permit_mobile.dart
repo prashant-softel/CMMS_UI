@@ -16,7 +16,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';import 'package:cmms/app/utils/url_path.dart';
 
 class ViewPermitMobile extends GetView<ViewPermitController> {
   ViewPermitMobile({super.key});
@@ -1068,7 +1068,7 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                                                   // String baseUrl =
                                                   //     'http://65.0.20.19/CMMS_API/';
                                                   String baseUrl =
-                                                      'http://172.20.43.9:83/';
+                                                      UrlPath.deployUrl;
                                                   String endpoint =
                                                       '${controller.jsaData}';
                                                   String fullUrl =
@@ -1091,7 +1091,7 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                                                   // String baseUrl =
                                                   //     'http://65.0.20.19/CMMS_API/';
                                                   String baseUrl =
-                                                      'http://172.20.43.9:83/';
+                                                      UrlPath.deployUrl;
                                                   String endpoint =
                                                       '${controller.sopData}';
 
@@ -1165,7 +1165,7 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                                                       // String baseUrl =
                                                       //     "http://65.0.20.19/CMMS_API/";
                                                       String baseUrl =
-                                                          'http://172.20.43.9:83/';
+                                                          UrlPath.deployUrl;
                                                       String fileName =
                                                           controller
                                                                   .file_list![

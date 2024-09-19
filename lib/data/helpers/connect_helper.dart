@@ -101,7 +101,7 @@ class ConnectHelper {
   // late Dio _dio;
 
   /// Api wrapper initialization
-  final apiWrapper = ApiWrapper();
+  final apiWrapper = ApiWrapper(ApiEnvironment.dev);
 
   // /// Device info plugin initialization
   // final deviceinfo = DeviceInfoPlugin();
@@ -5666,23 +5666,25 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<CreateSOPModel> browseFiles(
-      {required String auth,
-      Uint8List? fileBytes,
-      required String fileName,
-      required int importType,
-      bool? isLoading,
-      required int facilityId}) async {
-    final request = http.MultipartRequest(
-        'POST',
-        // Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
-        Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
+  Future<CreateSOPModel> browseFiles({
+    required String auth,
+    Uint8List? fileBytes,
+    required String fileName,
+    required int importType,
+    bool? isLoading,
+    required int facilityId,
+  }) async {
+    final String uploadUrl =
+        '${apiWrapper.environment.baseUrl}FileUpload/UploadFile';
+
+    final request = http.MultipartRequest('POST', Uri.parse(uploadUrl));
 
     request.files.add(
-        http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
+      http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName),
+    );
+
     request.headers.addAll({'Authorization': 'Bearer $auth'});
 
-    // Send the request and wait for the response
     final response = await request.send();
     var respStr = await response.stream.bytesToString();
     var jsonResponse = json.decode(respStr);
@@ -5729,15 +5731,20 @@ class ConnectHelper {
           isLoading: true,
         );
       }
-    }
 
-    CreateSOPModel createSOPModel = CreateSOPModel(
+      CreateSOPModel createSOPModel = CreateSOPModel(
         jsa_fileId: int.parse(jsonResponse["id"][0].toString()),
-        sop_fileId: int.parse(jsonResponse["id"][0].toString()));
-    print('JsaDataId${createSOPModel.jsa_fileId}');
-    print('SOPDataId${createSOPModel.sop_fileId}');
+        sop_fileId: int.parse(jsonResponse["id"][0].toString()),
+      );
 
-    return createSOPModel;
+      print('JsaDataId ${createSOPModel.jsa_fileId}');
+      print('SOPDataId ${createSOPModel.sop_fileId}');
+
+      return createSOPModel;
+    } else {
+      throw Exception(
+          'Failed to upload file. Status code: ${response.statusCode}');
+    }
   }
 
   Future<PmFiles?> browsePmFiles({
@@ -5746,29 +5753,32 @@ class ConnectHelper {
     required String fileName,
     bool? isLoading,
   }) async {
-    final request = http.MultipartRequest(
-        'POST',
-        // Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
-        Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
+    final String uploadUrl =
+        '${apiWrapper.environment.baseUrl}FileUpload/UploadFile';
+
+    final request = http.MultipartRequest('POST', Uri.parse(uploadUrl));
 
     request.files.add(
-        http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
+      http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName),
+    );
+
     request.headers.addAll({'Authorization': 'Bearer $auth'});
 
-    // Send the request and wait for the response
     final response = await request.send();
+
     var respStr = await response.stream.bytesToString();
     var jsonResponse = json.decode(respStr);
 
-    // Check if the upload was successful
     if (response.statusCode == 200) {
       PmFiles files =
           PmFiles(file_id: int.parse(jsonResponse["id"][0].toString()));
-      print('SOPDataId${files.file_id}');
+      print('File ID: ${files.file_id}');
 
       return files;
+    } else {
+      print('File upload failed with status: ${response.statusCode}');
+      return null;
     }
-    return null;
   }
 
   Future<ResponseModel> importInventory(
@@ -6304,28 +6314,33 @@ class ConnectHelper {
     required String fileName,
     bool? isLoading,
   }) async {
-    final request = http.MultipartRequest(
-        'POST',
-        // Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
-        Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
+    final String uploadUrl =
+        '${apiWrapper.environment.baseUrl}FileUpload/UploadFile';
+
+    final request = http.MultipartRequest('POST', Uri.parse(uploadUrl));
 
     request.files.add(
-        http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
+      http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName),
+    );
+
     request.headers.addAll({'Authorization': 'Bearer $auth'});
 
-    // Send the request and wait for the response
     final response = await request.send();
+
     var respStr = await response.stream.bytesToString();
     var jsonResponse = json.decode(respStr);
 
-    // Check if the upload was successful
-    // if (response.statusCode == 200) {
-    AddUserModel addUserModel = AddUserModel(
-      photo_id: int.parse(jsonResponse["id"][0].toString()),
-    );
-    print('photo_id${addUserModel.photo_id}');
+    if (response.statusCode == 200) {
+      AddUserModel addUserModel = AddUserModel(
+        photo_id: int.parse(jsonResponse["id"][0].toString()),
+      );
+      print('photo_id ${addUserModel.photo_id}');
 
-    return addUserModel;
+      return addUserModel;
+    } else {
+      throw Exception(
+          'Failed to upload image, status code: ${response.statusCode}');
+    }
   }
 
   Future<AddInventoryRequestModel> uploadImgeInventory({
@@ -6334,29 +6349,34 @@ class ConnectHelper {
     required String fileName,
     bool? isLoading,
   }) async {
-    final request = http.MultipartRequest(
-        'POST',
-        // Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
-        Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
+    final String uploadUrl =
+        '${apiWrapper.environment.baseUrl}FileUpload/UploadFile';
+
+    final request = http.MultipartRequest('POST', Uri.parse(uploadUrl));
 
     request.files.add(
-        http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
+      http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName),
+    );
+
     request.headers.addAll({'Authorization': 'Bearer $auth'});
 
-    // Send the request and wait for the response
     final response = await request.send();
+
     var respStr = await response.stream.bytesToString();
     var jsonResponse = json.decode(respStr);
 
-    // Check if the upload was successful
-    // if (response.statusCode == 200) {
-    AddInventoryRequestModel addInventoryRequestModel =
-        AddInventoryRequestModel(
-      categoryId: int.parse(jsonResponse["categoryId"][0].toString()),
-    );
-    print('photo_id${addInventoryRequestModel.categoryId}');
+    if (response.statusCode == 200) {
+      AddInventoryRequestModel addInventoryRequestModel =
+          AddInventoryRequestModel(
+        categoryId: int.parse(jsonResponse["categoryId"][0].toString()),
+      );
+      print('Category ID: ${addInventoryRequestModel.categoryId}');
 
-    return addInventoryRequestModel;
+      return addInventoryRequestModel;
+    } else {
+      throw Exception(
+          'Failed to upload image, status code: ${response.statusCode}');
+    }
   }
 
   ///
