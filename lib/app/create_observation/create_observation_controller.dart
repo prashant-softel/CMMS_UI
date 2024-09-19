@@ -14,6 +14,7 @@ import 'package:cmms/domain/models/type_model.dart';
 import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import '../home/home_controller.dart';
 
@@ -57,9 +58,10 @@ class CreateObservationController extends GetxController {
 
   Rx<int> type = 0.obs;
 
-  RxList<GenderModel?>? costType = <GenderModel?>[
-    GenderModel(id: 1, name: "Capex"),
-    GenderModel(id: 2, name: "Opex"),
+
+RxList<TypeModel> costType = <TypeModel>[
+    TypeModel(name: 'Capex', id: "1"),
+    TypeModel(name: 'Opex', id: "2"),
   ].obs;
   Rx<bool> isCostTypeListSelected = true.obs;
   Rx<String> selectedCostTypeList = ''.obs;
@@ -87,7 +89,7 @@ class CreateObservationController extends GetxController {
   Rx<bool> islocationofObservationInvalid = false.obs;
   Rx<DateTime> selectedObsTime = DateTime.now().obs;
   Rx<DateTime> selectedTargetTime = DateTime.now().obs;
-  int selectedCostTypeId = 1;
+int selectedCostTypeId = 0;
 // GetObservationList? selectedItem;
   Rx<bool> isLoading = true.obs;
   int facilityId = 0;
@@ -110,6 +112,7 @@ class CreateObservationController extends GetxController {
         // Future.delayed(Duration(seconds: 1), () {
         getSourceObservationList();
         getAssignedToList();
+        obsDateTc.text = DateFormat('yyyy-MM-dd').format(DateTime.now());
         // });
       });
       if (obsId.value != 0) {
@@ -273,7 +276,7 @@ class CreateObservationController extends GetxController {
       // String _targetDateTc = targetDateTc.text.trim();
 
       // Assigning the correct id based on the selected cost type
-      int idToSend = position == 1 || position == 2 ? 0 : obsId.value;
+     int idToSend = position == 1 ? 0 : obsId.value;
       String? targetDateToSend =
           position == 1 ? null : targetDateTc.text.trim();
 
@@ -318,29 +321,7 @@ class CreateObservationController extends GetxController {
     }
   }
 
-  void onDropdownValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      case const (RxList<EmployeeModel>):
-        {
-          if (value != "Please Select") {
-            int assignedToIndex =
-                assignedToList.indexWhere((x) => x?.name == value);
-            selectedAssignedToId.value =
-                assignedToList[assignedToIndex]?.id ?? 0;
-            isAssignedToSelected.value = true;
-            selectedAssignedTo.value = value;
-          } else {
-            selectedAssignedToId.value = 0;
-          }
-        }
-        break;
-      default:
-        {
-          //statements;
-        }
-        break;
-    }
-  }
+
 
   String? getAssignedToName(int _selectedAssignedToId) {
     final item =
@@ -477,6 +458,21 @@ class CreateObservationController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print("$value");
     switch (list.runtimeType) {
+
+      case const (RxList<EmployeeModel>):
+        {
+          if (value != "Please Select") {
+            int assignedToIndex =
+                assignedToList.indexWhere((x) => x?.name == value);
+            selectedAssignedToId.value =
+                assignedToList[assignedToIndex]?.id ?? 0;
+            isAssignedToSelected.value = true;
+            selectedAssignedTo.value = value;
+          } else {
+            selectedAssignedToId.value = 0;
+          }
+        }
+        break;
       case const (RxList<RiskTypeModel>):
         {
           if (value != "Please Select") {
@@ -524,16 +520,14 @@ class CreateObservationController extends GetxController {
           }
         }
         break;
-      case const (RxList<GenderModel>):
+      case const (RxList<TypeModel>):
         {
-          if (value.toString() != "Please Select") {
-            int costTypeIndex =
-                costType?.indexWhere((x) => x?.name == value.toString()) ?? -1;
-            if (costTypeIndex != -1 && costType?[costTypeIndex] != null) {
-              selectedCostTypeId = costType![costTypeIndex]!.id ?? 0;
-              selectedCostTypeList.value = value.toString();
-              isCostTypeListSelected.value = true;
-            }
+          if (value != "Please Select") {
+            int costTypeIndex = costType.indexWhere((x) => x.name == value);
+            selectedCostTypeId =
+                int.tryParse(costType[costTypeIndex].id ?? '0') ?? 0;
+            selectedCostTypeList.value = value;
+            isCostTypeListSelected.value = true;
           } else {
             selectedCostTypeId = 0;
           }

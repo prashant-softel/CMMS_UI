@@ -559,26 +559,26 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                 ),
                                               )
                                             : Dimens.box0,
-                                        controller.getObsById.value!
-                                                    .status_code !=
-                                                552
-                                            ? Container(
-                                                height: 45,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.rejectColor,
-                                                  text: "Close",
-                                                  icon: Icons.close,
-                                                  onPressed: () {
-                                                    Get.dialog(
-                                                        ListOfObsCloseDialog(
-                                                      id: controller
-                                                          .obsId.value,
-                                                    ));
-                                                  },
-                                                ),
-                                              )
-                                            : Dimens.box0,
+                                        // controller.getObsById.value!
+                                        //             .status_code !=
+                                        //         552
+                                        //     ? Container(
+                                        //         height: 45,
+                                        //         child: CustomElevatedButton(
+                                        //           backgroundColor:
+                                        //               ColorValues.rejectColor,
+                                        //           text: "Close",
+                                        //           icon: Icons.close,
+                                        //           onPressed: () {
+                                        //             Get.dialog(
+                                        //                 ListOfObsCloseDialog(
+                                        //               id: controller
+                                        //                   .obsId.value,
+                                        //             ));
+                                        //           },
+                                        //         ),
+                                        //       )
+                                        //     : Dimens.box0,
                                       ],
                                     ),
                                   ),

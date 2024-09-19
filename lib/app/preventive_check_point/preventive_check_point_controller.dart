@@ -54,14 +54,16 @@ class PreventiveCheckPointController extends GetxController {
   Rx<String> selectedchecklistId = "".obs;
   int typeOfObsId = 0;
   int incidenttypeId = 0;
+  int selectedCostTypeId = 0;
   Rx<bool> isTypeOfObsListSelected = true.obs;
   RxList<TypeOfObsListModel?> typeOfObsList = <TypeOfObsListModel>[].obs;
   Rx<bool> isSelectedTypeOfObs = true.obs;
   Rx<String> selectedTypeOfObs = ''.obs;
   RxList<CheckPointModel?>? preventiveCheckpoint = <CheckPointModel?>[].obs;
-  RxList<GenderModel?>? costType = <GenderModel?>[
-    GenderModel(id: 1, name: "Capex"),
-    GenderModel(id: 2, name: "Opex"),
+
+RxList<TypeModel> costType = <TypeModel>[
+    TypeModel(name: 'Capex', id: "1"),
+    TypeModel(name: 'Opex', id: "2"),
   ].obs;
   RxList<CheckPointModel?>? BufferPreventiveCheckPoint =
       <CheckPointModel?>[].obs;
@@ -86,6 +88,7 @@ class PreventiveCheckPointController extends GetxController {
     "Type": true,
     "Type of Observation": true,
     "Risk Type": true,
+    "Cost Type": true,
 
     // "search": true,
   });
@@ -100,6 +103,7 @@ class PreventiveCheckPointController extends GetxController {
     "Type": 200,
     "Type of Observation": 200,
     "Risk Type": 200,
+    "Cost Type": 200,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -119,6 +123,7 @@ class PreventiveCheckPointController extends GetxController {
   RxString typeFilterText = ''.obs;
   RxString typeObsFilterText = ''.obs;
   RxString typeRiskFilterText = ''.obs;
+  RxString typeCostFilterText = ''.obs;
 
   Rx<bool> isLoading = true.obs;
   @override
@@ -136,6 +141,7 @@ class PreventiveCheckPointController extends GetxController {
         "Type": typeFilterText,
         "Type of Observation": typeObsFilterText,
         "Risk Type": typeRiskFilterText,
+        "Cost Type": typeCostFilterText,
       };
 
       // if (type.value != 0) {
@@ -319,6 +325,8 @@ class PreventiveCheckPointController extends GetxController {
         type: type.value,
         type_of_observation: typeOfObsId,
         risk_type: incidenttypeId,
+        cost_type:selectedCostTypeId,
+        
       );
       var checkpointJsonString = [
         createCheckpoint.toJson()
@@ -520,7 +528,18 @@ class PreventiveCheckPointController extends GetxController {
             // selectedchecklistId=0;
           }
         }
-
+         case const (RxList<TypeModel>):
+        {
+          if (value != "Please Select") {
+            int costTypeIndex = costType.indexWhere((x) => x.name == value);
+            selectedCostTypeId =
+                int.tryParse(costType[costTypeIndex].id ?? '0') ?? 0;
+            selectedCostTypeList.value = value;
+            isCostTypeListSelected.value = true;
+          } else {
+            selectedCostTypeId = 0;
+          }
+        }
         break;
       case const (RxList<TypeOfObsListModel>):
         {
@@ -553,6 +572,7 @@ class PreventiveCheckPointController extends GetxController {
           }
         }
         break;
+      
 
       default:
         {

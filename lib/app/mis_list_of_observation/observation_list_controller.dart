@@ -55,6 +55,7 @@ class ObservationListController extends GetxController {
   RxString closerDateFilterText = ''.obs;
   RxString costTypeFilterText = ''.obs;
   RxString statusFilterText = ''.obs;
+  RxString remainingdaysFilterText = ''.obs;
 
   // RxString vendorFilterText = ''.obs;
 
@@ -69,29 +70,31 @@ class ObservationListController extends GetxController {
     "Type": true,
     "Source": true,
     "Risk Type": true,
-    "Obs Made": true,
+    "Description": true,
     "Responsible": true,
     "Target Date": true,
-    "Action Taken": true,
+    "created by": true,
     "Closed Date": true,
     "Cost type": true,
+    "Remaining days": true,
     // "Status": true,
   });
   final Map<String, double> columnwidth = {
     "Id": 120,
     "Month": 100,
-    "Observation Date": 270,
+    "Observation Date": 290,
     "Contractor Name": 200,
     "Location": 150,
-    "Type": 180,
-    "Source": 180,
+    "Type": 100,
+    "Source": 120,
     "Risk Type": 150,
-    "Obs Made": 200,
+    "Description": 200,
     "Responsible": 150,
     "Target Date": 150,
-    "Action Taken": 180,
+    "created by": 180,
     "Closed Date": 150,
     "Cost type": 150,
+    "Remaining days": 190,
     // "Status": 150,
   };
   Map<String, RxString> filterText = {};
@@ -114,12 +117,13 @@ class ObservationListController extends GetxController {
       "Type": typeFilterText,
       "Source": sourceFilterText,
       "Risk Type": riskTypeFilterText,
-      "Obs Made": correctiveFilterText,
+      "Description": correctiveFilterText,
       "Responsible": responsibleFilterText,
       "Target Date": targetDateFilterText,
-      "Action Taken": actionTakenFilterText,
+      "created by": actionTakenFilterText,
       "Closed Date": closerDateFilterText,
       "Cost type": costTypeFilterText,
+      "Remaining days": remainingdaysFilterText,
       // "Status": statusFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
@@ -285,7 +289,7 @@ class ObservationListController extends GetxController {
             ? (a.risk_type ?? '').compareTo(b.risk_type ?? '')
             : (b.risk_type ?? '').compareTo(a.risk_type ?? ''));
         break;
-      case 'Obs Made':
+      case 'Description':
         getObservationList.sort((a, b) => isAscending.value
             ? (a.type_of_observation_name ?? '')
                 .compareTo(b.type_of_observation_name ?? '')
@@ -302,7 +306,7 @@ class ObservationListController extends GetxController {
             ? (a.target_date ?? '').compareTo(b.target_date ?? '')
             : (b.target_date ?? '').compareTo(a.target_date ?? ''));
         break;
-      case 'Action Taken':
+      case 'created by':
         getObservationList.sort((a, b) => isAscending.value
             ? (a.action_taken ?? '').compareTo(b.action_taken ?? '')
             : (b.action_taken ?? '').compareTo(a.action_taken ?? ''));

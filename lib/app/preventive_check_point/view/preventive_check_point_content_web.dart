@@ -1185,8 +1185,9 @@ class CheckPointDataSource extends DataTableSource {
       checkPointDetails?.checkpoint_type == "Range"
           ? '${checkPointDetails?.checkpoint_type}(Min:${checkPointDetails?.min},Max:${checkPointDetails?.max})'
           : "${checkPointDetails?.checkpoint_type}",
-          '${checkPointDetails?.type_of_observation ?? ''}',
-          '${checkPointDetails?.risk_type ?? ''}',
+      '${checkPointDetails?.type_of_observation ?? ''}',
+      '${checkPointDetails?.risk_type ?? ''}',
+      '${checkPointDetails?.Cost_type_name ?? ''}',
 
       'Actions',
     ];
@@ -1257,12 +1258,11 @@ class CheckPointDataSource extends DataTableSource {
                                       1
                                   ? true
                                   : false;
-                                   controller.selectedTypeOfObs.value =
+                              controller.selectedTypeOfObs.value =
                                   "${controller.selectedItem?.type_of_observation}";
-                                   controller.selectedRiskTypeList.value =
+                              controller.selectedRiskTypeList.value =
                                   "${controller.selectedItem?.risk_type}";
                               controller.isContainerVisible.value = true;
-                              
                             },
                           )
                         : Dimens.box0,

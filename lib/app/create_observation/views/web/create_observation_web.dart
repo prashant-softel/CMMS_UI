@@ -11,6 +11,7 @@ import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
+import 'package:cmms/app/widgets/list_of_obs_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -258,44 +259,44 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             ],
                                                           ),
                                                           Dimens.boxHeight5,
-                                                          controller.obsId !=
-                                                                      0 &&
-                                                                  controller
-                                                                          .type ==
-                                                                      1
-                                                              ? Row(
-                                                                  children: [
-                                                                    CustomRichText(
-                                                                        title:
-                                                                            'Corrective/Preventive Action'),
-                                                                    Dimens
-                                                                        .boxWidth3,
-                                                                    LoginCustomTextfield(
-                                                                        width: (MediaQuery.of(context).size.width *
-                                                                            .2),
-                                                                        textController:
-                                                                            controller
-                                                                                .correctivePreventiveCtrlr,
-                                                                        //validate
-                                                                        errorController: controller.isCorrectiveInvalid.value
-                                                                            ? "Required field"
-                                                                            : null,
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          if (value.trim().length >
-                                                                              0) {
-                                                                            controller.isCorrectiveInvalid.value =
-                                                                                false;
-                                                                          } else {
-                                                                            controller.isCorrectiveInvalid.value =
-                                                                                true;
-                                                                          }
-                                                                        }),
-                                                                  ],
-                                                                )
-                                                              : SizedBox
-                                                                  .shrink(),
-                                                          Dimens.boxHeight5,
+                                                          // controller.obsId !=
+                                                          //             0 &&
+                                                          //         controller
+                                                          //                 .type ==
+                                                          //             1
+                                                          //     ? Row(
+                                                          //         children: [
+                                                          //           CustomRichText(
+                                                          //               title:
+                                                          //                   'Corrective/Preventive Action'),
+                                                          //           Dimens
+                                                          //               .boxWidth3,
+                                                          //           LoginCustomTextfield(
+                                                          //               width: (MediaQuery.of(context).size.width *
+                                                          //                   .2),
+                                                          //               textController:
+                                                          //                   controller
+                                                          //                       .correctivePreventiveCtrlr,
+                                                          //               //validate
+                                                          //               errorController: controller.isCorrectiveInvalid.value
+                                                          //                   ? "Required field"
+                                                          //                   : null,
+                                                          //               onChanged:
+                                                          //                   (value) {
+                                                          //                 if (value.trim().length >
+                                                          //                     0) {
+                                                          //                   controller.isCorrectiveInvalid.value =
+                                                          //                       false;
+                                                          //                 } else {
+                                                          //                   controller.isCorrectiveInvalid.value =
+                                                          //                       true;
+                                                          //                 }
+                                                          //               }),
+                                                          //         ],
+                                                          //       )
+                                                          //     : SizedBox
+                                                          //         .shrink(),
+                                                          // Dimens.boxHeight5,
                                                           // controller.obsId !=
                                                           //             0 ||
                                                           //         controller.getObsById.value
@@ -318,45 +319,12 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                             'Responsible Person'),
                                                                     Dimens
                                                                         .boxWidth3,
-                                                                    Container(
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(10),
-                                                                        border:
-                                                                            Border.all(
-                                                                          color: Color.fromARGB(
-                                                                              255,
-                                                                              227,
-                                                                              224,
-                                                                              224),
-                                                                          width:
-                                                                              1,
-                                                                        ),
-                                                                        boxShadow: [
-                                                                          BoxShadow(
-                                                                            color:
-                                                                                Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                                                                            spreadRadius:
-                                                                                2,
-                                                                            blurRadius:
-                                                                                5,
-                                                                            offset:
-                                                                                Offset(0, 2),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                      width: (MediaQuery.of(context)
-                                                                              .size
-                                                                              .width *
-                                                                          .2),
-                                                                      child:
-                                                                          DropdownWebWidget(
+                                                                    Obx(
+                                                                      () =>
+                                                                          DropdownWebStock(
                                                                         width:
                                                                             MediaQuery.of(context).size.width /
                                                                                 5,
-                                                                        controller:
-                                                                            controller,
                                                                         dropdownList:
                                                                             controller.assignedToList,
                                                                         isValueSelected: controller
@@ -369,36 +337,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                             controller.onValueChanged,
                                                                       ),
                                                                     ),
-                                                                    // LoginCustomTextfield(
-                                                                    //     width: (MediaQuery.of(
-                                                                    //                 context)
-                                                                    //             .size
-                                                                    //             .width *
-                                                                    //         .2),
-                                                                    //     textController:
-                                                                    //         controller
-                                                                    //             .responsiblePersonCtrlr,
-                                                                    //     //validate
-                                                                    //     errorController: controller
-                                                                    //             .isResponsibleInvalid
-                                                                    //             .value
-                                                                    //         ? "Required field"
-                                                                    //         : null,
-                                                                    //     onChanged:
-                                                                    //         (value) {
-                                                                    //       if (value
-                                                                    //               .trim()
-                                                                    //               .length >
-                                                                    //           0) {
-                                                                    //         controller
-                                                                    //             .isResponsibleInvalid
-                                                                    //             .value = false;
-                                                                    //       } else {
-                                                                    //         controller
-                                                                    //             .isResponsibleInvalid
-                                                                    //             .value = true;
-                                                                    //       }
-                                                                    //     }),
                                                                   ],
                                                                 )
                                                               : SizedBox
@@ -533,56 +471,59 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                 .end,
                                                         children: [
                                                           Dimens.boxWidth5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Date of Observation'),
-                                                              Dimens.boxWidth3,
-                                                              CustomTextFieldForStock(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                numberTextField:
-                                                                    true,
-                                                                onTap: () {
-                                                                  controller
-                                                                          .openObsDatePicker =
-                                                                      !controller
-                                                                          .openObsDatePicker;
-                                                                  controller
-                                                                      .update([
-                                                                    'stock_Mangement'
-                                                                  ]);
-                                                                },
-                                                                textController:
+                                                          IgnorePointer(
+                                                            ignoring: true,
+                                                            child: Row(
+                                                              children: [
+                                                                CustomRichText(
+                                                                    title:
+                                                                        'Date of Observation'),
+                                                                Dimens.boxWidth3,
+                                                                CustomTextFieldForStock(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  numberTextField:
+                                                                      true,
+                                                                  onTap: () {
                                                                     controller
-                                                                        .obsDateTc,
-                                                                errorController:
+                                                                            .openObsDatePicker =
+                                                                        !controller
+                                                                            .openObsDatePicker;
                                                                     controller
-                                                                            .isObsDateTcInvalid
-                                                                            .value
-                                                                        ? "Required field"
-                                                                        : null,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  if (value
-                                                                          .trim()
-                                                                          .length >
-                                                                      0) {
-                                                                    controller
-                                                                        .isObsDateTcInvalid
-                                                                        .value = false;
-                                                                  } else {
-                                                                    controller
-                                                                        .isObsDateTcInvalid
-                                                                        .value = true;
-                                                                  }
-                                                                },
-                                                              ),
-                                                            ],
+                                                                        .update([
+                                                                      'stock_Mangement'
+                                                                    ]);
+                                                                  },
+                                                                  textController:
+                                                                      controller
+                                                                          .obsDateTc,
+                                                                  errorController:
+                                                                      controller
+                                                                              .isObsDateTcInvalid
+                                                                              .value
+                                                                          ? "Required field"
+                                                                          : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .isObsDateTcInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .isObsDateTcInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  },
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
                                                           Dimens.boxHeight5,
                                                           Row(
@@ -824,6 +765,74 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                       ),
                                                     ]),
                                                   ),
+                                                  Dimens.boxHeight20,
+                                                     controller.obsId !=
+                                                                      0 &&
+                                                                  controller
+                                                                          .type ==
+                                                                      1
+                                                              ?
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 20),
+                                                    child: Row(children: [
+                                                      Text(
+                                                          'Corrective/Preventive Action: ',
+                                                          style: Styles.blue14),
+                                                      Expanded(
+                                                        child: TextField(
+                                                          controller: controller
+                                                              .correctivePreventiveCtrlr,
+                                                          style:
+                                                              GoogleFonts.lato(
+                                                            textStyle: TextStyle(
+                                                                fontSize: 16.0,
+                                                                height: 1.0,
+                                                                color: Colors
+                                                                    .black),
+                                                          ),
+                                                          decoration:
+                                                              InputDecoration(
+                                                            disabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: ColorValues
+                                                                    .appLightGreyColor,
+                                                                width: 1.0,
+                                                              ),
+                                                            ),
+                                                            enabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: ColorValues
+                                                                    .appLightBlueColor,
+                                                                width: 1.0,
+                                                              ),
+                                                            ),
+                                                            focusedBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: ColorValues
+                                                                    .appLightBlueColor,
+                                                                width: 1.0,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .multiline,
+                                                          minLines: 3,
+                                                          maxLines: null,
+                                                        ),
+                                                      ),
+                                                    ]),
+                                                  )
+                                                  : SizedBox
+                                                         .shrink(),
                                                   Dimens.boxHeight15,
                                                   Center(
                                                     child: Container(
@@ -994,17 +1003,19 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                     Row(
                       children: [
                         Spacer(),
-                        Container(
-                          height: 40,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.cancelColor,
-                            text: 'Cancel',
-                            onPressed: () {
-                              Get.offNamed(Routes.misDashboard);
-                              controller.clearStoreData();
-                            },
-                          ),
-                        ),
+                        controller.obsId == 0
+                            ? Container(
+                                height: 40,
+                                child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.cancelColor,
+                                  text: 'Cancel',
+                                  onPressed: () {
+                                    Get.offNamed(Routes.misDashboard);
+                                    controller.clearStoreData();
+                                  },
+                                ),
+                              )
+                            : Dimens.box0,
                         Dimens.boxWidth15,
                         controller.obsId == 0
                             ? Container(
@@ -1072,6 +1083,23 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                       position: 2,
                                       fileIds: dropzoneController.fileIds,
                                     );
+                                  },
+                                ),
+                              )
+                            : Dimens.box0,
+                        Dimens.boxWidth15,
+                        controller.getObsById.value!.status_code == 552 &&
+                                controller.obsId != 0
+                            ? Container(
+                                height: 45,
+                                child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.rejectColor,
+                                  text: "Close",
+                                  icon: Icons.close,
+                                  onPressed: () {
+                                    Get.dialog(ListOfObsCloseDialog(
+                                      id: controller.obsId.value,
+                                    ));
                                   },
                                 ),
                               )

@@ -17,8 +17,8 @@ class GetObservationList {
   int? risk_type_id;
   String? risk_type;
   String? preventive_action;
-  int? responsible_person;
-  String? responsible_person_name;
+  int? assigned_to_id;
+  String? assigned_to_name;
   String? contact_number;
   int? cost_type;
   String? cost_name;
@@ -56,8 +56,8 @@ class GetObservationList {
     this.risk_type_id,
     this.risk_type,
     this.preventive_action,
-    this.responsible_person,
-    this.responsible_person_name,
+    this.assigned_to_id,
+    this.assigned_to_name,
     this.contact_number,
     this.cost_type,
     this.cost_name,
@@ -90,6 +90,7 @@ class GetObservationList {
 
   factory GetObservationList.fromJson(Map<String, dynamic> json) {
     return GetObservationList(
+      
       id: json['id'],
       observation_type: json['observation_type'],
       facility_id: json['facility_id'],
@@ -97,22 +98,25 @@ class GetObservationList {
       risk_type_id: json['risk_type_id'],
       risk_type: json['risk_type'] ?? '',
       preventive_action: json['preventive_action'] ?? '',
-      responsible_person: json['responsible_person'],
-      responsible_person_name: json['responsible_person_name'] ?? '',
+      assigned_to_id: json['assigned_to_id'],
+      assigned_to_name: json['assigned_to_name'] ?? '',
       contact_number: json['contact_number'] ?? '',
       cost_type: json['cost_type'],
       cost_name: json['cost_name'] ?? '',
-      closed_date: json['closed_date'] ?? '',
+      // closed_date: json['closed_date'] ?? '',
+      closed_date: Utility.getFormatedyearMonthDay(json['closed_date']),
       observation_status: json['observation_status'] ?? '',
       date_of_observation: json['date_of_observation'] ?? '',
       type_of_observation: json['type_of_observation'],
       closer_date: json['closer_date'] ?? '',
+       
       location_of_observation: json['location_of_observation'] ?? '',
       remaining_days: json['remaining_days'] != null
           ? json['remaining_days'].toString() // Convert int to String
           : null, // Handle null case
       source_of_observation: json['source_of_observation'],
-      target_date: json['target_date'] ?? '',
+      // target_date: json['target_date'] ?? '',
+      target_date: Utility.getFormatedyearMonthDay(json['target_date']),
       corrective_action: json['corrective_action'] ?? '',
       observation_description: json['observation_description'] ?? '',
       type_of_observation_name: json['type_of_observation_name'] ?? '',
@@ -140,8 +144,8 @@ class GetObservationList {
         'risk_type_id': risk_type_id,
         'risk_type': risk_type,
         'preventive_action': preventive_action,
-        'responsible_person': responsible_person,
-        'responsible_person_name': responsible_person_name,
+        'assigned_to_id': assigned_to_id,
+        'assigned_to_name': assigned_to_name,
         'contact_number': contact_number,
         'cost_type': cost_type,
         'cost_name': cost_name,
