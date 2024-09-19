@@ -1,8 +1,5 @@
-// coverage:ignore-file
-
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:cmms/app/app.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
@@ -10,13 +7,18 @@ import 'package:cmms/domain/domain.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-/// API WRAPPER to call all the APIs and handle the error status codes
+enum ApiEnvironment {
+  prod('http://172.20.43.18:82/api/'),
+  dev('http://172.20.43.9:83/api/');
+
+  final String baseUrl;
+  const ApiEnvironment(this.baseUrl);
+}
+
 class ApiWrapper {
-  final String _baseUrl = //(appFlavor == AppFlavor.PROD)
-      //? 'https://api.cmms.in/v1/'
-      //:
-      // 'http://65.0.20.19/CMMS_API/api/';
-      'http://172.20.43.9:83/api/';
+  final ApiEnvironment environment;
+
+  ApiWrapper(this.environment);
 
   /// Method to make all the requests inside the app like GET, POST, PUT, Delete
   Future<ResponseModel> makeRequest(
@@ -26,6 +28,8 @@ class ApiWrapper {
     bool isLoading,
     Map<String, String> headers,
   ) async {
+    final String _baseUrl = environment.baseUrl; // Use enum value for URL
+
     /// To see whether the network is available or not
     if ((!GetPlatform.isWeb) ? await Utility.isNetworkAvailable() : true) {
       switch (request) {
@@ -39,7 +43,6 @@ class ApiWrapper {
             try {
               final response = await http
                   .get(
-                    //Uri.https(_baseUrl, url),
                     Uri.parse(uri),
                     headers: headers,
                   )
@@ -58,6 +61,7 @@ class ApiWrapper {
         case Request.post:
 
           /// Method to make the Post type request
+
           {
             var uri = _baseUrl + url;
 
@@ -84,6 +88,7 @@ class ApiWrapper {
         case Request.put:
 
           /// Method to make the Put type request
+
           {
             var uri = _baseUrl + url;
             print(uri);
@@ -93,7 +98,6 @@ class ApiWrapper {
                   .put(
                     Uri.parse(uri),
                     body: data,
-                    // json.encode(data),
                     headers: headers,
                   )
                   .timeout(const Duration(seconds: 120));
@@ -108,10 +112,10 @@ class ApiWrapper {
                   data: '{"message":"Request timed out"}', hasError: true);
             }
           }
-
         case Request.patch:
 
           /// Method to make the Patch type request
+
           {
             var uri = _baseUrl + url;
 
@@ -140,6 +144,7 @@ class ApiWrapper {
         case Request.delete:
 
           /// Method to make the Delete type request
+
           {
             var uri = _baseUrl + url;
 
@@ -167,7 +172,8 @@ class ApiWrapper {
           }
         case Request.postMultiparts:
 
-          /// Method to make the Delete type request
+          /// Method to make the Post Multipart request
+
           {
             var uri = _baseUrl + url;
 
@@ -194,7 +200,8 @@ class ApiWrapper {
           }
         case Request.getMultiparts:
 
-          /// Method to make the Delete type request
+          /// Method to make the Get Multipart request
+
           {
             var uri = _baseUrl + url;
 
@@ -202,7 +209,6 @@ class ApiWrapper {
               if (isLoading) Utility.showLoader();
 
               final request = await http.Request('GET', Uri.parse(uri));
-
               request.headers.addAll(headers);
 
               http.Response response =
@@ -221,7 +227,8 @@ class ApiWrapper {
           }
         case Request.awsUpload:
 
-          /// Method to make the Put type request
+          /// Method to handle AWS uploads
+
           {
             var uri = url;
 
@@ -246,10 +253,7 @@ class ApiWrapper {
             }
           }
       }
-    }
-
-    /// If there is no network available then instead of print can show the no internet widget too
-    else {
+    } else {
       if (Get.isDialogOpen!) {
         Get.back<void>();
       }
@@ -279,6 +283,7 @@ class ApiWrapper {
       case 401:
 
         /// unauthorized
+
         if (response.statusCode == 401) {
           Repository(DeviceRepository(), DataRepository(ConnectHelper()))
               .clearData(StringConstants.appName);
@@ -294,8 +299,6 @@ class ApiWrapper {
           errorCode: response.statusCode,
         );
       case 406:
-
-        /// To hit refresh token
         return ResponseModel(
           data: response.body,
           hasError: true,

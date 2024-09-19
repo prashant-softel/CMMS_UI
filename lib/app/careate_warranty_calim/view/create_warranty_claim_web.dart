@@ -9,6 +9,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/affected_part_detail_widget.dart';
 import 'package:cmms/app/widgets/affected_part_dropzone.dart';
@@ -689,7 +690,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                               icon: Icons.visibility,
                                                                               message: 'view attachment',
                                                                               onPress: () async {
-                                                                                String baseUrl = 'http://172.20.43.9:83/';
+                                                                                String baseUrl = UrlPath.deployUrl;
                                                                                 String fileName = controller.affectedPartImages[index]?.fileName ?? "";
                                                                                 String fullUrl = baseUrl + fileName;
                                                                                 if (await canLaunch(fullUrl)) {
@@ -2501,7 +2502,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                               icon: Icons.visibility,
                                                                               message: 'view attachment',
                                                                               onPress: () async {
-                                                                                String baseUrl = 'http://172.20.43.9:83/';
+                                                                                String baseUrl = UrlPath.deployUrl;
                                                                                 String fileName = controller.images[index]?.fileName ?? "";
                                                                                 String fullUrl = baseUrl + fileName;
                                                                                 if (await canLaunch(fullUrl)) {
@@ -3089,8 +3090,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
             style: TextStyle(color: color),
           ),
           value: severity,
-          groupValue:
-              controller.selectedSeverity.value, 
+          groupValue: controller.selectedSeverity.value,
           onChanged: (value) {
             controller.setSelectedSeverity(value as String);
             print('Data: ${controller.selectedSeverity.value}');

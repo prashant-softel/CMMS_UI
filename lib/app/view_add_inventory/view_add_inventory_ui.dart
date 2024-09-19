@@ -16,7 +16,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart';import 'package:cmms/app/utils/url_path.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'view/view_warranty_tab_widget.dart';
@@ -727,7 +727,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                                                               icon: Icons.visibility,
                                                                               message: 'view',
                                                                               onPress: () async {
-                                                                                String baseUrl = 'http://172.20.43.9:83/';
+                                                                                String baseUrl = UrlPath.deployUrl;
                                                                                 String fileName = controller.editAddInventoryDetailsModel.value!.inventory_image![index]?.fileName ?? "";
                                                                                 String fullUrl = baseUrl + fileName;
                                                                                 if (await canLaunch(fullUrl)) {
@@ -735,7 +735,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                                                                 } else {
                                                                                   throw 'Could not launch $fullUrl';
                                                                                 }
-                                                                                // String baseUrl = 'http://172.20.43.9:83/';
+                                                                                // String baseUrl = UrlPath.deployUrl;
                                                                               },
                                                                             ),
                                                                           ],

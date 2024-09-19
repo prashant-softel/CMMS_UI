@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -122,8 +123,6 @@ class NewPermitMobile extends GetView<NewPermitController> {
                             )
                           : Dimens.box0,
 
-                          
-                          
                       controller.vegExecutionDetailsModel?.executionId != null
                           ? Container(
                               padding: EdgeInsets.all(10),
@@ -954,7 +953,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                                             .appDarkBlueColor,
                                                         onPressed: () async {
                                                           String baseUrl =
-                                                              'http://172.20.43.9:83/';
+                                                              UrlPath.deployUrl;
                                                           String fileName =
                                                               controller
                                                                       .file_list![

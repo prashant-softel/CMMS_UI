@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';import 'package:cmms/app/utils/url_path.dart';
 
 class ViewDocUploadWeb extends StatefulWidget {
   ViewDocUploadWeb({
@@ -216,7 +216,7 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                                 message: 'View File',
                                                 onPress: () async {
                                                   String baseUrl =
-                                                      'http://172.20.43.9:83/';
+                                                      UrlPath.deployUrl;
                                                   String fileName = controller
                                                           .selectedItem
                                                           ?.file_path ??
@@ -295,7 +295,7 @@ class _DocUploadWebState extends State<ViewDocUploadWeb> {
                                         //                 .appDarkBlueColor,
                                         //             onPressed: () async {
                                         //               String baseUrl =
-                                        //                   'http://172.20.43.9:83/';
+                                        //                   UrlPath.deployUrl;
                                         //               String fileName =
                                         //                   controller
                                         //                           .selectedItem

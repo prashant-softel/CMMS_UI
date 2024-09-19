@@ -8,7 +8,7 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';import 'package:cmms/app/utils/url_path.dart';
 
 class ViewCourseWeb extends GetView<ViewCourseController> {
   ViewCourseWeb({Key? key}) : super(key: key);
@@ -279,7 +279,7 @@ class ViewCourseWeb extends GetView<ViewCourseController> {
                                                             'view attachment',
                                                         onPress: () async {
                                                           String baseUrl =
-                                                              'http://172.20.43.9:83/';
+                                                              UrlPath.deployUrl;
                                                           String fileName =
                                                               controller
                                                                       .imageDetails[

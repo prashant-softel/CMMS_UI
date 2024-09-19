@@ -4,7 +4,7 @@ import 'package:cmms/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:cmms/app/utils/url_path.dart';
 // import '../theme/colors_value.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
@@ -64,7 +64,7 @@ class ViewJSADialog extends GetView {
                                   // "https://www.w3.org/1999/xhtml/"
                                   // String baseUrl =
                                   //     'http://65.0.20.19/CMMS_API/';
-                                  String baseUrl = 'http://172.20.43.9:83/';
+                                  String baseUrl = UrlPath.deployUrl;
                                   String endpoint = '${_controller.jsaData}';
 
                                   // Concatenate the links

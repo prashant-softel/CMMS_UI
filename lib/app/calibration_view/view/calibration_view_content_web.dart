@@ -3,6 +3,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -426,7 +427,8 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                                             message: 'view',
                                                             onPress: () async {
                                                               String baseUrl =
-                                                                  'http://172.20.43.9:83/';
+                                                                  UrlPath
+                                                                      .deployUrl;
                                                               String fileName = controller
                                                                       .calibrationDetailModel
                                                                       .value!
@@ -444,7 +446,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                                               } else {
                                                                 throw 'Could not launch $fullUrl';
                                                               }
-                                                              // String baseUrl = 'http://172.20.43.9:83/';
+                                                              // String baseUrl = UrlPath.deployUrl;
                                                             },
                                                           ),
                                                         ],
@@ -580,7 +582,8 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                                             message: 'view',
                                                             onPress: () async {
                                                               String baseUrl =
-                                                                  'http://172.20.43.9:83/';
+                                                                  UrlPath
+                                                                      .deployUrl;
                                                               String fileName = controller
                                                                       .file_list![
                                                                           index]
@@ -596,7 +599,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                                               } else {
                                                                 throw 'Could not launch $fullUrl';
                                                               }
-                                                              // String baseUrl = 'http://172.20.43.9:83/';
+                                                              // String baseUrl = UrlPath.deployUrl;
                                                             },
                                                           ),
                                                         ],

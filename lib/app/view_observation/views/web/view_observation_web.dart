@@ -9,7 +9,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';import 'package:cmms/app/utils/url_path.dart';
 
 class ViewObservationWeb extends StatefulWidget {
   ViewObservationWeb({
@@ -405,7 +405,8 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                                   //     "http://65.0.20.19/CMMS_API/";
                                                                   String
                                                                       baseUrl =
-                                                                      'http://172.20.43.9:83/';
+                                                                      UrlPath
+                                                                          .deployUrl;
                                                                   String
                                                                       fileName =
                                                                       controller
@@ -423,7 +424,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                                   } else {
                                                                     throw 'Could not launch $fullUrl';
                                                                   }
-                                                                  // String baseUrl = 'http://172.20.43.9:83/';
+                                                                  // String baseUrl = UrlPath.deployUrl;
                                                                 },
                                                               )
                                                             ],

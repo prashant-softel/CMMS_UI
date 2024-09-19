@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:cmms/app/utils/url_path.dart';
 
 class ViewWarrantyTabWidget extends StatefulWidget {
   ViewWarrantyTabWidget({
@@ -512,7 +513,7 @@ class _WarrantyTabWidgetState extends State<ViewWarrantyTabWidget> {
                                                 message: 'view',
                                                 onPress: () async {
                                                   String baseUrl =
-                                                      'http://172.20.43.9:83/';
+                                                      UrlPath.deployUrl;
                                                   String fileName = controller
                                                           .editAddInventoryDetailsModel
                                                           .value!
@@ -527,7 +528,7 @@ class _WarrantyTabWidgetState extends State<ViewWarrantyTabWidget> {
                                                   } else {
                                                     throw 'Could not launch $fullUrl';
                                                   }
-                                                  // String baseUrl = 'http://172.20.43.9:83/';
+                                                  // String baseUrl = UrlPath.deployUrl;
                                                 },
                                               ),
                                             ],

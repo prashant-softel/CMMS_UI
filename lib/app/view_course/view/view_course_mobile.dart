@@ -9,7 +9,7 @@ import 'package:cmms/app/view_course/view_course_controller.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';import 'package:cmms/app/utils/url_path.dart';
 
 class ViewCourseMobile extends GetView<ViewCourseController> {
   const ViewCourseMobile({Key? key}) : super(key: key);
@@ -124,7 +124,7 @@ class ViewCourseMobile extends GetView<ViewCourseController> {
                                               message: 'View File',
                                               onPress: () async {
                                                 String baseUrl =
-                                                    'http://172.20.43.9:83/';
+                                                    UrlPath.deployUrl;
                                                 String fileName = controller
                                                         .imageDetails[index]
                                                         .name ??

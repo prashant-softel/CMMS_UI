@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../theme/dimens.dart';
-import '../theme/styles.dart';
+import '../theme/styles.dart';import 'package:cmms/app/utils/url_path.dart';
 // import '../view_incident_report/view_incident_report_controller.dart';
 
 class ObservationPMTaskViewDialog extends GetView {
@@ -261,7 +261,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 onPress: () async {
                                                   String baseUrl =
                                                       //     'http://65.0.20.19/CMMS_API/';
-                                                      'http://172.20.43.9:83/';
+                                                      UrlPath.deployUrl;
                                                   String imageUrl =
                                                       "${controller.selectedItem?.checklist_observation![index].files?[index].file_path}";
                                                   String fullUrl =

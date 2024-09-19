@@ -1,3 +1,4 @@
+import 'package:cmms/data/helpers/api_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:async';
@@ -11,9 +12,8 @@ import '../../domain/repositories/repository.dart';
 
 class AffectedPartUploadController extends GetxController {
   var repository = Get.find<Repository>();
-
   final Uri apiUrl =
-      Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile');
+      Uri.parse('${ApiEnvironment.dev.baseUrl}FileUpload/UploadFile');
 
   Rx<bool> blnHiglight = false.obs;
   RxList<int> progresses = <int>[].obs;
