@@ -90,7 +90,6 @@ class GetObservationList {
 
   factory GetObservationList.fromJson(Map<String, dynamic> json) {
     return GetObservationList(
-      
       id: json['id'],
       observation_type: json['observation_type'],
       facility_id: json['facility_id'],
@@ -109,7 +108,7 @@ class GetObservationList {
       date_of_observation: json['date_of_observation'] ?? '',
       type_of_observation: json['type_of_observation'],
       closer_date: json['closer_date'] ?? '',
-       
+
       location_of_observation: json['location_of_observation'] ?? '',
       remaining_days: json['remaining_days'] != null
           ? json['remaining_days'].toString() // Convert int to String

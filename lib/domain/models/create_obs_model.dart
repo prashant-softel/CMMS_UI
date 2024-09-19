@@ -21,6 +21,7 @@ class CreateObsModel {
   String? target_date;
   String? observation_description;
   dynamic uploadfileIds;
+  String? action_taken;
 
   CreateObsModel({
     this.id,
@@ -38,6 +39,7 @@ class CreateObsModel {
     this.target_date,
     this.observation_description,
     this.uploadfileIds,
+    this.action_taken,
   });
 
   factory CreateObsModel.fromJson(Map<String, dynamic> json) {
@@ -57,6 +59,7 @@ class CreateObsModel {
       target_date: json['target_date'],
       observation_description: json['observation_description'],
       uploadfileIds: json['uploadfileIds'],
+      action_taken: json['action_taken'],
     );
   }
   Map<String, dynamic> toJson() => {
@@ -75,5 +78,6 @@ class CreateObsModel {
         "target_date": target_date,
         "observation_description": observation_description,
         "uploadfileIds": uploadfileIds,
+        "action_taken": action_taken,
       };
 }
