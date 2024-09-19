@@ -2396,7 +2396,7 @@ class Repository {
           Map<String, List<List<dynamic>>> assetlistData = {
             'Sheet1': data,
           };
-          exportToExcel(assetlistData, "asset.xlsx");
+          exportToExcel(assetlistData, "Asset.xlsx");
         }
         return _inventoryModelList;
       } //
@@ -2490,7 +2490,7 @@ class Repository {
           Map<String, List<List<dynamic>>> goodorderData = {
             'Sheet1': data,
           };
-          exportToExcel(goodorderData, 'goodorder.xlsx');
+          exportToExcel(goodorderData, 'GoodOrderList.xlsx');
         }
 
         return _goodOrderModelList.reversed.toList();
@@ -2845,7 +2845,7 @@ class Repository {
           Map<String, List<List<dynamic>>> rolistData = {
             'Sheet1': data,
           };
-          exportToExcel(rolistData, 'rolist.xlsx');
+          exportToExcel(rolistData, 'Rolist.xlsx');
         }
 
         return _goodOrderModelList.reversed.toList();
@@ -2929,7 +2929,7 @@ class Repository {
           Map<String, List<List<dynamic>>> mcleaningData = {
             'Sheet1': data,
           };
-          exportToExcel(mcleaningData, 'mcleaning.xlsx');
+          exportToExcel(mcleaningData, 'MCList.xlsx');
         }
 
         return _moduleCleaningListPlan.reversed.toList();
@@ -5769,7 +5769,7 @@ class Repository {
           Map<String, List<List<dynamic>>> irlistData = {
             'Sheet1': data,
           };
-          exportToExcel(irlistData, 'irlist.xlsx');
+          exportToExcel(irlistData, 'IrList.xlsx');
         }
         return _irListModelList.reversed.toList();
       } //
@@ -5849,7 +5849,7 @@ class Repository {
           Map<String, List<List<dynamic>>> healthlistData = {
             'Sheet1': data,
           };
-          exportToExcel(healthlistData, 'healthlist.xlsx');
+          exportToExcel(healthlistData, 'HealthList.xlsx');
         }
         return _occupationallList.reversed.toList();
       } //
@@ -6179,7 +6179,7 @@ class Repository {
           Map<String, List<List<dynamic>>> regularlistData = {
             'Sheet1': data,
           };
-          exportToExcel(regularlistData, 'regularlist.xlsx');
+          exportToExcel(regularlistData, 'RegularList.xlsx');
         }
         return _visitandnoticeList.reversed.toList();
       } //
@@ -6333,9 +6333,15 @@ class Repository {
                       mctaskjson['abondend'],
                       mctaskjson['time_taken'],
                       mctaskjson['remark'],
-                      mctaskjson['startDate'],
-                      mctaskjson['doneDate'],
-                      mctaskjson['abondond_done_date'],
+                      mctaskjson['startDate'] == '0001-01-01'
+                          ? ''
+                          : mctaskjson['startDate'] ?? '',
+                      mctaskjson['doneDate'] == '0001-01-01'
+                          ? ''
+                          : mctaskjson['doneDate'] ?? '',
+                      mctaskjson['abondond_done_date'] == '0001-01-01'
+                          ? ''
+                          : mctaskjson['abondond_done_date'] ?? '',
                       mctaskjson['status_short'],
                     ])
                 .toList(),
@@ -6343,7 +6349,7 @@ class Repository {
           Map<String, List<List<dynamic>>> mctasklistData = {
             'Sheet1': data,
           };
-          exportToExcel(mctasklistData, "mctasklist.xlsx");
+          exportToExcel(mctasklistData, "McTaskList.xlsx");
         }
         return _McTaskListModelList.reversed.toList();
       } //
@@ -6515,7 +6521,7 @@ class Repository {
           Map<String, List<List<dynamic>>> joblistData = {
             'Sheet1': data,
           };
-          exportToExcel(joblistData, 'joblist.xlsx');
+          exportToExcel(joblistData, 'JobList.xlsx');
         }
 
         return _jobModelList;
@@ -7026,7 +7032,7 @@ class Repository {
                 .toList(),
           ];
           Map<String, List<List<dynamic>>> permitlistData = {'Sheet1': data};
-          exportToExcel(permitlistData, 'permitlist.xlsx');
+          exportToExcel(permitlistData, 'PermitList.xlsx');
         }
 
         return _newPermitModelList;
@@ -8924,7 +8930,7 @@ class Repository {
           Map<String, List<List<dynamic>>> checklistData = {
             'Sheet1': data,
           };
-          exportToExcel(checklistData, "checklist.xlsx");
+          exportToExcel(checklistData, "CheckList.xlsx");
         }
         return _PreventiveCheckListModelList;
       } else {
@@ -9196,7 +9202,7 @@ class Repository {
           Map<String, List<List<dynamic>>> checklistData = {
             'Sheet1': data,
           };
-          exportToExcel(checklistData, "checkPointlist.xlsx");
+          exportToExcel(checklistData, "CheckPointList.xlsx");
         }
         return _PreventiveCheckPointList;
       } else {
@@ -10403,6 +10409,7 @@ class Repository {
               "Equipment Category",
               'Task Title',
               'Start Date',
+              'Close Date',
               'Frequency',
               'Task ID',
               'Assigned To',
@@ -10421,6 +10428,7 @@ class Repository {
                       pmtaskjson['category_name'],
                       pmtaskjson['plan_title'],
                       pmtaskjson['start_date'],
+                      pmtaskjson['close_time'] ?? '',
                       pmtaskjson['frequency_name'],
                       pmtaskjson['task_code'],
                       pmtaskjson['assigned_to_name'],
@@ -10434,10 +10442,11 @@ class Repository {
                     ])
                 .toList(),
           ];
+
           Map<String, List<List<dynamic>>> pmtasklistData = {
             'Sheet1': data,
           };
-          exportToExcel(pmtasklistData, "pmtasks.xlsx");
+          exportToExcel(pmtasklistData, "PmTasks.xlsx");
         }
         // print({"object", _PmTaskListModelList});
         return _PmTaskListModelList.reversed.toList();
@@ -10528,7 +10537,7 @@ class Repository {
                 .toList(),
           ];
           Map<String, List<List<dynamic>>> userdata = {'Sheet1': data};
-          exportToExcel(userdata, 'Audittask.xlsx');
+          exportToExcel(userdata, 'AuditTask.xlsx');
         }
         // print({"object", _PmTaskListModelList});
         return _PmTaskListModelList.reversed.toList();
@@ -11285,7 +11294,7 @@ class Repository {
           Map<String, List<List<dynamic>>> userData = {
             'Sheet1': data,
           };
-          exportToExcel(userData, "userlist.xlsx");
+          exportToExcel(userData, "UserList.xlsx");
         }
         return _UserListModelList.reversed.toList();
       } else {
@@ -11392,7 +11401,7 @@ class Repository {
           Map<String, List<List<dynamic>>> jobCardData = {
             'Sheet1': data,
           };
-          exportToExcel(jobCardData, "jobcardlist.xlsx");
+          exportToExcel(jobCardData, "JobCardList.xlsx");
         }
 
         return _JobCardListModelList.reversed.toList();
@@ -13124,7 +13133,7 @@ class Repository {
                 .toList(),
           ];
           Map<String, List<List<dynamic>>> mrslistData = {'Sheet1': data};
-          exportToExcel(mrslistData, 'mrslist.xlsx');
+          exportToExcel(mrslistData, 'MrsList.xlsx');
         }
 
         return _MrsListModelList.reversed.toList();
@@ -13202,7 +13211,7 @@ class Repository {
           Map<String, List<List<dynamic>>> plantstocklistData = {
             'Sheet1': data,
           };
-          exportToExcel(plantstocklistData, 'plantstocklist.xlsx');
+          exportToExcel(plantstocklistData, 'PlantStockList.xlsx');
         }
 
         return _plantStockListModels;
@@ -14141,7 +14150,7 @@ class Repository {
                 .toList(),
           ];
           Map<String, List<List<dynamic>>> mrsretData = {'Sheet1': data};
-          exportToExcel(mrsretData, 'mrsreturn.xlsx');
+          exportToExcel(mrsretData, 'MrsReturn.xlsx');
         }
 
         return _ReturnMrsListModelList.reversed.toList();
@@ -14740,7 +14749,7 @@ class Repository {
             'Sheet1': data,
             'Sheet2': data1,
           };
-          exportToExcel(checklistData, "pmPlanlist.xlsx");
+          exportToExcel(checklistData, "PmPlanList.xlsx");
         }
         return _PmPlanListModelList;
       } else {
@@ -15360,7 +15369,7 @@ class Repository {
           Map<String, List<List<dynamic>>> auditlistData = {
             'Sheet1': data,
           };
-          exportToExcel(auditlistData, "auditlist.xlsx");
+          exportToExcel(auditlistData, "AuditList.xlsx");
         }
         print({"object", _AuditPlanListModelList});
         return _AuditPlanListModelList.reversed.toList();
@@ -15738,7 +15747,7 @@ class Repository {
           Map<String, List<List<dynamic>>> vegplanlistData = {
             'Sheet1': data,
           };
-          exportToExcel(vegplanlistData, "vegplanlist.xlsx");
+          exportToExcel(vegplanlistData, "VegPlanList.xlsx");
         }
 
         return _getVegetationPlanList.reversed.toList();
@@ -16106,15 +16115,21 @@ class Repository {
                       vegexejson['abondend'],
                       vegexejson['time_taken'],
                       vegexejson['remark'],
-                      vegexejson['startDate'],
-                      vegexejson['doneDate'],
-                      vegexejson['abondond_done_date'],
+                      vegexejson['startDate'] == '0001-01-01'
+                          ? ''
+                          : vegexejson['startDate'] ?? '',
+                      vegexejson['doneDate'] == '0001-01-01'
+                          ? ''
+                          : vegexejson['doneDate'] ?? '',
+                      vegexejson['abondond_done_date'] == '0001-01-01'
+                          ? ''
+                          : vegexejson['abondond_done_date'] ?? '',
                       vegexejson['status_short'],
                     ])
                 .toList(),
           ];
           Map<String, List<List<dynamic>>> vegexelistData = {'Sheet1': data};
-          exportToExcel(vegexelistData, "vegexe.xlsx");
+          exportToExcel(vegexelistData, "VegExe.xlsx");
         }
         return _VegTaskListModelList.reversed.toList();
       } //
@@ -17548,7 +17563,7 @@ class Repository {
           Map<String, List<List<dynamic>>> checklistData = {
             'Sheet1': data,
           };
-          exportToExcel(checklistData, "dsmList.xlsx");
+          exportToExcel(checklistData, "DsmList.xlsx");
         }
         return _DSMDataList;
       } else {

@@ -26,6 +26,7 @@ class _CustomMultiDropdownState extends State<CustomMultiDropdown> {
   late MultiSelectController<Object> _controller;
   late ValueNotifier<String> _hintTextNotifier;
   List<Object> selectedValues = [];
+  bool isSelectAll = false;
 
   @override
   void initState() {
@@ -64,8 +65,31 @@ class _CustomMultiDropdownState extends State<CustomMultiDropdown> {
     }
   }
 
+  void _handleSelectAll(bool selected) {
+    setState(() {
+      if (selected) {
+        // Select all items
+        selectedValues = widget.items?.map((item) => item.value).toList() ?? [];
+        _controller.selectAll();
+      } else {
+        // Deselect all items
+        selectedValues.clear();
+        selectedValues = [];
+        _controller.clearAll();
+      }
+      _updateHintText();
+      widget.onConfirm(selectedValues);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Add "Select All" option at the top
+    final List<DropdownItem<Object>> itemsWithSelectAll = [
+      DropdownItem(value: 'select_all', label: 'Select All'),
+      ...?widget.items,
+    ];
+
     return Container(
       constraints: BoxConstraints(
         maxWidth: MediaQuery.of(context).size.width * 0.7,
@@ -86,7 +110,7 @@ class _CustomMultiDropdownState extends State<CustomMultiDropdown> {
         valueListenable: _hintTextNotifier,
         builder: (context, hintText, _) {
           return MultiDropdown<Object>(
-            items: widget.items ?? [],
+            items: itemsWithSelectAll,
             controller: _controller,
             enabled: true,
             searchEnabled: true,
@@ -138,11 +162,26 @@ class _CustomMultiDropdownState extends State<CustomMultiDropdown> {
               disabledIcon: Icon(Icons.lock, color: Colors.black12),
             ),
             onSelectionChange: (newSelectedItems) {
-              setState(() {
-                selectedValues = newSelectedItems;
-                _updateHintText();
-                widget.onConfirm(selectedValues);
-              });
+              if (!(newSelectedItems.contains('select_all')) &&
+                  newSelectedItems.length == widget.items?.length) {
+                _handleSelectAll(false);
+
+                return;
+              }
+              else if (newSelectedItems.contains('select_all') &&
+                  newSelectedItems.length != widget.items?.length) {
+                return;
+              }
+              if (newSelectedItems.contains('select_all')) {
+                _handleSelectAll(true);
+              } else {
+                setState(() {
+                  isSelectAll = false;
+                  selectedValues = newSelectedItems;
+                  _updateHintText();
+                  widget.onConfirm(selectedValues);
+                });
+              }
             },
           );
         },
