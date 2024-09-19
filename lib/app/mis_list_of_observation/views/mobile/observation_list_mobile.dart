@@ -331,7 +331,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 Expanded(
                                                   child: Text(
                                                     obsListModel
-                                                            .responsible_person
+                                                            .assigned_to_name
                                                             .toString() ??
                                                         '',
                                                     style: const TextStyle(

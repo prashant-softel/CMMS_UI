@@ -511,7 +511,7 @@ class ObservationListDataSource extends DataTableSource {
       '${ObservationListDetails?.source_of_observation_name ?? ''}',
       '${ObservationListDetails?.risk_type ?? ''}',
       '${ObservationListDetails?.observation_description ?? ''}',
-      '${ObservationListDetails?.responsible_person_name ?? ''}',
+      '${ObservationListDetails?.assigned_to_name ?? ''}',
       '${ObservationListDetails?.target_date ?? ''}',
       '${ObservationListDetails?.action_taken ?? ''}',
       closedDate,
@@ -615,7 +615,7 @@ class ObservationListDataSource extends DataTableSource {
                                     // controller.clearStoreData();
                                     int obsId = ObservationListDetails!.id ?? 0;
                                     if (obsId != 0) {
-                                      Get.toNamed(
+                                      Get.offAllNamed(
                                         Routes.createObservation,
                                         arguments: {
                                           'obsId': ObservationListDetails.id,
@@ -646,6 +646,7 @@ class ObservationListDataSource extends DataTableSource {
                                       },
                                     )
                                   : Dimens.box0,
+                                  
                         ],
                       )
                     : Text(value.toString()),

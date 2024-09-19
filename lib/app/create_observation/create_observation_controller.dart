@@ -87,7 +87,7 @@ class CreateObservationController extends GetxController {
   Rx<bool> islocationofObservationInvalid = false.obs;
   Rx<DateTime> selectedObsTime = DateTime.now().obs;
   Rx<DateTime> selectedTargetTime = DateTime.now().obs;
-  int selectedCostTypeId = 1;
+   Rx<int> selectedCostTypeId = 0.obs;
 // GetObservationList? selectedItem;
   Rx<bool> isLoading = true.obs;
   int facilityId = 0;
@@ -273,7 +273,7 @@ class CreateObservationController extends GetxController {
       // String _targetDateTc = targetDateTc.text.trim();
 
       // Assigning the correct id based on the selected cost type
-      int idToSend = position == 1 || position == 2 ? 0 : obsId.value;
+     int idToSend = position == 1 ? 0 : obsId.value;
       String? targetDateToSend =
           position == 1 ? null : targetDateTc.text.trim();
 
@@ -282,7 +282,7 @@ class CreateObservationController extends GetxController {
         facility_id: facilityId,
         contact_number: _contactNumberCtrlr,
         contractor_name: _contractorNameCtrlr,
-        cost_type: selectedCostTypeId, // Sending the selected cost type ID
+        cost_type: selectedCostTypeId.value, // Sending the selected cost type ID
         date_of_observation: _obsDateTc,
         location_of_observation: _locationOfObservationCtrlr,
         observation_description: _discriptionCtrlr,
@@ -318,29 +318,7 @@ class CreateObservationController extends GetxController {
     }
   }
 
-  void onDropdownValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      case const (RxList<EmployeeModel>):
-        {
-          if (value != "Please Select") {
-            int assignedToIndex =
-                assignedToList.indexWhere((x) => x?.name == value);
-            selectedAssignedToId.value =
-                assignedToList[assignedToIndex]?.id ?? 0;
-            isAssignedToSelected.value = true;
-            selectedAssignedTo.value = value;
-          } else {
-            selectedAssignedToId.value = 0;
-          }
-        }
-        break;
-      default:
-        {
-          //statements;
-        }
-        break;
-    }
-  }
+
 
   String? getAssignedToName(int _selectedAssignedToId) {
     final item =
@@ -477,6 +455,21 @@ class CreateObservationController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print("$value");
     switch (list.runtimeType) {
+
+      case const (RxList<EmployeeModel>):
+        {
+          if (value != "Please Select") {
+            int assignedToIndex =
+                assignedToList.indexWhere((x) => x?.name == value);
+            selectedAssignedToId.value =
+                assignedToList[assignedToIndex]?.id ?? 0;
+            isAssignedToSelected.value = true;
+            selectedAssignedTo.value = value;
+          } else {
+            selectedAssignedToId.value = 0;
+          }
+        }
+        break;
       case const (RxList<RiskTypeModel>):
         {
           if (value != "Please Select") {
@@ -530,12 +523,12 @@ class CreateObservationController extends GetxController {
             int costTypeIndex =
                 costType?.indexWhere((x) => x?.name == value.toString()) ?? -1;
             if (costTypeIndex != -1 && costType?[costTypeIndex] != null) {
-              selectedCostTypeId = costType![costTypeIndex]!.id ?? 0;
+           selectedCostTypeId.value = costType![costTypeIndex]!.id ?? 0;
               selectedCostTypeList.value = value.toString();
               isCostTypeListSelected.value = true;
             }
           } else {
-            selectedCostTypeId = 0;
+            selectedCostTypeId = 0.obs;
           }
         }
         break;
