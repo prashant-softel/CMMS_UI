@@ -1692,11 +1692,21 @@ class CreateWarrantyClaimController extends GetxController {
     List<dynamic>? fileIds,
     required int type,
   }) async {
+    late List<SupplierActions> supplier_action_list = [];
+
+    supplierActions.forEach((e) {
+      supplier_action_list.add(SupplierActions(
+        srNumber: e.srNumber,
+        is_required: e.is_required,
+        name: e.name,
+        required_by_date: e.required_by_date,
+      ));
+    });
     UpdateWarrantyClaim update = UpdateWarrantyClaim(
       id: wc_id.value,
       facilityId: facilityId,
       type: type,
-      supplierActions: [],
+      supplierActions: supplier_action_list,
       uploadfile_ids: fileIds,
       comment: commentCtrl.text,
     );
