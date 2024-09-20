@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_presenter.dart';
+import 'package:cmms/app/utils/debouncer.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/create_mc_plan_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
@@ -17,6 +18,8 @@ import '../home/home_controller.dart';
 class ModuleCleaningPlanningController extends GetxController {
   ModuleCleaningPlanningController(this.moduleCleaningPlanningPresenter);
   ModuleCleaningPlanningPresenter moduleCleaningPlanningPresenter;
+  final debounce = Debounce(milliseconds: 600);
+
   final HomeController homecontroller = Get.find();
   var startDateTimeCtrlr = TextEditingController();
   var validTillTimeCtrlr = TextEditingController();
@@ -715,5 +718,10 @@ class ModuleCleaningPlanningController extends GetxController {
     }
 
     return newTime;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
