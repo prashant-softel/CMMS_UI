@@ -27,6 +27,7 @@ class _CustomMultiDropdownState extends State<CustomMultiDropdown> {
   late ValueNotifier<String> _hintTextNotifier;
   List<Object> selectedValues = [];
   bool isSelectAll = false;
+  Object? currentClickedItem;
 
   @override
   void initState() {
@@ -67,19 +68,47 @@ class _CustomMultiDropdownState extends State<CustomMultiDropdown> {
 
   void _handleSelectAll(bool selected) {
     setState(() {
+      isSelectAll = selected;
       if (selected) {
         // Select all items
-        selectedValues = widget.items?.map((item) => item.value).toList() ?? [];
+        selectedValues = [
+              DropdownItem(value: 'select_all', label: 'Select All'),
+              ...?widget.items
+            ]?.map((item) => item.value).toList() ??
+            [];
         _controller.selectAll();
       } else {
         // Deselect all items
         selectedValues.clear();
-        selectedValues = [];
         _controller.clearAll();
       }
       _updateHintText();
       widget.onConfirm(selectedValues);
     });
+  }
+
+  void _onItemClicked(List<Object> newSelectedItems) {
+    if (currentClickedItem == 'select_all') {
+      if (isSelectAll) {
+        // If `select_all` was clicked again, deselect everything
+        _handleSelectAll(false);
+      } else {
+        // If `select_all` was clicked for the first time, select everything
+        _handleSelectAll(true);
+      }
+    } else {
+      // If any other option is clicked, deselect `select_all`
+      if (isSelectAll) {
+        setState(() {
+          isSelectAll = false;
+        });
+      }
+      setState(() {
+        selectedValues = newSelectedItems;
+        _updateHintText();
+        widget.onConfirm(selectedValues);
+      });
+    }
   }
 
   @override
@@ -116,7 +145,7 @@ class _CustomMultiDropdownState extends State<CustomMultiDropdown> {
             searchEnabled: true,
             selectedItemBuilder: (item) {
               return selectedValues.indexOf(item.value) == 0
-                  ? Text('${hintText}')
+                  ? Text(hintText)
                   : SizedBox(
                       width: 0,
                     );
@@ -162,26 +191,15 @@ class _CustomMultiDropdownState extends State<CustomMultiDropdown> {
               disabledIcon: Icon(Icons.lock, color: Colors.black12),
             ),
             onSelectionChange: (newSelectedItems) {
-              if (!(newSelectedItems.contains('select_all')) &&
-                  newSelectedItems.length == widget.items?.length) {
-                _handleSelectAll(false);
-
-                return;
-              }
-              else if (newSelectedItems.contains('select_all') &&
-                  newSelectedItems.length != widget.items?.length) {
-                return;
-              }
-              if (newSelectedItems.contains('select_all')) {
-                _handleSelectAll(true);
+              // Get the currently clicked item
+              if (newSelectedItems.length > selectedValues.length) {
+                currentClickedItem = newSelectedItems
+                    .firstWhere((item) => !selectedValues.contains(item));
               } else {
-                setState(() {
-                  isSelectAll = false;
-                  selectedValues = newSelectedItems;
-                  _updateHintText();
-                  widget.onConfirm(selectedValues);
-                });
+                currentClickedItem = selectedValues
+                    .firstWhere((item) => !newSelectedItems.contains(item));
               }
+              _onItemClicked(newSelectedItems);
             },
           );
         },
