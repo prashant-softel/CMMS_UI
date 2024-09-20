@@ -73,7 +73,7 @@ class BreakdownMaintenanceController extends GetxController {
     );
   }
 
-   Future<void> goToWorkTypeList() async {
+  Future<void> goToWorkTypeList() async {
     Get.toNamed(
       Routes.worktype,
     );
@@ -94,9 +94,7 @@ class BreakdownMaintenanceController extends GetxController {
   }
 
   Future<void> newPermitList() async {
-    Get.toNamed(
-      Routes.newPermitList,
-    );
+    Get.toNamed(Routes.newPermitList, arguments: {"misPermit": 0});
   }
 
   Future<void> createNewPermit() async {
@@ -106,7 +104,7 @@ class BreakdownMaintenanceController extends GetxController {
   }
 
   Future<void> additionalPermit() async {
-      clearStoreData();
+    clearStoreData();
     clearTypeStoreData();
     clearisCheckedtoreData();
     clearjobmodelValue();
@@ -121,6 +119,7 @@ class BreakdownMaintenanceController extends GetxController {
       Routes.goToJobCardList,
     );
   }
+
   void clearStoreData() {
     breakdownMaintenancePresenter.clearValue();
   }
