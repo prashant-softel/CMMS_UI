@@ -594,7 +594,6 @@ class AttendanceWeb extends GetView<AttendanceController> {
                 fillColor: ColorValues.whiteColor,
                 filled: true,
                 hintStyle: TextStyle(color: Colors.black),
-                // contentPadding: EdgeInsets.only(bottom: 3),
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
@@ -612,8 +611,8 @@ class AttendanceWeb extends GetView<AttendanceController> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2000), // Adjust the range as needed
-      lastDate: DateTime(2100),
+      firstDate: DateTime.now(), // Adjust to your earliest allowed date
+      lastDate: DateTime.now(), // Restricting to today or past dates
     );
     if (picked != null && picked != DateTime.tryParse(textController.text)) {
       textController.text = DateFormat('yyyy-MM-dd').format(picked);
