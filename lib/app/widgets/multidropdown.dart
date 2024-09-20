@@ -46,7 +46,9 @@ class _CustomMultiDropdownState extends State<CustomMultiDropdown> {
   }
 
   void _updateHintText() {
-    final selectedCount = selectedValues.length;
+    final selectedCount = [
+      ...[...selectedValues]..remove('select_all')
+    ].length;
     final itemCount = widget.items?.length ?? 0;
 
     if (selectedCount > 2) {
@@ -67,23 +69,28 @@ class _CustomMultiDropdownState extends State<CustomMultiDropdown> {
   }
 
   void _handleSelectAll(bool selected) {
+    List<Object> selectedValuesBuffer = [];
     setState(() {
       isSelectAll = selected;
       if (selected) {
         // Select all items
-        selectedValues = [
-              DropdownItem(value: 'select_all', label: 'Select All'),
-              ...?widget.items
-            ]?.map((item) => item.value).toList() ??
-            [];
+
+        selectedValuesBuffer =
+            widget.items?.map((item) => item.value).toList() ?? [];
+        selectedValues = ['select_all', ...selectedValuesBuffer];
+
+        _updateHintText();
+        widget.onConfirm(selectedValuesBuffer);
         _controller.selectAll();
       } else {
         // Deselect all items
+
         selectedValues.clear();
+
+        _updateHintText();
+        widget.onConfirm([]);
         _controller.clearAll();
       }
-      _updateHintText();
-      widget.onConfirm(selectedValues);
     });
   }
 
@@ -106,7 +113,10 @@ class _CustomMultiDropdownState extends State<CustomMultiDropdown> {
       setState(() {
         selectedValues = newSelectedItems;
         _updateHintText();
-        widget.onConfirm(selectedValues);
+        List<Object> selectedValuesBuffer = [...selectedValues]
+          ..remove('select_all');
+
+        widget.onConfirm(selectedValuesBuffer);
       });
     }
   }
