@@ -1710,12 +1710,14 @@ class ConnectHelper {
     required String auth,
     auditPlanApproveJsonString,
     bool? isLoading,
+    int?type,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'AuditPlan/ApproveAuditPlan',
       Request.post,
       auditPlanApproveJsonString,
       isLoading ?? false,
+
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -1725,6 +1727,7 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(AuditPlanMessageApproveDialog(
+      type:type,
         data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;

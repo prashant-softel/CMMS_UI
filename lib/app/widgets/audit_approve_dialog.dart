@@ -1,4 +1,5 @@
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ import '../view_audit_plan/view_audit_plan_controller.dart';
 
 class AuditApprovedDialog extends GetView {
   // int? id;
+
 
   AuditApprovedDialog({super.key});
   final ViewAuditPlanController controller = Get.find();
@@ -24,7 +26,7 @@ class AuditApprovedDialog extends GetView {
           ),
           insetPadding: Dimens.edgeInsets10_0_10_0,
           contentPadding: EdgeInsets.zero,
-          title: Text(
+          title: Text( controller.type.value==AppConstants.kMis?"Observation Plan Approve":
             "Audit Plan Approve",
             textAlign: TextAlign.center,
             // style: TextStyle(color: Colors.green),
@@ -124,7 +126,9 @@ class AuditApprovedDialog extends GetView {
                   Get.back();
                   }
                 },
-                child: Text('Approve Audit Plan'),
+                child: Text(
+                  controller.type.value==AppConstants.kMis?'Observation Plan Approve':
+                  'Approve Audit Plan'),
               ),
             ]),
           ],

@@ -11,10 +11,12 @@ class ViewAuditPlanUsecase {
   Future<Map<String, dynamic>> auditPlanApprovedButton({
     auditPlanApproveJsonString,
     bool? isLoading,
+    int? type,
   }) async =>
       await repository.auditPlanApprovedButton(
         auditPlanApproveJsonString,
         isLoading,
+        type,
       );
   Future<List<HistoryModel>?> getHistory({
     moduleType,

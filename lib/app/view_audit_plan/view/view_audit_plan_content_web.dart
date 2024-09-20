@@ -220,6 +220,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                             'Checklist :',
                                             style: Styles.black17,
                                           ),
+                                          controller.type==AppConstants.kMis? Dimens.box0:
                                           Text(
                                             'Employees :',
                                             style: Styles.black17,
@@ -251,6 +252,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                           Text(
                                               '${controller.auditPlanDetailModel.value?.checklist_name ?? ""}',
                                               style: Styles.blue17),
+                                              controller.type==AppConstants.kMis? Dimens.box0:
                                           Text(
                                               '${controller.auditPlanDetailModel.value?.employees ?? ""}',
                                               style: Styles.blue17),
@@ -261,10 +263,12 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
                                         children: [
+                                           controller.type==AppConstants.kMis? Dimens.box0:
                                           Text(
                                             'Assigned To :',
                                             style: Styles.black17,
                                           ),
+                                          
                                           Text(
                                             'Approved At :',
                                             style: Styles.black17,
@@ -283,6 +287,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
+                                          controller.type==AppConstants.kMis? Dimens.box0:
                                           Text(
                                               '${controller.auditPlanDetailModel.value?.assignedTo ?? ''}',
                                               style: Styles.blue17),

@@ -8,11 +8,13 @@ class ViewAuditPlanPresenter {
 
   Future<Map<String, dynamic>?> auditPlanApprovedButton({
     auditPlanApproveJsonString,
+    int? type,
     required bool isLoading,
   }) async {
     return viewAuditPlanUsecase.auditPlanApprovedButton(
       auditPlanApproveJsonString: auditPlanApproveJsonString,
       isLoading: isLoading,
+       type:type,
     );
   }
 
