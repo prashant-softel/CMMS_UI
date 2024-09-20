@@ -1,4 +1,5 @@
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,7 @@ class AuditPlanRejectDialog extends GetView {
           insetPadding: Dimens.edgeInsets10_0_10_0,
           contentPadding: EdgeInsets.zero,
           title: Text(
+            controller.type==AppConstants.kMis?"Observation Plan Reject":
             "Audit Plan Reject",
             textAlign: TextAlign.center,
             // style: TextStyle(color: Colors.green),
@@ -85,7 +87,9 @@ class AuditPlanRejectDialog extends GetView {
                   controller.auditPlanRejectButton(id: controller.auditId.value);
                   Get.back();
                 },
-                child: Text('Reject Audit Plan'),
+                child: Text(
+                   controller.type==AppConstants.kMis?"Reject Observation Plan":
+                  'Reject Audit Plan'),
               ),
             ]),
           ],

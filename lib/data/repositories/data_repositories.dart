@@ -1126,11 +1126,13 @@ class DataRepository extends DomainRepository {
     required String auth,
     auditPlanApproveJsonString,
     bool? isLoading,
+    int? type
   }) async =>
       await connectHelper.auditPlanApprovedButton(
         auth: auth,
         auditPlanApproveJsonString: auditPlanApproveJsonString,
         isLoading: isLoading ?? false,
+        type:type,
       );
   Future<ResponseModel> approveGOReceiveButton({
     required String auth,

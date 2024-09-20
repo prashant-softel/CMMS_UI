@@ -73,7 +73,7 @@ class CreateAuditWeb extends GetView<CreateAuditController> {
                           Get.back();
                         },
                         child: controller.type.value == AppConstants.kMis
-                            ? Text(" / MIS11", style: Styles.greyLight14)
+                            ? Text(" / MIS", style: Styles.greyLight14)
                             : Text(" / AUDIT", style: Styles.greyLight14),
                       ),
                       controller.type.value == AppConstants.kMis

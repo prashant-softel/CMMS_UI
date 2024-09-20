@@ -373,29 +373,29 @@ class CreateAuditController extends GetxController {
   }
 
   void checkFormAduit() {
-    if (planTitleTc.text.trim().length == 0) {
-      isTitleInvalid.value = true;
-      isFormInvalid.value = true;
-    }
-    if (selectedfrequency == '') {
-      isSelectedfrequency.value = false;
-      isFormInvalid.value = true;
-    }
-    if (selectedchecklist == '') {
-      isSelectedchecklist.value = false;
-      isFormInvalid.value = true;
-    }
-    if (startDateDateTc.text.trim().length == 0) {
-      isScheduleDateInvalid.value = true;
-      isFormInvalid.value = true;
-    }
-    if (descriptionTc.text.trim().length == 0) {
-      isDescriptionInvalid.value = true;
-      isFormInvalid.value = true;
-    }
-    if (selectedAssignedTo == '') {
-      isAssignedToSelected.value = false;
-      isFormInvalid.value = true;
-    }
+    // if (planTitleTc.text.trim().length == 0) {
+    //   isTitleInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
+    // if (selectedfrequency == '') {
+    //   isSelectedfrequency.value = false;
+    //   isFormInvalid.value = true;
+    // }
+    // if (selectedchecklist == '') {
+    //   isSelectedchecklist.value = false;
+    //   isFormInvalid.value = true;
+    // }
+    // if (startDateDateTc.text.trim().length == 0) {
+    //   isScheduleDateInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
+    // if (descriptionTc.text.trim().length == 0) {
+    //   isDescriptionInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
+    // if (selectedAssignedTo == '') {
+    //   isAssignedToSelected.value = false;
+    //   isFormInvalid.value = true;
+    // }
   }
 }

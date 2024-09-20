@@ -1,4 +1,5 @@
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../navigators/app_pages.dart';
@@ -9,12 +10,15 @@ import '../view_audit_plan/view_audit_plan_controller.dart';
 class AuditPlanMessageApproveDialog extends GetView {
   String? data;
   List<dynamic>? id;
-
-  AuditPlanMessageApproveDialog({super.key, this.data, this.id});
+  int? type;
+  AuditPlanMessageApproveDialog({super.key, this.data, this.id,this.type});
   final ViewAuditPlanController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    String buttonText1 = type == AppConstants.kMis ? 'MIS Plan List' : 'Audit Plan List';
+    String buttonText2 = type == AppConstants.kMis ? 'MIS Task' : 'Audit Task';
+    String buttonText3 = type == AppConstants.kMis ? 'View MIS Plan' : 'View Audit Plan';
     return SelectionArea(
       child: StatefulBuilder(builder: ((context, setState) {
         return AlertDialog(
@@ -24,6 +28,7 @@ class AuditPlanMessageApproveDialog extends GetView {
           insetPadding: Dimens.edgeInsets10_0_10_0,
           contentPadding: EdgeInsets.zero,
           title: Text(
+            type==AppConstants.kMis?'MIS Plan Approval':
             'Audit Plan Approval',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black),
@@ -59,7 +64,8 @@ class AuditPlanMessageApproveDialog extends GetView {
                     onPressed: () {
                       Get.offAllNamed(Routes.auditListScreen);
                     },
-                    child: const Text('Audit Plan List'),
+                    child:  Text(
+                 buttonText1),
                   ),
                 ),
                 Dimens.boxWidth10,
@@ -69,7 +75,8 @@ class AuditPlanMessageApproveDialog extends GetView {
                     onPressed: () {
                       Get.offAllNamed(Routes.auditTask);
                     },
-                    child: const Text('Audit Task'),
+                    child:  Text(
+                       buttonText2),
                   ),
                 ),
                 Dimens.boxWidth10,
@@ -108,7 +115,7 @@ class AuditPlanMessageApproveDialog extends GetView {
                       //   }
                       // });
                     },
-                    child: const Text('View Audit Plan'),
+                    child:  Text(buttonText3),
                   ),
                 ),
                 Dimens.boxWidth10,

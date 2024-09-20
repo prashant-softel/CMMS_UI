@@ -1,4 +1,5 @@
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/view_audit_task/view_audit_task_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -12,7 +13,7 @@ import '../view_mis_plan/view_mis_plan_controller.dart';
 class MisExecutionProcessDialog extends GetView {
   MisExecutionProcessDialog();
 
-  final ViewMisPlanController controller = Get.find();
+  final ViewAuditTaskController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

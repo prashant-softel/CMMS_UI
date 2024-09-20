@@ -15477,6 +15477,7 @@ class Repository {
   Future<Map<String, dynamic>> auditPlanApprovedButton(
     auditPlanApproveJsonString,
     bool? isLoading,
+    int?  type,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -15486,6 +15487,7 @@ class Repository {
           auth: auth,
           auditPlanApproveJsonString: auditPlanApproveJsonString,
           isLoading: isLoading ?? false,
+          type:type,
         );
       }
       var resourceData = res.data;

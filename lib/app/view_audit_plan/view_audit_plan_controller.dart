@@ -116,6 +116,7 @@ class ViewAuditPlanController extends GetxController {
         await viewAuditPlanPresenter.auditPlanApprovedButton(
       auditPlanApproveJsonString: auditPlanApproveJsonString,
       isLoading: true,
+      type:type.value,
     );
     if (response == true) {
       //getCalibrationList(facilityId, true);
