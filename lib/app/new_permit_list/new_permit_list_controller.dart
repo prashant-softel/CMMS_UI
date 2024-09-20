@@ -412,6 +412,7 @@ class NewPermitListController extends GetxController {
     Get.toNamed(Routes.viewPermitScreen, arguments: {
       "permitId": permitId,
       "type": 0,
+      'hseMis': 0,
     });
   }
 
@@ -514,32 +515,34 @@ class NewPermitListController extends GetxController {
         break;
       case 'Title':
         newPermitList.sort((a, b) => isAscending.value
-                   ? (a?.description ?? '').compareTo(b?.description ?? '')
+            ? (a?.description ?? '').compareTo(b?.description ?? '')
             : (b?.description ?? '').compareTo(a?.description ?? ''));
         break;
       case 'Permit Type Name':
         newPermitList.sort((a, b) => isAscending.value
-                   ? (a?.permitTypeName ?? '').compareTo(b?.permitTypeName ?? '')
+            ? (a?.permitTypeName ?? '').compareTo(b?.permitTypeName ?? '')
             : (b?.permitTypeName ?? '').compareTo(a?.permitTypeName ?? ''));
         break;
       case 'Equipment Category':
         newPermitList.sort((a, b) => isAscending.value
-                   ? (a?.equipment_categories ?? '').compareTo(b?.equipment_categories ?? '')
-            : (b?.equipment_categories ?? '').compareTo(a?.equipment_categories ?? ''));
+            ? (a?.equipment_categories ?? '')
+                .compareTo(b?.equipment_categories ?? '')
+            : (b?.equipment_categories ?? '')
+                .compareTo(a?.equipment_categories ?? ''));
         break;
       case 'Working Area':
         newPermitList.sort((a, b) => isAscending.value
-                   ? (a?.workingAreaName ?? '').compareTo(b?.workingAreaName ?? '')
+            ? (a?.workingAreaName ?? '').compareTo(b?.workingAreaName ?? '')
             : (b?.workingAreaName ?? '').compareTo(a?.workingAreaName ?? ''));
         break;
       case 'Requested By':
         newPermitList.sort((a, b) => isAscending.value
-                   ? (a?.requestByName ?? '').compareTo(b?.requestByName ?? '')
+            ? (a?.requestByName ?? '').compareTo(b?.requestByName ?? '')
             : (b?.requestByName ?? '').compareTo(a?.requestByName ?? ''));
         break;
       case 'Approved By':
         newPermitList.sort((a, b) => isAscending.value
-                   ? (a?.approvedByName ?? '').compareTo(b?.approvedByName ?? '')
+            ? (a?.approvedByName ?? '').compareTo(b?.approvedByName ?? '')
             : (b?.approvedByName ?? '').compareTo(a?.approvedByName ?? ''));
         break;
       default:
