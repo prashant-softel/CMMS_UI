@@ -667,7 +667,7 @@ class VegetationPlanListDataSource extends DataTableSource {
         controller.clearStoreData();
         int id = VegetationListDetails?.planId ?? 0;
         if (id != 0) {
-          Get.toNamed('${Routes.viewVegetationPlanScreen}/$id');
+          Get.offAllNamed('${Routes.viewVegetationPlanScreen}/$id');
         }
       },
     );

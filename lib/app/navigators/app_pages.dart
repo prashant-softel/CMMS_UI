@@ -1147,7 +1147,7 @@ class AppPages {
     ),
 
     GetPage<dynamic>(
-      name: _Paths.viewMcPlaning,
+      name: '${_Paths.viewMcPlaning}/:mcid',
       page: ViewMcPlaningScreen.new,
       binding: ViewMcPlaningBinding(),
     ),
