@@ -41,12 +41,12 @@ class ViewObservationUsecase {
         LocalKeys.obsId,
       );
       
-      Future<Map<String, dynamic>> viewObsCloseButton({
-    viewobsCloseJsonString,
-    bool? isLoading,
-  }) async =>
-      await repository.viewObsCloseButton(
-        viewobsCloseJsonString,
-        isLoading,
-      );
+  //     Future<Map<String, dynamic>> viewObsCloseButton({
+  //   viewobsCloseJsonString,
+  //   bool? isLoading,
+  // }) async =>
+  //     await repository.viewObsCloseButton(
+  //       viewobsCloseJsonString,
+  //       isLoading,
+  //     );
 }

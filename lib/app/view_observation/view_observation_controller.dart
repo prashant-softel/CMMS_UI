@@ -139,25 +139,25 @@ class ViewObservationController extends GetxController {
     }
   }
 
-  void viewObsCloseButton({int? id}) async {
-    {
-      String _comment = closeCommentTextFieldCtrlr.text.trim();
+  // void viewObsCloseButton({int? id}) async {
+  //   {
+  //     String _comment = closeCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentviewListofObsCloseModel =
-          CommentModel(id: id, comment: _comment);
+  //     CommentModel commentviewListofObsCloseModel =
+  //         CommentModel(id: id, comment: _comment);
 
-      var ViewObsCloseJsonString = commentviewListofObsCloseModel.toJson();
+  //     var ViewObsCloseJsonString = commentviewListofObsCloseModel.toJson();
 
-      Map<String, dynamic>? response =
-          await viewObservationPresenter.viewObsCloseButton(
-        ViewObsCloseJsonString: ViewObsCloseJsonString,
-        isLoading: true,
-      );
-      if (response == true) {
-        //getCalibrationList(facilityId, true);
-      }
-    }
-  }
+  //     Map<String, dynamic>? response =
+  //         await viewObservationPresenter.viewObsCloseButton(
+  //       ViewObsCloseJsonString: ViewObsCloseJsonString,
+  //       isLoading: true,
+  //     );
+  //     if (response == true) {
+  //       //getCalibrationList(facilityId, true);
+  //     }
+  //   }
+  // }
 
   void onValueChanged(dynamic list, dynamic value) {
     print("$value");

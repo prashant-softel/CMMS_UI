@@ -41,13 +41,13 @@ class ViewObservationPresenter {
   }
 
   
-    Future<Map<String, dynamic>?> viewObsCloseButton({
-    ViewObsCloseJsonString,
-    required bool isLoading,
-  }) async {
-    return viewObservationUsecase.viewObsCloseButton(
-      viewobsCloseJsonString: ViewObsCloseJsonString,
-      isLoading: isLoading,
-    );
-  }
+  //   Future<Map<String, dynamic>?> viewObsCloseButton({
+  //   ViewObsCloseJsonString,
+  //   required bool isLoading,
+  // }) async {
+  //   return viewObservationUsecase.viewObsCloseButton(
+  //     viewobsCloseJsonString: ViewObsCloseJsonString,
+  //     isLoading: isLoading,
+  //   );
+  // }
 }

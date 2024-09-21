@@ -166,7 +166,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                           color: Color.fromARGB(
                                               255, 245, 248, 250),
                                           width: Get.width,
-                                          height: Get.height,
+                                          // height: Get.height,
+                                          height: 1500,
                                           child: Padding(
                                             padding: const EdgeInsets.all(16),
                                             child: Container(
@@ -1155,18 +1156,20 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                 : Dimens.box0,
                         Dimens.boxWidth15,
                         controller.obsId != 0 &&
-                                controller.type == 1 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kObservationFeatureId &&
-                                            e.approve ==
-                                                UserAccessConstants
-                                                    .kHaveApproveAccess)
-                                        .length >
-                                    0 &&
-                                controller.getObsById.value!.status_code == 555
+                                    controller.type == 1 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kObservationFeatureId &&
+                                                e.approve ==
+                                                    UserAccessConstants
+                                                        .kHaveApproveAccess)
+                                            .length >
+                                        0 &&
+                                    controller.getObsById.value!.status_code ==
+                                        555 ||
+                                controller.getObsById.value!.status_code == 551
                             ? Container(
                                 height: 40,
                                 child: CustomElevatedButton(
@@ -1184,10 +1187,17 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                               )
                             : Dimens.box0,
                         Dimens.boxWidth15,
+                        controller.getObsById.value != null &&
                         controller.getObsById.value!.status_code == 552 &&
                                 controller.obsId != 0 &&
                                 controller.getObsById.value!.createdid !=
-                                    varUserAccessModel.value.user_id
+                                    varUserAccessModel.value.user_id 
+                                //     &&
+                                //      controller.getObservationListModel != null 
+                                //     &&
+                                // controller.getObservationListModel!
+                                //         .assigned_to_id ==
+                                //     varUserAccessModel.value.user_id
                             ? Container(
                                 height: 45,
                                 child: CustomElevatedButton(
