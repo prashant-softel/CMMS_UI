@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -94,7 +97,17 @@ class TbtDonePMTaskDialog extends GetView {
                           controller.clearTypeStoreData();
                           controller.clearisCheckedtoreData();
                           controller.clearjobmodelValue();
-                          controller.clearpmTaskValue();
+                          // controller.clearpmTaskValue();
+                          // String permitId = ptw_id.toString();
+
+                          // String isChecked = "false";
+                          // String type = 2.toString();
+                          // PmtaskViewModel pmTaskModel =
+                          //     controller.pmtaskViewModel.value;
+
+                          // // Ensure variables are non-null before navigating
+                          // Get.offAllNamed(
+                          //     '${Routes.createPermit}/$permitId/$isChecked/$type/$pmTaskModel');
                           Get.toNamed(Routes.createPermit, arguments: {
                             'permitId': ptw_id,
                             'isChecked': false,

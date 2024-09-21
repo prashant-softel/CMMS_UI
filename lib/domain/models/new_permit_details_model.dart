@@ -522,18 +522,18 @@ class ListCategory {
 }
 
 class ListAssociatedJob {
-  ListAssociatedJob({
-    this.jobId,
-    this.permitId,
-    this.title,
-    this.equipmentCat,
-    this.equipment,
-    this.breakdownTime,
-    this.assignedTo,
-    this.status,
-    this.status_short,
-  });
-
+  ListAssociatedJob(
+      {this.jobId,
+      this.permitId,
+      this.title,
+      this.equipmentCat,
+      this.equipment,
+      this.breakdownTime,
+      this.assignedTo,
+      this.status,
+      this.status_short,
+      this.jc_id});
+  int? jc_id;
   int? jobId;
   int? permitId;
   String? title;
@@ -547,6 +547,7 @@ class ListAssociatedJob {
   factory ListAssociatedJob.fromJson(Map<String, dynamic> json) =>
       ListAssociatedJob(
         jobId: json['jobId'],
+        jc_id: json['jc_id'],
         permitId: json['permitId'],
         title: json["title"] ?? '',
         equipmentCat: json['equipmentCat'],
@@ -561,6 +562,7 @@ class ListAssociatedJob {
 
   Map<String, dynamic> toJson() => {
         "jobId": jobId,
+        "jc_id": jc_id,
         "permitId": permitId,
         "title": title,
         "equipmentCat": equipmentCat,

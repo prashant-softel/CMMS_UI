@@ -120,29 +120,32 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   }
 
   Future<void> setScheduleId() async {
-    try {
-      final _scheduleId =
-          await preventiveMaintenanceTaskViewPresenter.getValue();
+    final String? _pmTaskId = Get.parameters['pmTaskId'];
+    scheduleId.value = int.tryParse(_pmTaskId ?? "") ?? 0;
 
-      //  String? _scheduleId = await _flutterSecureStorage.read(key: "pmTaskId");
-      if (_scheduleId == null || _scheduleId == '' || _scheduleId == "null") {
-        var dataFromPreviousScreen = Get.arguments;
+    // try {
+    //   final _scheduleId =
+    //       await preventiveMaintenanceTaskViewPresenter.getValue();
 
-        scheduleId.value = dataFromPreviousScreen['pmTaskId'];
-        preventiveMaintenanceTaskViewPresenter.saveValue(
-            pmTaskId: scheduleId.value.toString());
+    //   //  String? _scheduleId = await _flutterSecureStorage.read(key: "pmTaskId");
+    //   if (_scheduleId == null || _scheduleId == '' || _scheduleId == "null") {
+    //     var dataFromPreviousScreen = Get.arguments;
 
-        // await _flutterSecureStorage.write(
-        //   key: "pmTaskId",
-        //   value: scheduleId.value == null ? '' : scheduleId.value.toString(),
-        // );
-      } else {
-        scheduleId.value = int.tryParse(_scheduleId) ?? 0;
-      }
-      //  await _flutterSecureStorage.delete(key: "scheduleId");
-    } catch (e) {
-      Utility.showDialog(e.toString(), 'scheduleId');
-    }
+    //     scheduleId.value = dataFromPreviousScreen['pmTaskId'];
+    //     preventiveMaintenanceTaskViewPresenter.saveValue(
+    //         pmTaskId: scheduleId.value.toString());
+
+    //     // await _flutterSecureStorage.write(
+    //     //   key: "pmTaskId",
+    //     //   value: scheduleId.value == null ? '' : scheduleId.value.toString(),
+    //     // );
+    //   } else {
+    //     scheduleId.value = int.tryParse(_scheduleId) ?? 0;
+    //   }
+    //   //  await _flutterSecureStorage.delete(key: "scheduleId");
+    // } catch (e) {
+    //   Utility.showDialog(e.toString(), 'scheduleId');
+    // }
   }
 
   Future<void> getMrsListByModuleTask({required int taskId}) async {
@@ -705,9 +708,12 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     int? permitId,
     int? jobId,
   }) async {
-    Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "jobId": jobId, "type": 2});
-    print({"Permit", permitId, jobId});
+    String type = 2.toString();
+    Get.offNamed('${Routes.viewPermitScreen}/$permitId/$type');
+
+    // Get.toNamed(Routes.viewPermitScreen,
+    //     arguments: {"permitId": permitId, "jobId": jobId, "type": 2});
+    // print({"Permit", permitId, jobId});
   }
 
   Future<void> generateInvoice() async {

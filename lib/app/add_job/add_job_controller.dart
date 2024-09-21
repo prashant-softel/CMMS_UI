@@ -569,7 +569,7 @@ class AddJobController extends GetxController {
   }
 
   goToJobDetailsScreen(int _jobId) {
-    Get.offAndToNamed(Routes.jobDetails, arguments: {"jobId": _jobId});
+    Get.toNamed('${Routes.jobDetails}/$_jobId');
   }
 
   goToJobListScreen() {

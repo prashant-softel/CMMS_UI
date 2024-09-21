@@ -133,24 +133,27 @@ class JobDetailsController extends GetxController {
   }
 
   Future<void> setJobId() async {
-    try {
-      final _jobId = await jobDetailsPresenter.getValue();
+    final String? _jobId = Get.parameters['jobId'];
+    jobId.value = int.tryParse(_jobId ?? "") ?? 0;
 
-      // If jobId is unavailable, take it from the arguments received
-      if (_jobId == null || _jobId == '' || _jobId == "null") {
-        var data = Get.arguments;
-        jobId.value = data["jobId"];
-        jobDetailsPresenter.saveValue(jobId: jobId.value.toString());
-      } else {
-        jobId.value = int.tryParse(_jobId) ?? 0;
-      }
-    } catch (e) {
-      Utility.showDialog(e.toString(), 'jobId');
-    }
+    //   try {
+    //     final _jobId = await jobDetailsPresenter.getValue();
+
+    //     // If jobId is unavailable, take it from the arguments received
+    //     if (_jobId == null || _jobId == '' || _jobId == "null") {
+    //       var data = Get.arguments;
+    //       jobId.value = data["jobId"];
+    //       jobDetailsPresenter.saveValue(jobId: jobId.value.toString());
+    //     } else {
+    //       jobId.value = int.tryParse(_jobId) ?? 0;
+    //     }
+    //   } catch (e) {
+    //     Utility.showDialog(e.toString(), 'jobId');
+    //   }
+    // }
+    // startStopJobCard() {
+    //   isJobCardStarted.value = !isJobCardStarted.value;
   }
-  // startStopJobCard() {
-  //   isJobCardStarted.value = !isJobCardStarted.value;
-  // }
 
   Future<void> createJobCard() async {
     //   await startStopJobCard();
@@ -170,8 +173,8 @@ class JobDetailsController extends GetxController {
       // await _flutterSecureStorage.delete(key: "jobId");
       final _jobCardId = responseMapJobCardStarted["id"][0];
       jobCardId.value = _jobCardId;
-
-      Get.toNamed(Routes.jobCard, arguments: {'JcId': jobCardId.value});
+      int jcId = jobCardId.value;
+      Get.toNamed('${Routes.jobCard}/$jcId');
 
       //  }
     }
@@ -372,14 +375,16 @@ class JobDetailsController extends GetxController {
     int? permitId,
     int? jobId,
   }) async {
-    Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "jobId": jobId, "type": 1});
-    print({"Permit", permitId, jobId});
+    String type = 1.toString();
+    Get.offAllNamed('${Routes.viewPermitScreen}/$permitId/$type');
+
+    // Get.toNamed(Routes.viewPermitScreen,
+    //     arguments: {"permitId": permitId, "jobId": jobId, "type": 1});
+    // print({"Permit", permitId, jobId});
   }
 
   Future<void> viewJobCArd({int? jobcardId}) async {
-    Get.toNamed(Routes.jobCard, arguments: jobcardId);
-    print({"jobcardvghwjbkn", jobcardId});
+    Get.toNamed('${Routes.jobCard}/$jobCardId');
   }
   // Future<void> vieMRSList({Rx<int>? mrsId}) async {
   //   Get.toNamed(Routes.mrsViewScreen, arguments: mrsId);

@@ -908,9 +908,7 @@ class EditJobController extends GetxController {
 
   goToJobDetailsScreen(int _jobId) {
     Get.back();
-    final _flutterSecureStorage = const FlutterSecureStorage();
-    _flutterSecureStorage.delete(key: "jobId");
-    Get.offAllNamed(Routes.jobDetails, arguments: {"jobId": _jobId});
+    Get.offAllNamed('${Routes.jobDetails}/$_jobId');
   }
 
   goToJobListScreen() {

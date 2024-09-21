@@ -18,11 +18,13 @@ class MrsIssuePresenter {
       {issuetoJsonString,
       int? type,
       required bool isLoading,
-      int? facility_id}) async {
+      int? facility_id,
+      int? route}) async {
     return mrsIssueUsecase.issueMrs(
         issuetoJsonString: issuetoJsonString,
         isLoading: isLoading,
-        facility_id: facility_id);
+        facility_id: facility_id,
+        route: route);
   }
 
   void saveValue({String? mrsId}) async {

@@ -514,9 +514,7 @@ class VegetationPlanListDataSource extends DataTableSource {
                             int id = VegetationListDetails?.planId ?? 0;
                             if (id != 0) {
                               Get.toNamed(
-                                Routes.viewVegetationPlanScreen,
-                                arguments: {'vegid': id},
-                              );
+                                  '${Routes.viewVegetationPlanScreen}/$id');
                             }
                           },
                         ),
@@ -655,9 +653,7 @@ class VegetationPlanListDataSource extends DataTableSource {
                                   int id = VegetationListDetails?.planId ?? 0;
                                   if (id != 0) {
                                     Get.toNamed(
-                                      Routes.viewVegetationPlanScreen,
-                                      arguments: {'vegid': id, "type": 1},
-                                    );
+                                        '${Routes.viewVegetationPlanScreen}/$id');
                                   }
                                 },
                               )
@@ -671,10 +667,7 @@ class VegetationPlanListDataSource extends DataTableSource {
         controller.clearStoreData();
         int id = VegetationListDetails?.planId ?? 0;
         if (id != 0) {
-          Get.toNamed(
-            Routes.viewVegetationPlanScreen,
-            arguments: {'vegid': id},
-          );
+          Get.toNamed('${Routes.viewVegetationPlanScreen}/$id');
         }
       },
     );

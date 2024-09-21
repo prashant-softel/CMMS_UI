@@ -13,7 +13,7 @@ class UpdateNewPermitDialog extends GetView {
   int? type;
   int? vegexid;
   int? vegplanId;
-
+  String? taskId;
   UpdateNewPermitDialog(
       {super.key,
       this.createPermitData,
@@ -21,7 +21,8 @@ class UpdateNewPermitDialog extends GetView {
       this.PtwId,
       this.type,
       this.vegplanId,
-      this.vegexid});
+      this.vegexid,
+      this.taskId});
   final NewPermitController controller = Get.find();
 
   @override
@@ -155,13 +156,15 @@ class UpdateNewPermitDialog extends GetView {
             type == 1
                 ? ElevatedButton(
                     style: Styles.darkBlueElevatedButtonStyle,
-                    onPressed: () => Get.offAllNamed(Routes.jobCard),
-                    child: const Text('View JC'),
+                    onPressed: () =>
+                        Get.offAllNamed('${Routes.jobDetails}/$taskId'),
+                    child: const Text('View Job'),
                   )
                 : type == 2
                     ? ElevatedButton(
                         style: Styles.darkBlueElevatedButtonStyle,
-                        onPressed: () => Get.offAllNamed(Routes.pmTaskView),
+                        onPressed: () =>
+                            Get.offAllNamed('${Routes.pmTaskView}/$taskId'),
                         child: const Text('View Task'),
                       )
                     : type == 3
@@ -182,12 +185,7 @@ class UpdateNewPermitDialog extends GetView {
                                 ? ElevatedButton(
                                     style: Styles.darkBlueElevatedButtonStyle,
                                     onPressed: () => Get.offAllNamed(
-                                      Routes.vegExecutionScreen,
-                                      arguments: {
-                                        "vegexe": vegexid,
-                                        "vegid": vegplanId,
-                                      },
-                                    ),
+                                        '${Routes.vegExecutionScreen}/${vegexid}/${vegplanId}'),
                                     child: const Text('View VEG'),
                                   )
                                 : Dimens.box0,

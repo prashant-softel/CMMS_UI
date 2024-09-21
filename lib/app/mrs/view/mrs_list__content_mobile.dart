@@ -55,19 +55,25 @@ class MrsListContentMobile extends GetView<MrsListController> {
                                 onTap: () {
                                   controller.clearStoreData();
                                   // controller.clearStoreDatatype();
-                                  var _mrsId =
-                                      controller.mrsList[index]!.id ?? 0;
+                                  String mrsId = controller.mrsList[index]!.id
+                                          .toString() ??
+                                      "";
+                                  String type = 0.toString();
+
                                   controller.mrsList[index]?.status == 323
                                       ? Get.toNamed(Routes.mrsIssueScreen,
                                           arguments: {
-                                              'mrsId': _mrsId,
+                                              'mrsId': mrsId,
                                               'type': 0
                                             })
-                                      : Get.toNamed(Routes.mrsApprovalScreen,
-                                          arguments: {
-                                              'mrsId': _mrsId,
-                                              'type': 0
-                                            });
+                                      : Get.offNamed(
+                                          '${Routes.mrsApprovalScreen}/$mrsId/$type');
+
+                                  // Get.toNamed(Routes.mrsApprovalScreen,
+                                  //     arguments: {
+                                  //         'mrsId': _mrsId,
+                                  //         'type': 0
+                                  //       });
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(left: 10, right: 10),

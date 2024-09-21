@@ -69,16 +69,22 @@ class NewPermitWeb extends GetView<NewPermitController> {
                   ),
                   InkWell(
                       onTap: () {
-                        var taskId;
+                        String taskId = controller.listAssociatedPm!.isEmpty
+                            ? controller.pmtaskViewModel?.id.toString() ?? ""
+                            : controller.listAssociatedPm?[0]?.pmId
+                                    .toString() ??
+                                "";
+                        String jobId = controller.listAssociatedJobs!.isEmpty
+                            ? controller.jobModel?.id.toString() ?? ''
+                            : controller.listAssociatedJobs![0]?.jobId
+                                    .toString() ??
+                                '';
                         var mcid;
-                        var jobId;
 
                         controller.typee.value == 1
-                            ? Get.offAllNamed(Routes.jobDetails,
-                                arguments: {'jobId': jobId})
+                            ? Get.offNamed('${Routes.jobDetails}/$jobId')
                             : controller.typee.value == 2
-                                ? Get.offAllNamed(Routes.pmTaskView,
-                                    arguments: {'pmTaskId': taskId})
+                                ? Get.offNamed('${Routes.pmTaskView}/$taskId')
                                 : controller.typee.value == AppConstants.kAudit
                                     ? Get.offAllNamed(Routes.viewAuditTask,
                                         arguments: {'auditTaskId': taskId})
@@ -91,16 +97,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               })
                                         : controller.typee.value == 5
                                             ? Get.offAllNamed(
-                                                Routes.vegExecutionScreen,
-                                                arguments: {
-                                                  "vegexe": controller
-                                                      .vegExecutionDetailsModel
-                                                      ?.executionId,
-                                                  "vegid": controller
-                                                      .vegExecutionDetailsModel
-                                                      ?.planId,
-                                                },
-                                              )
+                                                '${Routes.vegExecutionScreen}/${controller.vegExecutionDetailsModel?.executionId}/${controller.vegExecutionDetailsModel?.planId}')
                                             : Get.offNamed(
                                                 Routes.newPermitList);
                       },
@@ -562,8 +559,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                     .value ==
                                                                 AppConstants
                                                                     .kAudit
-                                                            ? 'AUD${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}'
-                                                            : 'PMT${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}',
+                                                            ? 'AUD${int.tryParse('${controller.listAssociatedPm?[index]?.pmId ?? 0}')}'
+                                                            : 'PMT${int.tryParse('${controller.listAssociatedPm?[index]?.pmId ?? 0}')}',
                                                         style: TextStyle(
                                                           decoration:
                                                               TextDecoration
@@ -1712,18 +1709,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                         // controller
                                                         // .clearStoreDataPMtaskId();
                                                         Get.offAllNamed(
-                                                            Routes
-                                                                .vegExecutionScreen,
-                                                            arguments: {
-                                                              'vegexe': controller
-                                                                  .lstAssociatedVc?[
-                                                                      index]!
-                                                                  .executionId,
-                                                              'vegid': controller
-                                                                  .lstAssociatedVc?[
-                                                                      index]!
-                                                                  .plan_id,
-                                                            });
+                                                            '${Routes.vegExecutionScreen}/${controller.vegExecutionDetailsModel?.executionId}/${controller.vegExecutionDetailsModel?.planId}');
                                                       },
                                                       child: Text(
                                                         'VET${int.tryParse('${controller.lstAssociatedVc?[index]?.executionId ?? 0}')}',

@@ -10,9 +10,15 @@ class CreateMrsSuccessDialog extends GetView {
   String? data;
   dynamic mrsId;
   int? type;
+  String? route;
 
   CreateMrsSuccessDialog(
-      {super.key, this.createPermitData, this.data, this.mrsId, this.type});
+      {super.key,
+      this.createPermitData,
+      this.data,
+      this.mrsId,
+      this.type,
+      this.route});
 
   final CreateMrsController controller = Get.find();
 
@@ -85,8 +91,12 @@ class CreateMrsSuccessDialog extends GetView {
                       style: Styles.yellowElevatedButtonStyle,
                       onPressed: () {
                         controller.clearStoreData();
-                        Get.toNamed(Routes.mrsApprovalScreen,
-                            arguments: {'mrsId': mrsId![0], 'type': type});
+                        String typee = type.toString();
+                        Get.offNamed(
+                            '${Routes.mrsApprovalScreen}/${mrsId![0].toString()}/$typee');
+
+                        // Get.toNamed(Routes.mrsApprovalScreen,
+                        //     arguments: {'mrsId': mrsId![0].toString(), 'type': type});
                       },
                       child: const Text('View MRS'),
                     ),
@@ -95,7 +105,7 @@ class CreateMrsSuccessDialog extends GetView {
                         ? ElevatedButton(
                             style: Styles.darkBlueElevatedButtonStyle,
                             onPressed: () {
-                              Get.offAndToNamed(Routes.jobDetails);
+                              Get.offAllNamed('${Routes.jobDetails}/$route');
                             },
                             child: const Text('View Job'),
                           )
@@ -103,7 +113,9 @@ class CreateMrsSuccessDialog extends GetView {
                             ? ElevatedButton(
                                 style: Styles.darkBlueElevatedButtonStyle,
                                 onPressed: () {
-                                  Get.offAndToNamed(Routes.pmTaskView);
+                                  Get.offAllNamed(
+                                      '${Routes.pmTaskView}/$route');
+                                  // Get.offAndToNamed(Routes.pmTaskView);
                                   // controller.viewNewPermitList(permitId: PtwId![0]);
                                 },
                                 child: const Text('View Task'),

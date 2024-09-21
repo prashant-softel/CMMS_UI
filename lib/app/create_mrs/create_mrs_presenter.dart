@@ -17,16 +17,13 @@ class CreateMrsPresenter {
     return createmrsUsecase.clearValue();
   }
 
-  Future<Map<String, dynamic>?> createMrs({
-    createMrsJsonString,
-    type,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> createMrs(
+      {createMrsJsonString, type, required bool isLoading, int? route}) async {
     return createmrsUsecase.createMrs(
-      createMrsJsonString: createMrsJsonString,
-      type: type,
-      isLoading: isLoading,
-    );
+        createMrsJsonString: createMrsJsonString,
+        type: type,
+        isLoading: isLoading,
+        route: route);
   }
 
   void saveUsedTypeIdValue({String? whereUsedTypeId}) async {

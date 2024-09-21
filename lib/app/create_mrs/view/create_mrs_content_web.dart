@@ -56,14 +56,12 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                 ),
                 InkWell(
                   onTap: () {
-                    var taskId;
-                    var jobId;
+                    String refId =
+                        controller.whereUsedTypeId.value.toString() ?? "";
                     controller.type.value == 1
-                        ? Get.offAllNamed(Routes.jobDetails,
-                            arguments: {'jobId': jobId})
+                        ? Get.offNamed('${Routes.jobDetails}/$refId')
                         : controller.type.value == 2
-                            ? Get.offAllNamed(Routes.pmTaskView,
-                                arguments: {'pmTaskId': taskId})
+                            ? Get.offNamed('${Routes.pmTaskView}/$refId')
                             : Get.offNamed(
                                 Routes.stockManagementDashboardScreen);
                   },

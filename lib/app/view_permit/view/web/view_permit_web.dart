@@ -93,32 +93,38 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                     //     :
                                     InkWell(
                                         onTap: () {
-                                          var taskId;
-                                          var jobId;
+                                          String taskId = controller
+                                                  .listAssociatedPm!.isEmpty
+                                              ? ""
+                                              : controller.listAssociatedPm?[0]
+                                                      ?.pmId
+                                                      .toString() ??
+                                                  "";
+                                          String jobId = controller
+                                                  .listAssociatedJobs!.isEmpty
+                                              ? ""
+                                              : controller
+                                                      .listAssociatedJobs![0]
+                                                      ?.jobId
+                                                      .toString() ??
+                                                  '';
                                           var vegexe;
                                           var mcid;
                                           var vegplan;
                                           controller.type.value == 1
-                                              ? Get.offAllNamed(
-                                                  Routes.jobDetails,
-                                                  arguments: {'jobId': jobId})
+                                              ? Get.offNamed(
+                                                  '${Routes.jobDetails}/$jobId')
                                               : controller.type.value == 2
-                                                  ? Get.offAllNamed(
-                                                      Routes.pmTaskView,
-                                                      arguments: {
-                                                          'pmTaskId': taskId
-                                                        })
+                                                  ? Get.offNamed(
+                                                      '${Routes.pmTaskView}/$taskId')
                                                   : controller.type.value == 5
                                                       ? Get.offAllNamed(
-                                                          Routes.vegExecutionScreen,
-                                                          arguments: {
-                                                              'vegexe': vegexe,
-                                                              'vegid': vegplan
-                                                            })
+                                                          '${Routes.vegExecutionScreen}/${vegexe}/${vegplan}')
                                                       : controller.type.value ==
                                                               4
                                                           ? Get.offAllNamed(
-                                                              Routes.addModuleCleaningExecutionContentWeb,
+                                                              Routes
+                                                                  .addModuleCleaningExecutionContentWeb,
                                                               arguments: {
                                                                   'mcid': mcid
                                                                 })
@@ -948,6 +954,12 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       flex: 1,
                                                       child: InkWell(
                                                         onTap: () {
+                                                          String refId = controller
+                                                                  .listAssociatedPm?[
+                                                                      index]
+                                                                  ?.pmId
+                                                                  .toString() ??
+                                                              "";
                                                           controller
                                                               .clearStoreDataPMtaskId();
                                                           controller.type
@@ -966,15 +978,8 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                                           .type
                                                                           .value,
                                                                     })
-                                                              : Get.toNamed(
-                                                                  Routes
-                                                                      .pmTaskView,
-                                                                  arguments: {
-                                                                      'pmTaskId': controller
-                                                                          .listAssociatedPm?[
-                                                                              index]
-                                                                          ?.pmId,
-                                                                    });
+                                                              : Get.offAllNamed(
+                                                                  '${Routes.pmTaskView}/$refId');
                                                         },
                                                         child: Text(
                                                           controller.type
@@ -1426,18 +1431,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                           controller
                                                               .clearStoreDataPMtaskId();
                                                           Get.offAllNamed(
-                                                              Routes
-                                                                  .vegExecutionScreen,
-                                                              arguments: {
-                                                                'vegexe': controller
-                                                                    .lstAssociatedVc?[
-                                                                        index]!
-                                                                    .executionId,
-                                                                'vegid': controller
-                                                                    .lstAssociatedVc?[
-                                                                        index]!
-                                                                    .plan_id,
-                                                              });
+                                                              '${Routes.vegExecutionScreen}/${controller.lstAssociatedVc?[index]!.executionId}/${controller.lstAssociatedVc?[index]!.plan_id}');
                                                         },
                                                         child: Text(
                                                           "VE${controller.lstAssociatedVc?[index]?.executionId.toString() ?? ''}",
@@ -3871,17 +3865,32 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                     text: "Reject Permit",
                                     icon: Icons.close,
                                     onPressed: () {
+                                      String taskId =
+                                          controller.listAssociatedPm!.isEmpty
+                                              ? ""
+                                              : controller.listAssociatedPm?[0]
+                                                      ?.pmId
+                                                      .toString() ??
+                                                  "";
+                                      String jobId =
+                                          controller.listAssociatedJobs!.isEmpty
+                                              ? ""
+                                              : controller
+                                                      .listAssociatedJobs![0]
+                                                      ?.jobId
+                                                      .toString() ??
+                                                  '';
                                       // controller
                                       //     .createNewPermit();
                                       Get.dialog(PermitRejectDialog(
-                                        permitId: controller
-                                            .viewPermitDetailsModel
-                                            .value
-                                            ?.permitNo,
-                                        ptwStatus:
-                                            '${controller.viewPermitDetailsModel.value?.ptwStatus}',
-                                        jobId: controller.jobId.value,
-                                      ));
+                                          permitId: controller
+                                              .viewPermitDetailsModel
+                                              .value
+                                              ?.permitNo,
+                                          ptwStatus:
+                                              '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                                          jobId: int.tryParse(jobId),
+                                          taskId: taskId));
                                     },
                                   )),
                             )

@@ -83,8 +83,7 @@ class PermitMessageCloseDialog extends GetView {
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
                 jobId != 0
-                    ? Get.offAllNamed(Routes.jobDetails,
-                        arguments: {"jobId": jobId})
+                    ? Get.offAllNamed('${Routes.jobDetails}/$jobId')
                     : Get.offAllNamed(Routes.newPermitList);
               },
               child: const Text('Ok'),

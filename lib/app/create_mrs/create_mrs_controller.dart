@@ -241,10 +241,10 @@ class CreateMrsController extends GetxController {
       print({"createMrsJsonString", createMrsJsonString});
       Map<String, dynamic>? responseCreateMrs =
           await createMrsPresenter.createMrs(
-        createMrsJsonString: createMrsJsonString,
-        type: type.value,
-        isLoading: true,
-      );
+              createMrsJsonString: createMrsJsonString,
+              type: type.value,
+              isLoading: true,
+              route: whereUsedTypeId.value);
       // if (responseCreateMrs == null) {
       // } else {
       //   Get.offAllNamed(

@@ -20,9 +20,14 @@ class CumulativeReportPresenter {
     bool? isLoading,
     required dynamic selectedFacilityIdList,
     required dynamic module_id,
+    dynamic endDate,
+    dynamic startDate,
   }) async =>
       await cumulativeReportUsecase.getCumulativeReportList(
-          isLoading: isLoading ?? false,
-          selectedFacilityIdList: selectedFacilityIdList,
-          module_id: module_id);
+        isLoading: isLoading ?? false,
+        selectedFacilityIdList: selectedFacilityIdList,
+        module_id: module_id,
+        endDate: endDate,
+        startDate: startDate,
+      );
 }

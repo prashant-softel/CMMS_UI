@@ -56,30 +56,33 @@ class CalibrationViewController extends GetxController {
   }
 
   Future<void> setcalibrationId() async {
-    try {
-      final _calibrationId = await calibrationViewPresenter.getValue();
+    final String? _calibrationId = Get.parameters['calibrationId'];
+    calibrationId.value = int.tryParse(_calibrationId ?? "") ?? 0;
 
-      //  String? _calibrationId = await _flutterSecureStorage.read(key: "pmTaskId");
-      if (_calibrationId == null ||
-          _calibrationId == '' ||
-          _calibrationId == "null") {
-        var dataFromPreviousScreen = Get.arguments;
+    // try {
+    //   final _calibrationId = await calibrationViewPresenter.getValue();
 
-        calibrationId.value = dataFromPreviousScreen['calibrationId'];
-        calibrationViewPresenter.saveValue(
-            calibrationId: calibrationId.value.toString());
+    //   //  String? _calibrationId = await _flutterSecureStorage.read(key: "pmTaskId");
+    //   if (_calibrationId == null ||
+    //       _calibrationId == '' ||
+    //       _calibrationId == "null") {
+    //     var dataFromPreviousScreen = Get.arguments;
 
-        // await _flutterSecureStorage.write(
-        //   key: "pmTaskId",
-        //   value: calibrationId.value == null ? '' : calibrationId.value.toString(),
-        // );
-      } else {
-        calibrationId.value = int.tryParse(_calibrationId) ?? 0;
-      }
-      //  await _flutterSecureStorage.delete(key: "calibrationId");
-    } catch (e) {
-      Utility.showDialog(e.toString(), 'calibrationId');
-    }
+    //     calibrationId.value = dataFromPreviousScreen['calibrationId'];
+    //     calibrationViewPresenter.saveValue(
+    //         calibrationId: calibrationId.value.toString());
+
+    //     // await _flutterSecureStorage.write(
+    //     //   key: "pmTaskId",
+    //     //   value: calibrationId.value == null ? '' : calibrationId.value.toString(),
+    //     // );
+    //   } else {
+    //     calibrationId.value = int.tryParse(_calibrationId) ?? 0;
+    //   }
+    //   //  await _flutterSecureStorage.delete(key: "calibrationId");
+    // } catch (e) {
+    //   Utility.showDialog(e.toString(), 'calibrationId');
+    // }
   }
 
   Future<void> getHistory({int? calibrationId, int? moduleType}) async {

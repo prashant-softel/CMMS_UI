@@ -247,9 +247,10 @@ class NewPermitUsecase {
           bool? isLoading,
           required bool resubmit,
           vegplanId,
-          vegexid}) async =>
+          vegexid,
+          taskId}) async =>
       await repository.updateNewPermit(
-          newPermit, isLoading, resubmit, type, vegplanId, vegexid);
+          newPermit, isLoading, resubmit, type, vegplanId, vegexid, taskId);
 
   Future<Map<String, dynamic>> resubmitPermit(
           {newPermit,
@@ -257,9 +258,10 @@ class NewPermitUsecase {
           required bool resubmit,
           int? type,
           vegplanId,
+          String? taskId,
           vegexid}) async =>
       await repository.resubmitPermit(
-          newPermit, isLoading, resubmit, type, vegplanId, vegexid);
+          newPermit, isLoading, resubmit, type, vegplanId, vegexid, taskId);
 
   Future<NewPermitDetailModel?> getNewPermitDetail({
     bool? isLoading,

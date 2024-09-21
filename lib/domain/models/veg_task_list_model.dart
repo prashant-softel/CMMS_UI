@@ -16,20 +16,20 @@ class VegTaskListModel {
   int? actual_Qnty;
   int? deviation;
   int? time_taken;
-  String? remark;
-  String? abondend;
-  String? sitename;
-  String? responsibility;
-  String? frequency;
+  dynamic remark;
+  dynamic abondend;
+  dynamic sitename;
+  dynamic responsibility;
+  dynamic frequency;
   int? noOfDays;
-  String? scheduledDate;
-  String? doneDate;
-  String? lastDoneDate;
+  dynamic scheduledDate;
+  dynamic doneDate;
+  dynamic lastDoneDate;
   int? status;
-  String? abondond_done_date;
-  String? status_short;
+  dynamic abondond_done_date;
+  dynamic status_short;
   int? water_used;
-  String? title;
+  dynamic title;
 
   VegTaskListModel({
     this.id,

@@ -162,7 +162,8 @@ class MrsIssueController extends GetxController {
           type: type.value,
           issuetoJsonString: issuetoJsonString,
           isLoading: true,
-          facility_id: facilityId);
+          facility_id: facilityId,
+          route: mrsDetailsModel.value?.whereUsedRefID);
       if (response == true) {
         // Get.offAllNamed(Routes.mrsListScreen);
       } else {

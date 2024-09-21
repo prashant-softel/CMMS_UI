@@ -1307,13 +1307,15 @@ class DataRepository extends DomainRepository {
           cancelPermitJsonString,
           bool? isLoading,
           int? jobId,
-          int? type}) async =>
+          int? type,
+          String? taskId}) async =>
       await connectHelper.permitCancelRequestButton(
           auth: auth,
           cancelPermitJsonString: cancelPermitJsonString,
           isLoading: isLoading ?? false,
           jobId: jobId,
-          type: type);
+          type: type,
+          taskId: taskId);
 
   Future<ResponseModel> permitCancelByApproverButton({
     required String auth,
@@ -1471,7 +1473,8 @@ class DataRepository extends DomainRepository {
           bool? isLoading,
           int? type,
           int? vegexe,
-          int? vegid}) async =>
+          int? vegid,
+          String? taskId}) async =>
       await connectHelper.permitRejectButton(
           auth: auth,
           rejectExtendPermitJsonString: rejectExtendPermitJsonString,
@@ -1481,7 +1484,8 @@ class DataRepository extends DomainRepository {
           isLoading: isLoading ?? false,
           type: type,
           vegexe: vegexe,
-          vegid: vegid);
+          vegid: vegid,
+          taskId: taskId);
 
   Future<ResponseModel> incidentReportRejectButton({
     required String auth,
@@ -2023,7 +2027,8 @@ class DataRepository extends DomainRepository {
           bool? resubmit,
           int? type,
           vegplanId,
-          vegexid}) async =>
+          vegexid,
+          taskId}) async =>
       await connectHelper.updateNewPermit(
           auth: auth,
           newPermit: newPermit,
@@ -2031,7 +2036,8 @@ class DataRepository extends DomainRepository {
           resubmit: resubmit,
           type: type,
           vegplanId: vegplanId,
-          vegexid: vegexid);
+          vegexid: vegexid,
+          taskId: taskId);
 
   Future<ResponseModel> resubmitPermit(
           {required String auth,
@@ -2040,7 +2046,8 @@ class DataRepository extends DomainRepository {
           bool? isLoading,
           bool? resubmit,
           vegplanId,
-          vegexid}) async =>
+          vegexid,
+          taskId}) async =>
       await connectHelper.resubmitPermit(
           auth: auth,
           newPermit: newPermit,
@@ -2048,7 +2055,8 @@ class DataRepository extends DomainRepository {
           type: type,
           resubmit: resubmit,
           vegplanId: vegplanId,
-          vegexid: vegexid);
+          vegexid: vegexid,
+          taskId: taskId);
 
   Future<ResponseModel> createSOP({
     required String auth,
@@ -3433,17 +3441,20 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  Future<ResponseModel> getCumulativeReportList({
-    required String auth,
-    bool? isLoading,
-    required selectedFacilityIdList,
-    required module_id,
-  }) async {
+  Future<ResponseModel> getCumulativeReportList(
+      {required String auth,
+      bool? isLoading,
+      required selectedFacilityIdList,
+      required module_id,
+      dynamic startDate,
+      dynamic endDate}) async {
     return await connectHelper.getCumulativeReportList(
         auth: auth,
         isLoading: isLoading,
         selectedFacilityIdList: selectedFacilityIdList,
-        module_id: module_id);
+        module_id: module_id,
+        startDate: startDate,
+        endDate: endDate);
   }
 
   Future<ResponseModel> getUserList({
@@ -4141,18 +4152,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  Future<ResponseModel> createMrs({
-    required String auth,
-    createMrsJsonString,
-    type,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> createMrs(
+          {required String auth,
+          createMrsJsonString,
+          type,
+          bool? isLoading,
+          int? route}) async =>
       await connectHelper.createMrs(
-        auth: auth,
-        createMrsJsonString: createMrsJsonString,
-        type: type,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          createMrsJsonString: createMrsJsonString,
+          type: type,
+          isLoading: isLoading ?? false,
+          route: route);
   Future<ResponseModel> createPmPlan({
     required String auth,
     createPmPlanJsonString,
@@ -4399,23 +4410,33 @@ class DataRepository extends DomainRepository {
       bool? isLoading,
       int? type,
       approvetoJsonString,
-      int? facility_id}) async {
+      int? facility_id,
+      int? routeId}) async {
     var response = await connectHelper.approveMrs(
         auth: auth,
         isLoading: isLoading,
         type: type,
         approvetoJsonString: approvetoJsonString,
-        facility_id: facility_id);
+        facility_id: facility_id,
+        routeId: routeId);
     return response;
   }
 
-  Future<ResponseModel> rejectMrs(
-      {auth, bool? isLoading, rejecttoJsonString, facility_id}) async {
+  Future<ResponseModel> rejectMrs({
+    auth,
+    bool? isLoading,
+    rejecttoJsonString,
+    facility_id,
+    routeId,
+    int? type,
+  }) async {
     var response = await connectHelper.rejectMrs(
         auth: auth,
         isLoading: isLoading,
         rejecttoJsonString: rejecttoJsonString,
-        facility_id: facility_id);
+        facility_id: facility_id,
+        routeId: routeId,
+        type: type);
     return response;
   }
 
@@ -4482,13 +4503,15 @@ class DataRepository extends DomainRepository {
       bool? isLoading,
       issuetoJsonString,
       int? type,
-      int? facility_id}) async {
+      int? facility_id,
+      int? route}) async {
     var response = await connectHelper.issueMrs(
         auth: auth,
         isLoading: isLoading,
         type: type,
         issuetoJsonString: issuetoJsonString,
-        facility_id: facility_id);
+        facility_id: facility_id,
+        route: route);
     return response;
   }
 

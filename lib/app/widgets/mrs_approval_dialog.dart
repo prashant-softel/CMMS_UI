@@ -9,8 +9,10 @@ class MrsApprovalSuccessDialog extends GetView {
   String? data;
   List<dynamic>? mrsId;
   int? type;
+  String? routeId;
 
-  MrsApprovalSuccessDialog({super.key, this.data, this.mrsId, this.type});
+  MrsApprovalSuccessDialog(
+      {super.key, this.data, this.mrsId, this.type, this.routeId});
   final MrsApproveController controller = Get.find();
 
   @override
@@ -93,7 +95,7 @@ class MrsApprovalSuccessDialog extends GetView {
                         ? ElevatedButton(
                             style: Styles.darkBlueElevatedButtonStyle,
                             onPressed: () {
-                              Get.offAndToNamed(Routes.jobDetails);
+                              Get.offAllNamed('${Routes.jobDetails}/$routeId');
                             },
                             child: const Text('View Job'),
                           )
@@ -101,7 +103,9 @@ class MrsApprovalSuccessDialog extends GetView {
                             ? ElevatedButton(
                                 style: Styles.darkBlueElevatedButtonStyle,
                                 onPressed: () {
-                                  Get.offAndToNamed(Routes.pmTaskView);
+                                  Get.back();
+                                  Get.offAllNamed(
+                                      '${Routes.pmTaskView}/$routeId');
                                   // controller.viewNewPermitList(permitId: PtwId![0]);
                                 },
                                 child: const Text('View Task'),

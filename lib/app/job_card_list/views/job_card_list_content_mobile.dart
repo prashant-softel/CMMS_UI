@@ -42,10 +42,7 @@ class JobCardContentMobile extends GetView<JobCardListController> {
                               controller.clearStoreData();
                               int jobCardId = jobcardModel.jobCardId ?? 0;
                               if (jobCardId != 0) {
-                                Get.toNamed(
-                                  Routes.jobCard,
-                                  arguments: {'JcId': jobCardId},
-                                );
+                                Get.toNamed('${Routes.jobCard}/$jobCardId');
                               }
                             },
                             child: Container(

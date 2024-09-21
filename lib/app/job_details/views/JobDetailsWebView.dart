@@ -663,14 +663,8 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                       jobCardId
                                                                 });
 
-                                                                Get.toNamed(
-                                                                    Routes
-                                                                        .jobCard,
-                                                                    arguments: {
-                                                                      'JcId': int
-                                                                          .tryParse(
-                                                                              "$jobCardId")
-                                                                    });
+                                                                Get.offAllNamed(
+                                                                    '${Routes.jobCard}/$jobCardId');
                                                               }),
                                                           varUserAccessModel
                                                                       .value
@@ -956,29 +950,17 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                         ?.mrs_return_ID
                                                                         .toString() ??
                                                                     "";
+                                                                String type = 1
+                                                                    .toString();
 
                                                                 print({
                                                                   "mrsId": mrsId
                                                                 });
                                                                 rmrsId == "0"
-                                                                    ? Get.toNamed(
-                                                                        Routes
-                                                                            .mrsApprovalScreen,
-                                                                        arguments: {
-                                                                            'mrsId':
-                                                                                int.tryParse("$mrsId"),
-                                                                            'type':
-                                                                                1
-                                                                          })
-                                                                    : Get.toNamed(
-                                                                        Routes
-                                                                            .approverReturnMrs,
-                                                                        arguments: {
-                                                                            'mrsId':
-                                                                                rmrsId,
-                                                                            'type':
-                                                                                1
-                                                                          });
+                                                                    ? Get.offNamed(
+                                                                        '${Routes.mrsApprovalScreen}/$mrsId/$type')
+                                                                    : Get.offNamed(
+                                                                        '${Routes.approverReturnMrs}/$rmrsId/$type');
                                                                 ;
                                                                 // String mrsId = controller
                                                                 //         .listMrsByJobId?[

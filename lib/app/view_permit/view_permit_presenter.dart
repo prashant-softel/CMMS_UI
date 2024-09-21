@@ -54,7 +54,8 @@ class ViewPermitPresenter {
       required bool isLoading,
       int? type,
       int? vegexe,
-      int? vegid}) async {
+      int? vegid,
+      String? taskId}) async {
     return viewPermitUsecase.permitApprovedButton(
         rejectCancelPermitJsonString: rejectCancelPermitJsonString,
         ptwStatus: ptwStatus,
@@ -62,7 +63,8 @@ class ViewPermitPresenter {
         isLoading: isLoading,
         type: type,
         vegid: vegid,
-        vegexe: vegexe);
+        vegexe: vegexe,
+        taskId: taskId);
   }
   // Future<void> permitApprovedButton({
   //   String? comment,
@@ -119,12 +121,14 @@ class ViewPermitPresenter {
       {cancelPermitJsonString,
       required bool isLoading,
       int? jobId,
-      int? type}) async {
+      int? type,
+      String? taskId}) async {
     return viewPermitUsecase.permitCancelRequestButton(
         cancelPermitJsonString: cancelPermitJsonString,
         isLoading: isLoading,
         jobId: jobId,
-        type: type);
+        type: type,
+        taskId: taskId);
   }
 
   Future<Map<String, dynamic>?> permitExtendButton({
@@ -161,6 +165,7 @@ class ViewPermitPresenter {
       rejectExtendPermitJsonString,
       required bool isLoading,
       int? type,
+      String? taskId,
       int? vegexe,
       int? vegid}) async {
     return viewPermitUsecase.permitRejectButton(
@@ -171,7 +176,8 @@ class ViewPermitPresenter {
         isLoading: isLoading,
         type: type,
         vegid: vegid,
-        vegexe: vegexe);
+        vegexe: vegexe,
+        taskId: taskId);
   }
 
   // Future<void> permitCancelByApproverButton({

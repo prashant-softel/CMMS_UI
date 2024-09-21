@@ -508,35 +508,56 @@ class MrsListDataSource extends DataTableSource {
                           icon: Icons.remove_red_eye_outlined,
                           message: "View",
                           onPress: () {
-                            controller.clearStoreData();
+                            // controller.clearStoreData();
 
                             // final _flutterSecureStorage =
                             //     const FlutterSecureStorage();
 
                             // _flutterSecureStorage.delete(key: "mrsId");
-                            int mrsId = MrsDetails?.id ?? 0;
-                            Get.toNamed(Routes.mrsApprovalScreen,
-                                arguments: {'mrsId': mrsId, 'type': 0});
+                            String mrsId = MrsDetails?.id.toString() ?? "";
+
+                            String type = 0.toString();
+                            Get.offNamed(
+                                '${Routes.mrsApprovalScreen}/$mrsId/$type');
                           },
                         ),
 
                         varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kMrsFeatureId &&
-                                            e.edit ==
-                                                UserAccessConstants
-                                                    .kHaveEditAccess)
-                                        .length >
-                                    0 &&
-                                controller.mrsList
-                                        .firstWhere(
-                                          (e) => e?.id == MrsDetails!.id,
-                                          orElse: () => MrsListModel(id: 00),
-                                        )
-                                        ?.status ==
-                                    321
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kMrsFeatureId &&
+                                                e.edit ==
+                                                    UserAccessConstants
+                                                        .kHaveEditAccess)
+                                            .length >
+                                        0 &&
+                                    controller.mrsList
+                                            .firstWhere(
+                                              (e) => e?.id == MrsDetails!.id,
+                                              orElse: () =>
+                                                  MrsListModel(id: 00),
+                                            )
+                                            ?.status ==
+                                        321 ||
+                                varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kMrsFeatureId &&
+                                                e.edit ==
+                                                    UserAccessConstants
+                                                        .kHaveEditAccess)
+                                            .length >
+                                        0 &&
+                                    controller.mrsList
+                                            .firstWhere(
+                                              (e) => e?.id == MrsDetails!.id,
+                                              orElse: () =>
+                                                  MrsListModel(id: 00),
+                                            )
+                                            ?.status ==
+                                        322
                             ? TableActionButton(
                                 color: ColorValues.editColor,
                                 icon: Icons.edit,
@@ -782,15 +803,20 @@ class MrsListDataSource extends DataTableSource {
       }).toList(),
       //   ],
       onSelectChanged: (_) {
-        controller.clearStoreData();
+        String mrsId = MrsDetails?.id.toString() ?? "";
+
+        String type = 0.toString();
+        Get.offNamed('${Routes.mrsApprovalScreen}/$mrsId/$type');
+
+        // controller.clearStoreData();
 
         // final _flutterSecureStorage = const FlutterSecureStorage();
 
         // _flutterSecureStorage.delete(key: "mrsId");
-        Get.toNamed(
-          Routes.mrsApprovalScreen,
-          arguments: {'mrsId': MrsDetails?.id, 'type': 0},
-        );
+        // Get.toNamed(
+        //   Routes.mrsApprovalScreen,
+        //   arguments: {'mrsId': MrsDetails?.id, 'type': 0},
+        // );
       },
     );
   }

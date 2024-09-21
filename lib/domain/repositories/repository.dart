@@ -522,7 +522,7 @@ class Repository {
 
   //Update New Permit
   Future<Map<String, dynamic>> updateNewPermit(newPermit, bool? isLoading,
-      bool? resubmit, int? type, vegplanId, vegexid) async {
+      bool? resubmit, int? type, vegplanId, vegexid, taskId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -534,7 +534,8 @@ class Repository {
             resubmit: resubmit,
             type: type,
             vegplanId: vegplanId,
-            vegexid: vegexid);
+            vegexid: vegexid,
+            taskId: taskId);
       }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -567,7 +568,7 @@ class Repository {
 
   /// sesubmit permit
   Future<Map<String, dynamic>> resubmitPermit(newPermit, bool? isLoading,
-      bool? resubmit, int? type, vegplanId, vegexid) async {
+      bool? resubmit, int? type, vegplanId, vegexid, taskId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -579,7 +580,8 @@ class Repository {
             resubmit: resubmit,
             type: type,
             vegplanId: vegplanId,
-            vegexid: vegexid);
+            vegexid: vegexid,
+            taskId: taskId);
       }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -7083,7 +7085,8 @@ class Repository {
       int? type,
       bool? isLoading,
       int? vegexe,
-      int? vegid) async {
+      int? vegid,
+      String? taskId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -7105,17 +7108,17 @@ class Repository {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
           type == 2
-              ? Get.offAllNamed(Routes.pmTaskView)
+              ? Get.offAllNamed('${Routes.pmTaskView}/$taskId')
               : type == 1
-                  ? Get.offAllNamed(Routes.jobDetails)
+                  ? Get.offNamed('${Routes.jobDetails}/$jobId')
                   : type == 3
                       ? Get.offAllNamed(Routes.viewAuditTask)
                       : type == 4
                           ? Get.offAllNamed(
                               Routes.addModuleCleaningExecutionContentWeb)
                           : type == 5
-                              ? Get.offAllNamed(Routes.vegExecutionScreen,
-                                  arguments: {"vegexe": vegexe, "vegid": vegid})
+                              ? Get.offAllNamed(
+                                  '${Routes.vegExecutionScreen}/${vegexe}/${vegid}')
                               : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
@@ -7197,7 +7200,8 @@ class Repository {
       cancelPermitJsonString,
       bool? isLoading,
       int? jobId,
-      int? type) async {
+      int? type,
+      String? taskId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
@@ -7208,7 +7212,8 @@ class Repository {
             cancelPermitJsonString: json.encode(cancelPermitJsonString),
             isLoading: isLoading ?? false,
             jobId: jobId,
-            type: type);
+            type: type,
+            taskId: taskId);
         print('PermitCancelRequestResponse: ${res.data}');
       }
       if (!res.hasError) {
@@ -7664,7 +7669,8 @@ class Repository {
       int? type,
       bool? isLoading,
       int? vegexe,
-      int? vegid) async {
+      int? vegid,
+      String? taskId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -7679,7 +7685,8 @@ class Repository {
             isLoading: isLoading ?? false,
             type: type,
             vegexe: vegexe,
-            vegid: vegid);
+            vegid: vegid,
+            taskId: taskId);
       }
       var resourceData = res.data;
 
@@ -11187,6 +11194,8 @@ class Repository {
     bool? isLoading,
     selectedFacilityIdList,
     module_id,
+    dynamic startDate,
+    dynamic endDate,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -11196,7 +11205,9 @@ class Repository {
             auth: auth,
             isLoading: isLoading ?? false,
             selectedFacilityIdList: selectedFacilityIdList,
-            module_id: module_id);
+            module_id: module_id,
+            startDate: startDate,
+            endDate: endDate);
       }
       if (!res.hasError) {
         final jsonCumulativereports = jsonDecode(res.data);
@@ -13312,20 +13323,17 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> createMrs(
-    createMrsJsonString,
-    type,
-    bool? isLoading,
-  ) async {
+      createMrsJsonString, type, bool? isLoading, int? route) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
       if (auth.isNotEmpty) {
         res = await _dataRepository.createMrs(
-          auth: auth,
-          createMrsJsonString: createMrsJsonString,
-          type: type,
-          isLoading: isLoading ?? false,
-        );
+            auth: auth,
+            createMrsJsonString: createMrsJsonString,
+            type: type,
+            isLoading: isLoading ?? false,
+            route: route);
       }
       var resourceData = res.data;
 
@@ -13767,7 +13775,8 @@ class Repository {
       {bool? isLoading,
       approvetoJsonString,
       int? type,
-      int? facility_id}) async {
+      int? facility_id,
+      int? routeId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -13778,7 +13787,8 @@ class Repository {
             isLoading: isLoading,
             type: type,
             approvetoJsonString: approvetoJsonString,
-            facility_id: facility_id);
+            facility_id: facility_id,
+            routeId: routeId);
         print({"res.data", res.data});
       }
       if (!res.hasError) {
@@ -13824,7 +13834,11 @@ class Repository {
   }
 
   Future<bool> rejectMrs(
-      {bool? isLoading, rejecttoJsonString, int? facility_id}) async {
+      {bool? isLoading,
+      rejecttoJsonString,
+      int? facility_id,
+      int? routeId,
+      int? type}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -13834,7 +13848,9 @@ class Repository {
             auth: auth,
             isLoading: isLoading,
             rejecttoJsonString: rejecttoJsonString,
-            facility_id: facility_id);
+            facility_id: facility_id,
+            routeId: routeId,
+            type: type);
         print({"res.data", res.data});
       }
       if (!res.hasError) {
@@ -14004,7 +14020,11 @@ class Repository {
   }
 
   Future<bool> issueMrs(
-      {bool? isLoading, int? type, issuetoJsonString, int? facility_id}) async {
+      {bool? isLoading,
+      int? type,
+      issuetoJsonString,
+      int? facility_id,
+      int? route}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -14015,7 +14035,8 @@ class Repository {
             isLoading: isLoading,
             type: type,
             issuetoJsonString: issuetoJsonString,
-            facility_id: facility_id);
+            facility_id: facility_id,
+            route: route);
         print({"res.data", res.data});
       }
       if (!res.hasError) {

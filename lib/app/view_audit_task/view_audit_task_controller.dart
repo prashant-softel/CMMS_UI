@@ -516,9 +516,12 @@ class ViewAuditTaskController extends GetxController {
     int? permitId,
     int? jobId,
   }) async {
-    Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "jobId": jobId, "type": 3});
-    print({"Permit", permitId, jobId});
+    String type = 3.toString();
+    Get.offNamed('${Routes.viewPermitScreen}/$permitId/$type');
+
+    // Get.toNamed(Routes.viewPermitScreen,
+    //     arguments: {"permitId": permitId, "jobId": jobId, "type": 3});
+    // print({"Permit", permitId, jobId});
   }
 
   void onDropdownValueChanged(dynamic list, dynamic value) {

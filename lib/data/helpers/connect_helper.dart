@@ -2099,7 +2099,8 @@ class ConnectHelper {
       cancelPermitJsonString,
       bool? isLoading,
       int? jobId,
-      int? type}) async {
+      int? type,
+      String? taskId}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitCancelRequest',
@@ -2116,7 +2117,7 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(PermitMessageCancelRequestDialog(
-        data: parsedJson['message'], jobId: jobId, type: type));
+        data: parsedJson['message'], jobId: jobId, type: type, taskId: taskId));
 
     return responseModel;
   }
@@ -2232,12 +2233,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> permitCloseButton(
-      {required String auth,
-      closePermitJsonString,
-      bool? isLoading,
-      int? jobId,
-      int? closetype}) async {
+  Future<ResponseModel> permitCloseButton({
+    required String auth,
+    closePermitJsonString,
+    bool? isLoading,
+    int? jobId,
+    int? closetype,
+  }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitClose',
@@ -2267,7 +2269,7 @@ class ConnectHelper {
             confirmTextColor: Colors.white,
             barrierDismissible: false)
         : closetype == 1
-            ? Get.offAllNamed(Routes.jobCard)
+            ? Get.offAllNamed('${Routes.jobList}')
             : closetype == 3
                 ? Get.offAllNamed(Routes.auditTask)
                 : closetype == 4
@@ -2477,7 +2479,8 @@ class ConnectHelper {
       int? jobId,
       int? type,
       int? vegexe,
-      int? vegid}) async {
+      int? vegid,
+      String? taskId}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       ptwStatus == '133' ? 'Permit/PermitExtendReject' : 'Permit/PermitReject',
@@ -2499,7 +2502,8 @@ class ConnectHelper {
         ptwStatus: ptwStatus,
         vegid: vegid,
         type: type,
-        vegexe: vegexe));
+        vegexe: vegexe,
+        taskId: taskId));
 
     return responseModel;
   }
@@ -3460,7 +3464,8 @@ class ConnectHelper {
       bool? resubmit,
       int? type,
       vegplanId,
-      vegexid}) async {
+      vegexid,
+      taskId}) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/UpdatePermit?resubmit=$resubmit',
       Request.patch,
@@ -3481,7 +3486,8 @@ class ConnectHelper {
             PtwId: parsedJson['id'],
             type: type,
             vegplanId: vegplanId,
-            vegexid: vegexid),
+            vegexid: vegexid,
+            taskId: taskId),
         barrierDismissible: false);
 
     return responseModel;
@@ -3495,7 +3501,8 @@ class ConnectHelper {
       bool? resubmit,
       int? type,
       vegplanId,
-      vegexid}) async {
+      vegexid,
+      taskId}) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/UpdatePermit?resubmit=$resubmit',
       Request.patch,
@@ -3515,7 +3522,8 @@ class ConnectHelper {
         PtwId: parsedJson['id'],
         type: type,
         vegplanId: vegplanId,
-        vegexid: vegexid));
+        vegexid: vegexid,
+        taskId: taskId));
 
     return responseModel;
   }
@@ -6124,14 +6132,15 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
-  Future<ResponseModel> getCumulativeReportList({
-    String? auth,
-    bool? isLoading,
-    required selectedFacilityIdList,
-    required module_id,
-  }) async =>
+  Future<ResponseModel> getCumulativeReportList(
+          {String? auth,
+          bool? isLoading,
+          required selectedFacilityIdList,
+          required module_id,
+          dynamic startDate,
+          dynamic endDate}) async =>
       await apiWrapper.makeRequest(
-        'MISMaster/Cumulativereport?facility_id=$selectedFacilityIdList&module_id=$module_id',
+        'MISMaster/Cumulativereport?facility_id=$selectedFacilityIdList&module_id=$module_id&start_date=${startDate}&end_date=${endDate}',
         Request.get,
         null,
         true,
@@ -7338,12 +7347,12 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> createMrs({
-    required String auth,
-    createMrsJsonString,
-    type,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> createMrs(
+      {required String auth,
+      createMrsJsonString,
+      type,
+      bool? isLoading,
+      int? route}) async {
     var responseModel = await apiWrapper.makeRequest(
       'MRS/CreateMRS',
       Request.post,
@@ -7358,7 +7367,10 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(
         CreateMrsSuccessDialog(
-            data: parsedJson['message'], mrsId: parsedJson['id'], type: type),
+            data: parsedJson['message'],
+            mrsId: parsedJson['id'],
+            type: type,
+            route: route.toString()),
         barrierDismissible: false);
     return responseModel;
   }
@@ -7710,7 +7722,8 @@ class ConnectHelper {
       bool? isLoading,
       int? type,
       required approvetoJsonString,
-      int? facility_id}) async {
+      int? facility_id,
+      int? routeId}) async {
     var responseModel = await apiWrapper.makeRequest(
       'MRS/mrsApproval?facility_id=$facility_id',
       Request.post,
@@ -7725,7 +7738,10 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(
         MrsApprovalSuccessDialog(
-            data: parsedJson['message'], mrsId: parsedJson['id'], type: type),
+            data: parsedJson['message'],
+            mrsId: parsedJson['id'],
+            type: type,
+            routeId: routeId.toString()),
         barrierDismissible: false);
 
     return responseModel;
@@ -7735,7 +7751,9 @@ class ConnectHelper {
       {required String auth,
       bool? isLoading,
       required rejecttoJsonString,
-      int? facility_id}) async {
+      int? type,
+      int? facility_id,
+      int? routeId}) async {
     var responseModel = await apiWrapper.makeRequest(
       'MRS/mrsReject?facility_id=$facility_id',
       Request.post,
@@ -7746,7 +7764,15 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        MrsApprovalSuccessDialog(
+            data: parsedJson['message'],
+            mrsId: parsedJson['id'],
+            type: type,
+            routeId: routeId.toString()),
+        barrierDismissible: false);
     return responseModel;
   }
 
@@ -7843,7 +7869,8 @@ class ConnectHelper {
       bool? isLoading,
       int? type,
       required issuetoJsonString,
-      int? facility_id}) async {
+      int? facility_id,
+      int? route}) async {
     var responseModel = await apiWrapper.makeRequest(
       'MRS/MRSIssue?facility_id=$facility_id',
       Request.post,
@@ -7858,7 +7885,10 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(
         MrsIssueSuccessDialog(
-            data: parsedJson['message'], mrsId: parsedJson['id'], type: type),
+            data: parsedJson['message'],
+            mrsId: parsedJson['id'],
+            type: type,
+            route: route),
         barrierDismissible: false);
 
     return responseModel;

@@ -126,27 +126,33 @@ class ViewAddGoodsOrdersController extends GetxController {
   }
 
   Future<void> setUserId() async {
-    try {
-      final _goId = await viewAddGoodsOrdersPresenter.getValue();
-      final _goType = await viewAddGoodsOrdersPresenter.getGoTypeValue();
+    final String? _goId = Get.parameters['goId'];
+    final String? _goType = Get.parameters['goType'];
 
-      if (_goId == null || _goId == '' || _goId == "null") {
-        var dataFromPreviousScreen = Get.arguments;
+    goId.value = int.tryParse(_goId ?? "") ?? 0;
+    goType.value = int.tryParse(_goType ?? "") ?? 0;
 
-        goId.value = dataFromPreviousScreen['goId'];
-        goType.value = dataFromPreviousScreen['goType'];
+    // try {
+    //   final _goId = await viewAddGoodsOrdersPresenter.getValue();
+    //   final _goType = await viewAddGoodsOrdersPresenter.getGoTypeValue();
 
-        viewAddGoodsOrdersPresenter.saveValue(goId: goId.value.toString());
-        viewAddGoodsOrdersPresenter.saveTypeValue(
-            goType: goType.value.toString());
-      } else {
-        goId.value = int.tryParse(_goId) ?? 0;
-        goType.value = int.tryParse(_goType ?? "") ?? 0;
-      }
-    } catch (e) {
-      print(e.toString() + 'goId');
-      //  Utility.showDialog(e.toString() + 'userId');
-    }
+    //   if (_goId == null || _goId == '' || _goId == "null") {
+    //     var dataFromPreviousScreen = Get.arguments;
+
+    //     goId.value = dataFromPreviousScreen['goId'];
+    //     goType.value = dataFromPreviousScreen['goType'];
+
+    //     viewAddGoodsOrdersPresenter.saveValue(goId: goId.value.toString());
+    //     viewAddGoodsOrdersPresenter.saveTypeValue(
+    //         goType: goType.value.toString());
+    //   } else {
+    //     goId.value = int.tryParse(_goId) ?? 0;
+    //     goType.value = int.tryParse(_goType ?? "") ?? 0;
+    //   }
+    // } catch (e) {
+    //   print(e.toString() + 'goId');
+    //   //  Utility.showDialog(e.toString() + 'userId');
+    // }
   }
 
   Future<void> getPurchaseDetailsById({required int id}) async {

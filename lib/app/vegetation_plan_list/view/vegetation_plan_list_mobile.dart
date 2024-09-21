@@ -58,9 +58,7 @@ class _VegetationPlanListMobileState extends State<VegetationPlanListMobile> {
                                 controller.clearStoreData();
                                 int id = vegPlan.planId ?? 0;
                                 Get.toNamed(
-                                  Routes.viewVegetationPlanScreen,
-                                  arguments: {'vegid': id},
-                                );
+                                    '${Routes.viewVegetationPlanScreen}/$id');
                               },
                               child: Container(
                                 margin: EdgeInsets.symmetric(

@@ -720,37 +720,28 @@ class PreventiveTaskViewContentMobile
                                                             controller
                                                                 .clearStoreData();
 
-                                                            int mrsId =
+                                                            String mrsId =
                                                                 pmTaskMrsModel
-                                                                        ?.mrsId ??
-                                                                    0;
-                                                            int? rmrsId = controller
+                                                                        ?.mrsId
+                                                                        .toString() ??
+                                                                    "";
+                                                            String type =
+                                                                2.toString();
+
+                                                            String? rmrsId = controller
                                                                 .listMrsByTaskId?[
                                                                     index]
-                                                                ?.mrs_return_ID;
+                                                                ?.mrs_return_ID
+                                                                .toString();
                                                             controller
                                                                         .listMrsByTaskId?[
                                                                             index]
                                                                         ?.is_mrs_return ==
                                                                     0
-                                                                ? Get.toNamed(
-                                                                    Routes
-                                                                        .mrsApprovalScreen,
-                                                                    arguments: {
-                                                                        'mrsId':
-                                                                            mrsId,
-                                                                        'type':
-                                                                            2
-                                                                      })
-                                                                : Get.toNamed(
-                                                                    Routes
-                                                                        .approverReturnMrs,
-                                                                    arguments: {
-                                                                        'mrsId':
-                                                                            rmrsId,
-                                                                        'type':
-                                                                            2
-                                                                      });
+                                                                ? Get.offNamed(
+                                                                    '${Routes.mrsApprovalScreen}/$mrsId/$type')
+                                                                : Get.offNamed(
+                                                                    '${Routes.approverReturnMrs}/$rmrsId/$type');
                                                           },
                                                           child: Container(
                                                             padding: Dimens

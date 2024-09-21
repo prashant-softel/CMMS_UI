@@ -20,7 +20,14 @@ class CumulativeReportUsecase {
     bool? isLoading,
     required selectedFacilityIdList,
     required module_id,
+    dynamic endDate,
+    dynamic startDate,
   }) async =>
       await repository.getCumulativeReportList(
-          isLoading, selectedFacilityIdList, module_id);
+        isLoading,
+        selectedFacilityIdList,
+        module_id,
+        startDate,
+        endDate,
+      );
 }

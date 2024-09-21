@@ -243,13 +243,7 @@ class VegExecutionListController extends GetxController {
 
   void executeVegetation(int executionId, int planId) {
     clearStoreData();
-    Get.toNamed(
-      Routes.vegExecutionScreen,
-      arguments: {
-        "vegexe": executionId,
-        "vegid": planId,
-      },
-    );
+    Get.toNamed('${Routes.vegExecutionScreen}/${executionId}/${planId}');
   }
 
   void sortData(String columnName) {

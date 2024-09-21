@@ -140,27 +140,23 @@ class LinkToPermitDialog extends GetView {
                                   //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
                                   Get.back();
                                   Get.offAllNamed(
-                                    Routes.vegExecutionScreen,
-                                    arguments: {
-                                      "vegexe": vegexid,
-                                      "vegid": vegplanId,
-                                    },
-                                  );
+                                      '${Routes.vegExecutionScreen}/${vegexid}/${vegplanId}');
                                 },
                                 child: const Text('View VEG'),
                               )
                             : ElevatedButton(
                                 style: Styles.greenElevatedButtonStyle,
                                 onPressed: () {
+                                  String route = taskId.toString();
                                   // _controller.getIncidentReportList(
                                   //     _controller.facilityId,
                                   //     _controller.formattedTodate,
                                   //     _controller.formattedFromdate,
                                   //     false);
                                   //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                                  Get.offAllNamed(
+                                      '${Routes.pmTaskView}/$route');
 
-                                  Get.offAllNamed(Routes.pmTaskView,
-                                      arguments: {'pmTaskId': taskId});
                                   Get.back();
                                 },
                                 child: const Text('View Task'),

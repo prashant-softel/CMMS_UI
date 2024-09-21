@@ -70,21 +70,24 @@ class PurchaseGoodsorderViewController extends GetxController {
   }
 
   Future<void> setUserId() async {
-    try {
-      final _roId = await purchaseGoodsorderViewPresenter.getValue();
+    final String? _roId = Get.parameters['roId'];
+    roId.value = int.tryParse(_roId ?? "") ?? 0;
 
-      if (_roId == null || _roId == '' || _roId == "null") {
-        var dataFromPreviousScreen = Get.arguments;
+    // try {
+    //   final _roId = await purchaseGoodsorderViewPresenter.getValue();
 
-        roId.value = dataFromPreviousScreen['roId'];
+    //   if (_roId == null || _roId == '' || _roId == "null") {
+    //     var dataFromPreviousScreen = Get.arguments;
 
-        purchaseGoodsorderViewPresenter.saveValue(roId: roId.value.toString());
-      } else {
-        roId.value = int.tryParse(_roId) ?? 0;
-      }
-    } catch (e) {
-      print(e.toString() + 'userId');
-    }
+    //     roId.value = dataFromPreviousScreen['roId'];
+
+    //     purchaseGoodsorderViewPresenter.saveValue(roId: roId.value.toString());
+    //   } else {
+    //     roId.value = int.tryParse(_roId) ?? 0;
+    //   }
+    // } catch (e) {
+    //   print(e.toString() + 'userId');
+    // }
   }
 
   void getUnitCurrencyList() async {

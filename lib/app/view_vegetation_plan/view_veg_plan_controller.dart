@@ -102,6 +102,9 @@ class ViewVegPlanController extends GetxController {
   }
 
   Future<void> setUserId() async {
+    final String? _vegid = Get.parameters['vegid'];
+    id.value = int.tryParse(_vegid ?? "") ?? 0;
+
     // try {
     //   var dataFromPreviousScreen = Get.arguments;
 
@@ -110,18 +113,18 @@ class ViewVegPlanController extends GetxController {
     // } catch (e) {
     //   print(e.toString() + 'userId');
     // }
-    try {
-      final _vegid = await viewVegPlanPresenter.getValue();
-      if (_vegid == null || _vegid == '' || _vegid == "null") {
-        var dataFromPreviousScreen = Get.arguments;
-        id.value = dataFromPreviousScreen['vegid'];
-        viewVegPlanPresenter.saveValue(vegid: id.value.toString());
-      } else {
-        id.value = int.tryParse(_vegid) ?? 0;
-      }
-    } catch (e) {
-      print(e);
-    }
+    // try {
+    //   final _vegid = await viewVegPlanPresenter.getValue();
+    //   if (_vegid == null || _vegid == '' || _vegid == "null") {
+    //     var dataFromPreviousScreen = Get.arguments;
+    //     id.value = dataFromPreviousScreen['vegid'];
+    //     viewVegPlanPresenter.saveValue(vegid: id.value.toString());
+    //   } else {
+    //     id.value = int.tryParse(_vegid) ?? 0;
+    //   }
+    // } catch (e) {
+    //   print(e);
+    // }
   }
 
   void clearStoreData() {

@@ -17,7 +17,15 @@ class Cumulativereport {
       this.ClosedOnTime,
       this.ClosedWithExtension,
       this.NotStarted,
-      this.Ongoing});
+      this.Ongoing,
+      this.abandoned,
+      this.actualQuantity,
+      this.cleaningType,
+      this.deviation,
+      this.remark,
+      this.scheduledQuantity,
+      this.timeTaken,
+      this.waterUsed});
 
   dynamic site_name;
   int? Created;
@@ -25,9 +33,17 @@ class Cumulativereport {
   int? Cancelled;
   int? NotStarted;
   int? Ongoing;
-  int? ClosedOnTime;
+  dynamic? ClosedOnTime;
   int? ClosedWithExtension;
   dynamic ClosedOnTimeCreate;
+  dynamic cleaningType;
+  dynamic waterUsed;
+  dynamic scheduledQuantity;
+  dynamic actualQuantity;
+  dynamic abandoned;
+  dynamic remark;
+  dynamic deviation;
+  dynamic timeTaken;
   factory Cumulativereport.fromJson(Map<String, dynamic> json) =>
       Cumulativereport(
         site_name: json["site_name"] == null ? "" : json["site_name"],
@@ -43,8 +59,24 @@ class Cumulativereport {
         ClosedOnTimeCreate: json["closedOnTimeCreate"] == null
             ? ""
             : json["closedOnTimeCreate"],
+        timeTaken: json["timeTaken"],
+        deviation: json["deviation"],
+        remark: json["remark"],
+        abandoned: json["abandoned"],
+        actualQuantity: json["actualQuantity"],
+        scheduledQuantity: json["scheduledQuantity"],
+        waterUsed: json["waterUsed"],
+        cleaningType: json["cleaningType"],
       );
   Map<String, dynamic> toJson() => {
+        'cleaningType': cleaningType,
+        'waterUsed': waterUsed,
+        'scheduledQuantity': scheduledQuantity,
+        'actualQuantity': actualQuantity,
+        'abandoned': abandoned,
+        'remark': remark,
+        'deviation': deviation,
+        'timeTaken': timeTaken,
         'site_name': site_name,
         'created': Created,
         'closed': Closed,

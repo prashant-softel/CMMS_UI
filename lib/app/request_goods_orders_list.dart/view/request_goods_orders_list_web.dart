@@ -473,7 +473,8 @@ DataColumn2 buildDataColumn(
               header,
               style: Styles.black16W500,
             ),
-            if (header != "Actions")  // Only show the sorting icon for sortable columns
+            if (header !=
+                "Actions") // Only show the sorting icon for sortable columns
               Obx(() {
                 final controller = Get.find<PurchaseGoodsorderListController>();
                 return AnimatedRotation(
@@ -667,8 +668,9 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 GoodsOrderListDetails?.requestOrderId ?? 0;
 
                             if (roId != 0) {
-                              Get.toNamed(Routes.purchaseGoodsorderView,
-                                  arguments: {'roId': roId, "roType": 1});
+                              String roType = 1.toString();
+                              Get.toNamed(
+                                  '${Routes.purchaseGoodsorderView}/$roId');
                             }
                           },
                           // onPress: () {
@@ -792,8 +794,9 @@ class GoodsOrderListDataSource extends DataTableSource {
                                           0;
 
                                   if (roId != 0) {
-                                    Get.toNamed(Routes.purchaseGoodsorderView,
-                                        arguments: {'roId': roId, "roType": 1});
+                                    String roType = 1.toString();
+                                    Get.toNamed(
+                                        '${Routes.purchaseGoodsorderView}/$roId');
                                   }
                                 },
                               )
@@ -809,8 +812,8 @@ class GoodsOrderListDataSource extends DataTableSource {
         int roId = GoodsOrderListDetails?.requestOrderId ?? 0;
 
         if (roId != 0) {
-          Get.toNamed(Routes.purchaseGoodsorderView,
-              arguments: {'roId': roId, "roType": 1});
+          String roType = 1.toString();
+          Get.toNamed('${Routes.purchaseGoodsorderView}/$roId');
         }
         // controller.clearStoreData();
         //   Get.toNamed(Routes.viewUserDetail,
