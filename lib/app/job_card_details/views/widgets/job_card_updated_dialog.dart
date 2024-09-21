@@ -1,3 +1,4 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -60,32 +61,34 @@ class JobCardUpdatedDialog extends GetView<JobCardDetailsController> {
                           style: Styles.yellowElevatedButtonStyle,
                           child: Text("Job Card"),
                           onPressed: () async {
-                            Get.back();
-                            try {
-                              Get.put(FileUploadController());
+                            Get.offAllNamed(
+                                '${Routes.jobCard}/${controller.jobCardId.value}');
 
-                              controller.jobCardList.value = await controller
-                                      .jobCardDetailsPresenter
-                                      .getJobCardDetails(
-                                    jobCardId: controller.jobCardId.value,
-                                    isLoading: true,
-                                  ) ??
-                                  [];
-                              controller.getHistory(controller.facilityId);
-                              controller.createPlantDetailsTableData();
+                            // try {
+                            //   Get.put(FileUploadController());
 
-                              controller.createJobDetailsTableData();
-                              controller.createPermitDetailsTableData();
-                              //  createJcDetailsTableData();
-                              controller.getEmployeeList();
-                              //  getPermitDetails();
+                            //   controller.jobCardList.value = await controller
+                            //           .jobCardDetailsPresenter
+                            //           .getJobCardDetails(
+                            //         jobCardId: controller.jobCardId.value,
+                            //         isLoading: true,
+                            //       ) ??
+                            //       [];
+                            //   controller.getHistory(controller.facilityId);
+                            //   controller.createPlantDetailsTableData();
 
-                              controller.responsibilityCtrlrs
-                                  .add(TextEditingController());
-                              controller.currentIndex.value = -1;
-                            } catch (e) {
-                              print(e);
-                            }
+                            //   controller.createJobDetailsTableData();
+                            //   controller.createPermitDetailsTableData();
+                            //   //  createJcDetailsTableData();
+                            //   controller.getEmployeeList();
+                            //   //  getPermitDetails();
+
+                            //   controller.responsibilityCtrlrs
+                            //       .add(TextEditingController());
+                            //   controller.currentIndex.value = -1;
+                            // } catch (e) {
+                            //   print(e);
+                            // }
                           }),
 
                       // ElevatedButton(
