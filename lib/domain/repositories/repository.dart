@@ -9623,7 +9623,7 @@ class Repository {
 
   Future<Map<String, dynamic>> carryForwardJob(
     jobCard,
-    bool? isLoading,
+    bool? isLoading,closePtwJsonString
   ) async {
     // final res = ResponseModel(data: '', hasError: false);
     try {
@@ -9638,7 +9638,8 @@ class Repository {
       }
       if (!res.hasError) {
         if (res.errorCode == 200) {
-          var responseMap = json.decode(res.data);
+          var responseMap = json.decode(res.data);          permitCloseButton(closePtwJsonString, isLoading, 0, 1);
+
           return responseMap;
         }
       } //

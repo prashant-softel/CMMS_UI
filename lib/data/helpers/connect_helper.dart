@@ -5133,10 +5133,10 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(carryForwardJobDialog(
-      message: parsedJson['message'],
-      jobId: parsedJson['id'],
-    ));
+    // Get.dialog<void>(carryForwardJobDialog(
+    //   message: parsedJson['message'],
+    //   jobId: parsedJson['id'],
+    // ));
     return responseModel;
   }
 
