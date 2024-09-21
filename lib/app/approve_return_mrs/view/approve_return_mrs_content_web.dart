@@ -61,14 +61,14 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                   ),
                   InkWell(
                       onTap: () {
-                        var taskId;
-                        var jobId;
+                        String refId = controller
+                                .returnMrsDetailsModel.value?.whereUsedTypeId
+                                .toString() ??
+                            "";
                         controller.type.value == 1
-                            ? Get.offAllNamed(Routes.jobDetails,
-                                arguments: {'jobId': jobId})
+                            ? Get.offNamed('${Routes.jobDetails}/$refId')
                             : controller.type.value == 2
-                                ? Get.offAllNamed(Routes.pmTaskView,
-                                    arguments: {'pmTaskId': taskId})
+                                ? Get.offNamed('${Routes.pmTaskView}/$refId')
                                 : Get.offNamed(Routes.returnMrsList);
                       },
                       child: controller.type.value == 1

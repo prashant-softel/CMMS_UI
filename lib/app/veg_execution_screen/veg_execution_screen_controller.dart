@@ -90,26 +90,32 @@ class VegExecutionController extends GetxController {
   }
 
   Future<void> setVegId() async {
-    try {
-      final _vegexe = await vegExecutionPresenter.getExecutionId();
-      final _vegid = await vegExecutionPresenter.getPlanId();
-      if (_vegexe == null || _vegexe == '' || _vegexe == "null") {
-        var dataFromPreviousScreen = Get.arguments;
-        vegid.value = dataFromPreviousScreen['vegid'];
-        vegexe.value = dataFromPreviousScreen['vegexe'];
-        vegExecutionPresenter.savePlanId(vegid: vegid.value.toString());
-        vegExecutionPresenter.saveExecutionId(vegexe: vegexe.value.toString());
-        print("Execution Id: ${vegexe.value}");
-        print("Plan Id: ${vegid.value}");
-      } else {
-        vegexe.value = int.tryParse(_vegexe) ?? 0;
-        vegid.value = int.tryParse(_vegid.toString()) ?? 0;
-        print("Execution Id: ${vegexe.value}");
-        print("Plan Id: ${vegid.value}");
-      }
-    } catch (e) {
-      Utility.showDialog(e.toString(), 'vegid');
-    }
+    final String? _vegid = Get.parameters['vegid'];
+    final String? _vegexe = Get.parameters['vegexe'];
+
+    vegid.value = int.tryParse(_vegid ?? "") ?? 0;
+    vegexe.value = int.tryParse(_vegexe ?? "") ?? 0;
+
+    // try {
+    //   final _vegexe = await vegExecutionPresenter.getExecutionId();
+    //   final _vegid = await vegExecutionPresenter.getPlanId();
+    //   if (_vegexe == null || _vegexe == '' || _vegexe == "null") {
+    //     var dataFromPreviousScreen = Get.arguments;
+    //     vegid.value = dataFromPreviousScreen['vegid'];
+    //     vegexe.value = dataFromPreviousScreen['vegexe'];
+    //     vegExecutionPresenter.savePlanId(vegid: vegid.value.toString());
+    //     vegExecutionPresenter.saveExecutionId(vegexe: vegexe.value.toString());
+    //     print("Execution Id: ${vegexe.value}");
+    //     print("Plan Id: ${vegid.value}");
+    //   } else {
+    //     vegexe.value = int.tryParse(_vegexe) ?? 0;
+    //     vegid.value = int.tryParse(_vegid.toString()) ?? 0;
+    //     print("Execution Id: ${vegexe.value}");
+    //     print("Plan Id: ${vegid.value}");
+    //   }
+    // } catch (e) {
+    //   Utility.showDialog(e.toString(), 'vegid');
+    // }
   }
 
   Future<void> getHistory(int facilityId) async {
@@ -511,11 +517,13 @@ class VegExecutionController extends GetxController {
     int? permitId,
     int? jobId,
   }) async {
-    Get.toNamed(Routes.viewPermitScreen, arguments: {
-      "permitId": permitId,
-      "jobId": jobId,
-      "type": 5,
-    });
+    // Get.toNamed(Routes.viewPermitScreen, arguments: {
+    //   "permitId": permitId,
+    //   "jobId": jobId,
+    //   "type": 5,
+    // });
+    String type = 5.toString();
+    Get.offNamed('${Routes.viewPermitScreen}/$permitId/$type');
   }
 
   void onValueChanged(dynamic list, dynamic value) {

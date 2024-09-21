@@ -918,21 +918,22 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                           onPress:
                                                                               () {
                                                                             controller.clearMrsStoreData();
-                                                                            int?
+                                                                            String?
                                                                                 rmrsId =
-                                                                                controller.listMrsByTaskId?[index]?.mrs_return_ID;
+                                                                                controller.listMrsByTaskId?[index]?.mrs_return_ID.toString();
                                                                             String
                                                                                 mrsId =
                                                                                 controller.listMrsByTaskId?[index]?.mrsId.toString() ?? "";
+                                                                            String
+                                                                                type =
+                                                                                2.toString();
+
                                                                             controller.listMrsByTaskId?[index]?.is_mrs_return == 0
-                                                                                ? Get.toNamed(Routes.mrsApprovalScreen, arguments: {
-                                                                                    'mrsId': int.tryParse("$mrsId"),
-                                                                                    'type': 2
-                                                                                  })
-                                                                                : Get.toNamed(Routes.approverReturnMrs, arguments: {
-                                                                                    'mrsId': rmrsId,
-                                                                                    'type': 2
-                                                                                  });
+                                                                                ? Get.offNamed(
+                                                                                    '${Routes.mrsApprovalScreen}/$mrsId/$type')
+                                                                                :Get.offNamed(
+                                                                                    '${Routes.approverReturnMrs}/$rmrsId/$type');
+                                                                                
                                                                           }),
                                                                       // controller.pmtaskViewModel.value?.status != 169 &&
                                                                       controller.listMrsByTaskId?[index]?.status == 323 ||

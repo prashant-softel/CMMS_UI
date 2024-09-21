@@ -52,23 +52,29 @@ class MrsApproveController extends GetxController {
   }
 
   Future<void> setMrsId() async {
-    try {
-      final _mrsId = await mrsApprovePresenter.getValue();
-      final _type = await mrsApprovePresenter.getValuee();
-      if (_mrsId == null || _mrsId == '' || _mrsId == "null") {
-        var dataFromPreviousScreen = Get.arguments;
+    final String? _mrsId = Get.parameters['mrsId'];
+    final String? _type = Get.parameters['type'];
 
-        mrsId.value = dataFromPreviousScreen['mrsId'];
-        type.value = dataFromPreviousScreen['type'];
-        mrsApprovePresenter.saveValue(mrsId: mrsId.value.toString());
-        mrsApprovePresenter.saveValuee(type: type.value.toString());
-      } else {
-        mrsId.value = int.tryParse(_mrsId) ?? 0;
-        type.value = int.tryParse(_type!) ?? 0;
-      }
-    } catch (e) {
-      Utility.showDialog(e.toString(), 'mrsId');
-    }
+    mrsId.value = int.tryParse(_mrsId ?? "") ?? 0;
+    type.value = int.tryParse(_type ?? "") ?? 0;
+
+    // try {
+    //   final _mrsId = await mrsApprovePresenter.getValue();
+    //   final _type = await mrsApprovePresenter.getValuee();
+    //   if (_mrsId == null || _mrsId == '' || _mrsId == "null") {
+    //     var dataFromPreviousScreen = Get.arguments;
+
+    //     mrsId.value = dataFromPreviousScreen['mrsId'];
+    //     type.value = dataFromPreviousScreen['type'];
+    //     mrsApprovePresenter.saveValue(mrsId: mrsId.value.toString());
+    //     mrsApprovePresenter.saveValuee(type: type.value.toString());
+    //   } else {
+    //     mrsId.value = int.tryParse(_mrsId) ?? 0;
+    //     type.value = int.tryParse(_type!) ?? 0;
+    //   }
+    // } catch (e) {
+    //   Utility.showDialog(e.toString(), 'mrsId');
+    // }
   }
 
   Future<void> getMrsDetails(
@@ -115,6 +121,7 @@ class MrsApproveController extends GetxController {
       final response = await mrsApprovePresenter.approveMrs(
           approvetoJsonString: approvetoJsonString,
           type: type.value,
+          routeId: mrsDetailsModel.value?.whereUsedRefID ?? 0,
           isLoading: true,
           facility_id: facilityId);
       if (response == true) {
@@ -139,14 +146,17 @@ class MrsApproveController extends GetxController {
 
       var rejecttoJsonString = commentModel.toJson();
       final response = await mrsApprovePresenter.rejectMrs(
-          rejecttoJsonString: rejecttoJsonString,
-          isLoading: true,
-          facility_id: facilityId);
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: true,
+        facility_id: facilityId,
+        type: type.value,
+        routeId: mrsDetailsModel.value?.whereUsedRefID ?? 0,
+      );
       if (response == true) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
+        // final _flutterSecureStorage = const FlutterSecureStorage();
 
-        _flutterSecureStorage.delete(key: "mrsId");
-        Get.offAllNamed(Routes.mrsListScreen);
+        // _flutterSecureStorage.delete(key: "mrsId");
+        // Get.offAllNamed(Routes.mrsListScreen);
       }
     }
   }

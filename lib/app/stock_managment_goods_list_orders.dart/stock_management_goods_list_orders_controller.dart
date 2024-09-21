@@ -206,8 +206,7 @@ class StockManagementGoodsOrdersController extends GetxController {
   }
 
   void viewAddGoodsOrdersDetails({int? id}) {
-    Get.toNamed(Routes.viewGoodsOrders, arguments: id);
-    print('Argument5:$id');
+    Get.offAllNamed('${Routes.viewGoodsOrders}/$id/0');
   }
 
   void getGOListByDate() {
@@ -229,8 +228,6 @@ class StockManagementGoodsOrdersController extends GetxController {
   void clearTypeStoreData() {
     stockManagementGoodsOrdersPresenter.clearTypeValue();
   }
-
-
 
   void sortData(String columnName) {
     if (currentSortColumn.value == columnName) {

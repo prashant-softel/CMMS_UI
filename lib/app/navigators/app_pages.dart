@@ -503,7 +503,7 @@ class AppPages {
       binding: EditJobBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.jobDetails,
+      name: '${_Paths.jobDetails}/:jobId',
       page: JobDetailsScreen.new,
       binding: JobDetailsBinding(),
       transition: Transition.cupertino,
@@ -514,7 +514,7 @@ class AppPages {
       binding: FacilityBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.jobCardDetails,
+      name: '${_Paths.jobCardDetails}/:JcId',
       page: JobCardDetailsScreen.new,
       binding: JobCardDetailsBinding(),
     ),
@@ -560,7 +560,8 @@ class AppPages {
     ),
 
     GetPage<dynamic>(
-      name: _Paths.createPermit,
+      name: //'${
+          _Paths.createPermit, //}///:permitId/:isChecked/:type/:pmTaskModel',
       page: CreatePermitScreen.new,
       binding: NewPermitBinding(),
     ),
@@ -628,8 +629,7 @@ class AppPages {
       binding: PreventiveMaintenanceTaskBinding(),
     ),
     GetPage<dynamic>(
-      name:
-          '/pm-execution-screen/:pmTaskId', // Define the route with a dynamic path parameter
+      name: '${_Paths.pmExecution}/:pmTaskId',
       page: PreventiveMaintenanceExecutionScreen.new,
       binding: PreventiveMaintenanceExecutionBinding(),
     ),
@@ -653,7 +653,7 @@ class AppPages {
     //     binding: ViewPermitBinding()),
 
     GetPage<dynamic>(
-        name: _Paths.viewPermitScreen,
+        name: '${_Paths.viewPermitScreen}/:permitId/:type',
         page: ViewPermitScreen.new,
         binding: NewViewPermitBinding()),
 
@@ -690,7 +690,7 @@ class AppPages {
       binding: AddVegetationPlanBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.viewVegetationPlanScreen,
+      name: '${_Paths.viewVegetationPlanScreen}/:vegid',
       page: ViewVegPlanScreen.new,
       binding: ViewVegPlanBinding(),
     ),
@@ -705,12 +705,12 @@ class AppPages {
       binding: ViewVegExecutionBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.vegExecutionScreen,
+      name: '${_Paths.vegExecutionScreen}/:vegexe/:vegid',
       page: VegExecutionScreen.new,
       binding: VegExecutionBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.pmTaskView,
+      name: '${_Paths.pmTaskView}/:pmTaskId',
       page: PreventiveMaintenanceTaskViewScreen.new,
       binding: PreventiveMaintenanceTaskViewBinding(),
     ),
@@ -852,7 +852,7 @@ class AppPages {
       binding: WarrantyListBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.calibrationViewScreen,
+      name: '${_Paths.calibrationViewScreen}/:calibrationId',
       page: CalibrationViewScreen.new,
       binding: CalibrationViewBinding(),
     ),
@@ -863,7 +863,7 @@ class AppPages {
     ),
 
     GetPage<dynamic>(
-      name: _Paths.viewGoodsOrders,
+      name: '${_Paths.viewGoodsOrders}/:goId/:goType',
       page: ViewAddGoodsOrdersScreen.new,
       binding: ViewAddGoodsOrdersBinding(),
     ),
@@ -914,7 +914,7 @@ class AppPages {
     ),
 
     GetPage<dynamic>(
-      name: _Paths.mrsApprovalScreen,
+      name: '${_Paths.mrsApprovalScreen}/:mrsId/:type',
       page: MrsApproveScreen.new,
       binding: MrsApproveBinding(),
     ),
@@ -1069,7 +1069,7 @@ class AppPages {
     ),
 
     GetPage<dynamic>(
-      name: _Paths.approverReturnMrs,
+      name: '${_Paths.approverReturnMrs}/:mrsId/:type',
       page: ApproveReturnMrsScreen.new,
       binding: ApproveReturnMrsBinding(),
     ),
@@ -1084,7 +1084,7 @@ class AppPages {
       binding: PurchaseGoodsorderListBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.purchaseGoodsorderView,
+      name: '${_Paths.purchaseGoodsorderView}/:roId',
       page: PurchaseGoodsorderViewScreen.new,
       binding: PurchaseGoodsorderViewBinding(),
     ),
@@ -1527,7 +1527,7 @@ class AppPages {
       binding: KaizensListBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.cumulativeReport,
+      name: '${_Paths.cumulativeReport}/:type',
       page: CumulativeReportScreen.new,
       binding: CumulativeReportBinding(),
     ),
@@ -1536,11 +1536,10 @@ class AppPages {
       page: WcCertificatesListScreen.new,
       binding: WcCertificatesListBinding(),
     ),
-      GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.calendarView,
       page: CalendarViewScreen.new,
       binding: CalendarViewBinding(),
     ),
-    
   ];
 }

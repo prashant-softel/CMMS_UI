@@ -79,9 +79,8 @@ class PreventiveMaintenanceExecutionContentWeb
                 ),
                 InkWell(
                   onTap: () {
-                    var taskId;
-                    Get.offNamed(Routes.pmTaskView,
-                        arguments: {'pmTaskId': taskId});
+                    String taskId = controller.scheduleId.value.toString();
+                    Get.offAllNamed('${Routes.pmTaskView}/$taskId');
                   },
                   child: Text(" / PM TASK VIEW", style: Styles.greyLight14),
                 ),
@@ -707,23 +706,22 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                           () {
                                                                         controller
                                                                             .clearMrsStoreData();
-                                                                        int? rmrsId = controller
+                                                                        String? rmrsId = controller
                                                                             .listMrsByTaskId?[index]
-                                                                            ?.mrs_return_ID;
+                                                                            ?.mrs_return_ID
+                                                                            .toString();
+                                                                        String
+                                                                            type =
+                                                                            2.toString();
+
                                                                         String
                                                                             mrsId =
                                                                             controller.listMrsByTaskId?[index]?.mrsId.toString() ??
                                                                                 "";
                                                                         controller.listMrsByTaskId?[index]?.is_mrs_return ==
                                                                                 0
-                                                                            ? Get.toNamed(Routes.mrsApprovalScreen, arguments: {
-                                                                                'mrsId': int.tryParse("$mrsId"),
-                                                                                'type': 2
-                                                                              })
-                                                                            : Get.toNamed(Routes.approverReturnMrs, arguments: {
-                                                                                'mrsId': rmrsId,
-                                                                                'type': 2
-                                                                              });
+                                                                            ? Get.offNamed('${Routes.mrsApprovalScreen}/$mrsId/$type')
+                                                                            : Get.offNamed('${Routes.approverReturnMrs}/$rmrsId/$type');
                                                                       }),
                                                                   // controller.pmtaskViewModel.value?.status != 169 &&
                                                                   controller.listMrsByTaskId?[index]?.status == 323 ||

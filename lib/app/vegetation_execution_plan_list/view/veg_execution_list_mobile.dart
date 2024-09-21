@@ -52,11 +52,8 @@ class _VegExecutionListMobileState extends State<VegExecutionListMobile> {
                                 if (id != 0) {
                                   controller.clearStoreData();
                                   // controller.clearStoreDataPlanid();
-                                  Get.toNamed(Routes.vegExecutionScreen,
-                                      arguments: {
-                                        "vegexe": id,
-                                        "vegid": planId
-                                      });
+                                  Get.toNamed(
+                                      '${Routes.vegExecutionScreen}/${id}/${planId}');
                                 }
                               },
                               child: Container(
@@ -260,7 +257,8 @@ class _VegExecutionListMobileState extends State<VegExecutionListMobile> {
                                           vegTaskModel?.scheduledDate ==
                                                   "0001-01-01"
                                               ? '-'
-                                              : vegTaskModel?.scheduledDate ?? "",
+                                              : vegTaskModel?.scheduledDate ??
+                                                  "",
                                         ),
                                         buildInfoRow(
                                           'Done Date: ',

@@ -60,14 +60,11 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                           const FlutterSecureStorage();
                       _flutterSecureStorage.delete(key: "mrsId");
 
-                      var taskId;
-                      var jobId;
+                      String refId = controller.whereUsedId.toString() ?? "";
                       controller.type.value == 1
-                          ? Get.offAllNamed(Routes.jobDetails,
-                              arguments: {'jobId': jobId})
+                          ? Get.offNamed('${Routes.jobDetails}/$refId')
                           : controller.type.value == 2
-                              ? Get.offAllNamed(Routes.pmTaskView,
-                                  arguments: {'pmTaskId': taskId})
+                              ? Get.offAllNamed('${Routes.pmTaskView}/$refId')
                               : Get.offNamed(Routes.mrsListScreen);
                     },
                     child: controller.type.value == 1

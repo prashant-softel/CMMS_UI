@@ -284,9 +284,12 @@ class AddModuleCleaningExecutionController extends GetxController {
     int? permitId,
     int? jobId,
   }) async {
-    Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "jobId": jobId, "type": 4});
-    print({"Permit", permitId, jobId});
+    String type = 4.toString();
+    Get.offNamed('${Routes.viewPermitScreen}/$permitId/$type');
+
+    // Get.toNamed(Routes.viewPermitScreen,
+    //     arguments: {"permitId": permitId, "jobId": jobId, "type": 4});
+    // print({"Permit", permitId, jobId});
   }
 
   Future<void> getMCTaskEquipmentList(int taskId, bool isLoading) async {

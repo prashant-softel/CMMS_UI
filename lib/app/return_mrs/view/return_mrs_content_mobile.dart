@@ -55,14 +55,13 @@ class ReturnMrsListContentMobile extends GetView<ReturnMrsListController> {
                                   onTap: () {
                                     controller.clearStoreData();
                                     // controller.clearStoreDatatype();
-                                    var _mrsId =
-                                        controller.mrsList[index]!.id ?? 0;
-
-                                    Get.toNamed(Routes.approverReturnMrs,
-                                        arguments: {
-                                          'mrsId': _mrsId,
-                                          'type': 0
-                                        });
+                                    String rmrsId = controller
+                                            .mrsList[index]!.id
+                                            .toString() ??
+                                        '';
+                                    String type = 0.toString();
+                                    Get.offNamed(
+                                        '${Routes.approverReturnMrs}/$rmrsId/$type');
                                   },
                                   child: Container(
                                     margin:

@@ -781,12 +781,11 @@ class GoodsOrderListDataSource extends DataTableSource {
                                           controller.clearStoreData();
                                           int goId =
                                               GoodsOrderListDetails?.id ?? 0;
+
                                           if (goId != 0) {
-                                            Get.toNamed(Routes.viewGoodsOrders,
-                                                arguments: {
-                                                  'goId': goId,
-                                                  "goType": 1
-                                                });
+                                            String goType = 1.toString();
+                                            Get.offAllNamed(
+                                                '${Routes.viewGoodsOrders}/$goId/$goType');
                                           }
                                         },
                                       )
@@ -1077,8 +1076,9 @@ class GoodsOrderListDataSource extends DataTableSource {
                                   controller.clearTypeStoreData();
                                   int goId = GoodsOrderListDetails?.id ?? 0;
                                   if (goId != 0) {
-                                    Get.toNamed(Routes.viewGoodsOrders,
-                                        arguments: {'goId': goId, "goType": 1});
+                                    String goType = 1.toString();
+                                    Get.offAllNamed(
+                                        '${Routes.viewGoodsOrders}/$goId/$goType');
                                   }
                                 },
                               )
@@ -1137,9 +1137,11 @@ class GoodsOrderListDataSource extends DataTableSource {
       onSelectChanged: (_) {
         controller.clearStoreData();
         controller.clearTypeStoreData();
+        String goType = 1.toString();
+        String goId = GoodsOrderListDetails?.id.toString() ?? "";
+
         GoodsOrderListDetails?.status == 302
-            ? Get.toNamed(Routes.viewGoodsOrders,
-                arguments: {'goId': GoodsOrderListDetails?.id, "goType": 1})
+            ? Get.offAllNamed('${Routes.viewGoodsOrders}/$goId/$goType')
             : GoodsOrderListDetails?.status == 309
                 ? Get.toNamed(Routes.receiveGoodsOrders,
                     arguments: {'goId': GoodsOrderListDetails?.id, "goType": 1})
@@ -1165,10 +1167,11 @@ class GoodsOrderListDataSource extends DataTableSource {
                         : GoodsOrderListDetails?.status == 306 &&
                                 varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length >
                                     0
-                            ? Get.toNamed(Routes.receiveGoodsOrders, arguments: {
-                                'goId': GoodsOrderListDetails?.id,
-                                "goType": 1
-                              })
+                            ? Get.toNamed(Routes.receiveGoodsOrders,
+                                arguments: {
+                                    'goId': GoodsOrderListDetails?.id,
+                                    "goType": 1
+                                  })
                             : GoodsOrderListDetails?.status == 310 &&
                                     varUserAccessModel.value.access_list!
                                             .where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess)
@@ -1211,15 +1214,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                       "goType": 1
                                                     },
                                                   )
-                                                : Get.toNamed(
-                                                    Routes.viewGoodsOrders,
-                                                    arguments: {
-                                                      "goId":
-                                                          GoodsOrderListDetails
-                                                              ?.id,
-                                                      "goType": 0
-                                                    },
-                                                  );
+                                                : Get.offAllNamed('${Routes.viewGoodsOrders}/$goId/$goType');
       },
     );
   }

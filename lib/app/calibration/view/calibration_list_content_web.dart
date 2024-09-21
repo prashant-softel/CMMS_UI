@@ -373,11 +373,11 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
       // size: columnSize,
       fixedWidth: fixedWidth,
       onSort: header == "Actions"
-        ? null
-        : (int columnIndex, bool ascending) {
-            final controller = Get.find<CalibrationListController>();
-            controller.sortData(header);
-          },
+          ? null
+          : (int columnIndex, bool ascending) {
+              final controller = Get.find<CalibrationListController>();
+              controller.sortData(header);
+            },
 
       label: //
           Column(
@@ -414,29 +414,29 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
             //     ),
             //   ),
             // ),
-             Row(
-          children: [
-            Text(
-              header,
-              style: Styles.black16W500,
-            ),
-            if (header != "Actions")
-              Obx(() {
-                final controller = Get.find<CalibrationListController>();
+            Row(
+              children: [
+                Text(
+                  header,
+                  style: Styles.black16W500,
+                ),
+                if (header != "Actions")
+                  Obx(() {
+                    final controller = Get.find<CalibrationListController>();
 
-                return AnimatedRotation(
-                  turns: controller.currentSortColumn.value == header
-                      ? (controller.isAscending.value ? 0.5 : 0.0)
-                      : 0.0,
-                  duration: Duration(milliseconds: 300),
-                  child: Icon(
-                    Icons.expand_more,
-                    size: 20,
-                  ),
-                );
-              }),
-          ],
-        ),
+                    return AnimatedRotation(
+                      turns: controller.currentSortColumn.value == header
+                          ? (controller.isAscending.value ? 0.5 : 0.0)
+                          : 0.0,
+                      duration: Duration(milliseconds: 300),
+                      child: Icon(
+                        Icons.expand_more,
+                        size: 20,
+                      ),
+                    );
+                  }),
+              ],
+            ),
             // Align(
             //   alignment: Alignment.centerLeft,
             //   child: Text(
@@ -798,13 +798,12 @@ class CalibrationDataSource extends DataTableSource {
                                 icon: Icons.remove_red_eye_outlined,
                                 message: 'View',
                                 onPress: () {
-                                  controller.clearStoreData();
+                                  // controller.clearStoreData();
                                   int calibrationId =
                                       calibrationDetails?.calibration_id ?? 0;
-                                  Get.toNamed(Routes.calibrationViewScreen,
-                                      arguments: {
-                                        'calibrationId': calibrationId
-                                      });
+
+                                  Get.toNamed(
+                                      '${Routes.calibrationViewScreen}/$calibrationId');
                                 },
                               ),
                         // controller.calibrationList
@@ -887,8 +886,8 @@ class CalibrationDataSource extends DataTableSource {
                   nextDate: '${calibrationDetails?.calibration_due_date}',
                   asset_id: '${calibrationDetails?.asset_id}',
                 )
-              : Get.toNamed(Routes.calibrationViewScreen,
-                  arguments: {'calibrationId': calibrationId});
+              : Get.toNamed('${Routes.calibrationViewScreen}/$calibrationId');
+
           //: null;
         }
       },

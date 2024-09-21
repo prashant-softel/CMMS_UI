@@ -354,21 +354,24 @@ class JobCardDetailsController extends GetxController {
   }
 
   Future<void> setJcId() async {
-    try {
-      final _jobCardId = await jobCardDetailsPresenter.getValue();
+    final String? _JcId = Get.parameters['JcId'];
+    jobCardId.value = int.tryParse(_JcId ?? "") ?? 0;
 
-      if (_jobCardId == null || _jobCardId == '' || _jobCardId == "null") {
-        var dataFromPreviousScreen = Get.arguments;
+    // try {
+    //   final _jobCardId = await jobCardDetailsPresenter.getValue();
 
-        jobCardId.value = dataFromPreviousScreen['JcId'];
-        jobCardDetailsPresenter.saveValue(
-            jobCardId: jobCardId.value.toString());
-      } else {
-        jobCardId.value = int.tryParse(_jobCardId) ?? 0;
-      }
-    } catch (e) {
-      Utility.showDialog(e.toString(), 'JcId');
-    }
+    //   if (_jobCardId == null || _jobCardId == '' || _jobCardId == "null") {
+    //     var dataFromPreviousScreen = Get.arguments;
+
+    //     jobCardId.value = dataFromPreviousScreen['JcId'];
+    //     jobCardDetailsPresenter.saveValue(
+    //         jobCardId: jobCardId.value.toString());
+    //   } else {
+    //     jobCardId.value = int.tryParse(_jobCardId) ?? 0;
+    //   }
+    // } catch (e) {
+    //   Utility.showDialog(e.toString(), 'JcId');
+    // }
   }
 
   @override
@@ -1008,8 +1011,8 @@ class JobCardDetailsController extends GetxController {
   }
 
   goToAddJobScreen() {
-    Get.offAllNamed(Routes.jobDetails,
-        arguments: {'jobId': jobDetailsModel.value?.id});
+    String jbId = jobDetailsModel.value?.id.toString() ?? "";
+    Get.offNamed('${Routes.jobDetails}/$jbId');
   }
 
   void addNewEmployee(EmployeeModel selectedEmployee, String responsibility) {

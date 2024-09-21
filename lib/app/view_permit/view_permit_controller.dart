@@ -511,30 +511,36 @@ class ViewPermitController extends GetxController {
   }
 
   Future<void> setPermitId() async {
-    try {
-      final _permitId = await viewPermitPresenter.getValue();
-      final _type = await viewPermitPresenter.getTypeValue();
-      // final _jobId = await viewPermitPresenter.getJobIdValue();
-      if (_permitId == null || _permitId == "" || _permitId == "null") {
-        var dataFromPreviousScreen = Get.arguments;
-        permitId.value = dataFromPreviousScreen['permitId'];
-        type.value = dataFromPreviousScreen['type'];
-        hseMis.value = dataFromPreviousScreen['hseMis'];
+    // try {
+    //   final _permitId = await viewPermitPresenter.getValue();
+    //   final _type = await viewPermitPresenter.getTypeValue();
+    //   // final _jobId = await viewPermitPresenter.getJobIdValue();
+    //   if (_permitId == null || _permitId == "" || _permitId == "null") {
+    //     var dataFromPreviousScreen = Get.arguments;
+    //     permitId.value = dataFromPreviousScreen['permitId'];
+    //     type.value = dataFromPreviousScreen['type'];
+    //     hseMis.value = dataFromPreviousScreen['hseMis'];
 
-        // jobId.value = dataFromPreviousScreen['jobId'];
-        viewPermitPresenter.saveValue(permitId: permitId.value.toString());
-        viewPermitPresenter.saveTypeValue(type: type.value.toString());
-        print("permitId: ${permitId.value}");
-        print("type: ${type.value}");
-        // print("jobId: ${jobId.value}");
-        // viewPermitPresenter.saveJobIdValue(jobId: jobId.value.toString());
-      } else {
-        permitId.value = int.tryParse(_permitId) ?? 0;
-        type.value = int.tryParse(_type ?? "") ?? 0;
-      }
-    } catch (e) {
-      // Utility.showDialog(e.toString() + 'permitId');
-    }
+    //     // jobId.value = dataFromPreviousScreen['jobId'];
+    //     viewPermitPresenter.saveValue(permitId: permitId.value.toString());
+    //     viewPermitPresenter.saveTypeValue(type: type.value.toString());
+    //     print("permitId: ${permitId.value}");
+    //     print("type: ${type.value}");
+    // print("jobId: ${jobId.value}");
+    // viewPermitPresenter.saveJobIdValue(jobId: jobId.value.toString());
+    // } else {]
+    final String? _permitId = Get.parameters['permitId'];
+    final String? _type = Get.parameters['type'];
+    final String? _hseMis = Get.parameters['hseMis'];
+
+    permitId.value = int.tryParse(_permitId ?? "") ?? 0;
+    type.value = int.tryParse(_type ?? "") ?? 0;
+    hseMis.value = int.tryParse(_hseMis ?? "") ?? 0;
+
+    // }
+    // } catch (e) {
+    //   // Utility.showDialog(e.toString() + 'permitId');
+    // }
   }
 
   Future<void> getFacilitiesLists() async {
@@ -558,13 +564,18 @@ class ViewPermitController extends GetxController {
       {int? permitId, String? ptwStatus, int? jobId, int? type}) async {
     {
       String _approveComment = approveCommentTextFieldCtrlr.text.trim();
-
+      String taskId = listAssociatedPm!.isEmpty
+          ? ""
+          : listAssociatedPm?[0]?.pmId.toString() ?? "";
+      String jobId = listAssociatedJobs!.isEmpty
+          ? ""
+          : listAssociatedJobs![0]?.jobId.toString() ?? '';
       AproveExtendPermitModel commentRejectCancelPermitModel =
           AproveExtendPermitModel(
         id: permitId,
         comment: _approveComment,
         ptwStatus: ptwStatus,
-        jobId: jobId,
+        jobId: 0,
       );
 
       var rejectCancelPermitJsonString =
@@ -574,7 +585,7 @@ class ViewPermitController extends GetxController {
           await viewPermitPresenter.permitApprovedButton(
         rejectCancelPermitJsonString: rejectCancelPermitJsonString,
         ptwStatus: ptwStatus,
-        jobId: jobId,
+        jobId: int.tryParse(jobId),
         type: type,
         isLoading: true,
         vegid: lstAssociatedVc!.value.length > 0
@@ -583,6 +594,7 @@ class ViewPermitController extends GetxController {
         vegexe: lstAssociatedVc!.value.length > 0
             ? lstAssociatedVc![0]!.executionId
             : 0,
+        taskId: type == 1 ? jobId : taskId,
       );
       if (response == true) {
         //getCalibrationList(facilityId, true);
@@ -672,6 +684,12 @@ class ViewPermitController extends GetxController {
       if (isFormInvalid.value) {
         return;
       }
+      String taskId = listAssociatedPm!.isEmpty
+          ? ""
+          : listAssociatedPm?[0]?.pmId.toString() ?? "";
+      String jobId = listAssociatedJobs!.isEmpty
+          ? ""
+          : listAssociatedJobs![0]?.jobId.toString() ?? '';
       String _cancelComment = cancelCommentRequestTextFieldCtrlr.text.trim();
       List<int> data = [];
       permitCancelConditionList!.value.forEach((element) {
@@ -691,19 +709,23 @@ class ViewPermitController extends GetxController {
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
       Map<String, dynamic>? response =
           await viewPermitPresenter.permitCancelRequestButton(
-              cancelPermitJsonString: cancelPermitJsonString,
-              jobId: jobId,
-              isLoading: true,
-              type: type.value);
+        cancelPermitJsonString: cancelPermitJsonString,
+        jobId: int.tryParse(jobId),
+        isLoading: true,
+        type: type.value,
+        taskId: type.value == 1 ? jobId : taskId,
+      );
       print('cancelPermitRequest:$cancelPermitJsonString');
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }
     }
   }
-void toggleShowMore() {
+
+  void toggleShowMore() {
     showMore.value = !showMore.value;
   }
+
   void checkcommentextend() {
     if (extendReasonCommentTextFieldCtrlr.text.trim().isEmpty) {
       isFormInvalid.value = true;
@@ -768,7 +790,7 @@ void toggleShowMore() {
   }
 
   void permitRejectButton(
-      {int? permitId, String? ptwStatus, int? jobId}) async {
+      {int? permitId, String? ptwStatus, int? jobId, String? taskId}) async {
     {
       String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
 
@@ -784,6 +806,7 @@ void toggleShowMore() {
         id: permitId,
         ptwStatus: ptwStatus,
         jobId: jobId,
+        taskId: taskId,
         isLoading: true,
         type: type.value,
         vegid: lstAssociatedVc!.value.length > 0
@@ -1658,7 +1681,7 @@ void toggleShowMore() {
   }
 
   Future<void> viewJobDetails(int? _jobId) async {
-    Get.toNamed(Routes.jobDetails, arguments: {'jobId': _jobId});
+    Get.offNamed('${Routes.jobDetails}/$_jobId');
   }
 
   // Future<bool> browseFiles({Uint8List? fileBytes}) async {
@@ -2809,7 +2832,8 @@ void toggleShowMore() {
       "jobModel": jobDetailsModel.value,
       "pmTaskModel": pmtaskViewModel.value,
       "mcModel": mcExecutionDetailsModel.value,
-      "scheduleID": 0
+      "scheduleID": 0,
+      "type": type.value,
     });
     print('PermitIdArgument:$permitId');
   }

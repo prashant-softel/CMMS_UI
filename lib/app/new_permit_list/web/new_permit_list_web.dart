@@ -782,7 +782,8 @@ class PermitListDataSource extends DataTableSource {
                             onPress: () {
                               int? permitId =
                                   controller.newPermitList[index]?.permitId;
-                              controller.viewMisPermitList(permitId: permitId);
+                              controller.viewMisPermitList(
+                                  permitId: permitId.toString());
                             },
                           )
                         : Wrap(
@@ -824,7 +825,8 @@ class PermitListDataSource extends DataTableSource {
                                                     .newPermitList[index]
                                                     ?.permitId;
                                                 controller.viewNewPermitList(
-                                                    permitId: permitId);
+                                                    permitId:
+                                                        permitId.toString());
                                               },
                                             )
                                           : Container(),
@@ -888,7 +890,8 @@ class PermitListDataSource extends DataTableSource {
                                               onPress: () {
                                                 controller.viewNewPermitList(
                                                     permitId: PermitDetails
-                                                        ?.permitId);
+                                                        ?.permitId
+                                                        .toString());
                                               },
                                             )
                                           : Dimens.box0,
@@ -922,7 +925,8 @@ class PermitListDataSource extends DataTableSource {
                                               onPress: () {
                                                 controller.viewNewPermitList(
                                                     permitId: PermitDetails
-                                                        ?.permitId);
+                                                        ?.permitId
+                                                        .toString());
                                               },
                                             )
                                           : Dimens.box0,
@@ -1498,7 +1502,8 @@ class PermitListDataSource extends DataTableSource {
                                               onPress: () {
                                                 controller.viewNewPermitList(
                                                     permitId: PermitDetails
-                                                        ?.permitId);
+                                                        ?.permitId
+                                                        .toString());
                                               },
                                             )
                                           : Dimens.box0
@@ -1514,7 +1519,8 @@ class PermitListDataSource extends DataTableSource {
       }).toList(),
       //   ],
       onSelectChanged: (_) {
-        controller.viewNewPermitList(permitId: PermitDetails?.permitId);
+        controller.viewNewPermitList(
+            permitId: PermitDetails?.permitId.toString());
       },
     );
   }

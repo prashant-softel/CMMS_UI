@@ -18,20 +18,28 @@ class MrsApprovePresenter {
       {approvetoJsonString,
       int? type,
       required bool isLoading,
-      int? facility_id}) async {
+      int? facility_id,
+      int? routeId}) async {
     return mrsApproveUsecase.approveMrs(
         approvetoJsonString: approvetoJsonString,
         type: type,
         isLoading: isLoading,
-        facility_id: facility_id);
+        facility_id: facility_id,
+        routeId: routeId);
   }
 
   Future<bool> rejectMrs(
-      {rejecttoJsonString, required bool isLoading, int? facility_id}) async {
+      {rejecttoJsonString,
+      required bool isLoading,
+      int? facility_id,
+      int? routeId,
+      int? type}) async {
     return mrsApproveUsecase.rejectMrs(
         rejecttoJsonString: rejecttoJsonString,
         isLoading: isLoading,
-        facility_id: facility_id);
+        facility_id: facility_id,
+        routeId: routeId,
+        type: type);
   }
 
   void saveValue({String? mrsId}) async {

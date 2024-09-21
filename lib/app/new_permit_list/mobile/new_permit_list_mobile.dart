@@ -57,7 +57,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                   var _newPermitListId =
                                       newPermitListModel?.permitId ?? 0;
                                   controller.viewNewPermitList(
-                                      permitId: _newPermitListId);
+                                      permitId: _newPermitListId.toString());
                                 },
                                 child: SizedBox(
                                   width: double.infinity,
@@ -293,7 +293,8 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                         controller.viewNewPermitList(
                                                             permitId:
                                                                 newPermitListModel
-                                                                    ?.permitId);
+                                                                    ?.permitId
+                                                                    .toString());
                                                       },
                                                     )
                                                   : Dimens.box0,
@@ -332,7 +333,8 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                         controller.viewNewPermitList(
                                                             permitId:
                                                                 newPermitListModel
-                                                                    ?.permitId);
+                                                                    ?.permitId
+                                                                    .toString());
                                                       },
                                                     )
                                                   : Dimens.box0,
@@ -865,7 +867,8 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                         controller.viewNewPermitList(
                                                             permitId:
                                                                 newPermitListModel
-                                                                    ?.permitId);
+                                                                    ?.permitId
+                                                                    .toString());
                                                       },
                                                     )
                                                   : Dimens.box0,

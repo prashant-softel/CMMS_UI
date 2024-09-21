@@ -447,15 +447,15 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 onTap: () {
                                                   controller
                                                       .clearStoreDataJobId();
-
-                                                  Get.toNamed(Routes.jobDetails,
-                                                      arguments: {
-                                                        'jobId': controller
-                                                            .selectedItem
-                                                            ?.schedule_link_job?[
-                                                                index]
-                                                            .job_id
-                                                      });
+                                                  String? jobId = controller
+                                                          .selectedItem
+                                                          ?.schedule_link_job?[
+                                                              index]
+                                                          .job_id
+                                                          .toString() ??
+                                                      "";
+                                                  Get.offNamed(
+                                                      '${Routes.jobDetails}/$jobId');
                                                 },
                                                 child: Text(
                                                   "JOB${controller.selectedItem?.schedule_link_job?[index].job_id.toString() ?? ''}",
@@ -645,16 +645,21 @@ class ObservationPMTaskViewDialog extends GetView {
                                                       onPress: () {
                                                         controller
                                                             .clearMrsStoreData();
-                                                        int? rmrsId = controller
-                                                            .listMrsByTaskId?[
-                                                                index]
-                                                            ?.mrs_return_ID;
+                                                        String? rmrsId =
+                                                            controller
+                                                                .listMrsByTaskId?[
+                                                                    index]
+                                                                ?.mrs_return_ID
+                                                                .toString();
                                                         String mrsId = controller
                                                                 .listMrsByTaskId?[
                                                                     index]
                                                                 ?.mrsId
                                                                 .toString() ??
                                                             "";
+                                                        String type =
+                                                            2.toString();
+
                                                         print({"mrsId": mrsId});
                                                         print({
                                                           "retmrsId": rmrsId
@@ -664,23 +669,10 @@ class ObservationPMTaskViewDialog extends GetView {
                                                                         index]
                                                                     ?.is_mrs_return ==
                                                                 0
-                                                            ? Get.toNamed(
-                                                                Routes
-                                                                    .mrsApprovalScreen,
-                                                                arguments: {
-                                                                    'mrsId': int
-                                                                        .tryParse(
-                                                                            "$mrsId"),
-                                                                    'type': 2
-                                                                  })
-                                                            : Get.toNamed(
-                                                                Routes
-                                                                    .approverReturnMrs,
-                                                                arguments: {
-                                                                    'mrsId':
-                                                                        rmrsId,
-                                                                    'type': 2
-                                                                  });
+                                                            ? Get.offNamed(
+                                                                '${Routes.mrsApprovalScreen}/$mrsId/$type')
+                                                            : Get.offNamed(
+                                                                '${Routes.approverReturnMrs}/$rmrsId/$type');
                                                       }),
                                                   // controller.pmtaskViewModel
                                                   //             .value?.status ==

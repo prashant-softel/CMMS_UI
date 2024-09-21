@@ -269,7 +269,7 @@ abstract class _Paths {
   static const jobList = '/job-list-screen';
   static const trainingCouse = '/training-course';
   static const viewCourse = '/view-course';
-  static const jobDetails = '/job-details-screen';
+  static const jobDetails = '/job-details';
   static const addJob = '/add-job-screen';
   static const editJob = '/edit-job-screen';
   static const facility = '/facility';
@@ -289,12 +289,13 @@ abstract class _Paths {
   static const vegetationDashboard = '/vegetation-dashboard';
   static const vegetationPlanListScreen = '/vegetation-plan-list-screen';
   static const addVegetationPlanScreen = '/add-vegetation-plan';
-  static const viewVegetationPlanScreen = '/view_vegetation_plan';
+  static const viewVegetationPlanScreen = '/vegetation-plan-details';
   static const editVegetationPlanScreen = '/edit_vegetation_plan';
   static const vegExecutionListScreen =
       '/vegetation-execution-plan-list-screen';
-  static const viewVegExecutionPlanScreen = '/view_vegetation_execution_plan';
-  static const vegExecutionScreen = '/veg-execution-screen';
+  static const viewVegExecutionPlanScreen =
+      '/vegetation_execution_plan_details';
+  static const vegExecutionScreen = '/veg-execution-details';
 
   // static const create_checkList = '/create_preventive_checklist-screen';
   // static const preventive_List = '/preventive-list-screen';
@@ -309,7 +310,7 @@ abstract class _Paths {
   static const executeCourse = '/execute-course';
 
   static const newPermit = '/new-permit';
-  static const createPermit = '/new-permit-add';
+  static const createPermit = '/create-permit';
   static const createCheckList = '/create_preventive_checklist-screen';
   static const preventiveList =
       '/preventive-maintenance/preventive-list-screen';
@@ -332,13 +333,13 @@ abstract class _Paths {
   static const pmExecution = '/pm-execution-screen';
   static const pmExecutionView = '/pm-execution-view-screen';
   static const viewPermitWebScreen = '/view-permit-web-screen';
-  static const viewPermitScreen = '/view-permit';
+  static const viewPermitScreen = '/permit-details';
   static const permitTypeScreen = '/permit-type-screen';
   static const masterDashboard = '/master-dashboard';
   static const docVersionDashboard = '/docVersionDashboard';
   static const viewDocUploadScreen = '/viewDocUploadScreen';
 
-  static const pmTaskView = '/pm-task-view-screen';
+  static const pmTaskView = '/pm-task-details';
   static const inventory = '/inventory';
   static const inventoryList = '/inventoryList';
   static const safetyQuestionsList = '/permit_type-checklist-screen';
@@ -367,18 +368,18 @@ abstract class _Paths {
   static const warrantyType = '/warranty-Type-List-Screen';
   static const addInventoryScreen = '/add-inventory-screen';
   static const viewAddInventoryScreen = '/view-add-inventory-screen';
-  static const calibrationViewScreen = '/calibration-view-screen';
+  static const calibrationViewScreen = '/calibration-details';
   static const mrsListScreen = '/mrs-list-screen';
   static const updateGoodsOrdersDetailsScreen =
       '/update-goods-orders-details-screen';
   static const GoodsOrdersReqDetailsScreen = '/goods-orders-req-details-screen';
-  static const viewGoodsOrders = '/view-goods-orders';
+  static const viewGoodsOrders = '/goods-orders-details';
 
   static const assetMasterList = '/Material-List';
   static const addassetMaster = '/add-Material-List';
   static const incidentReportListWeb = '/incident-report-list';
   static const addIncidentReportContentWeb = '/add-incident-report';
-  static const mrsApprovalScreen = '/mrs-approval';
+  static const mrsApprovalScreen = '/mrs-details';
   static const mrsIssueScreen = '/mrs-issue';
   static const mrsReturnScreen = '/mrs-return';
 
@@ -423,10 +424,10 @@ abstract class _Paths {
   static const profile = '/profile';
   static const changePassword = '/changePassword';
   // static const returnMrsView = '/returnMrsView';
-  static const approverReturnMrs = '/returnMrsView';
+  static const approverReturnMrs = '/returnMrs-details';
   static const receiveGoodsOrders = '/receiveGoodsOrders';
   static const purchaseGoodsorder = '/purchaseGoodsorder';
-  static const purchaseGoodsorderView = '/purchaseGoodsorderView';
+  static const purchaseGoodsorderView = '/purchaseGoodsorder-detail';
 
   static const addModuleCleaningExecutionContentWeb =
       '/add-module-cleaning-execution';
@@ -442,7 +443,7 @@ abstract class _Paths {
   static const createPmPlan = '/createPmPlan';
   static const editReturnMrs = '/edit-return-mrs';
   static const pmPlanList = '/pm-plan-list';
-  static const viewPmPlanScreen = '/view-Pm-Plan-Screen';
+  static const viewPmPlanScreen = '/pm-Plan-details';
   static const typeofobservation = '/type-of-observation';
   static const sourceofobservation = '/source-of-observation';
   static const risktypemaster = '/risk-type-master';

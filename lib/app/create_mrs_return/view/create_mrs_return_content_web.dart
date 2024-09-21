@@ -62,16 +62,16 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                           ),
                           InkWell(
                               onTap: () {
-                                var taskId;
-                                var jobId;
+                                String refId = controller.whereUsedTypeId.value
+                                        .toString() ??
+                                    "";
+
                                 controller.type.value == 1
-                                    ? Get.offAllNamed(Routes.jobDetails,
-                                        arguments: {
-                                            'jobId': controller.jobid.value
-                                          })
+                                    ? Get.offNamed(
+                                        '${Routes.jobDetails}/$refId')
                                     : controller.type.value == 2
-                                        ? Get.offAllNamed(Routes.pmExecution,
-                                            arguments: {'pmTaskId': taskId})
+                                        ? Get.offNamed(
+                                            '${Routes.pmExecution}/$refId')
                                         : Get.offNamed(Routes
                                             .stockManagementDashboardScreen);
                               },
@@ -426,7 +426,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                               .name));
                                                             },
                                                           ),
-                                                        ), 
+                                                        ),
                                                       ],
                                                     )
                                                   : (mapData['key'] ==
@@ -724,8 +724,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                       padding:
                                                           const EdgeInsets.all(
                                                               5.0),
-                                                      child:
-                                                       DropdownWebWidget(
+                                                      child: DropdownWebWidget(
                                                         width: MediaQuery.of(
                                                                     context)
                                                                 .size
@@ -817,7 +816,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                           null);
                                                                 },
                                                               ),
-                                                            ), 
+                                                            ),
                                                           ],
                                                         )
                                                       : (mapData['key'] ==
@@ -944,8 +943,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                       padding: const EdgeInsets
                                                                           .all(
                                                                           8.0),
-                                                                      child: 
-                                                                      Container(
+                                                                      child: Container(
                                                                           width: (Get.width * .5),
                                                                           // padding: EdgeInsets.all(value),
                                                                           decoration: BoxDecoration(

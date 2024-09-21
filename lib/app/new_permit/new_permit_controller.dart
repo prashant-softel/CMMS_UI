@@ -491,6 +491,16 @@ class NewPermitController extends GetxController {
   }
 
   Future<void> setId() async {
+    // final String? _permitId = Get.parameters['permitId'];
+    // final String? _isChecked = Get.parameters['isChecked'];
+    // final String? _type = Get.parameters['type'];
+    // final _pmTaskModel = Get.parameters['pmTaskModel']!;
+
+    // permitId.value = int.tryParse(_permitId ?? "") ?? 0;
+    // typee.value = int.tryParse(_type ?? "") ?? 0;
+    // isChecked.value = _isChecked == "false" ? false : true;
+    // pmtaskViewModel =
+    //     _pmTaskModel; //PmtaskViewModel.fromJson(jsonDecode(_pmTaskModel));
     try {
       JobDetailsModel? jobDetail;
       PmtaskViewModel? pmdetail;
@@ -1790,6 +1800,12 @@ class NewPermitController extends GetxController {
       String _startDate = htmlEscape.convert(startDateTimeCtrlr.text.trim());
       String _workPermitRemark =
           htmlEscape.convert(workPermitRemarkTextCtrlr.text.trim());
+      String taskId = listAssociatedPm!.isEmpty
+          ? pmtaskViewModel?.id.toString() ?? ""
+          : listAssociatedPm?[0]?.pmId.toString() ?? "";
+      String jobId = listAssociatedJobs!.isEmpty
+          ? jobModel?.id.toString() ?? ''
+          : listAssociatedJobs![0]?.jobId.toString() ?? '';
 
       //UserId
       int userId = varUserAccessModel.value.user_id ?? 0;
@@ -1895,13 +1911,13 @@ class NewPermitController extends GetxController {
       var jobJsonString = updatePermitModel.toJson();
       Map<String, dynamic>? responseUpdatePermit =
           await permitPresenter.updateNewPermit(
-        newPermit: jobJsonString,
-        resubmit: isChecked.value,
-        isLoading: true,
-        type: typee.value,
-        vegplanId: vegExecutionDetailsModel?.planId,
-        vegexid: vegExecutionDetailsModel?.executionId,
-      );
+              newPermit: jobJsonString,
+              resubmit: isChecked.value,
+              isLoading: true,
+              type: typee.value,
+              vegplanId: vegExecutionDetailsModel?.planId,
+              vegexid: vegExecutionDetailsModel?.executionId,
+              taskId: typee.value == 1 ? jobId : taskId);
       if (responseUpdatePermit != null) {
         //  CreateNewPermitDialog();
         // showAlertDialog();
@@ -1916,7 +1932,12 @@ class NewPermitController extends GetxController {
       if (isFormInvalid.value) {
         return;
       }
-
+      String taskId = listAssociatedPm!.isEmpty
+          ? pmtaskViewModel?.id.toString() ?? ""
+          : listAssociatedPm?[0]?.pmId.toString() ?? "";
+      String jobId = listAssociatedJobs!.isEmpty
+          ? jobModel?.id.toString() ?? ''
+          : listAssociatedJobs![0]?.jobId.toString() ?? '';
       String _description =
           htmlEscape.convert(permitDescriptionCtrlr.text.trim());
       String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
@@ -2008,13 +2029,13 @@ class NewPermitController extends GetxController {
       var jobJsonString = createPermitModel.toJson();
       Map<String, dynamic>? responseNewPermitCreated =
           await permitPresenter.resubmitPermit(
-        newPermit: jobJsonString,
-        resubmit: true,
-        isLoading: true,
-        type: typee.value,
-        vegplanId: vegExecutionDetailsModel?.planId,
-        vegexid: vegExecutionDetailsModel?.executionId,
-      );
+              newPermit: jobJsonString,
+              resubmit: true,
+              isLoading: true,
+              type: typee.value,
+              vegplanId: vegExecutionDetailsModel?.planId,
+              vegexid: vegExecutionDetailsModel?.executionId,
+              taskId: typee.value == 1 ? jobId : taskId);
       if (responseNewPermitCreated != null) {
         //  CreateNewPermitDialog();
         // showAlertDialog();
@@ -2107,7 +2128,10 @@ class NewPermitController extends GetxController {
   }
 
   Future<void> viewNewPermitList({int? permitId}) async {
-    Get.toNamed(Routes.viewPermitScreen, arguments: {"permitId": permitId});
+    String type = 0.toString();
+    Get.offNamed('${Routes.viewPermitScreen}/$permitId/$type');
+
+    // Get.toNamed(Routes.viewPermitScreen, arguments: {"permitId": permitId});
   }
 
   Future<void> viewJobDetails() async {

@@ -52,16 +52,10 @@ class ViewPermitUsecase {
           int? type,
           bool? isLoading,
           int? vegexe,
-          int? vegid}) async =>
-      await repository.permitApprovedButton(
-        rejectCancelPermitJsonString,
-        ptwStatus,
-        jobId,
-        type,
-        isLoading,
-        vegexe,
-        vegid,
-      );
+          int? vegid,
+          String? taskId}) async =>
+      await repository.permitApprovedButton(rejectCancelPermitJsonString,
+          ptwStatus, jobId, type, isLoading, vegexe, vegid, taskId);
   // Future<void> permitApprovedButton({
   //   String? comment,
   //   String? id,
@@ -98,14 +92,14 @@ class ViewPermitUsecase {
   //   );
   // }
 
-  Future<Map<String, dynamic>> permitCancelRequestButton({
-    cancelPermitJsonString,
-    bool? isLoading,
-    int? jobId,
-    int? type,
-  }) async =>
+  Future<Map<String, dynamic>> permitCancelRequestButton(
+          {cancelPermitJsonString,
+          bool? isLoading,
+          int? jobId,
+          int? type,
+          String? taskId}) async =>
       await repository.permitCancelRequestButton(
-          cancelPermitJsonString, isLoading, jobId, type);
+          cancelPermitJsonString, isLoading, jobId, type, taskId);
 
   Future<CreateSOPModel?> browseFiles(
       Uint8List? fileBytes, String fileName, bool isLoading) async {
@@ -151,17 +145,10 @@ class ViewPermitUsecase {
           bool? isLoading,
           int? type,
           int? vegexe,
-          int? vegid}) async =>
-      await repository.permitRejectButton(
-        rejectExtendPermitJsonString,
-        id,
-        ptwStatus,
-        jobId,
-        type,
-        isLoading,
-        vegexe,
-        vegid,
-      );
+          int? vegid,
+          String? taskId}) async =>
+      await repository.permitRejectButton(rejectExtendPermitJsonString, id,
+          ptwStatus, jobId, type, isLoading, vegexe, vegid, taskId);
 
   // Future<void> permitCancelByApproverButton({
   //   String? comment,

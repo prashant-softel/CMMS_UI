@@ -340,40 +340,40 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
         DataColumn2(
       // size: columnSize,
       fixedWidth: fixedWidth,
-       onSort: header == "Actions"
-        ? null
-        : (int columnIndex, bool ascending) {
-            final controller = Get.find<JobCardListController>();
-            controller.sortData(header);
-          },
+      onSort: header == "Actions"
+          ? null
+          : (int columnIndex, bool ascending) {
+              final controller = Get.find<JobCardListController>();
+              controller.sortData(header);
+            },
 
       label: //
           Column(
               mainAxisAlignment: MainAxisAlignment.center, //
               children: [
-                 Row(
-          children: [
-            Text(
-              header,
-              style: Styles.black16W500,
-            ),
-            if (header != "Actions")
-              Obx(() {
-                final controller = Get.find<JobCardListController>();
+            Row(
+              children: [
+                Text(
+                  header,
+                  style: Styles.black16W500,
+                ),
+                if (header != "Actions")
+                  Obx(() {
+                    final controller = Get.find<JobCardListController>();
 
-                return AnimatedRotation(
-                  turns: controller.currentSortColumn.value == header
-                      ? (controller.isAscending.value ? 0.5 : 0.0)
-                      : 0.0,
-                  duration: Duration(milliseconds: 300),
-                  child: Icon(
-                    Icons.expand_more,
-                    size: 20,
-                  ),
-                );
-              }),
-          ],
-        ),
+                    return AnimatedRotation(
+                      turns: controller.currentSortColumn.value == header
+                          ? (controller.isAscending.value ? 0.5 : 0.0)
+                          : 0.0,
+                      duration: Duration(milliseconds: 300),
+                      child: Icon(
+                        Icons.expand_more,
+                        size: 20,
+                      ),
+                    );
+                  }),
+              ],
+            ),
             // SizedBox(
             //   height: Get.height * 0.05,
             //   child: TextField(
@@ -404,13 +404,13 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
             //     ),
             //   ),
             // ),
-          //   Align(
-          //     alignment: Alignment.centerLeft,
-          //     child: Text(
-          //       header,
-          //       style: Styles.black16W500,
-          //     ),
-          //   ),
+            //   Align(
+            //     alignment: Alignment.centerLeft,
+            //     child: Text(
+            //       header,
+            //       style: Styles.black16W500,
+            //     ),
+            //   ),
           ]),
       // ),
     );
@@ -487,7 +487,7 @@ class JobDataSource extends DataTableSource {
         controller.clearStoreData();
         int jobCardId = JobDetails?.jobCardId ?? 0;
         if (jobCardId != 0) {
-          Get.toNamed(Routes.jobCard, arguments: {'JcId': jobCardId});
+          Get.toNamed('${Routes.jobCard}/$jobCardId');
         }
       },
       cells: [
@@ -562,8 +562,7 @@ class JobDataSource extends DataTableSource {
                                   controller.clearStoreData();
                                   int jobCardId = JobDetails?.jobCardId ?? 0;
                                   if (jobCardId != 0) {
-                                    Get.toNamed(Routes.jobCard,
-                                        arguments: {'JcId': jobCardId});
+                                    Get.toNamed('${Routes.jobCard}/$jobCardId');
                                   }
                                 },
                               )

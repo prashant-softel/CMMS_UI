@@ -15,16 +15,9 @@ class CreateMrsUsecase {
       );
   void clearValue() async => repository.clearData(LocalKeys.mrsId);
 
-  Future<Map<String, dynamic>> createMrs({
-    createMrsJsonString,
-    type,
-    bool? isLoading,
-  }) async =>
-      await repository.createMrs(
-        createMrsJsonString,
-        type,
-        isLoading,
-      );
+  Future<Map<String, dynamic>> createMrs(
+          {createMrsJsonString, type, bool? isLoading, int? route}) async =>
+      await repository.createMrs(createMrsJsonString, type, isLoading, route);
 
   void saveUsedTypeIdValue({String? whereUsedTypeId}) async =>
       repository.saveValue(LocalKeys.pmTaskId, whereUsedTypeId);

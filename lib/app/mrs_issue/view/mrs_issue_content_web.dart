@@ -77,14 +77,15 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                         ),
                         InkWell(
                             onTap: () {
-                              var taskId;
-                              var jobId;
+                              String refId = controller
+                                      .mrsDetailsModel.value?.whereUsedRefID
+                                      .toString() ??
+                                  "";
                               controller.type.value == 1
-                                  ? Get.offAllNamed(Routes.jobDetails,
-                                      arguments: {'jobId': jobId})
+                                  ? Get.offNamed('${Routes.jobDetails}/$refId')
                                   : controller.type.value == 2
-                                      ? Get.offAllNamed(Routes.pmTaskView,
-                                          arguments: {'pmTaskId': taskId})
+                                      ? Get.offNamed(
+                                          '${Routes.pmTaskView}/$refId')
                                       : Get.offNamed(Routes.mrsListScreen);
                             },
                             child: controller.type.value == 1
@@ -375,8 +376,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                               .errorMessages
                                                               .add(null);
                                                         }
-                                                        return 
-                                                        DataRow(cells: [
+                                                        return DataRow(cells: [
                                                           DataCell(Text(item
                                                               .asset_name
                                                               .toString())),
@@ -394,8 +394,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                               .toString())),
                                                           item.asset_type ==
                                                                   "Spare"
-                                                              ? 
-                                                              DataCell(
+                                                              ? DataCell(
                                                                   Padding(
                                                                     padding:
                                                                         const EdgeInsets
@@ -438,7 +437,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                 width:
                                                                     (Get.width /
                                                                         9),
-                                                                 textController:
+                                                                textController:
                                                                     item.issued_qty_controller,
                                                                 decoration:
                                                                     InputDecoration(
@@ -468,7 +467,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                         fontSize:
                                                                             16.0,
                                                                       );
-                                                                       item.issued_qty_controller!
+                                                                      item.issued_qty_controller!
                                                                           .clear();
                                                                       return;
                                                                     }
@@ -490,7 +489,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                         fontSize:
                                                                             16.0,
                                                                       );
-                                                                       item.issued_qty_controller!
+                                                                      item.issued_qty_controller!
                                                                           .clear();
                                                                     }
                                                                   } catch (e) {

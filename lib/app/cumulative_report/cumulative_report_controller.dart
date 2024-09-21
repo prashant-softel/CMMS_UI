@@ -31,12 +31,20 @@ class CumulativeReportController extends GetxController {
   Rx<String> selectedModuleList = ''.obs;
   RxInt module_id = 0.obs;
   RxList<Cumulativereport?> cumulativereport = <Cumulativereport>[].obs;
+  Rx<int> type = 0.obs;
 
   @override
   void onInit() async {
+    await setReportType();
+
     await getFacilityList();
     await getModuleList();
     super.onInit();
+  }
+
+  Future<void> setReportType() async {
+    final String? _type = Get.parameters['type'];
+    type.value = int.tryParse(_type ?? "") ?? 0;
   }
 
   Future<void> getFacilityList() async {
@@ -68,9 +76,9 @@ class CumulativeReportController extends GetxController {
       // Filter the modules to include only the specified items
       final filteredModules = _moduleList.where((module) {
         return module?.id == 2 ||
-            module?.id == 10 ||
-            module?.id == 32 ||
-            module?.id == 33;
+            module?.id == 39 ||
+            module?.id == 43 ||
+            module?.id == 44;
       }).toList();
 
       moduleList.value = filteredModules;
@@ -83,6 +91,8 @@ class CumulativeReportController extends GetxController {
       case const (RxList<ModuleModel>):
         {
           if (value != "Please Select") {
+            cumulativereport.value = <Cumulativereport>[];
+
             int moduleListIndex =
                 moduleList.indexWhere((x) => x?.name == value);
             module_id.value = moduleList[moduleListIndex]?.id ?? 0;
@@ -101,10 +111,15 @@ class CumulativeReportController extends GetxController {
   }
 
   Future<void> getCumulativeReportList() async {
+    cumulativereport.value = <Cumulativereport>[];
+
     String lststrFacilityIds = selectedFacilityIdList.join(',');
 
     final list = await cumulativeReportPresenter.getCumulativeReportList(
-        selectedFacilityIdList: lststrFacilityIds, module_id: module_id.value);
+        selectedFacilityIdList: lststrFacilityIds,
+        module_id: module_id.value,
+        endDate: formattedTodate1,
+        startDate: formattedFromdate1);
 
     if (list != null) {
       for (var _cumulativereport in list) {

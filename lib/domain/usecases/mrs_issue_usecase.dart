@@ -19,12 +19,14 @@ class MrsIssueUsecase {
           {issuetoJsonString,
           int? type,
           bool? isLoading,
-          int? facility_id}) async =>
+          int? facility_id,
+          int? route}) async =>
       await repository.issueMrs(
           issuetoJsonString: issuetoJsonString,
           type: type,
           isLoading: isLoading,
-          facility_id: facility_id);
+          facility_id: facility_id,
+          route: route);
   void saveValue({String? mrsId}) async =>
       repository.saveValue(LocalKeys.mrsId, mrsId);
   Future<String?> getValue() async =>

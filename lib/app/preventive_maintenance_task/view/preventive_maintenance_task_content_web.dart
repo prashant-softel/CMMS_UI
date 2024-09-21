@@ -427,11 +427,12 @@ class _PreventiveMaintenanceTaskContentWebState
       // size: columnSize,
       fixedWidth: fixedWidth,
       onSort: header == "Actions"
-        ? null
-        : (int columnIndex, bool ascending) {
-            final controller = Get.find<PreventiveMaintenanceTaskController>();
-            controller.sortData(header);
-          },
+          ? null
+          : (int columnIndex, bool ascending) {
+              final controller =
+                  Get.find<PreventiveMaintenanceTaskController>();
+              controller.sortData(header);
+            },
 
       label: //
           Column(
@@ -468,7 +469,7 @@ class _PreventiveMaintenanceTaskContentWebState
             //     ),
             //   ),
             // ),
-              Row(
+            Row(
               children: [
                 Text(
                   header,
@@ -476,7 +477,8 @@ class _PreventiveMaintenanceTaskContentWebState
                 ),
                 if (header != "Actions")
                   Obx(() {
-                    final controller = Get.find<PreventiveMaintenanceTaskController>();
+                    final controller =
+                        Get.find<PreventiveMaintenanceTaskController>();
 
                     return AnimatedRotation(
                       turns: controller.currentSortColumn.value == header
@@ -738,13 +740,13 @@ class PmTaskDataSource extends DataTableSource {
                                 icon: Icons.remove_red_eye_outlined,
                                 message: 'View',
                                 onPress: () {
-                                  controller.clearStoreData();
-                                  controller.clearStoreDatatype();
+                                  // controller.clearStoreData();
+                                  // controller.clearStoreDatatype();
 
                                   int pmTaskId = pmTaskDetails?.id ?? 0;
                                   if (pmTaskId != 0) {
-                                    Get.toNamed(Routes.pmTaskView,
-                                        arguments: {'pmTaskId': pmTaskId});
+                                    Get.toNamed(
+                                        '${Routes.pmTaskView}/$pmTaskId');
                                   }
                                 },
                               )
@@ -803,8 +805,8 @@ class PmTaskDataSource extends DataTableSource {
       }).toList(),
       //   ],
       onSelectChanged: (_) {
-        controller.clearStoreData();
-        controller.clearStoreDatatype();
+        // controller.clearStoreData();
+        // controller.clearStoreDatatype();
 
         int pmTaskId = pmTaskDetails?.id ?? 0;
         if (pmTaskId != 0) {
@@ -815,8 +817,7 @@ class PmTaskDataSource extends DataTableSource {
                           e.view == UserAccessConstants.kHaveViewAccess)
                       .length >
                   0
-              ? Get.toNamed(Routes.pmTaskView,
-                  arguments: {'pmTaskId': pmTaskId})
+              ? Get.toNamed('${Routes.pmTaskView}/$pmTaskId')
               : null;
         }
       },

@@ -82,8 +82,8 @@ class EditMrsController extends GetxController {
         var dataFromPreviousScreen = Get.arguments;
 
         mrsId.value = dataFromPreviousScreen['mrsId'];
-        // type.value = dataFromPreviousScreen['type'];
-        String? typeValue = dataFromPreviousScreen['type'];
+        type.value = dataFromPreviousScreen['type'];
+        // String? typeValue = dataFromPreviousScreen['type'];
 
         editMrsPresenter.saveValue(mrsId: mrsId.value.toString());
         editMrsPresenter.saveValuee(type: type.value.toString());

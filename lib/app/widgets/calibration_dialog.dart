@@ -92,14 +92,15 @@ class CalibrationDialog extends GetView {
                     //     _controller.formattedFromdate,
                     //     false);
                     //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
-                    Get.offAllNamed(Routes.calibrationViewScreen,
-                        arguments: {'calibrationId': calbrationId});
+                    Get.offAllNamed(
+                        '${Routes.calibrationViewScreen}/$calbrationId');
+
                     Get.back();
                   },
                   child: const Text('View Calibration'),
                 ),
                 // Dimens.boxWidth10,
-                SizedBox(width:10),
+                SizedBox(width: 10),
                 ElevatedButton(
                   style: Styles.yellowElevatedButtonStyle,
                   onPressed: () {

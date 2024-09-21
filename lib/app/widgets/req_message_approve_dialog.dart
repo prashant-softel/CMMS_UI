@@ -32,7 +32,7 @@ class ReqOrderMessageApproveDialog extends GetView {
           ),
           content: Builder(builder: (context) {
             var height = MediaQuery.of(context).size.height;
-      
+
             return Container(
               padding: Dimens.edgeInsets05_0_5_0,
               height: 80,
@@ -92,26 +92,16 @@ class ReqOrderMessageApproveDialog extends GetView {
                   ),
                 ),
                 // Dimens.boxWidth10,
-                SizedBox(width:10),
+                SizedBox(width: 10),
                 Center(
                   child: ElevatedButton(
                     style: Styles.yellowElevatedButtonStyle,
                     onPressed: () {
                       Get.back();
-                      Future.delayed(
-                        Duration(seconds: 1),
-                        () {
-                          controller.getAssetList(controller.facilityId);
-      
-                          if (controller.roId.value != 0) {
-                            Future.delayed(Duration(seconds: 1), () {
-                              controller.getRoDetailsByID(
-                                  requestID: controller.roId.value);
-                              // getGoHistory(id: id.value);
-                            });
-                          }
-                        },
-                      );
+                      String roType = 1.toString();
+                      String roId = id![0].toString();
+
+                      Get.offAllNamed('${Routes.purchaseGoodsorderView}/$roId');
                     },
                     child: const Text('View GR'),
                   ),

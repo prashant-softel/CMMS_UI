@@ -49,10 +49,12 @@ class PreventiveTaskContentMobile
                                   onTap: () {
                                     controller.clearStoreData();
                                     controller.clearStoreDatatype();
-                                    var _taskId =
-                                        controller.pmTaskList[index]!.id ?? 0;
-                                    Get.toNamed(Routes.pmTaskView,
-                                        arguments: {'pmTaskId': _taskId});
+                                    String taskId = controller
+                                            .pmTaskList[index]!.id
+                                            .toString() ??
+                                        "";
+                                    Get.offAllNamed(
+                                        '${Routes.pmTaskView}/$taskId');
                                   },
                                   child: Container(
                                     margin:

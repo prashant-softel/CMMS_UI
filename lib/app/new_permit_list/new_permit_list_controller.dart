@@ -405,26 +405,23 @@ class NewPermitListController extends GetxController {
     print('PermitIdArgument:$isChecked');
   }
 
-  Future<void> viewNewPermitList({int? permitId}) async {
-    clearStoreData();
-    clearTypeStoreData();
-    clearisCheckedtoreData();
-    Get.toNamed(Routes.viewPermitScreen, arguments: {
-      "permitId": permitId,
-      "type": 0,
-      'hseMis': 0,
-    });
+  Future<void> viewNewPermitList({String? permitId}) async {
+    // clearStoreData();
+    // clearTypeStoreData();
+    // clearisCheckedtoreData();
+    // Get.toNamed(Routes.viewPermitScreen, arguments: {
+    //   "permitId": permitId,
+    //   "type": 0,
+    // });
+    String type = 0.toString();
+    Get.offNamed('${Routes.viewPermitScreen}/$permitId/$type');
   }
 
-  Future<void> viewMisPermitList({int? permitId}) async {
-    clearStoreData();
-    clearTypeStoreData();
-    clearisCheckedtoreData();
-    Get.toNamed(Routes.viewPermitScreen, arguments: {
-      "permitId": permitId,
-      "type": 0,
-      'hseMis': 1,
-    });
+  Future<void> viewMisPermitList({String? permitId}) async {
+    String type = 0.toString();
+    String hseMis = 1.toString(); // Get the schedule ID
+    Get.offNamed(
+        '${Routes.viewPermitScreen}/$permitId/$type/$hseMis'); // Pass the ID in the path
   }
 
   Future<void> cancelPermitList({int? permitId}) async {

@@ -1272,17 +1272,12 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                           2);
                                                               if (prefix ==
                                                                   'BM') {
-                                                                Get.toNamed(
-                                                                  Routes
-                                                                      .jobDetails,
-                                                                  arguments: {
-                                                                    'jobId': int
-                                                                        .tryParse(
-                                                                            jobId)
-                                                                  },
-                                                                );
+                                                                Get.offNamed(
+                                                                    '${Routes.jobDetails}/$jobId');
                                                               } else if (prefix ==
                                                                   'PM') {
+                                                                Get.offNamed(
+                                                                    '${Routes.pmTaskView}/$taskId');
                                                                 Get.toNamed(
                                                                   Routes
                                                                       .pmTaskView,
@@ -1427,18 +1422,12 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                               2);
                                                                       if (prefix ==
                                                                           'BM') {
-                                                                        Get.toNamed(
-                                                                            Routes.jobDetails,
-                                                                            arguments: {
-                                                                              'jobId': int.tryParse(jobId)
-                                                                            });
+                                                                        Get.offNamed(
+                                                                            '${Routes.jobDetails}/$jobId');
                                                                       } else if (prefix ==
                                                                           'PM') {
-                                                                        Get.toNamed(
-                                                                            Routes.pmTaskView,
-                                                                            arguments: {
-                                                                              'pmTaskId': int.tryParse(taskId)
-                                                                            });
+                                                                        Get.offAllNamed(
+                                                                            '${Routes.pmTaskView}/$taskId');
                                                                       } else if (prefix ==
                                                                           'MC') {
                                                                         Get.toNamed(
@@ -2134,15 +2123,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                           2);
                                                               if (prefix ==
                                                                   'BM') {
-                                                                Get.toNamed(
-                                                                  Routes
-                                                                      .jobDetails,
-                                                                  arguments: {
-                                                                    'jobId': int
-                                                                        .tryParse(
-                                                                            jobId)
-                                                                  },
-                                                                );
+                                                                Get.offNamed(
+                                                                    '${Routes.jobDetails}/$jobId');
                                                               }
                                                             }
                                                           },
@@ -2288,14 +2270,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
 
                                                                       if (jobId !=
                                                                           null) {
-                                                                        Get.toNamed(
-                                                                          Routes
-                                                                              .jobDetails,
-                                                                          arguments: {
-                                                                            'jobId':
-                                                                                int.tryParse(jobId)
-                                                                          },
-                                                                        );
+                                                                        Get.offNamed(
+                                                                            '${Routes.jobDetails}/$jobId');
                                                                       }
                                                                     },
                                                                   ),
@@ -3000,14 +2976,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                               2);
                                                                   if (prefix ==
                                                                       'PM') {
-                                                                    Get.toNamed(
-                                                                      Routes
-                                                                          .pmTaskView,
-                                                                      arguments: {
-                                                                        'pmTaskId':
-                                                                            int.tryParse(taskId)
-                                                                      },
-                                                                    );
+                                                                    Get.offNamed(
+                                                                        '${Routes.pmTaskView}/$taskId');
                                                                   }
                                                                 }
                                                               },
@@ -3146,12 +3116,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
 
                                                                           if (pmTaskId !=
                                                                               null) {
-                                                                            Get.toNamed(
-                                                                              Routes.pmTaskView,
-                                                                              arguments: {
-                                                                                'pmTaskId': int.tryParse(pmTaskId)
-                                                                              },
-                                                                            );
+                                                                            Get.offAllNamed('${Routes.pmTaskView}/$pmTaskId');
                                                                           }
                                                                         },
                                                                       ),

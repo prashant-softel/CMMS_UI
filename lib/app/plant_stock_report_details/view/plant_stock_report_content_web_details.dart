@@ -456,8 +456,8 @@ class _PlantStockReportDetailsWebState
                   ),
                   onTap: () {
                     if (plantdetails[i].fromActorType1 == "JobCard") {
-                      Get.toNamed(Routes.jobCard,
-                          arguments: {'JcId': plantdetails[i].fromActorID});
+                      int jobCardId = plantdetails[i].fromActorID;
+                      Get.toNamed('${Routes.jobCard}/$jobCardId');
                     }
                   },
                 ),

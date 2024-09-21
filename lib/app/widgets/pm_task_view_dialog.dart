@@ -109,8 +109,9 @@ class PmTaskViewDialog extends GetView {
                     //     _controller.formattedFromdate,
                     //     false);
                     //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
-                    Get.offAllNamed(Routes.pmTaskView,
-                        arguments: {'pmTaskId': taskId});
+
+                    Get.offAllNamed('${Routes.pmTaskView}/$taskId');
+
                     Get.back();
                   },
                   child: const Text('View Task'),

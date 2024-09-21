@@ -438,11 +438,8 @@ Widget _content(context, controller) {
                                                         "";
                                                     print({"JcId": jobCardId});
 
-                                                    Get.toNamed(Routes.jobCard,
-                                                        arguments: {
-                                                          'JcId': int.tryParse(
-                                                              "$jobCardId")
-                                                        });
+                                                    Get.toNamed(
+                                                        '${Routes.jobCard}/$jobCardId');
                                                   }),
                                               varUserAccessModel
                                                           .value.access_list!
@@ -674,23 +671,31 @@ Widget _content(context, controller) {
                                                   icon: Icons.remove_red_eye,
                                                   message: "View MRS",
                                                   onPress: () {
-                                                    controller
-                                                        .clearMrsIdStoreData();
+                                                    // controller
+                                                    //     .clearMrsIdStoreData();
                                                     String mrsId = controller
                                                             .listMrsByJobId?[
                                                                 index]
                                                             ?.mrsId
                                                             .toString() ??
                                                         "";
-                                                    print({"mrsId": mrsId});
-                                                    Get.toNamed(
-                                                        Routes
-                                                            .mrsApprovalScreen,
-                                                        arguments: {
-                                                          'mrsId': int.tryParse(
-                                                              "$mrsId"),
-                                                          'type': 1
-                                                        });
+
+                                                    String type = 1.toString();
+                                                    Get.offNamed(
+                                                        '${Routes.mrsApprovalScreen}/$mrsId/$type');
+
+                                                    // print({"mrsId": mrsId});
+                                                    // Get.toNamed(
+                                                    //     Routes
+                                                    //         .mrsApprovalScreen,
+                                                    //     arguments: {
+                                                    //       'mrsId': int.tryParse(
+                                                    //           "$mrsId"),
+                                                    //       'type': 1
+                                                    //     });
+
+                                                    Get.offNamed(
+                                                        '${Routes.mrsApprovalScreen}/$mrsId/$type');
                                                   }),
                                               TableActionButton(
                                                   color: ColorValues.editColor,

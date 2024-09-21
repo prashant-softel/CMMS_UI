@@ -14,13 +14,15 @@ class PermitRejectDialog extends GetView {
   int? permitId;
   String? ptwStatus;
   int? jobId;
+  String? taskId;
 
   PermitRejectDialog(
       {super.key,
       this.permitRejectDialog,
       this.permitId,
       this.ptwStatus,
-      this.jobId});
+      this.jobId,
+      this.taskId});
   final ViewPermitController _controller = Get.find();
 
   @override
@@ -124,7 +126,10 @@ class PermitRejectDialog extends GetView {
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {
                 _controller.permitRejectButton(
-                    permitId: permitId, ptwStatus: '$ptwStatus', jobId: jobId);
+                    permitId: permitId,
+                    ptwStatus: '$ptwStatus',
+                    jobId: jobId,
+                    taskId: taskId);
                 Get.back();
               },
               child: Text(

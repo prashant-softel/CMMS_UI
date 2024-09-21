@@ -7,14 +7,12 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -71,7 +69,11 @@ class _CumulativeReportContentWebState
                         style: Styles.greyLight14,
                       ),
                     ),
-                    Text(" / CUMULATIVE REPORT", style: Styles.greyLight14)
+                    Text(
+                        controller.type.value == 1
+                            ? " / BASIC REPORT"
+                            : " / CUMULATIVE REPORT",
+                        style: Styles.greyLight14)
                   ],
                 ),
               ),
@@ -85,7 +87,9 @@ class _CumulativeReportContentWebState
                           child: Row(
                             children: [
                               Text(
-                                "CUMULATIVE REPORT",
+                                controller.type.value == 1
+                                    ? "BASIC REPORT"
+                                    : "CUMULATIVE REPORT",
                                 style: Styles.blackBold16,
                               ),
                             ],
@@ -194,7 +198,10 @@ class _CumulativeReportContentWebState
                             ],
                           ),
                         ),
-                        controller.cumulativereport.length > 0
+                        controller.cumulativereport.length > 0 &&
+                                    controller.module_id.value == 2 ||
+                                controller.cumulativereport.length > 0 &&
+                                    controller.module_id.value == 39
                             ? Container(
                                 margin: EdgeInsets.all(20),
                                 color: Color.fromARGB(255, 245, 248, 250),
@@ -221,7 +228,9 @@ class _CumulativeReportContentWebState
                                       DataColumn2(
                                         fixedWidth: 120,
                                         label: Text(
-                                          'Job created',
+                                          controller.module_id.value == 2
+                                              ? 'Job created'
+                                              : 'PM created',
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
@@ -229,7 +238,9 @@ class _CumulativeReportContentWebState
                                       DataColumn2(
                                         fixedWidth: 120,
                                         label: Text(
-                                          'Jobs closed',
+                                          controller.module_id.value == 2
+                                              ? 'Jobs closed'
+                                              : 'PMs closed',
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
@@ -237,7 +248,9 @@ class _CumulativeReportContentWebState
                                       DataColumn2(
                                         fixedWidth: 120,
                                         label: Text(
-                                          'Jobs cancelled',
+                                          controller.module_id.value == 2
+                                              ? 'Jobs cancelled'
+                                              : 'PMs cancelled',
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
@@ -245,7 +258,9 @@ class _CumulativeReportContentWebState
                                       DataColumn2(
                                         fixedWidth: 140,
                                         label: Text(
-                                          'Job not started',
+                                          controller.module_id.value == 2
+                                              ? 'Job not started'
+                                              : 'PM not started',
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
@@ -253,7 +268,9 @@ class _CumulativeReportContentWebState
                                       DataColumn2(
                                         fixedWidth: 120,
                                         label: Text(
-                                          'Job ongoing',
+                                          controller.module_id.value == 2
+                                              ? 'Job ongoing'
+                                              : 'PM ongoing',
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
@@ -261,7 +278,9 @@ class _CumulativeReportContentWebState
                                       DataColumn2(
                                         fixedWidth: 150,
                                         label: Text(
-                                          'Job closed on time',
+                                          controller.module_id.value == 2
+                                              ? 'Job closed on time'
+                                              : 'PM closed on time',
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
@@ -269,19 +288,22 @@ class _CumulativeReportContentWebState
                                       DataColumn2(
                                         fixedWidth: 190,
                                         label: Text(
-                                          'Jobs closed with extension',
+                                          controller.module_id.value == 2
+                                              ? 'Jobs closed with extension'
+                                              : 'PMs closed with extension',
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
                                       ),
-                                      DataColumn2(
-                                        fixedWidth: 170,
-                                        label: Text(
-                                          'Job closed on time %',
-                                          style: Styles.blackBold14,
-                                        ),
-                                        // size: ColumnSize.L,
-                                      ),
+                                      if (controller.module_id.value == 2)
+                                        DataColumn2(
+                                          fixedWidth: 170,
+                                          label: Text(
+                                            'Job closed on time %',
+                                            style: Styles.blackBold14,
+                                          ),
+                                          // size: ColumnSize.L,
+                                        )
                                     ],
                                     rows: List<DataRow>.generate(
                                         controller.cumulativereport.length,
@@ -325,11 +347,167 @@ class _CumulativeReportContentWebState
                                                         ?.ClosedWithExtension
                                                         .toString() ??
                                                     "")),
+                                                if (controller
+                                                        .module_id.value ==
+                                                    2)
+                                                  DataCell(Text(
+                                                    '${((controller.cumulativereport[index]?.ClosedOnTime ?? 0) / (controller.cumulativereport[index]?.Created) * 100).toStringAsFixed(1)}%',
+                                                  ))
+                                              ],
+                                            )),
+                                  ),
+                                ),
+                              )
+                            : Dimens.box0,
+                        controller.cumulativereport.length > 0 &&
+                                    controller.module_id.value == 43 ||
+                                controller.cumulativereport.length > 0 &&
+                                    controller.module_id.value == 44
+                            ? Container(
+                                margin: EdgeInsets.all(20),
+                                color: Color.fromARGB(255, 245, 248, 250),
+                                width: Get.width,
+                                height: ((controller.cumulativereport.length) *
+                                        40) +
+                                    100,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: DataTable2(
+                                    headingRowHeight: 50,
+                                    columnSpacing: 12,
+                                    horizontalMargin: 12,
+                                    minWidth: 1500,
+                                    columns: [
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'Site name',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Scheduled Qnty',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Actual Qnty',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Deviation',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 140,
+                                        label: Text(
+                                          'No. of cycles',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      if (controller.module_id.value == 43)
+                                        DataColumn2(
+                                          fixedWidth: 120,
+                                          label: Text(
+                                            'Cleaning type',
+                                            style: Styles.blackBold14,
+                                          ),
+                                          // size: ColumnSize.L,
+                                        ),
+                                      if (controller.module_id.value == 43)
+                                        DataColumn2(
+                                          fixedWidth: 120,
+                                          label: Text(
+                                            'Water used',
+                                            style: Styles.blackBold14,
+                                          ),
+                                          // size: ColumnSize.L,
+                                        ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Time taken',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Abondoned',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      )
+                                    ],
+                                    rows: List<DataRow>.generate(
+                                        controller.cumulativereport.length,
+                                        (index) => DataRow(
+                                              cells: [
+                                                DataCell(Text(controller
+                                                    .cumulativereport[index]
+                                                    ?.site_name)),
                                                 DataCell(Text(controller
                                                         .cumulativereport[index]
-                                                        ?.ClosedOnTimeCreate
+                                                        ?.scheduledQuantity
                                                         .toString() ??
                                                     "")),
+                                                DataCell(Text(controller
+                                                        .cumulativereport[index]
+                                                        ?.actualQuantity
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .cumulativereport[index]
+                                                        ?.deviation
+                                                        .toString() ??
+                                                    "")),
+                                                if (controller
+                                                        .module_id.value ==
+                                                    43)
+                                                  DataCell(Text(controller
+                                                          .cumulativereport[
+                                                              index]
+                                                          ?.NotStarted
+                                                          .toString() ??
+                                                      "")),
+                                                if (controller
+                                                        .module_id.value ==
+                                                    43)
+                                                  DataCell(Text(controller
+                                                          .cumulativereport[
+                                                              index]
+                                                          ?.cleaningType
+                                                          .toString() ??
+                                                      "")),
+                                                DataCell(Text(controller
+                                                        .cumulativereport[index]
+                                                        ?.waterUsed
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .cumulativereport[index]
+                                                        ?.timeTaken
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .cumulativereport[index]
+                                                        ?.abandoned
+                                                        .toString() ??
+                                                    ""))
                                               ],
                                             )),
                                   ),

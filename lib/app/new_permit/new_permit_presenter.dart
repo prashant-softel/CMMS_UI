@@ -257,14 +257,16 @@ class NewPermitPresenter {
       required bool resubmit,
       int? type,
       int? vegplanId,
-      int? vegexid}) async {
+      int? vegexid,
+      String? taskId}) async {
     return newPermitUsecase.updateNewPermit(
         type: type,
         newPermit: newPermit,
         isLoading: isLoading,
         resubmit: resubmit,
         vegexid: vegexid,
-        vegplanId: vegplanId);
+        vegplanId: vegplanId,
+        taskId: taskId);
   }
 
   Future<Map<String, dynamic>?> resubmitPermit(
@@ -273,14 +275,16 @@ class NewPermitPresenter {
       required bool resubmit,
       int? type,
       int? vegplanId,
-      int? vegexid}) async {
+      int? vegexid,
+      String? taskId}) async {
     return newPermitUsecase.resubmitPermit(
         newPermit: newPermit,
         isLoading: isLoading,
         resubmit: true,
         type: type,
         vegexid: vegexid,
-        vegplanId: vegplanId);
+        vegplanId: vegplanId,
+        taskId: taskId);
   }
 
   Future<NewPermitDetailModel?> getNewPermitDetail(
