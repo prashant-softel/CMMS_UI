@@ -529,8 +529,7 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                             if (id != 0) {
                               controller.clearStoreDataMcid();
                               controller.clearStoreDataPlanid();
-                              Get.toNamed(Routes.viewMcPlaning,
-                                  arguments: {'mcid': id});
+                              Get.offAllNamed('${Routes.viewMcPlaning}/$id');
                             }
                           },
                         ),
@@ -671,8 +670,8 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                   if (id != 0) {
                                     controller.clearStoreDataMcid();
                                     controller.clearStoreDataPlanid();
-                                    Get.toNamed(Routes.viewMcPlaning,
-                                        arguments: {'mcid': id});
+                                    Get.offAllNamed(
+                                        '${Routes.viewMcPlaning}/$id');
                                   }
                                 },
                               )
@@ -688,7 +687,7 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
         if (id != 0) {
           controller.clearStoreDataMcid();
           controller.clearStoreDataPlanid();
-          Get.toNamed(Routes.viewMcPlaning, arguments: {'mcid': id});
+          Get.offAllNamed('${Routes.viewMcPlaning}/$id');
         }
       },
     );

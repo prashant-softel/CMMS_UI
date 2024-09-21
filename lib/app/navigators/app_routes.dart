@@ -447,7 +447,7 @@ abstract class _Paths {
   static const typeofobservation = '/type-of-observation';
   static const sourceofobservation = '/source-of-observation';
   static const risktypemaster = '/risk-type-master';
-  static const viewMcPlaning = '/view-mc-planning';
+  static const viewMcPlaning = '/mc-planning-details';
   static const print = '/print';
   static const hotoListScreenContentWeb = '/hoto-list-screen';
   static const auditListScreen = '/audit-list-screen';

@@ -95,7 +95,7 @@ class McPlanMessageApproveDialog extends GetView {
                 child: ElevatedButton(
                   style: Styles.yellowElevatedButtonStyle,
                   onPressed: () {
-                    Get.offAllNamed(Routes.viewMcPlaning);
+                    Get.offAllNamed('${Routes.viewMcPlaning}/${id![0]}');
                   },
                   child: const Text('View MC Plan'),
                 ),

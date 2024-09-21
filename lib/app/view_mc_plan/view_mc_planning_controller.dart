@@ -98,19 +98,22 @@ class ViewMcPlaningController extends GetxController {
   }
 
   Future<void> setUserId() async {
-    try {
-      final _mcid = await viewMcPlaningPresenter.getValue();
-      if (_mcid == null || _mcid == '' || _mcid == "null") {
-        var dataFromPreviousScreen = Get.arguments;
+    final String? _mcid = Get.parameters['mcid'];
+    mcid.value = int.tryParse(_mcid ?? "") ?? 0;
 
-        mcid.value = dataFromPreviousScreen['mcid'];
-        viewMcPlaningPresenter.saveValue(mcid: mcid.value.toString());
-      } else {
-        mcid.value = int.tryParse(_mcid) ?? 0;
-      }
-    } catch (e) {
-      Utility.showDialog(e.toString(), 'mcid');
-    }
+    // try {
+    //   final _mcid = await viewMcPlaningPresenter.getValue();
+    //   if (_mcid == null || _mcid == '' || _mcid == "null") {
+    //     var dataFromPreviousScreen = Get.arguments;
+
+    //     mcid.value = dataFromPreviousScreen['mcid'];
+    //     viewMcPlaningPresenter.saveValue(mcid: mcid.value.toString());
+    //   } else {
+    //     mcid.value = int.tryParse(_mcid) ?? 0;
+    //   }
+    // } catch (e) {
+    //   Utility.showDialog(e.toString(), 'mcid');
+    // }
   }
 
   Future<void> getEquipmentModelList(int facilityId, bool isLoading) async {

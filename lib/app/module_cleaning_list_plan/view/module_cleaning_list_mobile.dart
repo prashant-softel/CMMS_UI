@@ -55,10 +55,7 @@ class _ModuleCleaningListMobileState extends State<ModuleCleaningListMobile> {
                               onTap: () {
                                 controller.clearStoreData();
                                 int id = mcPlan.planId ?? 0;
-                                Get.toNamed(
-                                  Routes.viewMcPlaning,
-                                  arguments: {'mcid': id},
-                                );
+                                Get.offAllNamed('${Routes.viewMcPlaning}/$id');
                               },
                               child: Container(
                                 margin: EdgeInsets.symmetric(
