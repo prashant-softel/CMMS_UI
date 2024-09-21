@@ -64,13 +64,6 @@ class JobCardUpdatedDialog extends GetView<JobCardDetailsController> {
                             try {
                               Get.put(FileUploadController());
 
-                              // final _flutterSecureStorage =
-                              //     const FlutterSecureStorage();
-
-                              // await _flutterSecureStorage.delete(key: "JcId");
-
-                              //   await controller.setJcId();
-
                               controller.jobCardList.value = await controller
                                       .jobCardDetailsPresenter
                                       .getJobCardDetails(
@@ -94,6 +87,7 @@ class JobCardUpdatedDialog extends GetView<JobCardDetailsController> {
                               print(e);
                             }
                           }),
+
                       // ElevatedButton(
                       //   style: Styles.yellowElevatedButtonStyle,
                       //   onPressed: () {
@@ -109,7 +103,6 @@ class JobCardUpdatedDialog extends GetView<JobCardDetailsController> {
                         },
                         child: const Text('View Job'),
                       ),
-                    
                     ]),
               ]),
         );

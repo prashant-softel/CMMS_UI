@@ -113,14 +113,9 @@ class JobCardDetailsUsecase {
         jobCard,
         isLoading,
       );
-  Future<Map<String, dynamic>?> carryForwardJob({
-    jobCard,
-    bool? isLoading,
-  }) async =>
-      await repository.carryForwardJob(
-        jobCard,
-        isLoading,
-      );
+  Future<Map<String, dynamic>?> carryForwardJob(
+          {jobCard, bool? isLoading, closePtwJsonString}) async =>
+      await repository.carryForwardJob(jobCard, isLoading, closePtwJsonString);
   Future<Map<String, dynamic>?> closeJob(
           {jobCard, bool? isLoading, closePtwJsonString}) async =>
       await repository.closeJob(jobCard, isLoading, closePtwJsonString);

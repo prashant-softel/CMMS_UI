@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/app/utils/save_file_web.dart';
@@ -843,7 +844,11 @@ class JobCardDetailsController extends GetxController {
     });
 
     var _comment = descriptionOfWorkDoneCtrlr.text.trim();
-
+    ClosePermitModel ptwClose = ClosePermitModel(
+        id: permitIdclose.value,
+        comment: _comment,
+        conditionIds: [1, 2, 3, 4],
+        fileIds: []);
     var jobCard = {
       "id": jobCardId.value,
       "isolationId": isolationId,
@@ -854,10 +859,13 @@ class JobCardDetailsController extends GetxController {
       "lotoStatus": lotoStatus,
       "uploadfile_ids": fileIds,
     };
+    var closePtwJsonString = ptwClose.toJson();
+
     Map<String, dynamic>? responseCarryForwardJCModel =
         await jobCardDetailsPresenter.carryForwardJob(
       jobCard,
       true,
+      closePtwJsonString,
     );
 
     if (responseCarryForwardJCModel == null) {}
