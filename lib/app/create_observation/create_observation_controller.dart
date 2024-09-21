@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:cmms/app/create_observation/create_observation_presenter.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_obs_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
+import 'package:cmms/domain/models/get_observation_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/models/job_details_model.dart';
@@ -36,7 +38,8 @@ class CreateObservationController extends GetxController {
   Rx<String> selectedAssignedTo = ''.obs;
   Rx<bool> isAssignedToSelected = true.obs;
   Rx<int> selectedAssignedToId = 0.obs;
-
+  TextEditingController closeCommentTextFieldCtrlr = TextEditingController();
+  GetObservationList? getObservationListModel;
   bool openTargetObsDatePicker = false;
   var obsDateTc = TextEditingController();
   var targetDateTc = TextEditingController();
@@ -95,6 +98,7 @@ class CreateObservationController extends GetxController {
   Rx<bool> isLoading = true.obs;
   int facilityId = 0;
   Rx<int> obsId = 0.obs;
+
   @override
   void onInit() async {
     try {
@@ -324,6 +328,26 @@ class CreateObservationController extends GetxController {
       print('Create Observation data: $createObsModelJsonString');
     } catch (e) {
       print(e);
+    }
+  }
+
+  void viewObsCloseButton({int? id}) async {
+    {
+      String _comment = closeCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentviewListofObsCloseModel =
+          CommentModel(id: id, comment: _comment);
+
+      var ViewObsCloseJsonString = commentviewListofObsCloseModel.toJson();
+
+      Map<String, dynamic>? response =
+          await createObservationPresenter.viewObsCloseButton(
+        ViewObsCloseJsonString: ViewObsCloseJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
     }
   }
 

@@ -84,4 +84,13 @@ class CreateObservationPresenter {
       position: position,
     );
   }
+      Future<Map<String, dynamic>?> viewObsCloseButton({
+    ViewObsCloseJsonString,
+    required bool isLoading,
+  }) async {
+    return createObservationUsecase.viewObsCloseButton(
+      viewobsCloseJsonString: ViewObsCloseJsonString,
+      isLoading: isLoading,
+    );
+  }
 }

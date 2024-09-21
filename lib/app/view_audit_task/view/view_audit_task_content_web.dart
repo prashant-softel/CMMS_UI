@@ -18,7 +18,7 @@ import '../../widgets/history_table_widget_web.dart';
 class ViewAuditTaskWeb extends StatefulWidget {
   ViewAuditTaskWeb({
     Key? key,
-  }) : super(key: key);
+  }) : super(key: key);  
 
   @override
   State<ViewAuditTaskWeb> createState() => _ViewAuditTaskWebState();

@@ -636,8 +636,11 @@ class ObservationListDataSource extends DataTableSource {
                                     }
                                   },
                                 )
-                              : ObservationListDetails!.status_code != 552
-                                  ? TableActionButton(
+                              : ObservationListDetails!.status_code == 552 ||
+                              ObservationListDetails.status_code ==  553
+                                  
+                                  ? Dimens.box0 :
+                                   TableActionButton(
                                       color: ColorValues.editColor,
                                       icon: Icons.edit,
                                       message: 'Edit',
@@ -646,7 +649,7 @@ class ObservationListDataSource extends DataTableSource {
                                         int obsId =
                                             ObservationListDetails.id ?? 0;
                                         if (obsId != 0) {
-                                          Get.toNamed(
+                                          Get.offAllNamed(
                                             Routes.createObservation,
                                             arguments: {
                                               'obsId':
@@ -656,10 +659,11 @@ class ObservationListDataSource extends DataTableSource {
                                         }
                                       },
                                     )
-                                  : Dimens.box0,
+                                  // : Dimens.box0,
+                                  ,
                           ObservationListDetails!.status_code == 552 &&
                                   controller
-                                          .getObservationListModel!.createdid !=
+                                          .getObservationListModel!.assigned_to_id ==
                                       varUserAccessModel.value.user_id
                               ? TableActionButton(
                                   color: ColorValues.closeColor,
@@ -667,7 +671,7 @@ class ObservationListDataSource extends DataTableSource {
                                   message: 'Close',
                                   onPress: () {
                                     // controller.clearStoreData();
-                                    int obsId = ObservationListDetails!.id ?? 0;
+                                    int obsId = ObservationListDetails.id ?? 0;
                                     if (obsId != 0) {
                                       Get.offAllNamed(
                                         Routes.createObservation,

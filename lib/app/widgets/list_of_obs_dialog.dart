@@ -1,3 +1,4 @@
+import 'package:cmms/app/create_observation/create_observation_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/view_observation/view_observation_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -11,7 +12,7 @@ class ListOfObsCloseDialog extends GetView {
   int? id;
 
   ListOfObsCloseDialog({super.key, this.id});
-  final ViewObservationController _controller = Get.find();
+  final CreateObservationController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

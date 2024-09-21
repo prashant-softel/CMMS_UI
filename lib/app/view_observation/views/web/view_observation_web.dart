@@ -1,10 +1,7 @@
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/view_observation/view_observation_controller.dart';
-import 'package:cmms/app/widgets/close_goods_order_dialog.dart';
-import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
-import 'package:cmms/app/widgets/list_of_obs_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -173,11 +170,16 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                               style: Styles
                                                                   .black17,
                                                             ),
-                                                            Text(
-                                                              "Risk Type:",
+                                                              Text(
+                                                              "Contact Number:",
                                                               style: Styles
                                                                   .black17,
                                                             ),
+                                                            // Text(
+                                                            //   "Risk Type:",
+                                                            //   style: Styles
+                                                            //       .black17,
+                                                            // ),
                                                             Text(
                                                               "Corrective/Preventive Action:",
                                                               style: Styles
@@ -203,17 +205,21 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                                   .start,
                                                           children: [
                                                             Text(
-                                                                "${controller.getObsById.value?.id ?? ""}",
+                                                                "OBS${controller.getObsById.value?.id ?? ""}",
                                                                 style: Styles
                                                                     .blue17),
                                                             Text(
                                                                 "${controller.getObsById.value?.contractor_name ?? ""}",
                                                                 style: Styles
                                                                     .blue17),
-                                                            Text(
-                                                                "${controller.getObsById.value?.risk_type_name ?? ""}",
+                                                                      Text(
+                                                                "${controller.getObsById.value?.contact_number ?? ""}",
                                                                 style: Styles
                                                                     .blue17),
+                                                            // Text(
+                                                            //     "${controller.getObsById.value?.risk_type_name ?? ""}",
+                                                            //     style: Styles
+                                                            //         .blue17),
                                                             Text(
                                                                 "${controller.getObsById.value?.preventive_action ?? ""}",
                                                                 style: Styles
@@ -234,8 +240,13 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                               CrossAxisAlignment
                                                                   .end,
                                                           children: [
-                                                            Text(
-                                                              "Contact Number:",
+                                                            // Text(
+                                                            //   "Contact Number:",
+                                                            //   style: Styles
+                                                            //       .black17,
+                                                            // ),
+                                                              Text(
+                                                              "Risk Type:",
                                                               style: Styles
                                                                   .black17,
                                                             ),
@@ -274,10 +285,14 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
-                                                            Text(
-                                                                "${controller.getObsById.value?.contact_number ?? ""}",
+                                                              Text(
+                                                                "${controller.getObsById.value?.risk_type_name ?? ""}",
                                                                 style: Styles
                                                                     .blue17),
+                                                            // Text(
+                                                            //     "${controller.getObsById.value?.contact_number ?? ""}",
+                                                            //     style: Styles
+                                                            //         .blue17),
                                                             Text(
                                                                 " ${controller.getObsById.value?.cost_type ?? ""}",
                                                                 style: Styles
