@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cmms/app/add_vegetation_plan/add_vegetation_plan_presenter.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/utils/debouncer.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/create_veg_plan_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
@@ -15,7 +16,7 @@ import 'package:intl/intl.dart';
 
 class AddVegetationPlanController extends GetxController {
   AddVegetationPlanController(this.addVegetationPresenter);
-
+  final debounce = Debounce(milliseconds: 600);
   AddVegetationPresenter addVegetationPresenter;
   final HomeController homeController = Get.find();
 
@@ -27,7 +28,7 @@ class AddVegetationPlanController extends GetxController {
   Rx<VegPlanDetailModel?> vegPlanDetailsModel = VegPlanDetailModel().obs;
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
   RxBool isDurationEditable = true.obs; // New observable to control editability
-
+  var maxCleaningDay = 0.obs;
   RxBool isAssignedToSelected = true.obs;
   RxString selectedAssignedTo = ''.obs;
   RxInt selectedAssignedToId = 0.obs;
@@ -348,43 +349,73 @@ class AddVegetationPlanController extends GetxController {
     required int planId,
     required int facilityId,
   }) async {
-    final _vegPlanDetails = await addVegetationPresenter.getVegPlanDetail(
-      facilityId: facilityId,
-      planId: planId,
-      isLoading: true,
-    );
-    print('Veg plan Detail:$_vegPlanDetails');
-
-    if (_vegPlanDetails != null) {
-      vegPlanDetailsModel.value = _vegPlanDetails;
-      vegTitleController.text = vegPlanDetailsModel.value?.title ?? "";
-      selectedfrequencyId = vegPlanDetailsModel.value?.frequencyId ?? 0;
-      selectedfrequency.value = vegPlanDetailsModel.value?.frequency ?? '';
-      selectedAssignedToId.value = vegPlanDetailsModel.value?.assignedToId ?? 0;
-      selectedAssignedTo.value = vegPlanDetailsModel.value?.assignedTo ?? '';
-      startDateTc.text = vegPlanDetailsModel.value?.startDate ?? '';
-      durationInDayCtrlr.text =
-          vegPlanDetailsModel.value?.noOfCleaningDays.toString() ?? "";
-      rowItem.value = [];
-      schedules.value = _vegPlanDetails.schedules!;
-
-      existingVegScheduleIds = _vegPlanDetails.schedules!
-          .map((schedule) => schedule.scheduleId)
-          .whereType<int>()
-          .toList();
-
-      _vegPlanDetails.schedules?.forEach(
-        (element) {
-          rowItem.value.add(
-            [
-              {"key": "day", "value": '${element.cleaningDay}'},
-              {'key': "noOfBlocks", "value": '${element.smbs}'},
-              {"key": "noOfInverters", "value": '${element.invs}'},
-              {'key': "area", "value": '${element.scheduledArea}'},
-            ],
-          );
-        },
+    try {
+      // Fetch veg plan details from the presenter
+      final _vegPlanDetails = await addVegetationPresenter.getVegPlanDetail(
+        planId: planId,
+        facilityId: facilityId,
+        isLoading: true,
       );
+
+      // Debugging output
+      print('Received Veg plan details: $_vegPlanDetails');
+
+      if (_vegPlanDetails != null) {
+        // Store the received veg plan details in a reactive variable
+        vegPlanDetailsModel.value = _vegPlanDetails;
+
+        // Assign values to form fields
+        vegTitleController.text = vegPlanDetailsModel.value?.title ?? "";
+        selectedfrequency.value = vegPlanDetailsModel.value?.frequency ?? '';
+        selectedAssignedToId.value =
+            vegPlanDetailsModel.value?.assignedToId ?? 0;
+        selectedAssignedTo.value = vegPlanDetailsModel.value?.assignedTo ?? '';
+        startDateTc.text = vegPlanDetailsModel.value?.startDate ?? '';
+        durationInDayCtrlr.text =
+            vegPlanDetailsModel.value?.noOfCleaningDays.toString() ?? "";
+
+        // Reset row data and schedules
+        rowItem.value = [];
+        schedules.value = _vegPlanDetails.schedules!;
+
+        // Collect existing schedule IDs, filtering out any null values
+        existingVegScheduleIds = _vegPlanDetails.schedules!
+            .map((schedule) => schedule.scheduleId)
+            .whereType<int>() // Ensure only non-null integers are included
+            .toList();
+
+        // Process each schedule and add to row items for display
+        _vegPlanDetails.schedules!.forEach(
+          (element) {
+            rowItem.value.add(
+              [
+                {"key": "day", "value": '${element.cleaningDay}'},
+                {"key": "noOfBlocks", "value": '${element.smbs}'},
+                {"key": "noOfInverters", "value": '${element.invs}'},
+                {"key": "area", "value": '${element.scheduledArea}'},
+              ],
+            );
+          },
+        );
+
+        // Find the highest cleaningDay from the schedules
+        int maxCleaningDay = _vegPlanDetails.schedules!
+            .map((schedule) => schedule.cleaningDay ?? 0)
+            .reduce((curr, next) => curr > next ? curr : next);
+
+        // Debugging output to ensure max cleaning day is correct
+        print('Max cleaning day found: $maxCleaningDay');
+
+        // Store the highest cleaning day in the reactive variable
+        this.maxCleaningDay.value = maxCleaningDay;
+        print(
+            'Max cleaning day stored in controller: ${this.maxCleaningDay.value}');
+      } else {
+        print('Failed to retrieve veg plan details: Data is null');
+      }
+    } catch (e) {
+      // Handle any potential errors here
+      print('Error fetching veg plan details: $e');
     }
   }
 

@@ -57,6 +57,8 @@ class ModuleCleaningPlanningController extends GetxController {
   Rx<bool> isSelectedCleaningType = true.obs;
   RxMap<dynamic, dynamic> cleaningTyperopdownMapperData = {}.obs;
 
+  var maxCleaningDay = 0.obs;
+
   int selectedfrequencyId = 0;
   int selectedCleaningId = 0;
 
@@ -372,49 +374,79 @@ class ModuleCleaningPlanningController extends GetxController {
 
   Future<void> getMcPlanDetail(
       {required int planId, required int facilityId}) async {
-    final _mcPlanDetails =
-        await moduleCleaningPlanningPresenter.getMcPlanDetail(
-            planId: planId, facilityId: facilityId, isLoading: true);
-    print('MC plan Detail:$_mcPlanDetails');
-
-    if (_mcPlanDetails != null) {
-      mcPlanDetailsModel.value = _mcPlanDetails;
-      mcTitelCtrlr.text = mcPlanDetailsModel.value?.title ?? "";
-      selectedfrequency.value = mcPlanDetailsModel.value?.frequency ?? '';
-      selectedCleaningType.value =
-          mcPlanDetailsModel.value?.cleaningTypeName ?? '';
-
-      selectedAssignedToId.value = mcPlanDetailsModel.value?.assignedToId ?? 0;
-      selectedCleaningId = mcPlanDetailsModel.value?.cleaningType ?? 0;
-
-      selectedAssignedTo.value = mcPlanDetailsModel.value?.assignedTo ?? '';
-
-      startDateTc.text = mcPlanDetailsModel.value?.startDate ?? '';
-      durationInDayCtrlr.text =
-          mcPlanDetailsModel.value?.noOfCleaningDays.toString() ?? "";
-
-      rowItem.value = [];
-      schedules.value = _mcPlanDetails.schedules;
-
-      // Collect existing scheduleIds, filtering out any null values
-      existingScheduleIds = _mcPlanDetails.schedules
-          .map((schedule) => schedule.scheduleId)
-          .whereType<int>() // Ensure only non-null integers are included
-          .toList();
-
-      _mcPlanDetails.schedules.forEach(
-        (element) {
-          rowItem.value.add(
-            [
-              {"key": "day", "value": '${element.cleaningDay}'},
-              {"key": "noOfInverters", "value": '${element.invs}'},
-              {'key': "noOfSMBs", "value": '${element.smbs}'},
-              {'key': "noOfModules", "value": '${element.scheduledModules}'},
-              {'key': "cleaningType", "value": '${element.cleaningTypeName}'},
-            ],
-          );
-        },
+    try {
+      final _mcPlanDetails =
+          await moduleCleaningPlanningPresenter.getMcPlanDetail(
+        planId: planId,
+        facilityId: facilityId,
+        isLoading: true,
       );
+
+      // Debugging output
+      print('Received MC plan details: $_mcPlanDetails');
+
+      if (_mcPlanDetails != null) {
+        mcPlanDetailsModel.value = _mcPlanDetails;
+        mcPlanDetailsModel.value = _mcPlanDetails;
+        mcTitelCtrlr.text = mcPlanDetailsModel.value?.title ?? "";
+        selectedfrequency.value = mcPlanDetailsModel.value?.frequency ?? '';
+        selectedCleaningType.value =
+            mcPlanDetailsModel.value?.cleaningTypeName ?? '';
+
+        selectedAssignedToId.value =
+            mcPlanDetailsModel.value?.assignedToId ?? 0;
+        selectedCleaningId = mcPlanDetailsModel.value?.cleaningType ?? 0;
+
+        selectedAssignedTo.value = mcPlanDetailsModel.value?.assignedTo ?? '';
+
+        startDateTc.text = mcPlanDetailsModel.value?.startDate ?? '';
+        durationInDayCtrlr.text =
+            mcPlanDetailsModel.value?.noOfCleaningDays.toString() ?? "";
+
+        rowItem.value = [];
+        schedules.value = _mcPlanDetails.schedules;
+
+        // Collect existing scheduleIds, filtering out any null values
+        existingScheduleIds = _mcPlanDetails.schedules
+            .map((schedule) => schedule.scheduleId)
+            .whereType<int>() // Ensure only non-null integers are included
+            .toList();
+
+        _mcPlanDetails.schedules.forEach(
+          (element) {
+            rowItem.value.add(
+              [
+                {"key": "day", "value": '${element.cleaningDay}'},
+                {"key": "noOfInverters", "value": '${element.invs}'},
+                {'key': "noOfSMBs", "value": '${element.smbs}'},
+                {'key': "noOfModules", "value": '${element.scheduledModules}'},
+                {'key': "cleaningType", "value": '${element.cleaningTypeName}'},
+              ],
+            );
+          },
+        );
+        // Assigning values to form fields
+        durationInDayCtrlr.text =
+            mcPlanDetailsModel.value?.noOfCleaningDays.toString() ?? "";
+
+        // Find the highest cleaningDay from the schedules
+        int maxCleaningDay = _mcPlanDetails.schedules
+            .map((schedule) => schedule.cleaningDay ?? 0)
+            .reduce((curr, next) => curr > next ? curr : next);
+
+        // Debugging output to ensure max cleaning day is correct
+        print('Max cleaning day found: $maxCleaningDay');
+
+        // Store the highest cleaning day in the reactive variable
+        this.maxCleaningDay.value = maxCleaningDay;
+        print(
+            'Max cleaning day stored in controller: ${this.maxCleaningDay.value}');
+      } else {
+        print('Failed to retrieve plan details: Data is null');
+      }
+    } catch (e) {
+      // Handle any potential errors here
+      print('Error fetching MC plan details: $e');
     }
   }
 
