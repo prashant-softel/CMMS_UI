@@ -1710,14 +1710,13 @@ class ConnectHelper {
     required String auth,
     auditPlanApproveJsonString,
     bool? isLoading,
-    int?type,
+    int? type,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'AuditPlan/ApproveAuditPlan',
       Request.post,
       auditPlanApproveJsonString,
       isLoading ?? false,
-
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -1727,8 +1726,7 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(AuditPlanMessageApproveDialog(
-      type:type,
-        data: parsedJson['message'], id: parsedJson['id']));
+        type: type, data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
   }
@@ -2727,7 +2725,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'CMMS/GetStatusbymodule?module=$moduleId',
+      'CMMS/GetEscalationStatusbymodule?module=$moduleId',
       Request.get,
       null,
       isLoading ?? false,
@@ -2928,7 +2926,7 @@ class ConnectHelper {
     print('PermitTypeResponse: $response');
     try {
       response = await apiWrapper.makeRequest(
-        'CMMS/GetModuleList?facility_id=$facility_id',
+        'CMMS/GetEscalationModuleList?facility_id=$facility_id',
         Request.get,
         null,
         true,

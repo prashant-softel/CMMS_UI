@@ -350,7 +350,34 @@ class AttendanceWeb extends GetView<AttendanceController> {
               backgroundColor: ColorValues.submitColor,
               text: "Submit",
               onPressed: () {
-                controller.addAttendance();
+                bool hasError = false;
+                String errorMessage = '';
+
+                for (int i = 0; i < controller.attendanceModel.length; i++) {
+                  final inTime = controller.inTimeControllers[i].text;
+                  final outTime = controller.outTimeControllers[i].text;
+
+                  print("Original In Time: $inTime, Out Time: $outTime");
+
+                  bool hasErrorBuffer = isTime1LessThanTime2(inTime, outTime);
+                  if (!hasErrorBuffer) {
+                    hasError = true;
+                    errorMessage =
+                        "In Time cannot be greater than or equal to Out Time for employee ${controller.attendanceModel[i]?.name}.";
+                  }
+                }
+
+                if (hasError) {
+                  print("Error: $errorMessage");
+
+                  Get.snackbar('Validation Error', errorMessage,
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: Colors.red,
+                      colorText: Colors.white);
+                } else {
+                  print("No errors, submitting attendance data...");
+                  controller.addAttendance();
+                }
               },
             ),
           ),
@@ -618,4 +645,53 @@ class AttendanceWeb extends GetView<AttendanceController> {
       textController.text = DateFormat('yyyy-MM-dd').format(picked);
     }
   }
+}
+
+bool isTime1LessThanTime2(String time1, String time2) {
+  try {
+    time1 = _strictSanitizeTimeString(time1);
+    time2 = _strictSanitizeTimeString(time2);
+
+    print('Sanitized Time1: $time1, Sanitized Time2: $time2');
+
+    DateTime parsedTime1 = _customParseTime(time1);
+    DateTime parsedTime2 = _customParseTime(time2);
+
+    return parsedTime1.isBefore(parsedTime2);
+  } catch (e) {
+    print("Error parsing time: $e");
+    return false;
+  }
+}
+
+String _strictSanitizeTimeString(String time) {
+  time = time.replaceAll(RegExp(r'[^0-9:APMampm ]'), '').trim();
+  return time;
+}
+
+DateTime _customParseTime(String time) {
+  final parts = time.split(' ');
+  if (parts.length != 2) {
+    throw FormatException("Invalid time format");
+  }
+
+  final timePart = parts[0];
+  final period = parts[1].toUpperCase();
+
+  final timeComponents = timePart.split(':');
+  if (timeComponents.length != 2) {
+    throw FormatException("Invalid time format");
+  }
+
+  int hour = int.parse(timeComponents[0]);
+  int minute = int.parse(timeComponents[1]);
+
+  if (period == 'PM' && hour != 12) {
+    hour += 12;
+  } else if (period == 'AM' && hour == 12) {
+    hour = 0;
+  }
+
+  final now = DateTime.now();
+  return DateTime(now.year, now.month, now.day, hour, minute);
 }
