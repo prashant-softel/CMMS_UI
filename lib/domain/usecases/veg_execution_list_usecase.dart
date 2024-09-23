@@ -14,7 +14,7 @@ class VegExecutionListUsecase {
 
   Future<List<VegTaskListModel>> getVegTaskList(
       {required bool isLoading,
-      required int? facility_id,
+      required dynamic? facility_id,
       dynamic endDate,
       dynamic startDate,
       bool? isExport

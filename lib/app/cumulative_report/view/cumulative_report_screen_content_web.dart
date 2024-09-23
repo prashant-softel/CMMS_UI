@@ -13,6 +13,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -189,7 +190,21 @@ class _CumulativeReportContentWebState
                                 child: CustomElevatedButton(
                                   backgroundColor: ColorValues.appDarkBlueColor,
                                   onPressed: () {
-                                    controller.getCumulativeReportList();
+                                    if (controller.type.value == 1 &&
+                                        controller.module_id == 2) {
+                                      controller.getJobList();
+                                    } else if (controller.type.value == 1 &&
+                                        controller.module_id == 39) {
+                                      controller.getPmTaskList();
+                                    } else if (controller.type.value == 1 &&
+                                        controller.module_id == 44) {
+                                      controller.getVegTaskList();
+                                    } else if (controller.type.value == 1 &&
+                                        controller.module_id == 43) {
+                                      controller.getMCTaskList();
+                                    } else {
+                                      controller.getCumulativeReportList();
+                                    }
                                   },
                                   text: 'Search',
                                 ),
@@ -508,6 +523,595 @@ class _CumulativeReportContentWebState
                                                         ?.abandoned
                                                         .toString() ??
                                                     ""))
+                                              ],
+                                            )),
+                                  ),
+                                ),
+                              )
+                            : Dimens.box0,
+                        controller.jobList.length > 0 &&
+                                controller.module_id.value == 2 &&
+                                controller.type.value == 1
+                            ? Container(
+                                margin: EdgeInsets.all(20),
+                                color: Color.fromARGB(255, 245, 248, 250),
+                                width: Get.width,
+                                height:
+                                    ((controller.jobList.length) * 40) + 100,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: DataTable2(
+                                    headingRowHeight: 50,
+                                    columnSpacing: 12,
+                                    horizontalMargin: 12,
+                                    minWidth: 2000,
+                                    columns: [
+                                      DataColumn2(
+                                        fixedWidth: 100,
+                                        label: Text(
+                                          'Job ID',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Facility Name',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Job Title',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'Equipment Category',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      // if (controller.module_id.value == 43)
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'Equipment Name',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      // if (controller.module_id.value == 43)
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'Description',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Breakdown Time',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Assigned To',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Permit ID',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Permit Type',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Isolation taken?',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      )
+                                    ],
+                                    rows: List<DataRow>.generate(
+                                        controller.jobList.length,
+                                        (index) => DataRow(
+                                              cells: [
+                                                DataCell(Text(
+                                                    '${controller.jobList[index]?.id.toString()}')),
+                                                DataCell(Text(controller
+                                                        .jobList[index]
+                                                        ?.facilityName
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .jobList[index]?.name
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .jobList[index]
+                                                        ?.equipmentCat
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .jobList[index]
+                                                        ?.workingArea
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .jobList[index]
+                                                        ?.description
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .jobList[index]
+                                                        ?.breakdownTime
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .jobList[index]
+                                                        ?.assignedToName
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(
+                                                    '${controller.jobList[index]?.permitId.toString()}')),
+                                                DataCell(Text("")),
+                                                DataCell(Text("")),
+                                              ],
+                                            )),
+                                  ),
+                                ),
+                              )
+                            : Dimens.box0,
+                        controller.pmTaskList.length > 0 &&
+                                controller.module_id.value == 39 &&
+                                controller.type.value == 1
+                            ? Container(
+                                margin: EdgeInsets.all(20),
+                                color: Color.fromARGB(255, 245, 248, 250),
+                                width: Get.width,
+                                height:
+                                    ((controller.pmTaskList.length) * 40) + 100,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: DataTable2(
+                                    headingRowHeight: 50,
+                                    columnSpacing: 12,
+                                    horizontalMargin: 12,
+                                    minWidth: 2500,
+                                    columns: [
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Facility Name',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 100,
+                                        label: Text(
+                                          'PM Plan ID',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Equipment Category',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'PM Title',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      // if (controller.module_id.value == 43)
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'Start date',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      // if (controller.module_id.value == 43)
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'close date',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Frequency',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Task ID',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Assigned To',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Permit ID',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Permit Type',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Isolation taken?',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Status',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      )
+                                    ],
+                                    rows: List<DataRow>.generate(
+                                        controller.pmTaskList.length,
+                                        (index) => DataRow(
+                                              cells: [
+                                                DataCell(Text(
+                                                    '${controller.pmTaskList[index]?.frequency_name.toString()}')),
+                                                DataCell(Text(
+                                                    "PMP${controller.pmTaskList[index]?.plan_id.toString() ?? ""}")),
+                                                DataCell(Text(controller
+                                                        .pmTaskList[index]
+                                                        ?.category_name
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text("")),
+                                                DataCell(Text(controller
+                                                        .pmTaskList[index]?.name
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .pmTaskList[index]
+                                                        ?.start_date
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .pmTaskList[index]
+                                                        ?.done_date
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .pmTaskList[index]
+                                                        ?.frequency_name
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(
+                                                    'PMT${controller.pmTaskList[index]?.id.toString()}')),
+                                                DataCell(Text(
+                                                    '${controller.pmTaskList[index]?.assigned_to_name.toString()}')),
+                                                DataCell(Text(
+                                                    '${controller.pmTaskList[index]?.permit_id.toString()}')),
+                                                DataCell(Text(
+                                                    '${controller.pmTaskList[index]?.permit_type.toString()}')),
+                                                DataCell(Text(
+                                                    '${controller.pmTaskList[index]?.status_short.toString()}')),
+                                              ],
+                                            )),
+                                  ),
+                                ),
+                              )
+                            : Dimens.box0,
+                        controller.vegTaskList.length > 0 &&
+                                controller.module_id.value == 44 &&
+                                controller.type.value == 1
+                            ? Container(
+                                margin: EdgeInsets.all(20),
+                                color: Color.fromARGB(255, 245, 248, 250),
+                                width: Get.width,
+                                height: ((controller.vegTaskList.length) * 40) +
+                                    100,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: DataTable2(
+                                    headingRowHeight: 50,
+                                    columnSpacing: 12,
+                                    horizontalMargin: 12,
+                                    minWidth: 2500,
+                                    columns: [
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Facility Name',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 100,
+                                        label: Text(
+                                          'Scheduled Qnty',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Actual Qnty ',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'Deviation',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      // if (controller.module_id.value == 43)
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'Machine type',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      // if (controller.module_id.value == 43)
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'Time taken',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Remarks',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                    ],
+                                    rows: List<DataRow>.generate(
+                                        controller.vegTaskList.length,
+                                        (index) => DataRow(
+                                              cells: [
+                                                DataCell(Text(
+                                                    '${controller.vegTaskList[index]?.sitename.toString()}')),
+                                                DataCell(Text(
+                                                    "${controller.vegTaskList[index]?.scheduled_Qnty.toString() ?? ""}")),
+                                                DataCell(Text(controller
+                                                        .vegTaskList[index]
+                                                        ?.actual_Qnty
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .vegTaskList[index]
+                                                        ?.deviation
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text("")),
+                                                DataCell(Text(controller
+                                                        .vegTaskList[index]
+                                                        ?.time_taken
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .vegTaskList[index]
+                                                        ?.remark
+                                                        .toString() ??
+                                                    "")),
+                                              ],
+                                            )),
+                                  ),
+                                ),
+                              )
+                            : Dimens.box0,
+                        controller.mcTaskList.length > 0 &&
+                                controller.module_id.value == 43 &&
+                                controller.type.value == 1
+                            ? Container(
+                                margin: EdgeInsets.all(20),
+                                color: Color.fromARGB(255, 245, 248, 250),
+                                width: Get.width,
+                                height:
+                                    ((controller.mcTaskList.length) * 40) + 100,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: DataTable2(
+                                    headingRowHeight: 50,
+                                    columnSpacing: 12,
+                                    horizontalMargin: 12,
+                                    minWidth: 2500,
+                                    columns: [
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Facility Name',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 100,
+                                        label: Text(
+                                          'Cycle',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+
+                                      DataColumn2(
+                                        fixedWidth: 100,
+                                        label: Text(
+                                          'Scheduled Qnty',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Actual Qnty ',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'Deviation',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      // if (controller.module_id.value == 43)
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'Cleaning type',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'Water used',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'Abondoned',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      // if (controller.module_id.value == 43)
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'Time taken',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Remarks',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                    ],
+                                    rows: List<DataRow>.generate(
+                                        controller.mcTaskList.length,
+                                        (index) => DataRow(
+                                              cells: [
+                                                DataCell(Text(
+                                                    '${controller.mcTaskList[index]?.sitename.toString()}')),
+                                                DataCell(Text(
+                                                    "${controller.mcTaskList[index]?.noOfDays.toString() ?? ""}")),
+                                                DataCell(Text(
+                                                    "${controller.mcTaskList[index]?.scheduled_Qnty.toString() ?? ""}")),
+                                                DataCell(Text(
+                                                    "${controller.mcTaskList[index]?.actual_Qnty.toString() ?? ""}")),
+                                                DataCell(Text(
+                                                    "${controller.mcTaskList[index]?.deviation.toString() ?? ""}")),
+                                                DataCell(Text(
+                                                    "${controller.mcTaskList[index]?.cleaningType.toString() ?? ""}")),
+                                                DataCell(Text(controller
+                                                        .mcTaskList[index]
+                                                        ?.water_used
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .mcTaskList[index]
+                                                        ?.abondend
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .mcTaskList[index]
+                                                        ?.time_taken
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .mcTaskList[index]
+                                                        ?.remark
+                                                        .toString() ??
+                                                    "")),
                                               ],
                                             )),
                                   ),

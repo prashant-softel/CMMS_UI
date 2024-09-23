@@ -11,7 +11,7 @@ class ModuleCleaningListExecutionUsecase {
   Future<List<MCTaskListModel>> getMCTaskList({
     required bool isLoading,
     bool? isExport,
-    required int? facility_id,
+    required dynamic facility_id,
     String? start_date,
     required String end_date,
   }) async {
