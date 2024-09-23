@@ -942,7 +942,7 @@ class ConnectHelper {
   Future<ResponseModel> getMCTaskList({
     required bool isLoading,
     required String auth,
-    int? facility_id,
+    dynamic? facility_id,
     String? start_date,
     required String end_date,
   }) async {
@@ -998,7 +998,7 @@ class ConnectHelper {
   Future<ResponseModel> getJobList({
     required String auth,
     bool? isLoading,
-    int? facilityId,
+    dynamic facilityId,
     bool? self_view,
     int? userId,
   }) async {
@@ -1710,14 +1710,13 @@ class ConnectHelper {
     required String auth,
     auditPlanApproveJsonString,
     bool? isLoading,
-    int?type,
+    int? type,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'AuditPlan/ApproveAuditPlan',
       Request.post,
       auditPlanApproveJsonString,
       isLoading ?? false,
-
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -1727,8 +1726,7 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(AuditPlanMessageApproveDialog(
-      type:type,
-        data: parsedJson['message'], id: parsedJson['id']));
+        type: type, data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
   }
@@ -5619,7 +5617,7 @@ class ConnectHelper {
       {required String auth,
       bool? isLoading,
       bool? self_view,
-      int? facilityId,
+      dynamic? facilityId,
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -9787,7 +9785,7 @@ class ConnectHelper {
     required String auth,
     dynamic startDate,
     dynamic endDate,
-    int? facility_id,
+    dynamic? facility_id,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Vegetation/GetVegetationTaskList?facility_Id=$facility_id&start_date=${startDate}&end_date=${endDate}',

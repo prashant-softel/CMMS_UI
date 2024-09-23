@@ -6264,7 +6264,7 @@ class Repository {
 
   ///Module Cleaning Task List
   Future<List<MCTaskListModel>> getMCTaskList({
-    required int? facility_id,
+    required dynamic? facility_id,
     required bool isLoading,
     bool? isExport,
     String? start_date,
@@ -6451,7 +6451,7 @@ class Repository {
 
   Future<List<JobModel?>?> getJobList(
     String auth,
-    int? facilityId,
+    dynamic facilityId,
     bool? isLoading,
     bool? isExport,
     bool? self_view,
@@ -9622,9 +9622,7 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> carryForwardJob(
-    jobCard,
-    bool? isLoading,closePtwJsonString
-  ) async {
+      jobCard, bool? isLoading, closePtwJsonString) async {
     // final res = ResponseModel(data: '', hasError: false);
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -9638,7 +9636,8 @@ class Repository {
       }
       if (!res.hasError) {
         if (res.errorCode == 200) {
-          var responseMap = json.decode(res.data);          permitCloseButton(closePtwJsonString, isLoading, 0, 1);
+          var responseMap = json.decode(res.data);
+          permitCloseButton(closePtwJsonString, isLoading, 0, 1);
 
           return responseMap;
         }
@@ -10380,7 +10379,7 @@ class Repository {
   }
 
   Future<List<PmTaskListModel?>?> getPmTaskList(
-      int? facilityId,
+      dynamic? facilityId,
       bool? isLoading,
       dynamic startDate,
       dynamic endDate,
@@ -15499,7 +15498,7 @@ class Repository {
   Future<Map<String, dynamic>> auditPlanApprovedButton(
     auditPlanApproveJsonString,
     bool? isLoading,
-    int?  type,
+    int? type,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -15509,7 +15508,7 @@ class Repository {
           auth: auth,
           auditPlanApproveJsonString: auditPlanApproveJsonString,
           isLoading: isLoading ?? false,
-          type:type,
+          type: type,
         );
       }
       var resourceData = res.data;
@@ -16068,7 +16067,7 @@ class Repository {
   }
 
   Future<List<VegTaskListModel>> getVegTaskList(
-      {required int? facility_id,
+      {required dynamic? facility_id,
       dynamic startDate,
       dynamic endDate,
       required bool isLoading,

@@ -678,7 +678,7 @@ class DataRepository extends DomainRepository {
   ///Module Cleaning Task List
   @override
   Future<ResponseModel> getMCTaskList({
-    int? facility_id,
+    dynamic? facility_id,
     required bool isLoading,
     required String auth,
     String? start_date,
@@ -732,14 +732,14 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> getJobList({
     required String auth,
-    int? facilityId,
+    dynamic facilityId,
     int? userId,
     bool? self_view,
     bool? isLoading,
   }) async =>
       await connectHelper.getJobList(
         auth: auth,
-        facilityId: facilityId ?? 0,
+        facilityId: facilityId,
         userId: userId,
         self_view: self_view,
         isLoading: isLoading ?? false,
@@ -1122,17 +1122,16 @@ class DataRepository extends DomainRepository {
         pmPlanApproveJsonString: pmPlanApproveJsonString,
         isLoading: isLoading ?? false,
       );
-  Future<ResponseModel> auditPlanApprovedButton({
-    required String auth,
-    auditPlanApproveJsonString,
-    bool? isLoading,
-    int? type
-  }) async =>
+  Future<ResponseModel> auditPlanApprovedButton(
+          {required String auth,
+          auditPlanApproveJsonString,
+          bool? isLoading,
+          int? type}) async =>
       await connectHelper.auditPlanApprovedButton(
         auth: auth,
         auditPlanApproveJsonString: auditPlanApproveJsonString,
         isLoading: isLoading ?? false,
-        type:type,
+        type: type,
       );
   Future<ResponseModel> approveGOReceiveButton({
     required String auth,
@@ -3170,7 +3169,7 @@ class DataRepository extends DomainRepository {
       );
   Future<ResponseModel> getPmTaskList(
           {required String auth,
-          int? facilityId,
+          dynamic? facilityId,
           bool? isLoading,
           dynamic startDate,
           dynamic endDate}) async =>
@@ -5481,7 +5480,7 @@ class DataRepository extends DomainRepository {
           facilityId: facilityId);
 
   Future<ResponseModel> getVegTaskList({
-    int? facility_id,
+    dynamic? facility_id,
     dynamic startDate,
     dynamic endDate,
     required bool isLoading,
