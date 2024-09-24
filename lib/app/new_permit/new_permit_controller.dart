@@ -2056,75 +2056,65 @@ class NewPermitController extends GetxController {
     print('removed file ids ${files}');
   }
 
-  loadPermitDetails(jobModel) {
-    titleTextCtrlr.text = jobModel.jobTitle ?? '';
-    selectedBlock.value = jobModel.blockName ?? '';
-    selectedBlockId = jobModel.blockId ?? 0;
-    // assignToTextCtrlr.text = jobModel.assignedName ?? "";
+  void loadPermitDetails(jobModel) {
+    // Safely assign job title, block name, and block ID with null safety
+    titleTextCtrlr.text = jobModel?.jobTitle ?? '';
+    selectedBlock.value = jobModel?.blockName ?? ''; // Corrected to blockName
+    selectedBlockId = jobModel?.blockId ?? 0;
 
-    //// uncomment once work done
     try {
-      if (jobModel.equipmentCatList != null &&
+      // Safely handling the equipment category list with null checks
+      if (jobModel?.equipmentCatList != null &&
           jobModel.equipmentCatList!.isNotEmpty) {
         listJobModelCategory.value =
             jobModel.equipmentCatList!.map<EquipmentCatList?>((action) {
-          if (action != null) {
-            return EquipmentCatList(
-                name: action.name ?? '', id: action.id ?? 0);
-          } else {
-            return EquipmentCatList(
-                name: '', id: 0); // Handle null case appropriately
-          }
+          return action != null
+              ? EquipmentCatList(name: action.name ?? '', id: action.id ?? 0)
+              : EquipmentCatList(name: '', id: 0); // Handling null action
         }).toList();
       } else {
         listJobModelCategory.value =
-            <EquipmentCatList?>[]; // Explicitly define the list type
+            <EquipmentCatList?>[]; // Empty list if null or empty
       }
     } catch (e, stacktrace) {
       print('Error while processing equipmentCatList: $e');
       print('Stacktrace: $stacktrace');
     }
 
-    List<int> idList = listJobModelCategory.map((obj) => obj!.id).toList();
+    // Safely mapping the category list ids
+    List<int> idList =
+        listJobModelCategory.map((obj) => obj?.id ?? 0).toList(); // Null safety
     selectedEquipmentCategoryIdList.value = idList;
 
-    // List<String> nameList =
-    //     listJobModelCategory.map((obj) => obj!.name).toList();
+    // Print selected block and equipment details for debugging
+    print("Selected Block Id: $selectedBlockId");
+    print("Selected Equipment Category IDs: $selectedEquipmentCategoryIdList");
 
-    // list_working_area_name.value = jobModel.workingAreaList ?? [];
+    // Handling breakdown time safely
+    if (jobModel?.breakdownTime != null) {
+      DateTime? breakdownTime;
 
-    //  selectedItem = nameList[0];
-    ///end uncomment
+      // If breakdownTime is a string, attempt to parse it to DateTime
+      if (jobModel.breakdownTime is String) {
+        breakdownTime = DateTime.tryParse(jobModel.breakdownTime);
+      } else if (jobModel.breakdownTime is DateTime) {
+        breakdownTime = jobModel.breakdownTime;
+      }
 
-    // listAssociatedPermit.value = jobModel.associatedPermitList ?? [];
-    // List<int?> associetdPermitId = listAssociatedPermit.map((element) => element?.permitId).toList();
-    // associatePermitId = associetdPermitId[0];
-    // print("Associated Permit Id:${associatePermitId}");
-
-    print("Selected Block Id:${selectedBlockId}");
-    //uncomment once work done
-    // selectedJobModelEquipemntIsolationIdList.value = idList;
-    print("Selected Equipment: ${selectedEquipmentCategoryIdList}");
-    print("JobModel Equipment Category Id:${selectedEquipmentCategoryIdList}");
-    print("Selected Name Category:${jobModel.id ?? 0}");
-
-    ///end uncomment
-
-    // idCtrlr.text = '${int.tryParse(jobModel.id ?? 0)}';
-    if (jobModel.breakdownTime != null && jobModel.breakdownTime.isNotEmpty) {
-      breakdownTimeTextCtrlr.text = DateFormat('yyyy-MM-dd HH:mm')
-          .format(DateTime.parse(jobModel.breakdownTime))
-          .toString();
-      blockNameTextCtrlr.text = jobModel.blockwName ?? '';
+      // Safely format and assign breakdown time text
+      if (breakdownTime != null) {
+        breakdownTimeTextCtrlr.text =
+            DateFormat('yyyy-MM-dd HH:mm').format(breakdownTime).toString();
+      } else {
+        breakdownTimeTextCtrlr.text = ''; // Empty if breakdown time is invalid
+      }
     } else {
-      breakdownTimeTextCtrlr.text = '';
-      blockNameTextCtrlr.text = '';
+      breakdownTimeTextCtrlr.text = ''; // Empty if breakdownTime is null
     }
 
-    // RxList<JobDetailsModel> jobDataList =
-    // filteredEmployeeNameList = jobModel.assignedId;
-    // filteredEmployeeNameList = jobModel.assignedName;
-    // filteredEmployeeNameList.add(EmployeeListModel(id: jobModel.assignedId,name: "${jobModel.assignedName}"));
+    // Handling block name safely (ensure blockName is the correct property)
+    blockNameTextCtrlr.text =
+        jobModel?.blockName ?? ''; // Corrected to blockName
   }
 
   Future<void> viewNewPermitList({int? permitId}) async {
