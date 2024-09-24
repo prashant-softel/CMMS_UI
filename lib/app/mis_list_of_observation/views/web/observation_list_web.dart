@@ -309,7 +309,7 @@ class _ObservationWebState extends State<ObservationListWeb> {
                                                           dataSource, // Custom DataSource class
                                                       // headingRowHeight:
                                                       //     Get.height * 0.12,
-                                                      minWidth: 2500,
+                                                      minWidth: 2650,
 
                                                       showCheckboxColumn: false,
                                                       rowsPerPage: 10,
@@ -527,6 +527,10 @@ class ObservationListDataSource extends DataTableSource {
           ? "-"
           : '${ObservationListDetails?.cost_name ?? '-'}',
       '${ObservationListDetails?.remaining_days ?? ''}',
+      (int.tryParse(ObservationListDetails?.remaining_days ?? '') ?? 0) > 0
+          ? 'InTime'
+          : '',
+
       // '${ObservationListDetails?.status_code ?? ''}',
 
       'Actions',
@@ -637,10 +641,9 @@ class ObservationListDataSource extends DataTableSource {
                                   },
                                 )
                               : ObservationListDetails!.status_code == 552 ||
-                              ObservationListDetails.status_code ==  553
-                                  
-                                  ? Dimens.box0 :
-                                   TableActionButton(
+                                      ObservationListDetails.status_code == 553
+                                  ? Dimens.box0
+                                  : TableActionButton(
                                       color: ColorValues.editColor,
                                       icon: Icons.edit,
                                       message: 'Edit',
@@ -659,11 +662,11 @@ class ObservationListDataSource extends DataTableSource {
                                         }
                                       },
                                     )
-                                  // : Dimens.box0,
-                                  ,
+                          // : Dimens.box0,
+                          ,
                           ObservationListDetails!.status_code == 552 &&
-                                  controller
-                                          .getObservationListModel!.assigned_to_id ==
+                                  controller.getObservationListModel!
+                                          .assigned_to_id ==
                                       varUserAccessModel.value.user_id
                               ? TableActionButton(
                                   color: ColorValues.closeColor,

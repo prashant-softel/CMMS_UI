@@ -18,7 +18,7 @@ import '../../widgets/history_table_widget_web.dart';
 class ViewAuditTaskWeb extends StatefulWidget {
   ViewAuditTaskWeb({
     Key? key,
-  }) : super(key: key);  
+  }) : super(key: key);
 
   @override
   State<ViewAuditTaskWeb> createState() => _ViewAuditTaskWebState();
@@ -908,6 +908,8 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                     Get.dialog(
                                                         AuditTaskApprovedRejectDialog(
                                                       type: 1,
+                                                      moduletype:
+                                                          controller.type.value,
                                                     ));
                                                   },
                                                 ),
@@ -940,6 +942,8 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                     Get.dialog(
                                                         AuditTaskApprovedRejectDialog(
                                                       type: 2,
+                                                      moduletype:
+                                                          controller.type.value,
                                                     ));
                                                   },
                                                 ),
@@ -975,6 +979,8 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                     Get.dialog(
                                                         AuditTaskApprovedRejectDialog(
                                                       type: 3,
+                                                      moduletype:
+                                                          controller.type.value,
                                                     ));
                                                   },
                                                 ),
@@ -1015,6 +1021,8 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                     Get.dialog(
                                                         AuditTaskApprovedRejectDialog(
                                                       type: 4,
+                                                      moduletype:
+                                                          controller.type.value,
                                                     ));
                                                   },
                                                 ),
@@ -1047,6 +1055,8 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                     Get.dialog(
                                                         AuditTaskApprovedRejectDialog(
                                                       type: 5,
+                                                      moduletype:
+                                                          controller.type.value,
                                                     ));
                                                   },
                                                 ),
@@ -1079,6 +1089,8 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                     Get.dialog(
                                                         AuditTaskApprovedRejectDialog(
                                                       type: 6,
+                                                      moduletype:
+                                                          controller.type.value,
                                                     ));
                                                   },
                                                 ),
@@ -1303,9 +1315,13 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                         },
                                                       ]);
                                                     });
-                                                    Get.dialog(
-                                                        // AuditExecutionProcessDialog()
-                                                        MisExecutionProcessDialog());
+                                                    controller.type.value ==
+                                                            AppConstants.kMis
+                                                        ? Get.dialog(
+                                                            // AuditExecutionProcessDialog()
+                                                            MisExecutionProcessDialog())
+                                                        : Get.dialog(
+                                                            AuditExecutionProcessDialog());
                                                   },
                                                 ),
                                               )

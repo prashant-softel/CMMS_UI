@@ -8,8 +8,10 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
@@ -183,10 +185,16 @@ class PreventiveChecklistListContentWeb
                                                   CustomRichText(
                                                       title: 'CheckList:'),
                                                   Dimens.boxHeight15,
-                                                  CustomRichText(
-                                                      title:
-                                                          'Equipment Category: '),
+                                                  
+                                                  // Visibility(
+                                                  //   visible: controller.type != 4,
+                                                    // child:
+                                                     CustomRichText(
+                                                        title:
+                                                            'Equipment Category: '),
+                                                  // ),
                                                   Dimens.boxHeight20,
+
                                                   CustomRichText(
                                                       title: 'Frequency: '),
                                                   Dimens.boxHeight20,
@@ -281,24 +289,29 @@ class PreventiveChecklistListContentWeb
                                                         ],
                                                       )),
                                                   Dimens.boxHeight10,
-                                                  DropdownWebWidget(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            6,
-                                                    controller: controller,
-                                                    dropdownList: controller
-                                                        .equipmentCategoryList,
-                                                    isValueSelected: controller
-                                                        .isSelectedequipment
-                                                        .value,
-                                                    selectedValue: controller
-                                                        .selectedequipment
-                                                        .value,
-                                                    onValueChanged: controller
-                                                        .onValueChanged,
-                                                  ),
+
+                                                  // Visibility(
+                                                  //    visible: controller.type != 4,
+                                                    // child:
+                                                     DropdownWebWidget(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              6,
+                                                      controller: controller,
+                                                      dropdownList: controller
+                                                          .equipmentCategoryList,
+                                                      isValueSelected: controller
+                                                          .isSelectedequipment
+                                                          .value,
+                                                      selectedValue: controller
+                                                          .selectedequipment
+                                                          .value,
+                                                      onValueChanged: controller
+                                                          .onValueChanged,
+                                                    ),
+                                                  // ),
                                                   Dimens.boxHeight10,
                                                   DropdownWebWidget(
                                                     width:

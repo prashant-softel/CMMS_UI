@@ -26,22 +26,22 @@ class AuditTaskViewMsgReceiveDialog extends GetView {
         contentPadding: EdgeInsets.zero,
         title: Text(
           type == 1
-              ? "Approve Audit Plan"
+              ? "Approve Plan"
               : type == 2
-                  ? 'Reject Audit Plan'
+                  ? 'Reject Plan'
                   : type == 3
-                      ? "Skip Audit Plan"
+                      ? "Skip Plan"
                       : type == 4
-                          ? "Close Audit Plan"
+                          ? "Close Plan"
                           : type == 5
-                              ? "Approve Close Audit Plan"
+                              ? "Approve Close Plan"
                               : type == 6
-                                  ? "Reject Close Audit Plan"
+                                  ? "Reject Close Plan"
                                   : type == 8
-                                      ? "Audit Plan Start"
+                                      ? "Plan Start"
                                       : type == 10
-                                          ? "Audit Task Assigned"
-                                          : "Execute Audit Plan",
+                                          ? "Task Assigned"
+                                          : "Execute Plan",
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
@@ -78,7 +78,7 @@ class AuditTaskViewMsgReceiveDialog extends GetView {
                     onPressed: () {
                       Get.offAllNamed(Routes.auditTask);
                     },
-                    child: const Text('Audit Task List'),
+                    child: const Text('Task List'),
                   ),
                 ),
                 Spacer(),
@@ -98,7 +98,7 @@ class AuditTaskViewMsgReceiveDialog extends GetView {
                       }
                       Get.back();
                     },
-                    child: const Text('View Audit Task'),
+                    child: const Text('View Task'),
                   ),
                 ),
                 Spacer(),

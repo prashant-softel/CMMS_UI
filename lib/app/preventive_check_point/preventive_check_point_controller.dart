@@ -624,6 +624,7 @@ RxList<TypeModel> costType = <TypeModel>[
       type: type.value,
       type_of_observation: typeOfObsId,
       risk_type: incidenttypeId,
+      cost_type:selectedCostTypeId,
     );
     var checkpointJsonString =
         createCheckpoint.toJson(); //createCheckPointToJson([createCheckpoint]);

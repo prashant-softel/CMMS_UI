@@ -56,6 +56,7 @@ class ObservationListController extends GetxController {
   RxString costTypeFilterText = ''.obs;
   RxString statusFilterText = ''.obs;
   RxString remainingdaysFilterText = ''.obs;
+  RxString timelineFilterText = ''.obs;
 
   // RxString vendorFilterText = ''.obs;
 
@@ -77,6 +78,7 @@ class ObservationListController extends GetxController {
     "Closed Date": true,
     "Cost type": true,
     "Remaining days": true,
+    "Timeline": true,
     // "Status": true,
   });
   final Map<String, double> columnwidth = {
@@ -84,7 +86,7 @@ class ObservationListController extends GetxController {
     "Month": 100,
     "Observation Date": 200,
     "Contractor Name": 200,
-    "Location": 150,
+    "Location": 120,
     "Type": 100,
     "Source": 120,
     "Risk Type": 150,
@@ -95,7 +97,7 @@ class ObservationListController extends GetxController {
     "Closed Date": 150,
     "Cost type": 150,
     "Remaining days": 190,
-    // "Status": 150,
+    "Timeline": 150,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -124,6 +126,7 @@ class ObservationListController extends GetxController {
       "Closed Date": closerDateFilterText,
       "Cost type": costTypeFilterText,
       "Remaining days": remainingdaysFilterText,
+      "Timeline": timelineFilterText,
       // "Status": statusFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
