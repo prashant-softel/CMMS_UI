@@ -549,6 +549,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       ClosePermitModel ptwClose = ClosePermitModel(
           id: pmtaskViewModel.value?.permit_id ?? 0,
           comment: _comment,
+          facility_id: facilityId,
           conditionIds: [1, 2, 3, 4],
           fileIds: []);
 
