@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 
 enum ApiEnvironment {
   prod('http://172.20.43.18:82/api/'),
-  dev('http://172.20.43.18:82/api/');
+  dev('http://172.20.43.9:83/api/');
 
   final String baseUrl;
   const ApiEnvironment(this.baseUrl);
