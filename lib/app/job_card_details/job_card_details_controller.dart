@@ -579,7 +579,6 @@ class JobCardDetailsController extends GetxController {
     try {
       if (jobCardList.isNotEmpty) {
         jobCardDetailsModel.value = jobCardList[0];
-
         permitList?.value =
             jobCardDetailsModel.value!.lstPermitDetailList ?? [];
 
@@ -779,6 +778,7 @@ class JobCardDetailsController extends GetxController {
     ClosePermitModel ptwClose = ClosePermitModel(
         id: permitIdclose.value,
         comment: _comment,
+        facility_id: facilityId,
         conditionIds: [1, 2, 3, 4],
         fileIds: []);
     var jobCard = {

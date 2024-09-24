@@ -657,19 +657,30 @@ class PmTaskDataSource extends DataTableSource {
                                                     165
                                                 ? ColorValues.closeColor
                                                 : controller.pmTaskList
-                                                            .firstWhere(
-                                                              (e) =>
-                                                                  e?.id ==
-                                                                  pmTaskDetails
-                                                                      ?.id,
-                                                              orElse: () =>
-                                                                  PmTaskListModel(
-                                                                      id: 00),
-                                                            )
-                                                            ?.status ==
-                                                        170
-                                                    ? ColorValues
-                                                        .approveStatusColor
+                                                                .firstWhere(
+                                                                  (e) =>
+                                                                      e?.id ==
+                                                                      pmTaskDetails
+                                                                          ?.id,
+                                                                  orElse: () =>
+                                                                      PmTaskListModel(
+                                                                          id: 00),
+                                                                )
+                                                                ?.status ==
+                                                            170 ||
+                                                        controller.pmTaskList
+                                                                .firstWhere(
+                                                                  (e) =>
+                                                                      e?.id ==
+                                                                      pmTaskDetails
+                                                                          ?.id,
+                                                                  orElse: () =>
+                                                                      PmTaskListModel(
+                                                                          id: 00),
+                                                                )
+                                                                ?.status ==
+                                                            172
+                                                    ? ColorValues.cancelColor
                                                     : controller.pmTaskList
                                                                     .firstWhere(
                                                                       (e) =>

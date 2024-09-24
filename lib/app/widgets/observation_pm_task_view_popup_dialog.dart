@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../theme/dimens.dart';
-import '../theme/styles.dart';import 'package:cmms/app/utils/url_path.dart';
+import '../theme/styles.dart';
+import 'package:cmms/app/utils/url_path.dart';
 // import '../view_incident_report/view_incident_report_controller.dart';
 
 class ObservationPMTaskViewDialog extends GetView {
@@ -311,7 +312,22 @@ class ObservationPMTaskViewDialog extends GetView {
                                                         )
                                                       ],
                                                     ))
-                                                  : DataCell(Text('Text')),
+                                                  : DataCell(
+                                                      Text(controller
+                                                                      .selectedItem
+                                                                      ?.checklist_observation?[
+                                                                          index]
+                                                                      .type_text ==
+                                                                  null ||
+                                                              controller
+                                                                      .selectedItem
+                                                                      ?.checklist_observation?[
+                                                                          index]
+                                                                      .type_text ==
+                                                                  "null"
+                                                          ? ""
+                                                          : "${controller.selectedItem?.checklist_observation?[index].type_text}"),
+                                                    ),
                                           controller
                                                       .selectedItem
                                                       ?.checklist_observation?[

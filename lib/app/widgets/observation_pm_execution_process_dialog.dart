@@ -693,7 +693,10 @@ class ObservationPmExecutionViewDialog extends GetView {
                     LoginCustomTextfield(
                         width: (Get.width * .8),
                         textController: new TextEditingController(
-                            text: mapData["value"] ?? ''),
+                            text: mapData["value"] == null ||
+                                    mapData["value"] == "null"
+                                ? ""
+                                : mapData["value"] ?? ''),
                         onChanged: (txt) {
                           mapData["value"] = txt;
                           updateJob(record);
@@ -711,7 +714,20 @@ class ObservationPmExecutionViewDialog extends GetView {
                   ],
                 ))
             : (mapData['inpute_type'] == "0")
-                ? Text('Text')
+                ? LoginCustomTextfield(
+                    width: (Get.width * .8),
+                    textController: new TextEditingController(
+                        text: mapData["value"] == null ||
+                                mapData["value"] == "null"
+                            ? ""
+                            : mapData["value"] ?? ''),
+                    onChanged: (txt) {
+                      mapData["value"] = txt;
+                      //  updateJob(record);
+                      // Future.delayed(Duration.zero, () {
+                      //   setState(() {});
+                      // });
+                    })
                 : _rowBoolItem(int.tryParse('${mapData['value']}'),
                     onCheck: (val) {
                     mapData['value'] = val == true ? "1" : "0";

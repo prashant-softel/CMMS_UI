@@ -629,6 +629,10 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                               .jobDetailsModel
                                                                               .value
                                                                               ?.jobTitle,
+                                                                          "jobId": controller
+                                                                              .jobDetailsModel
+                                                                              .value
+                                                                              ?.id,
                                                                           "type":
                                                                               1,
                                                                           "whereUsed":
