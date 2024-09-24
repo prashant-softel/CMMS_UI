@@ -266,6 +266,7 @@ class CreateObservationController extends GetxController {
       _facilityId.sink.add(facilityList[0]?.id ?? 0);
     }
   }
+  
 
   void createObs({int? position, List<dynamic>? fileIds}) async {
     try {

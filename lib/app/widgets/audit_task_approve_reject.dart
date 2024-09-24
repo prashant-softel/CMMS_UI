@@ -8,8 +8,9 @@ import '../theme/styles.dart';
 
 class AuditTaskApprovedRejectDialog extends GetView {
   int? type;
+  int? moduletype;
 
-  AuditTaskApprovedRejectDialog({super.key, this.type});
+  AuditTaskApprovedRejectDialog({super.key, this.type, this.moduletype});
   final ViewAuditTaskController controller = Get.find();
 
   @override
@@ -24,16 +25,16 @@ class AuditTaskApprovedRejectDialog extends GetView {
           contentPadding: EdgeInsets.zero,
           title: Text(
             type == 1
-                ? "Skip Audit Plan Approve"
+                ? "Skip Plan Approve"
                 : type == 2
-                    ? 'Skip Audit Plan Reject'
+                    ? 'Skip Plan Reject'
                     : type == 3
-                        ? "Audit Plan Skip"
+                        ? "Plan Skip"
                         : type == 4
-                            ? "Audit Plan Close"
+                            ? "Plan Close"
                             : type == 5
-                                ? "Audit Plan Approve"
-                                : "Audit Plan Reject",
+                                ? "Plan Approve"
+                                : "Plan Reject",
             textAlign: TextAlign.center,
             // style: TextStyle(color: Colors.green),
           ),
@@ -95,7 +96,7 @@ class AuditTaskApprovedRejectDialog extends GetView {
               ElevatedButton(
                 style: Styles.greenElevatedButtonStyle,
                 onPressed: () {
-                  type == 1
+                  type == 1 
                       ? controller.auditTaskApprovedButton(
                           id: controller.auditTasknDetailModel.value.id)
                       : type == 2
@@ -122,16 +123,16 @@ class AuditTaskApprovedRejectDialog extends GetView {
                 },
                 child: Text(
                   type == 1
-                      ? "Approve Audit Plan"
+                      ? "Approve Plan"
                       : type == 2
-                          ? 'Reject Audit Plan'
+                          ? 'Reject Plan'
                           : type == 3
-                              ? "Skip Audit Plan"
+                              ? "Skip Plan"
                               : type == 4
-                                  ? "Close Audit Plan"
+                                  ? "Close Plan"
                                   : type == 5
-                                      ? "Approve Audit Plan"
-                                      : "Reject Audit Plan",
+                                      ? "Approve Plan"
+                                      : "Reject Plan",
                 ),
               ),
             ]),
