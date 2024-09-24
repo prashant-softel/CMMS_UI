@@ -354,16 +354,18 @@ class AttendanceWeb extends GetView<AttendanceController> {
                 String errorMessage = '';
 
                 for (int i = 0; i < controller.attendanceModel.length; i++) {
-                  final inTime = controller.inTimeControllers[i].text;
-                  final outTime = controller.outTimeControllers[i].text;
+                  if ((controller.attendanceModel[i]?.present == true)) {
+                    final inTime = controller.inTimeControllers[i].text;
+                    final outTime = controller.outTimeControllers[i].text;
 
-                  print("Original In Time: $inTime, Out Time: $outTime");
+                    print("Original In Time: $inTime, Out Time: $outTime");
 
-                  bool hasErrorBuffer = isTime1LessThanTime2(inTime, outTime);
-                  if (!hasErrorBuffer) {
-                    hasError = true;
-                    errorMessage =
-                        "In Time cannot be greater than or equal to Out Time for employee ${controller.attendanceModel[i]?.name}.";
+                    bool hasErrorBuffer = isTime1LessThanTime2(inTime, outTime);
+                    if (!hasErrorBuffer) {
+                      hasError = true;
+                      errorMessage =
+                          "In Time cannot be greater than or equal to Out Time for employee ${controller.attendanceModel[i]?.name}.";
+                    }
                   }
                 }
 
