@@ -3195,7 +3195,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Job/UpdateJob?job=$job',
+      'Job/UpdateJob',
       Request.patch,
       job,
       isLoading ?? false,
@@ -3285,7 +3285,7 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(
         CreateJobCardDialog(
-            data: parsedJson['message'], jcId: parsedJson['id']),
+            data: parsedJson['message'], jcId: parsedJson['id'], jobId: jobId),
         barrierDismissible: false);
     print('jcId2:${parsedJson['id']}');
     return responseModel;

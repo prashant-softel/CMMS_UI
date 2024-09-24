@@ -10,13 +10,13 @@ class CreateJobCardDialog extends GetView {
   String? approveIncidentReportData;
   String? data;
   List<dynamic>? jcId;
-
-  CreateJobCardDialog({
-    super.key,
-    this.approveIncidentReportData,
-    this.data,
-    this.jcId,
-  });
+  int? jobId;
+  CreateJobCardDialog(
+      {super.key,
+      this.approveIncidentReportData,
+      this.data,
+      this.jcId,
+      this.jobId});
   final NewPermitController _controller = Get.find();
 
   @override
@@ -124,6 +124,7 @@ class CreateJobCardDialog extends GetView {
                     "whereUsedId": jcId![0],
                     "activity": _controller.titleTextCtrlr.text,
                     "whereUsed": 4,
+                    "jobId": jobId,
                     "type": 1,
                     "fromActorTypeId": 2,
                     "to_actor_type_id": 4
