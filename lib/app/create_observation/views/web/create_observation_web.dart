@@ -1168,8 +1168,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                         .length >
                                     0 &&
                                 controller.getObsById.value!.status_code == 555
-                            //         ||
-                            // controller.getObsById.value!.status_code == 551
+                                    ||
+                            controller.getObsById.value!.status_code == 551
                             ? Container(
                                 height: 40,
                                 child: CustomElevatedButton(
@@ -1187,18 +1187,18 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                               )
                             : Dimens.box0,
                         Dimens.boxWidth15,
-                        controller.getObsById.value != null &&
+                        // controller.getObsById.value != null &&
                                 controller.getObsById.value!.status_code ==
                                     552 &&
-                                controller.obsId != 0 &&
-                                controller.getObsById.value!.createdid !=
-                                    varUserAccessModel.value.user_id
+                                // controller.obsId != 0 &&
+                        //         controller.getObsById.value!.createdid !=
+                        //             varUserAccessModel.value.user_id
                             //     &&
-                            //      controller.getObservationListModel != null
-                            //     &&
-                            // controller.getObservationListModel!
-                            //         .assigned_to_id ==
-                            //     varUserAccessModel.value.user_id
+                                //  controller.getObservationListModel != null
+                                // &&
+                            controller.getObsById.value
+                                    !.assigned_to_id==
+                                varUserAccessModel.value.user_id
                             ? Container(
                                 height: 45,
                                 child: CustomElevatedButton(

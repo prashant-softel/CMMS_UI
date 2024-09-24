@@ -515,7 +515,7 @@ class MisExecutionProcessDialog extends GetView {
                                   Expanded(
                                     child: Obx(
                                       () => DataTable2(
-                                        dataRowHeight: 100,
+                                        dataRowHeight: 112,
                                         minWidth: 2500,
                                         border: TableBorder.all(
                                             color: Color.fromARGB(
@@ -549,7 +549,7 @@ class MisExecutionProcessDialog extends GetView {
                                               )),
 
                                           DataColumn2(
-                                              fixedWidth: 120,
+                                              fixedWidth: 220,
                                               label: Text(
                                                 "Accept",
                                                 style: TextStyle(
@@ -696,72 +696,82 @@ class MisExecutionProcessDialog extends GetView {
                                                                       ),
                                                                     ],
                                                                   )
-                                                             :(mapData['key'] == "accept")
-    ? SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: 100.0, // Ensure minimum height for the Column
-            maxHeight: MediaQuery.of(context).size.height * 0.5, // Limit max height
-          ),
-          child: IntrinsicHeight( // Allow Column to take up space as needed
-            child: Column(
-              children: [
-                Obx(
-                  () => Transform.scale(
-                    scale: 0.8,
-                    child: RadioListTile(
-                      title: Text('YES'),
-                      value: 1,
-                      groupValue: int.tryParse('${mapData['value']}'),
-                      onChanged: (value) {
-                        mapData['value'] = value == 1 ? "1" : "0";
-                        setState(() {});
-                      },
-                    ),
-                  ),
-                ),
-                Obx(
-                  () => Transform.scale(
-                    scale: 0.8,
-                    child: RadioListTile(
-                      title: Text('NO'),
-                      value: 2,
-                      groupValue: int.tryParse('${mapData['value']}'),
-                      onChanged: (value) {
-                        mapData['value'] = value == 2 ? "2" : "0";
-                        setState(() {});
-                      },
-                    ),
-                  ),
-                ),
-                Obx(
-                  () => Transform.scale(
-                    scale: 0.8,
-                    child: RadioListTile(
-                      title: Text('NA'),
-                      value: 3,
-                      groupValue: int.tryParse('${mapData['value']}'),
-                      onChanged: (value) {
-                        mapData['value'] = value == 3 ? "3" : "0";
-                        setState(() {});
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      )
-
-
-
-
-
-
-    
-
-
+                                                                : (mapData['key'] ==
+                                                                        "accept")
+                                                                    ? Column(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center, // Center the radio buttons
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          RadioListTile<
+                                                                              int>(
+                                                                            title:
+                                                                                Text('YES'),
+                                                                            value:
+                                                                                1,
+                                                                            groupValue:
+                                                                                int.tryParse('${mapData['value']}'),
+                                                                            visualDensity:
+                                                                                const VisualDensity(
+                                                                              horizontal: VisualDensity.minimumDensity,
+                                                                              vertical: VisualDensity.minimumDensity,
+                                                                            ),
+                                                                            onChanged:
+                                                                                (int? value) {
+                                                                              setState(() {
+                                                                                mapData['value'] = value.toString();
+                                                                              });
+                                                                            },
+                                                                            dense:
+                                                                                true,
+                                                                            contentPadding:
+                                                                                EdgeInsets.zero,
+                                                                          ),
+                                                                          RadioListTile<
+                                                                              int>(
+                                                                            title:
+                                                                                Text('NO'),
+                                                                            value:
+                                                                                2,
+                                                                            groupValue:
+                                                                                int.tryParse('${mapData['value']}'),
+                                                                            visualDensity:
+                                                                                VisualDensity.compact,
+                                                                            onChanged:
+                                                                                (int? value) {
+                                                                              setState(() {
+                                                                                mapData['value'] = value.toString();
+                                                                              });
+                                                                            },
+                                                                            dense:
+                                                                                true,
+                                                                            contentPadding:
+                                                                                EdgeInsets.zero,
+                                                                          ),
+                                                                          RadioListTile<
+                                                                              int>(
+                                                                            title:
+                                                                                Text('NA'),
+                                                                            value:
+                                                                                3,
+                                                                            groupValue:
+                                                                                int.tryParse('${mapData['value']}'),
+                                                                            visualDensity:
+                                                                                VisualDensity.compact,
+                                                                            onChanged:
+                                                                                (int? value) {
+                                                                              setState(() {
+                                                                                mapData['value'] = value.toString();
+                                                                              });
+                                                                            },
+                                                                            dense:
+                                                                                true,
+                                                                            contentPadding:
+                                                                                EdgeInsets.zero,
+                                                                          ),
+                                                                        ],
+                                                                      )
                                                                     : (mapData['key'] ==
                                                                                 "type" &&
                                                                             mapData['inpute_type'] ==
@@ -804,8 +814,7 @@ class MisExecutionProcessDialog extends GetView {
                         ),
                       ),
                     ),
-                  ),
-                  Spacer(),
+                  ),Spacer(),
                   Container(
                     //   margin: EdgeInsets.only(bottom: 30, top: 20),
                     child: Row(
