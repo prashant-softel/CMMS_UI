@@ -82,6 +82,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                         child: SingleChildScrollView(
                           child: Container(
                             width: Get.width * 7,
+                            
                             margin:
                                 EdgeInsets.only(left: 10, top: 10, right: 10),
                             child: Card(
@@ -180,11 +181,11 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                             //   style: Styles
                                                             //       .black17,
                                                             // ),
-                                                            Text(
-                                                              "Corrective/Preventive Action:",
-                                                              style: Styles
-                                                                  .black17,
-                                                            ),
+                                                            // Text(
+                                                            //   "Corrective/Preventive Action:",
+                                                            //   style: Styles
+                                                            //       .black17,
+                                                            // ),
                                                             Text(
                                                               "Responsible Person:",
                                                               style: Styles
@@ -192,6 +193,11 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                             ),
                                                             Text(
                                                               "Target Date:",
+                                                              style: Styles
+                                                                  .black17,
+                                                            ),
+                                                              Text(
+                                                              "Corrective/Preventive Action:",
                                                               style: Styles
                                                                   .black17,
                                                             ),
@@ -220,16 +226,20 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                             //     "${controller.getObsById.value?.risk_type_name ?? ""}",
                                                             //     style: Styles
                                                             //         .blue17),
-                                                            Text(
-                                                                "${controller.getObsById.value?.preventive_action ?? ""}",
-                                                                style: Styles
-                                                                    .blue17),
+                                                            // Text(
+                                                            //     "${controller.getObsById.value?.preventive_action ?? ""}",
+                                                            //     style: Styles
+                                                            //         .blue17),
                                                             Text(
                                                                 "${controller.getObsById.value?.assigned_to_name ?? ""}",
                                                                 style: Styles
                                                                     .blue17),
                                                             Text(
                                                                 "${controller.getObsById.value?.target_date ?? ""}",
+                                                                style: Styles
+                                                                    .blue17),
+                                                                      Text(
+                                                                "${controller.getObsById.value?.preventive_action ?? ""}",
                                                                 style: Styles
                                                                     .blue17),
                                                           ],
