@@ -190,10 +190,27 @@ class JobCardDetailsController extends GetxController {
       facilityIdStreamSubscription =
           homeController.facilityId$.listen((event) async {
         facilityId = event;
-        if (facilityId > 0) {
-          isFacilitySelected.value = true;
-          await getEmployeeList();
+        Future<void> checkFacilityAndLoadEmployees() async {
+          if (facilityId != null && facilityId > 0) {
+            // Ensure facilityId is valid
+            isFacilitySelected.value = true;
+
+            try {
+              await getEmployeeList();
+            } catch (e) {
+              print("Error while fetching employee list: $e");
+              // Handle the exception here if necessary
+            }
+          } else {
+            print("Invalid facilityId");
+            // Optionally handle invalid facilityId case here
+          }
         }
+
+        // if (facilityId > 0) {
+        //   isFacilitySelected.value = true;
+        //   await getEmployeeList();
+        // }
       });
 
       if (jobCardId.value != 0) {
@@ -388,13 +405,16 @@ class JobCardDetailsController extends GetxController {
       final _employeeList = await jobCardDetailsPresenter.getAssignedToList(
           facilityId: facilityId,
           featureId: UserAccessConstants.kJobCardFeatureId);
-      if (_employeeList != null) {
+
+      if (_employeeList != null && _employeeList.isNotEmpty) {
         for (var employee in _employeeList) {
           employeeList.add(employee);
         }
         update(["employeeList"]);
       }
-      if (jobCardDetailsModel.value!.lstCmjcEmpList!.isEmpty) {
+
+      // Check if jobCardDetailsModel or lstCmjcEmpList is null or empty
+      if (jobCardDetailsModel.value?.lstCmjcEmpList?.isEmpty ?? true) {
         addEmployeesDeployed();
       }
     }

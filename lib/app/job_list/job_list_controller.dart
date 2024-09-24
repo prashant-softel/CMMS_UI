@@ -129,10 +129,8 @@ class JobListController extends GetxController {
     }
     List<JobModel?> filteredList = filteredData
         .where((item) =>
-            (item?.name
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
+            (item?.name?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
+            (item?.id?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.assignedToName
                     ?.toString()

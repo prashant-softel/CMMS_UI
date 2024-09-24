@@ -74,7 +74,7 @@ class JobDetailsModel {
   String? breakdownType;
   String? jobTitle;
   String? jobDescription;
-  DateTime? breakdownTime;
+  String? breakdownTime;
   int? currentPtwId;
   String? currentPtwTitle;
   int? latestJCStatus;
@@ -115,9 +115,7 @@ class JobDetailsModel {
         jobTitle: json["job_title"] == null ? '' : json['job_title'],
         jobDescription:
             json["job_description"] == null ? '' : json['job_description'],
-        breakdownTime: json['breakdown_time'] == null
-            ? null
-            : DateTime.parse(json['breakdown_time'] as String),
+        breakdownTime: json['breakdown_time'],
         //DateTime.parse(json["breakdown_time"]),
         currentPtwId:
             json["current_ptw_id"] == null ? 0 : json['current_ptw_id'],
@@ -165,7 +163,7 @@ class JobDetailsModel {
         "breakdown_type": breakdownType,
         "job_title": jobTitle,
         "job_description": jobDescription,
-        "breakdown_time": breakdownTime?.toIso8601String(),
+        "breakdown_time": breakdownTime,
         "current_ptw_id": currentPtwId,
         "current_ptw_title": currentPtwTitle,
         "latestJCStatus": latestJCStatus,

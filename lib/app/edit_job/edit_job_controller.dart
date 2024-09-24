@@ -227,8 +227,9 @@ class EditJobController extends GetxController {
       // Set Job Title, Description, and Breakdown Time
       jobTitleCtrlr.text = jobDetailsModel.value?.jobTitle ?? '';
       jobDescriptionCtrlr.text = jobDetailsModel.value?.jobDescription ?? '';
-      breakdownTimeCtrlr.text =
-          formatDateTimeForUI(jobDetailsModel.value?.breakdownTime);
+      // breakdownTimeCtrlr.text =
+      //     formatDateTimeForUI(jobDetailsModel.value?.breakdownTime);
+      breakdownTimeCtrlr.text = jobDetailsModel.value?.breakdownTime ?? '';
 
       // Set Block
       selectedBlock.value = jobDetailsModel.value?.blockName ?? "";
@@ -652,25 +653,9 @@ class EditJobController extends GetxController {
       int _permitId = selectedPermitId;
       String _title = htmlEscape.convert(jobTitleCtrlr.text.trim());
       String _description = htmlEscape.convert(jobDescriptionCtrlr.text.trim());
-      // String _breakdownTime = convertDateTimeToAPIFormat();
-      String originalDateTimeString = breakdownTimeCtrlr.text;
 
-      // Parse the original date and time string
-      DateTime originalDateTime =
-          DateFormat("dd-MM-yyyy HH:mm").parse(originalDateTimeString);
+      String _breakdownTime = breakdownTimeCtrlr.text.trim();
 
-      // Format the DateTime object to the desired format
-      String _breakdownTime =
-          DateFormat("yyyy-MM-ddTHH:mm:ss'Z'").format(originalDateTime.toUtc());
-
-      // selectedAssetsIdList.clear();
-
-      // for (var _selectedWorkArea in selectedWorkAreaList) {
-      //   selectedAssetsIdList.add(_selectedWorkArea?.id ?? 0);
-      // }
-      // for (var _selectedworktype in selectedWorkTypeList) {
-      //   selectedwrktype.add(_selectedworktype?.id ?? 0);
-      // }
       print("selected  Fault : $selectedwrktype");
       AddJobModel addJobModel = AddJobModel(
         id: jobID.value,
