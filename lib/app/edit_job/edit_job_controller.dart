@@ -233,6 +233,8 @@ class EditJobController extends GetxController {
       // Set Block
       selectedBlock.value = jobDetailsModel.value?.blockName ?? "";
       selectedBlockId = jobDetailsModel.value?.blockId ?? 0;
+      selectedAssignedToId = jobDetailsModel.value?.assignedId ?? 0;
+
       if (selectedBlockId != 0) {
         // getInventoryCategoryList();
 
