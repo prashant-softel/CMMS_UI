@@ -13,6 +13,8 @@ class AttendanceController extends GetxController {
   AttendancePresenter attendancePresenter;
 
   Rx<int> facilityId = 0.obs;
+  Rx<int> updateSubmit = 0.obs;
+
   TextEditingController dateController = TextEditingController();
   List<TextEditingController> inTimeControllers = [];
   List<TextEditingController> outTimeControllers = [];
@@ -83,10 +85,13 @@ class AttendanceController extends GetxController {
         date: date,
         isLoading: isLoading,
       );
-      if (_attendanceDetails?.hfeAttendance?.length != 0 ||
-          _attendanceDetails?.contractAttendance != null ||
-          _attendanceDetails!.hfeAttendance!.isNotEmpty) {
+
+      if (_attendanceDetails != null &&
+          (_attendanceDetails.hfeAttendance?.isNotEmpty ??
+              false || _attendanceDetails.contractAttendance != null)) {
         getAttendanceDetails?.value = _attendanceDetails;
+
+        // Set values for contract attendance
         final contractAttendance =
             getAttendanceDetails?.value?.contractAttendance;
         lessThan35.text = contractAttendance?.lessThan35?.toString() ?? '';
@@ -96,11 +101,13 @@ class AttendanceController extends GetxController {
             contractAttendance?.greaterThan50?.toString() ?? '';
         purposeCtrl.text = contractAttendance?.purpose ?? '';
 
+        // Ensure Attendence_Id is set properly
         attendanceModel.value = List<HFEEmployeeAttendance>.generate(
           getAttendanceDetails!.value!.hfeAttendance!.length,
           (index) {
             var hfe = getAttendanceDetails!.value!.hfeAttendance![index];
             return HFEEmployeeAttendance(
+              Attendence_Id: hfe?.Attendence_Id, // Capture Attendence_Id here
               id: hfe?.id,
               name: hfe?.name,
               present: hfe!.present,
@@ -109,6 +116,8 @@ class AttendanceController extends GetxController {
             );
           },
         );
+
+        // Initialize in/out time controllers for each employee
         inTimeControllers = List.generate(
           attendanceModel.length,
           (index) => TextEditingController(),
@@ -117,13 +126,15 @@ class AttendanceController extends GetxController {
           attendanceModel.length,
           (index) => TextEditingController(),
         );
+
+        // Set inTime and outTime for each employee
         for (int i = 0; i < attendanceModel.length; i++) {
-          if (attendanceModel[i]!.inTime != null) {
-            inTimeControllers[i].text = attendanceModel[i]!.inTime ?? "";
-            outTimeControllers[i].text = attendanceModel[i]!.outTime ?? "";
-          }
+          inTimeControllers[i].text = attendanceModel[i]?.inTime ?? "";
+          outTimeControllers[i].text = attendanceModel[i]?.outTime ?? "";
         }
+        updateSubmit.value = 1;
       } else {
+        updateSubmit.value = 0;
         await getEmployeeList(facilityId.value);
       }
     } catch (e) {
@@ -208,6 +219,7 @@ class AttendanceController extends GetxController {
     int _lessThan35 = 0;
     int _between35To50 = 0;
     int _greaterThan50 = 0;
+
     if (lessThan35.text != "") {
       _lessThan35 = int.parse(lessThan35.text);
     }
@@ -217,18 +229,33 @@ class AttendanceController extends GetxController {
     if (greaterThan50.text != "") {
       _greaterThan50 = int.parse(greaterThan50.text);
     }
+
     String _purpose = purposeCtrl.text;
+
     ContractLabourAttendance contractAttendace = ContractLabourAttendance(
+      Id: 0,
       lessThan35: _lessThan35,
       between35to50: _between35To50,
       greaterThan50: _greaterThan50,
       purpose: _purpose,
     );
 
+    // Ensure that Attendence_Id is set to 0 for adding new records
+    List<HFEEmployeeAttendance> newAttendanceModel = attendanceModel.map((hfe) {
+      return HFEEmployeeAttendance(
+        Attendence_Id: 0, // Include Attendence_Id here
+        id: hfe?.id,
+        name: hfe?.name,
+        present: hfe!.present,
+        inTime: hfe.inTime,
+        outTime: hfe.outTime,
+      );
+    }).toList();
+
     employeeAttendance = AttendaceModel(
       date: dateController.text,
       facilityId: facilityId.value,
-      hfeAttendance: attendanceModel,
+      hfeAttendance: newAttendanceModel,
       contractAttendance: contractAttendace,
     );
 
@@ -237,9 +264,75 @@ class AttendanceController extends GetxController {
       jsonEmployeeAttendance: jsonEmployeeAttendance,
       isLoading: isLoading,
     );
+
     if (_attendance) {
       // clearData();
     }
+
+    isLoading = false;
+    return true;
+  }
+
+  Future<bool> updateAttendance() async {
+    int _lessThan35 = 0;
+    int _between35To50 = 0;
+    int _greaterThan50 = 0;
+
+    if (lessThan35.text != "") {
+      _lessThan35 = int.parse(lessThan35.text);
+    }
+    if (between35To50.text != "") {
+      _between35To50 = int.parse(between35To50.text);
+    }
+    if (greaterThan50.text != "") {
+      _greaterThan50 = int.parse(greaterThan50.text);
+    }
+
+    String _purpose = purposeCtrl.text;
+
+    // Set contract attendance details
+    ContractLabourAttendance contractAttendace = ContractLabourAttendance(
+      Id: 0,
+      lessThan35: _lessThan35,
+      between35to50: _between35To50,
+      greaterThan50: _greaterThan50,
+      purpose: _purpose,
+    );
+
+    // Ensure Attendence_Id is included in each HFEEmployeeAttendance object
+    List<HFEEmployeeAttendance> updatedAttendanceModel =
+        attendanceModel.map((hfe) {
+      return HFEEmployeeAttendance(
+        Attendence_Id:
+            hfe?.Attendence_Id, // Use the Attendence_Id from the model
+        id: hfe?.id,
+        name: hfe?.name,
+        present: hfe!.present,
+        inTime: hfe.inTime,
+        outTime: hfe.outTime,
+      );
+    }).toList();
+
+    // Create the attendance model with all the data
+    employeeAttendance = AttendaceModel(
+      date: dateController.text,
+      facilityId: facilityId.value,
+      hfeAttendance: updatedAttendanceModel,
+      contractAttendance: contractAttendace,
+    );
+
+    // Convert to JSON and send to the presenter for updating
+    final jsonEmployeeAttendance = employeeAttendance.toJson();
+    final _attendance = await attendancePresenter.updateAttendance(
+      jsonEmployeeAttendance: jsonEmployeeAttendance,
+      isLoading: isLoading,
+    );
+
+    if (_attendance) {
+      // Optionally clear data after successful update
+      // clearData();
+    }
+
     isLoading = false;
     return true;
   }

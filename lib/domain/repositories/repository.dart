@@ -17354,6 +17354,44 @@ class Repository {
     }
   }
 
+  Future<bool> updateAttendance(
+    jsonEmployeeAttendance,
+    isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.updateAttendance(
+          auth: auth,
+          jsonEmployeeAttendance: jsonEmployeeAttendance,
+          isLoading: isLoading,
+        );
+      }
+      var resourceData = res.data;
+      print('Response Create Permit For Job: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var json = jsonDecode(resourceData);
+          String message = json['message'];
+          Get.dialog<void>(
+            AttendancePopup(
+              message: message,
+            ),
+          );
+          return true;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'createNewPermitForJOb');
+      }
+      return false;
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
   Future<List<AttendanceListModel>> getAttendanceList({
     required int facilityId,
     required String year,

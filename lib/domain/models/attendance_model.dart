@@ -1,12 +1,14 @@
 import "package:get/get.dart";
 
 class AttendaceModel {
+  int? attendence_Id;
   String? date;
   int? facilityId;
   List<HFEEmployeeAttendance?>? hfeAttendance;
   ContractLabourAttendance? contractAttendance;
 
   AttendaceModel({
+    this.attendence_Id,
     this.date,
     this.facilityId,
     this.hfeAttendance,
@@ -14,6 +16,7 @@ class AttendaceModel {
   });
 
   factory AttendaceModel.fromJson(Map<String, dynamic> json) => AttendaceModel(
+        attendence_Id: json["attendence_Id"],
         date: json["date"],
         facilityId: json["facility_id"],
         hfeAttendance: json["hfeAttendance"] != null
@@ -26,6 +29,7 @@ class AttendaceModel {
       );
 
   Map<String, dynamic> toJson() => {
+        "attendence_Id": attendence_Id,
         "date": date,
         "facility_id": facilityId,
         "hfeAttendance": hfeAttendance?.map((e) => e?.toJson()).toList(),
@@ -34,6 +38,7 @@ class AttendaceModel {
 }
 
 class HFEEmployeeAttendance {
+  int? Attendence_Id;
   int? id;
   String? name;
   RxBool present;
@@ -41,6 +46,7 @@ class HFEEmployeeAttendance {
   String? outTime;
 
   HFEEmployeeAttendance({
+    this.Attendence_Id,
     this.id,
     this.name,
     required this.present,
@@ -50,6 +56,7 @@ class HFEEmployeeAttendance {
 
   factory HFEEmployeeAttendance.fromJson(Map<String, dynamic> json) =>
       HFEEmployeeAttendance(
+        Attendence_Id: json["attendence_Id"],
         id: json["employee_id"],
         name: json["name"],
         present: RxBool(json["present"]),
@@ -58,6 +65,7 @@ class HFEEmployeeAttendance {
       );
 
   Map<String, dynamic> toJson() => {
+        "Attendence_Id": Attendence_Id,
         "employee_id": id,
         "name": name,
         "present": present.value,
@@ -67,14 +75,14 @@ class HFEEmployeeAttendance {
 }
 
 class ContractLabourAttendance {
-  int? contractor_id;
+  int? Id;
   int? lessThan35;
   int? between35to50;
   int? greaterThan50;
   String? purpose;
 
   ContractLabourAttendance({
-    this.contractor_id = 0,
+    this.Id = 0,
     this.lessThan35,
     this.between35to50,
     this.greaterThan50,
@@ -83,7 +91,7 @@ class ContractLabourAttendance {
 
   factory ContractLabourAttendance.fromJson(Map<String, dynamic> json) =>
       ContractLabourAttendance(
-        contractor_id: json["contractor_id"],
+        Id: json["Id"],
         lessThan35: json["age_Less_Than35"],
         between35to50: json["age_Between_35And50"],
         greaterThan50: json["age_Greater50"],
@@ -91,7 +99,7 @@ class ContractLabourAttendance {
       );
 
   Map<String, dynamic> toJson() => {
-        "contractor_id": contractor_id,
+        "Id": Id,
         "lessThan35": lessThan35,
         "between35to50": between35to50,
         "greaterThan50": greaterThan50,

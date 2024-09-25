@@ -1317,511 +1317,166 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                             SizedBox(height: 20),
 
                             /// START JOB CARD BUTTON
-                            controller
-                                            .jobCardDetailsModel.value!.status ==
-                                        151 &&
-                                    controller.permitList
-                                            ?.firstWhere((element) =>
-                                                element.permitId != null)
-                                            .status ==
-                                        125
-                                ? Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center, //
-                                    children: [
-                                        CustomElevatedButton(
-                                          text: 'Start',
-                                          onPressed: () {
-                                            var employeesNotDeployed =
-                                                controller.employeesDeployed
-                                                        .value.length ==
-                                                    0;
-                                            bool anyEmployeeNotSelected = false;
-                                            if (employeesNotDeployed == false) {
-                                              anyEmployeeNotSelected = controller
-                                                  .employeesDeployed.value
-                                                  .any((employeeList) =>
-                                                      employeeList.any((employee) =>
-                                                          employee['key'] ==
-                                                              "Employee Name" &&
-                                                          employee['value'] ==
-                                                              "Please Select"));
-                                            }
-
-                                            var permitCondition = controller
-                                                    .permitList
-                                                    ?.firstWhere((element) =>
-                                                        element.permitId !=
-                                                        null)
-                                                    .tbTDoneCheck ==
-                                                1;
-
-                                            if ((permitCondition &&
-                                                    anyEmployeeNotSelected ==
-                                                        true &&
-                                                    employeesNotDeployed ==
-                                                        false ||
-                                                permitCondition &&
-                                                    employeesNotDeployed ==
-                                                        true)) {
-                                              Get.defaultDialog(
-                                                radius: 5,
-                                                title: 'Alert',
-                                                middleText:
-                                                    'Please select team members!',
-                                                textConfirm: 'OK',
-                                                onConfirm: () {
-                                                  Get.back(); // Close the dialog
-                                                },
-                                                buttonColor:
-                                                    ColorValues.appGreenColor,
-                                                confirmTextColor: Colors.white,
-                                              );
-                                            } else if ((controller.permitList
-                                                        ?.firstWhere(
-                                                            (element) =>
-                                                                element
-                                                                    .permitId !=
-                                                                null)
-                                                        .tbTDoneCheck ==
-                                                    1) &&
-                                                // employeesNotDeployed == true &&
-                                                anyEmployeeNotSelected ==
-                                                    false &&
-                                                employeesNotDeployed == false) {
-                                              controller.startJobCard(
-                                                jcCard:
-                                                    controller.jobCardId.value,
-                                                fileIds:
-                                                    dropzoneController.fileIds,
-                                              );
-                                            } else if (controller.permitList
-                                                        ?.firstWhere(
-                                                            (element) =>
-                                                                element
-                                                                    .permitId !=
-                                                                null)
-                                                        .tbTDoneCheck ==
-                                                    0 &&
-                                                controller.permitList
-                                                        ?.firstWhere(
-                                                            (element) =>
-                                                                element
-                                                                    .permitId !=
-                                                                null)
-                                                        .tbt_start ==
-                                                    0) {
-                                              Get.defaultDialog(
-                                                  radius: 5,
-                                                  title: 'Alert',
-                                                  middleText:
-                                                      'Unable to start task due to permit taken for date and time ',
-                                                  textConfirm: 'OK',
-                                                  onConfirm: () {
-                                                    Get.back(); // Close the dialog
-                                                    // Get.offAllNamed(Routes.pmTask);
-                                                  },
-                                                  buttonColor:
-                                                      ColorValues.appGreenColor,
-                                                  confirmTextColor:
-                                                      Colors.white,
-                                                  barrierDismissible: false);
-                                            } else if (controller.permitList
-                                                    ?.firstWhere((element) =>
-                                                        element.permitId !=
-                                                        null)
-                                                    .tbTDoneCheck ==
-                                                0) {
-                                              Get.dialog<void>(TbtDoneBMDialog(
-                                                ptw_id: controller
-                                                        .jobCardDetailsModel
-                                                        .value
-                                                        ?.ptwId ??
-                                                    0,
-                                                id: controller
-                                                        .jobCardDetailsModel
-                                                        .value
-                                                        ?.id ??
-                                                    0,
-                                              ));
-                                            }
-                                          },
-                                          backgroundColor:
-                                              ColorValues.addNewColor,
-                                        ),
-
-                                        // CustomElevatedButton(
-                                        //   text: 'Update',
-                                        //   onPressed: () => controller.updateJobCard(),
-                                        //   backgroundColor: ColorValues.appYellowColor,
-                                        // ),
-                                      ])
-                                : controller.jobCardDetailsModel.value!
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                controller.jobCardDetailsModel.value!.status == 151 &&
+                                        controller.permitList
+                                                ?.firstWhere((element) =>
+                                                    element.permitId != null)
                                                 .status ==
-                                            157 ||
-                                        controller.jobCardDetailsModel.value!
-                                                .status ==
-                                            152 ||
-                                        controller.jobCardDetailsModel.value!
-                                                .status ==
-                                            154
+                                            125
                                     ? Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        //
+                                            MainAxisAlignment.center, //
                                         children: [
                                             CustomElevatedButton(
-                                              text: 'Cancel',
-                                              onPressed: () =>
-                                                  controller.startStopJobCard(),
-                                              backgroundColor:
-                                                  ColorValues.appRedColor,
-                                            ),
-                                            // Dimens.boxWidth10,
-                                            SizedBox(width: 10),
-                                            varUserAccessModel
-                                                        .value.access_list!
-                                                        .where((e) =>
-                                                            e.feature_id ==
-                                                                UserAccessConstants
-                                                                    .kJobCardFeatureId &&
-                                                            e.edit ==
-                                                                UserAccessConstants
-                                                                    .kHaveEditAccess)
-                                                        .length >
-                                                    0
-                                                ? CustomElevatedButton(
-                                                    text: 'Update',
-                                                    backgroundColor: ColorValues
-                                                        .appYellowColor,
-                                                    onPressed: () async {
-                                                      bool? confirmed =
-                                                          await showConfirmationDialog(
-                                                        context,
-                                                        'Are you sure you want to Update job ?',
-                                                      );
-                                                      if (confirmed == true) {
-                                                        controller.updateJobCard(
-                                                            fileIds:
-                                                                dropzoneController
-                                                                    .fileIds);
-                                                        if (controller
-                                                                    .listMrsByTaskId!
-                                                                    .value
-                                                                    .firstWhereOrNull(
-                                                                      (element) =>
-                                                                          element?.jobCardId !=
-                                                                              0 ||
-                                                                          element?.pmId !=
-                                                                              0,
-                                                                    )
-                                                                    ?.mrs_return_ID ==
-                                                                0 &&
-                                                            controller.allTrue
-                                                                    .value ==
-                                                                false &&
-                                                            controller
-                                                                .cmmrsItems!
-                                                                .isNotEmpty) {
-                                                          controller
-                                                              .transferItem();
-                                                        }
-
-                                                        Text(
-                                                            'Are you sure you want to Update job ?');
-                                                      }
-                                                    },
-                                                  )
-                                                : Dimens.box0,
-                                            // Dimens.boxWidth10,
-                                            SizedBox(width: 10),
-                                            varUserAccessModel
-                                                        .value.access_list!
-                                                        .where((e) =>
-                                                            e.feature_id ==
-                                                                UserAccessConstants
-                                                                    .kJobCardFeatureId &&
-                                                            e.add ==
-                                                                UserAccessConstants
-                                                                    .kHaveAddAccess)
-                                                        .length >
-                                                    0
-                                                ? CustomElevatedButton(
-                                                    backgroundColor: ColorValues
-                                                        .appGreenColor,
-                                                    text: 'Close Job',
-                                                    onPressed: () async {
-                                                      bool? confirmed =
-                                                          await showConfirmationDialog(
-                                                        context,
-                                                        'Are you sure you want to Close Job ?',
-                                                      );
-                                                      if (confirmed == true) {
-                                                        // Check if the listMrsByTaskId is not null and is not empty
-                                                        if (controller
-                                                                    .listMrsByTaskId !=
-                                                                null &&
-                                                            controller
-                                                                .listMrsByTaskId!
-                                                                .isNotEmpty) {
-                                                          // Find the first element that meets the condition
-                                                          var element = controller
-                                                              .listMrsByTaskId!
-                                                              .firstWhereOrNull(
-                                                                  (element) => (element!
-                                                                              .jobCardId !=
-                                                                          0 ||
-                                                                      element.pmId !=
-                                                                          0));
-
-                                                          // Check if the conditions are met
-                                                          if (element != null &&
-                                                              element.mrs_return_ID ==
-                                                                  0 &&
-                                                              controller.allTrue
-                                                                      .value ==
-                                                                  false) {
-                                                            Get.defaultDialog(
-                                                              radius: 5,
-                                                              title: 'Alert',
-                                                              middleText:
-                                                                  'Please return all items first!',
-                                                              textConfirm: 'OK',
-                                                              onConfirm: () {
-                                                                Get.back(); // Close the dialog
-                                                              },
-                                                              buttonColor:
-                                                                  ColorValues
-                                                                      .appGreenColor,
-                                                              confirmTextColor:
-                                                                  Colors.white,
-                                                            );
-                                                          } else {
-                                                            controller.closeJob(
-                                                              fileIds:
-                                                                  dropzoneController
-                                                                      .fileIds,
-                                                            );
-                                                          }
-                                                        } else {
-                                                          // Handle the case where the list is null or empty if needed
-                                                          controller.closeJob(
-                                                            fileIds:
-                                                                dropzoneController
-                                                                    .fileIds,
-                                                          );
-                                                        }
-
-                                                        // This Text widget seems misplaced, ensure it is used correctly in your UI
-                                                        Text(
-                                                            'Are you sure you want to Close Job ?');
-                                                      }
-                                                    },
-                                                  )
-                                                : Container(),
-                                            // Dimens.boxWidth10,
-                                            SizedBox(width: 10),
-                                            CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.appLightBlueColor,
-                                              text: 'Carry Forward Job',
-                                              onPressed: () async {
-                                                bool? confirmed =
-                                                    await showConfirmationDialog(
-                                                  context,
-                                                  'Are you sure you want to Carry Forward Job ?',
-                                                );
-                                                if (confirmed == true) {
-                                                  // Check if the listMrsByTaskId is not null and is not empty
-                                                  if (controller
-                                                              .listMrsByTaskId !=
-                                                          null &&
-                                                      controller
-                                                          .listMrsByTaskId!
-                                                          .isNotEmpty) {
-                                                    // Find the first element that meets the condition
-                                                    var element = controller
-                                                        .listMrsByTaskId!
-                                                        .firstWhereOrNull(
-                                                            (element) => (element!
-                                                                        .jobCardId !=
-                                                                    0 ||
-                                                                element.pmId !=
-                                                                    0));
-
-                                                    // Check if the conditions are met
-                                                    if (element != null &&
-                                                        element.mrs_return_ID ==
-                                                            0 &&
-                                                        controller.allTrue
-                                                                .value ==
-                                                            false) {
-                                                      Get.defaultDialog(
-                                                        radius: 5,
-                                                        title: 'Alert',
-                                                        middleText:
-                                                            'Please return all items first!',
-                                                        textConfirm: 'OK',
-                                                        onConfirm: () {
-                                                          Get.back(); // Close the dialog
-                                                        },
-                                                        buttonColor: ColorValues
-                                                            .appGreenColor,
-                                                        confirmTextColor:
-                                                            Colors.white,
-                                                      );
-                                                    } else {
-                                                      controller.carryForwardJob(
-                                                          fileIds:
-                                                              dropzoneController
-                                                                  .fileIds);
-                                                    }
-                                                  } else {
-                                                    // Handle the case where the list is null or empty if needed
-                                                    controller.carryForwardJob(
-                                                        fileIds:
-                                                            dropzoneController
-                                                                .fileIds);
-                                                  }
-
-                                                  // This Text widget seems misplaced, ensure it is used correctly in your UI
-                                                  Text(
-                                                      'Are you sure you want to Close Job ?');
+                                              text: 'Start',
+                                              onPressed: () {
+                                                var employeesNotDeployed =
+                                                    controller.employeesDeployed
+                                                            .value.length ==
+                                                        0;
+                                                bool anyEmployeeNotSelected =
+                                                    false;
+                                                if (employeesNotDeployed ==
+                                                    false) {
+                                                  anyEmployeeNotSelected = controller
+                                                      .employeesDeployed.value
+                                                      .any((employeeList) =>
+                                                          employeeList.any((employee) =>
+                                                              employee['key'] ==
+                                                                  "Employee Name" &&
+                                                              employee[
+                                                                      'value'] ==
+                                                                  "Please Select"));
                                                 }
-                                                // if (confirmed == true) {
-                                                //   controller.listMrsByTaskId!
-                                                //                   .value
-                                                //                   .firstWhereOrNull(
-                                                //                       (element) =>
-                                                //                           element!.jobCardId !=
-                                                //                               0 ||
-                                                //                           element.pmId !=
-                                                //                               0)!
-                                                //                   .mrs_return_ID ==
-                                                //               0 &&
-                                                //           controller.allTrue
-                                                //                   .value ==
-                                                //               false
-                                                //       ? Get.defaultDialog(
-                                                //           radius: 5,
-                                                //           title: 'Alert',
-                                                //           middleText:
-                                                //               'Please return all items first!',
-                                                //           textConfirm: 'OK',
-                                                //           onConfirm: () {
-                                                //             Get.back(); // Close the dialog
-                                                //           },
-                                                //           buttonColor: ColorValues
-                                                //               .appGreenColor,
-                                                //           confirmTextColor:
-                                                //               Colors.white,
-                                                //         )
-                                                //       : controller.carryForwardJob(
-                                                //           fileIds:
-                                                //               dropzoneController
-                                                //                   .fileIds);
 
-                                                //   Text(
-                                                //       'Are you sure you want to Carry Forward Job ?');
-                                                // }
-                                              },
-                                            ),
-                                            // Dimens.boxWidth10,
-                                            SizedBox(width: 10),
-                                            controller.listMrsByTaskId!.value
-                                                            .firstWhereOrNull(
-                                                              (element) =>
-                                                                  element?.jobCardId !=
-                                                                      0 ||
-                                                                  element?.pmId !=
-                                                                      0,
-                                                            )
-                                                            ?.mrs_return_ID ==
-                                                        0 &&
-                                                    controller.allTrue.value ==
-                                                        false
-                                                ? CustomElevatedButton(
-                                                    icon: Icons
-                                                        .keyboard_return_outlined,
-                                                    backgroundColor: ColorValues
-                                                        .linktopermitColor,
-                                                    text: "Return Mrs",
-                                                    onPressed: () {
-                                                      controller
-                                                          .clearMrsIdStoreData();
-                                                      controller
-                                                          .clearJobIdStoreData();
+                                                var permitCondition = controller
+                                                        .permitList
+                                                        ?.firstWhere(
+                                                            (element) =>
+                                                                element
+                                                                    .permitId !=
+                                                                null)
+                                                        .tbTDoneCheck ==
+                                                    1;
 
-                                                      controller
-                                                          .clearTypeValue();
-                                                      controller
-                                                          .clearStoreTaskData();
-                                                      controller
-                                                          .clearStoreTaskActivityData();
-                                                      controller
-                                                          .clearStoreTasktoActorData();
-                                                      controller
-                                                          .clearStoreTaskWhereUsedData();
-                                                      controller
-                                                          .clearStoreTaskfromActorData();
-
-                                                      controller.getMrsListByModule(
-                                                          jobId: controller
-                                                                  .jobCardDetailsModel
-                                                                  .value
-                                                                  ?.jobId ??
-                                                              0);
-                                                      // controller.clearStoreTaskData();
-                                                      // controller
-                                                      //     .clearStoreTaskActivityData();
-                                                      // controller
-                                                      //     .clearStoreTasktoActorData();
-                                                      // controller
-                                                      //     .clearStoreTaskWhereUsedData();
-                                                      // controller
-                                                      //     .clearStoreTaskfromActorData();
-
-                                                      Get.toNamed(
-                                                          Routes
-                                                              .mrsReturnScreen,
-                                                          arguments: {
-                                                            'type': 1,
-                                                            'jobId': controller
-                                                                .jobId.value,
-                                                            "whereUsed": 4,
-                                                            "fromActorTypeId":
-                                                                4,
-                                                            "to_actor_type_id":
-                                                                2,
-                                                            "pmTaskId":
-                                                                controller
-                                                                    .jobCardId
-                                                                    .value,
-                                                            "activity": controller
-                                                                .jobDetailsModel
-                                                                .value
-                                                                ?.jobTitle,
-                                                            "mrsId": controller
-                                                                    .listMrsByTaskId!
-                                                                    .firstWhere(
-                                                                        (element) =>
-                                                                            element?.mrsId !=
-                                                                            0,
-                                                                        orElse:
-                                                                            null)!
-                                                                    .mrsId ??
-                                                                0
-                                                          });
+                                                if ((permitCondition &&
+                                                        anyEmployeeNotSelected ==
+                                                            true &&
+                                                        employeesNotDeployed ==
+                                                            false ||
+                                                    permitCondition &&
+                                                        employeesNotDeployed ==
+                                                            true)) {
+                                                  Get.defaultDialog(
+                                                    radius: 5,
+                                                    title: 'Alert',
+                                                    middleText:
+                                                        'Please select team members!',
+                                                    textConfirm: 'OK',
+                                                    onConfirm: () {
+                                                      Get.back(); // Close the dialog
                                                     },
-                                                  )
-                                                : Dimens.box0
+                                                    buttonColor: ColorValues
+                                                        .appGreenColor,
+                                                    confirmTextColor:
+                                                        Colors.white,
+                                                  );
+                                                } else if ((controller
+                                                            .permitList
+                                                            ?.firstWhere(
+                                                                (element) =>
+                                                                    element
+                                                                        .permitId !=
+                                                                    null)
+                                                            .tbTDoneCheck ==
+                                                        1) &&
+                                                    // employeesNotDeployed == true &&
+                                                    anyEmployeeNotSelected ==
+                                                        false &&
+                                                    employeesNotDeployed ==
+                                                        false) {
+                                                  controller.startJobCard(
+                                                    jcCard: controller
+                                                        .jobCardId.value,
+                                                    fileIds: dropzoneController
+                                                        .fileIds,
+                                                  );
+                                                } else if (controller.permitList
+                                                            ?.firstWhere(
+                                                                (element) =>
+                                                                    element
+                                                                        .permitId !=
+                                                                    null)
+                                                            .tbTDoneCheck ==
+                                                        0 &&
+                                                    controller.permitList
+                                                            ?.firstWhere(
+                                                                (element) =>
+                                                                    element
+                                                                        .permitId !=
+                                                                    null)
+                                                            .tbt_start ==
+                                                        0) {
+                                                  Get.defaultDialog(
+                                                      radius: 5,
+                                                      title: 'Alert',
+                                                      middleText:
+                                                          'Unable to start task due to permit taken for date and time ',
+                                                      textConfirm: 'OK',
+                                                      onConfirm: () {
+                                                        Get.back(); // Close the dialog
+                                                        // Get.offAllNamed(Routes.pmTask);
+                                                      },
+                                                      buttonColor: ColorValues
+                                                          .appGreenColor,
+                                                      confirmTextColor:
+                                                          Colors.white,
+                                                      barrierDismissible:
+                                                          false);
+                                                } else if (controller
+                                                        .permitList
+                                                        ?.firstWhere(
+                                                            (element) =>
+                                                                element
+                                                                    .permitId !=
+                                                                null)
+                                                        .tbTDoneCheck ==
+                                                    0) {
+                                                  Get.dialog<void>(
+                                                      TbtDoneBMDialog(
+                                                    ptw_id: controller
+                                                            .jobCardDetailsModel
+                                                            .value
+                                                            ?.ptwId ??
+                                                        0,
+                                                    id: controller
+                                                            .jobCardDetailsModel
+                                                            .value
+                                                            ?.id ??
+                                                        0,
+                                                  ));
+                                                }
+                                              },
+                                              backgroundColor:
+                                                  ColorValues.addNewColor,
+                                            ),
+
+                                            // CustomElevatedButton(
+                                            //   text: 'Update',
+                                            //   onPressed: () => controller.updateJobCard(),
+                                            //   backgroundColor: ColorValues.appYellowColor,
+                                            // ),
                                           ])
-                                    : controller.jobCardDetailsModel.value!
-                                                .status ==
-                                            153
-                                        // ||
-                                        //         controller.jobCardList[0]!.status ==
-                                        //             156
+                                    : controller.jobCardDetailsModel.value!.status == 157 ||
+                                            controller.jobCardDetailsModel
+                                                    .value!.status ==
+                                                152 ||
+                                            controller.jobCardDetailsModel
+                                                    .value!.status ==
+                                                154
                                         ? Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
@@ -1836,224 +1491,601 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                 ),
                                                 // Dimens.boxWidth10,
                                                 SizedBox(width: 10),
+                                                varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kJobCardFeatureId &&
+                                                                e.edit ==
+                                                                    UserAccessConstants
+                                                                        .kHaveEditAccess)
+                                                            .length >
+                                                        0
+                                                    ? CustomElevatedButton(
+                                                        text: 'Update',
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appYellowColor,
+                                                        onPressed: () async {
+                                                          bool? confirmed =
+                                                              await showConfirmationDialog(
+                                                            context,
+                                                            'Are you sure you want to Update job ?',
+                                                          );
+                                                          if (confirmed ==
+                                                              true) {
+                                                            controller.updateJobCard(
+                                                                fileIds:
+                                                                    dropzoneController
+                                                                        .fileIds);
+                                                            if (controller
+                                                                        .listMrsByTaskId!
+                                                                        .value
+                                                                        .firstWhereOrNull(
+                                                                          (element) =>
+                                                                              element?.jobCardId != 0 ||
+                                                                              element?.pmId != 0,
+                                                                        )
+                                                                        ?.mrs_return_ID ==
+                                                                    0 &&
+                                                                controller
+                                                                        .allTrue
+                                                                        .value ==
+                                                                    false &&
+                                                                controller
+                                                                    .cmmrsItems!
+                                                                    .isNotEmpty) {
+                                                              controller
+                                                                  .transferItem();
+                                                            }
+
+                                                            Text(
+                                                                'Are you sure you want to Update job ?');
+                                                          }
+                                                        },
+                                                      )
+                                                    : Dimens.box0,
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
+                                                varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kJobCardFeatureId &&
+                                                                e.add ==
+                                                                    UserAccessConstants
+                                                                        .kHaveAddAccess)
+                                                            .length >
+                                                        0
+                                                    ? CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appGreenColor,
+                                                        text: 'Close Job',
+                                                        onPressed: () async {
+                                                          bool? confirmed =
+                                                              await showConfirmationDialog(
+                                                            context,
+                                                            'Are you sure you want to Close Job ?',
+                                                          );
+                                                          if (confirmed ==
+                                                              true) {
+                                                            // Check if the listMrsByTaskId is not null and is not empty
+                                                            if (controller
+                                                                        .listMrsByTaskId !=
+                                                                    null &&
+                                                                controller
+                                                                    .listMrsByTaskId!
+                                                                    .isNotEmpty) {
+                                                              // Find the first element that meets the condition
+                                                              var element = controller
+                                                                  .listMrsByTaskId!
+                                                                  .firstWhereOrNull((element) =>
+                                                                      (element!.jobCardId !=
+                                                                              0 ||
+                                                                          element.pmId !=
+                                                                              0));
+
+                                                              // Check if the conditions are met
+                                                              if (element !=
+                                                                      null &&
+                                                                  element.mrs_return_ID ==
+                                                                      0 &&
+                                                                  controller
+                                                                          .allTrue
+                                                                          .value ==
+                                                                      false) {
+                                                                Get.defaultDialog(
+                                                                  radius: 5,
+                                                                  title:
+                                                                      'Alert',
+                                                                  middleText:
+                                                                      'Please return all items first!',
+                                                                  textConfirm:
+                                                                      'OK',
+                                                                  onConfirm:
+                                                                      () {
+                                                                    Get.back(); // Close the dialog
+                                                                  },
+                                                                  buttonColor:
+                                                                      ColorValues
+                                                                          .appGreenColor,
+                                                                  confirmTextColor:
+                                                                      Colors
+                                                                          .white,
+                                                                );
+                                                              } else {
+                                                                controller
+                                                                    .closeJob(
+                                                                  fileIds:
+                                                                      dropzoneController
+                                                                          .fileIds,
+                                                                );
+                                                              }
+                                                            } else {
+                                                              // Handle the case where the list is null or empty if needed
+                                                              controller
+                                                                  .closeJob(
+                                                                fileIds:
+                                                                    dropzoneController
+                                                                        .fileIds,
+                                                              );
+                                                            }
+
+                                                            // This Text widget seems misplaced, ensure it is used correctly in your UI
+                                                            Text(
+                                                                'Are you sure you want to Close Job ?');
+                                                          }
+                                                        },
+                                                      )
+                                                    : Container(),
+                                                // Dimens.boxWidth10,
+                                                SizedBox(width: 10),
                                                 CustomElevatedButton(
                                                   backgroundColor: ColorValues
-                                                      .appYellowColor,
-                                                  text: 'Update',
+                                                      .appLightBlueColor,
+                                                  text: 'Carry Forward Job',
                                                   onPressed: () async {
                                                     bool? confirmed =
                                                         await showConfirmationDialog(
                                                       context,
-                                                      'Are you sure you want to Update job ?',
+                                                      'Are you sure you want to Carry Forward Job ?',
                                                     );
                                                     if (confirmed == true) {
-                                                      controller.updateJobCard(
-                                                          fileIds:
-                                                              dropzoneController
-                                                                  .fileIds);
+                                                      // Check if the listMrsByTaskId is not null and is not empty
+                                                      if (controller
+                                                                  .listMrsByTaskId !=
+                                                              null &&
+                                                          controller
+                                                              .listMrsByTaskId!
+                                                              .isNotEmpty) {
+                                                        // Find the first element that meets the condition
+                                                        var element = controller
+                                                            .listMrsByTaskId!
+                                                            .firstWhereOrNull(
+                                                                (element) =>
+                                                                    (element!.jobCardId !=
+                                                                            0 ||
+                                                                        element.pmId !=
+                                                                            0));
 
+                                                        // Check if the conditions are met
+                                                        if (element != null &&
+                                                            element.mrs_return_ID ==
+                                                                0 &&
+                                                            controller.allTrue
+                                                                    .value ==
+                                                                false) {
+                                                          Get.defaultDialog(
+                                                            radius: 5,
+                                                            title: 'Alert',
+                                                            middleText:
+                                                                'Please return all items first!',
+                                                            textConfirm: 'OK',
+                                                            onConfirm: () {
+                                                              Get.back(); // Close the dialog
+                                                            },
+                                                            buttonColor:
+                                                                ColorValues
+                                                                    .appGreenColor,
+                                                            confirmTextColor:
+                                                                Colors.white,
+                                                          );
+                                                        } else {
+                                                          controller.carryForwardJob(
+                                                              fileIds:
+                                                                  dropzoneController
+                                                                      .fileIds);
+                                                        }
+                                                      } else {
+                                                        // Handle the case where the list is null or empty if needed
+                                                        controller.carryForwardJob(
+                                                            fileIds:
+                                                                dropzoneController
+                                                                    .fileIds);
+                                                      }
+
+                                                      // This Text widget seems misplaced, ensure it is used correctly in your UI
                                                       Text(
-                                                          'Are you sure you want to Update job ?');
+                                                          'Are you sure you want to Close Job ?');
                                                     }
+                                                    // if (confirmed == true) {
+                                                    //   controller.listMrsByTaskId!
+                                                    //                   .value
+                                                    //                   .firstWhereOrNull(
+                                                    //                       (element) =>
+                                                    //                           element!.jobCardId !=
+                                                    //                               0 ||
+                                                    //                           element.pmId !=
+                                                    //                               0)!
+                                                    //                   .mrs_return_ID ==
+                                                    //               0 &&
+                                                    //           controller.allTrue
+                                                    //                   .value ==
+                                                    //               false
+                                                    //       ? Get.defaultDialog(
+                                                    //           radius: 5,
+                                                    //           title: 'Alert',
+                                                    //           middleText:
+                                                    //               'Please return all items first!',
+                                                    //           textConfirm: 'OK',
+                                                    //           onConfirm: () {
+                                                    //             Get.back(); // Close the dialog
+                                                    //           },
+                                                    //           buttonColor: ColorValues
+                                                    //               .appGreenColor,
+                                                    //           confirmTextColor:
+                                                    //               Colors.white,
+                                                    //         )
+                                                    //       : controller.carryForwardJob(
+                                                    //           fileIds:
+                                                    //               dropzoneController
+                                                    //                   .fileIds);
+
+                                                    //   Text(
+                                                    //       'Are you sure you want to Carry Forward Job ?');
+                                                    // }
                                                   },
                                                 ),
                                                 // Dimens.boxWidth10,
                                                 SizedBox(width: 10),
-                                                // CustomElevatedButton(
-                                                //   backgroundColor:
-                                                //       ColorValues.approveColor,
-                                                //   text: 'Approve',
-                                                //   onPressed: () async {
-                                                //     bool? confirmed =
-                                                //         await showConfirmationDialog(
-                                                //       context,
-                                                //       'Are you sure you want to Approve ?',
-                                                //     );
-                                                //     if (confirmed == true) {
-                                                // controller.approveJobCards();
-
-                                                //       Text(
-                                                //           'Are you sure you want to Approve ?');
-                                                //     }
-                                                //   },
-                                                // ),
-
-                                                // Dimens.boxWidth10,
-                                                SizedBox(width: 10),
-
-                                                varUserAccessModel.value
-                                                                .access_list!
-                                                                .where((e) =>
-                                                                    e.feature_id ==
-                                                                        4 &&
-                                                                    e.approve ==
-                                                                        1)
-                                                                .length >
+                                                controller.listMrsByTaskId!
+                                                                .value
+                                                                .firstWhereOrNull(
+                                                                  (element) =>
+                                                                      element?.jobCardId !=
+                                                                          0 ||
+                                                                      element?.pmId !=
+                                                                          0,
+                                                                )
+                                                                ?.mrs_return_ID ==
                                                             0 &&
-                                                        controller
-                                                                .jobCardDetailsModel
-                                                                .value!
-                                                                .status ==
-                                                            153
-                                                    //         ||
-                                                    // varUserAccessModel.value
-                                                    //             .access_list!
-                                                    //             .where((e) =>
-                                                    //                 e.feature_id ==
-                                                    //                     4 &&
-                                                    //                 e.approve ==
-                                                    //                     1)
-                                                    //             .length >
-                                                    //         0 &&
-                                                    //     controller
-                                                    //             .jobCardList[0]!
-                                                    //             .status ==
-                                                    //         156
-                                                    ? Container(
-                                                        height: 30,
-                                                        child:
-                                                            CustomElevatedButton(
-                                                          backgroundColor:
-                                                              ColorValues
-                                                                  .appGreenColor,
-                                                          text: "Approve",
-                                                          icon: Icons.check,
-                                                          onPressed: () {
-                                                            // controller
-                                                            //     .createNewPermit();
-                                                            Get.dialog(
-                                                                JobCardApproveDialog(
-                                                              JobCardId:
-                                                                  '${controller.jobCardId.value}',
-                                                              // ptwStatus:
-                                                              //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
-                                                            ));
-                                                          },
-                                                        ))
-                                                    : Container(),
-                                                // Dimens.boxWidth10,
-                                                SizedBox(width: 10),
-                                                varUserAccessModel.value
-                                                                .access_list!
-                                                                .where((e) =>
-                                                                    e.feature_id ==
-                                                                        4 &&
-                                                                    e.approve ==
-                                                                        1)
-                                                                .length >
-                                                            0 &&
-                                                        controller
-                                                                .jobCardDetailsModel
-                                                                .value!
-                                                                .status ==
-                                                            153
-                                                    //          ||
-                                                    // varUserAccessModel.value
-                                                    //             .access_list!
-                                                    //             .where((e) =>
-                                                    //                 e.feature_id ==
-                                                    //                     4 &&
-                                                    //                 e.approve ==
-                                                    //                     1)
-                                                    //             .length >
-                                                    //         0 &&
-                                                    //     controller
-                                                    //             .jobCardList[0]!
-                                                    //             .status ==
-                                                    //         156
-                                                    ? Container(
-                                                        height: 30,
-                                                        child:
-                                                            CustomElevatedButton(
-                                                          backgroundColor:
-                                                              ColorValues
-                                                                  .rejectColor,
-                                                          text: "Reject",
-                                                          icon: Icons.add,
-                                                          onPressed: () {
-                                                            // controller
-                                                            //     .createNewPermit();
-                                                            Get.dialog(
-                                                                JobCardRejectDialog(
-                                                              JobCardId:
-                                                                  '${controller.jobCardId.value}',
-                                                              // ptwStatus:
-                                                              //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
-                                                            ));
-                                                          },
-                                                        ))
-                                                    : Container(),
+                                                        controller.allTrue
+                                                                .value ==
+                                                            false
+                                                    ? CustomElevatedButton(
+                                                        icon: Icons
+                                                            .keyboard_return_outlined,
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .linktopermitColor,
+                                                        text: "Return Mrs",
+                                                        onPressed: () {
+                                                          controller
+                                                              .clearMrsIdStoreData();
+                                                          controller
+                                                              .clearJobIdStoreData();
+
+                                                          controller
+                                                              .clearTypeValue();
+                                                          controller
+                                                              .clearStoreTaskData();
+                                                          controller
+                                                              .clearStoreTaskActivityData();
+                                                          controller
+                                                              .clearStoreTasktoActorData();
+                                                          controller
+                                                              .clearStoreTaskWhereUsedData();
+                                                          controller
+                                                              .clearStoreTaskfromActorData();
+
+                                                          controller.getMrsListByModule(
+                                                              jobId: controller
+                                                                      .jobCardDetailsModel
+                                                                      .value
+                                                                      ?.jobId ??
+                                                                  0);
+                                                          // controller.clearStoreTaskData();
+                                                          // controller
+                                                          //     .clearStoreTaskActivityData();
+                                                          // controller
+                                                          //     .clearStoreTasktoActorData();
+                                                          // controller
+                                                          //     .clearStoreTaskWhereUsedData();
+                                                          // controller
+                                                          //     .clearStoreTaskfromActorData();
+
+                                                          Get.toNamed(
+                                                              Routes
+                                                                  .mrsReturnScreen,
+                                                              arguments: {
+                                                                'type': 1,
+                                                                'jobId':
+                                                                    controller
+                                                                        .jobId
+                                                                        .value,
+                                                                "whereUsed": 4,
+                                                                "fromActorTypeId":
+                                                                    4,
+                                                                "to_actor_type_id":
+                                                                    2,
+                                                                "pmTaskId":
+                                                                    controller
+                                                                        .jobCardId
+                                                                        .value,
+                                                                "activity": controller
+                                                                    .jobDetailsModel
+                                                                    .value
+                                                                    ?.jobTitle,
+                                                                "mrsId": controller
+                                                                        .listMrsByTaskId!
+                                                                        .firstWhere(
+                                                                            (element) =>
+                                                                                element?.mrsId !=
+                                                                                0,
+                                                                            orElse:
+                                                                                null)!
+                                                                        .mrsId ??
+                                                                    0
+                                                              });
+                                                        },
+                                                      )
+                                                    : Dimens.box0
                                               ])
-                                        : controller.jobCardDetailsModel.value!
-                                                    .status ==
-                                                156
+                                        : controller.jobCardDetailsModel.value!.status ==
+                                                153
+                                            // ||
+                                            //         controller.jobCardList[0]!.status ==
+                                            //             156
                                             ? Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 //
                                                 children: [
-                                                    Container(
-                                                        height: 30,
-                                                        child:
-                                                            CustomElevatedButton(
-                                                          backgroundColor:
-                                                              ColorValues
-                                                                  .appGreenColor,
-                                                          text: "Approve",
-                                                          icon: Icons.check,
-                                                          onPressed: () {
-                                                            // controller
-                                                            //     .createNewPermit();
-                                                            Get.dialog(
-                                                                JobCardApproveDialog(
-                                                              JobCardId:
-                                                                  '${controller.jobCardId.value}',
-                                                              type: 1,
-                                                              // ptwStatus:
-                                                              //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
-                                                            ));
-                                                          },
-                                                        )),
+                                                    CustomElevatedButton(
+                                                      text: 'Cancel',
+                                                      onPressed: () => controller
+                                                          .startStopJobCard(),
+                                                      backgroundColor:
+                                                          ColorValues
+                                                              .appRedColor,
+                                                    ),
                                                     // Dimens.boxWidth10,
                                                     SizedBox(width: 10),
-                                                    Container(
-                                                        height: 30,
-                                                        child:
-                                                            CustomElevatedButton(
-                                                          backgroundColor:
-                                                              ColorValues
-                                                                  .rejectColor,
-                                                          text: "Reject",
-                                                          icon: Icons.add,
-                                                          onPressed: () {
-                                                            // controller
-                                                            //     .createNewPermit();
-                                                            Get.dialog(
-                                                                JobCardRejectDialog(
-                                                              JobCardId:
-                                                                  '${controller.jobCardId.value}',
-                                                              type: 1,
-                                                              // ptwStatus:
-                                                              //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
-                                                            ));
-                                                          },
-                                                        ))
+                                                    CustomElevatedButton(
+                                                      backgroundColor:
+                                                          ColorValues
+                                                              .appYellowColor,
+                                                      text: 'Update',
+                                                      onPressed: () async {
+                                                        bool? confirmed =
+                                                            await showConfirmationDialog(
+                                                          context,
+                                                          'Are you sure you want to Update job ?',
+                                                        );
+                                                        if (confirmed == true) {
+                                                          controller.updateJobCard(
+                                                              fileIds:
+                                                                  dropzoneController
+                                                                      .fileIds);
+
+                                                          Text(
+                                                              'Are you sure you want to Update job ?');
+                                                        }
+                                                      },
+                                                    ),
+                                                    // Dimens.boxWidth10,
+                                                    SizedBox(width: 10),
+                                                    // CustomElevatedButton(
+                                                    //   backgroundColor:
+                                                    //       ColorValues.approveColor,
+                                                    //   text: 'Approve',
+                                                    //   onPressed: () async {
+                                                    //     bool? confirmed =
+                                                    //         await showConfirmationDialog(
+                                                    //       context,
+                                                    //       'Are you sure you want to Approve ?',
+                                                    //     );
+                                                    //     if (confirmed == true) {
+                                                    // controller.approveJobCards();
+
+                                                    //       Text(
+                                                    //           'Are you sure you want to Approve ?');
+                                                    //     }
+                                                    //   },
+                                                    // ),
+
+                                                    // Dimens.boxWidth10,
+                                                    SizedBox(width: 10),
+
+                                                    varUserAccessModel.value
+                                                                    .access_list!
+                                                                    .where((e) =>
+                                                                        e.feature_id ==
+                                                                            4 &&
+                                                                        e.approve ==
+                                                                            1)
+                                                                    .length >
+                                                                0 &&
+                                                            controller
+                                                                    .jobCardDetailsModel
+                                                                    .value!
+                                                                    .status ==
+                                                                153
+                                                        //         ||
+                                                        // varUserAccessModel.value
+                                                        //             .access_list!
+                                                        //             .where((e) =>
+                                                        //                 e.feature_id ==
+                                                        //                     4 &&
+                                                        //                 e.approve ==
+                                                        //                     1)
+                                                        //             .length >
+                                                        //         0 &&
+                                                        //     controller
+                                                        //             .jobCardList[0]!
+                                                        //             .status ==
+                                                        //         156
+                                                        ? Container(
+                                                            height: 30,
+                                                            child:
+                                                                CustomElevatedButton(
+                                                              backgroundColor:
+                                                                  ColorValues
+                                                                      .appGreenColor,
+                                                              text: "Approve",
+                                                              icon: Icons.check,
+                                                              onPressed: () {
+                                                                // controller
+                                                                //     .createNewPermit();
+                                                                Get.dialog(
+                                                                    JobCardApproveDialog(
+                                                                  JobCardId:
+                                                                      '${controller.jobCardId.value}',
+                                                                  // ptwStatus:
+                                                                  //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
+                                                                ));
+                                                              },
+                                                            ))
+                                                        : Container(),
+                                                    // Dimens.boxWidth10,
+                                                    SizedBox(width: 10),
+                                                    varUserAccessModel.value
+                                                                    .access_list!
+                                                                    .where((e) =>
+                                                                        e.feature_id ==
+                                                                            4 &&
+                                                                        e.approve ==
+                                                                            1)
+                                                                    .length >
+                                                                0 &&
+                                                            controller
+                                                                    .jobCardDetailsModel
+                                                                    .value!
+                                                                    .status ==
+                                                                153
+                                                        //          ||
+                                                        // varUserAccessModel.value
+                                                        //             .access_list!
+                                                        //             .where((e) =>
+                                                        //                 e.feature_id ==
+                                                        //                     4 &&
+                                                        //                 e.approve ==
+                                                        //                     1)
+                                                        //             .length >
+                                                        //         0 &&
+                                                        //     controller
+                                                        //             .jobCardList[0]!
+                                                        //             .status ==
+                                                        //         156
+                                                        ? Container(
+                                                            height: 30,
+                                                            child:
+                                                                CustomElevatedButton(
+                                                              backgroundColor:
+                                                                  ColorValues
+                                                                      .rejectColor,
+                                                              text: "Reject",
+                                                              icon: Icons.add,
+                                                              onPressed: () {
+                                                                // controller
+                                                                //     .createNewPermit();
+                                                                Get.dialog(
+                                                                    JobCardRejectDialog(
+                                                                  JobCardId:
+                                                                      '${controller.jobCardId.value}',
+                                                                  // ptwStatus:
+                                                                  //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
+                                                                ));
+                                                              },
+                                                            ))
+                                                        : Container(),
                                                   ])
-                                            : Container(),
-                            Dimens.boxHeight10,
-                            Center(
-                              child: Container(
-                                height: 35,
-                                child: CustomElevatedButton(
-                                  icon: Icons.print,
-                                  backgroundColor:
-                                      ColorValues.linktopermitColor,
-                                  text: "print",
-                                  onPressed: () {
-                                    controller.generateInvoice();
-                                  },
+                                            : controller.jobCardDetailsModel
+                                                        .value!.status ==
+                                                    156
+                                                ? Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    //
+                                                    children: [
+                                                        Container(
+                                                            height: 30,
+                                                            child:
+                                                                CustomElevatedButton(
+                                                              backgroundColor:
+                                                                  ColorValues
+                                                                      .appGreenColor,
+                                                              text: "Approve",
+                                                              icon: Icons.check,
+                                                              onPressed: () {
+                                                                // controller
+                                                                //     .createNewPermit();
+                                                                Get.dialog(
+                                                                    JobCardApproveDialog(
+                                                                  JobCardId:
+                                                                      '${controller.jobCardId.value}',
+                                                                  type: 1,
+                                                                  // ptwStatus:
+                                                                  //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
+                                                                ));
+                                                              },
+                                                            )),
+                                                        // Dimens.boxWidth10,
+                                                        SizedBox(width: 10),
+                                                        Container(
+                                                            height: 30,
+                                                            child:
+                                                                CustomElevatedButton(
+                                                              backgroundColor:
+                                                                  ColorValues
+                                                                      .rejectColor,
+                                                              text: "Reject",
+                                                              icon: Icons.add,
+                                                              onPressed: () {
+                                                                // controller
+                                                                //     .createNewPermit();
+                                                                Get.dialog(
+                                                                    JobCardRejectDialog(
+                                                                  JobCardId:
+                                                                      '${controller.jobCardId.value}',
+                                                                  type: 1,
+                                                                  // ptwStatus:
+                                                                  //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
+                                                                ));
+                                                              },
+                                                            ))
+                                                      ])
+                                                : Container(),
+                                SizedBox(
+                                  width: 10,
                                 ),
-                              ),
+                                Center(
+                                  child: Container(
+                                    height: 30,
+                                    child: CustomElevatedButton(
+                                      icon: Icons.print,
+                                      backgroundColor:
+                                          ColorValues.linktopermitColor,
+                                      text: "print",
+                                      onPressed: () {
+                                        controller.generateInvoice();
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
 
                             // Dimens.boxHeight20,

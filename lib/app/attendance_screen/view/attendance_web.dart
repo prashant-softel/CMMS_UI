@@ -329,62 +329,116 @@ class AttendanceWeb extends GetView<AttendanceController> {
           ],
         ),
       ),
-      floatingActionButton: Row(
-        children: [
-          Spacer(),
-          Container(
-            height: 45,
-            child: CustomElevatedButton(
-              backgroundColor: ColorValues.cancelColor,
-              text: "Close",
-              onPressed: () {
-                controller.clearData();
-                Get.offNamed(Routes.admin_dashboard);
-              },
+      floatingActionButton: Obx(
+        () => Row(
+          children: [
+            Spacer(),
+            Container(
+              height: 45,
+              child: CustomElevatedButton(
+                backgroundColor: ColorValues.cancelColor,
+                text: "Close",
+                onPressed: () {
+                  controller.clearData();
+                  Get.offNamed(Routes.admin_dashboard);
+                },
+              ),
             ),
-          ),
-          Dimens.boxWidth10,
-          Container(
-            height: 45,
-            child: CustomElevatedButton(
-              backgroundColor: ColorValues.submitColor,
-              text: "Submit",
-              onPressed: () {
-                bool hasError = false;
-                String errorMessage = '';
+            Dimens.boxWidth10,
+            controller.updateSubmit.value == 0
+                ? Container(
+                    height: 45,
+                    child: CustomElevatedButton(
+                      backgroundColor: ColorValues.submitColor,
+                      text: "Submit",
+                      onPressed: () {
+                        bool hasError = false;
+                        String errorMessage = '';
 
-                for (int i = 0; i < controller.attendanceModel.length; i++) {
-                  if ((controller.attendanceModel[i]?.present == true)) {
-                    final inTime = controller.inTimeControllers[i].text;
-                    final outTime = controller.outTimeControllers[i].text;
+                        for (int i = 0;
+                            i < controller.attendanceModel.length;
+                            i++) {
+                          if ((controller.attendanceModel[i]?.present ==
+                              true)) {
+                            final inTime = controller.inTimeControllers[i].text;
+                            final outTime =
+                                controller.outTimeControllers[i].text;
 
-                    print("Original In Time: $inTime, Out Time: $outTime");
+                            print(
+                                "Original In Time: $inTime, Out Time: $outTime");
 
-                    bool hasErrorBuffer = isTime1LessThanTime2(inTime, outTime);
-                    if (!hasErrorBuffer) {
-                      hasError = true;
-                      errorMessage =
-                          "In Time cannot be greater than or equal to Out Time for employee ${controller.attendanceModel[i]?.name}.";
-                    }
-                  }
-                }
+                            bool hasErrorBuffer =
+                                isTime1LessThanTime2(inTime, outTime);
+                            if (!hasErrorBuffer) {
+                              hasError = true;
+                              errorMessage =
+                                  "In Time cannot be greater than or equal to Out Time for employee ${controller.attendanceModel[i]?.name}.";
+                            }
+                          }
+                        }
 
-                if (hasError) {
-                  print("Error: $errorMessage");
+                        if (hasError) {
+                          print("Error: $errorMessage");
 
-                  Get.snackbar('Validation Error', errorMessage,
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.red,
-                      colorText: Colors.white);
-                } else {
-                  print("No errors, submitting attendance data...");
-                  controller.addAttendance();
-                }
-              },
-            ),
-          ),
-          Spacer(),
-        ],
+                          Get.snackbar('Validation Error', errorMessage,
+                              snackPosition: SnackPosition.BOTTOM,
+                              backgroundColor: Colors.red,
+                              colorText: Colors.white);
+                        } else {
+                          print("No errors, submitting attendance data...");
+                          controller.addAttendance();
+                        }
+                      },
+                    ),
+                  )
+                : Container(
+                    height: 45,
+                    child: CustomElevatedButton(
+                      backgroundColor: ColorValues.submitColor,
+                      text: "Update",
+                      onPressed: () {
+                        bool hasError = false;
+                        String errorMessage = '';
+
+                        for (int i = 0;
+                            i < controller.attendanceModel.length;
+                            i++) {
+                          if ((controller.attendanceModel[i]?.present ==
+                              true)) {
+                            final inTime = controller.inTimeControllers[i].text;
+                            final outTime =
+                                controller.outTimeControllers[i].text;
+
+                            print(
+                                "Original In Time: $inTime, Out Time: $outTime");
+
+                            bool hasErrorBuffer =
+                                isTime1LessThanTime2(inTime, outTime);
+                            if (!hasErrorBuffer) {
+                              hasError = true;
+                              errorMessage =
+                                  "In Time cannot be greater than or equal to Out Time for employee ${controller.attendanceModel[i]?.name}.";
+                            }
+                          }
+                        }
+
+                        if (hasError) {
+                          print("Error: $errorMessage");
+
+                          Get.snackbar('Validation Error', errorMessage,
+                              snackPosition: SnackPosition.BOTTOM,
+                              backgroundColor: Colors.red,
+                              colorText: Colors.white);
+                        } else {
+                          print("No errors, submitting attendance data...");
+                          controller.updateAttendance();
+                        }
+                      },
+                    ),
+                  ),
+            Spacer(),
+          ],
+        ),
       ),
     );
   }
