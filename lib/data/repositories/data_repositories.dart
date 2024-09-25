@@ -6001,6 +6001,19 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> updateAttendance({
+    auth,
+    jsonEmployeeAttendance,
+    isLoading,
+  }) async {
+    var response = await connectHelper.updateAttendance(
+      auth: auth,
+      jsonEmployeeAttendance: jsonEmployeeAttendance,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+
   Future<ResponseModel> getAttendanceList({
     required String auth,
     required int facilityId,

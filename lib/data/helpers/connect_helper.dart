@@ -10649,6 +10649,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateAttendance({
+    auth,
+    jsonEmployeeAttendance,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Attendence/UpdateAttendance',
+      Request.post,
+      jsonEmployeeAttendance,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getAttendanceList({
     required String auth,
     required int facilityId,

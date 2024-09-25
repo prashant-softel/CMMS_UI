@@ -33,6 +33,14 @@ class AttendancePresenter {
         jsonEmployeeAttendance: jsonEmployeeAttendance,
         isLoading: isLoading,
       );
+  Future<bool> updateAttendance({
+    jsonEmployeeAttendance,
+    isLoading,
+  }) async =>
+      await attendanceUsecase.updateAttendance(
+        jsonEmployeeAttendance: jsonEmployeeAttendance,
+        isLoading: isLoading,
+      );
   void saveDate({String? date}) async {
     return attendanceUsecase.saveDateValue(date: date);
   }

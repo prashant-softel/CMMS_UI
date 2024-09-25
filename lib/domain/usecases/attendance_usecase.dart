@@ -36,6 +36,14 @@ class AttendanceUsecase {
         jsonEmployeeAttendance,
         isLoading,
       );
+  Future<bool> updateAttendance({
+    jsonEmployeeAttendance,
+    isLoading,
+  }) async =>
+      await repository.updateAttendance(
+        jsonEmployeeAttendance,
+        isLoading,
+      );
 
   void saveDateValue({String? date}) async =>
       repository.saveValue(LocalKeys.date, date);
