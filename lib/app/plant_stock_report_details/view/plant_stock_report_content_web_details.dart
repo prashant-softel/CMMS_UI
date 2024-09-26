@@ -1,3 +1,5 @@
+import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/multipule_dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -104,6 +106,44 @@ class _PlantStockReportDetailsWebState
                                           style: Styles.blackBold16,
                                         ),
                                         Spacer(),
+                                    //     Container(
+                                    //   height: 45,
+                                    //   decoration: BoxDecoration(
+                                    //     boxShadow: [
+                                    //       BoxShadow(
+                                    //         color: Colors.black26,
+                                    //         offset: const Offset(
+                                    //           5.0,
+                                    //           5.0,
+                                    //         ),
+                                    //         blurRadius: 5.0,
+                                    //         spreadRadius: 1.0,
+                                    //       ),
+                                    //     ],
+                                    //     color: ColorValues.whiteColor,
+                                    //     borderRadius: BorderRadius.circular(5),
+                                    //   ),
+                                    //   child: DropdownWebWidget(
+                                    //     width:
+                                    //         (MediaQuery.of(context).size.width *
+                                    //             .21),
+                                    //     //  height: 35,
+                                    //     dropdownList: controller.assetList,
+                                        
+                                    //     // selectedItems:
+                                    //     //     controller.selectedAssetsNameList,
+                                    //      isValueSelected:
+                                    //                           controller
+                                    //                               .ismaterialSelected
+                                    //                               .value,
+                                    //                       selectedValue: controller
+                                    //                           .selectedmaterial
+                                    //                           .value,
+                                    //     onValueChanged:
+                                    //         controller.onValueChanged,
+                                    //   ),
+                                    // ),
+                                     Spacer(),
                                         Row(
                                           children: [
                                             CustomRichText(
@@ -192,7 +232,7 @@ class _PlantStockReportDetailsWebState
                                                               const EdgeInsets
                                                                   .all(15),
                                                           child: Text(
-                                                            "Asset Name : ${controller.assetItemName} (${controller.assetType})",
+                                                            "Material Name : ${controller.assetItemName} (${controller.assetType})",
                                                             style:
                                                                 Styles.blue17,
                                                           ),
@@ -291,16 +331,16 @@ class _PlantStockReportDetailsWebState
                                                               ),
                                                               DataColumn2(
                                                                 // size: ColumnSize.S,
-                                                                fixedWidth: 150,
+                                                                fixedWidth: 70,
                                                                 label: Text(
-                                                                  "Available \n Qty",
+                                                                  "Avail\nQty",
                                                                   style: Styles
                                                                       .blue17,
                                                                 ),
                                                               ),
                                                               DataColumn2(
                                                                 // size: ColumnSize.M,
-                                                                fixedWidth: 110,
+                                                                fixedWidth: 150,
                                                                 label: Text(
                                                                   "Last Update By",
                                                                   style: Styles

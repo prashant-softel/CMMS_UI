@@ -1143,7 +1143,18 @@ class DataRepository extends DomainRepository {
         goodsOrderApproveJsonString: goodsOrderApproveJsonString,
         isLoading: isLoading ?? false,
       );
-
+  Future<ResponseModel> approveButton({
+    required String auth,
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+    int? facilityId,
+  }) async =>
+      await connectHelper.approveButton(
+        auth: auth,
+        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        isLoading: isLoading ?? false,
+        facilityId:facilityId,
+      );
   Future<ResponseModel> rejectGOReceiveButton({
     required String auth,
     goodsOrderApproveJsonString,
@@ -1153,6 +1164,18 @@ class DataRepository extends DomainRepository {
         auth: auth,
         goodsOrderApproveJsonString: goodsOrderApproveJsonString,
         isLoading: isLoading ?? false,
+      );
+        Future<ResponseModel> rejectobsButton({
+    required String auth,
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+    int?facilityId,
+  }) async =>
+      await connectHelper.rejectobsButton(
+        auth: auth,
+        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        isLoading: isLoading ?? false,
+        facilityId:facilityId
       );
   Future<ResponseModel> pmPlanRejectButton({
     required String auth,

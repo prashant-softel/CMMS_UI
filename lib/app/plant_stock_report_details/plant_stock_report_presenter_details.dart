@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:cmms/domain/models/plant_stock_month.dart';
 import 'package:cmms/domain/usecases/plant_stock_report_details_usecase.dart';
 
@@ -39,5 +40,19 @@ Future<String?> getStartdateValue() async {
 Future<String?> getEnddateValue() async {
   return await plantStockReportDetailsUsecase.getEnddateValue();
 }
+ Future<List<PlantStockListModel?>?> getPlantStockList(
+          {int? facilityId,
+          bool? isLoading,
+          bool? isExport,
+          dynamic endDate,
+          dynamic startDate,
+          List<int>? selectedAssetsNameIdList}) async =>
+      await plantStockReportDetailsUsecase.getPlantStockList(
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          isExport: isExport,
+          endDate: endDate,
+          startDate: startDate,
+          selectedAssetsNameIdList: selectedAssetsNameIdList);
 }
 

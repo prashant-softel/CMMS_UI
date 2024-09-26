@@ -1,38 +1,54 @@
 import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/plant_stock_report_details/plant_stock_report_presenter_details.dart';
+import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:cmms/domain/models/plant_stock_month.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class PlantStockReportDetailsController extends GetxController {
   PlantStockReportDetailsController(
     this.plantStockReportDetailsPresenter,
   );
-
+  PaginationController paginationController = PaginationController(
+    rowCount: 0,
+    rowsPerPage: 10,
+  );
+  // DateFormat('dd/MM/yyyy').format(fromDate.value);
+  // String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
   PlantStockReportDetailsPresenter plantStockReportDetailsPresenter;
   final HomeController homeController = Get.find();
-
+  int facilityId = 0;
+    RxList<StockDetails?> filteredData = <StockDetails?>[].obs;
+  RxList<StockDetails?> StockDetailsList = <StockDetails?>[].obs;
   bool openPurchaseDatePicker = false;
   var purchaseDateTc = TextEditingController();
+  List<int> selectedmaterialId = <int>[].obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
-
+  List<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
+  RxList<GetAssetDataModel?> selectedAssetsNameList = <GetAssetDataModel>[].obs;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
-
+  RxList<PlantStockListModel?> plantStockList = <PlantStockListModel?>[].obs;
   String get formattedFromdate =>
       DateFormat('dd/MM/yyyy').format(fromDate.value);
   String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
   String get end_date => DateFormat('yyyy-MM-dd').format(toDate.value);
   String get start_date => DateFormat('yyyy-MM-dd').format(fromDate.value);
-
+  Rx<bool> ismaterialSelected = true.obs;
+  Rx<String> selectedmaterial = ''.obs;
   int facilityID = 0;
   int assetItemID = 0;
   Rx<int> assetID = 0.obs;
-  Rx<bool>isLoading=true.obs; 
-
+  Rx<bool> isLoading = true.obs;
+// RxInt selectedmaterialId = 0.obs;
   Rx<int> type = 0.obs;
   Rx<int> selectedYear = 0.obs;
   Rx<int> selectedMonth = 0.obs;
@@ -86,6 +102,11 @@ class PlantStockReportDetailsController extends GetxController {
         end_date: enddate.value,
         assetItemID: assetID.value,
       );
+      //   Future.delayed(Duration(seconds: 1), () {
+      //   getPlantStockList(facilityId, formattedTodate1, formattedFromdate1,
+      //       false, selectedmaterialId.value);
+      // });
+
     });
     super.onInit();
   }
@@ -99,14 +120,14 @@ class PlantStockReportDetailsController extends GetxController {
 
       if (_assetId == null || _assetId.isEmpty || _assetId == "null") {
         var dataFromPreviousScreen = Get.arguments;
-  
+
         assetID.value = dataFromPreviousScreen['assetId'];
         startdate.value = dataFromPreviousScreen['startdate'];
         enddate.value = dataFromPreviousScreen['enddate'];
         DateTime start = DateTime.parse(startdate.value);
         DateTime end = DateTime.parse(enddate.value);
-        startDate.value=DateFormat("dd/MM/yyyy").format(start);
-        endDate.value=DateFormat("dd/MM/yyyy").format(end);
+        startDate.value = DateFormat("dd/MM/yyyy").format(start);
+        endDate.value = DateFormat("dd/MM/yyyy").format(end);
 
         plantStockReportDetailsPresenter.savestartValue(
             startdate: startdate.value.toString());
@@ -155,7 +176,7 @@ class PlantStockReportDetailsController extends GetxController {
       //     (element) => element?.facilityID != 0);
       for (var plantDetail in plantStockReportByMonthList) {
         plantDetailList.value = plantDetail?.details ?? [];
-        isLoading.value=false;
+        isLoading.value = false;
         plantDetails = plantDetailList
             .firstWhere((element) => element?.assetItemName != null);
         assetItemName.value = plantDetails?.assetItemName;
@@ -163,9 +184,62 @@ class PlantStockReportDetailsController extends GetxController {
             plantDetailList.firstWhere((element) => element?.assetType != null);
         assetType.value = plantDetails?.assetType;
       }
-
     }
-    
-    
   }
+// void onValueChanged(dynamic list, dynamic value) {
+//     print({"valuevaluevaluevalue": value});
+//     switch (list.runtimeType) {
+//       case const (RxList<GetAssetDataModel>):
+//         {
+//           if (value != "Please Select") {
+//             int equipCatIndex = assetList.indexWhere((x) => x?.name == value);
+//              selectedmaterialId.value= assetList[equipCatIndex]?.id ?? 0;
+//              ismaterialSelected.value=true;
+//              selectedmaterial.value=value;
+//             }
+//            else {
+//             selectedmaterialId.value=0;
+//           }
+//         }
+//         break;
+//     }
+
+//   }
+ 
+  Future<void> getPlantStockList(int facilityId, dynamic startDate,
+      dynamic endDate, bool? isExport, List<int>? selectedAssetsNameIdList,
+      {bool isExportOnly = false}) async {
+    if (!isExportOnly) {
+      plantStockList!.clear();
+      plantStockList?.value = <PlantStockListModel>[];
+      StockDetailsList.value = <StockDetails>[];
+    }
+    final _plantStockList = await plantStockReportDetailsPresenter.getPlantStockList(
+        facilityId: facilityId,
+        isLoading: isLoading.value,
+        isExport: isExport,
+        startDate: startDate,
+        endDate: endDate,
+        selectedAssetsNameIdList: selectedAssetsNameIdList);
+
+    if (_plantStockList != null && !isExportOnly) {
+      plantStockList?.value = _plantStockList;
+      isLoading.value = false;
+
+      for (var facility in _plantStockList) {
+        for (var stockDetail in facility!.stockDetails) {
+          StockDetailsList.add(stockDetail);
+        }
+      }
+
+      filteredData.value = StockDetailsList.toList();
+
+      // paginationController = PaginationController(
+      //   rowCount: StockDetailsList.length,
+      //   rowsPerPage: 10,
+      // );
+    }
+  }
+   
+  
 }

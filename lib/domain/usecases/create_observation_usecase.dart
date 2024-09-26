@@ -95,4 +95,25 @@ Future<List<EmployeeModel?>?> getAssignedToList({
         isLoading,
       );
 
+  Future<Map<String, dynamic>> approveButton({
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+    int?facilityId,
+  }) async =>
+      await repository.approveButton(
+        goodsOrderApproveJsonString,
+        isLoading,
+        facilityId,
+      );
+
+  Future<Map<String, dynamic>> rejectobsButton({
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+    int? facilityId,
+  }) async =>
+      await repository.rejectobsButton(
+        goodsOrderApproveJsonString,
+        isLoading,
+        facilityId,
+      );
 }

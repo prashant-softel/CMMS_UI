@@ -41,6 +41,7 @@ class CreateObservationController extends GetxController {
   TextEditingController closeCommentTextFieldCtrlr = TextEditingController();
   GetObservationList? getObservationListModel;
   bool openTargetObsDatePicker = false;
+  TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   var obsDateTc = TextEditingController();
   var targetDateTc = TextEditingController();
   var contractorNameCtrlr = TextEditingController();
@@ -270,10 +271,10 @@ class CreateObservationController extends GetxController {
 
   void createObs({int? position, List<dynamic>? fileIds}) async {
     try {
-      //   checkObs();
-      //   if (isFormInvalid.value) {
-      //     return;
-      //   }
+        // checkObs1();
+        // if (isFormInvalid.value) {
+        //   return;
+        // }
 
       String _contractorNameCtrlr = contractorNameCtrlr.text.trim();
       String _correctivePreventiveCtrlr = correctivePreventiveCtrlr.text.trim();
@@ -360,6 +361,10 @@ class CreateObservationController extends GetxController {
   }
 
   Future<void> getAssignedToList() async {
+    //  checkObs2();
+    //     if (isFormInvalid.value) {
+    //       return;
+    //     }
     assignedToList.clear();
     final _assignedToList = await createObservationPresenter.getAssignedToList(
         facilityId: facilityId,
@@ -372,7 +377,7 @@ class CreateObservationController extends GetxController {
     }
   }
 
-  void checkObs() {
+  void checkObs1() {
     if (selectedRiskTypeList.value == '') {
       isRiskTypeListSelected.value = false;
       isFormInvalid.value = true;
@@ -382,23 +387,16 @@ class CreateObservationController extends GetxController {
       isFormInvalid.value = true;
     }
 
-    if (correctivePreventiveCtrlr.text.trim() == '') {
-      isCorrectiveInvalid.value = true;
-      isFormInvalid.value = true;
-    }
-    if (responsiblePersonCtrlr.text.trim() == '') {
-      isResponsibleInvalid.value = true;
-      isFormInvalid.value = true;
-    }
+    // if (correctivePreventiveCtrlr.text.trim() == '') {
+    //   isCorrectiveInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
 
-    if (contactNumberCtrlr.text.trim() == '') {
-      isContactNumberInvalid.value = true;
-      isFormInvalid.value = true;
-    }
-    if (costTypeCtrlr.text.trim() == '') {
-      isCostInvalid.value = true;
-      isFormInvalid.value = true;
-    }
+
+    // if (contactNumberCtrlr.text.trim() == '') {
+    //   isContactNumberInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
 
     if (obsDateTc.text.trim() == '') {
       isObsDateTcInvalid.value = true;
@@ -414,10 +412,7 @@ class CreateObservationController extends GetxController {
       isFormInvalid.value = true;
     }
 
-    if (targetDateTc.text.trim().length == 0) {
-      isTargetDateInvalid.value = true;
-      isFormInvalid.value = true;
-    }
+   
 
     if (locationOfObservationCtrlr.text.trim().length == 0) {
       islocationofObservationInvalid.value = true;
@@ -446,7 +441,25 @@ class CreateObservationController extends GetxController {
     //   isFormInvalid.value = true;
     // }
   }
+void checkObs2(){
 
+      if (responsiblePersonCtrlr.text.trim() == '') {
+      isResponsibleInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+      if (costTypeCtrlr.text.trim() == '') {
+      isCostInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+
+ if (targetDateTc.text.trim().length == 0) {
+      isTargetDateInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+  
+} 
   Future<void> getIncidentRiskType(int facilityId) async {
     incidentrisktypeList.value = <RiskTypeModel>[];
     final _irisktypeList = await createObservationPresenter.getRiskTypeList(
@@ -457,6 +470,7 @@ class CreateObservationController extends GetxController {
       incidentrisktypeList.add(facilityType_list);
     }
   }
+
 
   Future<void> getTypeOfObservationList() async {
     typeOfObsList.clear();
@@ -561,6 +575,54 @@ class CreateObservationController extends GetxController {
           }
         }
         break;
+    }
+  }
+  
+   void approveButton({int? id}) async {
+    {
+      // await 
+      // checkform();
+      // if (isFormInvalid.value == true) {
+      //   Fluttertoast.showToast(msg: "Please Enter Comment!");
+
+        // return;
+      // }
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentGoodsOrderAproveModel =
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
+
+      var goodsOrderApproveJsonString = commentGoodsOrderAproveModel.toJson();
+
+      Map<String, dynamic>? response =
+          await createObservationPresenter.approveButton(
+        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        isLoading: true,
+        facilityId:facilityId
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+  // rejectobsButton
+   void rejectobsButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentGoodsOrderAproveModel =
+          CommentModel(id: id, comment: _comment, facilityId: facilityId);
+
+      var goodsOrderApproveJsonString = commentGoodsOrderAproveModel.toJson();
+
+      Map<String, dynamic>? response =
+          await createObservationPresenter.rejectobsButton(
+        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
     }
   }
 }
