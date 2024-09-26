@@ -140,7 +140,7 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
                                                 MediaQuery.of(context)
                                                         .size
                                                         .width /
-                                                    8,
+                                                    4,
                                             numberTextField: true,
                                             onTap: () {
                                               controller

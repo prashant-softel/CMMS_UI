@@ -75,9 +75,7 @@ class CalendarViewController extends GetxController {
     for (var module in dashboardList) {
       if (module?.module_name == 'Breakdown Maintenance' ||
           module?.module_name == 'Preventive Maintenance' ||
-          module?.module_name == 'Module Cleaning' ||
-          module?.module_name == 'Incident Report' ||
-          module?.module_name == 'Stock Management') {
+          module?.module_name == 'Module Cleaning') {
         var details = module?.cmDashboadDetails;
         allItems.addAll(details?.item_list ?? []);
       }
