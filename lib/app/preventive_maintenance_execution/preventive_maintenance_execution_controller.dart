@@ -105,18 +105,18 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       facilityIdStreamSubscription =
           homeController.facilityId$.listen((event) async {
         facilityId = event;
-        // if (facilityId > 0) {
-        isFacilitySelected.value = true;
-        if (scheduleId != 0) {
-          await getPmtaskViewList(
-              scheduleId: scheduleId.value,
-              isloading: true,
-              facilityId: facilityId);
+        if (facilityId > 0) {
+          isFacilitySelected.value = true;
+          if (scheduleId != 0) {
+            await getPmtaskViewList(
+                scheduleId: scheduleId.value,
+                isloading: true,
+                facilityId: facilityId);
 
-          getHistory();
-          getLocation();
+            getHistory();
+            getLocation();
+          }
         }
-        //}
       });
 
       super.onInit();
