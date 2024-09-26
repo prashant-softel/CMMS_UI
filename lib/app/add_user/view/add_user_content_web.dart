@@ -2249,9 +2249,9 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                       right: 35,
                       top: 300,
                       child: DatePickerWidget(
-                        minDate: DateTime(DateTime.now().year),
-                        maxDate: DateTime(DateTime.now().year, 13,
-                            0), // last date of this year
+                        minDate: DateTime(1950), // Starting from the year 1950
+                        maxDate: DateTime(DateTime.now().year, 12,
+                            31), // Until the last day of the current year
                         controller: DateRangePickerController(),
                         selectionChanges: (p0) {
                           print('po valu ${p0.value.toString()}');
