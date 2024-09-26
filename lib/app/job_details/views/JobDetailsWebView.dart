@@ -617,31 +617,61 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                         .clearStoreTaskWhereUsedData();
                                                                     controller
                                                                         .clearStoreTaskfromActorData();
+                                                                    String whereUsedId = controller
+                                                                            .jobAssociatedModelsList?[index]
+                                                                            ?.jobCardId
+                                                                            ?.toString() ??
+                                                                        "";
+                                                                    String activity = controller
+                                                                            .jobDetailsModel
+                                                                            .value
+                                                                            ?.jobTitle ??
+                                                                        "";
+                                                                    String jobId = controller
+                                                                            .jobAssociatedModelsList?[index]
+                                                                            ?.jobId
+                                                                            ?.toString() ??
+                                                                        "";
+                                                                    int whereUsed =
+                                                                        4;
+                                                                    int type =
+                                                                        1;
+                                                                    int fromActorTypeId =
+                                                                        2;
+                                                                    int toActorTypeId =
+                                                                        4;
+                                                                    String
+                                                                        encodedActivity =
+                                                                        Uri.encodeComponent(
+                                                                            activity);
+                                                                    String
+                                                                        encodedWhereUsedId =
+                                                                        Uri.encodeComponent(
+                                                                            whereUsedId);
+                                                                    String
+                                                                        encodedWhereUsed =
+                                                                        Uri.encodeComponent(
+                                                                            whereUsed.toString());
+                                                                    String
+                                                                        encodedJobId =
+                                                                        Uri.encodeComponent(
+                                                                            jobId.toString());
+                                                                    String
+                                                                        encodedType =
+                                                                        Uri.encodeComponent(
+                                                                            type.toString());
+                                                                    String
+                                                                        encodedFromActorTypeId =
+                                                                        Uri.encodeComponent(
+                                                                            fromActorTypeId.toString());
+                                                                    String
+                                                                        encodedToActorTypeId =
+                                                                        Uri.encodeComponent(
+                                                                            toActorTypeId.toString());
 
                                                                     Get.offAllNamed(
-                                                                        Routes
-                                                                            .createMrs,
-                                                                        arguments: {
-                                                                          "whereUsedId": controller
-                                                                              .jobAssociatedModelsList?[index]
-                                                                              ?.jobCardId,
-                                                                          "activity": controller
-                                                                              .jobDetailsModel
-                                                                              .value
-                                                                              ?.jobTitle,
-                                                                          "jobId": controller
-                                                                              .jobDetailsModel
-                                                                              .value
-                                                                              ?.id,
-                                                                          "type":
-                                                                              1,
-                                                                          "whereUsed":
-                                                                              4,
-                                                                          "fromActorTypeId":
-                                                                              2,
-                                                                          "to_actor_type_id":
-                                                                              4
-                                                                        });
+                                                                      '${Routes.createMrs}/$encodedWhereUsedId/$encodedWhereUsed/$encodedActivity/$encodedJobId/$encodedType/$encodedFromActorTypeId/$encodedToActorTypeId',
+                                                                    );
                                                                   },
                                                                 ),
                                                           TableActionButton(

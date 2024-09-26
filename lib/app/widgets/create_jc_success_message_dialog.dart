@@ -120,15 +120,39 @@ class CreateJobCardDialog extends GetView {
                   //     _controller.formattedFromdate,
                   //     false);
                   //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
-                  Get.offAllNamed(Routes.createMrs, arguments: {
-                    "whereUsedId": jcId![0],
-                    "activity": _controller.titleTextCtrlr.text,
-                    "whereUsed": 4,
-                    "jobId": jobId,
-                    "type": 1,
-                    "fromActorTypeId": 2,
-                    "to_actor_type_id": 4
-                  });
+                  // Get.offAllNamed(Routes.createMrs, arguments: {
+                  //   "whereUsedId": jcId![0],
+                  //   "activity": _controller.titleTextCtrlr.text,
+                  //   "whereUsed": 4,
+                  //   "jobId": jobId,
+                  //   "type": 1,
+                  //   "fromActorTypeId": 2,
+                  //   "to_actor_type_id": 4
+                  // });
+                  String whereUsedId = jcId![0].toString();
+                  String activity = _controller.titleTextCtrlr.text;
+                  String jbId = jobId.toString();
+                  int whereUsed = 4;
+                  int type = 1;
+                  int fromActorTypeId = 2;
+                  int toActorTypeId = 4;
+                  String encodedActivity = Uri.encodeComponent(activity);
+                  String encodedWhereUsedId = Uri.encodeComponent(whereUsedId);
+                  String encodedWhereUsed =
+                      Uri.encodeComponent(whereUsed.toString());
+                  String encodedJobId = Uri.encodeComponent(jbId.toString());
+                  String encodedType = Uri.encodeComponent(type.toString());
+                  String encodedFromActorTypeId =
+                      Uri.encodeComponent(fromActorTypeId.toString());
+                  String encodedToActorTypeId =
+                      Uri.encodeComponent(toActorTypeId.toString());
+
+                  Get.offAllNamed(
+                    '${Routes.createMrs}/$encodedWhereUsedId/$encodedWhereUsed/$encodedActivity/$encodedJobId/$encodedType/$encodedFromActorTypeId/$encodedToActorTypeId',
+                  );
+                  // Get.offAllNamed(
+                  //     '${Routes.createMrs}/${jcId![0]}/${_controller.titleTextCtrlr.text}/${4}/${jobId}/${1}/${2}/${4}');
+
                   Get.back();
                 },
                 child: const Text('Add Mrs'),

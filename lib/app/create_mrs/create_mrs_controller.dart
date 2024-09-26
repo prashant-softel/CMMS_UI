@@ -36,6 +36,8 @@ class CreateMrsController extends GetxController {
   Rx<int> whereUsedTypeId = 0.obs;
   Rx<int> whereUsed = 0.obs;
   Rx<int> type = 0.obs;
+  Rx<int> jobId = 0.obs;
+
   Rx<int> fromActorTypeId = 0.obs;
   Rx<int> to_actor_type_id = 0.obs;
 
@@ -69,64 +71,83 @@ class CreateMrsController extends GetxController {
   }
 
   Future<void> setMrs() async {
-    try {
-      final _whereUsedTypeId = await createMrsPresenter.getUsedTypeIdValue();
-      final _whereUsed = await createMrsPresenter.getwhereUsedValue();
-      final _to_actor_type_id = await createMrsPresenter.getToActortypeValue();
-      final _type = await createMrsPresenter.getTypeValue();
-      final _fromActorTypeId = await createMrsPresenter.getFromActorIdValue();
-      final _activityCtrlr = await createMrsPresenter.getActivityValue();
+    final String? _whereUsedTypeId = Get.parameters['whereUsedId'];
+    final String? _whereUsed = Get.parameters['whereUsed'];
+    final String? _to_actor_type_id = Get.parameters['to_actor_type_id'];
+    final String? _type = Get.parameters['type'];
+    final String? _fromActorTypeId = Get.parameters['fromActorTypeId'];
+    final String? _activityCtrlr = Get.parameters['activity'];
+    final String? _jbId = Get.parameters['jobId'];
 
-      if (_whereUsedTypeId == null ||
-          _whereUsedTypeId == '' ||
-          _whereUsedTypeId == "null") {
-        var dataFromPreviousScreen = Get.arguments;
-        if (dataFromPreviousScreen != null) {
-          if (dataFromPreviousScreen.containsKey('whereUsedId')) {
-            whereUsedTypeId.value = dataFromPreviousScreen['whereUsedId'];
-            createMrsPresenter.saveUsedTypeIdValue(
-                whereUsedTypeId: whereUsedTypeId.value.toString());
+    whereUsedTypeId.value = int.tryParse(_whereUsedTypeId ?? "") ?? 0;
+    whereUsed.value = int.tryParse(_whereUsed ?? "") ?? 0;
+    to_actor_type_id.value = int.tryParse(_to_actor_type_id ?? "") ?? 0;
+    fromActorTypeId.value = int.tryParse(_fromActorTypeId ?? "") ?? 0;
+    activityCtrlr.text = _activityCtrlr ?? "";
 
-            whereUsedCtrlr.text = whereUsedTypeId.toString();
-          }
-          if (dataFromPreviousScreen.containsKey('whereUsed')) {
-            whereUsed.value = dataFromPreviousScreen['whereUsed'];
-            createMrsPresenter.savewhereUsedValue(
-                whereUsed: whereUsed.value.toString());
-          }
-          if (dataFromPreviousScreen.containsKey('to_actor_type_id')) {
-            to_actor_type_id.value = dataFromPreviousScreen['to_actor_type_id'];
-            createMrsPresenter.saveToActortypeValue(
-                to_actor_type_id: to_actor_type_id.value.toString());
-          }
-          if (dataFromPreviousScreen.containsKey('type')) {
-            type.value = dataFromPreviousScreen['type'];
-            createMrsPresenter.saveTypeValue(type: type.value.toString());
-          }
-          if (dataFromPreviousScreen.containsKey('fromActorTypeId')) {
-            fromActorTypeId.value = dataFromPreviousScreen['fromActorTypeId'];
-            createMrsPresenter.saveFromActorIdValue(
-                fromActorTypeId: fromActorTypeId.value.toString());
-          }
-          if (dataFromPreviousScreen.containsKey('activity')) {
-            activityCtrlr.text = dataFromPreviousScreen['activity'];
-            createMrsPresenter.saveActivityValue(
-                activityCtrlr: activityCtrlr.text.toString());
-          }
-        }
-      } else {
-        whereUsedTypeId.value = int.tryParse(_whereUsedTypeId) ?? 0;
-        whereUsed.value = int.tryParse(_whereUsed ?? "") ?? 0;
-        to_actor_type_id.value = int.tryParse(_to_actor_type_id ?? "") ?? 0;
-        type.value = int.tryParse(_type ?? "") ?? 0;
-        fromActorTypeId.value = int.tryParse(_fromActorTypeId ?? "") ?? 0;
-        activityCtrlr.text = _activityCtrlr ?? "";
-        whereUsedCtrlr.text = whereUsedTypeId.toString();
-      }
-      //  await _flutterSecureStorage.delete(key: "scheduleId");
-    } catch (e) {
-      Utility.showDialog(e.toString(), 'scheduleId');
-    }
+    type.value = int.tryParse(_type ?? "") ?? 0;
+    jobId.value = int.tryParse(_jbId ?? "") ?? 0;
+
+    whereUsedCtrlr.text = whereUsedTypeId.toString();
+
+    // try {
+    //   final _whereUsedTypeId = await createMrsPresenter.getUsedTypeIdValue();
+    //   final _whereUsed = await createMrsPresenter.getwhereUsedValue();
+    //   final _to_actor_type_id = await createMrsPresenter.getToActortypeValue();
+    //   final _type = await createMrsPresenter.getTypeValue();
+    //   final _fromActorTypeId = await createMrsPresenter.getFromActorIdValue();
+    //   final _activityCtrlr = await createMrsPresenter.getActivityValue();
+
+    //   if (_whereUsedTypeId == null ||
+    //       _whereUsedTypeId == '' ||
+    //       _whereUsedTypeId == "null") {
+    //     var dataFromPreviousScreen = Get.arguments;
+    //     if (dataFromPreviousScreen != null) {
+    //       if (dataFromPreviousScreen.containsKey('whereUsedId')) {
+    //         whereUsedTypeId.value = dataFromPreviousScreen['whereUsedId'];
+    //         createMrsPresenter.saveUsedTypeIdValue(
+    //             whereUsedTypeId: whereUsedTypeId.value.toString());
+
+    //         whereUsedCtrlr.text = whereUsedTypeId.toString();
+    //       }
+    //       if (dataFromPreviousScreen.containsKey('whereUsed')) {
+    //         whereUsed.value = dataFromPreviousScreen['whereUsed'];
+    //         createMrsPresenter.savewhereUsedValue(
+    //             whereUsed: whereUsed.value.toString());
+    //       }
+    //       if (dataFromPreviousScreen.containsKey('to_actor_type_id')) {
+    //         to_actor_type_id.value = dataFromPreviousScreen['to_actor_type_id'];
+    //         createMrsPresenter.saveToActortypeValue(
+    //             to_actor_type_id: to_actor_type_id.value.toString());
+    //       }
+    //       if (dataFromPreviousScreen.containsKey('type')) {
+    //         type.value = dataFromPreviousScreen['type'];
+    //         createMrsPresenter.saveTypeValue(type: type.value.toString());
+    //       }
+    //       if (dataFromPreviousScreen.containsKey('fromActorTypeId')) {
+    //         fromActorTypeId.value = dataFromPreviousScreen['fromActorTypeId'];
+    //         createMrsPresenter.saveFromActorIdValue(
+    //             fromActorTypeId: fromActorTypeId.value.toString());
+    //       }
+    //       if (dataFromPreviousScreen.containsKey('activity')) {
+    //         activityCtrlr.text = dataFromPreviousScreen['activity'];
+    //         createMrsPresenter.saveActivityValue(
+    //             activityCtrlr: activityCtrlr.text.toString());
+    //       }
+    //     }
+    //   } else {
+    //     whereUsedTypeId.value = int.tryParse(_whereUsedTypeId) ?? 0;
+    //     whereUsed.value = int.tryParse(_whereUsed ?? "") ?? 0;
+    //     to_actor_type_id.value = int.tryParse(_to_actor_type_id ?? "") ?? 0;
+    //     type.value = int.tryParse(_type ?? "") ?? 0;
+    //     fromActorTypeId.value = int.tryParse(_fromActorTypeId ?? "") ?? 0;
+    //     activityCtrlr.text = _activityCtrlr ?? "";
+    //     whereUsedCtrlr.text = whereUsedTypeId.toString();
+    //   }
+    //  await _flutterSecureStorage.delete(key: "scheduleId");
+    // } catch (e) {
+    //   Utility.showDialog(e.toString(), 'scheduleId');
+    // }
   }
 
   bool validateFields() {
@@ -244,7 +265,7 @@ class CreateMrsController extends GetxController {
               createMrsJsonString: createMrsJsonString,
               type: type.value,
               isLoading: true,
-              route: whereUsedTypeId.value);
+              route: type.value == 2 ? whereUsedTypeId.value : jobId.value);
       // if (responseCreateMrs == null) {
       // } else {
       //   Get.offAllNamed(

@@ -59,7 +59,8 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                     String refId =
                         controller.whereUsedTypeId.value.toString() ?? "";
                     controller.type.value == 1
-                        ? Get.offNamed('${Routes.jobDetails}/$refId')
+                        ? Get.offNamed(
+                            '${Routes.jobDetails}/${controller.jobId.value}')
                         : controller.type.value == 2
                             ? Get.offNamed('${Routes.pmTaskView}/$refId')
                             : Get.offNamed(
