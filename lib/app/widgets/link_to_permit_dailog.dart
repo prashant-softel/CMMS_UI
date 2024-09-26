@@ -174,20 +174,39 @@ class LinkToPermitDialog extends GetView {
                           controller.clearStoreTaskWhereUsedData();
                           controller.clearStoreTaskfromActorData();
 
-                          // _controller.getIncidentReportList(
-                          //     _controller.facilityId,
-                          //     _controller.formattedTodate,
-                          //     _controller.formattedFromdate,
-                          //     false);
-                          //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
-                          Get.offAllNamed(Routes.createMrs, arguments: {
-                            "whereUsedId": taskId,
-                            "activity": activity,
-                            "whereUsed": 27,
-                            "type": type,
-                            "fromActorTypeId": 2,
-                            "to_actor_type_id": 3
-                          });
+                          String whereUsedId = taskId.toString() ?? "";
+                          String activitynew = activity ?? "";
+                          String jobId = 0.toString();
+                          int whereUsed = 27;
+                          int type = 2;
+                          int fromActorTypeId = 2;
+                          int toActorTypeId = 3;
+                          String encodedActivity =
+                              Uri.encodeComponent(activitynew);
+                          String encodedWhereUsedId =
+                              Uri.encodeComponent(whereUsedId);
+                          String encodedWhereUsed =
+                              Uri.encodeComponent(whereUsed.toString());
+                          String encodedJobId =
+                              Uri.encodeComponent(jobId.toString());
+                          String encodedType =
+                              Uri.encodeComponent(type.toString());
+                          String encodedFromActorTypeId =
+                              Uri.encodeComponent(fromActorTypeId.toString());
+                          String encodedToActorTypeId =
+                              Uri.encodeComponent(toActorTypeId.toString());
+
+                          Get.offAllNamed(
+                            '${Routes.createMrs}/$encodedWhereUsedId/$encodedWhereUsed/$encodedActivity/$encodedJobId/$encodedType/$encodedFromActorTypeId/$encodedToActorTypeId',
+                          );
+                          // Get.offAllNamed(Routes.createMrs, arguments: {
+                          //   "whereUsedId": taskId,
+                          //   "activity": activity,
+                          //   "whereUsed": 27,
+                          //   "type": type,
+                          //   "fromActorTypeId": 2,
+                          //   "to_actor_type_id": 3
+                          // });
                           Get.back();
                         },
                         child: const Text('Add Mrs'),

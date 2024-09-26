@@ -579,27 +579,27 @@ class NewPermitController extends GetxController {
     }
   }
 
-  Future<void> createJobCard() async {
-    //   await startStopJobCard();
+  // Future<void> createJobCard() async {
+  //   //   await startStopJobCard();
 
-    ///
-    // if (isJobCardStarted.value == true) {
-    Map<String, dynamic>? responseMapJobCardStarted =
-        await permitPresenter.createJobCard(
-      jobId: jobModel?.id,
-      isLoading: false,
-    );
+  //   ///
+  //   // if (isJobCardStarted.value == true) {
+  //   Map<String, dynamic>? responseMapJobCardStarted =
+  //       await permitPresenter.createJobCard(
+  //     jobId: jobModel?.id,
+  //     isLoading: false,
+  //   );
 
-    if (responseMapJobCardStarted != null &&
-        responseMapJobCardStarted.length > 0) {
-      Get.toNamed(Routes.createMrs, arguments: {
-        "whereUsedId": jobModel?.id,
-        "activity": jobModel?.jobTitle,
-        "whereUsed": 1,
-      });
-    }
-    //  }
-  }
+  //   if (responseMapJobCardStarted != null &&
+  //       responseMapJobCardStarted.length > 0) {
+  //     Get.toNamed(Routes.createMrs, arguments: {
+  //       "whereUsedId": jobModel?.id,
+  //       "activity": jobModel?.jobTitle,
+  //       "whereUsed": 1,
+  //     });
+  //   }
+  //   //  }
+  // }
 
   Future<void> getNewPermitDetail(
       {required int intPermitId, required int facilityId}) async {

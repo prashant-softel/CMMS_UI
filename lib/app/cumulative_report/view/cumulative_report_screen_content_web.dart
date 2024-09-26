@@ -9,6 +9,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 
@@ -636,6 +637,14 @@ class _CumulativeReportContentWebState
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Action',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
                                       )
                                     ],
                                     rows: List<DataRow>.generate(
@@ -682,6 +691,18 @@ class _CumulativeReportContentWebState
                                                     '${controller.jobList[index]?.permitId.toString()}')),
                                                 DataCell(Text("")),
                                                 DataCell(Text("")),
+                                                DataCell(Wrap(children: [
+                                                  TableActionButton(
+                                                    color:
+                                                        ColorValues.viewColor,
+                                                    icon: Icons.visibility,
+                                                    message: 'View',
+                                                    onPress: () {
+                                                      Get.toNamed(
+                                                          '${Routes.jobDetails}/${controller.jobList[index]?.id}');
+                                                    },
+                                                  ),
+                                                ])),
                                               ],
                                             )),
                                   ),

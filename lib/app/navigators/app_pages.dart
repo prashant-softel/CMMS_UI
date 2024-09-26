@@ -961,7 +961,8 @@ class AppPages {
       binding: ViewIncidentReportBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.createMrs,
+      name:
+          '${_Paths.createMrs}/:whereUsedId/:whereUsed/:activity/:jobId/:type/:fromActorTypeId/:toActorTypeId',
       page: CreateMrsScreen.new,
       binding: CreateMrsBinding(),
     ),
