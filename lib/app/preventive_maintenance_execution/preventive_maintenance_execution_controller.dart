@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/debouncer.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
@@ -27,6 +28,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   );
   PreventiveMaintenanceExecutionPresenter
       preventiveMaintenanceExecutionPresenter;
+  final debounce = Debounce(milliseconds: 400);
   Rx<int> scheduleId = 0.obs;
   RxBool isTouchable = true.obs;
   var isToggleOn = false.obs;
@@ -40,6 +42,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
   Rx<List<List<Map<String, String>>>> rowItemobs =
       Rx<List<List<Map<String, String>>>>([]);
+  List<TextEditingController> textEditingControllerList = [];
 
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   RxList<ScheduleCheckPoint> scheduleCheckPoints = <ScheduleCheckPoint>[].obs;

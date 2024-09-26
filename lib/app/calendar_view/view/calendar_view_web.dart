@@ -3,10 +3,12 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/utils/responsive.dart';
 import 'package:cmms/app/widgets/dash_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -124,6 +126,28 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
                                 ),
                               ),
                               Spacer(),
+                              Container(
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Select Module :",
+                                      style: Styles.black15,
+                                    ),
+                                    Dimens.boxWidth2,
+                                    DropdownWebWidget(
+                                      height: 40,
+                                      width:
+                                          MediaQuery.of(context).size.width / 5,
+                                      dropdownList: controller.moduleList,
+                                      isValueSelected:
+                                          controller.isModuleListSelected.value,
+                                      selectedValue:
+                                          controller.selectedModuleList.value,
+                                      onValueChanged: controller.onValueChanged,
+                                    ),
+                                  ],
+                                ),
+                              ),
                               Container(
                                 margin: EdgeInsets.only(
                                     left: 20, top: 10, bottom: 10),

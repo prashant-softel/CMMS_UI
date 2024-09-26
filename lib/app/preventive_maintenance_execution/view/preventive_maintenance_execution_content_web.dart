@@ -274,23 +274,21 @@ class PreventiveMaintenanceExecutionContentWeb
                                                   fontWeight: FontWeight.bold),
                                             )),
                                             DataColumn2(
-                                                fixedWidth: 200,
+                                                // fixedWidth: 200,
                                                 label: Text(
-                                                  "Executed By",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
+                                              "Executed By",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
                                             DataColumn2(
-                                                fixedWidth: 400,
+                                                // fixedWidth: 400,
                                                 label: Text(
-                                                  "Checklist Observation",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
+                                              "Checklist Observation",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
                                           ],
                                           rows: controller.rowItemclone.value
                                               .map((record) {
@@ -350,7 +348,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                           context)
                                                                       .size
                                                                       .width *
-                                                                  .15),
+                                                                  .10),
                                                               height: 33,
                                                               controller:
                                                                   controller,
@@ -410,6 +408,8 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                       controller
                                                                           .rowItemobs
                                                                           .value = [];
+                                                                      controller
+                                                                          .textEditingControllerList = [];
                                                                       controller.selectedItem = controller
                                                                           .scheduleCheckPoints
                                                                           .firstWhere((element) =>
@@ -422,6 +422,9 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                             .selectedItem!
                                                                             .checklist_observation
                                                                             ?.forEach((element) {
+                                                                          controller
+                                                                              .textEditingControllerList
+                                                                              .add(TextEditingController(text: element.type_text));
                                                                           controller
                                                                               .rowItemobs
                                                                               .value

@@ -277,6 +277,8 @@ class PreventiveMaintenanceExecutionContentMobile
                                                               null;
                                                           controller.rowItemobs
                                                               .value = [];
+                                                          controller
+                                                              .textEditingControllerList = [];
                                                           controller.selectedItem = controller
                                                               .scheduleCheckPoints
                                                               .firstWhere((element) =>
@@ -292,6 +294,10 @@ class PreventiveMaintenanceExecutionContentMobile
                                                                 .checklist_observation
                                                                 ?.forEach(
                                                                     (element) {
+                                                              controller
+                                                                  .textEditingControllerList
+                                                                  .add(
+                                                                      TextEditingController(text: element.type_text));
                                                               controller
                                                                   .rowItemobs
                                                                   .value

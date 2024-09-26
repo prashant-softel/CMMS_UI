@@ -3,7 +3,9 @@ import 'package:cmms/app/calendar_view/calendar_view_presenter.dart';
 import 'package:cmms/app/calendar_view/view/calendar_view_web.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/domain/models/cumulative_report_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
+import 'package:cmms/domain/models/module_model.dart';
 // import 'package:cmms/domain/models/doc_upload_list_model.dart';
 import 'package:cmms/domain/models/view_doc_upload.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +27,10 @@ class CalendarViewController extends GetxController {
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   bool openFromDateToStartDatePicker = false;
+  RxList<ModuleModel?> moduleList = <ModuleModel>[].obs;
+  Rx<bool> isModuleListSelected = true.obs;
+  Rx<String> selectedModuleList = ''.obs;
+  RxInt module_id = 0.obs;
 
   // GetDocUploadListModel? selectedItem;
   var subDocName = TextEditingController();
@@ -44,13 +50,13 @@ class CalendarViewController extends GetxController {
 
   @override
   void onInit() async {
-    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+    facilityIdStreamSubscription =
+        homecontroller.facilityId$.listen((event) async {
       facilityId = event;
 
       if (facilityId != 0) {
-        Future.delayed(Duration(seconds: 1), () {
-          getdashboardList();
-        });
+        await getdashboardList();
+        await getModuleList();
       }
     });
 
@@ -79,6 +85,27 @@ class CalendarViewController extends GetxController {
         var details = module?.cmDashboadDetails;
         allItems.addAll(details?.item_list ?? []);
       }
+    }
+  }
+
+  Future<void> getModuleList() async {
+    moduleList.value = <ModuleModel>[];
+
+    // Fetch the complete module list
+    final _moduleList =
+        await calendarViewPresenter.getModuleList(isLoading: true);
+
+    // Check if the list is not null
+    if (_moduleList != null) {
+      // Filter the modules to include only the specified items
+      final filteredModules = _moduleList.where((module) {
+        return module?.id == 2 ||
+            module?.id == 39 ||
+            module?.id == 43 ||
+            module?.id == 44;
+      }).toList();
+
+      moduleList.value = filteredModules;
     }
   }
 
@@ -145,5 +172,28 @@ class CalendarViewController extends GetxController {
 
   void getDashBordListByDate() {
     getdashboardList();
+  }
+
+  void onValueChanged(dynamic list, dynamic value) {
+    print('Valuesd:${value}');
+    switch (list.runtimeType) {
+      case const (RxList<ModuleModel>):
+        {
+          if (value != "Please Select") {
+            int moduleListIndex =
+                moduleList.indexWhere((x) => x?.name == value);
+            module_id.value = moduleList[moduleListIndex]?.id ?? 0;
+          } else {
+            module_id.value = 0;
+          }
+        }
+        break;
+
+      default:
+        {
+          //statements;
+        }
+        break;
+    }
   }
 }

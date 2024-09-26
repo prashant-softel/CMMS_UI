@@ -669,6 +669,7 @@ class ObservationPmExecutionViewDialog extends GetView {
     Map<String, String> mapData,
     List<Map<String, String>> record,
   ) {
+    int index = controller.rowItemobs.value.indexOf(record);
     switch (mapData['key']) {
       case 'observation':
         return Padding(
@@ -691,17 +692,22 @@ class ObservationPmExecutionViewDialog extends GetView {
                 child: Column(
                   children: [
                     LoginCustomTextfield(
+                        // focusNode: controller.focusList[index],
                         width: (Get.width * .8),
-                        textController: new TextEditingController(
-                            text: mapData["value"] == null ||
-                                    mapData["value"] == "null"
-                                ? ""
-                                : mapData["value"] ?? ''),
+                        textController:
+                            controller.textEditingControllerList[index],
+                        // new TextEditingController(
+                        //     text: mapData["value"] == null ||
+                        //             mapData["value"] == "null"
+                        //         ? ""
+                        //         : mapData["value"] ?? ''),
                         onChanged: (txt) {
-                          mapData["value"] = txt;
-                          updateJob(record);
-                          Future.delayed(Duration.zero, () {
-                            setState(() {});
+                          controller.debounce.run(() {
+                            mapData["value"] = txt;
+                            updateJob(record);
+                            Future.delayed(Duration.zero, () {
+                              setState(() {});
+                            });
                           });
                         }),
                     Row(
