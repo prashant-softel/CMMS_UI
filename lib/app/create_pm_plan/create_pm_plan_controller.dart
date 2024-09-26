@@ -175,7 +175,7 @@ class CreatePmPlanController extends GetxController {
               {
                 'key': "checklist",
                 "value": '${element.checklist_name}',
-                // "id": '${element.checklist_id}'
+                "id": '${element.checklist_id}'
               },
             ]);
             checkdropdownMapperData[element.checklist_name ?? ""] =
@@ -501,7 +501,7 @@ class CreatePmPlanController extends GetxController {
           parent_id: 0,
           parent_name: "",
           asset_id: int.tryParse(element[1]["value"] ?? '0'),
-          checklist_id: checkdropdownMapperData[element[4]["value"]]?.id);
+          checklist_id: checkdropdownMapperData[element[4]["value"]]?.id ?? 0);
       mapAssetChecklist.add(item);
     });
     CreatePmPlanModel createPmPlan = CreatePmPlanModel(
