@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/dashboard_model.dart';
+import 'package:cmms/domain/models/module_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class CalendarViewUsecase {
@@ -15,5 +16,11 @@ class CalendarViewUsecase {
         endDate: endDate,
         startDate: startDate,
         isLoading: isLoading,
+      );
+  Future<List<ModuleModel?>?> getModuleList({
+    bool? isLoading,
+  }) async =>
+      await repository.getModule(
+        isLoading,
       );
 }
