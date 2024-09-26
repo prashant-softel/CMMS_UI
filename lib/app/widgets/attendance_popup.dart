@@ -1,3 +1,4 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
@@ -52,7 +53,7 @@ class AttendancePopup extends StatelessWidget {
               child: ElevatedButton(
                 style: Styles.greenElevatedButtonStyle,
                 onPressed: () {
-                  Get.back();
+                  Get.offAllNamed(Routes.admin_dashboard);
                 },
                 child: const Text(
                   'Ok',
