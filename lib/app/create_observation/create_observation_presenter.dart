@@ -31,6 +31,27 @@ class CreateObservationPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> approveButton({
+    goodsOrderApproveJsonString,
+    required bool isLoading,
+    required int facilityId,
+    
+  }) async {
+    return createObservationUsecase.approveButton(
+      goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+      isLoading: isLoading,
+      facilityId:facilityId
+    );
+  }
+    Future<Map<String, dynamic>?> rejectobsButton({
+    goodsOrderApproveJsonString,
+    required bool isLoading,
+  }) async {
+    return createObservationUsecase.rejectobsButton(
+      goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+      isLoading: isLoading,
+    );
+  }
   Future<List<TypeOfObsListModel?>?> getTypeOfObservationList({
     required bool isLoading,
   }) async {

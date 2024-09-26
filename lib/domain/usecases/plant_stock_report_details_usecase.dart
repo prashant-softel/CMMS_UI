@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:cmms/domain/models/plant_stock_month.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
@@ -42,4 +43,13 @@ Future<String?> getStartdateValue() async {
 Future<String?> getEnddateValue() async {
   return await repository.getStringValue(LocalKeys.enddate);
 }
+Future<List<PlantStockListModel?>?> getPlantStockList(
+          {int? facilityId,
+          bool? isExport,
+          bool? isLoading,
+          dynamic endDate,
+          dynamic startDate,
+          List<int>? selectedAssetsNameIdList}) async =>
+      await repository.getPlantStockList(
+          facilityId, isLoading,isExport, startDate, endDate, selectedAssetsNameIdList);
 }

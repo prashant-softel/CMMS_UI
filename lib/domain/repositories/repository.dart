@@ -4604,6 +4604,80 @@ class Repository {
       return Map();
     }
   }
+  Future<Map<String, dynamic>> approveButton(
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+    int? facilityId,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.approveButton(
+          auth: auth,
+          goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+          isLoading: isLoading ?? false,
+          facilityId:facilityId,
+        );
+      }
+      var resourceData = res.data;
+
+      print('Response  Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'approveButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+   Future<Map<String, dynamic>> rejectobsButton(
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+    int? facilityId,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.rejectobsButton(
+          auth: auth,
+          goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+          isLoading: isLoading ?? false,
+          facilityId:facilityId,
+        );
+      }
+      var resourceData = res.data;
+
+      print('Response Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'rejectobsButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
 
   Future<Map<String, dynamic>> rejectGOReceiveButton(
     goodsOrderApproveJsonString,
@@ -17816,7 +17890,7 @@ class Repository {
           msg: "Course Add Successfully",
           fontSize: 16.0,
         );
-        Get.offNamed(
+        Get.offAllNamed(
           Routes.trainingCourse,
         );
       } else {

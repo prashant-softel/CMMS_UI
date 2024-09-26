@@ -47,6 +47,7 @@ import 'package:cmms/app/widgets/mc_plan_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/mrs_approval_dialog.dart';
 import 'package:cmms/app/widgets/mrs_issue_dialog.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
+import 'package:cmms/app/widgets/obs_msg_dialog.dart';
 import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_by_approver_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_message_dialog.dart';
@@ -1754,6 +1755,41 @@ class ConnectHelper {
 
     return responseModel;
   }
+Future<ResponseModel> approveButton({
+  required String auth,
+  goodsOrderApproveJsonString,
+  bool? isLoading,
+  int? facilityId,
+}) async {
+  // Ensure the body is serialized to JSON
+  var requestBody = json.encode(goodsOrderApproveJsonString);
+
+  var responseModel = await apiWrapper.makeRequest(
+    'MISMaster/ApproveObservation?facilityId=$facilityId',
+    Request.put,
+    requestBody, // Pass the serialized JSON string here
+    isLoading ?? false, 
+    {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $auth',
+    },
+  );
+
+  print('goodsOrderApproveResponse: ${responseModel.data}');
+  var res = responseModel.data;
+
+  // Parse the response only if it's a valid JSON
+  var parsedJson = json.decode(res);
+
+  Get.dialog<void>(
+    ApproveMsgObsDialog(
+      data: parsedJson['message'], 
+      id: parsedJson['id']
+    )
+  );
+
+  return responseModel;
+}
 
   Future<ResponseModel> rejectGOReceiveButton({
     required String auth,
@@ -1778,7 +1814,32 @@ class ConnectHelper {
 
     return responseModel;
   }
+//rejectobsButton
+Future<ResponseModel> rejectobsButton({
+    required String auth,
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/ApproveObservation?facilityId=$facilityId',
+      Request.put,
+      goodsOrderApproveJsonString,
+      isLoading ?? false,
+      
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(RejectGOMsgReceiveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
 
+    return responseModel;
+  }
   Future<ResponseModel> pmPlanRejectButton({
     required String auth,
     pmPlanRejectJsonString,
