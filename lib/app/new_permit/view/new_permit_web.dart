@@ -3957,37 +3957,85 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                               text:
                                                                   "Re submit Permit",
                                                               onPressed: () {
-                                                                controller
-                                                                            .newPermitDetailsModel
-                                                                            .value!
-                                                                            .requester_id ==
-                                                                        varUserAccessModel
-                                                                            .value
-                                                                            .user_id
-                                                                    ? controller.resubmitPermit(
-                                                                        fileIds:
-                                                                            dropzoneController.fileIds)
-                                                                    : showDialog(
-                                                                        context:
-                                                                            context,
-                                                                        builder:
-                                                                            (BuildContext
-                                                                                context) {
-                                                                          return AlertDialog(
-                                                                            title:
-                                                                                Text("Invalid User"),
-                                                                            // content: Text("Please select a Start Date & Time in the future."),
-                                                                            actions: <Widget>[
-                                                                              TextButton(
-                                                                                onPressed: () {
-                                                                                  Get.back();
-                                                                                },
-                                                                                child: Text("OK"),
-                                                                              ),
-                                                                            ],
-                                                                          );
-                                                                        },
+                                                                DateTime
+                                                                    currentTime =
+                                                                    DateTime
+                                                                        .now();
+                                                                DateTime selected = DateTime.parse(
+                                                                        controller
+                                                                            .startDateTimeCtrlrBuffer)
+                                                                    .add(Duration(
+                                                                        hours:
+                                                                            1));
+
+// Use currentTime directly for comparison
+                                                                if (controller
+                                                                        .newPermitDetailsModel
+                                                                        .value
+                                                                        ?.ptwStatus ==
+                                                                    132) {
+                                                                  showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (BuildContext
+                                                                            context) {
+                                                                      return AlertDialog(
+                                                                        title: Text(
+                                                                            "Invalid Start Date & Time"),
+                                                                        content:
+                                                                            Text("Please select a Start Date & Time at least 1 hour in the future."),
+                                                                        actions: <Widget>[
+                                                                          TextButton(
+                                                                            onPressed:
+                                                                                () {
+                                                                              Navigator.of(context).pop();
+                                                                            },
+                                                                            child:
+                                                                                Text("OK"),
+                                                                          ),
+                                                                        ],
                                                                       );
+                                                                    },
+                                                                  );
+                                                                  return null;
+                                                                } else if (controller
+                                                                        .newPermitDetailsModel
+                                                                        .value!
+                                                                        .requester_id ==
+                                                                    varUserAccessModel
+                                                                        .value
+                                                                        .user_id) {
+                                                                  controller.resubmitPermit(
+                                                                      fileIds:
+                                                                          dropzoneController
+                                                                              .fileIds);
+                                                                } else {
+                                                                  showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (BuildContext
+                                                                            context) {
+                                                                      return AlertDialog(
+                                                                        title: Text(
+                                                                            "Invalid User"),
+                                                                        // content: Text("Please select a Start Date & Time in the future."),
+                                                                        actions: <Widget>[
+                                                                          TextButton(
+                                                                            onPressed:
+                                                                                () {
+                                                                              Get.back();
+                                                                            },
+                                                                            child:
+                                                                                Text("OK"),
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    },
+                                                                  );
+                                                                }
+
                                                                 // DateTime
                                                                 //     currentTime =
                                                                 //     DateTime

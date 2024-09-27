@@ -1263,7 +1263,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                               String taskId =
                                                                   Id.substring(
                                                                       Id.indexOf(
-                                                                              "PM") +
+                                                                              "PMT") +
                                                                           2);
                                                               String mcId =
                                                                   Id.substring(
@@ -1275,7 +1275,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                 Get.offNamed(
                                                                     '${Routes.jobDetails}/$jobId');
                                                               } else if (prefix ==
-                                                                  'PM') {
+                                                                  'PMT') {
                                                                 Get.offNamed(
                                                                     '${Routes.pmTaskView}/$taskId');
                                                                 Get.toNamed(
@@ -1414,7 +1414,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                               2);
                                                                       String
                                                                           taskId =
-                                                                          Id.substring(Id.indexOf("PM") +
+                                                                          Id.substring(Id.indexOf("PMT") +
                                                                               2);
                                                                       String
                                                                           mcId =
@@ -1425,7 +1425,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                         Get.offNamed(
                                                                             '${Routes.jobDetails}/$jobId');
                                                                       } else if (prefix ==
-                                                                          'PM') {
+                                                                          'PMT') {
                                                                         Get.offAllNamed(
                                                                             '${Routes.pmTaskView}/$taskId');
                                                                       } else if (prefix ==
@@ -2972,10 +2972,10 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                   String
                                                                       taskId =
                                                                       Id.substring(
-                                                                          Id.indexOf("PM") +
+                                                                          Id.indexOf("PMT") +
                                                                               2);
                                                                   if (prefix ==
-                                                                      'PM') {
+                                                                      'PMT') {
                                                                     Get.offNamed(
                                                                         '${Routes.pmTaskView}/$taskId');
                                                                   }
@@ -3112,7 +3112,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                               controller.dashboardPmList.value?.cmDashboadDetails?.item_list?[index].wo_number ?? "";
                                                                           String
                                                                               pmTaskId =
-                                                                              Id.substring(Id.indexOf("PM") + 2);
+                                                                              Id.substring(Id.indexOf("PMT") + 2);
 
                                                                           if (pmTaskId !=
                                                                               null) {

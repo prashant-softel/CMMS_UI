@@ -633,16 +633,27 @@ class PmTaskDataSource extends DataTableSource {
                                             163
                                         ? ColorValues.appYellowColor
                                         : controller.pmTaskList
-                                                    .firstWhere(
-                                                      (e) =>
-                                                          e?.id ==
-                                                          pmTaskDetails?.id,
-                                                      orElse: () =>
-                                                          PmTaskListModel(
-                                                              id: 00),
-                                                    )
-                                                    ?.status ==
-                                                167
+                                                        .firstWhere(
+                                                          (e) =>
+                                                              e?.id ==
+                                                              pmTaskDetails?.id,
+                                                          orElse: () =>
+                                                              PmTaskListModel(
+                                                                  id: 00),
+                                                        )
+                                                        ?.status ==
+                                                    167 ||
+                                                controller.pmTaskList
+                                                        .firstWhere(
+                                                          (e) =>
+                                                              e?.id ==
+                                                              pmTaskDetails?.id,
+                                                          orElse: () =>
+                                                              PmTaskListModel(
+                                                                  id: 00),
+                                                        )
+                                                        ?.status ==
+                                                    169
                                             ? ColorValues.approveStatusColor
                                             : controller.pmTaskList
                                                         .firstWhere(
@@ -693,19 +704,6 @@ class PmTaskDataSource extends DataTableSource {
                                                                     )
                                                                     ?.status ==
                                                                 168 ||
-                                                            controller
-                                                                    .pmTaskList
-                                                                    .firstWhere(
-                                                                      (e) =>
-                                                                          e?.id ==
-                                                                          pmTaskDetails
-                                                                              ?.id,
-                                                                      orElse: () =>
-                                                                          PmTaskListModel(
-                                                                              id: 00),
-                                                                    )
-                                                                    ?.status ==
-                                                                169 ||
                                                             controller
                                                                     .pmTaskList
                                                                     .firstWhere(

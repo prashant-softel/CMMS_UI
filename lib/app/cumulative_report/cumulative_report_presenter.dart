@@ -1,12 +1,18 @@
 import 'package:cmms/domain/models/cumulative_report_model.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:cmms/domain/models/module_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
+import 'package:cmms/domain/models/veg_task_equipment_model.dart';
 import 'package:cmms/domain/models/veg_task_list_model.dart';
 import 'package:cmms/domain/usecases/cumulative_report_usecase.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+
+import '../../domain/models/veg_execution_details_model.dart';
 
 class CumulativeReportPresenter {
   CumulativeReportPresenter(this.cumulativeReportUsecase);
@@ -93,6 +99,64 @@ class CumulativeReportPresenter {
       facility_id: facility_id,
       start_date: start_date,
       end_date: end_date,
+    );
+  }
+
+  Future<PmtaskViewModel?> getPmtaskViewList({
+    int? scheduleId,
+    required int facilityId,
+    bool? isloading,
+  }) async =>
+      await cumulativeReportUsecase.getPmtaskViewList(
+        scheduleId: scheduleId,
+        facilityId: facilityId,
+        isLoading: isloading,
+      );
+  Future<List<HistoryModel>?> getHistory(
+    moduleType,
+    id,
+    facilityId,
+    isLoading,
+  ) async =>
+      await cumulativeReportUsecase.getHistory(
+        moduleType: moduleType,
+        id: id,
+        facilityId: facilityId,
+        isLoading: isLoading,
+      );
+  Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
+    bool? isLoading,
+    required int executionId,
+    required int facilityId,
+  }) async {
+    return cumulativeReportUsecase.getMCExecutionDetail(
+      executionId: executionId,
+      facilityId: facilityId,
+      isLoading: isLoading ?? false,
+    );
+  }
+
+  Future<VegExecutionDetailsModel?> getVegExecutionDetail({
+    bool? isLoading,
+    required int facilityId,
+    required int executionId,
+  }) async {
+    return cumulativeReportUsecase.getVegExecutionDetail(
+      executionId: executionId,
+      facilityId: facilityId,
+      isLoading: isLoading ?? false,
+    );
+  }
+
+  Future<List<VegTaskEquipmentList?>> getVegTaskEquipmentList({
+    required bool isLoading,
+    required int facilityId,
+    required int executionId,
+  }) async {
+    return cumulativeReportUsecase.getVegTaskEquipmentList(
+      isLoading: isLoading,
+      executionId: executionId,
+      facilityId: facilityId,
     );
   }
 }
