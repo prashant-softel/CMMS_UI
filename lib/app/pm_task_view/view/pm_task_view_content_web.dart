@@ -128,15 +128,20 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                   163
                                               ? ColorValues.appYellowColor
                                               : controller.pmtaskViewModel.value
-                                                          ?.status ==
-                                                      167
+                                                              ?.status ==
+                                                          167 ||
+                                                      controller.pmtaskViewModel
+                                                              .value?.status ==
+                                                          169
                                                   ? ColorValues
                                                       .approveStatusColor
                                                   : controller.pmtaskViewModel
                                                               .value?.status ==
                                                           165
                                                       ? ColorValues.closeColor
-                                                      : controller.pmtaskViewModel.value
+                                                      : controller
+                                                                      .pmtaskViewModel
+                                                                      .value
                                                                       ?.status ==
                                                                   170 ||
                                                               controller
@@ -148,16 +153,9 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                       .pmtaskViewModel
                                                                       .value
                                                                       ?.status ==
-                                                                  169 ||
-                                                              controller
-                                                                      .pmtaskViewModel
-                                                                      .value
-                                                                      ?.status ==
                                                                   166
-                                                          ? ColorValues
-                                                              .rejectedStatusColor
-                                                          : ColorValues
-                                                              .addNewColor,
+                                                          ? ColorValues.rejectedStatusColor
+                                                          : ColorValues.addNewColor,
                                   onPressed: () async {},
                                   text:
                                       "${controller.pmtaskViewModel.value?.status_short ?? ""}",

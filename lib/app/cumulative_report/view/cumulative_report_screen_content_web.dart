@@ -832,6 +832,14 @@ class _CumulativeReportContentWebState
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Action',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
                                       )
                                     ],
                                     rows: List<DataRow>.generate(
@@ -877,6 +885,48 @@ class _CumulativeReportContentWebState
                                                     '${controller.pmTaskList[index]?.permit_type.toString()}')),
                                                 DataCell(Text(
                                                     '${controller.pmTaskList[index]?.status_short.toString()}')),
+                                                DataCell(Wrap(children: [
+                                                  TableActionButton(
+                                                    color:
+                                                        ColorValues.viewColor,
+                                                    icon: Icons.visibility,
+                                                    message: 'View',
+                                                    onPress: () {
+                                                      String id = controller
+                                                              .pmTaskList[index]
+                                                              ?.id
+                                                              .toString() ??
+                                                          "";
+
+                                                      String encodedId =
+                                                          Uri.encodeComponent(
+                                                              id);
+                                                      Get.offAllNamed(
+                                                          '${Routes.pmTaskView}/$encodedId');
+                                                    },
+                                                  ),
+                                                  Dimens.boxWidth5,
+                                                  TableActionButton(
+                                                    color:
+                                                        ColorValues.draftColor,
+                                                    icon: Icons.download,
+                                                    message: 'Download',
+                                                    onPress: () {
+                                                      controller.getPmtaskViewList(
+                                                          scheduleId: controller
+                                                                  .pmTaskList[
+                                                                      index]
+                                                                  ?.id ??
+                                                              0,
+                                                          isloading: true,
+                                                          facilityId: controller
+                                                                  .pmTaskList[
+                                                                      index]
+                                                                  ?.facility_id ??
+                                                              0);
+                                                    },
+                                                  ),
+                                                ])),
                                               ],
                                             )),
                                   ),
@@ -959,6 +1009,14 @@ class _CumulativeReportContentWebState
                                         ),
                                         // size: ColumnSize.L,
                                       ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Action',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
                                     ],
                                     rows: List<DataRow>.generate(
                                         controller.vegTaskList.length,
@@ -989,6 +1047,56 @@ class _CumulativeReportContentWebState
                                                         ?.remark
                                                         .toString() ??
                                                     "")),
+                                                DataCell(Wrap(children: [
+                                                  TableActionButton(
+                                                    color:
+                                                        ColorValues.viewColor,
+                                                    icon: Icons.visibility,
+                                                    message: 'View',
+                                                    onPress: () {
+                                                      int executionId =
+                                                          controller
+                                                                  .vegTaskList[
+                                                                      index]
+                                                                  ?.id ??
+                                                              0;
+                                                      int planId = controller
+                                                              .vegTaskList[
+                                                                  index]
+                                                              ?.planId ??
+                                                          0;
+
+                                                      String encodedId =
+                                                          Uri.encodeComponent(
+                                                              executionId
+                                                                  .toString());
+                                                      String encodedPlanId =
+                                                          Uri.encodeComponent(
+                                                              planId
+                                                                  .toString());
+                                                      Get.toNamed(
+                                                          '${Routes.vegExecutionScreen}/${encodedId}/${encodedPlanId}');
+                                                    },
+                                                  ),
+                                                  Dimens.boxWidth5,
+                                                  TableActionButton(
+                                                    color:
+                                                        ColorValues.draftColor,
+                                                    icon: Icons.download,
+                                                    message: 'Download',
+                                                    onPress: () async {
+                                                      await controller
+                                                          .getVegExecutionDetail(
+                                                        executionId: controller
+                                                                .vegTaskList[
+                                                                    index]
+                                                                ?.id ??
+                                                            0,
+                                                        facilityId: 0,
+                                                      );
+                                                    },
+                                                  ),
+                                                ])),
                                               ],
                                             )),
                                   ),
@@ -1096,6 +1204,14 @@ class _CumulativeReportContentWebState
                                         ),
                                         // size: ColumnSize.L,
                                       ),
+                                      DataColumn2(
+                                        fixedWidth: 150,
+                                        label: Text(
+                                          'Action',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
                                     ],
                                     rows: List<DataRow>.generate(
                                         controller.mcTaskList.length,
@@ -1133,6 +1249,59 @@ class _CumulativeReportContentWebState
                                                         ?.remark
                                                         .toString() ??
                                                     "")),
+                                                DataCell(Wrap(children: [
+                                                  TableActionButton(
+                                                    color:
+                                                        ColorValues.viewColor,
+                                                    icon: Icons.visibility,
+                                                    message: 'View',
+                                                    onPress: () {
+                                                      int id = controller
+                                                              .mcTaskList[index]
+                                                              ?.executionId ??
+                                                          0;
+                                                      int planId = controller
+                                                              .mcTaskList[index]
+                                                              ?.planId ??
+                                                          0;
+                                                      if (id != 0) {
+                                                        // controller
+                                                        //     .clearStoreDataMcid();
+                                                        // controller
+                                                        //     .clearStoreDataPlanid();
+                                                        Get.toNamed(
+                                                            Routes
+                                                                .addModuleCleaningExecutionContentWeb,
+                                                            arguments: {
+                                                              "mcid": id,
+                                                              "planId": planId
+                                                            });
+                                                      }
+                                                    },
+                                                  ),
+                                                  Dimens.boxWidth5,
+                                                  TableActionButton(
+                                                    color:
+                                                        ColorValues.draftColor,
+                                                    icon: Icons.download,
+                                                    message: 'Download',
+                                                    onPress: () {
+                                                      controller
+                                                          .getMCExecutionDetail(
+                                                              executionId: controller
+                                                                      .mcTaskList[
+                                                                          index]
+                                                                      ?.executionId ??
+                                                                  0,
+                                                              facilityId:
+                                                                  // controller
+                                                                  //         .mcTaskList[
+                                                                  //             index]
+                                                                  //         ?.facility_id ??
+                                                                  0);
+                                                    },
+                                                  ),
+                                                ])),
                                               ],
                                             )),
                                   ),
