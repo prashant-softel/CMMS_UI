@@ -1185,6 +1185,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                     //     varUserAccessModel.value.user_id
                                     &&     controller.getObsById.value!.status_code !=
                                         553 
+                                        &&
+                                         controller.getObsById.value!.status_code !=556
                             ? Container(
                                 height: 40,
                                 child: CustomElevatedButton(

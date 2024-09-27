@@ -47,7 +47,8 @@ import 'package:cmms/app/widgets/mc_plan_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/mrs_approval_dialog.dart';
 import 'package:cmms/app/widgets/mrs_issue_dialog.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
-import 'package:cmms/app/widgets/obs_msg_dialog.dart';
+import 'package:cmms/app/widgets/obs_approve_msg_dialog.dart';
+import 'package:cmms/app/widgets/obs_reject_msg_dialog.dart';
 import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_by_approver_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_message_dialog.dart';
@@ -1821,10 +1822,11 @@ Future<ResponseModel> rejectobsButton({
     bool? isLoading,
     int? facilityId,
   }) async {
+      var requestBody = json.encode(goodsOrderApproveJsonString);
     var responseModel = await apiWrapper.makeRequest(
-      'MISMaster/ApproveObservation?facilityId=$facilityId',
+      'MISMaster/RejectObservation?facilityId=$facilityId',
       Request.put,
-      goodsOrderApproveJsonString,
+      requestBody,
       isLoading ?? false,
       
       {
@@ -1832,11 +1834,15 @@ Future<ResponseModel> rejectobsButton({
         'Authorization': 'Bearer $auth',
       },
     );
-    print('goodsOrderApproveResponse: ${responseModel.data}');
+    print('ApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(RejectGOMsgReceiveDialog(
-        data: parsedJson['message'], id: parsedJson['id']));
+     Get.dialog<void>(
+    RejectMsgObsDialog(
+      data: parsedJson['message'], 
+      id: parsedJson['id']
+    )
+  );
 
     return responseModel;
   }

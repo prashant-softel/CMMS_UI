@@ -106,43 +106,43 @@ class _PlantStockReportDetailsWebState
                                           style: Styles.blackBold16,
                                         ),
                                         Spacer(),
-                                    //     Container(
-                                    //   height: 45,
-                                    //   decoration: BoxDecoration(
-                                    //     boxShadow: [
-                                    //       BoxShadow(
-                                    //         color: Colors.black26,
-                                    //         offset: const Offset(
-                                    //           5.0,
-                                    //           5.0,
-                                    //         ),
-                                    //         blurRadius: 5.0,
-                                    //         spreadRadius: 1.0,
-                                    //       ),
-                                    //     ],
-                                    //     color: ColorValues.whiteColor,
-                                    //     borderRadius: BorderRadius.circular(5),
-                                    //   ),
-                                    //   child: DropdownWebWidget(
-                                    //     width:
-                                    //         (MediaQuery.of(context).size.width *
-                                    //             .21),
-                                    //     //  height: 35,
-                                    //     dropdownList: controller.assetList,
+                                        Container(
+                                      height: 45,
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            offset: const Offset(
+                                              5.0,
+                                              5.0,
+                                            ),
+                                            blurRadius: 5.0,
+                                            spreadRadius: 1.0,
+                                          ),
+                                        ],
+                                        color: ColorValues.whiteColor,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: DropdownWebWidget(
+                                        width:
+                                            (MediaQuery.of(context).size.width *
+                                                .21),
+                                        //  height: 35,
+                                        dropdownList: controller.assetList,
                                         
-                                    //     // selectedItems:
-                                    //     //     controller.selectedAssetsNameList,
-                                    //      isValueSelected:
-                                    //                           controller
-                                    //                               .ismaterialSelected
-                                    //                               .value,
-                                    //                       selectedValue: controller
-                                    //                           .selectedmaterial
-                                    //                           .value,
-                                    //     onValueChanged:
-                                    //         controller.onValueChanged,
-                                    //   ),
-                                    // ),
+                                        // selectedItems:
+                                        //     controller.selectedAssetsNameList,
+                                         isValueSelected:
+                                                              controller
+                                                                  .ismaterialSelected
+                                                                  .value,
+                                                          selectedValue: controller
+                                                              .selectedmaterial
+                                                              .value,
+                                        onValueChanged:
+                                            controller.onValueChanged,
+                                      ),
+                                    ),
                                      Spacer(),
                                         Row(
                                           children: [

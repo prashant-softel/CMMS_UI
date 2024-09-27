@@ -93,7 +93,7 @@ class RejectobsDialog extends GetView {
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {
                 _controller.rejectobsButton(id: id);
-                print('Goods order id:$id');
+                print('id:$id');
                 Get.back();
               },
               child: Text('Reject Observation'),

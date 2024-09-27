@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:cmms/domain/models/plant_stock_month.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
@@ -43,13 +44,33 @@ Future<String?> getStartdateValue() async {
 Future<String?> getEnddateValue() async {
   return await repository.getStringValue(LocalKeys.enddate);
 }
-Future<List<PlantStockListModel?>?> getPlantStockList(
-          {int? facilityId,
-          bool? isExport,
-          bool? isLoading,
-          dynamic endDate,
-          dynamic startDate,
-          List<int>? selectedAssetsNameIdList}) async =>
-      await repository.getPlantStockList(
-          facilityId, isLoading,isExport, startDate, endDate, selectedAssetsNameIdList);
+// Future<List<PlantStockListModel?>?> getPlantStockList(
+//           {int? facilityId,
+//           bool? isExport,
+//           bool? isLoading,
+//           dynamic endDate,
+//           dynamic startDate,
+//           int? selectedmaterialId}) async =>
+//       await repository.getPlantStockList(
+//           facilityId, isLoading,isExport, startDate, endDate, selectedmaterialId);
+Future<List<GetAssetDataModel?>?> getAssetList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await repository.getAssetList(
+        auth,
+        facilityId,
+        isLoading,
+      );
+      void clearValue() async => repository.clearData(
+        LocalKeys.assetId,
+      );
+       void clearstartValue() async => repository.clearData(
+        LocalKeys.startdate,
+      );
+       void clearendValue() async => repository.clearData(
+        LocalKeys.enddate,
+      );
 }
+

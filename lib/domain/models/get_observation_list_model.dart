@@ -28,7 +28,7 @@ class GetObservationList {
   int? type_of_observation;
   String? closer_date;
   String? location_of_observation;
-  String? remaining_days; // Update this to String? to match the error
+  int? remaining_days; 
   int? source_of_observation;
   String? target_date;
   String? corrective_action;
@@ -91,47 +91,48 @@ class GetObservationList {
   factory GetObservationList.fromJson(Map<String, dynamic> json) {
     return GetObservationList(
       id: json['id'],
-      observation_type: json['observation_type'],
-      facility_id: json['facility_id'],
-      contractor_name: json['contractor_name'] ?? '',
-      risk_type_id: json['risk_type_id'],
-      risk_type: json['risk_type'] ?? '',
-      preventive_action: json['preventive_action'] ?? '',
-      assigned_to_id: json['assigned_to_id'],
-      assigned_to_name: json['assigned_to_name'] ?? '',
-      contact_number: json['contact_number'] ?? '',
-      cost_type: json['cost_type'],
-      cost_name: json['cost_name'] ?? '',
-      // closed_date: json['closed_date'] ?? '',
-      closed_date: Utility.getFormatedyearMonthDay(json['closed_date']),
-      observation_status: json['observation_status'] ?? '',
-      date_of_observation: json['date_of_observation'] ?? '',
-      type_of_observation: json['type_of_observation'],
-      closer_date: json['closer_date'] ?? '',
-
-      location_of_observation: json['location_of_observation'] ?? '',
-      remaining_days: json['remaining_days'] != null
-          ? json['remaining_days'].toString() // Convert int to String
-          : null, // Handle null case
-      source_of_observation: json['source_of_observation'],
-      // target_date: json['target_date'] ?? '',
-      target_date: Utility.getFormatedyearMonthDay(json['target_date']),
-      corrective_action: json['corrective_action'] ?? '',
-      observation_description: json['observation_description'] ?? '',
-      type_of_observation_name: json['type_of_observation_name'] ?? '',
-      source_of_observation_name: json['source_of_observation_name'] ?? '',
-      created_at: json['created_at'] ?? '',
-      created_by: json['created_by'] ?? '',
-      updated_at: json['updated_at'],
-      updated_by: json['updated_by'],
-      action_taken: json['action_taken'] ?? '',
-      month_of_observation: json['month_of_observation'] ?? '',
-      status_code: json['status_code'],
-      createdid: json['createdid'],
-      updateid: json['updateid'],
-      short_status: json['short_status'] ?? '',
-      uploadfileIds: json['uploadfileIds'],
-      comment: json['comment'],
+    observation_type: json['observation_type'],
+    facility_id: json['facility_id'],
+    contractor_name: json['contractor_name'] != null ? json['contractor_name'] as String : '', // Explicit null check
+    risk_type_id: json['risk_type_id'],
+    risk_type: json['risk_type'] != null ? json['risk_type'] as String : '',
+    preventive_action: json['preventive_action'] != null ? json['preventive_action'] as String : '',
+    assigned_to_id: json['assigned_to_id'],
+    assigned_to_name: json['assigned_to_name'] != null ? json['assigned_to_name'] as String : '',
+    contact_number: json['contact_number'] != null ? json['contact_number'] as String : '',
+    cost_type: json['cost_type'],
+    cost_name: json['cost_name'] != null ? json['cost_name'] as String : '',
+    closed_date: json['closed_date'] != null
+        ? Utility.getFormatedyearMonthDay(json['closed_date']) ?? ''
+        : '', // Handle null case in Utility method
+    observation_status: json['observation_status'] != null ? json['observation_status'] as String : '',
+    date_of_observation: json['date_of_observation'] != null ? json['date_of_observation'] as String : '',
+    type_of_observation: json['type_of_observation'],
+    closer_date: json['closer_date'] != null
+        ? Utility.getFormatedyearMonthDay(json['closer_date']) ?? ''
+        : '',
+    location_of_observation: json['location_of_observation'] != null ? json['location_of_observation'] as String : '',
+    remaining_days: json['remaining_days'] ?? 0, // Default to 0 if null
+    source_of_observation: json['source_of_observation'],
+    target_date: json['target_date'] != null
+        ? Utility.getFormatedyearMonthDay(json['target_date']) ?? ''
+        : '',
+    corrective_action: json['corrective_action'] != null ? json['corrective_action'] as String : '',
+    observation_description: json['observation_description'] != null ? json['observation_description'] as String : '',
+    type_of_observation_name: json['type_of_observation_name'] != null ? json['type_of_observation_name'] as String : '',
+    source_of_observation_name: json['source_of_observation_name'] != null ? json['source_of_observation_name'] as String : '',
+    created_at: json['created_at'] != null ? json['created_at'] as String : '',
+    created_by: json['created_by'] != null ? json['created_by'] as String : '',
+    updated_at: json['updated_at'] != null ? json['updated_at'] as String : '',
+    updated_by: json['updated_by'] != null ? json['updated_by'] as String : '',
+    action_taken: json['action_taken'] != null ? json['action_taken'] as String : '',
+    month_of_observation: json['month_of_observation'] != null ? json['month_of_observation'] as String : '',
+    status_code: json['status_code'],
+    createdid: json['createdid'],
+    updateid: json['updateid'],
+    short_status: json['short_status'] != null ? json['short_status'] as String : '',
+    uploadfileIds: json['uploadfileIds'] != null ? json['uploadfileIds'] as String : '',
+    comment: json['comment'] != null ? json['comment'] as String : '',
     );
   }
 
