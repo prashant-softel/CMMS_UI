@@ -10,11 +10,13 @@ class ModuleCleaningListPlanPresenter {
   Future<List<ModuleCleaningListPlanModel>> getModuleCleaningListPlan({
     required bool isLoading,
     bool? isExport,
+     bool? self_view,
     required int? facility_id,
   }) async {
     return moduleCleaningListPlanUsecase.getModuleCleaningListPlan(
       isLoading: isLoading,
       facility_id: facility_id,
+      self_view: self_view,
       isExport: isExport
     );
   }

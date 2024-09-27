@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_presenter.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -80,27 +82,35 @@ class ModuleCleaningListPlanController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getModuleCleaningListPlan(facilityId, false);
+        getModuleCleaningListPlan(facilityId, false,false);
       });
     });
     super.onInit();
   }
 
   void export() {
-    getModuleCleaningListPlan(facilityId, true, isExportOnly: true);
+    getModuleCleaningListPlan(facilityId, true,true, isExportOnly: true);
   }
 
-  Future<void> getModuleCleaningListPlan(int facilityId, bool isExport,
+  Future<void> getModuleCleaningListPlan(int facilityId, bool isExport,bool self_view,
       {bool isExportOnly = false}) async {
     if (!isExportOnly) {
       moduleCleaningListPlan.value = <ModuleCleaningListPlanModel>[];
       filteredData.value = <ModuleCleaningListPlanModel>[];
     }
 
+       bool selfview = varUserAccessModel.value.access_list!
+            .where((e) =>
+                e.feature_id == UserAccessConstants.kModuleCleaningplanFeatureId &&
+                e.selfView == UserAccessConstants.kHaveSelfViewAccess)
+            .length >
+        0;
+
     final _moduleCleaningListPlan =
         await moduleCleaningListPlanPresenter.getModuleCleaningListPlan(
             isLoading: isLoading.value,
             facility_id: facilityId,
+             self_view: selfview,
             isExport: isExport);
 
     if (!isExportOnly) {
@@ -126,7 +136,7 @@ class ModuleCleaningListPlanController extends GetxController {
   }
 
   void mcPlanListByDate() {
-    getModuleCleaningListPlan(facilityId, false);
+    getModuleCleaningListPlan(facilityId, false,false);
   }
 
   void onValueChanged(dynamic list, dynamic value) {

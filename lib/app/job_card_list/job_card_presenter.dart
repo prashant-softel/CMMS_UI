@@ -15,6 +15,7 @@ class JobCardPresenter {
     String? auth,
     int? facilityId,
     bool? isLoading,
+    
   }) async =>
       await jobCardDetailsUsecase.getAssignedToList(
         auth: auth ?? "",
@@ -24,12 +25,14 @@ class JobCardPresenter {
   Future<List<JobCardModel?>?> jobCardList({
     int? facilityId,
     bool? isLoading,
-    bool? isExport
+    bool? isExport,
+    bool? self_view,
   }) async =>
       await jobCardDetailsUsecase.jobCardList(
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
-        isExport: isExport
+        isExport: isExport,
+         self_view: self_view
       );
 
   ///

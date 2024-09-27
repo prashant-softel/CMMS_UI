@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/vegetation_execution_plan_list/veg_execution_list_presenter.dart';
 import 'package:cmms/domain/models/veg_task_list_model.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +88,7 @@ class VegExecutionListController extends GetxController {
   }
 
   void getVegExcustionListByDate() {
-    getVegTaskList(facilityId, formattedFromdate1, formattedTodate1, false);
+    getVegTaskList(facilityId, formattedFromdate1, formattedTodate1, false,false);
   }
 
   Rx<bool> isLoading = true.obs;
@@ -110,6 +112,7 @@ class VegExecutionListController extends GetxController {
           facilityId,
           formattedFromdate1,
           formattedTodate1,
+          false,
           false,
         );
       });
@@ -175,22 +178,29 @@ class VegExecutionListController extends GetxController {
   // }
 
   void export() {
-    getVegTaskList(facilityId, formattedFromdate1, formattedTodate1, true,
+    getVegTaskList(facilityId, formattedFromdate1, formattedTodate1, true,true,
         isExportOnly: true);
   }
 
   Future<void> getVegTaskList(
-      int facilityId, dynamic startDate, dynamic endDate, bool isExport,
+      int facilityId, dynamic startDate, dynamic endDate, bool isExport, bool self_view,
       {bool isExportOnly = false}) async {
     if (!isExportOnly) {
       vegTaskList.value = <VegTaskListModel>[];
     }
+      bool selfview = varUserAccessModel.value.access_list!
+            .where((e) =>
+                e.feature_id == UserAccessConstants.kVegetationControlexeFeatureId &&
+                e.selfView == UserAccessConstants.kHaveSelfViewAccess)
+            .length >
+        0;
 
     final list = await vegExecutionListPresenter.getVegTaskList(
         isLoading: isLoading.value,
         startDate: startDate,
         endDate: endDate,
         facility_id: facilityId,
+        self_view: selfview,
         isExport: isExport);
 
     if (!isExportOnly) {

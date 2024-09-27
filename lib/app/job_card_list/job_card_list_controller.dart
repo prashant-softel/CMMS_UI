@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/job_card_list/job_card_presenter.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/job_card_model.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -124,7 +126,7 @@ class JobCardListController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
         if (facilityId > 0) {
-          jobCardList(facilityId, formattedTodate1, formattedFromdate1, false);
+          jobCardList(facilityId, formattedTodate1, formattedFromdate1, false,false);
         }
       });
     });
@@ -133,23 +135,30 @@ class JobCardListController extends GetxController {
   }
 
   void getjobcardListByDate() {
-    jobCardList(facilityId, formattedTodate1, formattedFromdate1, false);
+    jobCardList(facilityId, formattedTodate1, formattedFromdate1, false,false);
   }
 
   void export() {
-    jobCardList(facilityId, formattedTodate1, formattedFromdate1, true,
+    jobCardList(facilityId, formattedTodate1, formattedFromdate1, true,true,
         isExportOnly: true);
   }
 
   Future<void> jobCardList(
-      int facilityId, dynamic startDate, dynamic endDate, bool isExport,
+      int facilityId, dynamic startDate, dynamic endDate, bool self_view,bool isExport,
       {bool isExportOnly = false}) async {
     if (!isExportOnly) {
       jobList.value = <JobCardModel>[];
     }
+      bool selfview = varUserAccessModel.value.access_list!
+            .where((e) =>
+                e.feature_id == UserAccessConstants.kJobCardFeatureId &&
+                e.selfView == UserAccessConstants.kHaveSelfViewAccess)
+            .length >
+        0;
+
 
     final _jobList = await jobCardPresenter.jobCardList(
-        facilityId: facilityId, isLoading: isLoading.value, isExport: isExport);
+        facilityId: facilityId, isLoading: isLoading.value, isExport: isExport,self_view: selfview);
 
     if (_jobList != null && !isExportOnly) {
       jobList.value = _jobList;
