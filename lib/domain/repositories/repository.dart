@@ -11912,7 +11912,7 @@ class Repository {
         res = await _dataRepository.getAssetList(
           auth: auth,
           isLoading: isLoading ?? false,
-          facilityId: facilityId ?? 0,
+          facilityId:facilityId ?? 0,
         );
       }
       if (!res.hasError) {

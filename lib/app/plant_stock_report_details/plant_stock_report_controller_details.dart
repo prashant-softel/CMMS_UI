@@ -30,9 +30,9 @@ class PlantStockReportDetailsController extends GetxController {
   RxList<StockDetails?> StockDetailsList = <StockDetails?>[].obs;
   bool openPurchaseDatePicker = false;
   var purchaseDateTc = TextEditingController();
-  List<int> selectedmaterialId = <int>[].obs;
+  // List<int> selectedmaterialId = <int>[].obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
-  List<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
+  RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
   RxList<GetAssetDataModel?> selectedAssetsNameList = <GetAssetDataModel>[].obs;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
@@ -48,7 +48,7 @@ class PlantStockReportDetailsController extends GetxController {
   int assetItemID = 0;
   Rx<int> assetID = 0.obs;
   Rx<bool> isLoading = true.obs;
-// RxInt selectedmaterialId = 0.obs;
+Rx<int> selectedmaterialId = 0.obs;
   Rx<int> type = 0.obs;
   Rx<int> selectedYear = 0.obs;
   Rx<int> selectedMonth = 0.obs;
@@ -103,13 +103,30 @@ class PlantStockReportDetailsController extends GetxController {
         assetItemID: assetID.value,
       );
       //   Future.delayed(Duration(seconds: 1), () {
-      //   getPlantStockList(facilityId, formattedTodate1, formattedFromdate1,
-      //       false, selectedmaterialId.value);
+      //    getPlantStockList(facilityId, formattedTodate1, formattedFromdate1, false, selectedmaterialId.value);
+
       // });
+      
+        Future.delayed(Duration(seconds: 1), () {
+        getAssetList(facilityId);
+      });
 
     });
     super.onInit();
   }
+  Future<void> getAssetList(int _facilityId) async {
+    assetList.clear();
+    assetList.value = <GetAssetDataModel>[];
+    final _assetList =
+        await plantStockReportDetailsPresenter.getAssetList(facilityId: facilityId);
+    if (_assetList != null) {
+      for (var asset in _assetList) {
+        assetList.add(asset);
+      }
+      update(["AssetList"]);
+    }
+  }
+
 
   Future<void> setPlantDetails() async {
     try {
@@ -186,60 +203,61 @@ class PlantStockReportDetailsController extends GetxController {
       }
     }
   }
-// void onValueChanged(dynamic list, dynamic value) {
-//     print({"valuevaluevaluevalue": value});
-//     switch (list.runtimeType) {
-//       case const (RxList<GetAssetDataModel>):
-//         {
-//           if (value != "Please Select") {
-//             int equipCatIndex = assetList.indexWhere((x) => x?.name == value);
-//              selectedmaterialId.value= assetList[equipCatIndex]?.id ?? 0;
-//              ismaterialSelected.value=true;
-//              selectedmaterial.value=value;
-//             }
-//            else {
-//             selectedmaterialId.value=0;
-//           }
-//         }
-//         break;
-//     }
-
-//   }
- 
-  Future<void> getPlantStockList(int facilityId, dynamic startDate,
-      dynamic endDate, bool? isExport, List<int>? selectedAssetsNameIdList,
-      {bool isExportOnly = false}) async {
-    if (!isExportOnly) {
-      plantStockList!.clear();
-      plantStockList?.value = <PlantStockListModel>[];
-      StockDetailsList.value = <StockDetails>[];
-    }
-    final _plantStockList = await plantStockReportDetailsPresenter.getPlantStockList(
-        facilityId: facilityId,
-        isLoading: isLoading.value,
-        isExport: isExport,
-        startDate: startDate,
-        endDate: endDate,
-        selectedAssetsNameIdList: selectedAssetsNameIdList);
-
-    if (_plantStockList != null && !isExportOnly) {
-      plantStockList?.value = _plantStockList;
-      isLoading.value = false;
-
-      for (var facility in _plantStockList) {
-        for (var stockDetail in facility!.stockDetails) {
-          StockDetailsList.add(stockDetail);
+void onValueChanged(dynamic list, dynamic value) {
+    print({"valuevaluevaluevalue": value});
+    switch (list.runtimeType) {
+      case const (RxList<GetAssetDataModel>):
+        {
+          if (value != "Please Select") {
+            int equipCatIndex = assetList.indexWhere((x) => x?.name == value);
+             selectedmaterialId.value= assetList[equipCatIndex]?.id ?? 0;
+             ismaterialSelected.value=true;
+             selectedmaterial.value=value;
+            }
+           else {
+            selectedmaterialId.value=0;
+          }
         }
-      }
-
-      filteredData.value = StockDetailsList.toList();
-
-      // paginationController = PaginationController(
-      //   rowCount: StockDetailsList.length,
-      //   rowsPerPage: 10,
-      // );
+        break;
     }
+
   }
+ 
+  // Future<void> getPlantStockList(int facilityId, dynamic startDate,
+  //     dynamic endDate, bool? isExport,int ? selectedmaterialId,
+  //     {bool isExportOnly = false}) async {
+  //   if (!isExportOnly) {
+  //     plantStockList!.clear();
+  //     plantStockList?.value = <PlantStockListModel>[];
+  //     StockDetailsList.value = <StockDetails>[];
+  //   }
+  //   final _plantStockList = await plantStockReportDetailsPresenter.getPlantStockList(
+  //       facilityId: facilityId,
+  //       isLoading: isLoading.value,
+  //       isExport: isExport,
+  //       startDate: startDate,
+  //       endDate: endDate,
+  //       selectedmaterialId: selectedmaterialId
+  //       );
+
+  //   if (_plantStockList != null && !isExportOnly) {
+  //     plantStockList?.value = _plantStockList;
+  //     isLoading.value = false;
+
+  //     for (var facility in _plantStockList) {
+  //       for (var stockDetail in facility!.stockDetails) {
+  //         StockDetailsList.add(stockDetail);
+  //       }
+  //     }
+
+  //     filteredData.value = StockDetailsList.toList();
+
+  //     // paginationController = PaginationController(
+  //     //   rowCount: StockDetailsList.length,
+  //     //   rowsPerPage: 10,
+  //     // );
+  //   }
+  // }
    
   
 }

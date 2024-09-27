@@ -527,7 +527,7 @@ class ObservationListDataSource extends DataTableSource {
           ? "-"
           : '${ObservationListDetails?.cost_name ?? '-'}',
       '${ObservationListDetails?.remaining_days ?? ''}',
-      (int.tryParse(ObservationListDetails?.remaining_days ?? '') ?? 0) > 0
+      (ObservationListDetails?.remaining_days ?? 0) > 0
           ? 'InTime'
           : '',
 

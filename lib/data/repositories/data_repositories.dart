@@ -1169,13 +1169,13 @@ class DataRepository extends DomainRepository {
     required String auth,
     goodsOrderApproveJsonString,
     bool? isLoading,
-    int?facilityId,
+    int? facilityId,
   }) async =>
       await connectHelper.rejectobsButton(
         auth: auth,
         goodsOrderApproveJsonString: goodsOrderApproveJsonString,
         isLoading: isLoading ?? false,
-        facilityId:facilityId
+        facilityId:facilityId,
       );
   Future<ResponseModel> pmPlanRejectButton({
     required String auth,
