@@ -58,9 +58,10 @@ class CumulativeReportUsecase {
           bool? isLoading,
           dynamic endDate,
           dynamic startDate,
+          bool? self_view,
           bool? isExport}) async =>
       await repository.getPmTaskList(
-          facilityId, isLoading, startDate, endDate, isExport);
+          facilityId, isLoading, startDate, endDate, isExport,self_view);
   Future<List<VegTaskListModel>> getVegTaskList(
       {required bool isLoading,
       required dynamic? facility_id,

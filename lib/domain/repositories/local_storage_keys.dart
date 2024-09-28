@@ -13,6 +13,7 @@ abstract class LocalKeys {
   static const irId = 'irId';
   static const srId = 'srId';
   static const obsId = 'obsId';
+  static const checkpointtypeId ='checkpointtypeId';
   static const wc_id = 'wc_id';
   static const wc_type = 'wc_type';
   static const typeEdit = 'typeEdit';
@@ -123,4 +124,5 @@ abstract class LocalKeys {
   static const fuelId = 'fuelId';
   static const plantationId = 'plantationId';
   static const kaizenId = 'kaizenId';
+
 }

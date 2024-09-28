@@ -10,12 +10,15 @@ class PreventiveMaintenanceTaskPresenter {
           bool? isLoading,
           dynamic endDate,
           dynamic startDate,
-          bool? isExport}) async =>
+          bool? isExport,
+          bool? self_view
+          }) async =>
       await preventiveMaintenanceTaskUsecase.getPmTaskList(
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           endDate: endDate,
           startDate: startDate,
+           self_view: self_view,
           isExport: isExport);
   void clearValue() async => preventiveMaintenanceTaskUsecase.clearValue();
   void clearValuetype() async =>

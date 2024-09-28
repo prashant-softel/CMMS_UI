@@ -682,12 +682,14 @@ class DataRepository extends DomainRepository {
     required bool isLoading,
     required String auth,
     String? start_date,
+    bool? self_view,
     required String end_date,
   }) async {
     return await connectHelper.getMCTaskList(
       isLoading: isLoading,
       auth: auth,
       facility_id: facility_id,
+      self_view: self_view,
       start_date: start_date,
       end_date: end_date,
     );
@@ -863,12 +865,14 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> getModuleCleaningListPlan({
     int? facility_id,
     required bool isLoading,
+    bool? self_view,
     required String auth,
   }) async {
     return await connectHelper.getModuleCleaningListPlan(
       isLoading: isLoading,
       auth: auth,
       facility_id: facility_id,
+      self_view: self_view,
     );
   }
 
@@ -2652,10 +2656,12 @@ class DataRepository extends DomainRepository {
     required String auth,
     bool? isLoading,
     int? id,
+    int? check_point_type_id,
   }) async =>
       await connectHelper.getObsDetail(
         auth: auth,
         id: id,
+        check_point_type_id:check_point_type_id,
         isLoading: isLoading ?? false,
       );
 
@@ -3195,11 +3201,13 @@ class DataRepository extends DomainRepository {
           dynamic? facilityId,
           bool? isLoading,
           dynamic startDate,
+           bool? self_view,
           dynamic endDate}) async =>
       await connectHelper.getPmTaskList(
           auth: auth,
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
+          self_view: self_view,
           startDate: startDate,
           endDate: endDate);
   Future<ResponseModel> getAuditTaskList(
@@ -3493,11 +3501,13 @@ class DataRepository extends DomainRepository {
     required String auth,
     int? facilityId,
     bool? isLoading,
+    bool? self_view,
   }) async =>
       await connectHelper.jobCardList(
         auth: auth,
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
+        self_view: self_view,
       );
   Future<ResponseModel> getUserDetails({
     String? auth,
@@ -4838,12 +4848,14 @@ class DataRepository extends DomainRepository {
           {required String auth,
           int? facilityId,
           bool? isLoading,
+           bool? self_view,
           dynamic startDate,
           dynamic endDate}) async =>
       await connectHelper.getPmPlanList(
           auth: auth,
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
+          self_view: self_view,
           startDate: startDate,
           endDate: endDate);
   Future<ResponseModel> getAuditPlanList(
@@ -5506,6 +5518,7 @@ class DataRepository extends DomainRepository {
     dynamic? facility_id,
     dynamic startDate,
     dynamic endDate,
+    bool? self_view,
     required bool isLoading,
     required String auth,
     // String? start_date,
@@ -5515,6 +5528,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading,
         auth: auth,
         facility_id: facility_id,
+         self_view: self_view,
         startDate: startDate,
         endDate: endDate
         // start_date: start_date,

@@ -945,6 +945,7 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     dynamic? facility_id,
+    bool? self_view,
     String? start_date,
     required String end_date,
   }) async {
@@ -953,7 +954,7 @@ class ConnectHelper {
 //var statusParam = (status!=null status!='')?'status=1':'';
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MC/GetMCTaskList?facility_id=$facility_id&' +
+      'MC/GetMCTaskList?facility_id=$facility_id&self_view=$self_view' +
           startDateParam +
           endDateParam,
       Request.getMultiparts,
@@ -1192,10 +1193,11 @@ class ConnectHelper {
   Future<ResponseModel> getModuleCleaningListPlan({
     required bool isLoading,
     required String auth,
+    bool? self_view,
     int? facility_id,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MC/GetMCPlanList?facilityId=$facility_id',
+      'MC/GetMCPlanList?facilityId=$facility_id&self_view=$self_view',
       Request.getMultiparts,
       null,
       isLoading,
@@ -4846,9 +4848,10 @@ Future<ResponseModel> rejectobsButton({
     required String auth,
     bool? isLoading,
     int? id,
+    int? check_point_type_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetObservationById?observation_id=$id',
+      'MISMaster/GetObservationById?observation_id=$id&check_point_type_id=$check_point_type_id',
       Request.get,
       null,
       isLoading ?? false,
@@ -5688,7 +5691,7 @@ Future<ResponseModel> rejectobsButton({
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
+      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}&self_view=${self_view}',
       Request.get,
       null,
       isLoading ?? true,
@@ -6237,9 +6240,10 @@ Future<ResponseModel> rejectobsButton({
     required String auth,
     bool? isLoading,
     int? facilityId,
+    bool? self_view,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'JC/GetJCList?facility_id=$facilityId',
+      'JC/GetJCList?facility_id=$facilityId&self_view=$self_view',
       Request.get,
       null,
       isLoading ?? false,
@@ -8637,11 +8641,12 @@ Future<ResponseModel> rejectobsButton({
       {required String auth,
       bool? isLoading,
       int? facilityId,
+       bool? self_view,
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
       //   'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
-      'PM/GetPMPlanList?facility_id=${facilityId}', Request.get,
+      'PM/GetPMPlanList?facility_id=${facilityId}&self_view=${self_view}', Request.get,
       null,
       isLoading ?? true,
       {
@@ -9851,11 +9856,12 @@ Future<ResponseModel> rejectobsButton({
     required bool isLoading,
     required String auth,
     dynamic startDate,
+     bool? self_view,
     dynamic endDate,
     dynamic? facility_id,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Vegetation/GetVegetationTaskList?facility_Id=$facility_id&start_date=${startDate}&end_date=${endDate}',
+      'Vegetation/GetVegetationTaskList?facility_Id=$facility_id&start_date=${startDate}&end_date=${endDate}&self_view=${self_view}',
       Request.get,
       null,
       isLoading,

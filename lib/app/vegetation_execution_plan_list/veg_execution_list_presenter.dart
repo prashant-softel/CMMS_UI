@@ -19,7 +19,8 @@ class VegExecutionListPresenter {
       required dynamic? facility_id,
       dynamic endDate,
       dynamic startDate,
-      bool? isExport
+      bool? isExport,
+      bool? self_view,
       // String? start_date,
       // required String end_date,
       }) async {
@@ -27,6 +28,7 @@ class VegExecutionListPresenter {
         isLoading: isLoading,
         facility_id: facility_id,
         endDate: endDate,
+         self_view: self_view,
         startDate: startDate,
         isExport: isExport
         // start_date: start_date,

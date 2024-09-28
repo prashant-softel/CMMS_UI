@@ -17,6 +17,7 @@ class VegExecutionListUsecase {
       required dynamic? facility_id,
       dynamic endDate,
       dynamic startDate,
+      bool? self_view,
       bool? isExport
       // String? start_date,
       // required String end_date,
@@ -26,6 +27,7 @@ class VegExecutionListUsecase {
         facility_id: facility_id,
         startDate: startDate,
         endDate: endDate,
+        self_view:self_view,
         isExport: isExport
         // start_date: start_date,
         // end_date: end_date,

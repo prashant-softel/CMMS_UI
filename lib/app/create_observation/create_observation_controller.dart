@@ -99,6 +99,7 @@ class CreateObservationController extends GetxController {
   Rx<bool> isLoading = true.obs;
   int facilityId = 0;
   Rx<int> obsId = 0.obs;
+  Rx<int> checkpointtypeId = 0.obs;
 
   @override
   void onInit() async {
@@ -121,9 +122,9 @@ class CreateObservationController extends GetxController {
         obsDateTc.text = DateFormat('yyyy-MM-dd').format(DateTime.now());
         // });
       });
-      if (obsId.value != 0) {
+      if (obsId.value != 0&& checkpointtypeId.value!=0) {
         // Future.delayed(Duration(seconds: 1), () {
-        getObsDetail(id: obsId.value);
+        getObsDetail(id: obsId.value,check_point_type_id: checkpointtypeId.value);
         getObsHistory(id: obsId.value);
         // });
       }
@@ -135,14 +136,17 @@ class CreateObservationController extends GetxController {
   Future<void> setUserId() async {
     try {
       final _obsId = await createObservationPresenter.getValue();
+      final _checkpointtypeId = await createObservationPresenter.getValue();
 
-      if (_obsId == null || _obsId == '' || _obsId == "null") {
+      if (_obsId == null || _obsId == '' || _obsId == "null" &&
+      _checkpointtypeId == null || _checkpointtypeId == '' || _checkpointtypeId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         obsId.value = dataFromPreviousScreen['obsId'];
+        checkpointtypeId.value = dataFromPreviousScreen['checkpointtypeId'];
         type.value = dataFromPreviousScreen['type'];
 
-        createObservationPresenter.saveValue(obsId: obsId.value.toString());
+        createObservationPresenter.saveValue(obsId: obsId.value.toString(),checkpointtypeId:checkpointtypeId.value.toString());
       } else {
         obsId.value = int.tryParse(_obsId) ?? 0;
       }
@@ -204,8 +208,8 @@ class CreateObservationController extends GetxController {
     createObservationPresenter.clearValue();
   }
 
-  Future<void> getObsDetail({required int id}) async {
-    final _getObsDetail = await createObservationPresenter.getObsDetail(id: id);
+  Future<void> getObsDetail({required int id,required int check_point_type_id}) async {
+    final _getObsDetail = await createObservationPresenter.getObsDetail(id: id,check_point_type_id:check_point_type_id);
 
     if (_getObsDetail != null) {
       getObsById.value = _getObsDetail;
@@ -213,7 +217,7 @@ class CreateObservationController extends GetxController {
       contactNumberCtrlr.text = getObsById.value?.contact_number ?? '';
       selectedAssignedToId.value = getObsById.value?.assigned_to_id ?? 0;
       selectedAssignedTo.value = getObsById.value?.assigned_to_name ?? '';
-      contractorNameCtrlr.text = getObsById.value?.contractor_name ?? "";
+      contractorNameCtrlr.text = getObsById.value?.operator_name ?? "";
       correctivePreventiveCtrlr.text =
           getObsById.value?.preventive_action ?? "";
       selectedCostTypeList.value = getObsById.value?.cost_name == "Empty"

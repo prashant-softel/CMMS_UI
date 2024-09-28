@@ -2865,6 +2865,7 @@ class Repository {
   Future<List<ModuleCleaningListPlanModel>> getModuleCleaningListPlan(
       {required int? facility_id,
       required bool isLoading,
+      bool? self_view,
       bool? isExport}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -2875,6 +2876,7 @@ class Repository {
         res = await _dataRepository.getModuleCleaningListPlan(
           facility_id: facility_id,
           isLoading: isLoading,
+          self_view: self_view,
           auth: auth,
         );
         print('getModuleCleaningListPlan: ${res.data}');
@@ -3557,6 +3559,7 @@ class Repository {
   Future<GetObservationById?> getObsDetail({
     bool? isLoading,
     int? id,
+    int? check_point_type_id,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -3565,6 +3568,7 @@ class Repository {
         res = await _dataRepository.getObsDetail(
           auth: auth,
           id: id,
+          check_point_type_id:check_point_type_id,
           isLoading: isLoading ?? false,
         );
 
@@ -6342,6 +6346,7 @@ class Repository {
     required bool isLoading,
     bool? isExport,
     String? start_date,
+    bool? self_view,
     required String end_date,
   }) async {
     try {
@@ -6354,7 +6359,9 @@ class Repository {
           facility_id: facility_id,
           isLoading: isLoading,
           start_date: start_date,
+          self_view: self_view,
           end_date: end_date,
+          
           auth: auth,
         );
         print('MCTaskList: ${res.data}');
@@ -10457,6 +10464,7 @@ class Repository {
       bool? isLoading,
       dynamic startDate,
       dynamic endDate,
+      bool? self_view,
       bool? isExport) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -10467,6 +10475,7 @@ class Repository {
             facilityId: facilityId ?? 0,
             isLoading: isLoading ?? false,
             startDate: startDate,
+            self_view: self_view,
             endDate: endDate);
         // print(res.data);
       }
@@ -11393,7 +11402,7 @@ class Repository {
   }
 
   Future<List<JobCardModel>> jobCardList(
-      int? facilityId, bool? isLoading, bool? isExport) async {
+      int? facilityId, bool? isLoading, bool? isExport,bool? self_view) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -11402,6 +11411,7 @@ class Repository {
           auth: auth,
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
+          self_view: self_view,
         );
       }
       if (!res.hasError) {
@@ -14781,6 +14791,7 @@ class Repository {
       int? facilityId,
       bool? isLoading,
       dynamic startDate,
+      bool? self_view,
       dynamic endDate,
       bool? isExport) async {
     try {
@@ -14791,6 +14802,7 @@ class Repository {
             auth: auth,
             facilityId: facilityId ?? 0,
             isLoading: isLoading ?? false,
+             self_view: self_view,
             startDate: startDate,
             endDate: endDate);
         // print(res.data);
@@ -16145,6 +16157,7 @@ class Repository {
       dynamic startDate,
       dynamic endDate,
       required bool isLoading,
+       bool? self_view,
       bool? isExport
       // String? start_date,
       // required String end_date,
@@ -16159,6 +16172,7 @@ class Repository {
           facility_id: facility_id,
           startDate: startDate,
           endDate: endDate,
+           self_view: self_view,
           isLoading: isLoading,
           // start_date: start_date,
           // end_date: end_date,

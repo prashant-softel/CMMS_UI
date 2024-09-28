@@ -17,9 +17,14 @@ class CreateObservationUsecase {
   Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
       await repository.getFacilityList(isLoading);
   Future<String?> getValue() async =>
-      await repository.getStringValue(LocalKeys.obsId);
-  void saveValue({String? obsId}) async =>
-      repository.saveValue(LocalKeys.obsId, obsId);
+      await repository.getStringValue(LocalKeys.obsId,);
+  void saveValue({String? obsId,String?checkpointtypeId}) async =>
+      repository.saveValue(
+        LocalKeys.obsId, 
+        obsId, 
+        // LocalKeys.checkpointtypeId,
+        // checkpointtypeId
+        );
   Future<List<HistoryModel>?> getHistory({
     moduleType,
     id,
@@ -35,9 +40,11 @@ class CreateObservationUsecase {
   Future<GetObservationById?> getObsDetail({
     bool? isLoading,
     required int id,
+    required int check_point_type_id,
   }) async =>
       await repository.getObsDetail(
         id: id,
+        check_point_type_id:check_point_type_id,
         isLoading: isLoading ?? false,
       );
   Future<Map<String, dynamic>> createObs({

@@ -23,8 +23,8 @@ class JobCardUsecase {
         isLoading,
       );
   Future<List<JobCardModel?>?> jobCardList(
-          {int? facilityId, bool? isLoading, bool? isExport}) async =>
-      await repository.jobCardList(facilityId, isLoading, isExport);
+          {int? facilityId, bool? isLoading, bool? isExport,bool? self_view,}) async =>
+      await repository.jobCardList(facilityId, isLoading, isExport,self_view);
 
   ///
   Future<Map<String, dynamic>?> createJobCard({

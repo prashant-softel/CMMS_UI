@@ -11,7 +11,7 @@ String getObservationListModelToJson(List<GetObservationList> data) =>
 
 class GetObservationList {
   int? id;
-  int? observation_type;
+  int? check_point_type_id;
   int? facility_id;
   String? contractor_name;
   int? risk_type_id;
@@ -50,7 +50,7 @@ class GetObservationList {
 
   GetObservationList({
     this.id,
-    this.observation_type,
+    this.check_point_type_id,
     this.facility_id,
     this.contractor_name,
     this.risk_type_id,
@@ -91,7 +91,7 @@ class GetObservationList {
   factory GetObservationList.fromJson(Map<String, dynamic> json) {
     return GetObservationList(
       id: json['id'],
-    observation_type: json['observation_type'],
+    check_point_type_id: json['check_point_type_id'],
     facility_id: json['facility_id'],
     contractor_name: json['contractor_name'] != null ? json['contractor_name'] as String : '', // Explicit null check
     risk_type_id: json['risk_type_id'],
@@ -138,7 +138,7 @@ class GetObservationList {
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'observation_type': observation_type,
+        'check_point_type_id': check_point_type_id,
         'facility_id': facility_id,
         'contractor_name': contractor_name,
         'risk_type_id': risk_type_id,
