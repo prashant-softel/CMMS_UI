@@ -161,7 +161,12 @@ class VegExecutionController extends GetxController {
           {"key": "Pending", "value": '${element.pending}'},
           {"key": "Remark", "value": '${element.remark_of_schedule}'},
           {"key": "Permit_code", "value": '${element.permit_code}'},
-          {"key": "Permit_status", "value": '${element.status_short_ptw}'},
+          {
+            "key": "Permit_status",
+            "value": element.is_expired == 1
+                ? '${element.status_short_ptw}(Expired)'
+                : '${element.status_short_ptw}'
+          },
           {"key": "Status", "value": '${element.status_short}'},
           {'key': "Actions", "value": ''},
         ]);

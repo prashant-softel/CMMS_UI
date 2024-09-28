@@ -438,8 +438,9 @@ class NewPermitListController extends GetxController {
     clearisCheckedtoreData();
     clearjobmodelValue();
     clearpmTaskValue();
-    Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "type": 0});
+    String type = 0.toString();
+
+    Get.offAllNamed('${Routes.viewPermitScreen}/$permitId/$type');
   }
 
   Future<void> closePermitRequestList({int? permitId}) async {

@@ -47,12 +47,14 @@ class AddModuleCleaningExecutionController extends GetxController {
   List<Escalation> days = [];
   Map<String, Schedules> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
-  RxList<Schedules?>? schedules = <Schedules?>[].obs;
+  RxList<Schedules>? schedules = <Schedules>[].obs;
   Map<String, String> check = <String, String>{};
   int count = 0;
 
   int? scheduledId = 0;
   Rx<bool> allScheduleTrue = false.obs;
+  Rx<bool> anyScheduleTrue = false.obs;
+
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
   Rx<String> selectedAssignedTo = ''.obs;
   Rx<bool> isAssignedToSelected = true.obs;
@@ -159,6 +161,10 @@ class AddModuleCleaningExecutionController extends GetxController {
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
   List<int?> scheduleId = [];
+  int totalSchedule = 0;
+  int totalCleaned = 0;
+  int totalAbandoned = 0;
+  // bool containsStatus383 = false;
 
   ///
 
@@ -627,6 +633,7 @@ class AddModuleCleaningExecutionController extends GetxController {
 
     if (_mcExecutionDetails != null) {
       mcExecutionDetailsModel.value = _mcExecutionDetails;
+
       plannedAtDateTimeCtrlrWeb.text =
           '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.plannedAt}'))}';
       startedAtDateTimeCtrlrWeb.text =
@@ -644,9 +651,18 @@ class AddModuleCleaningExecutionController extends GetxController {
 
       rowItem.value = [];
       schedules?.value = _mcExecutionDetails.schedules;
+      Map<String, int> totals =
+          SchedulesCalculator.calculateTotals(schedules!.value);
+      totalSchedule = totals['totalScheduled'] ?? 0;
+      totalCleaned = totals['totalCleaned'] ?? 0;
+      totalAbandoned = totals['totalAbandoned'] ?? 0;
+
+      bool anyStatus383 = schedules!.any((schedule) => schedule?.status == 383);
+
       bool allStatus383 =
           schedules!.every((schedule) => schedule?.status == 383);
 
+      anyScheduleTrue.value = anyStatus383;
       allScheduleTrue.value = allStatus383;
 
       _mcExecutionDetails.schedules.forEach((element) {

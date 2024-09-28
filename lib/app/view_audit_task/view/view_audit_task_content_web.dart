@@ -708,7 +708,13 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                             "${controller.auditTasknDetailModel.value.permit_type ?? ""}",
                                                           )),
                                                           DataCell(Text(
-                                                            "${controller.auditTasknDetailModel.value.status_short_ptw ?? ""}",
+                                                            controller
+                                                                        .auditTasknDetailModel
+                                                                        .value
+                                                                        .is_expired ==
+                                                                    1
+                                                                ? "${controller.auditTasknDetailModel.value.status_short_ptw}(Expired)"
+                                                                : "${controller.auditTasknDetailModel.value.status_short_ptw ?? ""}",
                                                           )),
                                                           DataCell(Row(
                                                             mainAxisAlignment:

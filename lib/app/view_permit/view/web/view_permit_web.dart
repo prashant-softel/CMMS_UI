@@ -19,7 +19,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';import 'package:cmms/app/utils/url_path.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:cmms/app/utils/url_path.dart';
 
 class ViewPermitWeb extends GetView<ViewPermitController> {
   ViewPermitWeb({super.key});
@@ -3743,8 +3744,8 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                       // controller.viewPermitDetailsModel.value?.isExpired == 1 ||
                       controller.viewPermitDetailsModel.value!.tbT_Done_Check ==
                                   1 &&
-                              controller.viewPermitDetailsModel.value
-                                      ?.requester_id ==
+                              controller
+                                      .viewPermitDetailsModel.value?.requester_id ==
                                   varUserAccessModel.value.user_id &&
                               controller.viewPermitDetailsModel.value
                                       ?.ptwStatus ==
@@ -3759,8 +3760,16 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                   .kHaveEditAccess)
                                       .length >
                                   0 &&
-                              controller.isOneHour(
-                                      controller.validTillTimeCtrlr.text) ==
+                              (controller.viewPermitDetailsModel.value
+                                      ?.isExpired ==
+                                  0) &&
+                              controller.viewPermitDetailsModel.value
+                                      ?.lstAssociatedJobs?.isNotEmpty
+
+                                  // &&
+                                  // controller.isOneHour(
+                                  //         controller.validTillTimeCtrlr.text)
+                                  ==
                                   true
                           ? Padding(
                               padding: const EdgeInsets.only(left: 5),
