@@ -4848,9 +4848,10 @@ Future<ResponseModel> rejectobsButton({
     required String auth,
     bool? isLoading,
     int? id,
+    int? check_point_type_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetObservationById?observation_id=$id',
+      'MISMaster/GetObservationById?observation_id=$id&check_point_type_id=$check_point_type_id',
       Request.get,
       null,
       isLoading ?? false,
@@ -8640,11 +8641,12 @@ Future<ResponseModel> rejectobsButton({
       {required String auth,
       bool? isLoading,
       int? facilityId,
+       bool? self_view,
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
       //   'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
-      'PM/GetPMPlanList?facility_id=${facilityId}', Request.get,
+      'PM/GetPMPlanList?facility_id=${facilityId}&self_view=${self_view}', Request.get,
       null,
       isLoading ?? true,
       {

@@ -18,8 +18,9 @@ class CreateObservationPresenter {
       await createObservationUsecase.getFacilityList(isLoading: isLoading);
   void saveValue({
     String? obsId,
+    String?checkpointtypeId,
   }) async {
-    return createObservationUsecase.saveValue(obsId: obsId);
+    return createObservationUsecase.saveValue(obsId: obsId,checkpointtypeId:checkpointtypeId);
   }
 
   void clearValue() async => createObservationUsecase.clearValue();
@@ -78,9 +79,10 @@ class CreateObservationPresenter {
         isLoading: isLoading,
       );
   Future<GetObservationById?> getObsDetail(
-      {bool? isLoading, required int id}) async {
+      {bool? isLoading, required int id,required int check_point_type_id,}) async {
     return createObservationUsecase.getObsDetail(
       id: id,
+      check_point_type_id:check_point_type_id,
       isLoading: isLoading ?? false,
     );
   }

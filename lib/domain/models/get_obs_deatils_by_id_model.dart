@@ -8,7 +8,7 @@ GetObservationById getObservationByIdModelFromJson(String str) =>
 class GetObservationById {
   int? id;
   int? facility_id;
-  String? contractor_name;
+  String? operator_name;
   int? risk_type_id;
   int? status_code;
   String? risk_type_name;
@@ -38,7 +38,7 @@ class GetObservationById {
   GetObservationById({
     this.id,
     this.facility_id,
-    this.contractor_name,
+    this.operator_name,
     this.risk_type_id,
     this.status_code,
     this.risk_type_name,
@@ -73,26 +73,27 @@ class GetObservationById {
       facility_id: json['facility_id'],
       short_status: json['short_status'],
       contact_number: json['contact_number'],
-      contractor_name: json['contractor_name'],
+      operator_name: json['operator_name'],
       cost_type: json['cost_type'],
       cost_name: json['cost_name'],
       location_of_observation: json['location_of_observation'],
       date_of_observation:
           Utility.getFormatedyearMonthDay(json['date_of_observation']),
       observation_description: json['observation_description'],
-      preventive_action: json['preventive_action'],
+      preventive_action: json['preventive_action']??'',
       assigned_to_id: json['assigned_to_id'],
-      assigned_to_name: json['assigned_to_name'],
+      assigned_to_name: json['assigned_to_name']??'',
       created_by: json['created_by'],
       updateid: json['updateid'],
       createdid: json['createdid'],
       created_at: Utility.getFormatedyearMonthDay(json['created_at']),
-      updated_by: json['updated_by'],
-      updated_at: json['updated_at'],
+      updated_by: json['updated_by']??'',
+      updated_at: json['updated_at']??'',
       risk_type_id: json['risk_type_id'],
       risk_type_name: json['risk_type_name'],
       source_of_observation: json['source_of_observation'],
       source_of_observation_name: json['source_of_observation_name'],
+      // target_date: Utility.getFormatedyearMonthDay(json['target_date']),
       target_date: Utility.getFormatedyearMonthDay(json['target_date']),
       file_list: json["fileDetails"] != null
           ? List<FileList>.from(

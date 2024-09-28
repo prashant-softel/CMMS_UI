@@ -31,6 +31,7 @@ class ViewObservationUsecase {
   Future<GetObservationById?> getObsDetail({
     bool? isLoading,
     required int id,
+
   }) async =>
       await repository.getObsDetail(
         id: id,

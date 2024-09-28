@@ -3559,6 +3559,7 @@ class Repository {
   Future<GetObservationById?> getObsDetail({
     bool? isLoading,
     int? id,
+    int? check_point_type_id,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -3567,6 +3568,7 @@ class Repository {
         res = await _dataRepository.getObsDetail(
           auth: auth,
           id: id,
+          check_point_type_id:check_point_type_id,
           isLoading: isLoading ?? false,
         );
 
@@ -14789,6 +14791,7 @@ class Repository {
       int? facilityId,
       bool? isLoading,
       dynamic startDate,
+      bool? self_view,
       dynamic endDate,
       bool? isExport) async {
     try {
@@ -14799,6 +14802,7 @@ class Repository {
             auth: auth,
             facilityId: facilityId ?? 0,
             isLoading: isLoading ?? false,
+             self_view: self_view,
             startDate: startDate,
             endDate: endDate);
         // print(res.data);

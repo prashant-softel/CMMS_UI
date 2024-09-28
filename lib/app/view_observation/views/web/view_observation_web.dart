@@ -215,7 +215,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                                 style: Styles
                                                                     .blue17),
                                                             Text(
-                                                                "${controller.getObsById.value?.contractor_name ?? ""}",
+                                                                "${controller.getObsById.value?.operator_name ?? ""}",
                                                                 style: Styles
                                                                     .blue17),
                                                                       Text(

@@ -2656,10 +2656,12 @@ class DataRepository extends DomainRepository {
     required String auth,
     bool? isLoading,
     int? id,
+    int? check_point_type_id,
   }) async =>
       await connectHelper.getObsDetail(
         auth: auth,
         id: id,
+        check_point_type_id:check_point_type_id,
         isLoading: isLoading ?? false,
       );
 
@@ -4846,12 +4848,14 @@ class DataRepository extends DomainRepository {
           {required String auth,
           int? facilityId,
           bool? isLoading,
+           bool? self_view,
           dynamic startDate,
           dynamic endDate}) async =>
       await connectHelper.getPmPlanList(
           auth: auth,
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
+          self_view: self_view,
           startDate: startDate,
           endDate: endDate);
   Future<ResponseModel> getAuditPlanList(

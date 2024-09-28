@@ -601,12 +601,15 @@ class ObservationListDataSource extends DataTableSource {
                             onPress: () {
                               // controller.clearStoreData();
                               int obsId = ObservationListDetails?.id ?? 0;
-                              if (obsId != 0) {
+                              int checkpointtypeId=ObservationListDetails?.check_point_type_id ??0;
+                              
+                              if (obsId != 0 &&checkpointtypeId!=0) {
                                 controller.clearValue();
                                 Get.toNamed(
                                   Routes.viewObservationScreen,
                                   arguments: {
                                     'obsId': ObservationListDetails?.id,
+                                     'checkpointtypeId':ObservationListDetails?.check_point_type_id,
                                   },
                                 );
                               }
@@ -622,6 +625,7 @@ class ObservationListDataSource extends DataTableSource {
                                                   .kHaveApproveAccess)
                                       .length >
                                   0
+                                  // check_point_type_id
                               ? TableActionButton(
                                   color: ColorValues.editColor,
                                   icon: Icons.edit,
@@ -629,11 +633,13 @@ class ObservationListDataSource extends DataTableSource {
                                   onPress: () {
                                     // controller.clearStoreData();
                                     int obsId = ObservationListDetails!.id ?? 0;
-                                    if (obsId != 0) {
+                                    int checkpointtypeId=ObservationListDetails.check_point_type_id ??0;
+                                    if (obsId != 0 && checkpointtypeId !=0) {
                                       Get.offAllNamed(
                                         Routes.createObservation,
                                         arguments: {
                                           'obsId': ObservationListDetails.id,
+                                          'checkpointtypeId':ObservationListDetails.check_point_type_id,
                                           'type': 1
                                         },
                                       );
@@ -651,12 +657,15 @@ class ObservationListDataSource extends DataTableSource {
                                         // controller.clearStoreData();
                                         int obsId =
                                             ObservationListDetails.id ?? 0;
-                                        if (obsId != 0) {
+                                              int checkpointtypeId=ObservationListDetails.check_point_type_id ??0;
+                                        if (obsId != 0 && checkpointtypeId!=0) {
                                           Get.offAllNamed(
                                             Routes.createObservation,
                                             arguments: {
                                               'obsId':
                                                   ObservationListDetails.id,
+                                                  'checkpointtypeId':ObservationListDetails.check_point_type_id,
+
                                             },
                                           );
                                         }
@@ -675,11 +684,14 @@ class ObservationListDataSource extends DataTableSource {
                                   onPress: () {
                                     // controller.clearStoreData();
                                     int obsId = ObservationListDetails.id ?? 0;
-                                    if (obsId != 0) {
+                                     int checkpointtypeId=ObservationListDetails.check_point_type_id ??0;
+                                    
+                                    if (obsId != 0 &&checkpointtypeId!=0) {
                                       Get.offAllNamed(
                                         Routes.createObservation,
                                         arguments: {
                                           'obsId': ObservationListDetails.id,
+                                            'checkpointtypeId':ObservationListDetails.check_point_type_id,
                                           'type': 1
                                         },
                                       );
@@ -695,12 +707,14 @@ class ObservationListDataSource extends DataTableSource {
       }).toList(),
       onSelectChanged: (_) {
         int obsId = ObservationListDetails?.id ?? 0;
-        if (obsId != 0) {
+         int checkpointtypeId=ObservationListDetails?.check_point_type_id ??0;
+        if (obsId != 0 && checkpointtypeId!=0) {
           controller.clearValue();
           Get.toNamed(
             Routes.viewObservationScreen,
             arguments: {
               'obsId': ObservationListDetails?.id,
+                'checkpointtypeId':ObservationListDetails?.check_point_type_id,
             },
           );
         }

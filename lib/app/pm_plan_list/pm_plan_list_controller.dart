@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_presenter.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/pm_plan_list_model.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +105,7 @@ class PmPlanListController extends GetxController {
       facilityId = event;
       if (facilityId > 0) {
         //Future.delayed(Duration(seconds: 2), () async {
-        getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, false);
+        getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, false,false);
         //   });
       }
 
@@ -159,23 +161,31 @@ class PmPlanListController extends GetxController {
   }
 
   void export() {
-    getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, true,
+    getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, true,true,
         isExportOnly: true);
   }
 
   Future<void> getPmPlanList(
-      int facilityId, dynamic startDate, dynamic endDate, bool? isExport,
+      int facilityId, dynamic startDate, dynamic endDate, bool? isExport,bool self_view,
       {bool isExportOnly = false}) async {
     if (!isExportOnly) {
       pmPlanList.value = <PmPlanListModel>[];
       filteredData.value = <PmPlanListModel>[];
     }
+      bool selfview = varUserAccessModel.value.access_list!
+            .where((e) =>
+                e.feature_id == UserAccessConstants.kPmPlanFeatureId &&
+                e.selfView == UserAccessConstants.kHaveSelfViewAccess)
+            .length >
+        0;
+
 
     final _pmPlanList = await pmPlanListPresenter.getPmPlanList(
         facilityId: facilityId,
         isLoading: isLoading.value,
         startDate: startDate,
         endDate: endDate,
+         self_view: selfview,
         isExport: isExport);
 
     if (_pmPlanList != null && !isExportOnly) {
@@ -202,7 +212,7 @@ class PmPlanListController extends GetxController {
   }
 
   void getPmPlanListByDate() {
-    getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, false);
+    getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, false,false);
   }
 
   void isDeleteDialog({String? planId, String? planName}) {
@@ -248,7 +258,7 @@ class PmPlanListController extends GetxController {
                     deletePmPlan(planId).then((value) {
                       Get.back();
                       getPmPlanList(facilityId, formattedTodate1,
-                          formattedFromdate1, false);
+                          formattedFromdate1, false,false);
                     });
                   },
                   text: 'Yes'),

@@ -96,7 +96,7 @@ class ViewObservationController extends GetxController {
 
       contactNumberCtrlr.text = getObsById.value?.contact_number ?? '';
         // .value = getObsById.value?.responsible_person_name??'';
-      contractorNameCtrlr.text = getObsById.value?.contractor_name ?? "";
+      contractorNameCtrlr.text = getObsById.value?.operator_name ?? "";
       correctivePreventiveCtrlr.text =
           getObsById.value?.preventive_action ?? "";
       discriptionCtrlr.text = getObsById.value?.observation_description ?? "";
