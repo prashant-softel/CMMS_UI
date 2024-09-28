@@ -571,7 +571,13 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                             "${controller.pmtaskViewModel.value?.permit_type ?? ""}",
                                                           )),
                                                           DataCell(Text(
-                                                            "${controller.pmtaskViewModel.value?.status_short_ptw ?? ""}",
+                                                            controller
+                                                                        .pmtaskViewModel
+                                                                        .value
+                                                                        ?.is_expired ==
+                                                                    1
+                                                                ? "${controller.pmtaskViewModel.value?.status_short_ptw}(Expired)"
+                                                                : "${controller.pmtaskViewModel.value?.status_short_ptw ?? ""}",
                                                           )),
                                                           DataCell(Row(
                                                             mainAxisAlignment:

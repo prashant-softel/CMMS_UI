@@ -146,9 +146,12 @@ class Schedules {
     this.status_short_ptw,
     this.tbt_start,
     this.startDate,
+    this.is_expired,
   });
 
   int? id;
+  int? is_expired;
+
   int? scheduleId;
   int? executionId;
   int? cleaningDay;
@@ -175,6 +178,7 @@ class Schedules {
 
   factory Schedules.fromJson(Map<String, dynamic> json) => Schedules(
         id: json["id"],
+        is_expired: json["is_expired"],
         permit_id: json['permit_id'],
         permit_code: json['permit_code'] ?? '',
         ptw_status: json['ptw_status'],
@@ -197,7 +201,7 @@ class Schedules {
         remark: json['remark'] ?? '',
         status_short: json['status_short'] ?? '',
         status: json['status'],
-        startDate:json['startDate'],
+        startDate: json['startDate'],
         equipments: json["equipments"] != null
             ? List<EquipmentsList>.from(
                 json["equipments"].map((x) => EquipmentsList.fromJson(x)))
@@ -206,6 +210,7 @@ class Schedules {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "is_expired": is_expired,
         "status_short_ptw":
             status_short_ptw == 'Invalid' ? '' : status_short_ptw,
         "scheduleId": scheduleId,
@@ -222,7 +227,7 @@ class Schedules {
         "remark": remark ?? '',
         "status": status,
         "tbt_start": tbt_start,
-        "startDate":startDate,
+        "startDate": startDate,
         "status_short": status_short ?? '',
         "permit_id": permit_id,
         "permit_code": permit_code ?? '',
@@ -275,3 +280,33 @@ class EquipmentsList {
 String endExecutionModelToJson(Schedules data) => json.encode(data.toJson());
 String endExecutionDetailModelToJson(EquipmentsList data) =>
     json.encode(data.toJson());
+
+class SchedulesCalculator {
+  // Function to calculate total scheduled, cleaned, and abandoned values
+  static Map<String, int> calculateTotals(List<Schedules> schedules) {
+    int totalScheduled = 0;
+    int totalCleaned = 0;
+    int totalAbandoned = 0;
+
+    for (Schedules schedule in schedules) {
+      totalScheduled += schedule.scheduled ?? 0;
+      totalCleaned += schedule.cleaned ?? 0;
+      totalAbandoned += schedule.abandoned ?? 0;
+    }
+
+    return {
+      "totalScheduled": totalScheduled,
+      "totalCleaned": totalCleaned,
+      "totalAbandoned": totalAbandoned,
+    };
+  }
+
+  static bool hasStatus383(List<Schedules> schedules) {
+    for (Schedules schedule in schedules) {
+      if (schedule.status == 383) {
+        return true;
+      }
+    }
+    return false;
+  }
+}

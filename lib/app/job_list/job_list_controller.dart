@@ -235,9 +235,9 @@ class JobListController extends GetxController {
   }
 
   void goToJobDetailsScreen(int? _jobId) {
-    clearStoreData();
-    clearStoreDataType();
-    Get.toNamed('${Routes.jobDetails}/$_jobId');
+    // clearStoreData();
+    // clearStoreDataType();
+    Get.offAllNamed('${Routes.jobDetails}/$_jobId');
   }
 
   String formatDate(String? inputDateTime) {

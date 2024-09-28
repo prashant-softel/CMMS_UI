@@ -1127,9 +1127,19 @@ class AddModuleCleaningExecutionContentWeb
                                                               .cancelColor,
                                                       text: "Close",
                                                       onPressed: () {
-                                                        controller.allScheduleTrue
-                                                                    .value ==
-                                                                false
+                                                        int total = (controller
+                                                                .totalAbandoned +
+                                                            controller
+                                                                .totalCleaned);
+                                                        controller.anyScheduleTrue
+                                                                            .value ==
+                                                                        false &&
+                                                                    controller.totalSchedule !=
+                                                                        total ||
+                                                                controller
+                                                                        .allScheduleTrue
+                                                                        .value ==
+                                                                    false
                                                             ? Get.defaultDialog(
                                                                 radius: 5,
                                                                 title: 'Alert',
