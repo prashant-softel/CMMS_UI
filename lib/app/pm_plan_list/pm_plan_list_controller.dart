@@ -105,7 +105,8 @@ class PmPlanListController extends GetxController {
       facilityId = event;
       if (facilityId > 0) {
         //Future.delayed(Duration(seconds: 2), () async {
-        getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, false,false);
+        getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, false,
+            false, true);
         //   });
       }
 
@@ -161,31 +162,29 @@ class PmPlanListController extends GetxController {
   }
 
   void export() {
-    getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, true,true,
-        isExportOnly: true);
+    getPmPlanList(
+        facilityId, formattedTodate1, formattedFromdate1, true, true, true);
   }
 
-  Future<void> getPmPlanList(
-      int facilityId, dynamic startDate, dynamic endDate, bool? isExport,bool self_view,
-      {bool isExportOnly = false}) async {
+  Future<void> getPmPlanList(int facilityId, dynamic startDate, dynamic endDate,
+      bool? isExport, bool self_view, bool isExportOnly) async {
     if (!isExportOnly) {
       pmPlanList.value = <PmPlanListModel>[];
       filteredData.value = <PmPlanListModel>[];
     }
-      bool selfview = varUserAccessModel.value.access_list!
+    bool selfview = varUserAccessModel.value.access_list!
             .where((e) =>
                 e.feature_id == UserAccessConstants.kPmPlanFeatureId &&
                 e.selfView == UserAccessConstants.kHaveSelfViewAccess)
             .length >
         0;
 
-
     final _pmPlanList = await pmPlanListPresenter.getPmPlanList(
         facilityId: facilityId,
         isLoading: isLoading.value,
         startDate: startDate,
         endDate: endDate,
-         self_view: selfview,
+        self_view: selfview,
         isExport: isExport);
 
     if (_pmPlanList != null && !isExportOnly) {
@@ -193,26 +192,27 @@ class PmPlanListController extends GetxController {
       filteredData.value = pmPlanList.value;
       isLoading.value = false;
 
-      paginationController = PaginationController(
-        rowCount: filteredData.length,
-        rowsPerPage: 10,
-      );
+      // paginationController = PaginationController(
+      //   rowCount: filteredData.length,
+      //   rowsPerPage: 10,
+      // );
 
-      if (filteredData.isNotEmpty) {
-        pmPlanListModel = filteredData[0];
-        var calibrationListJson = pmPlanListModel?.toJson();
-        pmPlanListTableColumns.value = <String>[];
-        for (var key in calibrationListJson?.keys.toList() ?? []) {
-          pmPlanListTableColumns.add(key);
-        }
-      }
+      // if (filteredData.isNotEmpty) {
+      //   pmPlanListModel = filteredData[0];
+      //   var calibrationListJson = pmPlanListModel?.toJson();
+      //   pmPlanListTableColumns.value = <String>[];
+      //   for (var key in calibrationListJson?.keys.toList() ?? []) {
+      //     pmPlanListTableColumns.add(key);
+      //   }
+      // }
     }
 
     update(['pmPlan_list']);
   }
 
   void getPmPlanListByDate() {
-    getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, false,false);
+    getPmPlanList(
+        facilityId, formattedTodate1, formattedFromdate1, false, false, false);
   }
 
   void isDeleteDialog({String? planId, String? planName}) {
@@ -258,7 +258,7 @@ class PmPlanListController extends GetxController {
                     deletePmPlan(planId).then((value) {
                       Get.back();
                       getPmPlanList(facilityId, formattedTodate1,
-                          formattedFromdate1, false,false);
+                          formattedFromdate1, false, false, false);
                     });
                   },
                   text: 'Yes'),
@@ -329,4 +329,3 @@ class PmPlanListController extends GetxController {
     update();
   }
 }
-

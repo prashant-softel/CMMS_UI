@@ -7355,7 +7355,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getSmReportList(
+  Future<ResponseModel> getAvailbleSmReportList(
       {required String auth,
       bool? isLoading,
       int? facilityId,
@@ -7364,7 +7364,7 @@ class ConnectHelper {
       int? userId,
       dynamic selectedAssetsNameIdList}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'SMReports/GetSMAvailibilityReport?facilityID=$facilityId&smassetCategoryID=$selectedAssetsNameIdList&fromDate=$startDate&toDate=$endDate',
+      'SMReports/GetSMAvailibilityReport?facilityID=$facilityId&smassetCategoryID=1,2,3fromDate=$startDate&toDate=$endDate',
       // 'SMReports/GetStockReport?facility_id=$facilityId&actorTypeID=2&actorID=$facilityId&StartDate=$endDate&EndDate=$startDate&assetMasterIDs=$assetsItems',
       Request.get,
       null,
@@ -8658,12 +8658,13 @@ class ConnectHelper {
       {required String auth,
       bool? isLoading,
       int? facilityId,
-       bool? self_view,
+      bool? self_view,
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
       //   'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
-      'PM/GetPMPlanList?facility_id=${facilityId}&self_view=${self_view}', Request.get,
+      'PM/GetPMPlanList?facility_id=${facilityId}&self_view=${self_view}',
+      Request.get,
       null,
       isLoading ?? true,
       {
@@ -9873,7 +9874,7 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     dynamic startDate,
-     bool? self_view,
+    bool? self_view,
     dynamic endDate,
     dynamic? facility_id,
   }) async {

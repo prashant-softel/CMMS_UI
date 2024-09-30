@@ -268,61 +268,52 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                               SizedBox(
                                 height: 20,
                               ),
-                              controller.pmPlanList.isEmpty == true &&
-                                      controller.isLoading == false
-                                  ? Center(child: Text("No data"))
-                                  : controller.isLoading.value == true
-                                      ? Center(
-                                          child: Text("Data Loading......"))
-                                      : Expanded(
-                                          child: ValueListenableBuilder(
-                                              valueListenable:
-                                                  controller.columnVisibility,
-                                              builder: (context, value, child) {
-                                                final dataSource =
-                                                    PmPlanDataSource(
-                                                        controller);
+                              // controller.pmPlanList.isEmpty == true &&
+                              //         controller.isLoading == false
+                              //     ? Center(child: Text("No data"))
+                              // : controller.isLoading.value == true
+                              //     ? Center(
+                              //         child: Text("Data Loading......"))
+                              // :
+                              Expanded(
+                                child: ValueListenableBuilder(
+                                    valueListenable:
+                                        controller.columnVisibility,
+                                    builder: (context, value, child) {
+                                      final dataSource =
+                                          PmPlanDataSource(controller);
 
-                                                return PaginatedDataTable2(
-                                                  // fixedLeftColumns: 1,
-                                                  // dataRowHeight: Get.height * 0.12,
-                                                  columnSpacing: 10,
-                                                  source:
-                                                      dataSource, // Custom DataSource class
-                                                  // headingRowHeight: Get.height * 0.12,
-                                                  minWidth:
-                                                      2000, //Get.width * 1.2,
-                                                  showCheckboxColumn: false,
-                                                  rowsPerPage:
-                                                      10, // Number of rows per page
-                                                  availableRowsPerPage: [
-                                                    10,
-                                                    20,
-                                                    30,
-                                                    50
-                                                  ],
-                                                  columns: [
-                                                    for (var entry
-                                                        in value.entries)
-                                                      if (entry.value)
-                                                        buildDataColumn(
-                                                          entry.key,
-                                                          controller.filterText[
-                                                              entry.key]!,
-                                                          controller
-                                                                  .columnwidth[
-                                                              entry.key],
-                                                        ),
-                                                    buildDataColumn(
-                                                      'Actions',
-                                                      controller
-                                                          .tittleFilterText,
-                                                      200,
-                                                    ),
-                                                  ],
-                                                );
-                                              }),
-                                        )
+                                      return PaginatedDataTable2(
+                                        // fixedLeftColumns: 1,
+                                        // dataRowHeight: Get.height * 0.12,
+                                        columnSpacing: 10,
+                                        source:
+                                            dataSource, // Custom DataSource class
+                                        // headingRowHeight: Get.height * 0.12,
+                                        minWidth: 2000, //Get.width * 1.2,
+                                        showCheckboxColumn: false,
+                                        rowsPerPage:
+                                            10, // Number of rows per page
+                                        availableRowsPerPage: [10, 20, 30, 50],
+                                        columns: [
+                                          for (var entry in value.entries)
+                                            if (entry.value)
+                                              buildDataColumn(
+                                                entry.key,
+                                                controller
+                                                    .filterText[entry.key]!,
+                                                controller
+                                                    .columnwidth[entry.key],
+                                              ),
+                                          buildDataColumn(
+                                            'Actions',
+                                            controller.tittleFilterText,
+                                            200,
+                                          ),
+                                        ],
+                                      );
+                                    }),
+                              )
                             ]),
                       ),
                     ),
@@ -347,12 +338,12 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
         DataColumn2(
       // size: columnSize,
       fixedWidth: fixedWidth,
-          onSort: header == "Actions"
-        ? null
-        : (int columnIndex, bool ascending) {
-            final controller = Get.find<PmPlanListController>();
-            controller.sortData(header);
-          },
+      onSort: header == "Actions"
+          ? null
+          : (int columnIndex, bool ascending) {
+              final controller = Get.find<PmPlanListController>();
+              controller.sortData(header);
+            },
 
       label: //
           Column(
@@ -397,29 +388,29 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
             //     style: Styles.black16W500,
             //   ),
             // ),
-             Row(
-          children: [
-            Text(
-              header,
-              style: Styles.black16W500,
-            ),
-            if (header != "Actions")
-              Obx(() {
-                final controller = Get.find<PmPlanListController>();
+            Row(
+              children: [
+                Text(
+                  header,
+                  style: Styles.black16W500,
+                ),
+                if (header != "Actions")
+                  Obx(() {
+                    final controller = Get.find<PmPlanListController>();
 
-                return AnimatedRotation(
-                  turns: controller.currentSortColumn.value == header
-                      ? (controller.isAscending.value ? 0.5 : 0.0)
-                      : 0.0,
-                  duration: Duration(milliseconds: 300),
-                  child: Icon(
-                    Icons.expand_more,
-                    size: 20,
-                  ),
-                );
-              }),
-          ],
-        ),
+                    return AnimatedRotation(
+                      turns: controller.currentSortColumn.value == header
+                          ? (controller.isAscending.value ? 0.5 : 0.0)
+                          : 0.0,
+                      duration: Duration(milliseconds: 300),
+                      child: Icon(
+                        Icons.expand_more,
+                        size: 20,
+                      ),
+                    );
+                  }),
+              ],
+            ),
           ]),
       // ),
     );

@@ -7,13 +7,13 @@ import '../../domain/usecases/sm_report_list_usecase.dart';
 class SmReportPresenter {
   SmReportPresenter(this.smReportUsecase);
   SmReportUsecase smReportUsecase;
-  Future<List<SmReportListModel?>?> getSmReportList(
+  Future<List<SmReportListModel?>?> getAvailbleSmReportList(
           {int? facilityId,
           bool? isLoading,
           dynamic endDate,
           dynamic startDate,
           dynamic selectedAssetsNameIdList}) async =>
-      await smReportUsecase.getSmReportList(
+      await smReportUsecase.getAvailbleSmReportList(
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           endDate: endDate,

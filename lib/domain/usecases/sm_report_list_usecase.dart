@@ -8,13 +8,13 @@ class SmReportUsecase {
   final Repository _repository;
 
   SmReportUsecase(this._repository);
-  Future<List<SmReportListModel?>?> getSmReportList(
+  Future<List<SmReportListModel?>?> getAvailbleSmReportList(
           {int? facilityId,
           bool? isLoading,
           dynamic endDate,
           dynamic startDate,
           dynamic selectedAssetsNameIdList}) async =>
-      await _repository.getSmReportList(
+      await _repository.getAvailbleSmReportList(
           facilityId, isLoading, startDate, endDate, selectedAssetsNameIdList);
   Future<List<GetAssetDataModel?>?> getAssetList({
     String? auth,
