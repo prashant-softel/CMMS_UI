@@ -70,6 +70,7 @@ class PmtaskViewModel {
   String? new_remark;
   String? site_name;
   int? tbt_start;
+  int? is_expired;
   PmtaskViewModel({
     this.assigned_to_name,
     this.category_id,
@@ -101,6 +102,7 @@ class PmtaskViewModel {
     this.cancelled_by_name,
     this.closed_at,
     this.is_PTW,
+    this.is_expired,
     this.tbt_start,
     this.closed_by_id,
     this.closed_by_name,
@@ -136,6 +138,7 @@ class PmtaskViewModel {
         status_short_ptw: json["status_short_ptw"] ?? "",
         approved_by: json["approved_by"],
         plan_id: json["plan_id"] ?? 0,
+        is_expired: json["isExpired"] ?? 0,
         tbt_start: json['tbt_start'] ?? 0,
         is_PTW: json['is_PTW'] ?? "",
         updated_by_name: json["updated_by_name"] ?? "",
@@ -210,6 +213,7 @@ class PmtaskViewModel {
         "ptw_status": ptw_status,
         "approved_by": approved_by,
         "is_PTW": is_PTW,
+        "isExpired": is_expired,
         "schedule_Date": schedule_Date,
         "plan_id": plan_id,
         "tbT_conducted_by_name": tbT_conducted_by_name,

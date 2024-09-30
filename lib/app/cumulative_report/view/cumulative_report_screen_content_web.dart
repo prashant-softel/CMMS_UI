@@ -82,6 +82,8 @@ class _CumulativeReportContentWebState
               Stack(
                 children: [
                   Container(
+                    height: Get.height - 150,
+                    // color: ColorValues.addNewColor,
                     child: Column(
                       children: [
                         Padding(
@@ -224,7 +226,7 @@ class _CumulativeReportContentWebState
                                 width: Get.width,
                                 height: ((controller.cumulativereport.length) *
                                         40) +
-                                    100,
+                                    200,
                                 child: Padding(
                                   padding: const EdgeInsets.all(16),
                                   child: DataTable2(
@@ -537,8 +539,8 @@ class _CumulativeReportContentWebState
                                 margin: EdgeInsets.all(20),
                                 color: Color.fromARGB(255, 245, 248, 250),
                                 width: Get.width,
-                                height:
-                                    ((controller.jobList.length) * 40) + 100,
+                                height: Get.height - 290,
+                                // ((controller.jobList.length) * 40) + 100,
                                 child: Padding(
                                   padding: const EdgeInsets.all(16),
                                   child: DataTable2(

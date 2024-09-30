@@ -182,18 +182,18 @@ class JobDetailsModel {
 }
 
 class AssociatedPermit {
-  AssociatedPermit({
-    this.permitId,
-    this.sitePermitNo,
-    this.permitTypeName,
-    this.title,
-    this.issuedByName,
-    this.issueAt,
-    this.ptwStatus,
-    this.ptwStatusShort,
-    this.startDate,
-    this.endDate,
-  });
+  AssociatedPermit(
+      {this.permitId,
+      this.sitePermitNo,
+      this.permitTypeName,
+      this.title,
+      this.issuedByName,
+      this.issueAt,
+      this.ptwStatus,
+      this.ptwStatusShort,
+      this.startDate,
+      this.endDate,
+      this.isExpired});
 
   int? permitId;
   String? sitePermitNo;
@@ -205,10 +205,12 @@ class AssociatedPermit {
   String? ptwStatusShort;
   DateTime? startDate;
   DateTime? endDate;
+  int? isExpired;
 
   factory AssociatedPermit.fromJson(Map<String, dynamic> json) =>
       AssociatedPermit(
         permitId: json["permitId"] == null ? 0 : json['permitId'],
+        isExpired: json["isExpired"] == null ? 0 : json['isExpired'],
         sitePermitNo: json["sitePermitNo"] == null ? '' : json['sitePermitNo'],
         permitTypeName:
             json["permitTypeName"] == null ? '' : json['permitTypeName'],
@@ -228,6 +230,7 @@ class AssociatedPermit {
 
   Map<String, dynamic> toJson() => {
         "permitId": permitId,
+        "isExpired": isExpired,
         "sitePermitNo": sitePermitNo,
         "permitTypeName": permitTypeName,
         "title": title,
@@ -340,7 +343,8 @@ class JobAssociatedModel {
       this.status,
       this.approvedStatus,
       this.status_short,
-      this.permit_status_short});
+      this.permit_status_short,
+      this.isExpired});
 
   // int? id;
   int? jobCardId;
@@ -356,10 +360,12 @@ class JobAssociatedModel {
   int? status;
   int? approvedStatus;
   String? status_short;
+  int? isExpired;
 
   factory JobAssociatedModel.fromJson(Map<String, dynamic> json) =>
       JobAssociatedModel(
         permitStatus: json["permitStatus"] == null ? 0 : json['permitStatus'],
+        isExpired: json["isExpired"] == null ? 0 : json['isExpired'],
         jobCardId: json["jobCardId"] == null ? 0 : json['jobCardId'],
         jobCardNo: json["jobCardNo"] == null ? "" : json['jobCardNo'],
         permit_status_short: json['permit_status_short'],
@@ -378,6 +384,7 @@ class JobAssociatedModel {
 
   Map<String, dynamic> toJson() => {
         "permitStatus": permitStatus,
+        "isExpired": isExpired,
         "jobCardId": jobCardId,
         "jobCardNo": jobCardNo,
         "permit_status_short": permit_status_short,

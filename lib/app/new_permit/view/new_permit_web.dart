@@ -3957,23 +3957,34 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                               text:
                                                                   "Re submit Permit",
                                                               onPressed: () {
-                                                                DateTime
-                                                                    currentTime =
-                                                                    DateTime
-                                                                        .now();
-                                                                DateTime selected = DateTime.parse(
-                                                                        controller
-                                                                            .startDateTimeCtrlrBuffer)
-                                                                    .add(Duration(
-                                                                        hours:
-                                                                            1));
+                                                                dynamic startDateTime = DateFormat(
+                                                                        "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                                                                    .format(DateTime.parse(controller
+                                                                        .startDateTimeCtrlr
+                                                                        .text
+                                                                        .trim()));
+                                                                dynamic
+                                                                    startDateTimeCtrlrBuffer1 =
+                                                                    '${DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateTime.parse('${controller.newPermitDetailsModel.value?.start_datetime}')).toString()}';
 
-// Use currentTime directly for comparison
-                                                                if (controller
-                                                                        .newPermitDetailsModel
-                                                                        .value
-                                                                        ?.ptwStatus ==
-                                                                    132) {
+                                                                print({
+                                                                  "startDateTimeCtrlr expir":
+                                                                      startDateTime
+                                                                });
+                                                                print({
+                                                                  "startDateTimeCtrlrBuffer expir":
+                                                                      startDateTimeCtrlrBuffer1
+                                                                });
+                                                                if (controller.newPermitDetailsModel.value!.is_TBT_Expire ==
+                                                                            true &&
+                                                                        startDateTime ==
+                                                                            startDateTimeCtrlrBuffer1 ||
+                                                                    controller.newPermitDetailsModel.value!.ptwStatus ==
+                                                                            132 &&
+                                                                        controller.newPermitDetailsModel.value!.is_TBT_Expire ==
+                                                                            true &&
+                                                                        startDateTime ==
+                                                                            startDateTimeCtrlrBuffer1) {
                                                                   showDialog(
                                                                     context:
                                                                         context,
@@ -3981,24 +3992,65 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                         (BuildContext
                                                                             context) {
                                                                       return AlertDialog(
-                                                                        title: Text(
-                                                                            "Invalid Start Date & Time"),
+                                                                        shape:
+                                                                            RoundedRectangleBorder(
+                                                                          borderRadius:
+                                                                              BorderRadius.all(Radius.circular(15.0)),
+                                                                        ),
+                                                                        insetPadding:
+                                                                            Dimens.edgeInsets00_04_04_04,
+                                                                        contentPadding:
+                                                                            EdgeInsets.zero,
+                                                                        title:
+                                                                            Text(
+                                                                          'Alert',
+                                                                          textAlign:
+                                                                              TextAlign.center,
+                                                                        ),
                                                                         content:
-                                                                            Text("Please select a Start Date & Time at least 1 hour in the future."),
-                                                                        actions: <Widget>[
-                                                                          TextButton(
-                                                                            onPressed:
-                                                                                () {
-                                                                              Navigator.of(context).pop();
-                                                                            },
-                                                                            child:
-                                                                                Text("OK"),
-                                                                          ),
+                                                                            Builder(builder:
+                                                                                (context) {
+                                                                          return Container(
+                                                                            padding:
+                                                                                Dimens.edgeInsets05_0_5_0,
+                                                                            height:
+                                                                                80,
+                                                                            width:
+                                                                                double.infinity,
+                                                                            child: Column(
+                                                                                crossAxisAlignment: CrossAxisAlignment.stretch, //
+                                                                                children: [
+                                                                                  Divider(
+                                                                                    color: ColorValues.greyLightColour,
+                                                                                    thickness: 1,
+                                                                                  ),
+                                                                                  Dimens.boxHeight10,
+                                                                                  Center(
+                                                                                    child: Text(
+                                                                                      'Need to change the start date and time before resubmision',
+                                                                                      overflow: TextOverflow.ellipsis,
+                                                                                    ),
+                                                                                  ),
+                                                                                  Dimens.boxHeight10,
+                                                                                ]),
+                                                                          );
+                                                                        }),
+                                                                        actions: [
+                                                                          Row(
+                                                                              mainAxisAlignment: MainAxisAlignment.center, //
+                                                                              children: [
+                                                                                ElevatedButton(
+                                                                                  style: Styles.navyBlueElevatedButtonStyle,
+                                                                                  onPressed: () {
+                                                                                    Get.back();
+                                                                                  },
+                                                                                  child: const Text('ok'),
+                                                                                ),
+                                                                              ]),
                                                                         ],
                                                                       );
                                                                     },
                                                                   );
-                                                                  return null;
                                                                 } else if (controller
                                                                         .newPermitDetailsModel
                                                                         .value!

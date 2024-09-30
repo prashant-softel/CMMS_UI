@@ -572,11 +572,17 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                   .toString() ??
                                                               ''))),
                                                       DataCell(Text((controller
-                                                              .jobAssociatedModelsList?[
-                                                                  index]
-                                                              ?.permit_status_short
-                                                              .toString() ??
-                                                          ''))),
+                                                                  .jobAssociatedModelsList?[
+                                                                      index]
+                                                                  ?.isExpired ==
+                                                              1
+                                                          ? '${controller.jobAssociatedModelsList?[index]?.permit_status_short.toString()}(Expired)'
+                                                          : controller
+                                                                  .jobAssociatedModelsList?[
+                                                                      index]
+                                                                  ?.permit_status_short
+                                                                  .toString() ??
+                                                              ''))),
                                                       DataCell(Text(controller
                                                               .jobAssociatedModelsList?[
                                                                   index]

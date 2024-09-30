@@ -1189,24 +1189,62 @@ class PermitListDataSource extends DataTableSource {
                                           : Dimens.box0,
 
                                       ///Extend Button
-                                      varUserAccessModel.value.access_list!
-                                                          .where((e) =>
-                                                              e.feature_id ==
-                                                                  UserAccessConstants
-                                                                      .kPermitFeatureId &&
-                                                              e.edit ==
-                                                                  UserAccessConstants
-                                                                      .kHaveEditAccess)
-                                                          .length >
-                                                      0 &&
-                                                  controller.newPermitList
-                                                          .firstWhereOrNull(
+                                      // varUserAccessModel.value.access_list!
+                                      //                     .where((e) =>
+                                      //                         e.feature_id ==
+                                      //                             UserAccessConstants
+                                      //                                 .kPermitFeatureId &&
+                                      //                         e.edit ==
+                                      //                             UserAccessConstants
+                                      //                                 .kHaveEditAccess)
+                                      //                     .length >
+                                      //                 0 &&
+                                      //             controller.newPermitList
+                                      //                     .firstWhereOrNull(
+                                      //                       (e) =>
+                                      //                           "${e?.permitId}" ==
+                                      //                           "${PermitDetails?.permitId}",
+                                      //                     )
+                                      //                     ?.jc_status !=
+                                      //                 158 &&
+                                      //             controller.newPermitList
+                                      //                     .firstWhere(
+                                      //                       (e) =>
+                                      //                           "${e?.permitId}" ==
+                                      //                           "${PermitDetails?.permitId}",
+                                      //                       orElse: () =>
+                                      //                           NewPermitModel(
+                                      //                               permitId:
+                                      //                                   000),
+                                      //                     )
+                                      //                     ?.isExpired ==
+                                      //                 0 ||
+                                      controller.newPermitList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            "${e?.permitId}" ==
+                                                            "${PermitDetails?.permitId}",
+                                                        orElse: () =>
+                                                            NewPermitModel(
+                                                                permitId: 000),
+                                                      )
+                                                      ?.requestById ==
+                                                  varUserAccessModel
+                                                      .value.user_id &&
+                                              (controller.newPermitList
+                                                          .firstWhere(
                                                             (e) =>
                                                                 "${e?.permitId}" ==
                                                                 "${PermitDetails?.permitId}",
+                                                            orElse: () =>
+                                                                NewPermitModel(
+                                                                    permitId:
+                                                                        000),
                                                           )
-                                                          ?.jc_status !=
-                                                      158 &&
+                                                          ?.ptwStatus ==
+                                                      PermitStatusConstants
+                                                          .PTW_APPROVE //125
+                                                  &&
                                                   controller.newPermitList
                                                           .firstWhere(
                                                             (e) =>
@@ -1217,21 +1255,19 @@ class PermitListDataSource extends DataTableSource {
                                                                     permitId:
                                                                         000),
                                                           )
-                                                          ?.isExpired ==
-                                                      1 ||
-                                              controller.newPermitList
-                                                          .firstWhere(
-                                                            (e) =>
-                                                                "${e?.permitId}" ==
-                                                                "${PermitDetails?.permitId}",
-                                                            orElse: () =>
-                                                                NewPermitModel(
-                                                                    permitId:
-                                                                        000),
-                                                          )
-                                                          ?.requestById ==
-                                                      varUserAccessModel
-                                                          .value.user_id &&
+                                                          ?.tbT_Done_Check ==
+                                                      1 && (controller.newPermitList
+                                                              .firstWhere(
+                                                                (e) =>
+                                                                    "${e?.permitId}" ==
+                                                                    "${PermitDetails?.permitId}",
+                                                                orElse: () =>
+                                                                    NewPermitModel(
+                                                                        permitId:
+                                                                            000),
+                                                              )
+                                                              ?.jc_id !=
+                                                          0) &&
                                                   (controller.newPermitList
                                                               .firstWhere(
                                                                 (e) =>
@@ -1242,46 +1278,33 @@ class PermitListDataSource extends DataTableSource {
                                                                         permitId:
                                                                             000),
                                                               )
-                                                              ?.ptwStatus ==
-                                                          PermitStatusConstants
-                                                              .PTW_APPROVE //125
-                                                      &&
-                                                      controller.newPermitList
-                                                              .firstWhere(
-                                                                (e) =>
-                                                                    "${e?.permitId}" ==
-                                                                    "${PermitDetails?.permitId}",
-                                                                orElse: () =>
-                                                                    NewPermitModel(
-                                                                        permitId:
-                                                                            000),
-                                                              )
-                                                              ?.tbT_Done_Check ==
-                                                          1 &&
-                                                      controller.isOneHour(controller
-                                                                  .newPermitList
-                                                                  .firstWhere(
-                                                                    (e) =>
-                                                                        "${e?.permitId}" ==
-                                                                        "${PermitDetails?.permitId}",
-                                                                  )
-                                                                  ?.endDate ??
-                                                              "") ==
-                                                          true
-                                                  //||
-                                                  // controller.newPermitList
-                                                  //         .firstWhere(
-                                                  //           (e) =>
-                                                  //               "${e?.permitId}" ==
-                                                  //               "${PermitDetails?.permitId}",
-                                                  //           orElse: () =>
-                                                  //               NewPermitModel(
-                                                  //                   permitId:
-                                                  //                       000),
-                                                  //         )
-                                                  //         ?.ptwStatus ==
-                                                  //     135
-                                                  )
+                                                              ?.isExpired ==
+                                                          0)
+                                                      // controller.isOneHour(controller
+                                                      //             .newPermitList
+                                                      //             .firstWhere(
+                                                      //               (e) =>
+                                                      //                   "${e?.permitId}" ==
+                                                      //                   "${PermitDetails?.permitId}",
+                                                      //             )
+                                                      //             ?.endDate ??
+                                                      //         "")
+                                                      ==
+                                                      true
+                                              //||
+                                              // controller.newPermitList
+                                              //         .firstWhere(
+                                              //           (e) =>
+                                              //               "${e?.permitId}" ==
+                                              //               "${PermitDetails?.permitId}",
+                                              //           orElse: () =>
+                                              //               NewPermitModel(
+                                              //                   permitId:
+                                              //                       000),
+                                              //         )
+                                              //         ?.ptwStatus ==
+                                              //     135
+                                              )
                                           ? TableActionButton(
                                               color:
                                                   ColorValues.appDarkBlueColor,

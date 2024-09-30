@@ -139,6 +139,7 @@ class VegSchedules {
   int? ptw_tbt_done;
   String? status_short_ptw;
   int? tbt_start;
+  int? is_expired;
 
   List<Equipments>? equipments;
 
@@ -161,6 +162,7 @@ class VegSchedules {
     this.remark_of_schedule,
     this.status,
     this.status_short,
+    this.is_expired,
     this.equipments,
     this.permit_id,
     this.permit_code,
@@ -171,6 +173,7 @@ class VegSchedules {
 
   factory VegSchedules.fromJson(Map<String, dynamic> json) => VegSchedules(
       id: json['id'],
+      is_expired: json['is_expired'],
       scheduleId: json['scheduleId'],
       startDate: json['startDate'],
       executionId: json['executionId'],
@@ -200,6 +203,7 @@ class VegSchedules {
 
   Map<String, dynamic> toJson() => {
         'id': id,
+        'is_expired': is_expired,
         'scheduleId': scheduleId,
         'executionId': executionId,
         'cleaningDay': cleaningDay,
