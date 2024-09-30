@@ -96,6 +96,7 @@ import '../../app/widgets/pm_plan_approve_msg_dialog.dart';
 
 /// The helper class which will connect to the world to get the data.
 class ConnectHelper {
+
   ConnectHelper() {
     _init();
   }
@@ -1758,15 +1759,15 @@ class ConnectHelper {
 
     return responseModel;
   }
-
-  Future<ResponseModel> approveButton({
-    required String auth,
-    goodsOrderApproveJsonString,
-    bool? isLoading,
-    int? facilityId,
-  }) async {
-    // Ensure the body is serialized to JSON
-    var requestBody = json.encode(goodsOrderApproveJsonString);
+Future<ResponseModel> approveButton({
+  required String auth,
+  goodsOrderApproveJsonString,
+  bool? isLoading,
+  int? facilityId,
+  int? check_point_type_id,
+}) async {
+  // Ensure the body is serialized to JSON
+  var requestBody = json.encode(goodsOrderApproveJsonString);
 
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/ApproveObservation?facilityId=$facilityId',
@@ -1778,8 +1779,6 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-
-    print('goodsOrderApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
 
     // Parse the response only if it's a valid JSON
@@ -1821,10 +1820,11 @@ class ConnectHelper {
     goodsOrderApproveJsonString,
     bool? isLoading,
     int? facilityId,
+    int? check_point_type_id,
   }) async {
     var requestBody = json.encode(goodsOrderApproveJsonString);
     var responseModel = await apiWrapper.makeRequest(
-      'MISMaster/RejectObservation?facilityId=$facilityId',
+      'MISMaster/RejectObservation?facilityId=$facilityId&check_point_type_id=$check_point_type_id',
       Request.put,
       requestBody,
       isLoading ?? false,
@@ -1838,6 +1838,13 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(
         RejectMsgObsDialog(data: parsedJson['message'], id: parsedJson['id']));
+     Get.dialog<void>(
+    RejectMsgObsDialog(
+      data: parsedJson['message'], 
+      id: parsedJson['id'],
+      check_point_type_id: parsedJson['check_point_type_id']
+    )
+  );
 
     return responseModel;
   }
@@ -3853,13 +3860,19 @@ class ConnectHelper {
   }
 
   Future<ResponseModel> createObs(
-      {required String auth, createObs, bool? isLoading, int? position}) async {
+      {required String auth, 
+      createObs, 
+      bool? isLoading, 
+      int? position,
+      int?check_point_type_id,
+      }) async {
     String url;
 
     if (position == 1) {
       url = 'MISMaster/CreateObservation';
-    } else if (position == 2) {
-      url = 'MISMaster/AssingtoObservation';
+    } 
+    else if (position == 2) {
+      url = 'MISMaster/AssingtoObservation?check_point_type_id=$check_point_type_id';
     } else {
       url = 'MISMaster/UpdateObservation';
     }
@@ -4845,7 +4858,7 @@ class ConnectHelper {
     int? check_point_type_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetObservationById?observation_id=$id&check_point_type_id=$check_point_type_id',
+      'MISMaster/GetObservationDetails?observation_id=$id&check_point_type_id=$check_point_type_id',
       Request.get,
       null,
       isLoading ?? false,
@@ -4880,9 +4893,10 @@ class ConnectHelper {
     required String auth,
     viewobsCloseJsonString,
     bool? isLoading,
+    int?check_point_type_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MISMaster/CloseObservation',
+      'MISMaster/CloseObservation?check_point_type_id=$check_point_type_id',
       Request.post,
       viewobsCloseJsonString,
       isLoading ?? false,
@@ -8658,12 +8672,13 @@ class ConnectHelper {
       {required String auth,
       bool? isLoading,
       int? facilityId,
-       bool? self_view,
+      //  bool? self_view,
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
       //   'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
-      'PM/GetPMPlanList?facility_id=${facilityId}&self_view=${self_view}', Request.get,
+      'PM/GetPMPlanList?facility_id=${facilityId}', Request.get,
+      // &self_view=${self_view}
       null,
       isLoading ?? true,
       {

@@ -187,7 +187,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                             //       .black17,
                                                             // ),
                                                             Text(
-                                                              "Responsible Person:",
+                                                              "Assigned To:",
                                                               style: Styles
                                                                   .black17,
                                                             ),
@@ -296,7 +296,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                                   .start,
                                                           children: [
                                                               Text(
-                                                                "${controller.getObsById.value?.risk_type_name ?? ""}",
+                                                                "${controller.getObsById.value?.risk_type ?? ""}",
                                                                 style: Styles
                                                                     .blue17),
                                                             // Text(

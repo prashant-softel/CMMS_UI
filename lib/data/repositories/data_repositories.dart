@@ -1152,12 +1152,14 @@ class DataRepository extends DomainRepository {
     goodsOrderApproveJsonString,
     bool? isLoading,
     int? facilityId,
+    int? check_point_type_id,
   }) async =>
       await connectHelper.approveButton(
         auth: auth,
         goodsOrderApproveJsonString: goodsOrderApproveJsonString,
         isLoading: isLoading ?? false,
         facilityId:facilityId,
+        check_point_type_id:check_point_type_id,
       );
   Future<ResponseModel> rejectGOReceiveButton({
     required String auth,
@@ -1174,12 +1176,14 @@ class DataRepository extends DomainRepository {
     goodsOrderApproveJsonString,
     bool? isLoading,
     int? facilityId,
+    int? check_point_type_id,
   }) async =>
       await connectHelper.rejectobsButton(
         auth: auth,
         goodsOrderApproveJsonString: goodsOrderApproveJsonString,
         isLoading: isLoading ?? false,
         facilityId:facilityId,
+        check_point_type_id:check_point_type_id,
       );
   Future<ResponseModel> pmPlanRejectButton({
     required String auth,
@@ -2226,11 +2230,13 @@ class DataRepository extends DomainRepository {
           {required String auth,
           createObs,
           bool? isLoading,
+          int?check_point_type_id,
           int? position}) async =>
       await connectHelper.createObs(
         auth: auth,
         createObs: createObs,
         isLoading: isLoading ?? false,
+         check_point_type_id:check_point_type_id,
         position: position,
       );
   Future<ResponseModel> createoccupational({
@@ -2669,10 +2675,12 @@ class DataRepository extends DomainRepository {
     required String auth,
     viewobsCloseJsonString,
     bool? isLoading,
+    int?check_point_type_id,
   }) async =>
       await connectHelper.viewObsCloseButton(
         auth: auth,
         viewobsCloseJsonString: viewobsCloseJsonString,
+        check_point_type_id:check_point_type_id,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> getHistory({
@@ -4865,14 +4873,14 @@ class DataRepository extends DomainRepository {
           {required String auth,
           int? facilityId,
           bool? isLoading,
-           bool? self_view,
+          //  bool? self_view,
           dynamic startDate,
           dynamic endDate}) async =>
       await connectHelper.getPmPlanList(
           auth: auth,
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
-          self_view: self_view,
+          // self_view: self_view,
           startDate: startDate,
           endDate: endDate);
   Future<ResponseModel> getAuditPlanList(

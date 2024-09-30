@@ -1186,7 +1186,7 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> createObs(
-      createObs, bool? isLoading, int? position) async {
+      createObs, bool? isLoading, int? position,int?check_point_type_id,) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -1195,6 +1195,7 @@ class Repository {
           auth: auth,
           createObs: createObs,
           isLoading: isLoading ?? false,
+          check_point_type_id:check_point_type_id,
           position: position,
         );
       }
@@ -3595,6 +3596,7 @@ class Repository {
   Future<Map<String, dynamic>> viewObsCloseButton(
     viewobsCloseJsonString,
     bool? isLoading,
+    int?check_point_type_id,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -3603,6 +3605,7 @@ class Repository {
         res = await _dataRepository.viewObsCloseButton(
           auth: auth,
           viewobsCloseJsonString: viewobsCloseJsonString,
+          check_point_type_id:check_point_type_id,
           isLoading: isLoading ?? false,
         );
       }
@@ -4614,6 +4617,7 @@ class Repository {
     goodsOrderApproveJsonString,
     bool? isLoading,
     int? facilityId,
+    int? check_point_type_id,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -4624,6 +4628,7 @@ class Repository {
           goodsOrderApproveJsonString: goodsOrderApproveJsonString,
           isLoading: isLoading ?? false,
           facilityId: facilityId,
+          check_point_type_id:check_point_type_id,
         );
       }
       var resourceData = res.data;
@@ -4652,6 +4657,7 @@ class Repository {
     goodsOrderApproveJsonString,
     bool? isLoading,
     int? facilityId,
+    int? check_point_type_id,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -4662,6 +4668,7 @@ class Repository {
           goodsOrderApproveJsonString: goodsOrderApproveJsonString,
           isLoading: isLoading ?? false,
           facilityId: facilityId,
+          check_point_type_id:check_point_type_id,
         );
       }
       var resourceData = res.data;
@@ -14833,7 +14840,7 @@ class Repository {
       int? facilityId,
       bool? isLoading,
       dynamic startDate,
-      bool? self_view,
+      // bool? self_view,
       dynamic endDate,
       bool? isExport) async {
     try {
@@ -14844,7 +14851,7 @@ class Repository {
             auth: auth,
             facilityId: facilityId ?? 0,
             isLoading: isLoading ?? false,
-             self_view: self_view,
+            //  self_view: self_view,
             startDate: startDate,
             endDate: endDate);
         // print(res.data);

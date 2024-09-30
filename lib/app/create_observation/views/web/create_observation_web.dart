@@ -92,8 +92,12 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                             },
                             child: Text(" / MIS", style: Styles.greyLight14),
                           ),
-                          Text(" / CREATE OBSERVATION",
-                              style: Styles.greyLight14),
+                          Text(
+                            (controller.obsId != 0 && controller.type == 1)
+                                ? "/ UPDATE/ASSIGN OBSERVATION"
+                                : "/ CREATE OBSERVATION",
+                            style: Styles.greyLight14,
+                          ),
                         ],
                       ),
                     ),
@@ -125,7 +129,10 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                           child: Row(
                                             children: [
                                               Text(
-                                                "Create Observation",
+                                                (controller.obsId != 0 &&
+                                                        controller.type == 1)
+                                                    ? "Update/Assign Observation"
+                                                    : "Create Observation",
                                                 style: Styles.blackBold16,
                                               ),
                                               Spacer(),
@@ -188,47 +195,45 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                 .end,
                                                         children: [
                                                           Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Contractor Name'),
-                                                              Dimens.boxWidth3,
-                                                              LoginCustomTextfield(
-                                                                  width: (MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      .2),
-                                                                  keyboardType:
-                                                                      TextInputType
-                                                                          .number,
-                                                                  textController:
-                                                                      controller
-                                                                          .contractorNameCtrlr,
-                                                                  //validate
-                                                                  errorController: controller
-                                                                          .isContractorInvalid
-                                                                          .value
-                                                                      ? "Required field"
-                                                                      : null,
-                                                                  onChanged:
-                                                                      (value) {
-                                                                    if (value
-                                                                            .trim()
-                                                                            .length >
-                                                                        0) {
-                                                                      controller
-                                                                          .isContractorInvalid
-                                                                          .value = false;
-                                                                    } else {
-                                                                      controller
-                                                                          .isContractorInvalid
-                                                                          .value = true;
-                                                                    }
-                                                                  }),
-                                                            ],
-                                                          ),
+                                                          controller.obsId !=
+                                                                      0 &&
+                                                                  controller
+                                                                          .type ==
+                                                                      1
+                                                              ? IgnorePointer(
+                                                                  ignoring:
+                                                                      true,
+                                                                  child: Row(
+                                                                    children: [
+                                                                      CustomRichText(
+                                                                          title:
+                                                                              'Contractor Name'),
+                                                                      Dimens
+                                                                          .boxWidth3,
+                                                                      LoginCustomTextfield(
+                                                                          width: (MediaQuery.of(context).size.width *
+                                                                              .2),
+                                                                          keyboardType: TextInputType
+                                                                              .number,
+                                                                          textController: controller
+                                                                              .contractorNameCtrlr,
+                                                                          //validate
+                                                                          errorController: controller.isContractorInvalid.value
+                                                                              ? "Required field"
+                                                                              : null,
+                                                                          onChanged:
+                                                                              (value) {
+                                                                            if (value.trim().length >
+                                                                                0) {
+                                                                              controller.isContractorInvalid.value = false;
+                                                                            } else {
+                                                                              controller.isContractorInvalid.value = true;
+                                                                            }
+                                                                          }),
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                              : Dimens.box0,
                                                           Dimens.boxHeight5,
                                                           Row(
                                                             children: [
@@ -320,7 +325,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                   children: [
                                                                     CustomRichText(
                                                                         title:
-                                                                            'Responsible Person'),
+                                                                            'Assigned To'),
                                                                     Dimens
                                                                         .boxWidth3,
                                                                     Obx(
@@ -716,7 +721,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                         horizontal: 20),
                                                     child: Row(children: [
                                                       Text(
-                                                          'Observation Description: ',
+                                                          '         Observation Description: ',
                                                           style: Styles.blue14),
                                                       Expanded(
                                                         child: TextField(
@@ -852,7 +857,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                   .assigned_to_id ==
                                                               varUserAccessModel
                                                                   .value.user_id
-                                                      ? Padding(
+                                                      ? 
+                                                      Padding(
                                                           padding:
                                                               const EdgeInsets
                                                                   .symmetric(
@@ -860,7 +866,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                       20),
                                                           child: Row(children: [
                                                             Text(
-                                                                'Action Taken : ',
+                                                                '                              Action Taken: ',
                                                                 style: Styles
                                                                     .blue14),
                                                             Expanded(
@@ -1164,29 +1170,28 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                 : Dimens.box0,
                         Dimens.boxWidth15,
                         controller.obsId != 0 &&
-                                    controller.type == 1 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kObservationFeatureId &&
-                                                e.approve ==
-                                                    UserAccessConstants
-                                                        .kHaveApproveAccess)
-                                            .length >
-                                        0 &&
-                                    controller.getObsById.value!.status_code !=
-                                        552 
-                                        // ||
+                                controller.type == 1 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kObservationFeatureId &&
+                                            e.approve ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
+                                    0 &&
+                                controller.getObsById.value!.status_code != 552
+                                // ||
                                 // controller.getObsById.value!.status_code ==
                                 //         551
                                 //  &&
-                                    // controller.getObsById.value!.createdid !=
-                                    //     varUserAccessModel.value.user_id
-                                    &&     controller.getObsById.value!.status_code !=
-                                        553 
-                                        &&
-                                         controller.getObsById.value!.status_code !=556
+                                // controller.getObsById.value!.createdid !=
+                                //     varUserAccessModel.value.user_id
+                                &&
+                                controller.getObsById.value!.status_code !=
+                                    553 &&
+                                controller.getObsById.value!.status_code != 556
                             ? Container(
                                 height: 40,
                                 child: CustomElevatedButton(
@@ -1198,6 +1203,10 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                     controller.createObs(
                                       position: 2,
                                       fileIds: dropzoneController.fileIds,
+                                       check_point_type_id:
+                                          controller.checkpointtypeId.value,
+
+
                                     );
                                   },
                                 ),
@@ -1205,67 +1214,69 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                             : Dimens.box0,
                         Dimens.boxWidth15,
                         //Approve
-                         controller.obsId != 0 &&
-                                    controller.type == 1 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kObservationFeatureId &&
-                                                e.approve ==
-                                                    UserAccessConstants
-                                                        .kHaveApproveAccess)
-                                            .length >
-                                        0 &&
-                                    controller.getObsById.value!.status_code ==
-                                        553 
-                                 &&
-                                    controller.getObsById.value!.createdid !=
-                                        varUserAccessModel.value.user_id
+                        controller.obsId != 0 &&
+                                controller.type == 1 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kObservationFeatureId &&
+                                            e.approve ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
+                                    0 &&
+                                controller.getObsById.value!.status_code ==
+                                    553 &&
+                                controller.getObsById.value!.createdid !=
+                                    varUserAccessModel.value.user_id
                             ? Container(
                                 height: 40,
                                 child: CustomElevatedButton(
                                   backgroundColor: ColorValues.submitColor,
                                   text: 'Approve',
                                   onPressed: () {
-                                     Get.dialog(ApproveobsDialog(
-                                id: controller.obsId.value,
-                              ));
+                                    Get.dialog(ApproveobsDialog(
+                                      id: controller.obsId.value,
+                                      check_point_type_id:
+                                          controller.checkpointtypeId.value,
+                                    ));
                                   },
                                 ),
                               )
                             : Dimens.box0,
                         Dimens.boxWidth15,
                         //reject
-                         controller.obsId != 0 &&
-                                    controller.type == 1 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kObservationFeatureId &&
-                                                e.approve ==
-                                                    UserAccessConstants
-                                                        .kHaveApproveAccess)
-                                            .length >
-                                        0 &&
-                                    controller.getObsById.value!.status_code ==
-                                        553 
-                                        // ||
+                        controller.obsId != 0 &&
+                                controller.type == 1 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kObservationFeatureId &&
+                                            e.approve ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
+                                    0 &&
+                                controller.getObsById.value!.status_code == 553
+                                // ||
                                 // controller.getObsById.value!.status_code ==
                                 //         551
-                                 &&
-                                    controller.getObsById.value!.createdid !=
-                                        varUserAccessModel.value.user_id
+                                &&
+                                controller.getObsById.value!.createdid !=
+                                    varUserAccessModel.value.user_id
                             ? Container(
                                 height: 40,
                                 child: CustomElevatedButton(
                                   backgroundColor: ColorValues.rejectColor,
                                   text: 'Reject',
                                   onPressed: () {
-                                     Get.dialog(RejectobsDialog(
-                                id: controller.obsId.value,
-                              ));
+                                    Get.dialog(RejectobsDialog(
+                                      id: controller.obsId.value,
+                                      check_point_type_id:
+                                          controller.checkpointtypeId.value,
+                                    ));
                                   },
                                 ),
                               )
@@ -1290,6 +1301,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                   onPressed: () {
                                     Get.dialog(ListOfObsCloseDialog(
                                       id: controller.obsId.value,
+                                      check_point_type_id:
+                                          controller.checkpointtypeId.value,
                                     ));
                                   },
                                 ),

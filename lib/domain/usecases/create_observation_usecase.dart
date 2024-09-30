@@ -18,12 +18,21 @@ class CreateObservationUsecase {
       await repository.getFacilityList(isLoading);
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.obsId,);
-  void saveValue({String? obsId,String?checkpointtypeId}) async =>
+  Future<String?> getValue1() async =>
+      await repository.getStringValue(LocalKeys.checkpointtypeId);
+  void saveValue({String? obsId}) async =>
       repository.saveValue(
         LocalKeys.obsId, 
         obsId, 
         // LocalKeys.checkpointtypeId,
         // checkpointtypeId
+        );
+  void saveValue1({String?checkpointtypeId}) async =>
+      repository.saveValue(
+        // LocalKeys.obsId, 
+        // obsId, 
+        LocalKeys.checkpointtypeId,
+        checkpointtypeId
         );
   Future<List<HistoryModel>?> getHistory({
     moduleType,
@@ -51,11 +60,14 @@ class CreateObservationUsecase {
     createObs,
     bool? isLoading,
     int? position,
+    int? check_point_type_id,
   }) async =>
       await repository.createObs(
         createObs,
         isLoading,
-        position,
+         position,
+         check_point_type_id,
+       
       );
   Future<List<RiskTypeModel>> getRiskTypeList(
       {required bool isLoading, required int facility_id}) async {
@@ -95,32 +107,38 @@ Future<List<EmployeeModel?>?> getAssignedToList({
       );
        Future<Map<String, dynamic>> viewObsCloseButton({
     viewobsCloseJsonString,
+    int? check_point_type_id,
     bool? isLoading,
   }) async =>
       await repository.viewObsCloseButton(
         viewobsCloseJsonString,
         isLoading,
+        check_point_type_id,
       );
 
   Future<Map<String, dynamic>> approveButton({
     goodsOrderApproveJsonString,
     bool? isLoading,
     int?facilityId,
+    int?check_point_type_id,
   }) async =>
       await repository.approveButton(
         goodsOrderApproveJsonString,
         isLoading,
         facilityId,
+        check_point_type_id,
       );
 
   Future<Map<String, dynamic>> rejectobsButton({
     goodsOrderApproveJsonString,
     bool? isLoading,
     int? facilityId,
+    int? check_point_type_id,
   }) async =>
       await repository.rejectobsButton(
         goodsOrderApproveJsonString,
         isLoading,
         facilityId,
+        check_point_type_id,
       );
 }

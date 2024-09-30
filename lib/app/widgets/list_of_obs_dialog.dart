@@ -10,8 +10,9 @@ import '../theme/styles.dart';
 
 class ListOfObsCloseDialog extends GetView {
   int? id;
+  int?check_point_type_id;
 
-  ListOfObsCloseDialog({super.key, this.id});
+  ListOfObsCloseDialog({super.key, this.id,this.check_point_type_id});
   final CreateObservationController _controller = Get.find();
 
   @override
@@ -90,7 +91,7 @@ class ListOfObsCloseDialog extends GetView {
             ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                _controller.viewObsCloseButton(id: id);
+                _controller.viewObsCloseButton(id: id,check_point_type_id:check_point_type_id);
                 print('obs  id:$id');
                 // Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
               },
