@@ -186,6 +186,8 @@ import 'package:cmms/app/schedule_course/View/schedule_course_screen.dart';
 import 'package:cmms/app/schedule_course/schedule_course_binding.dart';
 import 'package:cmms/app/schedule_course_list/schedule_course_list_binding.dart';
 import 'package:cmms/app/schedule_course_list/view/schedule_course_list_screen.dart';
+import 'package:cmms/app/sm_report/sm_report_list_binding.dart';
+import 'package:cmms/app/sm_report/view/sm_report_list_screen.dart';
 import 'package:cmms/app/targeted_group/View/targeted_group_screen.dart';
 import 'package:cmms/app/targeted_group/targeted_group_binding.dart';
 import 'package:cmms/app/tool_type/tool_type_binding.dart';
@@ -1541,6 +1543,11 @@ class AppPages {
       name: _Paths.calendarView,
       page: CalendarViewScreen.new,
       binding: CalendarViewBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.smReportList,
+      page: SmReportScreen.new,
+      binding: SmReportBinding(),
     ),
   ];
 }

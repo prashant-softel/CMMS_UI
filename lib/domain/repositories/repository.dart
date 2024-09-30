@@ -103,6 +103,7 @@ import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/schedule_course_details_model.dart';
 import 'package:cmms/domain/models/schedule_course_list_model.dart';
+import 'package:cmms/domain/models/sm_report_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/asset_type_list_model.dart';
 import 'package:cmms/domain/models/facility_type_list_model.dart';
@@ -4608,6 +4609,7 @@ class Repository {
       return Map();
     }
   }
+
   Future<Map<String, dynamic>> approveButton(
     goodsOrderApproveJsonString,
     bool? isLoading,
@@ -4621,7 +4623,7 @@ class Repository {
           auth: auth,
           goodsOrderApproveJsonString: goodsOrderApproveJsonString,
           isLoading: isLoading ?? false,
-          facilityId:facilityId,
+          facilityId: facilityId,
         );
       }
       var resourceData = res.data;
@@ -4645,7 +4647,8 @@ class Repository {
       return Map();
     }
   }
-   Future<Map<String, dynamic>> rejectobsButton(
+
+  Future<Map<String, dynamic>> rejectobsButton(
     goodsOrderApproveJsonString,
     bool? isLoading,
     int? facilityId,
@@ -4658,7 +4661,7 @@ class Repository {
           auth: auth,
           goodsOrderApproveJsonString: goodsOrderApproveJsonString,
           isLoading: isLoading ?? false,
-          facilityId:facilityId,
+          facilityId: facilityId,
         );
       }
       var resourceData = res.data;
@@ -11922,7 +11925,7 @@ class Repository {
         res = await _dataRepository.getAssetList(
           auth: auth,
           isLoading: isLoading ?? false,
-          facilityId:facilityId ?? 0,
+          facilityId: facilityId ?? 0,
         );
       }
       if (!res.hasError) {
@@ -13310,6 +13313,45 @@ class Repository {
         }
 
         return _plantStockListModels;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), ' getPlantStockList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<SmReportListModel?>?> getSmReportList(
+      int? facilityId,
+      bool? isLoading,
+      dynamic startDate,
+      dynamic endDate,
+      dynamic selectedAssetsNameIdList) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      int userId = varUserAccessModel.value.user_id ?? 0;
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getSmReportList(
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            isLoading: isLoading ?? false,
+            startDate: startDate,
+            endDate: endDate,
+            userId: userId,
+            selectedAssetsNameIdList: selectedAssetsNameIdList);
+      }
+      if (!res.hasError) {
+        final jsonSmReportListModels = jsonDecode(res.data);
+        final List<SmReportListModel> _SmReportListModels =
+            jsonSmReportListModels
+                .map<SmReportListModel>((m) =>
+                    SmReportListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _SmReportListModels;
       } else {
         Utility.showDialog(res.errorCode.toString(), ' getPlantStockList');
         return [];

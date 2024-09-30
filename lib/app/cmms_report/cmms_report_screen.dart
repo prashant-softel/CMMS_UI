@@ -105,30 +105,36 @@ class CmmsReportDashboardScreen extends GetView<CmmsReportDashboardController> {
                               ? (itemWidth / itemHeight)
                               : 5,
                           children: <Widget>[
-                            varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kIncidentReportFeatureId &&
-                                            e.view ==
-                                                UserAccessConstants
-                                                    .kHaveViewAccess)
-                                        .length >
-                                    0
-                                ? _incidentReportList(
-                                    tittle: "Basic Report",
-                                    ontap: () {
-                                      String type = 1.toString();
-                                      Get.offNamed(
-                                          '${Routes.cumulativeReport}/$type');
-                                    })
-                                : Dimens.box0,
+                            // varUserAccessModel.value.access_list!
+                            //             .where((e) =>
+                            //                 e.feature_id ==
+                            //                     UserAccessConstants
+                            //                         .kIncidentReportFeatureId &&
+                            //                 e.view ==
+                            //                     UserAccessConstants
+                            //                         .kHaveViewAccess)
+                            //             .length >
+                            //         0
+                            //     ?
+                            _incidentReportList(
+                                tittle: "Basic Report",
+                                ontap: () {
+                                  String type = 1.toString();
+                                  Get.offNamed(
+                                      '${Routes.cumulativeReport}/$type');
+                                }),
+                            // : Dimens.box0,
                             _incidentReportList(
                                 tittle: "Cumulative Report",
                                 ontap: () {
                                   String type = 2.toString();
                                   Get.offNamed(
                                       '${Routes.cumulativeReport}/$type');
+                                }),
+                            _incidentReportList(
+                                tittle: "SM Report",
+                                ontap: () {
+                                  Get.offNamed('${Routes.smReportList}');
                                 })
                           ],
                         )

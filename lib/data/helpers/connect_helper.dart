@@ -1758,41 +1758,38 @@ class ConnectHelper {
 
     return responseModel;
   }
-Future<ResponseModel> approveButton({
-  required String auth,
-  goodsOrderApproveJsonString,
-  bool? isLoading,
-  int? facilityId,
-}) async {
-  // Ensure the body is serialized to JSON
-  var requestBody = json.encode(goodsOrderApproveJsonString);
 
-  var responseModel = await apiWrapper.makeRequest(
-    'MISMaster/ApproveObservation?facilityId=$facilityId',
-    Request.put,
-    requestBody, // Pass the serialized JSON string here
-    isLoading ?? false, 
-    {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $auth',
-    },
-  );
+  Future<ResponseModel> approveButton({
+    required String auth,
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    // Ensure the body is serialized to JSON
+    var requestBody = json.encode(goodsOrderApproveJsonString);
 
-  print('goodsOrderApproveResponse: ${responseModel.data}');
-  var res = responseModel.data;
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/ApproveObservation?facilityId=$facilityId',
+      Request.put,
+      requestBody, // Pass the serialized JSON string here
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
 
-  // Parse the response only if it's a valid JSON
-  var parsedJson = json.decode(res);
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
 
-  Get.dialog<void>(
-    ApproveMsgObsDialog(
-      data: parsedJson['message'], 
-      id: parsedJson['id']
-    )
-  );
+    // Parse the response only if it's a valid JSON
+    var parsedJson = json.decode(res);
 
-  return responseModel;
-}
+    Get.dialog<void>(
+        ApproveMsgObsDialog(data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
 
   Future<ResponseModel> rejectGOReceiveButton({
     required String auth,
@@ -1817,20 +1814,20 @@ Future<ResponseModel> approveButton({
 
     return responseModel;
   }
+
 //rejectobsButton
-Future<ResponseModel> rejectobsButton({
+  Future<ResponseModel> rejectobsButton({
     required String auth,
     goodsOrderApproveJsonString,
     bool? isLoading,
     int? facilityId,
   }) async {
-      var requestBody = json.encode(goodsOrderApproveJsonString);
+    var requestBody = json.encode(goodsOrderApproveJsonString);
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/RejectObservation?facilityId=$facilityId',
       Request.put,
       requestBody,
       isLoading ?? false,
-      
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -1839,15 +1836,12 @@ Future<ResponseModel> rejectobsButton({
     print('ApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-     Get.dialog<void>(
-    RejectMsgObsDialog(
-      data: parsedJson['message'], 
-      id: parsedJson['id']
-    )
-  );
+    Get.dialog<void>(
+        RejectMsgObsDialog(data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
   }
+
   Future<ResponseModel> pmPlanRejectButton({
     required String auth,
     pmPlanRejectJsonString,
@@ -7349,6 +7343,29 @@ Future<ResponseModel> rejectobsButton({
     final assetsItems = assets.substring(1, assets.length - 1);
     var responseModel = await apiWrapper.makeRequest(
       'SMReports/GetStockReport?facility_id=$facilityId&actorTypeID=2&actorID=$facilityId&StartDate=$endDate&EndDate=$startDate&assetMasterIDs=$assetsItems',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getSmReportList(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      dynamic startDate,
+      dynamic endDate,
+      int? userId,
+      dynamic selectedAssetsNameIdList}) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'SMReports/GetSMAvailibilityReport?facilityID=$facilityId&smassetCategoryID=$selectedAssetsNameIdList&fromDate=$startDate&toDate=$endDate',
+      // 'SMReports/GetStockReport?facility_id=$facilityId&actorTypeID=2&actorID=$facilityId&StartDate=$endDate&EndDate=$startDate&assetMasterIDs=$assetsItems',
       Request.get,
       null,
       isLoading ?? false,
