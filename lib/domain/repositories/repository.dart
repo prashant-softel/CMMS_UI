@@ -4628,7 +4628,6 @@ class Repository {
           goodsOrderApproveJsonString: goodsOrderApproveJsonString,
           isLoading: isLoading ?? false,
           facilityId: facilityId,
-          facilityId:facilityId,
           check_point_type_id:check_point_type_id,
         );
       }
@@ -4669,7 +4668,6 @@ class Repository {
           goodsOrderApproveJsonString: goodsOrderApproveJsonString,
           isLoading: isLoading ?? false,
           facilityId: facilityId,
-          facilityId:facilityId,
           check_point_type_id:check_point_type_id,
         );
       }

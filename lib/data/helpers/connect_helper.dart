@@ -96,6 +96,7 @@ import '../../app/widgets/pm_plan_approve_msg_dialog.dart';
 
 /// The helper class which will connect to the world to get the data.
 class ConnectHelper {
+
   ConnectHelper() {
     _init();
   }
@@ -1758,15 +1759,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
-  Future<ResponseModel> approveButton({
-    required String auth,
-    goodsOrderApproveJsonString,
-    bool? isLoading,
-    int? facilityId,
-  }) async {
-    // Ensure the body is serialized to JSON
-    var requestBody = json.encode(goodsOrderApproveJsonString);
 Future<ResponseModel> approveButton({
   required String auth,
   goodsOrderApproveJsonString,
@@ -1787,18 +1779,6 @@ Future<ResponseModel> approveButton({
         'Authorization': 'Bearer $auth',
       },
     );
-  var responseModel = await apiWrapper.makeRequest(
-    'MISMaster/ApproveObservation?facilityId=$facilityId&check_point_type_id=$check_point_type_id',
-    Request.put,
-    requestBody, // Pass the serialized JSON string here
-    isLoading ?? false, 
-    {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $auth',
-    },
-  );
-
-    print('goodsOrderApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
 
     // Parse the response only if it's a valid JSON
