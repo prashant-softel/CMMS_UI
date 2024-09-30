@@ -83,7 +83,7 @@ class _CumulativeReportContentWebState
                 children: [
                   Container(
                     height: Get.height - 150,
-                    color: ColorValues.addNewColor,
+                    // color: ColorValues.addNewColor,
                     child: Column(
                       children: [
                         Padding(

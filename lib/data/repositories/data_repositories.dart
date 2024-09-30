@@ -4136,6 +4136,23 @@ class DataRepository extends DomainRepository {
           endDate: endDate,
           userId: userId,
           selectedAssetsNameIdList: selectedAssetsNameIdList);
+   Future<ResponseModel> getSmReportList(
+          {required String auth,
+          int? facilityId,
+          bool? isLoading,
+          dynamic startDate,
+          dynamic endDate,
+          int? userId,
+          dynamic selectedAssetsNameIdList}) async =>
+      await connectHelper.getSmReportList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate,
+          userId: userId,
+          selectedAssetsNameIdList: selectedAssetsNameIdList);
+  
   Future<ResponseModel> getPlantStockListReturn({
     required String auth,
     int? facilityId,
