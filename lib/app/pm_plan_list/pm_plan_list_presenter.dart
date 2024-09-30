@@ -9,13 +9,13 @@ class PmPlanListPresenter {
           bool? isLoading,
           dynamic endDate,
           dynamic startDate,
-          bool?  self_view,
+          // bool?  self_view,
           bool? isExport}) async =>
       await pmPlanListUsecase.getPmPlanList(
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           endDate: endDate,
-          self_view: self_view,
+          // self_view: self_view,
           isExport: isExport,
           startDate: startDate);
   deletePmPlan(String? planId, {required bool isLoading}) async =>

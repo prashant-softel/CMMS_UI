@@ -11,8 +11,9 @@ import '../theme/styles.dart';
 
 class ApproveobsDialog extends GetView {
   int? id;
+  int?check_point_type_id;
 
-  ApproveobsDialog({super.key, this.id});
+  ApproveobsDialog({super.key, this.id,this.check_point_type_id});
   final CreateObservationController _controller = Get.find();
 
   @override
@@ -93,7 +94,7 @@ class ApproveobsDialog extends GetView {
             ElevatedButton(
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {
-                _controller.approveButton(id: id);
+                _controller.approveButton(id: id,check_point_type_id:check_point_type_id);
                 print('obs id:$id');
                 Get.back();
               },

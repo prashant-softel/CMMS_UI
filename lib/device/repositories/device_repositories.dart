@@ -53,6 +53,15 @@ class DeviceRepository extends DomainRepository {
     String? value = box.get(key, defaultValue: defaultValue) as String;
     return value;
   }
+  String getStringValue1(String key) {
+    var box = _getBox();
+    var defaultValue = '';
+    if (key == DeviceConstants.localLang) {
+      defaultValue = DataConstants.defaultLang;
+    }
+    String? value = box.get(key, defaultValue: defaultValue) as String;
+    return value;
+  }
 
   /// store the data
   @override

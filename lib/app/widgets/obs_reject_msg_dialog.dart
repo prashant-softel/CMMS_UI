@@ -12,8 +12,9 @@ import '../theme/styles.dart';
 class RejectMsgObsDialog extends GetView {
   String? data;
   List<dynamic>? id;
+  List<dynamic>? check_point_type_id;
 
-  RejectMsgObsDialog({super.key, this.data, this.id});
+  RejectMsgObsDialog({super.key, this.data, this.id,this.check_point_type_id});
   final CreateObservationController _controller = Get.find();
 
   @override

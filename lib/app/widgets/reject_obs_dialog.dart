@@ -12,8 +12,9 @@ import '../theme/styles.dart';
 
 class RejectobsDialog extends GetView {
   int? id;
+  int?check_point_type_id;
 
-  RejectobsDialog({super.key, this.id});
+  RejectobsDialog({super.key, this.id, this.check_point_type_id});
   final CreateObservationController _controller = Get.find();
 
   @override
@@ -92,7 +93,7 @@ class RejectobsDialog extends GetView {
             ElevatedButton(
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {
-                _controller.rejectobsButton(id: id);
+                _controller.rejectobsButton(id: id,check_point_type_id:check_point_type_id);
                 print('id:$id');
                 Get.back();
               },

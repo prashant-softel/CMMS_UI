@@ -1763,12 +1763,13 @@ Future<ResponseModel> approveButton({
   goodsOrderApproveJsonString,
   bool? isLoading,
   int? facilityId,
+  int? check_point_type_id,
 }) async {
   // Ensure the body is serialized to JSON
   var requestBody = json.encode(goodsOrderApproveJsonString);
 
   var responseModel = await apiWrapper.makeRequest(
-    'MISMaster/ApproveObservation?facilityId=$facilityId',
+    'MISMaster/ApproveObservation?facilityId=$facilityId&check_point_type_id=$check_point_type_id',
     Request.put,
     requestBody, // Pass the serialized JSON string here
     isLoading ?? false, 
@@ -1823,10 +1824,11 @@ Future<ResponseModel> rejectobsButton({
     goodsOrderApproveJsonString,
     bool? isLoading,
     int? facilityId,
+    int? check_point_type_id,
   }) async {
       var requestBody = json.encode(goodsOrderApproveJsonString);
     var responseModel = await apiWrapper.makeRequest(
-      'MISMaster/RejectObservation?facilityId=$facilityId',
+      'MISMaster/RejectObservation?facilityId=$facilityId&check_point_type_id=$check_point_type_id',
       Request.put,
       requestBody,
       isLoading ?? false,
@@ -1842,7 +1844,8 @@ Future<ResponseModel> rejectobsButton({
      Get.dialog<void>(
     RejectMsgObsDialog(
       data: parsedJson['message'], 
-      id: parsedJson['id']
+      id: parsedJson['id'],
+      check_point_type_id: parsedJson['check_point_type_id']
     )
   );
 
@@ -3859,13 +3862,19 @@ Future<ResponseModel> rejectobsButton({
   }
 
   Future<ResponseModel> createObs(
-      {required String auth, createObs, bool? isLoading, int? position}) async {
+      {required String auth, 
+      createObs, 
+      bool? isLoading, 
+      int? position,
+      int?check_point_type_id,
+      }) async {
     String url;
 
     if (position == 1) {
       url = 'MISMaster/CreateObservation';
-    } else if (position == 2) {
-      url = 'MISMaster/AssingtoObservation';
+    } 
+    else if (position == 2) {
+      url = 'MISMaster/AssingtoObservation?check_point_type_id=$check_point_type_id';
     } else {
       url = 'MISMaster/UpdateObservation';
     }
@@ -4851,7 +4860,7 @@ Future<ResponseModel> rejectobsButton({
     int? check_point_type_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetObservationById?observation_id=$id&check_point_type_id=$check_point_type_id',
+      'MISMaster/GetObservationDetails?observation_id=$id&check_point_type_id=$check_point_type_id',
       Request.get,
       null,
       isLoading ?? false,
@@ -4886,9 +4895,10 @@ Future<ResponseModel> rejectobsButton({
     required String auth,
     viewobsCloseJsonString,
     bool? isLoading,
+    int?check_point_type_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MISMaster/CloseObservation',
+      'MISMaster/CloseObservation?check_point_type_id=$check_point_type_id',
       Request.post,
       viewobsCloseJsonString,
       isLoading ?? false,
@@ -8641,12 +8651,13 @@ Future<ResponseModel> rejectobsButton({
       {required String auth,
       bool? isLoading,
       int? facilityId,
-       bool? self_view,
+      //  bool? self_view,
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
       //   'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
-      'PM/GetPMPlanList?facility_id=${facilityId}&self_view=${self_view}', Request.get,
+      'PM/GetPMPlanList?facility_id=${facilityId}', Request.get,
+      // &self_view=${self_view}
       null,
       isLoading ?? true,
       {

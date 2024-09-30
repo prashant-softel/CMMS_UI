@@ -20,6 +20,7 @@ class ViewObservationPresenter {
   void clearValue() async => viewObservationUsecase.clearValue();
 
   Future<String?> getValue() async => await viewObservationUsecase.getValue();
+  Future<String?> getValue1() async => await viewObservationUsecase.getValue1();
   Future<List<HistoryModel>?> getHistory(
     moduleType,
     facilityId,
@@ -33,9 +34,10 @@ class ViewObservationPresenter {
         isLoading: isLoading,
       );
   Future<GetObservationById?> getObsDetail(
-      {bool? isLoading, required int id}) async {
+      {bool? isLoading, required int id,required int check_point_type_id}) async {
     return viewObservationUsecase.getObsDetail(
       id: id,
+      check_point_type_id:check_point_type_id,
       isLoading: isLoading ?? false,
     );
   }

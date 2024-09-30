@@ -136,7 +136,7 @@ class CreateObservationController extends GetxController {
   Future<void> setUserId() async {
     try {
       final _obsId = await createObservationPresenter.getValue();
-      final _checkpointtypeId = await createObservationPresenter.getValue();
+      final _checkpointtypeId = await createObservationPresenter.getValue1();
 
       if (_obsId == null || _obsId == '' || _obsId == "null" &&
       _checkpointtypeId == null || _checkpointtypeId == '' || _checkpointtypeId == "null") {
@@ -146,7 +146,8 @@ class CreateObservationController extends GetxController {
         checkpointtypeId.value = dataFromPreviousScreen['checkpointtypeId'];
         type.value = dataFromPreviousScreen['type'];
 
-        createObservationPresenter.saveValue(obsId: obsId.value.toString(),checkpointtypeId:checkpointtypeId.value.toString());
+        createObservationPresenter.saveValue(obsId: obsId.value.toString());
+        createObservationPresenter.saveValue1(checkpointtypeId: checkpointtypeId.value.toString());
       } else {
         obsId.value = int.tryParse(_obsId) ?? 0;
       }
@@ -230,7 +231,7 @@ class CreateObservationController extends GetxController {
           ? ""
           : getObsById.value?.target_date ?? "";
       obsDateTc.text = getObsById.value?.date_of_observation ?? "";
-      selectedRiskTypeList.value = getObsById.value?.risk_type_name ?? '';
+      selectedRiskTypeList.value = getObsById.value?.risk_type ?? '';
       selectedTypeOfObs.value =
           getObsById.value?.type_of_observation_name ?? '';
       selectedSourceOfObs.value =
@@ -273,7 +274,7 @@ class CreateObservationController extends GetxController {
   }
   
 
-  void createObs({int? position, List<dynamic>? fileIds}) async {
+  void createObs({int? position, List<dynamic>? fileIds,int?check_point_type_id}) async {
     try {
         // checkObs1();
         // if (isFormInvalid.value) {
@@ -325,6 +326,7 @@ class CreateObservationController extends GetxController {
         createObs: createObsModelJsonString,
         isLoading: true,
         position: position,
+         check_point_type_id:check_point_type_id??0,
       );
 
       if (responseCreateObsModel == null) {
@@ -337,7 +339,7 @@ class CreateObservationController extends GetxController {
     }
   }
 
-  void viewObsCloseButton({int? id}) async {
+  void viewObsCloseButton({int? id,required int?check_point_type_id}) async {
     {
       String _comment = closeCommentTextFieldCtrlr.text.trim();
 
@@ -350,6 +352,7 @@ class CreateObservationController extends GetxController {
           await createObservationPresenter.viewObsCloseButton(
         ViewObsCloseJsonString: ViewObsCloseJsonString,
         isLoading: true,
+        check_point_type_id:check_point_type_id!,
       );
       if (response == true) {
         //getCalibrationList(facilityId, true);
@@ -582,7 +585,7 @@ void checkObs2(){
     }
   }
   
-   void approveButton({int? id}) async {
+   void approveButton({int? id,int?check_point_type_id}) async {
     {
       // await 
       // checkform();
@@ -602,7 +605,8 @@ void checkObs2(){
           await createObservationPresenter.approveButton(
         goodsOrderApproveJsonString: goodsOrderApproveJsonString,
         isLoading: true,
-        facilityId:facilityId
+        facilityId:facilityId,
+        check_point_type_id:check_point_type_id!
       );
       if (response == true) {
         //getCalibrationList(facilityId, true);
@@ -610,7 +614,7 @@ void checkObs2(){
     }
   }
   // rejectobsButton
-   void rejectobsButton({int? id}) async {
+   void rejectobsButton({int? id,int?check_point_type_id}) async {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
@@ -622,6 +626,8 @@ void checkObs2(){
       Map<String, dynamic>? response =
           await createObservationPresenter.rejectobsButton(
         goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        facilityId:facilityId,
+        check_point_type_id:check_point_type_id!,
         isLoading: true,
       );
       if (response == true) {

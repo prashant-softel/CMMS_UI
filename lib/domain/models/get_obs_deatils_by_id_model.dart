@@ -11,7 +11,7 @@ class GetObservationById {
   String? operator_name;
   int? risk_type_id;
   int? status_code;
-  String? risk_type_name;
+  String? risk_type;
   String? preventive_action;
   int? assigned_to_id;
   String? assigned_to_name;
@@ -41,7 +41,7 @@ class GetObservationById {
     this.operator_name,
     this.risk_type_id,
     this.status_code,
-    this.risk_type_name,
+    this.risk_type,
     this.preventive_action,
     this.assigned_to_id,
     this.assigned_to_name,
@@ -66,46 +66,51 @@ class GetObservationById {
     this.updated_by,
   });
 
-  factory GetObservationById.fromJson(Map<String, dynamic> json) {
-    return GetObservationById(
-      id: json['id'],
-      status_code: json['status_code'],
-      facility_id: json['facility_id'],
-      short_status: json['short_status'],
-      contact_number: json['contact_number'],
-      operator_name: json['operator_name'],
-      cost_type: json['cost_type'],
-      cost_name: json['cost_name'],
-      location_of_observation: json['location_of_observation'],
-      date_of_observation:
-          Utility.getFormatedyearMonthDay(json['date_of_observation']),
-      observation_description: json['observation_description'],
-      preventive_action: json['preventive_action']??'',
-      assigned_to_id: json['assigned_to_id'],
-      assigned_to_name: json['assigned_to_name']??'',
-      created_by: json['created_by'],
-      updateid: json['updateid'],
-      createdid: json['createdid'],
-      created_at: Utility.getFormatedyearMonthDay(json['created_at']),
-      updated_by: json['updated_by']??'',
-      updated_at: json['updated_at']??'',
-      risk_type_id: json['risk_type_id'],
-      risk_type_name: json['risk_type_name'],
-      source_of_observation: json['source_of_observation'],
-      source_of_observation_name: json['source_of_observation_name'],
-      // target_date: Utility.getFormatedyearMonthDay(json['target_date']),
-      target_date: Utility.getFormatedyearMonthDay(json['target_date']),
-      file_list: json["fileDetails"] != null
-          ? List<FileList>.from(
-              json["fileDetails"].map((x) => FileList.fromJson(x)))
-          : [],
-      type_of_observation: json['type_of_observation'],
-      type_of_observation_name: json['type_of_observation_name'],
-    );
-  }
+ factory GetObservationById.fromJson(Map<String, dynamic> json) {
+  return GetObservationById(
+    id: json['id'],
+    status_code: json['status_code'],
+    facility_id: json['facility_id'],
+    short_status: json['short_status'],
+    contact_number: json['contact_number'],
+    operator_name: json['operator_name'],
+    cost_type: json['cost_type'],
+    cost_name: json['cost_name'],
+    location_of_observation: json['location_of_observation'],
+    date_of_observation: json['date_of_observation'] != null && json['date_of_observation'].isNotEmpty 
+        ? Utility.getFormatedyearMonthDay(json['date_of_observation']) 
+        : null,
+    observation_description: json['observation_description'],
+    preventive_action: json['preventive_action'] ?? '',
+    assigned_to_id: json['assigned_to_id'],
+    assigned_to_name: json['assigned_to_name'] ?? '',
+    created_by: json['created_by'],
+    updateid: json['updateid'],
+    createdid: json['createdid'],
+    created_at: json['created_at'] != null && json['created_at'].isNotEmpty 
+        ? Utility.getFormatedyearMonthDay(json['created_at']) 
+        : null,
+    updated_by: json['updated_by'] ?? '',
+    updated_at: json['updated_at'] != null && json['updated_at'].isNotEmpty 
+        ? Utility.getFormatedyearMonthDay(json['updated_at']) 
+        : null,
+    risk_type_id: json['risk_type_id'],
+    risk_type: json['risk_type'],
+    source_of_observation: json['source_of_observation'],
+    source_of_observation_name: json['source_of_observation_name'],
+    target_date: json['target_date'] != null && json['target_date'].isNotEmpty 
+        ? Utility.getFormatedyearMonthDay(json['target_date']) 
+        : null,
+    file_list: json["fileDetails"] != null
+        ? List<FileList>.from(
+            json["fileDetails"].map((x) => FileList.fromJson(x)))
+        : [],
+    type_of_observation: json['type_of_observation'],
+    type_of_observation_name: json['type_of_observation_name'],
+  );
 }
 
-
+}
 
 class FileList {
   FileList({

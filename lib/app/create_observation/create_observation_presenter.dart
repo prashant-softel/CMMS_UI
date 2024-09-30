@@ -18,9 +18,13 @@ class CreateObservationPresenter {
       await createObservationUsecase.getFacilityList(isLoading: isLoading);
   void saveValue({
     String? obsId,
+  }) async {
+    return createObservationUsecase.saveValue(obsId: obsId);
+  }
+  void saveValue1({
     String?checkpointtypeId,
   }) async {
-    return createObservationUsecase.saveValue(obsId: obsId,checkpointtypeId:checkpointtypeId);
+    return createObservationUsecase.saveValue1(checkpointtypeId:checkpointtypeId);
   }
 
   void clearValue() async => createObservationUsecase.clearValue();
@@ -36,21 +40,27 @@ class CreateObservationPresenter {
     goodsOrderApproveJsonString,
     required bool isLoading,
     required int facilityId,
+    required int check_point_type_id,
     
   }) async {
     return createObservationUsecase.approveButton(
       goodsOrderApproveJsonString: goodsOrderApproveJsonString,
       isLoading: isLoading,
-      facilityId:facilityId
+      facilityId:facilityId,
+      check_point_type_id:check_point_type_id,
     );
   }
     Future<Map<String, dynamic>?> rejectobsButton({
     goodsOrderApproveJsonString,
     required bool isLoading,
+    required int facilityId,
+    required int check_point_type_id,
   }) async {
     return createObservationUsecase.rejectobsButton(
       goodsOrderApproveJsonString: goodsOrderApproveJsonString,
       isLoading: isLoading,
+       facilityId:facilityId,
+      check_point_type_id:check_point_type_id,
     );
   }
   Future<List<TypeOfObsListModel?>?> getTypeOfObservationList({
@@ -68,6 +78,7 @@ class CreateObservationPresenter {
   }
 
   Future<String?> getValue() async => await createObservationUsecase.getValue();
+  Future<String?> getValue1() async => await createObservationUsecase.getValue1();
   Future<List<HistoryModel>?> getHistory(
     moduleType,
     id,
@@ -78,6 +89,7 @@ class CreateObservationPresenter {
         id: id,
         isLoading: isLoading,
       );
+      
   Future<GetObservationById?> getObsDetail(
       {bool? isLoading, required int id,required int check_point_type_id,}) async {
     return createObservationUsecase.getObsDetail(
@@ -100,19 +112,22 @@ class CreateObservationPresenter {
       );
 
   Future<Map<String, dynamic>?> createObs(
-      {createObs, required bool isLoading, int? position}) async {
+      {createObs, required bool isLoading, int? position, required int check_point_type_id,}) async {
     return createObservationUsecase.createObs(
       createObs: createObs,
+      check_point_type_id:check_point_type_id,
       isLoading: isLoading,
       position: position,
     );
   }
       Future<Map<String, dynamic>?> viewObsCloseButton({
     ViewObsCloseJsonString,
+    required int check_point_type_id,
     required bool isLoading,
   }) async {
     return createObservationUsecase.viewObsCloseButton(
       viewobsCloseJsonString: ViewObsCloseJsonString,
+      check_point_type_id:check_point_type_id,
       isLoading: isLoading,
     );
   }
