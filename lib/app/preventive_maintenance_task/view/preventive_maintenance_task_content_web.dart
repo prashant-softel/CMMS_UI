@@ -754,7 +754,7 @@ class PmTaskDataSource extends DataTableSource {
 
                                   int pmTaskId = pmTaskDetails?.id ?? 0;
                                   if (pmTaskId != 0) {
-                                    Get.toNamed(
+                                    Get.offAllNamed(
                                         '${Routes.pmTaskView}/$pmTaskId');
                                   }
                                 },
