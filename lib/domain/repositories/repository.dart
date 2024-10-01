@@ -1186,7 +1186,11 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> createObs(
-      createObs, bool? isLoading, int? position,int?check_point_type_id,) async {
+    createObs,
+    bool? isLoading,
+    int? position,
+    int? check_point_type_id,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -1195,7 +1199,7 @@ class Repository {
           auth: auth,
           createObs: createObs,
           isLoading: isLoading ?? false,
-          check_point_type_id:check_point_type_id,
+          check_point_type_id: check_point_type_id,
           position: position,
         );
       }
@@ -3570,7 +3574,7 @@ class Repository {
         res = await _dataRepository.getObsDetail(
           auth: auth,
           id: id,
-          check_point_type_id:check_point_type_id,
+          check_point_type_id: check_point_type_id,
           isLoading: isLoading ?? false,
         );
 
@@ -3596,7 +3600,7 @@ class Repository {
   Future<Map<String, dynamic>> viewObsCloseButton(
     viewobsCloseJsonString,
     bool? isLoading,
-    int?check_point_type_id,
+    int? check_point_type_id,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -3605,7 +3609,7 @@ class Repository {
         res = await _dataRepository.viewObsCloseButton(
           auth: auth,
           viewobsCloseJsonString: viewobsCloseJsonString,
-          check_point_type_id:check_point_type_id,
+          check_point_type_id: check_point_type_id,
           isLoading: isLoading ?? false,
         );
       }
@@ -4628,7 +4632,7 @@ class Repository {
           goodsOrderApproveJsonString: goodsOrderApproveJsonString,
           isLoading: isLoading ?? false,
           facilityId: facilityId,
-          check_point_type_id:check_point_type_id,
+          check_point_type_id: check_point_type_id,
         );
       }
       var resourceData = res.data;
@@ -4668,7 +4672,7 @@ class Repository {
           goodsOrderApproveJsonString: goodsOrderApproveJsonString,
           isLoading: isLoading ?? false,
           facilityId: facilityId,
-          check_point_type_id:check_point_type_id,
+          check_point_type_id: check_point_type_id,
         );
       }
       var resourceData = res.data;
@@ -6371,7 +6375,6 @@ class Repository {
           start_date: start_date,
           self_view: self_view,
           end_date: end_date,
-          
           auth: auth,
         );
         print('MCTaskList: ${res.data}');
@@ -11412,7 +11415,7 @@ class Repository {
   }
 
   Future<List<JobCardModel>> jobCardList(
-      int? facilityId, bool? isLoading, bool? isExport,bool? self_view) async {
+      int? facilityId, bool? isLoading, bool? isExport, bool? self_view) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -11912,6 +11915,84 @@ class Repository {
 //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getBusinessList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<SmReportListModel?>?> getAvailbleSmReportList(
+      int? facilityId,
+      bool? isLoading,
+      dynamic startDate,
+      dynamic endDate,
+      dynamic selectedAssetsNameIdList) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      int userId = varUserAccessModel.value.user_id ?? 0;
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getAvailbleSmReportList(
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            isLoading: isLoading ?? false,
+            startDate: startDate,
+            endDate: endDate,
+            userId: userId,
+            selectedAssetsNameIdList: selectedAssetsNameIdList);
+      }
+      if (!res.hasError) {
+        final jsonSmReportListModels = jsonDecode(res.data);
+        final List<SmReportListModel> _SmReportListModels =
+            jsonSmReportListModels
+                .map<SmReportListModel>((m) =>
+                    SmReportListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _SmReportListModels;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), ' getPlantStockList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<SmReportListModel?>?> getCansumeSmReportList(
+      int? facilityId,
+      bool? isLoading,
+      dynamic startDate,
+      dynamic endDate,
+      dynamic selectedAssetsNameIdList) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      int userId = varUserAccessModel.value.user_id ?? 0;
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getCansumeSmReportList(
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            isLoading: isLoading ?? false,
+            startDate: startDate,
+            endDate: endDate,
+            userId: userId,
+            selectedAssetsNameIdList: selectedAssetsNameIdList);
+      }
+      if (!res.hasError) {
+        final jsonSmReportListModels = jsonDecode(res.data);
+        final List<SmReportListModel> _SmReportListModels =
+            jsonSmReportListModels
+                .map<SmReportListModel>((m) =>
+                    SmReportListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _SmReportListModels;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), ' getPlantStockList');
         return [];
       }
     } catch (error) {
@@ -16206,7 +16287,7 @@ class Repository {
       dynamic startDate,
       dynamic endDate,
       required bool isLoading,
-       bool? self_view,
+      bool? self_view,
       bool? isExport
       // String? start_date,
       // required String end_date,
@@ -16221,7 +16302,7 @@ class Repository {
           facility_id: facility_id,
           startDate: startDate,
           endDate: endDate,
-           self_view: self_view,
+          self_view: self_view,
           isLoading: isLoading,
           // start_date: start_date,
           // end_date: end_date,

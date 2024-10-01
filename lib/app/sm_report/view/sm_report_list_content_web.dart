@@ -240,7 +240,23 @@ class _SmReportContentWebState extends State<SmReportContentWeb> {
                                         ),
                                       ],
                                     ),
-                                    // Dimens.boxWidth15,
+                                    Dimens.boxWidth15,
+                                    Container(
+                                      margin: EdgeInsets.only(right: 10),
+                                      height: 30,
+                                      child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appDarkBlueColor,
+                                        onPressed: () {
+                                          controller.isToggleOn.value == false
+                                              ? controller
+                                                  .getAvailbleSmReportList()
+                                              : controller
+                                                  .getCansumeSmReportList();
+                                        },
+                                        text: 'Search',
+                                      ),
+                                    ),
                                     // ActionButton(
                                     //   icon: Icons.add,
                                     //   label: "Add New",
@@ -415,7 +431,7 @@ class _SmReportContentWebState extends State<SmReportContentWeb> {
                                                       dataSource, // Custom DataSource class
                                                   // headingRowHeight: Get.height * 0.12,
                                                   // minWidth: Get.width * 0.7,
-                                                  minWidth: 1500,
+                                                  minWidth: 3000,
                                                   showCheckboxColumn: false,
                                                   rowsPerPage:
                                                       10, // Number of rows per page
@@ -515,7 +531,7 @@ class _SmReportContentWebState extends State<SmReportContentWeb> {
           ? null
           : (int columnIndex, bool ascending) {
               final controller = Get.find<SmReportController>();
-              //controller.sortData(header);
+              controller.sortData(header);
             },
 
       label: //
@@ -648,13 +664,16 @@ class PlantListDataSource extends DataTableSource {
       '${PlantDetails?.material_Category ?? ''}',
       "",
       "",
-      '${PlantDetails?.facility_ID ?? ''}',
-      '${PlantDetails?.facility_Name ?? ''}',
+      // '${PlantDetails?.facility_ID ?? ''}',
+      // '${PlantDetails?.facility_Name ?? ''}',
       '${PlantDetails?.inward ?? ''}',
       '${PlantDetails?.outward ?? ''}',
       '${PlantDetails?.min_available_qty ?? ''}',
       '${PlantDetails?.act_available_qty ?? ''}',
       "",
+      '${PlantDetails?.comsumption_date ?? ''}',
+      '${PlantDetails?.comsumed_qty ?? ''}',
+
       ""
     ];
     var cells = [];
