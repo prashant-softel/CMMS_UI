@@ -9,11 +9,7 @@ class StockManagementDashboardController extends GetxController {
 
   @override
   void switchFacility(String? facilityName) {}
-  Future<void> createChecklist() async {
-    // Get.toNamed(
-    //   Routes.preventiveList,
-    // );
-  }
+  Future<void> createChecklist() async {}
 
   Future<void> checkPoint() async {
     Get.toNamed(

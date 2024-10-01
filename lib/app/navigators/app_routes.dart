@@ -260,8 +260,9 @@ abstract class Routes {
   static const cmmsReport = _Paths.cmmsReport;
   static const cumulativeReport = _Paths.cumulativeReport;
   static const wcCertificatesList = _Paths.wcCertificatesList;
-  static const calendarView = _Paths.calendarView;  static const smReportList = _Paths.smReportList;
-
+  static const calendarView = _Paths.calendarView;
+  static const smReportList = _Paths.smReportList;
+  static const evaluation = _Paths.evaluation;
 }
 
 abstract class _Paths {
@@ -523,4 +524,5 @@ abstract class _Paths {
   static const wcCertificatesList = '/wcCertificatesList';
   static const calendarView = '/calendarView';
   static const smReportList = '/smreportlist';
+  static const evaluation = '/evaluation';
 }

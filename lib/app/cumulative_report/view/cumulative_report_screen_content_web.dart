@@ -71,6 +71,12 @@ class _CumulativeReportContentWebState
                         style: Styles.greyLight14,
                       ),
                     ),
+                    InkWell(
+                      onTap: () {
+                        Get.offNamed(Routes.cmmsReport);
+                      },
+                      child: Text(" / REPORT", style: Styles.greyLight14),
+                    ),
                     Text(
                         controller.type.value == 1
                             ? " / BASIC REPORT"
@@ -112,13 +118,13 @@ class _CumulativeReportContentWebState
                               Container(
                                 child: Row(children: [
                                   Text(
-                                    "Select Plants :",
-                                    style: Styles.black15,
+                                    "Select Plants:",
+                                    style: Styles.black13,
                                   ),
                                   Dimens.boxWidth2,
                                   SizedBox(
                                     width:
-                                        MediaQuery.of(context).size.width / 5,
+                                        MediaQuery.of(context).size.width / 7,
                                     child: CustomMultiSelectDialogField(
                                       buttonText: 'Select Facility Name',
                                       title: 'Facility Name',
@@ -147,14 +153,14 @@ class _CumulativeReportContentWebState
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Select Module :",
-                                      style: Styles.black15,
+                                      " Select Module:",
+                                      style: Styles.black13,
                                     ),
                                     Dimens.boxWidth2,
                                     DropdownWebWidget(
                                       height: 40,
                                       width:
-                                          MediaQuery.of(context).size.width / 5,
+                                          MediaQuery.of(context).size.width / 7,
                                       dropdownList: controller.moduleList,
                                       isValueSelected:
                                           controller.isModuleListSelected.value,
@@ -165,16 +171,52 @@ class _CumulativeReportContentWebState
                                   ],
                                 ),
                               ),
+                              Container(
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      " Select Categories:",
+                                      style: Styles.black13,
+                                    ),
+                                    Dimens.boxWidth2,
+                                    SizedBox(
+                                      width:
+                                          MediaQuery.of(context).size.width / 7,
+                                      child: CustomMultiSelectDialogField(
+                                        buttonText: 'Select Category',
+                                        title: 'Category Name',
+                                        initialValue: (controller
+                                                .selectedCategoryIdList
+                                                .isNotEmpty)
+                                            ? controller.selectedCategoryIdList
+                                            : [],
+                                        items: controller.equipmentCategoryList
+                                            .map(
+                                              (category) => MultiSelectItem(
+                                                category?.id,
+                                                category?.name ?? '',
+                                              ),
+                                            )
+                                            .toList(),
+                                        onConfirm: (selectedOptionsList) => {
+                                          controller.facilitySelected(
+                                              selectedOptionsList),
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               Row(
                                 children: [
                                   Text(
-                                    "Date Range :",
-                                    style: Styles.black15,
+                                    " Date Range:",
+                                    style: Styles.black13,
                                   ),
                                   Dimens.boxWidth2,
                                   CustomTextFieldForStock(
                                     width:
-                                        MediaQuery.of(context).size.width / 5,
+                                        MediaQuery.of(context).size.width / 7,
                                     numberTextField: true,
                                     onTap: () {
                                       controller.openFromDateToStartDatePicker =
@@ -188,7 +230,7 @@ class _CumulativeReportContentWebState
                                 ],
                               ),
                               Container(
-                                margin: EdgeInsets.only(right: 10),
+                                // margin: EdgeInsets.only(right: 10),
                                 height: 30,
                                 child: CustomElevatedButton(
                                   backgroundColor: ColorValues.appDarkBlueColor,
@@ -212,7 +254,7 @@ class _CumulativeReportContentWebState
                                   text: 'Search',
                                 ),
                               ),
-                              Dimens.boxWidth10
+                              Dimens.boxWidth2
                             ],
                           ),
                         ),

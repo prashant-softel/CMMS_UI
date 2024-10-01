@@ -61,7 +61,7 @@ class PreventiveCheckPointController extends GetxController {
   Rx<String> selectedTypeOfObs = ''.obs;
   RxList<CheckPointModel?>? preventiveCheckpoint = <CheckPointModel?>[].obs;
 
-RxList<TypeModel> costType = <TypeModel>[
+  RxList<TypeModel> costType = <TypeModel>[
     TypeModel(name: 'Capex', id: "1"),
     TypeModel(name: 'Opex', id: "2"),
   ].obs;
@@ -184,21 +184,24 @@ RxList<TypeModel> costType = <TypeModel>[
   }
 
   Future<void> setType() async {
-    try {
-      // Read jobId
-      String? _type = await preventiveCheckPointPresenter.getValue();
-      if (_type == null || _type == '' || _type == "null") {
-        var dataFromPreviousScreen = Get.arguments;
+    final String? _type = Get.parameters['type'];
+    type.value = int.tryParse(_type ?? "") ?? 0;
 
-        type.value = dataFromPreviousScreen['type'];
-        preventiveCheckPointPresenter.saveValue(type: type.value.toString());
-      } else {
-        type.value = int.tryParse(_type) ?? 0;
-      }
-    } catch (e) {
-      print(e.toString() + 'type');
-      //  Utility.showDialog(e.toString() + 'type');
-    }
+    // try {
+    //   // Read jobId
+    //   String? _type = await preventiveCheckPointPresenter.getValue();
+    //   if (_type == null || _type == '' || _type == "null") {
+    //     var dataFromPreviousScreen = Get.arguments;
+
+    //     type.value = dataFromPreviousScreen['type'];
+    //     preventiveCheckPointPresenter.saveValue(type: type.value.toString());
+    //   } else {
+    //     type.value = int.tryParse(_type) ?? 0;
+    //   }
+    // } catch (e) {
+    //   print(e.toString() + 'type');
+    //   //  Utility.showDialog(e.toString() + 'type');
+    // }
   }
 
   var checkpointType = ''.obs;
@@ -309,7 +312,9 @@ RxList<TypeModel> costType = <TypeModel>[
               ? 0
               : checkpointType.value == "Bool"
                   ? 1
-                  : 2,
+                  : checkpointType.value == "Range"
+                      ? 2
+                      : 3,
           max: _max,
           min: _min);
 
@@ -325,8 +330,7 @@ RxList<TypeModel> costType = <TypeModel>[
         type: type.value,
         type_of_observation: typeOfObsId,
         risk_type: incidenttypeId,
-        cost_type:selectedCostTypeId,
-        
+        cost_type: selectedCostTypeId,
       );
       var checkpointJsonString = [
         createCheckpoint.toJson()
@@ -347,7 +351,7 @@ RxList<TypeModel> costType = <TypeModel>[
       selectedchecklistId: 0.toString(),
       facilityId: facilityId,
       isExport: true,
-      type: type?.value,
+      type: type.value,
       isExportOnly: true,
     );
   }
@@ -528,7 +532,7 @@ RxList<TypeModel> costType = <TypeModel>[
             // selectedchecklistId=0;
           }
         }
-         case const (RxList<TypeModel>):
+      case const (RxList<TypeModel>):
         {
           if (value != "Please Select") {
             int costTypeIndex = costType.indexWhere((x) => x.name == value);
@@ -572,7 +576,6 @@ RxList<TypeModel> costType = <TypeModel>[
           }
         }
         break;
-      
 
       default:
         {
@@ -608,7 +611,9 @@ RxList<TypeModel> costType = <TypeModel>[
             ? 0
             : checkpointType.value == "Bool"
                 ? 1
-                : 2,
+                : checkpointType.value == "Range"
+                    ? 2
+                    : 3,
         max: _max,
         min: _min);
 
@@ -624,7 +629,7 @@ RxList<TypeModel> costType = <TypeModel>[
       type: type.value,
       type_of_observation: typeOfObsId,
       risk_type: incidenttypeId,
-      cost_type:selectedCostTypeId,
+      cost_type: selectedCostTypeId,
     );
     var checkpointJsonString =
         createCheckpoint.toJson(); //createCheckPointToJson([createCheckpoint]);

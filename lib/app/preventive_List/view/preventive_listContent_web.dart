@@ -72,14 +72,21 @@ class PreventiveChecklistListContentWeb
                             ? Get.offNamed(Routes.preventive)
                             : controller.type.value == AppConstants.kAudit
                                 ? Get.offNamed(Routes.audit)
-                                : Get.offNamed(Routes.misDashboard);
+                                : controller.type.value ==
+                                        AppConstants.kEvaluation
+                                    ? Get.offNamed(Routes.evaluation)
+                                    : Get.offNamed(Routes.misDashboard);
                       },
                       child: controller.type.value == AppConstants.kPM
                           ? Text(" / PREVENTIVE MAINTENANCE",
                               style: Styles.greyLight14)
                           : controller.type.value == AppConstants.kAudit
                               ? Text(" / AUDIT", style: Styles.greyLight14)
-                              : Text(" / MIS", style: Styles.greyLight14),
+                              : controller.type.value ==
+                                      AppConstants.kEvaluation
+                                  ? Text(" / EVALUATION",
+                                      style: Styles.greyLight14)
+                                  : Text(" / MIS", style: Styles.greyLight14),
                     ),
                     Text(" / CREATE CHECKLIST NUMBER",
                         style: Styles.greyLight14),
@@ -185,13 +192,13 @@ class PreventiveChecklistListContentWeb
                                                   CustomRichText(
                                                       title: 'CheckList:'),
                                                   Dimens.boxHeight15,
-                                                  
+
                                                   // Visibility(
                                                   //   visible: controller.type != 4,
-                                                    // child:
-                                                     CustomRichText(
-                                                        title:
-                                                            'Equipment Category: '),
+                                                  // child:
+                                                  CustomRichText(
+                                                      title:
+                                                          'Equipment Category: '),
                                                   // ),
                                                   Dimens.boxHeight20,
 
@@ -292,25 +299,25 @@ class PreventiveChecklistListContentWeb
 
                                                   // Visibility(
                                                   //    visible: controller.type != 4,
-                                                    // child:
-                                                     DropdownWebWidget(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              6,
-                                                      controller: controller,
-                                                      dropdownList: controller
-                                                          .equipmentCategoryList,
-                                                      isValueSelected: controller
-                                                          .isSelectedequipment
-                                                          .value,
-                                                      selectedValue: controller
-                                                          .selectedequipment
-                                                          .value,
-                                                      onValueChanged: controller
-                                                          .onValueChanged,
-                                                    ),
+                                                  // child:
+                                                  DropdownWebWidget(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            6,
+                                                    controller: controller,
+                                                    dropdownList: controller
+                                                        .equipmentCategoryList,
+                                                    isValueSelected: controller
+                                                        .isSelectedequipment
+                                                        .value,
+                                                    selectedValue: controller
+                                                        .selectedequipment
+                                                        .value,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
+                                                  ),
                                                   // ),
                                                   Dimens.boxHeight10,
                                                   DropdownWebWidget(
