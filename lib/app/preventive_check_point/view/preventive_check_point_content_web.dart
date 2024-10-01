@@ -74,14 +74,21 @@ class PreventiveCheckPointContentWeb
                             ? Get.offNamed(Routes.preventive)
                             : controller.type.value == AppConstants.kAudit
                                 ? Get.offNamed(Routes.audit)
-                                : Get.offNamed(Routes.misDashboard);
+                                : controller.type.value ==
+                                        AppConstants.kEvaluation
+                                    ? Get.offNamed(Routes.evaluation)
+                                    : Get.offNamed(Routes.misDashboard);
                       },
                       child: controller.type.value == AppConstants.kPM
                           ? Text(" / PREVENTIVE MAINTENANCE",
                               style: Styles.greyLight14)
                           : controller.type.value == AppConstants.kAudit
                               ? Text(" / AUDIT", style: Styles.greyLight14)
-                              : Text(" / MIS", style: Styles.greyLight14),
+                              : controller.type.value ==
+                                      AppConstants.kEvaluation
+                                  ? Text(" / EVALUATION",
+                                      style: Styles.greyLight14)
+                                  : Text(" / MIS", style: Styles.greyLight14),
                     ),
                     Text(" / CHECK POINT CREATOR", style: Styles.greyLight14)
                   ],
@@ -545,9 +552,11 @@ class PreventiveCheckPointContentWeb
                                           height: 10,
                                         ),
                                         Visibility(
-                                          visible:
+                                          visible: controller
+                                                      .checkpointType.value ==
+                                                  "Range" ||
                                               controller.checkpointType.value ==
-                                                  "Range",
+                                                  "Input Range",
                                           child: Row(
                                             // mainAxisAlignment:
                                             //     MainAxisAlignment.spaceBetween,
@@ -718,93 +727,93 @@ class PreventiveCheckPointContentWeb
                                 //               ),
                                 //             )
                                 //           ],
-                                        // ),
-                                        //   SizedBox(
-                                        //   height: 10,
-                                        // ),
-                                        //  Visibility(
-                                        //   visible:
-                                        //       controller.checkpointType.value ==
-                                        //           "Range",
-                                        //   child: Row(
-                                        //     // mainAxisAlignment:
-                                        //     //     MainAxisAlignment.spaceBetween,
-                                        //     children: [
-                                        //       Spacer(),
-                                        //       CustomRichText(title: 'Min'),
-                                        //       SizedBox(
-                                        //         width: 10,
-                                        //       ),
-                                        //       Container(
-                                        //           decoration: BoxDecoration(
-                                        //             borderRadius:
-                                        //                 BorderRadius.circular(
-                                        //                     10),
-                                        //             border: Border.all(
-                                        //               color: Color.fromARGB(
-                                        //                   255, 227, 224, 224),
-                                        //               width: 1,
-                                        //             ),
-                                        //             boxShadow: [
-                                        //               BoxShadow(
-                                        //                 color: Color.fromARGB(
-                                        //                         255,
-                                        //                         236,
-                                        //                         234,
-                                        //                         234)
-                                        //                     .withOpacity(0.5),
-                                        //                 spreadRadius: 2,
-                                        //                 blurRadius: 5,
-                                        //                 offset: Offset(0, 2),
-                                        //               ),
-                                        //             ],
-                                        //           ),
-                                        //           width: 100,
-                                        //           child: LoginCustomTextfield(
-                                        //             // ishint: 'Enter Chec',
-                                        //             textController: controller
-                                        //                 .minRangeCtrlr,
-                                        //           )),
-                                        //       // Dimens.boxWidth20,
-                                        //       Spacer(),
-                                        //       CustomRichText(title: 'Max'),
-                                        //       SizedBox(
-                                        //         width: 10,
-                                        //       ),
-                                        //       Container(
-                                        //           decoration: BoxDecoration(
-                                        //             borderRadius:
-                                        //                 BorderRadius.circular(
-                                        //                     10),
-                                        //             border: Border.all(
-                                        //               color: Color.fromARGB(
-                                        //                   255, 227, 224, 224),
-                                        //               width: 1,
-                                        //             ),
-                                        //             boxShadow: [
-                                        //               BoxShadow(
-                                        //                 color: Color.fromARGB(
-                                        //                         255,
-                                        //                         236,
-                                        //                         234,
-                                        //                         234)
-                                        //                     .withOpacity(0.5),
-                                        //                 spreadRadius: 2,
-                                        //                 blurRadius: 5,
-                                        //                 offset: Offset(0, 2),
-                                        //               ),
-                                        //             ],
-                                        //           ),
-                                        //           width: 100,
-                                        //           child: LoginCustomTextfield(
-                                        //             // ishint: 'Enter Check Point',
-                                        //             textController: controller
-                                        //                 .maxRangeCtrlr,
-                                        //           )),
-                                        //       Spacer(),
-                                        //     ],
-                                        //   ),
-                                        // ),
+                                // ),
+                                //   SizedBox(
+                                //   height: 10,
+                                // ),
+                                //  Visibility(
+                                //   visible:
+                                //       controller.checkpointType.value ==
+                                //           "Range",
+                                //   child: Row(
+                                //     // mainAxisAlignment:
+                                //     //     MainAxisAlignment.spaceBetween,
+                                //     children: [
+                                //       Spacer(),
+                                //       CustomRichText(title: 'Min'),
+                                //       SizedBox(
+                                //         width: 10,
+                                //       ),
+                                //       Container(
+                                //           decoration: BoxDecoration(
+                                //             borderRadius:
+                                //                 BorderRadius.circular(
+                                //                     10),
+                                //             border: Border.all(
+                                //               color: Color.fromARGB(
+                                //                   255, 227, 224, 224),
+                                //               width: 1,
+                                //             ),
+                                //             boxShadow: [
+                                //               BoxShadow(
+                                //                 color: Color.fromARGB(
+                                //                         255,
+                                //                         236,
+                                //                         234,
+                                //                         234)
+                                //                     .withOpacity(0.5),
+                                //                 spreadRadius: 2,
+                                //                 blurRadius: 5,
+                                //                 offset: Offset(0, 2),
+                                //               ),
+                                //             ],
+                                //           ),
+                                //           width: 100,
+                                //           child: LoginCustomTextfield(
+                                //             // ishint: 'Enter Chec',
+                                //             textController: controller
+                                //                 .minRangeCtrlr,
+                                //           )),
+                                //       // Dimens.boxWidth20,
+                                //       Spacer(),
+                                //       CustomRichText(title: 'Max'),
+                                //       SizedBox(
+                                //         width: 10,
+                                //       ),
+                                //       Container(
+                                //           decoration: BoxDecoration(
+                                //             borderRadius:
+                                //                 BorderRadius.circular(
+                                //                     10),
+                                //             border: Border.all(
+                                //               color: Color.fromARGB(
+                                //                   255, 227, 224, 224),
+                                //               width: 1,
+                                //             ),
+                                //             boxShadow: [
+                                //               BoxShadow(
+                                //                 color: Color.fromARGB(
+                                //                         255,
+                                //                         236,
+                                //                         234,
+                                //                         234)
+                                //                     .withOpacity(0.5),
+                                //                 spreadRadius: 2,
+                                //                 blurRadius: 5,
+                                //                 offset: Offset(0, 2),
+                                //               ),
+                                //             ],
+                                //           ),
+                                //           width: 100,
+                                //           child: LoginCustomTextfield(
+                                //             // ishint: 'Enter Check Point',
+                                //             textController: controller
+                                //                 .maxRangeCtrlr,
+                                //           )),
+                                //       Spacer(),
+                                //     ],
+                                //   ),
+                                // ),
                                 Visibility(
                                   visible: controller.type == 4,
                                   child: Row(

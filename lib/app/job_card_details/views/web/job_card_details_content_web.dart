@@ -569,11 +569,20 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                 "Material Used For ",
                                                 style: Styles.blue700,
                                               ),
-                                              controller.jobCardDetailsModel
-                                                          .value!.status ==
-                                                      158
-                                                  ? Dimens.box0
-                                                  : GestureDetector(
+                                              controller.listMrsByTaskId!.value
+                                                              .firstWhereOrNull(
+                                                                (element) =>
+                                                                    element?.jobCardId !=
+                                                                        0 ||
+                                                                    element?.pmId !=
+                                                                        0,
+                                                              )
+                                                              ?.mrs_return_ID ==
+                                                          0 &&
+                                                      controller
+                                                              .allTrue.value ==
+                                                          false
+                                                  ? GestureDetector(
                                                       onTap: () {
                                                         controller.addRowItem();
                                                       },
@@ -609,6 +618,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                         ),
                                                       ),
                                                     )
+                                                  : Dimens.box0
                                             ],
                                           ),
                                         ),

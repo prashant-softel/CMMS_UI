@@ -233,6 +233,19 @@ class HomeDrawer extends GetView<HomeController> {
                                 width: 40,
                                 height: 16,
                                 color: Color(0xffD2D0D0),
+                                title: "Evaluation",
+                                icon: "assets/files/images.png",
+                                press: () {
+                                  Get.offAllNamed(Routes.evaluation);
+                                },
+                              ),
+                              MenuItem(
+                                isexpand: controller.isExpanded.value,
+                                menuButton: controller.menuButton.value,
+                                fontSize: 14,
+                                width: 40,
+                                height: 16,
+                                color: Color(0xffD2D0D0),
                                 title: "F&S DSM Charges",
                                 icon: "assets/files/images.png",
                                 press: () {

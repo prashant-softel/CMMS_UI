@@ -109,6 +109,7 @@ import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_we
 import 'package:cmms/app/employee_stock_report/view/employee_stock_report_screen.dart';
 import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_binding.dart';
 import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_screen.dart';
+import 'package:cmms/app/evaluation_dashboard/evaluation_dashboard_binding.dart';
 import 'package:cmms/app/execute_course/execute_course_binding.dart';
 import 'package:cmms/app/execute_course/view/execute_course_screen.dart';
 import 'package:cmms/app/faulty_material_report/faulty_material_report_binding.dart';
@@ -310,6 +311,7 @@ import '../change_password/view/change_password_screen.dart';
 import '../create_observation/create_observation_binding.dart';
 import '../dsm_dashboard/dsm_dashboard_screan.dart';
 import '../employee_stock_report/employee_stock_report_binding.dart';
+import '../evaluation_dashboard/evaluation_dashboard_screen.dart';
 import '../insurance_status/insurance_status_listContent_binding.dart';
 import '../insurance_status/view/insurance_status_listContent_screen.dart';
 // import 'package:cmms/warranty_claim_list/warranty_claim_list_binding.dart';
@@ -556,7 +558,7 @@ class AppPages {
       binding: CreatePreventiveListBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.preventiveList,
+      name: '${_Paths.preventiveList}/:type',
       page: PreventiveListScreen.new,
       binding: PreventiveListBinding(),
     ),
@@ -572,8 +574,9 @@ class AppPages {
       page: NewPermitListScreen.new,
       binding: NewPermitListBinding(),
     ),
-    GetPage<dynamic>(
-      name: _Paths.preventiveCheckPoint,
+    GetPage<dynamic>(      name: '${_Paths.preventiveCheckPoint}/:type',
+
+      // name: _Paths.preventiveCheckPoint,
       page: PreventiveCheckPointScreen.new,
       binding: PreventiveCheckPointBinding(),
     ),
@@ -1548,6 +1551,11 @@ class AppPages {
       name: _Paths.smReportList,
       page: SmReportScreen.new,
       binding: SmReportBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.evaluation,
+      page: EvaluationScreen.new,
+      binding: EvaluationBinding(),
     ),
   ];
 }

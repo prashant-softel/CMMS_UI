@@ -79,6 +79,12 @@ class _SmReportContentWebState extends State<SmReportContentWeb> {
                           style: Styles.greyLight14,
                         ),
                       ),
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.cmmsReport);
+                        },
+                        child: Text(" / REPORT", style: Styles.greyLight14),
+                      ),
                       Text(" /SM REPORT", style: Styles.greyLight14),
                       Spacer(),
                       Row(
@@ -168,8 +174,7 @@ class _SmReportContentWebState extends State<SmReportContentWeb> {
                                             buttonText: 'Select Material',
                                             initialValue: controller
                                                 .selectedAssetsNameIdList,
-                                            items: controller
-                                                    .selectedAssetsNameList
+                                            items: controller.assetList
                                                     ?.map((assets) {
                                                   return DropdownItem<Object>(
                                                     label: assets?.name ?? "",

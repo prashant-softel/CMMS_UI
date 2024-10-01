@@ -3,6 +3,7 @@ import 'package:cmms/domain/models/cumulative_report_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:cmms/domain/models/module_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
@@ -53,6 +54,16 @@ class CumulativeReportUsecase {
         isExport,
         self_view,
       );
+  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await repository.getInventoryCategoryList(
+        auth,
+        facilityId,
+        isLoading,
+      );
   Future<List<PmTaskListModel?>?> getPmTaskList(
           {dynamic facilityId,
           bool? isLoading,
@@ -61,7 +72,7 @@ class CumulativeReportUsecase {
           bool? self_view,
           bool? isExport}) async =>
       await repository.getPmTaskList(
-          facilityId, isLoading, startDate, endDate, isExport,self_view);
+          facilityId, isLoading, startDate, endDate, isExport, self_view);
   Future<List<VegTaskListModel>> getVegTaskList(
       {required bool isLoading,
       required dynamic? facility_id,

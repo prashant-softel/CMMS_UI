@@ -107,15 +107,12 @@ class MisDashboardController extends GetxController {
 
   Future<void> createChecklist() async {
     misDashboardPresenter.clearValue();
-
-    Get.toNamed(Routes.preventiveList, arguments: {'type': AppConstants.kMis});
+    Get.offAllNamed('${Routes.preventiveList}/${AppConstants.kMis}');
   }
 
   Future<void> checkPoint() async {
     misDashboardPresenter.clearValue();
-
-    Get.toNamed(Routes.preventiveCheckPoint,
-        arguments: {'type': AppConstants.kMis});
+    Get.offAllNamed('${Routes.preventiveCheckPoint}/${AppConstants.kMis}');
   }
 
   void goToCheckListOfObservation() {
@@ -126,7 +123,6 @@ class MisDashboardController extends GetxController {
     Get.toNamed(Routes.statutory);
   }
 
- 
   void trainingCourse() {
     Get.toNamed(Routes.trainingCourse);
   }
