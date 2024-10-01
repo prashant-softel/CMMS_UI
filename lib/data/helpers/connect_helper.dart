@@ -96,7 +96,6 @@ import '../../app/widgets/pm_plan_approve_msg_dialog.dart';
 
 /// The helper class which will connect to the world to get the data.
 class ConnectHelper {
-
   ConnectHelper() {
     _init();
   }
@@ -1759,15 +1758,16 @@ class ConnectHelper {
 
     return responseModel;
   }
-Future<ResponseModel> approveButton({
-  required String auth,
-  goodsOrderApproveJsonString,
-  bool? isLoading,
-  int? facilityId,
-  int? check_point_type_id,
-}) async {
-  // Ensure the body is serialized to JSON
-  var requestBody = json.encode(goodsOrderApproveJsonString);
+
+  Future<ResponseModel> approveButton({
+    required String auth,
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+    int? facilityId,
+    int? check_point_type_id,
+  }) async {
+    // Ensure the body is serialized to JSON
+    var requestBody = json.encode(goodsOrderApproveJsonString);
 
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/ApproveObservation?facilityId=$facilityId',
@@ -1838,13 +1838,10 @@ Future<ResponseModel> approveButton({
     var parsedJson = json.decode(res);
     Get.dialog<void>(
         RejectMsgObsDialog(data: parsedJson['message'], id: parsedJson['id']));
-     Get.dialog<void>(
-    RejectMsgObsDialog(
-      data: parsedJson['message'], 
-      id: parsedJson['id'],
-      check_point_type_id: parsedJson['check_point_type_id']
-    )
-  );
+    Get.dialog<void>(RejectMsgObsDialog(
+        data: parsedJson['message'],
+        id: parsedJson['id'],
+        check_point_type_id: parsedJson['check_point_type_id']));
 
     return responseModel;
   }
@@ -3039,6 +3036,51 @@ Future<ResponseModel> approveButton({
           'Authorization': 'Bearer $auth',
         },
       );
+  Future<ResponseModel> getAvailbleSmReportList(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      dynamic startDate,
+      dynamic endDate,
+      int? userId,
+      dynamic selectedAssetsNameIdList}) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'SMReports/GetSMAvailibilityReport?facilityID=$facilityId&smassetCategoryID=1,2,3fromDate=$startDate&toDate=$endDate',
+      // 'SMReports/GetStockReport?facility_id=$facilityId&actorTypeID=2&actorID=$facilityId&StartDate=$endDate&EndDate=$startDate&assetMasterIDs=$assetsItems',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getCansumeSmReportList(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      dynamic startDate,
+      dynamic endDate,
+      int? userId,
+      dynamic selectedAssetsNameIdList}) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'SMReports/GetSMConsuptionReport?facilityID=$facilityId&smassetCategoryID=1,2,3fromDate=$startDate&toDate=$endDate',
+      // 'SMReports/GetStockReport?facility_id=$facilityId&actorTypeID=2&actorID=$facilityId&StartDate=$endDate&EndDate=$startDate&assetMasterIDs=$assetsItems',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    return responseModel;
+  }
 
   Future<ResponseModel> getInventoryCategoryList({
     String? auth,
@@ -3859,20 +3901,20 @@ Future<ResponseModel> approveButton({
     return responseModel;
   }
 
-  Future<ResponseModel> createObs(
-      {required String auth, 
-      createObs, 
-      bool? isLoading, 
-      int? position,
-      int?check_point_type_id,
-      }) async {
+  Future<ResponseModel> createObs({
+    required String auth,
+    createObs,
+    bool? isLoading,
+    int? position,
+    int? check_point_type_id,
+  }) async {
     String url;
 
     if (position == 1) {
       url = 'MISMaster/CreateObservation';
-    } 
-    else if (position == 2) {
-      url = 'MISMaster/AssingtoObservation?check_point_type_id=$check_point_type_id';
+    } else if (position == 2) {
+      url =
+          'MISMaster/AssingtoObservation?check_point_type_id=$check_point_type_id';
     } else {
       url = 'MISMaster/UpdateObservation';
     }
@@ -4893,7 +4935,7 @@ Future<ResponseModel> approveButton({
     required String auth,
     viewobsCloseJsonString,
     bool? isLoading,
-    int?check_point_type_id,
+    int? check_point_type_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/CloseObservation?check_point_type_id=$check_point_type_id',
@@ -9888,7 +9930,7 @@ Future<ResponseModel> approveButton({
     required bool isLoading,
     required String auth,
     dynamic startDate,
-     bool? self_view,
+    bool? self_view,
     dynamic endDate,
     dynamic? facility_id,
   }) async {

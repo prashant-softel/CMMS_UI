@@ -24,28 +24,34 @@ class SmReportListModel {
       this.mrs_ID,
       this.opening,
       this.outward,
-      this.per_item_cost});
+      this.per_item_cost,
+      this.comsumption_date,
+      this.comsumed_qty});
 
-  int? id;
-  int? mrs_ID;
+  dynamic id;
+  dynamic mrs_ID;
   String? asset_code;
-  int? facility_ID;
+  dynamic facility_ID;
   String? facility_Name;
   String? material_Category;
-  int? asset_Item_ID;
+  dynamic asset_Item_ID;
   String? asset_name;
-  int? asset_type_ID;
+  dynamic asset_type_ID;
   String? asset_type;
-  int? per_item_cost;
-  int? opening;
-  int? inward;
-  int? outward;
-  int? min_available_qty;
-  int? act_available_qty;
+  dynamic per_item_cost;
+  dynamic opening;
+  dynamic inward;
+  dynamic outward;
+  dynamic min_available_qty;
+  dynamic act_available_qty;
+  dynamic comsumed_qty;
+  dynamic comsumption_date;
 
   factory SmReportListModel.fromJson(Map<String, dynamic> json) =>
       SmReportListModel(
         id: json["id"],
+        comsumed_qty: json["comsumed_qty"],
+        comsumption_date: json["comsumption_date"],
         mrs_ID: json["mrs_ID"],
         asset_code: json['asset_code'],
         facility_ID: json['facility_ID'],
@@ -65,6 +71,8 @@ class SmReportListModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "comsumption_date": comsumption_date,
+        "comsumed_qty": comsumed_qty,
         "mrs_ID": mrs_ID,
         "asset_code": asset_code,
         "facility_ID": facility_ID,

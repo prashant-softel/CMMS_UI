@@ -63,19 +63,23 @@ class SmReportController extends GetxController {
   RxString actQntyFilterText = ''.obs;
   RxString deviationFilterText = ''.obs;
   RxString amountFilterText = ''.obs;
+  RxString consumptionFilterText = ''.obs;
+  RxString quantityFilterText = ''.obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "Material code": true,
     "Material category": true,
     "Material Description": true,
     "Company Code": true,
-    "Plant code": true,
-    "Plant Name": true,
+
+    // "Plant code": true,
+    // "Plant Name": true,
     "Inward": true,
     "Outward": true,
     "Min Available Qnty": true,
     "Act Available Qnty": true,
-    "Deviation": true,
+    "Deviation": true, "Consumption date": true,
+    "Quantity": true,
     "Amount": true,
   });
   final Map<String, double> columnwidth = {
@@ -83,13 +87,15 @@ class SmReportController extends GetxController {
     "Material category": 200,
     "Material Description": 200,
     "Company Code": 200,
-    "Plant code": 200,
-    "Plant Name": 200,
+    // "Plant code": 200,
+    // "Plant Name": 200,
     "Inward": 200,
     "Outward": 200,
     "Min Available Qnty": 200,
     "Act Available Qnty": 200,
-    "Deviation": 200,
+    "Deviation": 200, "Consumption date": 200,
+    "Quantity": 200,
+
     "Amount": 200,
   };
   Map<String, RxString> filterText = {};
@@ -160,13 +166,15 @@ class SmReportController extends GetxController {
       "Material category": materialcategoryFilterText,
       "Material Description": materialdesFilterText,
       "Company Code": companyCodeFilterText,
-      "Plant code": plantCodeFilterText,
-      "Plant Name": plantNameFilterText,
+      // "Plant code": plantCodeFilterText,
+      // "Plant Name": plantNameFilterText,
       "Inward": inwardFilterText,
       "Outward": outwardFilterText,
       "Min Available Qnty": MinQntyFilterText,
       "Act Available Qnty": actQntyFilterText,
       "Deviation": deviationFilterText,
+      "Consumption date": consumptionFilterText,
+      "Quantity": quantityFilterText,
       "Amount": amountFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
@@ -213,10 +221,12 @@ class SmReportController extends GetxController {
   //       isExportOnly: true);
   // }
 
-  Future<void> getSmReportList() async {
-    String lststrAssetsIds = selectedAssetsNameIdList!.join(',');
+  Future<void> getAvailbleSmReportList() async {
+    String lststrAssetsIds = selectedAssetsNameIdList.join(',');
+    smReportList.value = <SmReportListModel>[];
+    filteredData.value = <SmReportListModel>[];
 
-    final _smReportList = await smReportPresenter.getSmReportList(
+    final _smReportList = await smReportPresenter.getAvailbleSmReportList(
         facilityId: facilityId,
         isLoading: isLoading.value,
         startDate: formattedTodate1,
@@ -231,6 +241,25 @@ class SmReportController extends GetxController {
     }
   }
 
+  Future<void> getCansumeSmReportList() async {
+    String lststrAssetsIds = selectedAssetsNameIdList.join(',');
+    smReportList.value = <SmReportListModel>[];
+    filteredData.value = <SmReportListModel>[];
+
+    final _smReportList = await smReportPresenter.getCansumeSmReportList(
+        facilityId: facilityId,
+        isLoading: isLoading.value,
+        startDate: formattedTodate1,
+        endDate: formattedFromdate1,
+        selectedAssetsNameIdList: lststrAssetsIds);
+
+    if (_smReportList != null) {
+      smReportList.value = _smReportList;
+      isLoading.value = false;
+
+      filteredData.value = smReportList.toList();
+    }
+  }
   // void getPlantStockListByDate() {
   //   getPlantStockList(facilityId, formattedTodate1, formattedFromdate1, false,
   //       selectedAssetsNameIdList.value);
@@ -263,55 +292,76 @@ class SmReportController extends GetxController {
     // print({"selectedfrequency": selectedfrequency});
   }
 
-  // void sortData(String columnName) {
-  //   if (currentSortColumn.value == columnName) {
-  //     isAscending.value = !isAscending.value;
-  //   } else {
-  //     currentSortColumn.value = columnName;
-  //     isAscending.value = true;
-  //   }
-  //   switch (columnName) {
-  //     case 'Assets Name':
-  //       StockDetailsList.sort((a, b) => isAscending.value
-  //           ? (a?.name ?? '').compareTo(b?.name ?? '')
-  //           : (b?.name ?? '').compareTo(a?.name ?? ''));
-  //       break;
-  //     case 'Assets Code':
-  //       StockDetailsList.sort((a, b) => isAscending.value
-  //           ? (a?.asset_code ?? '').compareTo(b?.asset_code ?? '')
-  //           : (b?.asset_code ?? '').compareTo(a?.asset_code ?? ''));
-  //       break;
-  //     case 'Assets Type':
-  //       StockDetailsList.sort((a, b) => isAscending.value
-  //           ? (a?.asset_type ?? '').compareTo(b?.asset_type ?? '')
-  //           : (b?.asset_type ?? '').compareTo(a?.asset_type ?? ''));
-  //       break;
-  //     case 'Opening':
-  //       StockDetailsList.sort((a, b) => isAscending.value
-  //           ? (a?.opening ?? 0).compareTo(b?.opening ?? 0)
-  //           : (b?.opening ?? 0).compareTo(a?.opening ?? 0));
-  //       break;
-  //     case 'Inward':
-  //       StockDetailsList.sort((a, b) => isAscending.value
-  //           ? (a?.inward ?? 0).compareTo(b?.inward ?? 0)
-  //           : (b?.inward ?? 0).compareTo(a?.inward ?? 0));
-  //       break;
+  void sortData(String columnName) {
+    if (currentSortColumn.value == columnName) {
+      isAscending.value = !isAscending.value;
+    } else {
+      currentSortColumn.value = columnName;
+      isAscending.value = true;
+    }
+    switch (columnName) {
+      case 'Material code':
+        smReportList.sort((a, b) => isAscending.value
+            ? (a?.asset_code ?? '').compareTo(b?.asset_code ?? '')
+            : (b?.asset_code ?? '').compareTo(a?.asset_code ?? ''));
+        break;
+      case 'Material category':
+        smReportList.sort((a, b) => isAscending.value
+            ? (a?.material_Category ?? '').compareTo(b?.material_Category ?? '')
+            : (b?.material_Category ?? '')
+                .compareTo(a?.material_Category ?? ''));
+        break;
+      case 'Material Description':
+        smReportList.sort((a, b) => isAscending.value
+            ? (a?.asset_type ?? '').compareTo(b?.asset_type ?? '')
+            : (b?.asset_type ?? '').compareTo(a?.asset_type ?? ''));
+        break;
+      case 'Company Code':
+        smReportList.sort((a, b) => isAscending.value
+            ? (a?.opening ?? 0).compareTo(b?.opening ?? 0)
+            : (b?.opening ?? 0).compareTo(a?.opening ?? 0));
+        break;
+      case 'Plant Name':
+        smReportList.sort((a, b) => isAscending.value
+            ? (a?.facility_Name ?? "").compareTo(b?.facility_Name ?? "")
+            : (b?.facility_Name ?? "").compareTo(a?.facility_Name ?? ""));
+        break;
+      case 'Inward':
+        smReportList.sort((a, b) => isAscending.value
+            ? (a?.inward ?? 0).compareTo(b?.inward ?? 0)
+            : (b?.inward ?? 0).compareTo(a?.inward ?? 0));
+        break;
 
-  //     case 'Outward':
-  //       StockDetailsList.sort((a, b) => isAscending.value
-  //           ? (a?.outward ?? 0).compareTo(b?.outward ?? 0)
-  //           : (b?.outward ?? 0).compareTo(a?.outward ?? 0));
-  //       break;
-  //     case 'Balance':
-  //       StockDetailsList.sort((a, b) => isAscending.value
-  //           ? (a?.balance ?? 0).compareTo(b?.balance ?? 0)
-  //           : (b?.balance ?? 0).compareTo(a?.balance ?? 0));
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //   update();
-  // }
+      case 'Outward':
+        smReportList.sort((a, b) => isAscending.value
+            ? (a?.outward ?? 0).compareTo(b?.outward ?? 0)
+            : (b?.outward ?? 0).compareTo(a?.outward ?? 0));
+        break;
+      case 'Min Available Qnty':
+        smReportList.sort((a, b) => isAscending.value
+            ? (a?.min_available_qty ?? 0).compareTo(b?.min_available_qty ?? 0)
+            : (b?.min_available_qty ?? 0).compareTo(a?.min_available_qty ?? 0));
+        break;
+      case 'Act Available Qnty':
+        smReportList.sort((a, b) => isAscending.value
+            ? (a?.act_available_qty ?? 0).compareTo(b?.act_available_qty ?? 0)
+            : (b?.act_available_qty ?? 0).compareTo(a?.act_available_qty ?? 0));
+        break;
+      case 'Deviation':
+        smReportList.sort((a, b) => isAscending.value
+            ? (a?.outward ?? 0).compareTo(b?.outward ?? 0)
+            : (b?.outward ?? 0).compareTo(a?.outward ?? 0));
+        break;
+      case 'Amount':
+        smReportList.sort((a, b) => isAscending.value
+            ? (a?.outward ?? 0).compareTo(b?.outward ?? 0)
+            : (b?.outward ?? 0).compareTo(a?.outward ?? 0));
+        break;
+      default:
+        break;
+    }
+    update();
+  }
 
   void facilitySelected(_selectedFacilityIds) {
     selectedFacilityIdList.value = <int>[];
