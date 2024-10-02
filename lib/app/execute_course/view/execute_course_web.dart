@@ -291,7 +291,7 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                                         value:
                                                             employeeNameDetails
                                                                 .attendend
-                                                                .value,
+                                                                !.value,
                                                         onChanged:
                                                             (bool? value) {
                                                           controller.isPresent(
@@ -421,7 +421,7 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                                     DataCell(
                                                       Checkbox(
                                                         value: employee
-                                                            .attendend.value,
+                                                            .attendend!.value,
                                                         onChanged: (value) {
                                                           controller.isPresent(
                                                               index, 2);

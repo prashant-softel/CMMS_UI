@@ -70,8 +70,9 @@ class Employee {
   int? id;
   String? name;
   String? email;
-  int? mobile;
-  RxBool attendend;
+  String? mobile; // Change mobile to String to accommodate larger numbers
+  RxBool? attendend; // Corrected field name to 'attendend'
+  String? designation;
   String? rsvp;
   String? notes;
 
@@ -80,27 +81,36 @@ class Employee {
     this.name,
     this.email,
     this.mobile,
-    required this.attendend,
+    this.attendend,
+    this.designation,
     this.rsvp,
     this.notes,
   });
 
   factory Employee.fromJson(Map<String, dynamic> json) => Employee(
-        id: json["id"],
-        name: json["employeeName"],
-        email: json["employeeEmail"],
-        mobile: json["employeeNumber"],
-        attendend: json["attendend"] == 1 ? RxBool(true) : RxBool(false),
+        id: json["employee_id"], // Change key from "id" to "employee_id"
+        name: json["name"] ??
+            json[
+                "employeeName"], // Check for "name", fallback to "employeeName"
+        email: json["email"] ??
+            json[
+                "employeeEmail"], // Check for "email", fallback to "employeeEmail"
+        mobile: json["mobile"] ??
+            json["employeeNumber"].toString(), // Adjusted mobile to string
+        attendend: RxBool(json["attendend"] == 1), // Use 'attendend' from JSON
+        designation: json["designation"],
         rsvp: json["rsvp"],
         notes: json["notes"],
       );
 
   Map<String, dynamic> toJson() => {
-        'id': id,
+        'employee_id': id,
         'name': name,
         'email': email,
         'mobile': mobile,
-        'attended': attendend.value ? 1 : 0,
+        'attendend':
+            attendend?.value == true ? 1 : 0, // Handle null and RxBool properly
+        'designation': designation,
         'rsvp': rsvp,
         'notes': notes,
       };
