@@ -37,8 +37,9 @@ class AddJobContentWeb extends StatefulWidget {
 }
 
 class _AddJobContentWebState extends State<AddJobContentWeb> {
-  final FileUploadController dropzoneController =
-      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
+  final FileUploadController dropzoneController = Get.put(FileUploadController(
+    apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',
+  ));
 
   @override
   Widget build(BuildContext context) {
@@ -844,94 +845,50 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                       false, // Explicitly exclude the asterisk
                                                 ),
                                                 Dimens.boxWidth2,
-                                                IgnorePointer(
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          ColorValues.whiteColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
+                                                Container(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
+                                                  padding: EdgeInsets.all(10),
+                                                  decoration: BoxDecoration(
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 227, 224, 224),
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
                                                         color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
+                                                                255,
+                                                                236,
+                                                                234,
+                                                                234)
+                                                            .withOpacity(0.5),
+                                                        spreadRadius: 2,
+                                                        blurRadius: 5,
+                                                        offset: Offset(0, 2),
                                                       ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Color.fromARGB(
-                                                                  255,
-                                                                  236,
-                                                                  234,
-                                                                  234)
-                                                              .withOpacity(0.5),
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2),
-                                                    child: MultiSelectDialogField(
-                                                      dialogWidth: 300,
-                                                      dialogHeight: 400,
-                                                      searchable: true,
-                                                      // validator: (selectedItems) {
-                                                      //   if (controller.isToolRequiredToWorkTypeSelected.value == false) {
-                                                      //     return "Required field";
-                                                      //   } else {
-                                                      //     return null;
-                                                      //   }
-                                                      // },
-                                                      autovalidateMode:
-                                                          AutovalidateMode.always,
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(
-                                                          color:
-                                                              //     controller.isToolRequiredToWorkTypeSelected.value == false
-                                                              //         ? Colors.red
-                                                              //         :
-                                                              Colors.transparent,
-                                                          width: 1.0,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                5),
-                                                      ),
-                                                      buttonIcon: Icon(
-                                                          Icons.arrow_drop_down),
-                                                      initialValue: controller
-                                                          .toolsRequiredToWorkTypeList
-                                                          .toList(), // Select all items initially
-                                                  
-                                                      items: controller
-                                                          .toolsRequiredToWorkTypeList
-                                                          .map((e) => MultiSelectItem(
-                                                              e,
-                                                              e?.linkedToolName ??
-                                                                  ''))
-                                                          .toList(),
-                                                  
-                                                      onConfirm:
-                                                          (selectedOptionsList) =>
-                                                              {
-                                                        controller
-                                                            .toolsRequiredSelected(
-                                                                selectedOptionsList),
-                                                        controller
-                                                                .isToolRequiredToWorkTypeSelected
-                                                                .value =
-                                                            selectedOptionsList
-                                                                .isNotEmpty,
-                                                      },
-                                                      chipDisplay:
-                                                          MultiSelectChipDisplay(),
-                                                    ),
+                                                    ],
                                                   ),
-                                                ),
+                                                  child: Text(
+                                                    controller
+                                                        .toolsRequiredToWorkTypeList
+                                                        .map((e) =>
+                                                            e?.linkedToolName ??
+                                                            '')
+                                                        .join(
+                                                            ', '), // Join the list with commas
+                                                    style: TextStyle(
+                                                        fontSize:
+                                                            14), // You can adjust the font size or style
+                                                  ),
+                                                )
                                               ],
                                             ),
 
