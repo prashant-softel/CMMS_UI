@@ -92,11 +92,11 @@ class ExecuteCourseController extends GetxController {
 
   void isPresent(int index, int position) {
     if (position == 1) {
-      internal_employee[index].attendend.value =
-          !internal_employee[index].attendend.value;
+      internal_employee[index].attendend?.value =
+          !internal_employee[index].attendend!.value;
     } else if (position == 2) {
-      external_employee[index].attendend.value =
-          !external_employee[index].attendend.value;
+      external_employee[index].attendend?.value =
+          !external_employee[index].attendend!.value;
     }
     update();
   }
