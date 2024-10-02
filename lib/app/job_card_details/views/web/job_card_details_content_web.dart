@@ -67,8 +67,9 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
   }
 
   ///
-  final FileUploadController dropzoneController =
-      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
+  final FileUploadController dropzoneController = Get.put(FileUploadController(
+    apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',
+  ));
 
   ///
   @override
@@ -823,14 +824,17 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                                     children: [
-                                                                                      TableActionButton(
-                                                                                        color: ColorValues.appRedColor,
-                                                                                        icon: Icons.delete,
-                                                                                        label: '',
-                                                                                        message: '',
-                                                                                        onPress: () {
-                                                                                          controller.rowItem.remove(record);
-                                                                                        },
+                                                                                      IgnorePointer(
+                                                                                        ignoring: controller.jobCardDetailsModel.value!.status == 156 || controller.jobCardDetailsModel.value!.status == 158 ? true : false,
+                                                                                        child: TableActionButton(
+                                                                                          color: ColorValues.appRedColor,
+                                                                                          icon: Icons.delete,
+                                                                                          label: '',
+                                                                                          message: '',
+                                                                                          onPress: () {
+                                                                                            controller.rowItem.remove(record);
+                                                                                          },
+                                                                                        ),
                                                                                       )
                                                                                     ],
                                                                                   ),
@@ -2288,10 +2292,17 @@ class DeployedTeam extends StatelessWidget {
                                               children: [
                                                 IgnorePointer(
                                                   ignoring: controller
-                                                          .jobCardDetailsModel
-                                                          .value!
-                                                          .status ==
-                                                      158,
+                                                                  .jobCardDetailsModel
+                                                                  .value!
+                                                                  .status ==
+                                                              156 ||
+                                                          controller
+                                                                  .jobCardDetailsModel
+                                                                  .value!
+                                                                  .status ==
+                                                              158
+                                                      ? true
+                                                      : false,
                                                   child: TableActionButton(
                                                     color:
                                                         ColorValues.appRedColor,
