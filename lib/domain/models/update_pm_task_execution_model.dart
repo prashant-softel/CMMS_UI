@@ -58,6 +58,7 @@ class AddObservations {
       // this.boolean,
       this.cp_ok,
       this.text,
+      this.is_job_deleted,
       this.observation_value_controller,
       this.text_value_controller});
 
@@ -67,6 +68,7 @@ class AddObservations {
   // int? boolean; // 1 for ok ,0 for not ok
   int? cp_ok;
   String? text;
+  int? is_job_deleted;
   List<PmFiles>? pm_files;
   TextEditingController? observation_value_controller;
   TextEditingController? text_value_controller;
@@ -78,7 +80,7 @@ class AddObservations {
         job_create: json["job_create"],
         // boolean: json["boolean"],
         cp_ok: json["cp_ok"],
-        text: json["text"],
+        text: json["text"], is_job_deleted: json["is_job_deleted"],
         observation_value_controller:
             TextEditingController(text: json["observation"]),
         text_value_controller: TextEditingController(text: json["text"]),
@@ -90,7 +92,7 @@ class AddObservations {
         "execution_id": execution_id,
         "observation": observation,
         "job_create": job_create,
-        // "boolean": boolean,
+        "is_job_deleted": is_job_deleted,
         "cp_ok": cp_ok,
         "text": text,
         "pm_files": List<dynamic>.from(pm_files!.map((x) => x.toJson())),

@@ -1132,15 +1132,28 @@ class AddModuleCleaningExecutionContentWeb
                                                             controller
                                                                 .totalCleaned);
                                                         controller.anyScheduleTrue
-                                                                            .value ==
-                                                                        false &&
-                                                                    controller.totalSchedule !=
-                                                                        total ||
-                                                                controller
-                                                                        .allScheduleTrue
                                                                         .value ==
-                                                                    false
-                                                            ? Get.defaultDialog(
+                                                                    true &&
+                                                                controller
+                                                                        .totalSchedule ==
+                                                                    total||controller
+                                                                    .allScheduleTrue
+                                                                    .value ==
+                                                                true
+                                                            ? Get.dialog<void>(CustomCalibrationDialog(
+                                                                id: controller
+                                                                        .mcExecutionDetailsModel
+                                                                        .value
+                                                                        ?.executionId ??
+                                                                    0,
+                                                                title: controller
+                                                                        .mcExecutionDetailsModel
+                                                                        .value
+                                                                        ?.title ??
+                                                                    "",
+                                                                starttype: 3))
+                                                            
+                                                            : Get.defaultDialog(
                                                                 radius: 5,
                                                                 title: 'Alert',
                                                                 middleText:
@@ -1156,19 +1169,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                 confirmTextColor:
                                                                     Colors
                                                                         .white,
-                                                              )
-                                                            : Get.dialog<void>(CustomCalibrationDialog(
-                                                                id: controller
-                                                                        .mcExecutionDetailsModel
-                                                                        .value
-                                                                        ?.executionId ??
-                                                                    0,
-                                                                title: controller
-                                                                        .mcExecutionDetailsModel
-                                                                        .value
-                                                                        ?.title ??
-                                                                    "",
-                                                                starttype: 3));
+                                                              );
 
                                                         // Get.dialog(EndMCExecutionDialog());
                                                       },

@@ -115,32 +115,34 @@ class PreventiveCheckListController extends GetxController {
         {
           if (value != "Please Select") {
             int equipmentIndex =
-              equipmentCategoryList.indexWhere((x) => x?.name == value);
-          selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
+                equipmentCategoryList.indexWhere((x) => x?.name == value);
+            selectedEquipmentId =
+                equipmentCategoryList[equipmentIndex]?.id ?? 0;
           } else {
-            selectedEquipmentId=0;
+            selectedEquipmentId = 0;
           }
         }
 
         break;
       case const (RxList<FrequencyModel>):
         {
-         if (value != "Please Select") {
+          if (value != "Please Select") {
             int frequencyIndex =
-              frequencyList.indexWhere((x) => x?.name == value);
-          selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-         } else {
-           selectedfrequencyId=0;
-         }
+                frequencyList.indexWhere((x) => x?.name == value);
+            selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+          } else {
+            selectedfrequencyId = 0;
+          }
         }
         break;
       case const (RxList<FacilityModel>):
         {
           if (value != "Please Select") {
-            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
-          selectedfacilityId = frequencyList[facilityIndex]?.id ?? 0;
+            int facilityIndex =
+                facilityList.indexWhere((x) => x?.name == value);
+            selectedfacilityId = frequencyList[facilityIndex]?.id ?? 0;
           } else {
-            selectedfacilityId=0;
+            selectedfacilityId = 0;
           }
         }
         break;
@@ -180,7 +182,6 @@ class PreventiveCheckListController extends GetxController {
             onPressed: () {
               Get.back();
               Get.back();
-              // (Routes.preventiveList);
             },
             child: Text('OK'),
           ),

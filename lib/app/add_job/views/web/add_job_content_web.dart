@@ -4,6 +4,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/widgets/body_custom_app_bar.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -36,7 +37,7 @@ class AddJobContentWeb extends StatefulWidget {
 
 class _AddJobContentWebState extends State<AddJobContentWeb> {
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
 
   @override
   Widget build(BuildContext context) {

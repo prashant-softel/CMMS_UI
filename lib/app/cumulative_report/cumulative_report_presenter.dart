@@ -2,6 +2,7 @@ import 'package:cmms/domain/models/cumulative_report_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:cmms/domain/models/module_model.dart';
@@ -39,6 +40,16 @@ class CumulativeReportPresenter {
         module_id: module_id,
         endDate: endDate,
         startDate: startDate,
+      );
+  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await cumulativeReportUsecase.getInventoryCategoryList(
+        auth: auth ?? "",
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
       );
   Future<List<JobModel?>?> getJobList({
     // String? auth,

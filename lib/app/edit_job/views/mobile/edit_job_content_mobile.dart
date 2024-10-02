@@ -2,6 +2,7 @@ import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/edit_job/edit_job_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -15,7 +16,7 @@ import 'package:multi_select_flutter/util/multi_select_item.dart';
 class EditJobContentMobile extends GetView<EditJobController> {
   EditJobContentMobile({Key? key}) : super(key: key);
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
 
   @override
   Widget build(BuildContext context) {

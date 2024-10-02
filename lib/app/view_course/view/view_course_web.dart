@@ -13,7 +13,7 @@ import 'package:url_launcher/url_launcher.dart';import 'package:cmms/app/utils/u
 class ViewCourseWeb extends GetView<ViewCourseController> {
   ViewCourseWeb({Key? key}) : super(key: key);
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
 
   @override
   Widget build(BuildContext context) {

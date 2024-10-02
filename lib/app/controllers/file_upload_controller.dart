@@ -1,3 +1,4 @@
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:async';
@@ -9,11 +10,11 @@ import '../../domain/models/file_upload_model.dart';
 import '../../domain/repositories/local_storage_keys.dart';
 import '../../domain/repositories/repository.dart';
 
-class FileUploadController extends GetxController {
-  var repository = Get.find<Repository>();
 
-  final Uri apiUrl =
-      Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile');
+
+class FileUploadController extends GetxController {
+  final Repository repository = Get.find<Repository>();
+  final String apiUrl; // Dynamic URL for file upload
 
   Rx<bool> blnHiglight = false.obs;
   RxList<int> progresses = <int>[].obs;
@@ -31,12 +32,16 @@ class FileUploadController extends GetxController {
 
   List<dynamic> fileIds = [];
 
+  // Constructor accepting dynamic API URL
+  FileUploadController({required this.apiUrl});
+
   @override
   void onInit() async {
     token = await repository.getSecuredValue(LocalKeys.authToken);
     super.onInit();
   }
 
+  // Method to add files
   addFiles({bool? single}) async {
     final FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: single == false ? false : true,
@@ -58,6 +63,7 @@ class FileUploadController extends GetxController {
     }
   }
 
+  // Method to upload a single file
   Future<void> uploadSingleFile(PlatformFile file, List<int> bytesData,
       String token, int index, TextEditingController descriptionController,
       {required Function(double) uploadProgressCallback}) async {
@@ -124,7 +130,7 @@ class FileUploadController extends GetxController {
 
     var newStream = streamController.stream;
 
-    var request = http.StreamedRequest('POST', apiUrl)
+    var request = http.StreamedRequest('POST', Uri.parse(apiUrl))
       ..headers.addAll(headers)
       ..contentLength = length
       ..followRedirects = true
@@ -154,6 +160,7 @@ class FileUploadController extends GetxController {
     }
   }
 
+  // Method to upload multiple files
   Future<void> uploadFiles(
       List<PlatformFile> files,
       List<List<int>> bytesDataList,
@@ -178,10 +185,12 @@ class FileUploadController extends GetxController {
     }
   }
 
+  // Method to set selected event
   void setSelectedEvent(FileUploadEvents event) {
     selectedEvent.value = event;
   }
 
+  // Method to initialize description controllers for files
   void initializeDescriptionControllers(List<PlatformFile> files) {
     newDescriptionCtrlrs = List<TextEditingController>.generate(
       files.length,
@@ -190,6 +199,7 @@ class FileUploadController extends GetxController {
     descriptionCtrlrs.addAll(newDescriptionCtrlrs);
   }
 
+  // Method to remove a file
   void removeFile(PlatformFile file) {
     try {
       List<PlatformFile> fileList = List.from(pickedFiles);
@@ -210,31 +220,7 @@ class FileUploadController extends GetxController {
     }
   }
 
-  // selectFiles() async {
-  //   try {
-  //     pickedFiles.value = await addFiles();
-
-  //     if (pickedFiles.isNotEmpty) {
-  //       // pickedFiles.assignAll(files);
-  //       bytesDataList = [];
-  //       for (var file in pickedFiles) {
-  //         bytesDataList!.add(file.bytes!);
-  //       }
-  //       if (bytesDataList!.length != pickedFiles.length) {
-  //         print('Failed to read some files bytes data');
-  //         pickedFiles.clear();
-  //         bytesDataList = null;
-  //       }
-  //     } else {
-  //       print('No files selected');
-  //       pickedFiles.clear();
-  //       bytesDataList = null;
-  //     }
-  //   } catch (e) {
-  //     Utility.showDialog(e.toString(), ' selectFiles');
-  //   }
-  // }
-
+  // Method to upload selected files
   uploadSelectedFiles() async {
     fileIds.clear();
     uploadingImage.value = true;
@@ -255,3 +241,6 @@ class FileUploadController extends GetxController {
     }
   }
 }
+
+var fileUploadController = FileUploadController(
+    apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile');

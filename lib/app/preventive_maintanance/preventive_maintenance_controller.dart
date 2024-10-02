@@ -44,14 +44,12 @@ class PreventiveController extends GetxController {
   void switchFacility(String? facilityName) {}
   Future<void> createChecklist() async {
     preventivePresenter.clearValue();
-
-    Get.toNamed(Routes.preventiveList, arguments: {'type': 1});
+    Get.offAllNamed('${Routes.preventiveList}/${AppConstants.kPM}');
   }
 
   Future<void> checkPoint() async {
     preventivePresenter.clearValue();
-
-    Get.toNamed(Routes.preventiveCheckPoint, arguments: {'type': 1});
+    Get.offAllNamed('${Routes.preventiveCheckPoint}/${AppConstants.kPM}');
   }
 
   Future<void> pmMapping() async {

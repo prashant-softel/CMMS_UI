@@ -3,6 +3,7 @@ import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/utils/responsive.dart';
 import 'package:cmms/app/utils/strings/string_constants.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/view_permit/view_permit_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_mobile.dart';
@@ -24,7 +25,7 @@ class PermitCancelReQuestDialog extends GetView {
       {super.key, this.permitCancelDialog, this.permitId, this.jobId});
   final ViewPermitController controller = Get.find();
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
 
   @override
   Widget build(BuildContext context) {

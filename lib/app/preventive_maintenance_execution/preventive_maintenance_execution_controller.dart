@@ -403,6 +403,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           job_create: int.tryParse(element[7]["value"] ?? '0'),
           text: element[6]["value"] ?? '',
           cp_ok: int.tryParse(element[3]["value"] ?? '0'),
+          is_job_deleted: int.tryParse(element[7]["is_job_deleted"] ?? '0'),
           pm_files: pmfile);
       addObservations.add(item);
     });

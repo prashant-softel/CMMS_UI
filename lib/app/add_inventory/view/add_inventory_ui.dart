@@ -8,6 +8,7 @@ import 'package:cmms/app/controllers/file_upload_controller2.dart';
 import 'package:cmms/app/controllers/file_upload_controller3.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -26,12 +27,17 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
 
   final AddInventoryController controller = Get.find();
   final HomeController homecontroller = Get.find();
-  final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+  final FileUploadController dropzoneController = Get.put(FileUploadController(
+    apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',
+  ));
   final FileUploadController2 dropzoneController2 =
-      Get.put(FileUploadController2());
+      Get.put(FileUploadController2(
+    apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',
+  ));
   final FileUploadController3 dropzoneController3 =
-      Get.put(FileUploadController3());
+      Get.put(FileUploadController3(
+    apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',
+  ));
   @override
   Widget build(BuildContext context) => SelectionArea(
         child: SelectionArea(
@@ -451,7 +457,6 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                                     ],
                                                   )
                                                 : Dimens.box0
-                                        
                                           ],
                                         ),
                                         Spacer(),
@@ -700,7 +705,6 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                                     ],
                                                   )
                                                 : Dimens.box0
-                                         
                                           ],
                                         ),
                                         SizedBox(

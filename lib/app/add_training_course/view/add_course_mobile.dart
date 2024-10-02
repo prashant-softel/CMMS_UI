@@ -4,6 +4,7 @@ import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textFieldMobile.dart';
@@ -20,7 +21,7 @@ class AddCourseMobile extends GetView<AddCourseController> {
   @override
   Widget build(BuildContext context) {
     final FileUploadController dropzoneController = Get.put(
-      FileUploadController(),
+      FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',),
     );
     return GetBuilder<AddCourseController>(
       id: "add-course-mobile",

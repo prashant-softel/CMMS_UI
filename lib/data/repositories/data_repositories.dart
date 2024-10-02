@@ -1158,8 +1158,8 @@ class DataRepository extends DomainRepository {
         auth: auth,
         goodsOrderApproveJsonString: goodsOrderApproveJsonString,
         isLoading: isLoading ?? false,
-        facilityId:facilityId,
-        check_point_type_id:check_point_type_id,
+        facilityId: facilityId,
+        check_point_type_id: check_point_type_id,
       );
   Future<ResponseModel> rejectGOReceiveButton({
     required String auth,
@@ -1171,7 +1171,7 @@ class DataRepository extends DomainRepository {
         goodsOrderApproveJsonString: goodsOrderApproveJsonString,
         isLoading: isLoading ?? false,
       );
-        Future<ResponseModel> rejectobsButton({
+  Future<ResponseModel> rejectobsButton({
     required String auth,
     goodsOrderApproveJsonString,
     bool? isLoading,
@@ -1182,8 +1182,8 @@ class DataRepository extends DomainRepository {
         auth: auth,
         goodsOrderApproveJsonString: goodsOrderApproveJsonString,
         isLoading: isLoading ?? false,
-        facilityId:facilityId,
-        check_point_type_id:check_point_type_id,
+        facilityId: facilityId,
+        check_point_type_id: check_point_type_id,
       );
   Future<ResponseModel> pmPlanRejectButton({
     required String auth,
@@ -1728,6 +1728,39 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getAvailbleSmReportList(
+          {required String auth,
+          int? facilityId,
+          bool? isLoading,
+          dynamic startDate,
+          dynamic endDate,
+          int? userId,
+          dynamic selectedAssetsNameIdList}) async =>
+      await connectHelper.getAvailbleSmReportList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate,
+          userId: userId,
+          selectedAssetsNameIdList: selectedAssetsNameIdList);
+  Future<ResponseModel> getCansumeSmReportList(
+          {required String auth,
+          int? facilityId,
+          bool? isLoading,
+          dynamic startDate,
+          dynamic endDate,
+          int? userId,
+          dynamic selectedAssetsNameIdList}) async =>
+      await connectHelper.getCansumeSmReportList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate,
+          userId: userId,
+          selectedAssetsNameIdList: selectedAssetsNameIdList);
+
   Future<ResponseModel> getInventoryCategoryList({
     String? auth,
     bool? isLoading,
@@ -2230,13 +2263,13 @@ class DataRepository extends DomainRepository {
           {required String auth,
           createObs,
           bool? isLoading,
-          int?check_point_type_id,
+          int? check_point_type_id,
           int? position}) async =>
       await connectHelper.createObs(
         auth: auth,
         createObs: createObs,
         isLoading: isLoading ?? false,
-         check_point_type_id:check_point_type_id,
+        check_point_type_id: check_point_type_id,
         position: position,
       );
   Future<ResponseModel> createoccupational({
@@ -2667,7 +2700,7 @@ class DataRepository extends DomainRepository {
       await connectHelper.getObsDetail(
         auth: auth,
         id: id,
-        check_point_type_id:check_point_type_id,
+        check_point_type_id: check_point_type_id,
         isLoading: isLoading ?? false,
       );
 
@@ -2675,12 +2708,12 @@ class DataRepository extends DomainRepository {
     required String auth,
     viewobsCloseJsonString,
     bool? isLoading,
-    int?check_point_type_id,
+    int? check_point_type_id,
   }) async =>
       await connectHelper.viewObsCloseButton(
         auth: auth,
         viewobsCloseJsonString: viewobsCloseJsonString,
-        check_point_type_id:check_point_type_id,
+        check_point_type_id: check_point_type_id,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> getHistory({
@@ -3209,7 +3242,7 @@ class DataRepository extends DomainRepository {
           dynamic? facilityId,
           bool? isLoading,
           dynamic startDate,
-           bool? self_view,
+          bool? self_view,
           dynamic endDate}) async =>
       await connectHelper.getPmTaskList(
           auth: auth,
@@ -4154,7 +4187,7 @@ class DataRepository extends DomainRepository {
           endDate: endDate,
           userId: userId,
           selectedAssetsNameIdList: selectedAssetsNameIdList);
-   Future<ResponseModel> getSmReportList(
+  Future<ResponseModel> getSmReportList(
           {required String auth,
           int? facilityId,
           bool? isLoading,
@@ -4170,7 +4203,7 @@ class DataRepository extends DomainRepository {
           endDate: endDate,
           userId: userId,
           selectedAssetsNameIdList: selectedAssetsNameIdList);
-  
+
   Future<ResponseModel> getPlantStockListReturn({
     required String auth,
     int? facilityId,
@@ -5553,7 +5586,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading,
         auth: auth,
         facility_id: facility_id,
-         self_view: self_view,
+        self_view: self_view,
         startDate: startDate,
         endDate: endDate
         // start_date: start_date,

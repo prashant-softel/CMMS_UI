@@ -1,4 +1,5 @@
 import 'package:cmms/app/navigators/navigators.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/material_category_model.dart';
 import 'package:flutter/services.dart';
@@ -132,7 +133,7 @@ class AddAssetMasterController extends GetxController {
     getMaterialList();
 
     getAssetType();
-    Get.put(FileUploadController());
+    Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
 
     // await getRoleList();
     // await getFacilityList();

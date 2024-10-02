@@ -1,13 +1,14 @@
 import 'package:cmms/app/audit/audit_presenter.dart';
+import 'package:cmms/app/evaluation_dashboard/evaluation_dashboard_presenter.dart';
 import 'package:cmms/app/utils/app_constants.dart';
 import 'package:get/get.dart';
 
 import '../../domain/models/facility_model.dart';
 import '../navigators/app_pages.dart';
 
-class AuditController extends GetxController {
-  AuditController(this.auditPresenter);
-  AuditPresenter auditPresenter;
+class EvaluationController extends GetxController {
+  EvaluationController(this.evaluationPresenter);
+  EvaluationPresenter evaluationPresenter;
 
   String username = '';
   Rx<String> selectedFacility = ''.obs;
@@ -31,7 +32,7 @@ class AuditController extends GetxController {
   }
 
   Future<void> getFacilityList() async {
-    final _facilityList = await auditPresenter.getFacilityList();
+    final _facilityList = await evaluationPresenter.getFacilityList();
 
     if (_facilityList != null) {
       for (var facility in _facilityList) {
@@ -43,31 +44,29 @@ class AuditController extends GetxController {
 
   void switchFacility(String? facilityName) {}
   Future<void> createChecklist() async {
-    // auditPresenter.clearValue();
-    Get.offAllNamed('${Routes.preventiveList}/${AppConstants.kAudit}');
+    // EvaluationPresenter.clearValue();
+    Get.offAllNamed('${Routes.preventiveList}/${AppConstants.kEvaluation}');
 
     // Get.toNamed(Routes.preventiveList,
     //     arguments: {'type': AppConstants.kAudit});
   }
 
   Future<void> checkPoint() async {
-    auditPresenter.clearValue();
-    Get.offAllNamed('${Routes.preventiveCheckPoint}/${AppConstants.kAudit}');
-
-    // Get.toNamed(Routes.preventiveCheckPoint,
-    //     arguments: {'type': AppConstants.kAudit});
+    evaluationPresenter.clearValue();
+    Get.offAllNamed(
+        '${Routes.preventiveCheckPoint}/${AppConstants.kEvaluation}');
   }
 
-  Future<void> auditList() async {
-    auditPresenter.clearValue();
+  // Future<void> auditList() async {
+  //   evaluationPresenter.clearValue();
 
-    Get.toNamed(Routes.auditListScreen,
-        arguments: {'type': AppConstants.kAudit});
-  }
+  //   Get.toNamed(Routes.auditListScreen,
+  //       arguments: {'type': AppConstants.kAudit});
+  // }
 
-  Future<void> auditTask() async {
-    auditPresenter.clearValue();
+  // Future<void> auditTask() async {
+  //   evaluationPresenter.clearValue();
 
-    Get.toNamed(Routes.auditTask, arguments: {'type': AppConstants.kAudit});
-  }
+  //   Get.toNamed(Routes.auditTask, arguments: {'type': AppConstants.kAudit});
+  // }
 }

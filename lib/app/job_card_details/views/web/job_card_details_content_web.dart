@@ -4,6 +4,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/job_card_details/views/widgets/tbt_done_dialog.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
@@ -67,7 +68,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
 
   ///
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
 
   ///
   @override
@@ -569,11 +570,20 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                 "Material Used For ",
                                                 style: Styles.blue700,
                                               ),
-                                              controller.jobCardDetailsModel
-                                                          .value!.status ==
-                                                      158
-                                                  ? Dimens.box0
-                                                  : GestureDetector(
+                                              controller.listMrsByTaskId!.value
+                                                              .firstWhereOrNull(
+                                                                (element) =>
+                                                                    element?.jobCardId !=
+                                                                        0 ||
+                                                                    element?.pmId !=
+                                                                        0,
+                                                              )
+                                                              ?.mrs_return_ID ==
+                                                          0 &&
+                                                      controller
+                                                              .allTrue.value ==
+                                                          false
+                                                  ? GestureDetector(
                                                       onTap: () {
                                                         controller.addRowItem();
                                                       },
@@ -609,6 +619,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                         ),
                                                       ),
                                                     )
+                                                  : Dimens.box0
                                             ],
                                           ),
                                         ),

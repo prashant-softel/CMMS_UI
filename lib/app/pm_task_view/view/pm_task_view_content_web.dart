@@ -157,8 +157,14 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                           ? ColorValues.rejectedStatusColor
                                                           : ColorValues.addNewColor,
                                   onPressed: () async {},
-                                  text:
-                                      "${controller.pmtaskViewModel.value?.status_short ?? ""}",
+                                  text: controller.pmtaskViewModel.value
+                                                  ?.is_expired ==
+                                              1 &&
+                                          controller.pmtaskViewModel.value
+                                                  ?.status ==
+                                              163
+                                      ? "${controller.pmtaskViewModel.value?.status_short ?? ""}(Expired)"
+                                      : "${controller.pmtaskViewModel.value?.status_short ?? ""}",
                                 ),
                               ),
                             ],

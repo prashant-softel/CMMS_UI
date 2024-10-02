@@ -3,6 +3,7 @@ import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/create_observation/create_observation_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/approve_obs_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -36,7 +37,7 @@ class CreateObservationWeb extends StatefulWidget {
 class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
   final HomeController homecontroller = Get.find();
   final FileUploadController dropzoneController = Get.put(
-    FileUploadController(),
+    FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',),
   );
   @override
   Widget build(BuildContext context) {

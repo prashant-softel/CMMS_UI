@@ -1,3 +1,4 @@
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:async';
@@ -12,8 +13,10 @@ import '../../domain/repositories/repository.dart';
 class FileUploadController3 extends GetxController {
   var repository = Get.find<Repository>();
 
-  final Uri apiUrl =
-      Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile');
+  // Accept dynamic API URL in the constructor
+  final String apiUrl;
+
+  FileUploadController3({required this.apiUrl});
 
   Rx<bool> blnHiglight = false.obs;
   RxList<int> progresses = <int>[].obs;
@@ -124,7 +127,7 @@ class FileUploadController3 extends GetxController {
 
     var newStream = streamController.stream;
 
-    var request = http.StreamedRequest('POST', apiUrl)
+    var request = http.StreamedRequest('POST', Uri.parse(apiUrl))
       ..headers.addAll(headers)
       ..contentLength = length
       ..followRedirects = true
@@ -210,31 +213,6 @@ class FileUploadController3 extends GetxController {
     }
   }
 
-  // selectFiles() async {
-  //   try {
-  //     pickedFiles.value = await addFiles();
-
-  //     if (pickedFiles.isNotEmpty) {
-  //       // pickedFiles.assignAll(files);
-  //       bytesDataList = [];
-  //       for (var file in pickedFiles) {
-  //         bytesDataList!.add(file.bytes!);
-  //       }
-  //       if (bytesDataList!.length != pickedFiles.length) {
-  //         print('Failed to read some files bytes data');
-  //         pickedFiles.clear();
-  //         bytesDataList = null;
-  //       }
-  //     } else {
-  //       print('No files selected');
-  //       pickedFiles.clear();
-  //       bytesDataList = null;
-  //     }
-  //   } catch (e) {
-  //     Utility.showDialog(e.toString(), ' selectFiles');
-  //   }
-  // }
-
   uploadSelectedFiles() async {
     fileIds.clear();
     uploadingImage.value = true;
@@ -255,3 +233,5 @@ class FileUploadController3 extends GetxController {
     }
   }
 }
+var fileUploadController = FileUploadController3(
+    apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile');

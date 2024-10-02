@@ -27,7 +27,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
   final ViewPermitController controller = Get.find();
   final HomeController homecontroller = Get.find();
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
   @override
   Widget build(BuildContext context) {
     return SelectionArea(

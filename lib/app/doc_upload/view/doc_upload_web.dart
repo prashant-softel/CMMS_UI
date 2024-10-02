@@ -25,8 +25,11 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
   DocumentUploadWeb({
     Key? key,
   });
-  final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+
+  // Pass the URL from UrlPath.deployUrl
+  final FileUploadController dropzoneController = Get.put(FileUploadController(
+    apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',
+  ));
 
   @override
   Widget build(BuildContext context) {
@@ -351,31 +354,27 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    // controller.selectedItem == null
-                                    //     ?
                                     Container(
                                       margin: EdgeInsets.only(
                                           top: 10, right: 20, left: 20),
                                       height: Get.height * 0.2,
                                       width: Get.width,
                                       child: Row(
-                                          //
-                                          children: [
-                                            Expanded(
-                                              flex: 2,
-                                              child:
-                                                  FileUploadWidgetWithDropzone(
-                                                uploadSingleFile: false,
-                                              ),
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: FileUploadWidgetWithDropzone(
+                                              uploadSingleFile: false,
                                             ),
-                                            Dimens.boxWidth10,
-                                            Expanded(
-                                                flex: 8,
-                                                child:
-                                                    FileUploadDetailsWidgetWeb()),
-                                          ]),
+                                          ),
+                                          Dimens.boxWidth10,
+                                          Expanded(
+                                              flex: 8,
+                                              child:
+                                                  FileUploadDetailsWidgetWeb()),
+                                        ],
+                                      ),
                                     ),
-                                    // : Dimens.box0,
                                     Dimens.boxHeight10,
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
@@ -450,7 +449,6 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                             ColorValues.cancelColor,
                                         text: "Cancel",
                                         onPressed: () {
-                                          // controller.clearData();
                                           Get.back();
                                         },
                                       ),
@@ -505,13 +503,9 @@ class DocumentUploadWeb extends GetView<DocumentUploadController> {
                                     0), // last date of this year
                                 controller: DateRangePickerController(),
                                 selectionChanges: (p0) {
-                                  print('po valu ${p0.value.toString()}');
                                   controller.renewDateTc.text =
                                       DateFormat('yyyy-MM-dd').format(p0.value);
                                   controller.openrenewDateTcDatePicker = false;
-                                  // controller.openrenewDateTcDatePicker =
-                                  //     !controller.openrenewDateTcDatePicker;
-                                  controller.isRenewDateTcInvalid.value = false;
                                   controller.update(['stock_Mangement']);
                                 },
                                 onCancel: () {

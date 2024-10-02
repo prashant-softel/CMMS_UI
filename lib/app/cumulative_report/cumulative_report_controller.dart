@@ -7,6 +7,7 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/cumulative_report_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:cmms/domain/models/module_model.dart';
@@ -31,6 +32,8 @@ class CumulativeReportController extends GetxController {
   CumulativeReportPresenter cumulativeReportPresenter;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<int> selectedFacilityIdList = <int>[].obs;
+  RxList<int> selectedCategoryIdList = <int>[].obs;
+
   bool openFromDateToStartDatePicker = false;
 
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
@@ -59,6 +62,8 @@ class CumulativeReportController extends GetxController {
   RxList<ScheduleCheckPoint?>? scheduleCheckPoint = <ScheduleCheckPoint?>[].obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
+  RxList<InventoryCategoryModel?> equipmentCategoryList =
+      <InventoryCategoryModel>[].obs;
   Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
       EndMCExecutionDetailsModel().obs;
   // RxList<VegTaskEquipmentList?> vegTaskEquipment = <VegTaskEquipmentList>[].obs;
@@ -70,6 +75,8 @@ class CumulativeReportController extends GetxController {
 
     await getFacilityList();
     await getModuleList();
+    await getInventoryCategoryList();
+
     super.onInit();
   }
 
@@ -95,6 +102,13 @@ class CumulativeReportController extends GetxController {
     }
   }
 
+  void categorySelected(_selectedCategoryIds) {
+    selectedCategoryIdList.value = <int>[];
+    for (var _selectedId in _selectedCategoryIds) {
+      selectedCategoryIdList.add(_selectedId);
+    }
+  }
+
   Future<void> getModuleList() async {
     moduleList.value = <ModuleModel>[];
 
@@ -113,6 +127,20 @@ class CumulativeReportController extends GetxController {
       }).toList();
 
       moduleList.value = filteredModules;
+    }
+  }
+
+  Future<void> getInventoryCategoryList() async {
+    equipmentCategoryList.value = <InventoryCategoryModel>[];
+    final _equipmentCategoryList =
+        await cumulativeReportPresenter.getInventoryCategoryList(
+      isLoading: false,
+    );
+    if (_equipmentCategoryList != null) {
+      for (var equimentCategory in _equipmentCategoryList) {
+        equipmentCategoryList.add(equimentCategory);
+      }
+      equipmentCategoryList.sort((a, b) => a!.name.compareTo(b!.name));
     }
   }
 
