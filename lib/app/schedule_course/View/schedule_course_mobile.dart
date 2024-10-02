@@ -4,6 +4,7 @@ import 'package:cmms/app/schedule_course/schedule_course_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textFieldMobile.dart';
@@ -20,7 +21,7 @@ class ScheduleMobile extends GetView<ScheduleController> {
   @override
   Widget build(BuildContext context) {
     final FileUploadController dropzoneController = Get.put(
-      FileUploadController(),
+      FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',),
     );
     return GetBuilder<ScheduleController>(
       id: "schedule-course",

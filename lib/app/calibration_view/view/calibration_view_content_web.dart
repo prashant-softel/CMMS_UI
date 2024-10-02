@@ -28,7 +28,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
   ///
   var controller = Get.find<CalibrationViewController>();
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
   @override
   Widget build(BuildContext context) {
     return SelectionArea(

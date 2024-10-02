@@ -26,7 +26,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
 
   final ViewAddInventoryController controller = Get.find();
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
   final HomeController homecontroller = Get.find();
 
   @override

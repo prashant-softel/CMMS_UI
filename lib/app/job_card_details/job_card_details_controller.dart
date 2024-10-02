@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/app/utils/save_file_web.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
@@ -184,7 +185,7 @@ class JobCardDetailsController extends GetxController {
   @override
   void onInit() async {
     try {
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
 
       await setJcId();
       facilityIdStreamSubscription =
@@ -890,7 +891,7 @@ class JobCardDetailsController extends GetxController {
       );
       if (response == true) {
         try {
-          Get.put(FileUploadController());
+          Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
 
           final _flutterSecureStorage = const FlutterSecureStorage();
 
@@ -958,7 +959,7 @@ class JobCardDetailsController extends GetxController {
       );
       if (response == true) {
         try {
-          Get.put(FileUploadController());
+          Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
 
           jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
                 jobCardId: jobCardId.value,

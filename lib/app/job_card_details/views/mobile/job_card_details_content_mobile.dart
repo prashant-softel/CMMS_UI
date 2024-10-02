@@ -1,6 +1,7 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/job_card_details/views/widgets/tbt_done_dialog.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
@@ -32,7 +33,7 @@ class JobCardDetailsContentMobile extends GetView<JobCardDetailsController> {
   JobCardDetailsContentMobile({super.key});
 
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
 
   @override
   Widget build(BuildContext context) {

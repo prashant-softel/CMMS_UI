@@ -1,6 +1,7 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
@@ -23,7 +24,7 @@ class ObservationPmExecutionViewDialog extends GetView {
 
   final PreventiveMaintenanceExecutionController controller = Get.find();
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
   Widget _rowItem(int? defaultValue, {required Function(bool) onCheck}) {
     return CustomSwitchTroggle(
         value: defaultValue == 1 ? true : false,
