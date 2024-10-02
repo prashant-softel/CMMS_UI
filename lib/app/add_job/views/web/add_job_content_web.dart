@@ -17,6 +17,7 @@ import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -843,90 +844,92 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                       false, // Explicitly exclude the asterisk
                                                 ),
                                                 Dimens.boxWidth2,
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 224),
-                                                      width: 1,
-                                                    ),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Color.fromARGB(
-                                                                255,
-                                                                236,
-                                                                234,
-                                                                234)
-                                                            .withOpacity(0.5),
-                                                        spreadRadius: 2,
-                                                        blurRadius: 5,
-                                                        offset: Offset(0, 2),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
-                                                  child: MultiSelectDialogField(
-                                                    dialogWidth: 300,
-                                                    dialogHeight: 400,
-                                                    searchable: true,
-                                                    // validator: (selectedItems) {
-                                                    //   if (controller.isToolRequiredToWorkTypeSelected.value == false) {
-                                                    //     return "Required field";
-                                                    //   } else {
-                                                    //     return null;
-                                                    //   }
-                                                    // },
-                                                    autovalidateMode:
-                                                        AutovalidateMode.always,
+                                                IgnorePointer(
+                                                  child: Container(
                                                     decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                        color:
-                                                            //     controller.isToolRequiredToWorkTypeSelected.value == false
-                                                            //         ? Colors.red
-                                                            //         :
-                                                            Colors.transparent,
-                                                        width: 1.0,
-                                                      ),
+                                                      color:
+                                                          ColorValues.whiteColor,
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              5),
+                                                              10),
+                                                      border: Border.all(
+                                                        color: Color.fromARGB(
+                                                            255, 227, 224, 224),
+                                                        width: 1,
+                                                      ),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Color.fromARGB(
+                                                                  255,
+                                                                  236,
+                                                                  234,
+                                                                  234)
+                                                              .withOpacity(0.5),
+                                                          spreadRadius: 2,
+                                                          blurRadius: 5,
+                                                          offset: Offset(0, 2),
+                                                        ),
+                                                      ],
                                                     ),
-                                                    buttonIcon: Icon(
-                                                        Icons.arrow_drop_down),
-                                                    initialValue: controller
-                                                        .toolsRequiredToWorkTypeList
-                                                        .toList(), // Select all items initially
-
-                                                    items: controller
-                                                        .toolsRequiredToWorkTypeList
-                                                        .map((e) => MultiSelectItem(
-                                                            e,
-                                                            e?.linkedToolName ??
-                                                                ''))
-                                                        .toList(),
-
-                                                    onConfirm:
-                                                        (selectedOptionsList) =>
-                                                            {
-                                                      controller
-                                                          .toolsRequiredSelected(
-                                                              selectedOptionsList),
-                                                      controller
-                                                              .isToolRequiredToWorkTypeSelected
-                                                              .value =
-                                                          selectedOptionsList
-                                                              .isNotEmpty,
-                                                    },
-                                                    chipDisplay:
-                                                        MultiSelectChipDisplay(),
+                                                    width: (MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                        .2),
+                                                    child: MultiSelectDialogField(
+                                                      dialogWidth: 300,
+                                                      dialogHeight: 400,
+                                                      searchable: true,
+                                                      // validator: (selectedItems) {
+                                                      //   if (controller.isToolRequiredToWorkTypeSelected.value == false) {
+                                                      //     return "Required field";
+                                                      //   } else {
+                                                      //     return null;
+                                                      //   }
+                                                      // },
+                                                      autovalidateMode:
+                                                          AutovalidateMode.always,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color:
+                                                              //     controller.isToolRequiredToWorkTypeSelected.value == false
+                                                              //         ? Colors.red
+                                                              //         :
+                                                              Colors.transparent,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                5),
+                                                      ),
+                                                      buttonIcon: Icon(
+                                                          Icons.arrow_drop_down),
+                                                      initialValue: controller
+                                                          .toolsRequiredToWorkTypeList
+                                                          .toList(), // Select all items initially
+                                                  
+                                                      items: controller
+                                                          .toolsRequiredToWorkTypeList
+                                                          .map((e) => MultiSelectItem(
+                                                              e,
+                                                              e?.linkedToolName ??
+                                                                  ''))
+                                                          .toList(),
+                                                  
+                                                      onConfirm:
+                                                          (selectedOptionsList) =>
+                                                              {
+                                                        controller
+                                                            .toolsRequiredSelected(
+                                                                selectedOptionsList),
+                                                        controller
+                                                                .isToolRequiredToWorkTypeSelected
+                                                                .value =
+                                                            selectedOptionsList
+                                                                .isNotEmpty,
+                                                      },
+                                                      chipDisplay:
+                                                          MultiSelectChipDisplay(),
+                                                    ),
                                                   ),
                                                 ),
                                               ],
