@@ -1225,11 +1225,12 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                 UserAccessConstants
                                                     .kHaveApproveAccess)
                                         .length >
-                                    0 &&
+                                    0 && 
                                 controller.getObsById.value!.status_code ==
-                                    553 &&
-                                controller.getObsById.value!.createdid !=
-                                    varUserAccessModel.value.user_id
+                                    553 
+                                //     &&
+                                // controller.getObsById.value!.createdid !=
+                                //     varUserAccessModel.value.user_id
                             ? Container(
                                 height: 40,
                                 child: CustomElevatedButton(
@@ -1263,9 +1264,9 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                 // ||
                                 // controller.getObsById.value!.status_code ==
                                 //         551
-                                &&
-                                controller.getObsById.value!.createdid !=
-                                    varUserAccessModel.value.user_id
+                                // &&
+                                // controller.getObsById.value!.createdid !=
+                                //     varUserAccessModel.value.user_id
                             ? Container(
                                 height: 40,
                                 child: CustomElevatedButton(

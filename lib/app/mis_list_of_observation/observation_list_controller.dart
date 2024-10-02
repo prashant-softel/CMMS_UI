@@ -163,7 +163,7 @@ class ObservationListController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.contractor_name?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+            (item.operator_name?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item.corrective_action
                     ?.toString()
@@ -263,8 +263,8 @@ class ObservationListController extends GetxController {
         break;
       case 'Contractor Name':
         getObservationList.sort((a, b) => isAscending.value
-            ? (a.contractor_name ?? '').compareTo(b.contractor_name ?? '')
-            : (b.contractor_name ?? '').compareTo(a.contractor_name ?? ''));
+            ? (a.operator_name ?? '').compareTo(b.operator_name ?? '')
+            : (b.operator_name ?? '').compareTo(a.operator_name ?? ''));
         break;
       case 'Location':
         getObservationList.sort((a, b) => isAscending.value

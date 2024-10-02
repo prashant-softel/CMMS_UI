@@ -167,7 +167,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 Expanded(
                                                   child: Text(
                                                     obsListModel
-                                                            .contractor_name ??
+                                                            .operator_name ??
                                                         '',
                                                     style: const TextStyle(
                                                       fontWeight:

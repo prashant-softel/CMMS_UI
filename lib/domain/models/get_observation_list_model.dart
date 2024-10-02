@@ -13,7 +13,7 @@ class GetObservationList {
   int? id;
   int? check_point_type_id;
   int? facility_id;
-  String? contractor_name;
+  String? operator_name;
   int? risk_type_id;
   String? risk_type;
   String? preventive_action;
@@ -52,7 +52,7 @@ class GetObservationList {
     this.id,
     this.check_point_type_id,
     this.facility_id,
-    this.contractor_name,
+    this.operator_name,
     this.risk_type_id,
     this.risk_type,
     this.preventive_action,
@@ -93,7 +93,7 @@ class GetObservationList {
       id: json['id'],
     check_point_type_id: json['check_point_type_id'],
     facility_id: json['facility_id'],
-    contractor_name: json['contractor_name'] != null ? json['contractor_name'] as String : '', // Explicit null check
+    operator_name: json['operator_name'] != null ? json['operator_name'] as String : '', // Explicit null check
     risk_type_id: json['risk_type_id'],
     risk_type: json['risk_type'] != null ? json['risk_type'] as String : '',
     preventive_action: json['preventive_action'] != null ? json['preventive_action'] as String : '',
@@ -140,7 +140,7 @@ class GetObservationList {
         'id': id,
         'check_point_type_id': check_point_type_id,
         'facility_id': facility_id,
-        'contractor_name': contractor_name,
+        'operator_name': operator_name,
         'risk_type_id': risk_type_id,
         'risk_type': risk_type,
         'preventive_action': preventive_action,
