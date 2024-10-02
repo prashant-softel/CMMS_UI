@@ -40,7 +40,7 @@ import 'package:url_launcher/url_launcher.dart';
 class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
   CreateWarrantyClaimWeb({Key? key}) : super(key: key);
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
   final AffectedPartUploadController affectedPartController =
       Get.put(AffectedPartUploadController());
   final HomeController homecontroller = Get.find();

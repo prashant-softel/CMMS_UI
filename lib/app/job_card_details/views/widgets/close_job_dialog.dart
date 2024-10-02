@@ -1,4 +1,5 @@
 import 'package:cmms/app/controllers/file_upload_controller.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -62,7 +63,7 @@ class closeJobDialog extends GetView<JobCardDetailsController> {
                         onPressed: () async {
                           Get.back();
                           try {
-                            Get.put(FileUploadController());
+                            Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
 
                             final _flutterSecureStorage =
                                 const FlutterSecureStorage();

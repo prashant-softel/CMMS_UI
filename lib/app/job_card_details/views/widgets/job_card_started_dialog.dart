@@ -1,3 +1,4 @@
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -62,7 +63,7 @@ class JobCardStartedDialog extends GetView<JobCardDetailsController> {
                           onPressed: () async {
                             Get.back();
                             try {
-                              Get.put(FileUploadController());
+                              Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
 
                               // final _flutterSecureStorage =
                               //     const FlutterSecureStorage();

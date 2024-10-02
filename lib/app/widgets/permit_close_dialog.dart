@@ -1,6 +1,7 @@
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/utils/strings/string_constants.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/view_permit/view_permit_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
@@ -21,7 +22,7 @@ class PermitCloseDialog extends GetView {
       {super.key, this.permitCloseDialog, this.permitId, this.jobId});
   final ViewPermitController controller = Get.find();
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
 
   @override
   Widget build(BuildContext context) {

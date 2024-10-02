@@ -43,7 +43,7 @@ class IRMobile extends GetView<AddIncidentReportController> {
   IRMobile({super.key});
 
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
 
   @override
   Widget build(BuildContext context) {

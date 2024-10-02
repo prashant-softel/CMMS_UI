@@ -28,7 +28,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
   NewPermitWeb({Key? key}) : super(key: key);
   final NewPermitController _controller = Get.find();
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
   @override
   Widget build(BuildContext context) {
     return SelectionArea(

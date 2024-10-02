@@ -3,6 +3,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
@@ -21,7 +22,7 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
   NewWarrantyClaimWeb({super.key});
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
   // bool valuefirst = false;
   // final controller = Get.find<HomeController>();
   // final WarrantyClaimController controller = Get.find();

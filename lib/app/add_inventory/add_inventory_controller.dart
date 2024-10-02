@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/controllers/file_upload_controller2.dart';
 import 'package:cmms/app/controllers/file_upload_controller3.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/domain/models/add_inventory_details_model.dart';
 import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/app/add_inventory/add_inventory_presenter.dart';
@@ -34,11 +35,11 @@ class AddInventoryController extends GetxController {
   AddInventoryController(this.addInventoryPresenter);
   AddInventoryPresenter addInventoryPresenter;
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
   final FileUploadController2 dropzoneController2 =
-      Get.put(FileUploadController2());
+      Get.put(FileUploadController2(apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
   final FileUploadController3 dropzoneController3 =
-      Get.put(FileUploadController3());
+      Get.put(FileUploadController3(apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
 
   RxList<String?> selectedWorkAreaNameList = <String>[].obs;
   RxList<InventoryModel?> workAreaList = <InventoryModel>[].obs;

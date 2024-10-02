@@ -3,6 +3,7 @@ import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/execute_course/execute_course_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/url_path.dart';
 import 'package:cmms/app/veg_execution_screen/view/widgets/veg_schedule_approve_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -16,7 +17,7 @@ import 'package:google_fonts/google_fonts.dart';
 class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
   ExecuteCourseWeb({Key? key}) : super(key: key);
   final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
+      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
 
   @override
   Widget build(BuildContext context) {
