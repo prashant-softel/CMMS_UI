@@ -536,13 +536,14 @@ class TrainingListDataSource extends DataTableSource {
                                           courseId: TrainingCourse?.id ?? 0);
                                     },
                                   ),
-                                  controller.courseList
-                                              .firstWhereOrNull((element) =>
-                                                  element?.id ==
-                                                  TrainingCourse?.id)
-                                              ?.status ==
-                                          471
-                                      ? TableActionButton(
+                                  // controller.courseList
+                                  //             .firstWhereOrNull((element) =>
+                                  //                 element?.id ==
+                                  //                 TrainingCourse?.id)
+                                  //             ?.status ==
+                                  //         471
+                                      // ?
+                                       TableActionButton(
                                           color: ColorValues.editColor,
                                           icon: Icons.edit,
                                           message: 'Edit',
@@ -552,14 +553,16 @@ class TrainingListDataSource extends DataTableSource {
                                                     TrainingCourse?.id ?? 0);
                                           },
                                         )
-                                      : Dimens.box0,
-                                  controller.courseList
-                                              .firstWhereOrNull((element) =>
-                                                  element?.id ==
-                                                  TrainingCourse?.id)
-                                              ?.status ==
-                                          471
-                                      ? TableActionButton(
+                                      // : Dimens.box0,
+                                      ,
+                                  // controller.courseList
+                                  //             .firstWhereOrNull((element) =>
+                                  //                 element?.id ==
+                                  //                 TrainingCourse?.id)
+                                  //             ?.status ==
+                                  //         471
+                                      // ? 
+                                      TableActionButton(
                                           color: Colors.lightGreen,
                                           icon: Icons.calendar_month_outlined,
                                           message: "Schedule",
@@ -570,14 +573,16 @@ class TrainingListDataSource extends DataTableSource {
                                             );
                                           },
                                         )
-                                      : Dimens.box0,
-                                  controller.courseList
-                                              .firstWhereOrNull((element) =>
-                                                  element?.id ==
-                                                  TrainingCourse?.id)
-                                              ?.status ==
-                                          472
-                                      ? TableActionButton(
+                                      // : Dimens.box0,
+                                      ,
+                                  // controller.courseList
+                                  //             .firstWhereOrNull((element) =>
+                                  //                 element?.id ==
+                                  //                 TrainingCourse?.id)
+                                  //             ?.status ==
+                                  //         472
+                                      // ?
+                                       TableActionButton(
                                           color: ColorValues.appLightBlueColor,
                                           icon: Icons.remove_red_eye,
                                           message: "View Schedule",
@@ -588,14 +593,17 @@ class TrainingListDataSource extends DataTableSource {
                                             );
                                           },
                                         )
-                                      : Dimens.box0,
-                                  controller.courseList
-                                              .firstWhereOrNull((element) =>
-                                                  element?.id ==
-                                                  TrainingCourse?.id)
-                                              ?.status ==
-                                          472
-                                      ? TableActionButton(
+
+                                      // : Dimens.box0,
+                                      ,
+                                  // controller.courseList
+                                  //             .firstWhereOrNull((element) =>
+                                  //                 element?.id ==
+                                  //                 TrainingCourse?.id)
+                                  //             ?.status ==
+                                  //         472
+                                      // ?
+                                       TableActionButton(
                                           color: ColorValues.editColor,
                                           icon: Icons.edit,
                                           message: "Edit Schedule",
@@ -606,7 +614,9 @@ class TrainingListDataSource extends DataTableSource {
                                             );
                                           },
                                         )
-                                      : Dimens.box0,
+                                      // : Dimens.box0,
+                                      ,
+
                                   TableActionButton(
                                     color: ColorValues.deleteColor,
                                     icon: Icons.delete,

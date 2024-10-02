@@ -342,7 +342,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                               child: Obx(
                                                 () => DropdownWebWidget(
                                                   dropdownList:
-                                                      controller.employees,
+                                                      controller.employeeNameList,
                                                   isValueSelected: controller
                                                       .isEmployeeSelected.value,
                                                   selectedValue: controller

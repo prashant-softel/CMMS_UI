@@ -33,7 +33,7 @@ class ScheduleCourseDetails {
         scheduleId: json["scheduleID"],
         facility_id: json["facility_id"],
         date_of_Training: json["date_of_Trainig"] != null
-            ? Utility.getFormattedYearMonthDayTime(json["date_of_Training"])
+            ? Utility.getFormattedYearMonthDayTime(json["date_of_Trainig"])
             : "",
         training_course: json["training_course"],
         trainer: json["trainer"],
@@ -43,13 +43,11 @@ class ScheduleCourseDetails {
         hfe_Employee: json["hfE_Epmloyee"],
         internal_employee: json["internal_employee"] != null
             ? List<Employee>.from(
-                json["internal_employee"].map((x) => Employee.fromJson(x)),
-              )
+                json["internal_employee"].map((x) => Employee.fromJson(x)))
             : [],
         external_employee: json["external_employee"] != null
             ? List<Employee>.from(
-                json["external_employee"].map((x) => Employee.fromJson(x)),
-              )
+                json["external_employee"].map((x) => Employee.fromJson(x)))
             : [],
       );
 
@@ -89,10 +87,10 @@ class Employee {
 
   factory Employee.fromJson(Map<String, dynamic> json) => Employee(
         id: json["id"],
-        name: json["name"],
-        email: json["email"],
-        mobile: json["mobile"],
-        attendend: json["attended"] == 1 ? RxBool(true) : RxBool(false),
+        name: json["employeeName"],
+        email: json["employeeEmail"],
+        mobile: json["employeeNumber"],
+        attendend: json["attendend"] == 1 ? RxBool(true) : RxBool(false),
         rsvp: json["rsvp"],
         notes: json["notes"],
       );

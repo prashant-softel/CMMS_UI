@@ -505,7 +505,7 @@ class ObservationListDataSource extends DataTableSource {
       "id",
       '${ObservationListDetails?.month_of_observation ?? ''}',
       '${ObservationListDetails?.date_of_observation ?? ''}',
-      '${ObservationListDetails?.contractor_name ?? ''}',
+      '${ObservationListDetails?.operator_name ?? ''}',
       '${ObservationListDetails?.location_of_observation ?? ''}',
       '${ObservationListDetails?.type_of_observation_name ?? ''}',
       '${ObservationListDetails?.source_of_observation_name ?? ''}',
@@ -673,32 +673,32 @@ class ObservationListDataSource extends DataTableSource {
                                     )
                           // : Dimens.box0,
                           ,
-                          ObservationListDetails!.status_code == 552 &&
-                                  controller.getObservationListModel!
-                                          .assigned_to_id ==
-                                      varUserAccessModel.value.user_id
-                              ? TableActionButton(
-                                  color: ColorValues.closeColor,
-                                  icon: Icons.close,
-                                  message: 'Close',
-                                  onPress: () {
-                                    // controller.clearStoreData();
-                                    int obsId = ObservationListDetails.id ?? 0;
-                                     int checkpointtypeId=ObservationListDetails.check_point_type_id ??0;
+                          // ObservationListDetails!.status_code == 552 &&
+                          //         controller.getObservationListModel!
+                          //                 .assigned_to_id ==
+                          //             varUserAccessModel.value.user_id
+                          //     ? TableActionButton(
+                          //         color: ColorValues.closeColor,
+                          //         icon: Icons.close,
+                          //         message: 'Close',
+                          //         onPress: () {
+                          //           // controller.clearStoreData();
+                          //           int obsId = ObservationListDetails.id ?? 0;
+                          //            int checkpointtypeId=ObservationListDetails.check_point_type_id ??0;
                                     
-                                    if (obsId != 0 &&checkpointtypeId!=0) {
-                                      Get.offAllNamed(
-                                        Routes.createObservation,
-                                        arguments: {
-                                          'obsId': ObservationListDetails.id,
-                                            'checkpointtypeId':ObservationListDetails.check_point_type_id,
-                                          'type': 1
-                                        },
-                                      );
-                                    }
-                                  },
-                                )
-                              : Dimens.box0,
+                          //           if (obsId != 0 &&checkpointtypeId!=0) {
+                          //             Get.offAllNamed(
+                          //               Routes.createObservation,
+                          //               arguments: {
+                          //                 'obsId': ObservationListDetails.id,
+                          //                   'checkpointtypeId':ObservationListDetails.check_point_type_id,
+                          //                 'type': 1
+                          //               },
+                          //             );
+                          //           }
+                          //         },
+                          //       )
+                          //     : Dimens.box0,
                         ],
                       )
                     : Text(value.toString()),

@@ -146,7 +146,7 @@ class ScheduleController extends GetxController {
       if (_courseId == null || _courseId == "" || _courseId == 0) {
         var dataFromPrevioursScreen = Get.arguments;
         courseId.value = dataFromPrevioursScreen['courseId'];
-        courseId.value = dataFromPrevioursScreen['scheduleId'];
+        scheduleId.value = dataFromPrevioursScreen['scheduleId'];
         schedulePresenter.saveValue(courseId: courseId.value.toString());
         schedulePresenter.saveScheduleValue(
             scheduleId: scheduleId.value.toString());
@@ -227,6 +227,7 @@ class ScheduleController extends GetxController {
 
   Future<void> getEmployeePermitList() async {
     employeeNameList.value = <EmployeeListModel>[];
+    
     final _employeeNameList = await schedulePresenter.getEmployeePermitList(
       isLoading: true,
       facility_id: facilityId.value,
@@ -328,10 +329,10 @@ class ScheduleController extends GetxController {
   }
 
   Future<void> scheduleCourse({List<dynamic>? fileIds}) async {
-    checkForm();
-    if (isFormInvalid.value) {
-      return;
-    }
+    // checkForm();
+    // if (isFormInvalid.value) {
+    //   return;
+    // }
     String _venue = venue.text.trim();
     String _trainerName = trainerName.text.trim();
     String _dateOfTraining = dateOfTraining.text.trim();

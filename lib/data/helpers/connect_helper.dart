@@ -1770,7 +1770,7 @@ class ConnectHelper {
     var requestBody = json.encode(goodsOrderApproveJsonString);
 
     var responseModel = await apiWrapper.makeRequest(
-      'MISMaster/ApproveObservation?facilityId=$facilityId',
+      'MISMaster/ApproveObservation?facilityId=$facilityId&check_point_type_id=$check_point_type_id',
       Request.put,
       requestBody, // Pass the serialized JSON string here
       isLoading ?? false,
