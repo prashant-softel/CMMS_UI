@@ -11,9 +11,10 @@ class PreventiveMaintenanceTaskUsecase {
           dynamic endDate,
           dynamic startDate,
           bool? self_view,
-          bool? isExport}) async =>
-      await repository.getPmTaskList(
-          facilityId, isLoading, startDate, endDate, isExport,self_view);
+          bool? isExport,
+          dynamic categoryIds}) async =>
+      await repository.getPmTaskList(facilityId, isLoading, startDate, endDate,
+          isExport, self_view, categoryIds);
   void clearValue() async => repository.clearData(LocalKeys.pmTaskId);
   void clearValuetype() async => repository.clearData(LocalKeys.type);
 

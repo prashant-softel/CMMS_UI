@@ -25,6 +25,7 @@ class PmTaskListModel {
   String? category_name;
   String? permit_type;
   String? isolation_taken;
+  int? isolation;
   String? site_name;
   int? assigned_to_id;
   String? assigned_to_name;
@@ -50,6 +51,7 @@ class PmTaskListModel {
       this.isolation_taken,
       this.start_date,
       this.site_name,
+      this.isolation,
       this.id,
       this.last_done_date,
       this.permit_code,
@@ -65,11 +67,12 @@ class PmTaskListModel {
   factory PmTaskListModel.fromJson(Map<String, dynamic> json) =>
       PmTaskListModel(
         assigned_to_id: json['assigned_to_id'] ?? 0,
+        isolation: json['isolation'] ?? 0,
         assigned_to_name: json['assigned_to_name'] ?? '',
         category_id: json['category_id'] ?? 0,
         plan_id: json['plan_id'] ?? 0,
         category_name: json['category_name'] ?? '',
-         task_code:
+        task_code:
             json['task_code'] != null && json['task_code'].startsWith('PMTASK')
                 ? 'PMT${json['task_code'].substring(6)}'
                 : json['task_code'] ?? '',
@@ -102,6 +105,7 @@ class PmTaskListModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "isolation": isolation,
         "category_id": category_id,
         "plan_id": plan_id,
         "facility_id": facility_id,

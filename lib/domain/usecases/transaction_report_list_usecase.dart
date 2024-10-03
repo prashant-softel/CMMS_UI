@@ -48,23 +48,19 @@ class TransactionReportListUsecase {
           dynamic endDate,
           dynamic startDate,
           bool? self_view,
-          bool? isExport}) async =>
-      await repository.getPmTaskList(
-          facilityId, isLoading, startDate, endDate, isExport,self_view);
-  Future<List<JobModel?>?> getJobList({
-    required String auth,
-    int? facilityId,
-    bool? self_view,
-    bool? isLoading,
-    bool? isExport
-  }) async =>
+          bool? isExport,
+          dynamic categoryIds}) async =>
+      await repository.getPmTaskList(facilityId, isLoading, startDate, endDate,
+          isExport, self_view, categoryIds);
+  Future<List<JobModel?>?> getJobList(
+          {required String auth,
+          int? facilityId,
+          bool? self_view,
+          bool? isLoading,
+          bool? isExport,
+          dynamic categoryid}) async =>
       await repository.getJobList(
-        auth,
-        facilityId,
-        self_view,
-        isLoading,
-        isExport
-      );
+          auth, facilityId, self_view, isLoading, isExport, categoryid);
   Future<List<InventoryModel?>?> inventoryList({
     required bool isLoading,
     int? facilityId,
@@ -75,7 +71,7 @@ class TransactionReportListUsecase {
 
   Future<List<BusinessListModel?>?> getBusinessList(int facilityId) async =>
       await repository.getBusinessList(
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: true,
       );
 }

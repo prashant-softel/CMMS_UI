@@ -11,6 +11,8 @@ class JobModel {
         id: json['id'] == null ? 0 : json['id'],
         ptw_id: json['ptw_id'] == null ? 0 : json['ptw_id'],
         userId: json['userId'] == null ? 0 : json['userId'],
+        isolation: json['isolation'] == null ? 0 : json['isolation'],
+
         facilityId: json['facilityId'] == null ? 0 : json['facilityId'],
         facilityName:
             json['facilityName'] == null ? null : json['facilityName'],
@@ -30,10 +32,10 @@ class JobModel {
             : DateTime.parse(json['breakdownTime'] as String),
         breakdownType:
             json['breakdownType'] == null ? null : json['breakdownType'] ?? '',
-        permitId: json['permitId'] == null ? null : json['permitId'] ?? '',
-        assignedToName: json['assignedToName'] == null
-            ? null
-            : json['assignedToName'] ?? '',
+        permitId: json['permitId'] == null ? "" : json['permitId'] ?? '',
+        assignedToName:
+            json['assignedToName'] == null ? "" : json['assignedToName'] ?? '',
+        permitType: json['permitType'] == null ? "" : json['permitType'] ?? '',
         assignedToId:
             json['assignedToId'] == null ? null : json['assignedToId'] ?? '',
         latestJCStatusShort: json['latestJCStatusShort'] == null
@@ -77,7 +79,9 @@ class JobModel {
       this.status,
       this.status_short,
       this.latestJCStatusShort,
-      this.latestJCStatus});
+      this.latestJCStatus,
+      this.permitType,
+      this.isolation});
 
   int? id;
   int? ptw_id;
@@ -99,11 +103,12 @@ class JobModel {
   int? assignedToId;
   int? latestJCStatus;
   String? status_short;
-
+  dynamic permitType;
   int? status;
   String? latestJCStatusShort;
+  int? isolation;
   Map<String, dynamic> toJson() => {
-        'id': id,
+        'id': id, "permitType": permitType, "isolation": isolation,
         'ptw_id': ptw_id,
         'userId': userId,
         'facilityId': facilityId,

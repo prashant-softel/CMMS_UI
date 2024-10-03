@@ -122,7 +122,7 @@ class EvaluationScreen extends GetView<EvaluationController> {
                                       ? _priventiveList(
                                           tittle: " Evaluation Plan",
                                           ontap: () {
-                                            //  controller.auditList();
+                                            controller.auditList();
                                           })
                                       : Dimens.box0,
                                   varUserAccessModel.value.access_list!

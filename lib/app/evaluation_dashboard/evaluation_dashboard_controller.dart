@@ -57,12 +57,10 @@ class EvaluationController extends GetxController {
         '${Routes.preventiveCheckPoint}/${AppConstants.kEvaluation}');
   }
 
-  // Future<void> auditList() async {
-  //   evaluationPresenter.clearValue();
-
-  //   Get.toNamed(Routes.auditListScreen,
-  //       arguments: {'type': AppConstants.kAudit});
-  // }
+  Future<void> auditList() async {
+    evaluationPresenter.clearValue();
+    Get.offAllNamed('${Routes.auditListScreen}/${AppConstants.kEvaluation}');
+  }
 
   // Future<void> auditTask() async {
   //   evaluationPresenter.clearValue();

@@ -574,7 +574,8 @@ class AppPages {
       page: NewPermitListScreen.new,
       binding: NewPermitListBinding(),
     ),
-    GetPage<dynamic>(      name: '${_Paths.preventiveCheckPoint}/:type',
+    GetPage<dynamic>(
+      name: '${_Paths.preventiveCheckPoint}/:type',
 
       // name: _Paths.preventiveCheckPoint,
       page: PreventiveCheckPointScreen.new,
@@ -1008,7 +1009,7 @@ class AppPages {
       binding: HotoListScreenBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.auditListScreen,
+      name: '${_Paths.auditListScreen}/:type',
       page: AuditListScreen.new,
       binding: AuditListScreenBinding(),
     ),

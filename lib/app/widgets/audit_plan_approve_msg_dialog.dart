@@ -11,14 +11,16 @@ class AuditPlanMessageApproveDialog extends GetView {
   String? data;
   List<dynamic>? id;
   int? type;
-  AuditPlanMessageApproveDialog({super.key, this.data, this.id,this.type});
+  AuditPlanMessageApproveDialog({super.key, this.data, this.id, this.type});
   final ViewAuditPlanController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    String buttonText1 = type == AppConstants.kMis ? 'MIS Plan List' : 'Audit Plan List';
+    String buttonText1 =
+        type == AppConstants.kMis ? 'MIS Plan List' : 'Audit Plan List';
     String buttonText2 = type == AppConstants.kMis ? 'MIS Task' : 'Audit Task';
-    String buttonText3 = type == AppConstants.kMis ? 'View MIS Plan' : 'View Audit Plan';
+    String buttonText3 =
+        type == AppConstants.kMis ? 'View MIS Plan' : 'View Audit Plan';
     return SelectionArea(
       child: StatefulBuilder(builder: ((context, setState) {
         return AlertDialog(
@@ -28,8 +30,9 @@ class AuditPlanMessageApproveDialog extends GetView {
           insetPadding: Dimens.edgeInsets10_0_10_0,
           contentPadding: EdgeInsets.zero,
           title: Text(
-            type==AppConstants.kMis?'MIS Plan Approval':
-            'Audit Plan Approval',
+            type == AppConstants.kMis
+                ? 'MIS Plan Approval'
+                : 'Audit Plan Approval',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black),
           ),
@@ -62,10 +65,11 @@ class AuditPlanMessageApproveDialog extends GetView {
                   child: ElevatedButton(
                     style: Styles.darkBlueElevatedButtonStyle,
                     onPressed: () {
-                      Get.offAllNamed(Routes.auditListScreen);
+                      Get.offAllNamed('${Routes.auditListScreen}/${type}');
+
+                      // Get.offAllNamed(Routes.auditListScreen);
                     },
-                    child:  Text(
-                 buttonText1),
+                    child: Text(buttonText1),
                   ),
                 ),
                 Dimens.boxWidth10,
@@ -75,8 +79,7 @@ class AuditPlanMessageApproveDialog extends GetView {
                     onPressed: () {
                       Get.offAllNamed(Routes.auditTask);
                     },
-                    child:  Text(
-                       buttonText2),
+                    child: Text(buttonText2),
                   ),
                 ),
                 Dimens.boxWidth10,
@@ -115,7 +118,7 @@ class AuditPlanMessageApproveDialog extends GetView {
                       //   }
                       // });
                     },
-                    child:  Text(buttonText3),
+                    child: Text(buttonText3),
                   ),
                 ),
                 Dimens.boxWidth10,

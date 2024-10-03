@@ -123,8 +123,12 @@ class _CumulativeReportContentWebState
                                   ),
                                   Dimens.boxWidth2,
                                   SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 7,
+                                    width: controller.type.value == 1 &&
+                                                controller.module_id == 2 ||
+                                            controller.type.value == 1 &&
+                                                controller.module_id == 39
+                                        ? MediaQuery.of(context).size.width / 7
+                                        : MediaQuery.of(context).size.width / 5,
                                     child: CustomMultiSelectDialogField(
                                       buttonText: 'Select Facility Name',
                                       title: 'Facility Name',
@@ -159,8 +163,14 @@ class _CumulativeReportContentWebState
                                     Dimens.boxWidth2,
                                     DropdownWebWidget(
                                       height: 40,
-                                      width:
-                                          MediaQuery.of(context).size.width / 7,
+                                      width: controller.type.value == 1 &&
+                                                  controller.module_id == 2 ||
+                                              controller.type.value == 1 &&
+                                                  controller.module_id == 39
+                                          ? MediaQuery.of(context).size.width /
+                                              7
+                                          : MediaQuery.of(context).size.width /
+                                              5,
                                       dropdownList: controller.moduleList,
                                       isValueSelected:
                                           controller.isModuleListSelected.value,
@@ -171,42 +181,53 @@ class _CumulativeReportContentWebState
                                   ],
                                 ),
                               ),
-                              Container(
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      " Select Categories:",
-                                      style: Styles.black13,
-                                    ),
-                                    Dimens.boxWidth2,
-                                    SizedBox(
-                                      width:
-                                          MediaQuery.of(context).size.width / 7,
-                                      child: CustomMultiSelectDialogField(
-                                        buttonText: 'Select Category',
-                                        title: 'Category Name',
-                                        initialValue: (controller
-                                                .selectedCategoryIdList
-                                                .isNotEmpty)
-                                            ? controller.selectedCategoryIdList
-                                            : [],
-                                        items: controller.equipmentCategoryList
-                                            .map(
-                                              (category) => MultiSelectItem(
-                                                category?.id,
-                                                category?.name ?? '',
-                                              ),
-                                            )
-                                            .toList(),
-                                        onConfirm: (selectedOptionsList) => {
-                                          controller.facilitySelected(
-                                              selectedOptionsList),
-                                        },
+                              controller.type.value == 1 &&
+                                          controller.module_id == 2 ||
+                                      controller.type.value == 1 &&
+                                          controller.module_id == 39
+                                  ? Container(
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            " Select Categories:",
+                                            style: Styles.black13,
+                                          ),
+                                          Dimens.boxWidth2,
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                7,
+                                            child: CustomMultiSelectDialogField(
+                                              buttonText: 'Select Category',
+                                              title: 'Category Name',
+                                              initialValue: (controller
+                                                      .selectedCategoryIdList
+                                                      .isNotEmpty)
+                                                  ? controller
+                                                      .selectedCategoryIdList
+                                                  : [],
+                                              items: controller
+                                                  .equipmentCategoryList
+                                                  .map(
+                                                    (category) =>
+                                                        MultiSelectItem(
+                                                      category?.id,
+                                                      category?.name ?? '',
+                                                    ),
+                                                  )
+                                                  .toList(),
+                                              onConfirm:
+                                                  (selectedOptionsList) => {
+                                                controller.categorySelected(
+                                                    selectedOptionsList),
+                                              },
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                    )
+                                  : Dimens.box0,
                               Row(
                                 children: [
                                   Text(
@@ -215,8 +236,12 @@ class _CumulativeReportContentWebState
                                   ),
                                   Dimens.boxWidth2,
                                   CustomTextFieldForStock(
-                                    width:
-                                        MediaQuery.of(context).size.width / 7,
+                                    width: controller.type.value == 1 &&
+                                                controller.module_id == 2 ||
+                                            controller.type.value == 1 &&
+                                                controller.module_id == 39
+                                        ? MediaQuery.of(context).size.width / 7
+                                        : MediaQuery.of(context).size.width / 5,
                                     numberTextField: true,
                                     onTap: () {
                                       controller.openFromDateToStartDatePicker =
@@ -619,7 +644,7 @@ class _CumulativeReportContentWebState
                                       DataColumn2(
                                         fixedWidth: 200,
                                         label: Text(
-                                          'Equipment Category',
+                                          'Category',
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
@@ -733,8 +758,14 @@ class _CumulativeReportContentWebState
                                                     "")),
                                                 DataCell(Text(
                                                     '${controller.jobList[index]?.permitId.toString()}')),
-                                                DataCell(Text("")),
-                                                DataCell(Text("")),
+                                                DataCell(Text(
+                                                    '${controller.jobList[index]?.permitType.toString()}')),
+                                                DataCell(Text(controller
+                                                            .jobList[index]
+                                                            ?.isolation ==
+                                                        0
+                                                    ? "NO"
+                                                    : "YES")),
                                                 DataCell(Wrap(children: [
                                                   TableActionButton(
                                                     color:
@@ -760,8 +791,7 @@ class _CumulativeReportContentWebState
                                 margin: EdgeInsets.all(20),
                                 color: Color.fromARGB(255, 245, 248, 250),
                                 width: Get.width,
-                                height:
-                                    ((controller.pmTaskList.length) * 40) + 100,
+                                height: Get.height - 290,
                                 child: Padding(
                                   padding: const EdgeInsets.all(16),
                                   child: DataTable2(
@@ -789,7 +819,7 @@ class _CumulativeReportContentWebState
                                       DataColumn2(
                                         fixedWidth: 150,
                                         label: Text(
-                                          'Equipment Category',
+                                          'Category',
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
@@ -891,7 +921,7 @@ class _CumulativeReportContentWebState
                                         (index) => DataRow(
                                               cells: [
                                                 DataCell(Text(
-                                                    '${controller.pmTaskList[index]?.frequency_name.toString()}')),
+                                                    '${controller.pmTaskList[index]?.site_name.toString()}')),
                                                 DataCell(Text(
                                                     "PMP${controller.pmTaskList[index]?.plan_id.toString() ?? ""}")),
                                                 DataCell(Text(controller
@@ -899,7 +929,6 @@ class _CumulativeReportContentWebState
                                                         ?.category_name
                                                         .toString() ??
                                                     "")),
-                                                DataCell(Text("")),
                                                 DataCell(Text(controller
                                                         .pmTaskList[index]?.name
                                                         .toString() ??
@@ -924,9 +953,15 @@ class _CumulativeReportContentWebState
                                                 DataCell(Text(
                                                     '${controller.pmTaskList[index]?.assigned_to_name.toString()}')),
                                                 DataCell(Text(
-                                                    '${controller.pmTaskList[index]?.permit_id.toString()}')),
+                                                    'PTW${controller.pmTaskList[index]?.permit_id.toString()}')),
                                                 DataCell(Text(
                                                     '${controller.pmTaskList[index]?.permit_type.toString()}')),
+                                                DataCell(Text(controller
+                                                            .pmTaskList[index]
+                                                            ?.isolation ==
+                                                        0
+                                                    ? "NO"
+                                                    : "YES")),
                                                 DataCell(Text(
                                                     '${controller.pmTaskList[index]?.status_short.toString()}')),
                                                 DataCell(Wrap(children: [
@@ -984,8 +1019,7 @@ class _CumulativeReportContentWebState
                                 margin: EdgeInsets.all(20),
                                 color: Color.fromARGB(255, 245, 248, 250),
                                 width: Get.width,
-                                height: ((controller.vegTaskList.length) * 40) +
-                                    100,
+                                height: Get.height - 290,
                                 child: Padding(
                                   padding: const EdgeInsets.all(16),
                                   child: DataTable2(
@@ -998,6 +1032,22 @@ class _CumulativeReportContentWebState
                                         fixedWidth: 150,
                                         label: Text(
                                           'Facility Name',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 100,
+                                        label: Text(
+                                          'Task ID',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'Title',
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
@@ -1068,6 +1118,10 @@ class _CumulativeReportContentWebState
                                               cells: [
                                                 DataCell(Text(
                                                     '${controller.vegTaskList[index]?.sitename.toString()}')),
+                                                DataCell(Text(
+                                                    'VGT${controller.vegTaskList[index]?.id.toString()}')),
+                                                DataCell(Text(
+                                                    '${controller.vegTaskList[index]?.title.toString()}')),
                                                 DataCell(Text(
                                                     "${controller.vegTaskList[index]?.scheduled_Qnty.toString() ?? ""}")),
                                                 DataCell(Text(controller
@@ -1154,8 +1208,7 @@ class _CumulativeReportContentWebState
                                 margin: EdgeInsets.all(20),
                                 color: Color.fromARGB(255, 245, 248, 250),
                                 width: Get.width,
-                                height:
-                                    ((controller.mcTaskList.length) * 40) + 100,
+                                height: Get.height - 290,
                                 child: Padding(
                                   padding: const EdgeInsets.all(16),
                                   child: DataTable2(
@@ -1175,6 +1228,22 @@ class _CumulativeReportContentWebState
                                       DataColumn2(
                                         fixedWidth: 100,
                                         label: Text(
+                                          'Task ID',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 100,
+                                        label: Text(
+                                          'Title',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 100,
+                                        label: Text(
                                           'Cycle',
                                           style: Styles.blackBold14,
                                         ),
@@ -1182,7 +1251,7 @@ class _CumulativeReportContentWebState
                                       ),
 
                                       DataColumn2(
-                                        fixedWidth: 100,
+                                        fixedWidth: 150,
                                         label: Text(
                                           'Scheduled Qnty',
                                           style: Styles.blackBold14,
@@ -1199,7 +1268,7 @@ class _CumulativeReportContentWebState
                                       ),
 
                                       DataColumn2(
-                                        fixedWidth: 200,
+                                        fixedWidth: 150,
                                         label: Text(
                                           'Deviation',
                                           style: Styles.blackBold14,
@@ -1208,7 +1277,7 @@ class _CumulativeReportContentWebState
                                       ),
                                       // if (controller.module_id.value == 43)
                                       DataColumn2(
-                                        fixedWidth: 200,
+                                        fixedWidth: 150,
                                         label: Text(
                                           'Cleaning type',
                                           style: Styles.blackBold14,
@@ -1216,7 +1285,7 @@ class _CumulativeReportContentWebState
                                         // size: ColumnSize.L,
                                       ),
                                       DataColumn2(
-                                        fixedWidth: 200,
+                                        fixedWidth: 150,
                                         label: Text(
                                           'Water used',
                                           style: Styles.blackBold14,
@@ -1224,7 +1293,7 @@ class _CumulativeReportContentWebState
                                         // size: ColumnSize.L,
                                       ),
                                       DataColumn2(
-                                        fixedWidth: 200,
+                                        fixedWidth: 150,
                                         label: Text(
                                           'Abondoned',
                                           style: Styles.blackBold14,
@@ -1233,7 +1302,7 @@ class _CumulativeReportContentWebState
                                       ),
                                       // if (controller.module_id.value == 43)
                                       DataColumn2(
-                                        fixedWidth: 200,
+                                        fixedWidth: 150,
                                         label: Text(
                                           'Time taken',
                                           style: Styles.blackBold14,
@@ -1263,6 +1332,10 @@ class _CumulativeReportContentWebState
                                               cells: [
                                                 DataCell(Text(
                                                     '${controller.mcTaskList[index]?.sitename.toString()}')),
+                                                DataCell(Text(
+                                                    'MCT${controller.mcTaskList[index]?.executionId.toString()}')),
+                                                DataCell(Text(
+                                                    '${controller.mcTaskList[index]?.title.toString()}')),
                                                 DataCell(Text(
                                                     "${controller.mcTaskList[index]?.noOfDays.toString() ?? ""}")),
                                                 DataCell(Text(

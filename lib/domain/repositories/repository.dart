@@ -6544,12 +6544,12 @@ class Repository {
   }
 
   Future<List<JobModel?>?> getJobList(
-    String auth,
-    dynamic facilityId,
-    bool? isLoading,
-    bool? isExport,
-    bool? self_view,
-  ) async {
+      String auth,
+      dynamic facilityId,
+      bool? isLoading,
+      bool? isExport,
+      bool? self_view,
+      dynamic categoryid) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       int userId = varUserAccessModel.value.user_id ?? 0;
@@ -6557,12 +6557,12 @@ class Repository {
       dynamic res;
       if (auth.isNotEmpty) {
         res = await _dataRepository.getJobList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          userId: userId,
-          self_view: self_view,
-          isLoading: isLoading ?? false,
-        );
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            userId: userId,
+            self_view: self_view,
+            isLoading: isLoading ?? false,
+            categoryid: categoryid);
         // print({"res.data", res.data});
       }
       if (!res.hasError) {
@@ -10478,7 +10478,8 @@ class Repository {
       dynamic startDate,
       dynamic endDate,
       bool? self_view,
-      bool? isExport) async {
+      bool? isExport,
+      dynamic categoryIds) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -10489,7 +10490,8 @@ class Repository {
             isLoading: isLoading ?? false,
             startDate: startDate,
             self_view: self_view,
-            endDate: endDate);
+            endDate: endDate,
+            categoryIds: categoryIds);
         // print(res.data);
       }
       if (!res.hasError) {
@@ -11298,12 +11300,13 @@ class Repository {
       dynamic res;
       if (auth.isNotEmpty) {
         res = await _dataRepository.getCumulativeReportList(
-            auth: auth,
-            isLoading: isLoading ?? false,
-            selectedFacilityIdList: selectedFacilityIdList,
-            module_id: module_id,
-            startDate: startDate,
-            endDate: endDate);
+          auth: auth,
+          isLoading: isLoading ?? false,
+          selectedFacilityIdList: selectedFacilityIdList,
+          module_id: module_id,
+          startDate: startDate,
+          endDate: endDate,
+        );
       }
       if (!res.hasError) {
         final jsonCumulativereports = jsonDecode(res.data);
@@ -15475,7 +15478,7 @@ class Repository {
             checkAuditJsonString: checkAuditJsonString);
       }
       if (!res.hasError) {
-        Get.offAllNamed(Routes.auditListScreen);
+        // Get.offAllNamed(Routes.auditListScreen);
 
         return true;
       } //

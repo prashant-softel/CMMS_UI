@@ -35,7 +35,7 @@ class SmReportController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-  RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
+  // RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
 
   RxList<String> plantStockTableColumns = <String>[].obs;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
@@ -202,14 +202,14 @@ class SmReportController extends GetxController {
   }
 
   Future<void> getAssetList(int _facilityId) async {
-    assetList.clear();
-    assetList.value = <GetAssetDataModel>[];
+    selectedAssetsNameList.clear();
+    selectedAssetsNameList.value = <GetAssetDataModel>[];
     final _assetList =
         await smReportPresenter.getAssetList(facilityId: facilityId);
     // print('jkncejknce:$facilityId');
     if (_assetList != null) {
       for (var asset in _assetList) {
-        assetList.add(asset);
+        selectedAssetsNameList.add(asset);
       }
       update(["AssetList"]);
     }
@@ -273,11 +273,11 @@ class SmReportController extends GetxController {
           if (value != "Please Select") {
             if (value != null) {
               for (var selectedItem in value) {
-                int equipCatIndex =
-                    assetList.indexWhere((x) => x?.name == selectedItem);
+                int equipCatIndex = selectedAssetsNameList
+                    .indexWhere((x) => x?.name == selectedItem);
                 if (equipCatIndex >= 0) {
                   selectedAssetsNameIdList
-                      .add(assetList[equipCatIndex]?.id ?? 0);
+                      .add(selectedAssetsNameList[equipCatIndex]?.id ?? 0);
                 }
               }
             }

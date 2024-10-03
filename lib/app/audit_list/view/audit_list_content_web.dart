@@ -80,17 +80,29 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                               onTap: () {
                                 controller.type.value == AppConstants.kMis
                                     ? Get.offNamed(Routes.misDashboard)
-                                    : Get.offNamed(Routes.audit);
+                                    : controller.type.value ==
+                                            AppConstants.kEvaluation
+                                        ? Get.offNamed(Routes.evaluation)
+                                        : Get.offNamed(Routes.audit);
                               },
                               child: controller.type.value == AppConstants.kMis
                                   ? Text(" / MIS", style: Styles.greyLight14)
-                                  : Text(" / AUDIT", style: Styles.greyLight14),
+                                  : controller.type.value ==
+                                          AppConstants.kEvaluation
+                                      ? Text(" / EVALUATION",
+                                          style: Styles.greyLight14)
+                                      : Text(" / AUDIT",
+                                          style: Styles.greyLight14),
                             ),
                             controller.type.value == AppConstants.kMis
                                 ? Text(" / OBSERVATION PLAN",
                                     style: Styles.greyLight14)
-                                : Text(" / AUDIT PLAN LIST",
-                                    style: Styles.greyLight14)
+                                : controller.type.value ==
+                                        AppConstants.kEvaluation
+                                    ? Text(" / EVALUATION PLAN LIST",
+                                        style: Styles.greyLight14)
+                                    : Text(" / AUDIT PLAN LIST",
+                                        style: Styles.greyLight14)
                           ],
                         ),
                       ),
@@ -122,10 +134,16 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                                 "Observation Plan",
                                                 style: Styles.blackBold14,
                                               )
-                                            : Text(
-                                                "Audit List Screen",
-                                                style: Styles.blackBold16,
-                                              ),
+                                            : controller.type.value ==
+                                                    AppConstants.kEvaluation
+                                                ? Text(
+                                                    "Evaluation Plan List",
+                                                    style: Styles.blackBold14,
+                                                  )
+                                                : Text(
+                                                    "Audit List Screen",
+                                                    style: Styles.blackBold16,
+                                                  ),
                                         Spacer(),
                                         Row(
                                           children: [
