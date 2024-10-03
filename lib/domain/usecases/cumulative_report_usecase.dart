@@ -40,20 +40,16 @@ class CumulativeReportUsecase {
         startDate,
         endDate,
       );
-  Future<List<JobModel?>?> getJobList({
-    // required String auth,
-    dynamic facilityId,
-    bool? self_view,
-    bool? isExport,
-    bool? isLoading,
-  }) async =>
+  Future<List<JobModel?>?> getJobList(
+          {
+          // required String auth,
+          dynamic facilityId,
+          bool? self_view,
+          bool? isExport,
+          bool? isLoading,
+          dynamic categoryid}) async =>
       await repository.getJobList(
-        "",
-        facilityId,
-        isLoading,
-        isExport,
-        self_view,
-      );
+          "", facilityId, isLoading, isExport, self_view, categoryid);
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,
     int? facilityId,
@@ -70,9 +66,10 @@ class CumulativeReportUsecase {
           dynamic endDate,
           dynamic startDate,
           bool? self_view,
-          bool? isExport}) async =>
-      await repository.getPmTaskList(
-          facilityId, isLoading, startDate, endDate, isExport, self_view);
+          bool? isExport,
+          dynamic categoryIds}) async =>
+      await repository.getPmTaskList(facilityId, isLoading, startDate, endDate,
+          isExport, self_view, categoryIds);
   Future<List<VegTaskListModel>> getVegTaskList(
       {required bool isLoading,
       required dynamic? facility_id,

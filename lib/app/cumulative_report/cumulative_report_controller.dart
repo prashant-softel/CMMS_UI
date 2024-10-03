@@ -175,10 +175,11 @@ class CumulativeReportController extends GetxController {
     String lststrFacilityIds = selectedFacilityIdList.join(',');
 
     final list = await cumulativeReportPresenter.getCumulativeReportList(
-        selectedFacilityIdList: lststrFacilityIds,
-        module_id: module_id.value,
-        endDate: formattedTodate1,
-        startDate: formattedFromdate1);
+      selectedFacilityIdList: lststrFacilityIds,
+      module_id: module_id.value,
+      endDate: formattedTodate1,
+      startDate: formattedFromdate1,
+    );
 
     if (list != null) {
       for (var _cumulativereport in list) {
@@ -197,6 +198,8 @@ class CumulativeReportController extends GetxController {
 
     // if (facilityId > 0) {
     String lststrFacilityIds = selectedFacilityIdList.join(',');
+    String categoryid = selectedCategoryIdList.join(',');
+
     pmTaskList.value = <PmTaskListModel>[];
     jobList.value = <JobModel>[];
 
@@ -211,7 +214,8 @@ class CumulativeReportController extends GetxController {
             ? true
             : false,
         isLoading: true,
-        isExport: false);
+        isExport: false,
+        categoryid: categoryid);
 
     if (_jobList != null && _jobList.isNotEmpty) {
       filteredData.value = _jobList;
@@ -260,14 +264,15 @@ class CumulativeReportController extends GetxController {
 
     // pmTaskList?.clear();
     String lststrFacilityIds = selectedFacilityIdList.join(',');
+    String categoryIds = selectedCategoryIdList.join(',');
 
     final _pmTaskList = await cumulativeReportPresenter.getPmTaskList(
-      facilityId: lststrFacilityIds,
-      isLoading: true, //isLoading.value,
-      startDate: formattedTodate1,
-      endDate: formattedFromdate1,
-      isExport: false,
-    );
+        facilityId: lststrFacilityIds,
+        isLoading: true, //isLoading.value,
+        startDate: formattedTodate1,
+        endDate: formattedFromdate1,
+        isExport: false,
+        categoryIds: categoryIds);
     if (_pmTaskList != null) {
       pmTaskList.value = _pmTaskList;
       pmfilteredData.value = pmTaskList.value;

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/create_audit/create_audit_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/audit_plan_detail_model.dart';
 import 'package:cmms/domain/models/create_audit_plan_model.dart';
@@ -46,10 +47,16 @@ class CreateAuditController extends GetxController {
   Rx<int> type = 0.obs;
   Rx<int> auditId = 0.obs;
   var isToggleOn = false.obs;
+  RxList<int> selectedCheckListIdList = <int>[].obs;
 
   void toggle() {
     isToggleOn.value = !isToggleOn.value;
   }
+
+  RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
+
+  RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
+  RxMap<String, bool> errorState = <String, bool>{}.obs;
 
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
   Rx<String> selectedAssignedTo = ''.obs;
@@ -280,6 +287,7 @@ class CreateAuditController extends GetxController {
     }
     selectedchecklist.value = checkList[0]?.name.toString() ?? '';
     selectedchecklistId.value = checkList[0]?.id.toString() ?? "";
+    addRowItem();
   }
 
   Future<bool> createAuditNumber() async {
@@ -297,22 +305,30 @@ class CreateAuditController extends GetxController {
     String _planTitle = planTitleTc.text.trim();
     String _description = descriptionTc.text.trim();
     String _startDate = startDateDateTc.text.trim();
-
+    List<EvaluationChecklist> items = [];
+    rowItem.forEach((element) {
+      EvaluationChecklist item = EvaluationChecklist(
+        checklist_id: dropdownMapperData[element[0]["value"]]?.id,
+        comment: element[3]["value"] ?? '',
+        weightage: int.tryParse(element[1]["value"] ?? '0') ?? 0,
+      );
+      items.add(item);
+    });
     CreateAuditPlan createAuditPlan = CreateAuditPlan(
-      id: 0,
-      plan_number: _planTitle,
-      Facility_id: facilityId,
-      auditee_id: varUserAccessModel.value.user_id,
-      auditor_id: facilityId,
-      assignedTo: selectedAssignedTo.value,
-      Employees: selectedEmployeeNameList.value,
-      Checklist_id: int.tryParse(selectedchecklistId.value),
-      Description: _description,
-      Schedule_Date: _startDate,
-      isPTW: isToggleOn.value,
-      Module_Type_id: type.value,
-      ApplyFrequency: selectedfrequencyId,
-    );
+        id: 0,
+        plan_number: _planTitle,
+        Facility_id: facilityId,
+        auditee_id: varUserAccessModel.value.user_id,
+        auditor_id: facilityId,
+        assignedTo: selectedAssignedTo.value,
+        Employees: selectedEmployeeNameList.value,
+        Checklist_id: int.tryParse(selectedchecklistId.value),
+        Description: _description,
+        Schedule_Date: _startDate,
+        isPTW: isToggleOn.value,
+        Module_Type_id: type.value,
+        ApplyFrequency: selectedfrequencyId,
+        map_checklist: items);
     var checkAuditJsonString =
         createAuditPlan.toJson(); //createCheckListToJson([createChecklist]);
 
@@ -332,29 +348,37 @@ class CreateAuditController extends GetxController {
     //       msg: "Please enter required field", fontSize: 16.0);
     // } else {
 
-    checkFormAduit();
-    if (isFormInvalid.value) {
-      return;
-    }
+    // checkFormAduit();
+    // if (isFormInvalid.value) {
+    //   return;
+    // }
     String _planTitle = planTitleTc.text.trim();
     String _description = descriptionTc.text.trim();
     String _startDate = startDateDateTc.text.trim();
-
+    List<EvaluationChecklist> items = [];
+    rowItem.forEach((element) {
+      EvaluationChecklist item = EvaluationChecklist(
+        checklist_id: dropdownMapperData[element[0]["value"]]?.id,
+        comment: element[3]["value"] ?? '',
+        weightage: int.tryParse(element[1]["value"] ?? '0') ?? 0,
+      );
+      items.add(item);
+    });
     CreateAuditPlan createAuditPlan = CreateAuditPlan(
-      id: auditId.value,
-      plan_number: _planTitle,
-      Facility_id: facilityId,
-      auditee_id: varUserAccessModel.value.user_id,
-      auditor_id: facilityId,
-      assignedTo: selectedAssignedTo.value,
-      Employees: selectedEmployeeNameList.value,
-      Checklist_id: int.tryParse(selectedchecklistId.value),
-      Description: _description,
-      Schedule_Date: _startDate,
-      isPTW: isToggleOn.value,
-      Module_Type_id: type.value,
-      ApplyFrequency: selectedfrequencyId,
-    );
+        id: auditId.value,
+        plan_number: _planTitle,
+        Facility_id: facilityId,
+        auditee_id: varUserAccessModel.value.user_id,
+        auditor_id: facilityId,
+        assignedTo: selectedAssignedTo.value,
+        Employees: selectedEmployeeNameList.value,
+        Checklist_id: int.tryParse(selectedchecklistId.value),
+        Description: _description,
+        Schedule_Date: _startDate,
+        isPTW: isToggleOn.value,
+        Module_Type_id: type.value,
+        ApplyFrequency: selectedfrequencyId,
+        map_checklist: items);
     var checkAuditJsonString =
         createAuditPlan.toJson(); //createCheckListToJson([createChecklist]);
 
@@ -366,36 +390,79 @@ class CreateAuditController extends GetxController {
     );
     if (responseCreatePmPlan == null) {
     } else {
-      Get.offAllNamed(
-        Routes.auditListScreen,
-      );
+      Get.offAllNamed('${Routes.auditListScreen}/${type.value}');
     }
   }
 
   void checkFormAduit() {
-    // if (planTitleTc.text.trim().length == 0) {
-    //   isTitleInvalid.value = true;
-    //   isFormInvalid.value = true;
-    // }
-    // if (selectedfrequency == '') {
-    //   isSelectedfrequency.value = false;
-    //   isFormInvalid.value = true;
-    // }
-    // if (selectedchecklist == '') {
-    //   isSelectedchecklist.value = false;
-    //   isFormInvalid.value = true;
-    // }
-    // if (startDateDateTc.text.trim().length == 0) {
-    //   isScheduleDateInvalid.value = true;
-    //   isFormInvalid.value = true;
-    // }
-    // if (descriptionTc.text.trim().length == 0) {
-    //   isDescriptionInvalid.value = true;
-    //   isFormInvalid.value = true;
-    // }
-    // if (selectedAssignedTo == '') {
-    //   isAssignedToSelected.value = false;
-    //   isFormInvalid.value = true;
-    // }
+    if (planTitleTc.text.trim().length == 0) {
+      isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (selectedfrequency == '') {
+      isSelectedfrequency.value = false;
+      isFormInvalid.value = true;
+    }
+    if (selectedchecklist == '' && type.value == AppConstants.kAudit ||
+        selectedchecklist == '' && type.value == AppConstants.kMis) {
+      isSelectedchecklist.value = false;
+      isFormInvalid.value = true;
+    }
+    if (startDateDateTc.text.trim().length == 0) {
+      isScheduleDateInvalid.value = false;
+      isFormInvalid.value = true;
+    }
+    if (descriptionTc.text.trim().length == 0) {
+      isDescriptionInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (selectedAssignedTo == '' && type.value == AppConstants.kAudit ||
+        selectedAssignedTo == '' && type.value == AppConstants.kEvaluation) {
+      isAssignedToSelected.value = false;
+      isFormInvalid.value = true;
+    }
+    if (type.value == AppConstants.kEvaluation) {
+      if (!validateFields()) {
+        isFormInvalid.value = true;
+      }
+    }
+  }
+
+  bool validateFields() {
+    bool isValid = true;
+    errorState.clear();
+    for (int i = 0; i < rowItem.length; i++) {
+      var row = rowItem[i];
+      for (var mapData in row) {
+        if ((mapData['key'] == 'Drop_down' &&
+                    (mapData['value'] == null ||
+                        mapData['value'] == 'Please Select')) ||
+                (mapData['key'] == 'Weightage' &&
+                    (mapData['value'] == null ||
+                        mapData['value'] == 'Please Select')) ||
+                (mapData['key'] == 'Remark' &&
+                    (mapData['value'] == null || mapData['value'] == ''))
+            // (mapData['key'] == 'Requested' &&
+            //     (mapData['value'] == null || mapData['value'] == '')) ||
+            // (mapData['key'] == 'Cost' &&
+            //     (mapData['value'] == null || mapData['value'] == '')) ||
+            ) {
+          errorState['$i-${mapData['key']}'] = true;
+          isValid = false;
+        }
+      }
+    }
+    update();
+    return isValid;
+  }
+
+  void addRowItem() {
+    rowItem.add([
+      {"key": "Drop_down", "value": 'Please Select'},
+      {'key': "Weightage", "value": ''},
+      {'key': "ptwreq", "value": ''},
+      {'key': "Remark", "value": ''},
+      {'key': "Action ", "value": ''},
+    ]);
   }
 }

@@ -732,20 +732,20 @@ class DataRepository extends DomainRepository {
         auth: auth,
       );
 
-  Future<ResponseModel> getJobList({
-    required String auth,
-    dynamic facilityId,
-    int? userId,
-    bool? self_view,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> getJobList(
+          {required String auth,
+          dynamic facilityId,
+          int? userId,
+          bool? self_view,
+          bool? isLoading,
+          dynamic categoryid}) async =>
       await connectHelper.getJobList(
-        auth: auth,
-        facilityId: facilityId,
-        userId: userId,
-        self_view: self_view,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          facilityId: facilityId,
+          userId: userId,
+          self_view: self_view,
+          isLoading: isLoading ?? false,
+          categoryid: categoryid);
   Future<ResponseModel> getGoodsOrdersList({
     int? facility_id,
     String? start_date,
@@ -3243,14 +3243,16 @@ class DataRepository extends DomainRepository {
           bool? isLoading,
           dynamic startDate,
           bool? self_view,
-          dynamic endDate}) async =>
+          dynamic endDate,
+          dynamic categoryIds}) async =>
       await connectHelper.getPmTaskList(
           auth: auth,
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           self_view: self_view,
           startDate: startDate,
-          endDate: endDate);
+          endDate: endDate,
+          categoryIds: categoryIds);
   Future<ResponseModel> getAuditTaskList(
           {required String auth,
           int? facilityId,

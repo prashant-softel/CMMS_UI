@@ -998,15 +998,15 @@ class ConnectHelper {
 
   ///
 
-  Future<ResponseModel> getJobList({
-    required String auth,
-    bool? isLoading,
-    dynamic facilityId,
-    bool? self_view,
-    int? userId,
-  }) async {
+  Future<ResponseModel> getJobList(
+      {required String auth,
+      bool? isLoading,
+      dynamic facilityId,
+      bool? self_view,
+      int? userId,
+      dynamic categoryid}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Job/GetJobList?facility_id=$facilityId&userId=$userId&self_view=$self_view',
+      'Job/GetJobList?facility_id=$facilityId&userId=$userId&self_view=$self_view&categoryid=$categoryid',
       Request.get,
       null,
       isLoading ?? false,
@@ -5739,9 +5739,10 @@ class ConnectHelper {
       bool? self_view,
       dynamic? facilityId,
       dynamic startDate,
-      dynamic endDate}) async {
+      dynamic endDate,
+      dynamic categoryIds}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}&self_view=${self_view}',
+      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}&self_view=${self_view}&categoryIds=${categoryIds}',
       Request.get,
       null,
       isLoading ?? true,

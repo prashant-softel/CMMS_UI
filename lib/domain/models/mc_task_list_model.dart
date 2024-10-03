@@ -14,55 +14,57 @@ String mcTaskListModelToJson(List<MCTaskListModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class MCTaskListModel {
-  MCTaskListModel({
-    this.executionId,
-    this.scheduled_Qnty,
-    this.actual_Qnty,
-    this.abondend,
-    this.sitename,
-    this.time_taken,
-    this.remark,
-    this.cleaningType,
-    this.deviation,
-    this.planId,
-    this.responsibility,
-    this.frequency,
-    this.noOfDays,
-    this.water_used,
-    this.scheduledDate,
-    this.doneDate,
-    this.status,
-    this.status_short,
-    this.title,
-    this.waterused,
-    this.abondond_done_date,
-  });
+  MCTaskListModel(
+      {this.executionId,
+      this.scheduled_Qnty,
+      this.actual_Qnty,
+      this.abondend,
+      this.sitename,
+      this.time_taken,
+      this.remark,
+      this.cleaningType,
+      this.deviation,
+      this.planId,
+      this.responsibility,
+      this.frequency,
+      this.noOfDays,
+      this.water_used,
+      this.scheduledDate,
+      this.doneDate,
+      this.status,
+      this.status_short,
+      this.title,
+      this.waterused,
+      this.abondond_done_date,
+      this.cleaningTypeName});
 
   int? executionId;
   int? scheduled_Qnty;
   int? actual_Qnty;
   int? planId;
-  String? abondend;
-  String? sitename;
-  String? remark;
-  String? cleaningType;
+  dynamic abondend;
+  dynamic sitename;
+  dynamic remark;
+  dynamic cleaningType;
   int? waterused;
   int? deviation;
   int? time_taken;
-  String? responsibility;
-  String? frequency;
+  dynamic responsibility;
+  dynamic frequency;
   int? noOfDays;
   int? water_used;
-  String? scheduledDate;
-  String? doneDate;
+  dynamic scheduledDate;
+  dynamic doneDate;
   int? status;
-  String? status_short;
-  String? title;
-  String? abondond_done_date;
+  dynamic status_short;
+  dynamic title;
+  dynamic abondond_done_date;
+  dynamic cleaningTypeName;
 
   factory MCTaskListModel.fromJson(Map<String, dynamic> json) =>
       MCTaskListModel(
         executionId: json["executionId"],
+        cleaningTypeName: json['cleaningTypeName'],
         planId: json["planId"],
         responsibility: json["responsibility"] ?? '',
         sitename: json["sitename"] ?? '',
@@ -88,6 +90,7 @@ class MCTaskListModel {
 
   Map<String, dynamic> toJson() => {
         "executionId": executionId,
+        "cleaningTypeName": cleaningTypeName,
         "sitename": sitename,
         "planId": planId,
         "responsibility": responsibility,

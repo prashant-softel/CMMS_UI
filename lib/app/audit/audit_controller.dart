@@ -60,9 +60,7 @@ class AuditController extends GetxController {
 
   Future<void> auditList() async {
     auditPresenter.clearValue();
-
-    Get.toNamed(Routes.auditListScreen,
-        arguments: {'type': AppConstants.kAudit});
+    Get.offAllNamed('${Routes.auditListScreen}/${AppConstants.kAudit}');
   }
 
   Future<void> auditTask() async {

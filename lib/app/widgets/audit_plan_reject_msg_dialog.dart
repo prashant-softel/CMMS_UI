@@ -30,7 +30,7 @@ class AuditPlanMsgReceiveDialog extends GetView {
           ),
           content: Builder(builder: (context) {
             var height = MediaQuery.of(context).size.height;
-      
+
             return Container(
               padding: Dimens.edgeInsets05_0_5_0,
               height: 80,
@@ -59,6 +59,9 @@ class AuditPlanMsgReceiveDialog extends GetView {
                   child: ElevatedButton(
                     style: Styles.darkBlueElevatedButtonStyle,
                     onPressed: () {
+                      Get.offAllNamed(
+                          '${Routes.auditListScreen}/${controller.type.value}');
+
                       Get.offAllNamed(Routes.auditListScreen);
                     },
                     child: const Text('Audit Plan List'),
@@ -74,10 +77,10 @@ class AuditPlanMsgReceiveDialog extends GetView {
                         await controller.setauditPlanId();
                         if (controller.auditId != 0) {
                           // print({"fghvjbggjhjgk", auditId});
-      
+
                           await controller.getAuditPlanDetails(
                               auditPlanId: controller.auditId.value,
-                              facilityId:controller.facilityId,
+                              facilityId: controller.facilityId,
                               isloading: true);
                         }
                       } catch (e) {
