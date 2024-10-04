@@ -532,7 +532,8 @@ class ListAssociatedJob {
       this.assignedTo,
       this.status,
       this.status_short,
-      this.jc_id});
+      this.jc_id,
+      this.jc_status});
   int? jc_id;
   int? jobId;
   int? permitId;
@@ -543,22 +544,23 @@ class ListAssociatedJob {
   String? assignedTo;
   int? status;
   String? status_short;
+  int? jc_status;
 
   factory ListAssociatedJob.fromJson(Map<String, dynamic> json) =>
       ListAssociatedJob(
-        jobId: json['jobId'],
-        jc_id: json['jc_id'],
-        permitId: json['permitId'],
-        title: json["title"] ?? '',
-        equipmentCat: json['equipmentCat'],
-        equipment: json['equipment'],
-        breakdownTime: json['breakdownTime'] == null
-            ? DateTime.now()
-            : DateTime.parse(json['breakdownTime'] as String),
-        assignedTo: json['assignedTo'] ?? '',
-        status: json['status'],
-        status_short: json['status_short'],
-      );
+          jobId: json['jobId'],
+          jc_id: json['jc_id'],
+          permitId: json['permitId'],
+          title: json["title"] ?? '',
+          equipmentCat: json['equipmentCat'],
+          equipment: json['equipment'],
+          breakdownTime: json['breakdownTime'] == null
+              ? DateTime.now()
+              : DateTime.parse(json['breakdownTime'] as String),
+          assignedTo: json['assignedTo'] ?? '',
+          status: json['status'],
+          status_short: json['status_short'],
+          jc_status: json['jc_status']);
 
   Map<String, dynamic> toJson() => {
         "jobId": jobId,
@@ -571,6 +573,7 @@ class ListAssociatedJob {
         "assignedTo": assignedTo,
         "status": status,
         "status_short": status_short,
+        "jc_status": jc_status
       };
 }
 

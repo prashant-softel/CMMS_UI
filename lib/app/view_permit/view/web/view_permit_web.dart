@@ -26,8 +26,9 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
   ViewPermitWeb({super.key});
   final ViewPermitController controller = Get.find();
   final HomeController homecontroller = Get.find();
-  final FileUploadController dropzoneController =
-      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
+  final FileUploadController dropzoneController = Get.put(FileUploadController(
+    apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',
+  ));
   @override
   Widget build(BuildContext context) {
     return SelectionArea(
@@ -3763,8 +3764,9 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                               (controller.viewPermitDetailsModel.value
                                       ?.isExpired ==
                                   0) &&
-                              controller.viewPermitDetailsModel.value
-                                      ?.lstAssociatedJobs?.isNotEmpty
+                              (controller.viewPermitDetailsModel.value
+                                          ?.lstAssociatedJobs![0]!.jc_status ==
+                                      152)
 
                                   // &&
                                   // controller.isOneHour(

@@ -1256,18 +1256,31 @@ class PermitListDataSource extends DataTableSource {
                                                                         000),
                                                           )
                                                           ?.tbT_Done_Check ==
-                                                      1 && (controller.newPermitList
-                                                              .firstWhere(
-                                                                (e) =>
-                                                                    "${e?.permitId}" ==
-                                                                    "${PermitDetails?.permitId}",
-                                                                orElse: () =>
-                                                                    NewPermitModel(
-                                                                        permitId:
-                                                                            000),
-                                                              )
-                                                              ?.jc_id !=
-                                                          0) &&
+                                                      1 &&
+                                                  (controller.newPermitList
+                                                          .firstWhere(
+                                                            (e) =>
+                                                                "${e?.permitId}" ==
+                                                                "${PermitDetails?.permitId}",
+                                                            orElse: () =>
+                                                                NewPermitModel(
+                                                                    permitId:
+                                                                        000),
+                                                          )
+                                                          ?.jc_id !=
+                                                      0) &&
+                                                  (controller.newPermitList
+                                                          .firstWhere(
+                                                            (e) =>
+                                                                "${e?.permitId}" ==
+                                                                "${PermitDetails?.permitId}",
+                                                            orElse: () =>
+                                                                NewPermitModel(
+                                                                    permitId:
+                                                                        000),
+                                                          )
+                                                          ?.isExpired ==
+                                                      0) &&
                                                   (controller.newPermitList
                                                               .firstWhere(
                                                                 (e) =>
@@ -1278,8 +1291,8 @@ class PermitListDataSource extends DataTableSource {
                                                                         permitId:
                                                                             000),
                                                               )
-                                                              ?.isExpired ==
-                                                          0)
+                                                              ?.jc_status ==
+                                                          152)
                                                       // controller.isOneHour(controller
                                                       //             .newPermitList
                                                       //             .firstWhere(
