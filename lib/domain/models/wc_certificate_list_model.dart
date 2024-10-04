@@ -11,7 +11,7 @@ String wcCertificatesListModelToJson(List<WcCertificatesListModel> data) =>
 class WcCertificatesListModel {
   int? facilityId;
   String? facilityName;
-  int? assetId;
+  int? asset_id;
   int? categoryId;
   String? assetName;
   int? warrantyTypeId;
@@ -32,7 +32,7 @@ class WcCertificatesListModel {
   WcCertificatesListModel({
     this.facilityId,
     this.facilityName,
-    this.assetId,
+    this.asset_id,
     this.categoryId,
     this.assetName,
     this.warrantyTypeId,
@@ -56,7 +56,7 @@ class WcCertificatesListModel {
     return WcCertificatesListModel(
       facilityId: json['facility_id'],
       facilityName: json['facility_name'],
-      assetId: json['asset_id'],
+      asset_id: json['asset_id'],
       categoryId: json['categoryId'],
       assetName: json['asset_name'],
       warrantyTypeId: json['warrantyTypeId'],
@@ -83,7 +83,7 @@ class WcCertificatesListModel {
 
     data['facility_id'] = this.facilityId;
     data['facility_name'] = this.facilityName;
-    data['asset_id'] = this.assetId;
+    data['asset_id'] = this.asset_id;
     data['categoryId'] = this.categoryId;
     data['asset_name'] = this.assetName;
     data['warrantyTypeId'] = this.warrantyTypeId;
