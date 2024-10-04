@@ -41,6 +41,7 @@ class WorkTypeModel {
         "workType": name,
         "status": status,
       };
+      
 }
 
 class UpdateWorkTypeModel {

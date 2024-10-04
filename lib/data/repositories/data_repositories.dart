@@ -1596,13 +1596,13 @@ class DataRepository extends DomainRepository {
           String? facilityId,
           bool? isLoading,
           dynamic startDate,
-          dynamic endDate}) async =>
+          dynamic endDate,String?moduleId}) async =>
       await connectHelper.getdashboardList(
           auth: auth,
           facilityId: facilityId ?? "",
           isLoading: isLoading ?? false,
           startDate: startDate,
-          endDate: endDate);
+          endDate: endDate,moduleId:moduleId);
   Future<ResponseModel> getPreventiveCheckListForPm(
           {required String auth,
           int? facilityId,

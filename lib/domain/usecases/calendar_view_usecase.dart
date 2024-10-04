@@ -5,18 +5,18 @@ import 'package:cmms/domain/repositories/repository.dart';
 class CalendarViewUsecase {
   Repository repository;
   CalendarViewUsecase(this.repository);
-  Future<List<DashboardModel?>?> getdashboardList({
-    String? facilityId,
-    dynamic endDate,
-    dynamic startDate,
-    bool? isLoading,
-  }) async =>
+  Future<List<DashboardModel?>?> getdashboardList(
+          {String? facilityId,
+          dynamic endDate,
+          dynamic startDate,
+          bool? isLoading,
+          String? moduleId}) async =>
       await repository.getdashboardList(
-        facilityId: facilityId,
-        endDate: endDate,
-        startDate: startDate,
-        isLoading: isLoading,
-      );
+          facilityId: facilityId,
+          endDate: endDate,
+          startDate: startDate,
+          isLoading: isLoading,
+          moduleId: moduleId);
   Future<List<ModuleModel?>?> getModuleList({
     bool? isLoading,
   }) async =>

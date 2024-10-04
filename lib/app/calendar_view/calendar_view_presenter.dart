@@ -10,13 +10,13 @@ class CalendarViewPresenter {
     String? facilityId,
     dynamic endDate,
     dynamic startDate,
-    bool? isLoading,
+    bool? isLoading,String?moduleId
   }) async =>
       await calendarViewUsecase.getdashboardList(
         facilityId: facilityId ?? "",
         endDate: endDate,
         startDate: startDate,
-        isLoading: isLoading ?? false,
+        isLoading: isLoading ?? false,moduleId:moduleId,
       );
   Future<List<ModuleModel?>?> getModuleList({
     bool? isLoading,
