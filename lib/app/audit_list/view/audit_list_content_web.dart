@@ -178,11 +178,8 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                           onPressed: () {
                                             // controller.clearValue();
                                             controller.clearStoreIdData();
-
-                                            Get.offNamed(Routes.createAudit,
-                                                arguments: {
-                                                  'type': controller.type.value
-                                                });
+                                            Get.offNamed(
+                                                '${Routes.createAudit}/0/${controller.type.value}');
                                           },
                                           color: ColorValues.addNewColor,
                                         ),
@@ -611,9 +608,13 @@ class AuditListListDataSource extends DataTableSource {
                           ? Text(
                               'MIS${AuditPlanPlanningListDetails?.id}',
                             )
-                          : Text(
-                              'AUT${AuditPlanPlanningListDetails?.id}',
-                            ),
+                          : controller.type.value == AppConstants.kEvaluation
+                              ? Text(
+                                  'EVAL${AuditPlanPlanningListDetails?.id}',
+                                )
+                              : Text(
+                                  'AUT${AuditPlanPlanningListDetails?.id}',
+                                ),
                       Dimens.boxHeight10,
                       Align(
                         alignment: Alignment.centerRight,
@@ -632,16 +633,29 @@ class AuditListListDataSource extends DataTableSource {
                                     431
                                 ? ColorValues.linktopermitStatusColor
                                 : controller.auditPlanList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.id ==
-                                                  AuditPlanPlanningListDetails!
-                                                      .id,
-                                              orElse: () =>
-                                                  AuditPlanListModel(id: 00),
-                                            )
-                                            .status ==
-                                        430
+                                                .firstWhere(
+                                                  (e) =>
+                                                      e.id ==
+                                                      AuditPlanPlanningListDetails!
+                                                          .id,
+                                                  orElse: () =>
+                                                      AuditPlanListModel(
+                                                          id: 00),
+                                                )
+                                                .status ==
+                                            430 ||
+                                        controller.auditPlanList
+                                                .firstWhere(
+                                                  (e) =>
+                                                      e.id ==
+                                                      AuditPlanPlanningListDetails!
+                                                          .id,
+                                                  orElse: () =>
+                                                      AuditPlanListModel(
+                                                          id: 00),
+                                                )
+                                                .status ==
+                                            807
                                     ? ColorValues.rejectedStatusColor
                                     : controller.auditPlanList
                                                 .firstWhere(
@@ -804,7 +818,13 @@ class AuditListListDataSource extends DataTableSource {
                                                   'Rejected' ||
                                               AuditPlanPlanningListDetails
                                                       ?.short_status ==
-                                                  'Schedule')
+                                                  'Schedule' ||
+                                              AuditPlanPlanningListDetails
+                                                      ?.short_status ==
+                                                  807 ||
+                                              AuditPlanPlanningListDetails
+                                                      ?.short_status ==
+                                                  800)
                                       ? TableActionButton(
                                           color: ColorValues.editColor,
                                           icon: Icons.edit,
@@ -816,12 +836,8 @@ class AuditListListDataSource extends DataTableSource {
                                                         ?.id ??
                                                     0;
                                             if (id != 0) {
-                                              Get.toNamed(Routes.createAudit,
-                                                  arguments: {
-                                                    "auditId": id,
-                                                    'type':
-                                                        controller.type.value
-                                                  });
+                                              Get.offNamed(
+                                                  '${Routes.createAudit}/$id/${controller.type.value}');
                                             }
                                           },
                                         )

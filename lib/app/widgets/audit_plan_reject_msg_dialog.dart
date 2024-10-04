@@ -1,4 +1,5 @@
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../navigators/app_pages.dart';
@@ -9,9 +10,10 @@ import '../view_audit_plan/view_audit_plan_controller.dart';
 class AuditPlanMsgReceiveDialog extends GetView {
   String? data;
   List<dynamic>? id;
+  int? type;
 
-  AuditPlanMsgReceiveDialog({super.key, this.data, this.id});
-  final ViewAuditPlanController controller = Get.find();
+  AuditPlanMsgReceiveDialog({super.key, this.data, this.id, this.type});
+  // final ViewAuditPlanController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class AuditPlanMsgReceiveDialog extends GetView {
           insetPadding: Dimens.edgeInsets10_0_10_0,
           contentPadding: EdgeInsets.zero,
           title: Text(
-            'Reject Audit Plan',
+            'Reject Plan Successfully',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black),
           ),
@@ -53,18 +55,18 @@ class AuditPlanMsgReceiveDialog extends GetView {
           }),
           actions: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Dimens.boxWidth10,
+                // Dimens.boxWidth10,
                 Center(
                   child: ElevatedButton(
                     style: Styles.darkBlueElevatedButtonStyle,
                     onPressed: () {
-                      Get.offAllNamed(
-                          '${Routes.auditListScreen}/${controller.type.value}');
+                      Get.offAllNamed('${Routes.auditListScreen}/${type}');
 
-                      Get.offAllNamed(Routes.auditListScreen);
+                      // Get.offAllNamed(Routes.auditListScreen);
                     },
-                    child: const Text('Audit Plan List'),
+                    child: const Text('Plan List'),
                   ),
                 ),
                 Dimens.boxWidth10,
@@ -72,22 +74,13 @@ class AuditPlanMsgReceiveDialog extends GetView {
                   child: ElevatedButton(
                     style: Styles.yellowElevatedButtonStyle,
                     onPressed: () async {
+                      int auditId = id![0];
                       Get.back();
-                      try {
-                        await controller.setauditPlanId();
-                        if (controller.auditId != 0) {
-                          // print({"fghvjbggjhjgk", auditId});
 
-                          await controller.getAuditPlanDetails(
-                              auditPlanId: controller.auditId.value,
-                              facilityId: controller.facilityId,
-                              isloading: true);
-                        }
-                      } catch (e) {
-                        print(e);
-                      }
+                      Get.offAllNamed(
+                          '${Routes.viewAuditPlan}/$auditId/${type}');
                     },
-                    child: const Text('View Audit Plan'),
+                    child: const Text('View Plan'),
                   ),
                 ),
                 Dimens.boxWidth10,

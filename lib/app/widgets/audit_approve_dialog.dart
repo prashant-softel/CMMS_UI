@@ -12,7 +12,6 @@ import '../view_audit_plan/view_audit_plan_controller.dart';
 class AuditApprovedDialog extends GetView {
   // int? id;
 
-
   AuditApprovedDialog({super.key});
   final ViewAuditPlanController controller = Get.find();
 
@@ -26,14 +25,18 @@ class AuditApprovedDialog extends GetView {
           ),
           insetPadding: Dimens.edgeInsets10_0_10_0,
           contentPadding: EdgeInsets.zero,
-          title: Text( controller.type.value==AppConstants.kMis?"Observation Plan Approve":
-            "Audit Plan Approve",
+          title: Text(
+            controller.type.value == AppConstants.kMis
+                ? "Observation Plan Approve"
+                : controller.type == AppConstants.kEvaluation
+                    ? "Approve Evaluation Plan"
+                    : "Audit Plan Approve",
             textAlign: TextAlign.center,
             // style: TextStyle(color: Colors.green),
           ),
           content: Builder(builder: (context) {
             return Obx(
-              ()=> Container(
+              () => Container(
                 padding: Dimens.edgeInsets05_0_5_0,
                 height: 200,
                 width: 400,
@@ -64,35 +67,34 @@ class AuditApprovedDialog extends GetView {
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.black),
                               ),
-                                     focusedErrorBorder:
-                                    controller.iscommentTextInvalid.value
-                                        ? OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(5),
-                                            borderSide: BorderSide(
-                                              color: ColorValues.redColorDark,
-                                            ),
-                                        )
-                               : InputBorder.none,
-                                errorBorder: controller.iscommentTextInvalid.value
-                                    ? OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(5),
-                                        borderSide: BorderSide(
-                                          color: ColorValues.redColorDark,
-                                        ),
-                                      )
-                                    : null,
-                                errorText: controller.iscommentTextInvalid.value
-                                    ? "Required field"
-                                    : null,
+                              focusedErrorBorder: controller
+                                      .iscommentTextInvalid.value
+                                  ? OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      borderSide: BorderSide(
+                                        color: ColorValues.redColorDark,
+                                      ),
+                                    )
+                                  : InputBorder.none,
+                              errorBorder: controller.iscommentTextInvalid.value
+                                  ? OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      borderSide: BorderSide(
+                                        color: ColorValues.redColorDark,
+                                      ),
+                                    )
+                                  : null,
+                              errorText: controller.iscommentTextInvalid.value
+                                  ? "Required field"
+                                  : null,
                             ),
-              
-                               onChanged: (value) {
-                                if (value.trim().length > 3) {
-                                  controller.iscommentTextInvalid.value = false;
-                                } else {
-                                  controller.iscommentTextInvalid.value = true;
-                                }
-                              },
+                            onChanged: (value) {
+                              if (value.trim().length > 3) {
+                                controller.iscommentTextInvalid.value = false;
+                              } else {
+                                controller.iscommentTextInvalid.value = true;
+                              }
+                            },
                           ),
                         ],
                       ),
@@ -117,18 +119,20 @@ class AuditApprovedDialog extends GetView {
               ElevatedButton(
                 style: Styles.greenElevatedButtonStyle,
                 onPressed: () {
-                  if(controller.checkComment()){
+                  if (controller.checkComment()) {
                     return;
-                  }else{
-                  controller.auditPlanApprovedButton(
-                      id: controller.auditId.value);
-                  // print('Goods order id:$id');
-                  Get.back();
+                  } else {
+                    controller.auditPlanApprovedButton(
+                        id: controller.auditId.value);
+                    // print('Goods order id:$id');
+                    Get.back();
                   }
                 },
-                child: Text(
-                  controller.type.value==AppConstants.kMis?'Observation Plan Approve':
-                  'Approve Audit Plan'),
+                child: Text(controller.type.value == AppConstants.kMis
+                    ? 'Observation Plan Approve'
+                    : controller.type == AppConstants.kEvaluation
+                        ? "Approve Plan"
+                        : 'Approve Audit Plan'),
               ),
             ]),
           ],

@@ -48,6 +48,8 @@ class CreateAuditController extends GetxController {
   Rx<int> type = 0.obs;
   Rx<int> auditId = 0.obs;
   var isToggleOn = false.obs;
+  var isPtwToggleOn = false.obs;
+
   RxList<int> selectedCheckListIdList = <int>[].obs;
 
   void toggle() {
@@ -106,26 +108,11 @@ class CreateAuditController extends GetxController {
   }
 
   Future<void> setType() async {
-    try {
-      // Read jobId
-      String? _type = await createAuditPresenter.getValue();
+    final String? _auditId = Get.parameters['auditId'];
+    final String? _type = Get.parameters['type'];
 
-      String _auditId = await createAuditPresenter.getAuditdValue();
-      if (_auditId == '' || _auditId == "null") {
-        var dataFromPreviousScreen = Get.arguments;
-
-        type.value = dataFromPreviousScreen['type'];
-        auditId.value = dataFromPreviousScreen['auditId'];
-        print({"typeeee", auditId.value});
-        createAuditPresenter.saveValue(type: type.value.toString());
-      } else {
-        type.value = int.tryParse(_type) ?? 0;
-        auditId.value = int.tryParse(_auditId) ?? 0;
-      }
-    } catch (e) {
-      print(e.toString() + 'type');
-      //  Utility.showDialog(e.toString() + 'type');
-    }
+    auditId.value = int.tryParse(_auditId ?? "") ?? 0;
+    type.value = int.tryParse(_type ?? "") ?? 0;
   }
 
   Future<void> getAssignedToList() async {
@@ -312,9 +299,10 @@ class CreateAuditController extends GetxController {
     rowItem.forEach((element) {
       EvaluationChecklist item = EvaluationChecklist(
         checklist_id: dropdownMapperData[element[0]["value"]]?.id,
-        comment: element[3]["value"] ?? '',
-        ptw_req: element[2]["value"] == "0" ? 0 : 1,
-        weightage: int.tryParse(element[1]["value"] ?? '0') ?? 0,
+        title: element[1]["value"] ?? '',
+        comment: element[4]["value"] ?? '',
+        ptw_req: element[3]["value"] == "0" ? 0 : 1,
+        weightage: int.tryParse(element[2]["value"] ?? '0') ?? 0,
       );
       items.add(item);
     });
@@ -366,9 +354,10 @@ class CreateAuditController extends GetxController {
     rowItem.forEach((element) {
       EvaluationChecklist item = EvaluationChecklist(
         checklist_id: dropdownMapperData[element[0]["value"]]?.id,
-        comment: element[3]["value"] ?? '',
-        ptw_req: element[2]["value"] == "0" ? 0 : 1,
-        weightage: int.tryParse(element[1]["value"] ?? '0') ?? 0,
+        title: element[1]["value"] ?? '',
+        comment: element[4]["value"] ?? '',
+        ptw_req: element[3]["value"] == "0" ? 0 : 1,
+        weightage: int.tryParse(element[2]["value"] ?? '0') ?? 0,
       );
       items.add(item);
     });
@@ -376,7 +365,7 @@ class CreateAuditController extends GetxController {
         id: auditId.value,
         plan_number: _planTitle,
         Facility_id: facilityId,
-        max_score: int.tryParse(_maxScore),
+        max_score: int.tryParse(_maxScore) ?? 0,
         auditee_id: varUserAccessModel.value.user_id,
         auditor_id: facilityId,
         assignedTo: selectedAssignedTo.value,
@@ -387,7 +376,7 @@ class CreateAuditController extends GetxController {
         isPTW: isToggleOn.value,
         Module_Type_id: type.value,
         ApplyFrequency: selectedfrequencyId,
-        map_checklist: items);
+        map_checklist: type.value == AppConstants.kEvaluation ? items : []);
     var checkAuditJsonString =
         createAuditPlan.toJson(); //createCheckListToJson([createChecklist]);
 
@@ -450,9 +439,9 @@ class CreateAuditController extends GetxController {
                     (mapData['value'] == null ||
                         mapData['value'] == 'Please Select')) ||
                 (mapData['key'] == 'Remark' &&
+                    (mapData['value'] == null || mapData['value'] == '')) ||
+                (mapData['key'] == 'title' &&
                     (mapData['value'] == null || mapData['value'] == ''))
-            // (mapData['key'] == 'Requested' &&
-            //     (mapData['value'] == null || mapData['value'] == '')) ||
             // (mapData['key'] == 'Cost' &&
             //     (mapData['value'] == null || mapData['value'] == '')) ||
             ) {
@@ -468,6 +457,7 @@ class CreateAuditController extends GetxController {
   void addRowItem() {
     rowItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
+      {'key': "title", "value": ''},
       {'key': "Weightage", "value": ''},
       {'key': "ptwreq", "value": ''},
       {'key': "Remark", "value": ''},

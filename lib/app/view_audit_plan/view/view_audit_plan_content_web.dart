@@ -6,7 +6,9 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_audit_plan/view_audit_plan_controller.dart';
 import 'package:cmms/app/widgets/audit_reject_plan_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
+import 'package:data_table_2/data_table_2.dart';
 
 import 'package:flutter/material.dart';
 
@@ -75,14 +77,21 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                           },
                           child: controller.type.value == AppConstants.kMis
                               ? Text(" / MIS", style: Styles.greyLight14)
-                              : Text(" / AUDIT LIST",
-                                  style: Styles.greyLight14),
+                              : controller.type.value ==
+                                      AppConstants.kEvaluation
+                                  ? Text(" / EVALUATION LIST",
+                                      style: Styles.greyLight14)
+                                  : Text(" / AUDIT LIST",
+                                      style: Styles.greyLight14),
                         ),
                         controller.type.value == AppConstants.kMis
                             ? Text(" / VIEW OBSERVATION PLAN",
                                 style: Styles.greyLight14)
-                            : Text(" / VIEW AUDIT PLAN",
-                                style: Styles.greyLight14)
+                            : controller.type.value == AppConstants.kEvaluation
+                                ? Text(" / VIEW EVALUATION PLAN",
+                                    style: Styles.greyLight14)
+                                : Text(" / VIEW AUDIT PLAN",
+                                    style: Styles.greyLight14)
                       ],
                     ),
                   ),
@@ -115,7 +124,10 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                           controller.type.value ==
                                                   AppConstants.kMis
                                               ? "View MIS Plan"
-                                              : " View Audit Plan",
+                                              : controller.type.value ==
+                                                      AppConstants.kEvaluation
+                                                  ? "View Evaluation Plan"
+                                                  : " View Audit Plan",
                                           style: Styles.blackBold14,
                                         ),
                                       ),
@@ -196,18 +208,28 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                           Text(
                                             controller.type.value ==
                                                     AppConstants.kMis
-                                                ? "MIS ID"
-                                                : 'Audit ID :',
+                                                ? "MIS ID :"
+                                                : controller.type.value ==
+                                                        AppConstants.kEvaluation
+                                                    ? "Evaluation ID :"
+                                                    : 'Audit ID :',
                                             style: Styles.black17,
                                           ),
                                           Text(
-                                            ' Plan Title :',
+                                            'Plan Title :',
                                             style: Styles.black17,
                                           ),
                                           Text(
                                             'Description :',
                                             style: Styles.black17,
                                           ),
+                                          controller.type.value ==
+                                                  AppConstants.kEvaluation
+                                              ? Text(
+                                                  'Max Score :',
+                                                  style: Styles.black17,
+                                                )
+                                              : Dimens.box0,
                                           Text(
                                             'Created By :',
                                             style: Styles.black17,
@@ -216,11 +238,17 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                             'Approved By :',
                                             style: Styles.black17,
                                           ),
-                                          Text(
-                                            'Checklist :',
-                                            style: Styles.black17,
-                                          ),
-                                          controller.type == AppConstants.kMis
+                                          controller.type ==
+                                                  AppConstants.kEvaluation
+                                              ? Dimens.box0
+                                              : Text(
+                                                  'Checklist :',
+                                                  style: Styles.black17,
+                                                ),
+                                          controller.type ==
+                                                      AppConstants.kMis ||
+                                                  controller.type ==
+                                                      AppConstants.kEvaluation
                                               ? Dimens.box0
                                               : Text(
                                                   'Employees :',
@@ -236,7 +264,11 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                               controller.type.value ==
                                                       AppConstants.kMis
                                                   ? 'MIS${controller.auditPlanDetailModel.value?.id ?? ''}'
-                                                  : 'AUD${controller.auditPlanDetailModel.value?.id ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                                  : controller.type.value ==
+                                                          AppConstants
+                                                              .kEvaluation
+                                                      ? 'EVAL${controller.auditPlanDetailModel.value?.id ?? ''}'
+                                                      : 'AUD${controller.auditPlanDetailModel.value?.id ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                               style: Styles.blue17),
                                           Text(
                                               '${controller.auditPlanDetailModel.value?.plan_number ?? ''}', //  "Block 2 all Inverter maintenance plan",
@@ -244,16 +276,28 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                           Text(
                                               '${controller.auditPlanDetailModel.value?.description ?? ""}',
                                               style: Styles.blue17),
+                                          controller.type.value ==
+                                                  AppConstants.kEvaluation
+                                              ? Text(
+                                                  '${controller.auditPlanDetailModel.value?.max_score ?? ""}',
+                                                  style: Styles.blue17)
+                                              : Dimens.box0,
                                           Text(
                                               '${controller.auditPlanDetailModel.value?.created_by ?? ''}',
                                               style: Styles.blue17),
                                           Text(
                                               '${controller.auditPlanDetailModel.value?.approved_by ?? ""}',
                                               style: Styles.blue17),
-                                          Text(
-                                              '${controller.auditPlanDetailModel.value?.checklist_name ?? ""}',
-                                              style: Styles.blue17),
-                                          controller.type == AppConstants.kMis
+                                          controller.type ==
+                                                  AppConstants.kEvaluation
+                                              ? Dimens.box0
+                                              : Text(
+                                                  '${controller.auditPlanDetailModel.value?.checklist_name ?? ""}',
+                                                  style: Styles.blue17),
+                                          controller.type ==
+                                                      AppConstants.kMis ||
+                                                  controller.type ==
+                                                      AppConstants.kEvaluation
                                               ? Dimens.box0
                                               : Text(
                                                   '${controller.auditPlanDetailModel.value?.employees ?? ""}',
@@ -314,6 +358,225 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                     ],
                                   ),
                                 ),
+                                Dimens.boxHeight10,
+                                controller.auditPlanDetailModel.value
+                                                ?.map_checklist !=
+                                            null &&
+                                        controller.auditPlanDetailModel.value!
+                                            .map_checklist!.isNotEmpty
+                                    ? Container(
+                                        margin: Dimens.edgeInsets20,
+                                        height: controller.auditPlanDetailModel
+                                                        .value?.map_checklist !=
+                                                    null &&
+                                                controller
+                                                    .auditPlanDetailModel
+                                                    .value!
+                                                    .map_checklist!
+                                                    .isNotEmpty
+                                            ? ((controller
+                                                            .auditPlanDetailModel
+                                                            .value!
+                                                            .map_checklist!
+                                                            .length ??
+                                                        0) *
+                                                    40) +
+                                                150
+                                            : 55,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: ColorValues
+                                                .lightGreyColorWithOpacity35,
+                                            width: 1,
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: ColorValues
+                                                  .appBlueBackgroundColor,
+                                              spreadRadius: 2,
+                                              blurRadius: 5,
+                                              offset: Offset(0, 2),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "Maped Checklist",
+                                                    style: Styles.blue700,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            // Divider(
+                                            //   color:
+                                            //       ColorValues.greyLightColour,
+                                            // ),
+                                            controller.auditPlanDetailModel.value
+                                                            ?.map_checklist !=
+                                                        null &&
+                                                    controller
+                                                        .auditPlanDetailModel
+                                                        .value!
+                                                        .map_checklist!
+                                                        .isNotEmpty
+                                                ? Expanded(
+                                                    child: DataTable2(
+                                                      border: TableBorder.all(
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              206,
+                                                              229,
+                                                              234)),
+                                                      columns: [
+                                                        DataColumn2(
+                                                            fixedWidth: 70,
+                                                            label: Text(
+                                                              "Sr. No.",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                        DataColumn2(
+                                                            fixedWidth: 130,
+                                                            label: Text(
+                                                              "Checklist ID",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                        DataColumn2(
+                                                            // fixedWidth: 200,
+                                                            label: Text(
+                                                          "Checklist Name ",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                        DataColumn2(
+                                                            // fixedWidth: 200,
+                                                            label: Text(
+                                                          "Title ",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                        DataColumn2(
+                                                            fixedWidth: 150,
+                                                            label: Text(
+                                                              "Weightage",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                        DataColumn2(
+                                                            fixedWidth: 170,
+                                                            label: Text(
+                                                              "PTW Required",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                        DataColumn2(
+                                                            //  fixedWidth: 300,
+                                                            label: Text(
+                                                          "Remark",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                      ],
+                                                      rows: List<
+                                                          DataRow>.generate(
+                                                        controller
+                                                            .auditPlanDetailModel
+                                                            .value!
+                                                            .map_checklist!
+                                                            .length,
+                                                        (index) =>
+                                                            DataRow(cells: [
+                                                          DataCell(Text(
+                                                              '${index + 1}')),
+                                                          DataCell(Text(
+                                                              "CL${controller.auditPlanDetailModel.value!.map_checklist![index]?.id.toString() ?? ''}")),
+                                                          DataCell(Text(controller
+                                                                  .auditPlanDetailModel
+                                                                  .value!
+                                                                  .map_checklist![
+                                                                      index]
+                                                                  ?.name
+                                                                  .toString() ??
+                                                              '')),
+                                                          DataCell(Text(controller
+                                                                  .auditPlanDetailModel
+                                                                  .value!
+                                                                  .map_checklist![
+                                                                      index]
+                                                                  ?.title
+                                                                  .toString() ??
+                                                              '')),
+                                                          DataCell(Text(controller
+                                                                  .auditPlanDetailModel
+                                                                  .value!
+                                                                  .map_checklist![
+                                                                      index]
+                                                                  ?.weightage
+                                                                  .toString() ??
+                                                              '')),
+                                                          DataCell(Wrap(
+                                                            children: [
+                                                              Text("No"),
+                                                              CustomSwitchTroggle(
+                                                                value: controller
+                                                                            .auditPlanDetailModel
+                                                                            .value!
+                                                                            .map_checklist![index]
+                                                                            ?.ptw_required ==
+                                                                        1
+                                                                    ? true
+                                                                    : false,
+                                                                onChanged:
+                                                                    (value) {},
+                                                              ),
+                                                              Text("Yes"),
+                                                            ],
+                                                          )),
+                                                          DataCell(Text(controller
+                                                                  .auditPlanDetailModel
+                                                                  .value!
+                                                                  .map_checklist![
+                                                                      index]
+                                                                  ?.comments
+                                                                  .toString() ??
+                                                              '')),
+                                                        ]),
+                                                      ),
+                                                    ),
+                                                  )
+                                                : Dimens.box0,
+                                          ],
+                                        ),
+                                      )
+                                    : Dimens.box0,
                                 Dimens.boxHeight15,
                                 (controller.historyList != null &&
                                         controller.historyList!.isNotEmpty)
@@ -388,7 +651,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                                                     .kHaveApproveAccess)
                                                         .length >
                                                     0 ||
-                                            controller.auditPlanDetailModel.value?.status == 808 &&
+                                            controller.auditPlanDetailModel.value?.status == 800 &&
                                                 varUserAccessModel
                                                         .value.access_list!
                                                         .where((e) =>
@@ -427,7 +690,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                                                     .kHaveApproveAccess)
                                                         .length >
                                                     0 ||
-                                            controller.auditPlanDetailModel.value?.status == 808 &&
+                                            controller.auditPlanDetailModel.value?.status == 800 &&
                                                 varUserAccessModel
                                                         .value.access_list!
                                                         .where((e) =>

@@ -33,11 +33,10 @@ class ViewAuditPlanUsecase {
   Future<Map<String, dynamic>> auditPlanRejectButton({
     auditPlanRejectJsonString,
     bool? isLoading,
+    int? type,
   }) async =>
       await repository.auditPlanRejectButton(
-        auditPlanRejectJsonString,
-        isLoading,
-      );
+          auditPlanRejectJsonString, isLoading, type);
   Future<AuditPlanDetailModel?> getAuditPlanDetails({
     int? auditPlanId,
     required int facilityId,

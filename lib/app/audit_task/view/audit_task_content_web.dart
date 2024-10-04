@@ -77,16 +77,27 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                           onTap: () {
                             controller.type.value == AppConstants.kMis
                                 ? Get.offNamed(Routes.misDashboard)
-                                : Get.offNamed(Routes.audit);
+                                : controller.type.value ==
+                                        AppConstants.kEvaluation
+                                    ? Get.offNamed(Routes.evaluation)
+                                    : Get.offNamed(Routes.audit);
                           },
                           child: controller.type.value == AppConstants.kMis
                               ? Text(" / MIS", style: Styles.greyLight14)
-                              : Text(" / AUDIT", style: Styles.greyLight14),
+                              : controller.type.value ==
+                                      AppConstants.kEvaluation
+                                  ? Text(" / EVALUATION",
+                                      style: Styles.greyLight14)
+                                  : Text(" / AUDIT", style: Styles.greyLight14),
                         ),
                         controller.type.value == AppConstants.kMis
                             ? Text(" / OBSERVATION PLAN",
                                 style: Styles.greyLight14)
-                            : Text(" / AUDIT TASK", style: Styles.greyLight14)
+                            : controller.type.value == AppConstants.kEvaluation
+                                ? Text(" / EVALUATION TASK",
+                                    style: Styles.greyLight14)
+                                : Text(" / AUDIT TASK",
+                                    style: Styles.greyLight14)
                       ],
                     ),
                   ),
@@ -115,10 +126,16 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                                               "MIS Task",
                                               style: Styles.blackBold14,
                                             )
-                                          : Text(
-                                              "Audit Task",
-                                              style: Styles.blackBold16,
-                                            ),
+                                          : controller.type.value ==
+                                                  AppConstants.kEvaluation
+                                              ? Text(
+                                                  "Evaluation Task",
+                                                  style: Styles.blackBold14,
+                                                )
+                                              : Text(
+                                                  "Audit Task",
+                                                  style: Styles.blackBold16,
+                                                ),
                                       Spacer(),
                                       Row(
                                         children: [
@@ -368,7 +385,7 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                         if (controller.openFromDateToStartDatePicker)
                           Positioned(
                             right: 150,
-                            top: 85,
+                            top: 70,
                             child: DatePickerWidget(
                               selectionMode: DateRangePickerSelectionMode.range,
                               monthCellStyle: DateRangePickerMonthCellStyle(
@@ -577,9 +594,13 @@ class PmTaskDataSource extends DataTableSource {
                           ? Text(
                               'MIS${pmTaskDetails?.id}',
                             )
-                          : Text(
-                              'AUT${pmTaskDetails?.id}',
-                            ),
+                          : controller.type.value == AppConstants.kEvaluation
+                              ? Text(
+                                  'EVEL${pmTaskDetails?.id}',
+                                )
+                              : Text(
+                                  'AUT${pmTaskDetails?.id}',
+                                ),
                       Dimens.boxHeight5,
                       Align(
                         alignment: Alignment.centerRight,

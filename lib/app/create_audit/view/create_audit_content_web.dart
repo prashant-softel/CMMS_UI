@@ -2154,7 +2154,7 @@ class CheckListDataTable extends StatelessWidget {
           value: defaultValue == 1 ? true : false,
           onChanged: (value) {
             print("object");
-            controller.isToggleOn.value = value!;
+            controller.isPtwToggleOn.value = value!;
             onCheck(value);
 
             //  controller.toggle();
@@ -2236,7 +2236,14 @@ class CheckListDataTable extends StatelessWidget {
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     )),
                     DataColumn2(
-                        fixedWidth: 200,
+                        // fixedWidth: 200,
+                        label: Text(
+                      "Title",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        fixedWidth: 150,
                         label: Text(
                           "Weightage",
                           style: TextStyle(
@@ -2251,19 +2258,19 @@ class CheckListDataTable extends StatelessWidget {
                     //           fontWeight: FontWeight.bold),
                     //     )),
                     DataColumn2(
-                        fixedWidth: 200,
+                        fixedWidth: 150,
                         label: Text(
                           "PTW REQ?",
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
                         )),
                     DataColumn2(
-                        fixedWidth: 200,
+                        // fixedWidth: 200,
                         label: Text(
-                          "Remark",
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
-                        )),
+                      "Remark",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
                     DataColumn2(
                         fixedWidth: 100,
                         label: Text(

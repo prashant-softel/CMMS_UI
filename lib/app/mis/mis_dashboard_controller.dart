@@ -82,7 +82,9 @@ class MisDashboardController extends GetxController {
 
   void goTocreatePlanScreen() {
     misDashboardPresenter.clearValue();
-    Get.toNamed(Routes.createAudit, arguments: {"type": AppConstants.kMis});
+    Get.offNamed('${Routes.createAudit}/0/${AppConstants.kMis}');
+
+    // Get.toNamed(Routes.createAudit, arguments: {"type": AppConstants.kMis});
   }
 
   void goToMisTaskScreen() {

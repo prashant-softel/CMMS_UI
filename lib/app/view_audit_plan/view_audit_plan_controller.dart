@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_audit_plan/view_audit_plan_presenter.dart';
 import 'package:cmms/domain/models/audit_plan_detail_model.dart';
@@ -53,7 +54,7 @@ class ViewAuditPlanController extends GetxController {
 
   Future<void> getHistory(int facilityId) async {
     /// TODO: CHANGE THESE VALUES
-    int moduleType = 41;
+    int moduleType = type.value == AppConstants.kEvaluation ? 409 : 41;
     //
     historyList?.value = await viewAuditPlanPresenter.getHistory(
           // tempModuleType,
@@ -141,6 +142,7 @@ class ViewAuditPlanController extends GetxController {
           await viewAuditPlanPresenter.auditPlanRejectButton(
         auditPlanRejectJsonString: auditPlanRejectJsonString,
         isLoading: true,
+        type: type.value,
       );
       if (response == true) {
         //getCalibrationList(facilityId, true);

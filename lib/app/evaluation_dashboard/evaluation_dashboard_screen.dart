@@ -138,7 +138,7 @@ class EvaluationScreen extends GetView<EvaluationController> {
                                       ? _priventiveList(
                                           tittle: "Evaluation Task",
                                           ontap: () {
-                                            // controller.auditTask();
+                                            controller.auditTask();
                                           })
                                       : Dimens.box0
                                   // _priventiveList(

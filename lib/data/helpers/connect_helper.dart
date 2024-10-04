@@ -2018,6 +2018,7 @@ class ConnectHelper {
     required String auth,
     auditPlanRejectJsonString,
     bool? isLoading,
+    int? type,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'AuditPlan/RejectAuditPlan',
@@ -2033,7 +2034,7 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(AuditPlanMsgReceiveDialog(
-        data: parsedJson['message'], id: parsedJson['id']));
+        data: parsedJson['message'], id: parsedJson['id'], type: type));
 
     return responseModel;
   }
