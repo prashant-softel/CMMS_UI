@@ -6,12 +6,15 @@ import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/utils/responsive.dart';
+import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/dash_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/multidropdown.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:get/get.dart';
@@ -134,17 +137,33 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
                                       style: Styles.black15,
                                     ),
                                     Dimens.boxWidth2,
-                                    DropdownWebWidget(
-                                      height: 40,
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      dropdownList: controller.moduleList,
-                                      isValueSelected:
-                                          controller.isModuleListSelected.value,
-                                      selectedValue:
-                                          controller.selectedModuleList.value,
-                                      onValueChanged: controller.onValueChanged,
-                                    ),
+                                    // Container(
+                                    //   width: 300,
+                                    //   child: CustomMultiSelectDialogField(
+                                    //     title: 'Please Select',
+                                    //     buttonText: 'Select Module',
+                                    //     // initialValue:
+                                    //     //     controller.selectedModuleList,
+                                    //     items: controller.moduleList
+                                    //             ?.map(
+                                    //               (module) => MultiSelectItem(
+                                    //                 module!.id,
+                                    //                 module.moduleName ??
+                                    //                     'Unknown',
+                                    //               ),
+                                    //             )
+                                    //             ?.toList() ??
+                                    //         [],
+                                    //     // onConfirm: (selectedOptionsList) {
+                                    //     //   controller.moduleSelected(
+                                    //     //       selectedOptionsList);
+                                    //     //   print(
+                                    //     //       'Selected Modules: $selectedOptionsList');
+                                    //     //   print(
+                                    //     //       'Updated Selected Modules in Controller: ${controller.selectedModuleList}');
+                                    //     // },
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                               ),

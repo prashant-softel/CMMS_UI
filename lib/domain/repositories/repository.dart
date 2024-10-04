@@ -9048,7 +9048,7 @@ class Repository {
     String? facilityId,
     dynamic startDate,
     dynamic endDate,
-    bool? isLoading,
+    bool? isLoading,String?moduleId
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -9059,7 +9059,7 @@ class Repository {
             facilityId: facilityId ?? "",
             isLoading: isLoading ?? false,
             startDate: startDate,
-            endDate: endDate);
+            endDate: endDate,moduleId:moduleId);
       }
       if (!res.hasError) {
         final jsonDashboardModelModels = jsonDecode(res.data);

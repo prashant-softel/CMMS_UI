@@ -507,6 +507,7 @@ class JobDetailsController extends GetxController {
         100; // Start position for the first section below the image
     double sectionHeight = 20; // Height for each section header
     double pageWidth = pageSize.width - 2 * margin;
+    double rowHeight = 20; // Increased row height for headers
 
     // Draw image
     page.graphics.drawImage(image, Rect.fromLTWH(margin, 10, 100, 80));
@@ -562,12 +563,10 @@ class JobDetailsController extends GetxController {
     List<String> mcInfoValuesLeft = [
       'JOb${jobDetailsModel.value?.id ?? ''}',
       '${jobDetailsModel.value?.jobTitle ?? ''}',
-      '${jobDetailsModel.value?.equipmentCatList ?? ''}',
-      '${jobDetailsModel.value?.workTypeList ?? ''}',
+      '${jobDetailsModel.value?.equipmentCatList?.map((item) => item.name).join(", ") ?? ''}',
+      '${jobDetailsModel.value?.workTypeList?.map((item) => item.name).join(", ") ?? ''}',
       '${jobDetailsModel.value?.jobDescription ?? ''}',
     ];
-
-    double rowHeight = 15;
 
     for (int i = 0; i < mcInfoLabelsLeft.length; i++) {
       page.graphics.drawString(mcInfoLabelsLeft[i], contentFont,
@@ -580,7 +579,7 @@ class JobDetailsController extends GetxController {
     // Draw MC Information Details (Right Side)
     double labelWidthRight = 80;
     double valueWidthRight = 120;
-    double labelXRight = pageWidth / 2 + margin; // Position on the right side
+    double labelXRight = pageWidth / 2 + margin;
     double valueXRight = labelXRight + labelWidthRight + 5;
 
     List<String> mcInfoLabelsRight = [
@@ -592,14 +591,13 @@ class JobDetailsController extends GetxController {
     ];
     List<String> mcInfoValuesRight = [
       '${jobDetailsModel.value?.blockName}',
-      '${jobDetailsModel.value?.workingAreaList}',
-      '${jobDetailsModel.value!.createdByName}',
+      '${jobDetailsModel.value?.workingAreaList?.map((item) => item.name).join(", ") ?? ''}',
+      '${jobDetailsModel.value?.createdByName}',
       '${jobDetailsModel.value?.assignedName ?? ''}',
       '${jobDetailsModel.value?.breakdownTime ?? ''}',
     ];
 
-    currentY -= mcInfoLabelsLeft.length *
-        rowHeight; // Reset currentY to align with left side
+    currentY -= mcInfoLabelsLeft.length * rowHeight;
 
     for (int i = 0; i < mcInfoLabelsRight.length; i++) {
       page.graphics.drawString(mcInfoLabelsRight[i], contentFont,
@@ -611,286 +609,118 @@ class JobDetailsController extends GetxController {
       currentY += rowHeight;
     }
 
-    // Add "Schedule Execution" header before the table
+    // Add "Associated JobCard(s)" header before the table
     currentY += 15;
-    double tableWidth =
-        pageWidth; // Ensure the header width matches the table width
+
+    // Define column widths for the JobCard table
+    double colWidthJobCardId = 80;
+    double colWidthPermitID = 80;
+    double colWidthPermitStatus = 100;
+    double colWidthJobCardDate = 100;
+    double colWidthStatus = 100;
+    double tableWidth = colWidthJobCardId +
+        colWidthPermitID +
+        colWidthPermitStatus +
+        colWidthJobCardDate +
+        colWidthStatus;
+
+    // Draw the rectangle for the header
     page.graphics.drawRectangle(
         pen: borderPen,
         bounds: Rect.fromLTWH(margin, currentY, tableWidth, sectionHeight));
     page.graphics.drawString('Associated JobCard(s)', headerFont,
-        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+        bounds:
+            Rect.fromLTWH(margin + 5, currentY + 5, tableWidth, sectionHeight));
 
     currentY += sectionHeight;
 
-    // // Calculate column widths proportionally
-    // double totalColWidth = pageWidth - 2 * margin;
-    // double colWidthSchId = totalColWidth * 0.06;
-    // double colWidthDays = totalColWidth * 0.06;
-    // double colWidthScheduled = totalColWidth * 0.12;
-    // double colWidthCleaned = totalColWidth * 0.10;
-    // double colWidthAbandoned = totalColWidth * 0.12;
-    // double colWidthPending = totalColWidth * 0.10;
-    // double colWidthWaterUsed = totalColWidth * 0.08;
-    // double colWidthPermitID = totalColWidth * 0.10;
-    // double colWidthPermitStatus = totalColWidth * 0.15;
-    // double colWidthStatus = totalColWidth * 0.15;
+    // Table column headers
+    List<String> jobCardHeaders = [
+      'Job Card Id',
+      'Permit ID',
+      'Permit Status',
+      'Job Card Date',
+      'Status'
+    ];
 
-    // // Draw table header
-    // page.graphics.drawRectangle(
-    //     pen: borderPen,
-    //     brush: backgroundBrush,
-    //     bounds: Rect.fromLTWH(margin, currentY, tableWidth, 25));
-    // page.graphics.drawString('Id', headerFont,
-    //     bounds: Rect.fromLTWH(margin, currentY, colWidthSchId, 25),
-    //     format: PdfStringFormat(
-    //         alignment: PdfTextAlignment.center,
-    //         lineAlignment: PdfVerticalAlignment.middle));
-    // page.graphics.drawString('Days', headerFont,
-    //     bounds:
-    //         Rect.fromLTWH(margin + colWidthSchId, currentY, colWidthDays, 25),
-    //     format: PdfStringFormat(
-    //         alignment: PdfTextAlignment.center,
-    //         lineAlignment: PdfVerticalAlignment.middle));
-    // page.graphics.drawString('Scheduled', headerFont,
-    //     bounds: Rect.fromLTWH(margin + colWidthSchId + colWidthDays, currentY,
-    //         colWidthScheduled, 25),
-    //     format: PdfStringFormat(
-    //         alignment: PdfTextAlignment.center,
-    //         lineAlignment: PdfVerticalAlignment.middle));
-    // page.graphics.drawString('Cleaned', headerFont,
-    //     bounds: Rect.fromLTWH(
-    //         margin + colWidthSchId + colWidthDays + colWidthScheduled,
-    //         currentY,
-    //         colWidthCleaned,
-    //         25),
-    //     format: PdfStringFormat(
-    //         alignment: PdfTextAlignment.center,
-    //         lineAlignment: PdfVerticalAlignment.middle));
-    // page.graphics.drawString('Abandoned', headerFont,
-    //     bounds: Rect.fromLTWH(
-    //         margin +
-    //             colWidthSchId +
-    //             colWidthDays +
-    //             colWidthScheduled +
-    //             colWidthCleaned,
-    //         currentY,
-    //         colWidthAbandoned,
-    //         25),
-    //     format: PdfStringFormat(
-    //         alignment: PdfTextAlignment.center,
-    //         lineAlignment: PdfVerticalAlignment.middle));
-    // page.graphics.drawString('Pending', headerFont,
-    //     bounds: Rect.fromLTWH(
-    //         margin +
-    //             colWidthSchId +
-    //             colWidthDays +
-    //             colWidthScheduled +
-    //             colWidthCleaned +
-    //             colWidthAbandoned,
-    //         currentY,
-    //         colWidthPending,
-    //         25),
-    //     format: PdfStringFormat(
-    //         alignment: PdfTextAlignment.center,
-    //         lineAlignment: PdfVerticalAlignment.middle));
-    // page.graphics.drawString('Water Used', headerFont,
-    //     bounds: Rect.fromLTWH(
-    //         margin +
-    //             colWidthSchId +
-    //             colWidthDays +
-    //             colWidthScheduled +
-    //             colWidthCleaned +
-    //             colWidthAbandoned +
-    //             colWidthPending,
-    //         currentY,
-    //         colWidthWaterUsed,
-    //         25),
-    //     format: PdfStringFormat(
-    //         alignment: PdfTextAlignment.center,
-    //         lineAlignment: PdfVerticalAlignment.middle));
-    // page.graphics.drawString('PTW ID', headerFont,
-    //     bounds: Rect.fromLTWH(
-    //         margin +
-    //             colWidthSchId +
-    //             colWidthDays +
-    //             colWidthScheduled +
-    //             colWidthCleaned +
-    //             colWidthAbandoned +
-    //             colWidthPending +
-    //             colWidthWaterUsed,
-    //         currentY,
-    //         colWidthPermitID,
-    //         25),
-    //     format: PdfStringFormat(
-    //         alignment: PdfTextAlignment.center,
-    //         lineAlignment: PdfVerticalAlignment.middle));
-    // page.graphics.drawString('PTW Status', headerFont,
-    //     bounds: Rect.fromLTWH(
-    //         margin +
-    //             colWidthSchId +
-    //             colWidthDays +
-    //             colWidthScheduled +
-    //             colWidthCleaned +
-    //             colWidthAbandoned +
-    //             colWidthPending +
-    //             colWidthWaterUsed +
-    //             colWidthPermitID,
-    //         currentY,
-    //         colWidthPermitStatus,
-    //         25),
-    //     format: PdfStringFormat(
-    //         alignment: PdfTextAlignment.center,
-    //         lineAlignment: PdfVerticalAlignment.middle));
-    // page.graphics.drawString('Status', headerFont,
-    //     bounds: Rect.fromLTWH(
-    //         margin +
-    //             colWidthSchId +
-    //             colWidthDays +
-    //             colWidthScheduled +
-    //             colWidthCleaned +
-    //             colWidthAbandoned +
-    //             colWidthPending +
-    //             colWidthWaterUsed +
-    //             colWidthPermitID +
-    //             colWidthPermitStatus,
-    //         currentY,
-    //         colWidthStatus,
-    //         25),
-    //     format: PdfStringFormat(
-    //         alignment: PdfTextAlignment.center,
-    //         lineAlignment: PdfVerticalAlignment.middle));
+    // Draw headers with increased height
+    double headerHeight = 25; // Increase header height
+    double headerX = margin;
 
-    // currentY += 25;
+    for (int i = 0; i < jobCardHeaders.length; i++) {
+      double colWidth = (i == 0)
+          ? colWidthJobCardId
+          : (i == 1)
+              ? colWidthPermitID
+              : (i == 2)
+                  ? colWidthPermitStatus
+                  : (i == 3)
+                      ? colWidthJobCardDate
+                      : colWidthStatus;
 
-    // // // Draw table rows
-    // // for (var schedule in jobDetailsModel.value?.schedules ?? []) {
-    // //   page.graphics.drawRectangle(
-    // //       pen: borderPen,
-    // //       bounds: Rect.fromLTWH(margin, currentY, tableWidth, 25));
-    // //   page.graphics.drawString('${schedule.scheduleId}', contentFont,
-    // //       bounds: Rect.fromLTWH(margin, currentY, colWidthSchId, 25),
-    // //       format: PdfStringFormat(
-    // //           alignment: PdfTextAlignment.center,
-    // //           lineAlignment: PdfVerticalAlignment.middle));
-    // //   page.graphics.drawString('${schedule.cleaningDay}', contentFont,
-    // //       bounds:
-    // //           Rect.fromLTWH(margin + colWidthSchId, currentY, colWidthDays, 25),
-    // //       format: PdfStringFormat(
-    // //           alignment: PdfTextAlignment.center,
-    // //           lineAlignment: PdfVerticalAlignment.middle));
-    // //   page.graphics.drawString('${schedule.scheduled}', contentFont,
-    // //       bounds: Rect.fromLTWH(margin + colWidthSchId + colWidthDays, currentY,
-    // //           colWidthScheduled, 25),
-    // //       format: PdfStringFormat(
-    // //           alignment: PdfTextAlignment.center,
-    // //           lineAlignment: PdfVerticalAlignment.middle));
-    // //   page.graphics.drawString('${schedule.cleaned}', contentFont,
-    // //       bounds: Rect.fromLTWH(
-    // //           margin + colWidthSchId + colWidthDays + colWidthScheduled,
-    // //           currentY,
-    // //           colWidthCleaned,
-    // //           25),
-    // //       format: PdfStringFormat(
-    // //           alignment: PdfTextAlignment.center,
-    // //           lineAlignment: PdfVerticalAlignment.middle));
-    // //   page.graphics.drawString('${schedule.abandoned}', contentFont,
-    // //       bounds: Rect.fromLTWH(
-    // //           margin +
-    // //               colWidthSchId +
-    // //               colWidthDays +
-    // //               colWidthScheduled +
-    // //               colWidthCleaned,
-    // //           currentY,
-    // //           colWidthAbandoned,
-    // //           25),
-    // //       format: PdfStringFormat(
-    // //           alignment: PdfTextAlignment.center,
-    // //           lineAlignment: PdfVerticalAlignment.middle));
-    // //   page.graphics.drawString('${schedule.pending}', contentFont,
-    // //       bounds: Rect.fromLTWH(
-    // //           margin +
-    // //               colWidthSchId +
-    // //               colWidthDays +
-    // //               colWidthScheduled +
-    // //               colWidthCleaned +
-    // //               colWidthAbandoned,
-    // //           currentY,
-    // //           colWidthPending,
-    // //           25),
-    // //       format: PdfStringFormat(
-    // //           alignment: PdfTextAlignment.center,
-    // //           lineAlignment: PdfVerticalAlignment.middle));
-    // //   page.graphics.drawString('${schedule.waterUsed}', contentFont,
-    // //       bounds: Rect.fromLTWH(
-    // //           margin +
-    // //               colWidthSchId +
-    // //               colWidthDays +
-    // //               colWidthScheduled +
-    // //               colWidthCleaned +
-    // //               colWidthAbandoned +
-    // //               colWidthPending,
-    // //           currentY,
-    // //           colWidthWaterUsed,
-    // //           25),
-    // //       format: PdfStringFormat(
-    // //           alignment: PdfTextAlignment.center,
-    // //           lineAlignment: PdfVerticalAlignment.middle));
-    // //   page.graphics.drawString(
-    // //       'PTW${schedule.permit_id}', contentFont, // New Permit ID column
-    // //       bounds: Rect.fromLTWH(
-    // //           margin +
-    // //               colWidthSchId +
-    // //               colWidthDays +
-    // //               colWidthScheduled +
-    // //               colWidthCleaned +
-    // //               colWidthAbandoned +
-    // //               colWidthPending +
-    // //               colWidthWaterUsed,
-    // //           currentY,
-    // //           colWidthPermitID,
-    // //           25),
-    // //       format: PdfStringFormat(
-    // //           alignment: PdfTextAlignment.center,
-    // //           lineAlignment: PdfVerticalAlignment.middle));
-    // //   page.graphics.drawString('${schedule.status_short_ptw}', contentFont,
-    // //       bounds: Rect.fromLTWH(
-    // //           margin +
-    // //               colWidthSchId +
-    // //               colWidthDays +
-    // //               colWidthScheduled +
-    // //               colWidthCleaned +
-    // //               colWidthAbandoned +
-    // //               colWidthPending +
-    // //               colWidthWaterUsed +
-    // //               colWidthPermitID,
-    // //           currentY,
-    // //           colWidthPermitStatus,
-    // //           25),
-    // //       format: PdfStringFormat(
-    // //           alignment: PdfTextAlignment.center,
-    // //           lineAlignment: PdfVerticalAlignment.middle));
-    // //   page.graphics.drawString('${schedule.status_short}', contentFont,
-    // //       bounds: Rect.fromLTWH(
-    // //           margin +
-    // //               colWidthSchId +
-    // //               colWidthDays +
-    // //               colWidthScheduled +
-    // //               colWidthCleaned +
-    // //               colWidthAbandoned +
-    // //               colWidthPending +
-    // //               colWidthWaterUsed +
-    // //               colWidthPermitID +
-    // //               colWidthPermitStatus,
-    // //           currentY,
-    // //           colWidthStatus,
-    // //           25),
-    // //       format: PdfStringFormat(
-    // //           alignment: PdfTextAlignment.center,
-    // //           lineAlignment: PdfVerticalAlignment.middle));
-    // //   currentY += 25;
-    // // }
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(headerX, currentY, colWidth, headerHeight));
 
+      page.graphics.drawString(jobCardHeaders[i], headerFont,
+          bounds:
+              Rect.fromLTWH(headerX + 5, currentY + 5, colWidth, headerHeight),
+          format: PdfStringFormat(
+              alignment: PdfTextAlignment.center,
+              lineAlignment: PdfVerticalAlignment.middle)); // Centered text
+
+      headerX += colWidth;
+    }
+
+    currentY += headerHeight; // Move down to first row
+
+    // Iterate through each row in `jobAssociatedModelsList`
+    for (int index = 0;
+        index < (jobAssociatedModelsList?.length ?? 0);
+        index++) {
+      var job = jobAssociatedModelsList?[index];
+
+      List<String> rowValues = [
+        'JC${job?.jobCardId ?? ''}',
+        'PTW${job?.permitId ?? ''}',
+        job?.isExpired == 1
+            ? '${job?.permit_status_short.toString()}(Expired)'
+            : '${job?.permit_status_short ?? ''}',
+        '${job?.jobCardDate ?? ''}',
+        '${job?.status_short ?? ''}'
+      ];
+
+      double rowX = margin;
+
+      for (int i = 0; i < rowValues.length; i++) {
+        double colWidth = (i == 0)
+            ? colWidthJobCardId
+            : (i == 1)
+                ? colWidthPermitID
+                : (i == 2)
+                    ? colWidthPermitStatus
+                    : (i == 3)
+                        ? colWidthJobCardDate
+                        : colWidthStatus;
+
+        page.graphics.drawRectangle(
+            pen: borderPen,
+            bounds: Rect.fromLTWH(rowX, currentY, colWidth, rowHeight));
+
+        page.graphics.drawString(rowValues[i], contentFont,
+            bounds: Rect.fromLTWH(rowX + 5, currentY + 5, colWidth, rowHeight),
+            format: PdfStringFormat(
+                alignment: PdfTextAlignment.center,
+                lineAlignment: PdfVerticalAlignment.middle)); // Centered text
+
+        rowX += colWidth;
+      }
+
+      currentY += rowHeight; // Move to next row
+    }
+
+    // Signature section
     final String signatureText = 'Signature';
     final Size signatureSize = contentFont.measureString(signatureText);
     return PdfTextElement(text: signatureText, font: contentFont).draw(

@@ -2704,9 +2704,10 @@ class ConnectHelper {
       bool? isLoading,
       String? facilityId,
       dynamic startDate,
-      dynamic endDate}) async {
+      dynamic endDate,
+      String? moduleId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'CMMS/getDashboadDetails?facilityId=$facilityId&fromDate=$startDate&toDate=$endDate',
+      'CMMS/getDashboadDetails?facilityId=$facilityId&moduleID=$moduleId&fromDate=$startDate&toDate=$endDate',
       // 'CMMS/getDashboadDetails?facilityId=$facilityId',
       Request.get,
       null,
