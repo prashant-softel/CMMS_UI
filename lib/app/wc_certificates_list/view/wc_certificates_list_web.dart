@@ -323,7 +323,7 @@ DataColumn2 buildDataColumn(
         ? null
         : (int columnIndex, bool ascending) {
             final controller = Get.find<WcCertificatesListController>();
-            controller.sortData(header); 
+            controller.sortData(header);
           },
     label: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -370,7 +370,7 @@ class WcCertificatesListDataSource extends DataTableSource {
     filteredWcCertificatesList = <WcCertificatesListModel?>[];
     filteredWcCertificatesList =
         controller.wcCertificateList.where((wcCertificateList) {
-      return (wcCertificateList.assetId ?? '')
+      return (wcCertificateList.asset_id ?? '')
               .toString()
               .contains(controller.assetNameFilterText.value.toLowerCase()) &&
           (wcCertificateList.assetName ?? '').toString().contains(
@@ -394,7 +394,7 @@ class WcCertificatesListDataSource extends DataTableSource {
     // print({"getRow call"});
     final wcCertificatesList = filteredWcCertificatesList[index];
 
-    controller.assetsId.value = wcCertificatesList?.assetId ?? 0;
+    controller.assetsId.value = wcCertificatesList?.asset_id ?? 0;
     var cellsBuffer = [
       "asset_id",
       '${wcCertificatesList?.assetName ?? ''}',
@@ -436,7 +436,7 @@ class WcCertificatesListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'WCC${wcCertificatesList?.assetId}',
+                        'WCC${wcCertificatesList?.asset_id}',
                       ),
                       Dimens.boxHeight10,
                       // Container(
@@ -485,7 +485,14 @@ class WcCertificatesListDataSource extends DataTableSource {
                           icon: Icons.remove_red_eye_outlined,
                           message: 'view',
                           onPress: () {
-                            int id = wcCertificatesList?.assetId ?? 0;
+                            // controller.clearStoreData();
+                            int inventoryId = wcCertificatesList?.asset_id ?? 0;
+                            if (inventoryId != 0) {
+                              Get.toNamed(Routes.viewAddInventoryScreen,
+                                  arguments: {
+                                    'inventoryId': inventoryId,
+                                  });
+                            }
                           },
                         ),
                       ])

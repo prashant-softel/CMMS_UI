@@ -183,8 +183,8 @@ class WcCertificatesListController extends GetxController {
     switch (columnName) {
       case 'Asset Id':
         wcCertificateList.sort((a, b) => isAscending.value
-            ? a.assetId!.compareTo(b.assetId!)
-            : b.assetId!.compareTo(a.assetId!));
+            ? a.asset_id!.compareTo(b.asset_id!)
+            : b.asset_id!.compareTo(a.asset_id!));
         break;
       case 'Asset Name':
         wcCertificateList.sort((a, b) => isAscending.value
