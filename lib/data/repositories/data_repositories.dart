@@ -1719,7 +1719,7 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> getAssetList({
     String? auth,
     bool? isLoading,
-    int? facilityId,
+    facilityId,
   }) async {
     return await connectHelper.getAssetList(
       auth: auth,
@@ -1730,7 +1730,7 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> getAvailbleSmReportList(
           {required String auth,
-          int? facilityId,
+          facilityId,
           bool? isLoading,
           dynamic startDate,
           dynamic endDate,
@@ -1746,7 +1746,7 @@ class DataRepository extends DomainRepository {
           selectedAssetsNameIdList: selectedAssetsNameIdList);
   Future<ResponseModel> getCansumeSmReportList(
           {required String auth,
-          int? facilityId,
+          facilityId,
           bool? isLoading,
           dynamic startDate,
           dynamic endDate,

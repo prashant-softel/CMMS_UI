@@ -11927,7 +11927,7 @@ class Repository {
   }
 
   Future<List<SmReportListModel?>?> getAvailbleSmReportList(
-      int? facilityId,
+      facilityId,
       bool? isLoading,
       dynamic startDate,
       dynamic endDate,
@@ -11966,7 +11966,7 @@ class Repository {
   }
 
   Future<List<SmReportListModel?>?> getCansumeSmReportList(
-      int? facilityId,
+      facilityId,
       bool? isLoading,
       dynamic startDate,
       dynamic endDate,
@@ -12006,7 +12006,7 @@ class Repository {
 
   Future<List<GetAssetDataModel?>?> getAssetList(
     String? auth,
-    int? facilityId,
+    facilityId,
     bool? isLoading,
   ) async {
     try {

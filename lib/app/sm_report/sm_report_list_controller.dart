@@ -49,6 +49,8 @@ class SmReportController extends GetxController {
       DateFormat('yyyy-MM-dd').format(fromDate.value);
   RxList<GetAssetDataModel?> selectedAssetsNameList = <GetAssetDataModel>[].obs;
   RxList<int> selectedAssetsNameIdList = <int>[].obs;
+  RxList<int> selectedFacilities = <int>[].obs;
+  RxList<FacilityModel?> facilityNameList = <FacilityModel>[].obs;
 
   RxString materialCodeFilterText = ''.obs;
   RxString materialcategoryFilterText = ''.obs;
@@ -155,6 +157,7 @@ class SmReportController extends GetxController {
 
   void toggle() {
     isToggleOn.value = !isToggleOn.value;
+    smReportList.value = <SmReportListModel>[];
   }
 
   ///
@@ -183,35 +186,39 @@ class SmReportController extends GetxController {
       //   getPlantStockList(facilityId, formattedTodate1, formattedFromdate1,
       //       false, selectedAssetsNameIdList.value);
       // });
-      Future.delayed(Duration(seconds: 1), () {
-        getAssetList(facilityId);
-      });
-      // await getFacilityList();
+      // Future.delayed(Duration(seconds: 1), () {
+      //   getAssetList(facilityId);
+      // });
+      getFacilityList();
     });
     super.onInit();
   }
 
   Future<void> getFacilityList() async {
-    final _facilityList = await smReportPresenter.getFacilityList();
-    //print('Facility25:$_facilityList');
-    if (_facilityList != null) {
-      for (var facility in _facilityList) {
-        facilityList.add(facility);
-      }
+    facilityNameList.value = <FacilityModel>[];
+    final _facilityNameList = await smReportPresenter.getFacilityList(
+        // categoryIds: categoryIds,
+        );
+    for (var facility_list in _facilityNameList!) {
+      facilityNameList.add(facility_list);
     }
+    update(['facility-list']);
   }
 
-  Future<void> getAssetList(int _facilityId) async {
-    selectedAssetsNameList.clear();
+  Future<void> getAssetList() async {
+    // selectedAssetsNameList.clear();
     selectedAssetsNameList.value = <GetAssetDataModel>[];
+    String lststrFacilityIds = selectedFacilities.join(',');
+
     final _assetList =
-        await smReportPresenter.getAssetList(facilityId: facilityId);
-    // print('jkncejknce:$facilityId');
+        await smReportPresenter.getAssetList(facilityId: lststrFacilityIds);
+
     if (_assetList != null) {
       for (var asset in _assetList) {
         selectedAssetsNameList.add(asset);
       }
-      update(["AssetList"]);
+      print(selectedAssetsNameList); // Debugging: Check if this has data
+      update(["AssetList"]); // Update the GetX controller to refresh the UI
     }
   }
 
@@ -223,15 +230,18 @@ class SmReportController extends GetxController {
 
   Future<void> getAvailbleSmReportList() async {
     String lststrAssetsIds = selectedAssetsNameIdList.join(',');
+    String lststrFacilityIds = selectedFacilities.join(',');
+
     smReportList.value = <SmReportListModel>[];
     filteredData.value = <SmReportListModel>[];
 
     final _smReportList = await smReportPresenter.getAvailbleSmReportList(
-        facilityId: facilityId,
-        isLoading: isLoading.value,
-        startDate: formattedTodate1,
-        endDate: formattedFromdate1,
-        selectedAssetsNameIdList: lststrAssetsIds);
+      facilityId: lststrFacilityIds,
+      isLoading: isLoading.value,
+      startDate: formattedTodate1,
+      endDate: formattedFromdate1,
+      selectedAssetsNameIdList: lststrAssetsIds,
+    );
 
     if (_smReportList != null) {
       smReportList.value = _smReportList;
@@ -243,11 +253,13 @@ class SmReportController extends GetxController {
 
   Future<void> getCansumeSmReportList() async {
     String lststrAssetsIds = selectedAssetsNameIdList.join(',');
+    String lststrFacilityIds = selectedFacilities.join(',');
+
     smReportList.value = <SmReportListModel>[];
     filteredData.value = <SmReportListModel>[];
 
     final _smReportList = await smReportPresenter.getCansumeSmReportList(
-        facilityId: facilityId,
+        facilityId: lststrFacilityIds,
         isLoading: isLoading.value,
         startDate: formattedTodate1,
         endDate: formattedFromdate1,
@@ -363,11 +375,13 @@ class SmReportController extends GetxController {
     update();
   }
 
-  void facilitySelected(_selectedFacilityIds) {
-    selectedFacilityIdList.value = <int>[];
-    for (var _selectedId in _selectedFacilityIds) {
-      selectedFacilityIdList.add(_selectedId);
+  void facilitySelected(_facilities) {
+    selectedFacilities.value = <int>[];
+    for (var _selectedFacility in _facilities) {
+      selectedFacilities.add(_selectedFacility);
     }
+    getAssetList();
+    print("${selectedFacilities}");
   }
 
   void materialSelected(_selectedMaterialIds) {

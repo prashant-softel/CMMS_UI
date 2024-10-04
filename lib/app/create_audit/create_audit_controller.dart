@@ -30,6 +30,7 @@ class CreateAuditController extends GetxController {
   var startDateDateTc = TextEditingController();
   var planTitleTc = TextEditingController();
   var descriptionTc = TextEditingController();
+  var maxScoreTc = TextEditingController();
 
   RxList<PreventiveCheckListModel?> checkList =
       <PreventiveCheckListModel>[].obs;
@@ -305,11 +306,14 @@ class CreateAuditController extends GetxController {
     String _planTitle = planTitleTc.text.trim();
     String _description = descriptionTc.text.trim();
     String _startDate = startDateDateTc.text.trim();
+    String _maxScore = maxScoreTc.text.trim();
+
     List<EvaluationChecklist> items = [];
     rowItem.forEach((element) {
       EvaluationChecklist item = EvaluationChecklist(
         checklist_id: dropdownMapperData[element[0]["value"]]?.id,
         comment: element[3]["value"] ?? '',
+        ptw_req: element[2]["value"] == "0" ? 0 : 1,
         weightage: int.tryParse(element[1]["value"] ?? '0') ?? 0,
       );
       items.add(item);
@@ -325,10 +329,11 @@ class CreateAuditController extends GetxController {
         Checklist_id: int.tryParse(selectedchecklistId.value),
         Description: _description,
         Schedule_Date: _startDate,
+        max_score: int.tryParse(_maxScore) ?? 0,
         isPTW: isToggleOn.value,
         Module_Type_id: type.value,
         ApplyFrequency: selectedfrequencyId,
-        map_checklist: items);
+        map_checklist: type.value == AppConstants.kEvaluation ? items : []);
     var checkAuditJsonString =
         createAuditPlan.toJson(); //createCheckListToJson([createChecklist]);
 
@@ -355,11 +360,14 @@ class CreateAuditController extends GetxController {
     String _planTitle = planTitleTc.text.trim();
     String _description = descriptionTc.text.trim();
     String _startDate = startDateDateTc.text.trim();
+    String _maxScore = maxScoreTc.text.trim();
+
     List<EvaluationChecklist> items = [];
     rowItem.forEach((element) {
       EvaluationChecklist item = EvaluationChecklist(
         checklist_id: dropdownMapperData[element[0]["value"]]?.id,
         comment: element[3]["value"] ?? '',
+        ptw_req: element[2]["value"] == "0" ? 0 : 1,
         weightage: int.tryParse(element[1]["value"] ?? '0') ?? 0,
       );
       items.add(item);
@@ -368,6 +376,7 @@ class CreateAuditController extends GetxController {
         id: auditId.value,
         plan_number: _planTitle,
         Facility_id: facilityId,
+        max_score: int.tryParse(_maxScore),
         auditee_id: varUserAccessModel.value.user_id,
         auditor_id: facilityId,
         assignedTo: selectedAssignedTo.value,

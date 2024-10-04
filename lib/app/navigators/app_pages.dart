@@ -1185,7 +1185,7 @@ class AppPages {
     ),
 
     GetPage<dynamic>(
-      name: _Paths.viewAuditPlan,
+      name: '${_Paths.viewAuditPlan}/:auditId/:type',
       page: ViewAuditPlanScreen.new,
       binding: ViewAuditPlanBinding(),
     ),

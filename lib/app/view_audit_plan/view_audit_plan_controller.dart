@@ -68,25 +68,31 @@ class ViewAuditPlanController extends GetxController {
   }
 
   Future<void> setauditPlanId() async {
-    try {
-      final _auditId = await viewAuditPlanPresenter.getValue();
-      final _type = await viewAuditPlanPresenter.getTypeValue();
+    final String? _auditId = Get.parameters['auditId'];
+    final String? _type = Get.parameters['type'];
 
-      if (_auditId == null || _auditId == '' || _auditId == "null") {
-        var dataFromPreviousScreen = Get.arguments;
+    auditId.value = int.tryParse(_auditId ?? "") ?? 0;
+    type.value = int.tryParse(_type ?? "") ?? 0;
 
-        auditId.value = dataFromPreviousScreen['auditId'];
-        type.value = dataFromPreviousScreen['type'];
+    // try {
+    //   final _auditId = await viewAuditPlanPresenter.getValue();
+    //   final _type = await viewAuditPlanPresenter.getTypeValue();
 
-        viewAuditPlanPresenter.saveValue(auditId: auditId.value.toString());
-        viewAuditPlanPresenter.saveTypeValue(type: type.value.toString());
-      } else {
-        auditId.value = int.tryParse(_auditId) ?? 0;
-        type.value = int.tryParse(_type ?? "") ?? 0;
-      }
-    } catch (e) {
-      Utility.showDialog(e.toString(), 'auditId');
-    }
+    //   if (_auditId == null || _auditId == '' || _auditId == "null") {
+    //     var dataFromPreviousScreen = Get.arguments;
+
+    //     auditId.value = dataFromPreviousScreen['auditId'];
+    //     type.value = dataFromPreviousScreen['type'];
+
+    //     viewAuditPlanPresenter.saveValue(auditId: auditId.value.toString());
+    //     viewAuditPlanPresenter.saveTypeValue(type: type.value.toString());
+    //   } else {
+    //     auditId.value = int.tryParse(_auditId) ?? 0;
+    //     type.value = int.tryParse(_type ?? "") ?? 0;
+    //   }
+    // } catch (e) {
+    //   Utility.showDialog(e.toString(), 'auditId');
+    // }
   }
 
   Future<void> getAuditPlanDetails(
@@ -104,7 +110,6 @@ class ViewAuditPlanController extends GetxController {
   }
 
   void auditPlanApprovedButton({int? id}) async {
-
     String _comment = approveCommentTextFieldCtrlr.text.trim();
 
     CommentModel commentauditPlanAproveModel =
@@ -116,7 +121,7 @@ class ViewAuditPlanController extends GetxController {
         await viewAuditPlanPresenter.auditPlanApprovedButton(
       auditPlanApproveJsonString: auditPlanApproveJsonString,
       isLoading: true,
-      type:type.value,
+      type: type.value,
     );
     if (response == true) {
       //getCalibrationList(facilityId, true);

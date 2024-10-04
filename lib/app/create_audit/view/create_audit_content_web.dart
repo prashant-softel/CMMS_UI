@@ -1464,7 +1464,7 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                                                 .3),
                                                             textController:
                                                                 controller
-                                                                    .planTitleTc,
+                                                                    .maxScoreTc,
 
                                                             //validate
                                                             errorController: controller
@@ -2052,7 +2052,8 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                             )
                                           : Dimens.box0,
                                       controller.type.value ==
-                                              AppConstants.kEvaluation
+                                                  AppConstants.kEvaluation &&
+                                              controller.checkList.length > 0
                                           ? CheckListDataTable()
                                           : Dimens.box0
                                     ],
