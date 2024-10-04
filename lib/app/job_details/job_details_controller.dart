@@ -507,7 +507,7 @@ class JobDetailsController extends GetxController {
         100; // Start position for the first section below the image
     double sectionHeight = 20; // Height for each section header
     double pageWidth = pageSize.width - 2 * margin;
-    double rowHeight = 20; // Increased row height for headers
+    double rowHeight = 20; // Height for each table row, including header
 
     // Draw image
     page.graphics.drawImage(image, Rect.fromLTWH(margin, 10, 100, 80));
@@ -537,7 +537,7 @@ class JobDetailsController extends GetxController {
         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
-    // MC Information section
+    // Job Information section
     page.graphics.drawRectangle(
         pen: borderPen,
         brush: backgroundBrush,
@@ -546,13 +546,13 @@ class JobDetailsController extends GetxController {
         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
 
-    // Draw MC Information Details (Left Side)
-    double labelWidth = 80;
-    double valueWidth = 120;
+    // Draw Job Information Details (Left Side)
+    double labelWidth = 100; // Keeping width for labels consistent
+    double valueWidth = 150; // Keeping value width consistent
     double labelX = margin + 5;
     double valueX = labelX + labelWidth + 5;
 
-    List<String> mcInfoLabelsLeft = [
+    List<String> jobInfoLabelsLeft = [
       'Job ID',
       'Job Title',
       'Equipment Categories',
@@ -560,7 +560,7 @@ class JobDetailsController extends GetxController {
       'Job Description'
     ];
 
-    List<String> mcInfoValuesLeft = [
+    List<String> jobInfoValuesLeft = [
       'JOb${jobDetailsModel.value?.id ?? ''}',
       '${jobDetailsModel.value?.jobTitle ?? ''}',
       '${jobDetailsModel.value?.equipmentCatList?.map((item) => item.name).join(", ") ?? ''}',
@@ -568,28 +568,28 @@ class JobDetailsController extends GetxController {
       '${jobDetailsModel.value?.jobDescription ?? ''}',
     ];
 
-    for (int i = 0; i < mcInfoLabelsLeft.length; i++) {
-      page.graphics.drawString(mcInfoLabelsLeft[i], contentFont,
+    for (int i = 0; i < jobInfoLabelsLeft.length; i++) {
+      page.graphics.drawString(jobInfoLabelsLeft[i], contentFont,
           bounds: Rect.fromLTWH(labelX, currentY + 5, labelWidth, rowHeight));
-      page.graphics.drawString(mcInfoValuesLeft[i], contentFont,
+      page.graphics.drawString(jobInfoValuesLeft[i], contentFont,
           bounds: Rect.fromLTWH(valueX, currentY + 5, valueWidth, rowHeight));
       currentY += rowHeight;
     }
 
-    // Draw MC Information Details (Right Side)
-    double labelWidthRight = 80;
-    double valueWidthRight = 120;
-    double labelXRight = pageWidth / 2 + margin;
+    // Draw Job Information Details (Right Side)
+    double labelWidthRight = 100;
+    double valueWidthRight = 150;
+    double labelXRight = pageWidth / 2 + margin; // Position on the right side
     double valueXRight = labelXRight + labelWidthRight + 5;
 
-    List<String> mcInfoLabelsRight = [
+    List<String> jobInfoLabelsRight = [
       'Block Name',
       'Equipment Name',
       'Raised By',
       'Assigned To',
       'BreakDown'
     ];
-    List<String> mcInfoValuesRight = [
+    List<String> jobInfoValuesRight = [
       '${jobDetailsModel.value?.blockName}',
       '${jobDetailsModel.value?.workingAreaList?.map((item) => item.name).join(", ") ?? ''}',
       '${jobDetailsModel.value?.createdByName}',
@@ -597,13 +597,14 @@ class JobDetailsController extends GetxController {
       '${jobDetailsModel.value?.breakdownTime ?? ''}',
     ];
 
-    currentY -= mcInfoLabelsLeft.length * rowHeight;
+    currentY -= jobInfoLabelsLeft.length *
+        rowHeight; // Reset currentY to align with left side
 
-    for (int i = 0; i < mcInfoLabelsRight.length; i++) {
-      page.graphics.drawString(mcInfoLabelsRight[i], contentFont,
+    for (int i = 0; i < jobInfoLabelsRight.length; i++) {
+      page.graphics.drawString(jobInfoLabelsRight[i], contentFont,
           bounds: Rect.fromLTWH(
               labelXRight, currentY + 5, labelWidthRight, rowHeight));
-      page.graphics.drawString(mcInfoValuesRight[i], contentFont,
+      page.graphics.drawString(jobInfoValuesRight[i], contentFont,
           bounds: Rect.fromLTWH(
               valueXRight, currentY + 5, valueWidthRight, rowHeight));
       currentY += rowHeight;
@@ -611,30 +612,15 @@ class JobDetailsController extends GetxController {
 
     // Add "Associated JobCard(s)" header before the table
     currentY += 15;
-
-    // Define column widths for the JobCard table
-    double colWidthJobCardId = 80;
-    double colWidthPermitID = 80;
-    double colWidthPermitStatus = 100;
-    double colWidthJobCardDate = 100;
-    double colWidthStatus = 100;
-    double tableWidth = colWidthJobCardId +
-        colWidthPermitID +
-        colWidthPermitStatus +
-        colWidthJobCardDate +
-        colWidthStatus;
-
-    // Draw the rectangle for the header
     page.graphics.drawRectangle(
         pen: borderPen,
-        bounds: Rect.fromLTWH(margin, currentY, tableWidth, sectionHeight));
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
     page.graphics.drawString('Associated JobCard(s)', headerFont,
-        bounds:
-            Rect.fromLTWH(margin + 5, currentY + 5, tableWidth, sectionHeight));
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
 
     currentY += sectionHeight;
 
-    // Table column headers
+    // Define the table column headers
     List<String> jobCardHeaders = [
       'Job Card Id',
       'Permit ID',
@@ -643,37 +629,22 @@ class JobDetailsController extends GetxController {
       'Status'
     ];
 
-    // Draw headers with increased height
-    double headerHeight = 25; // Increase header height
-    double headerX = margin;
+    // Define the same width for all columns
+    double colWidth = pageWidth / jobCardHeaders.length;
 
+    // Render shaded header for table
     for (int i = 0; i < jobCardHeaders.length; i++) {
-      double colWidth = (i == 0)
-          ? colWidthJobCardId
-          : (i == 1)
-              ? colWidthPermitID
-              : (i == 2)
-                  ? colWidthPermitStatus
-                  : (i == 3)
-                      ? colWidthJobCardDate
-                      : colWidthStatus;
-
       page.graphics.drawRectangle(
           pen: borderPen,
           brush: backgroundBrush,
-          bounds: Rect.fromLTWH(headerX, currentY, colWidth, headerHeight));
-
+          bounds: Rect.fromLTWH(
+              margin + i * colWidth, currentY, colWidth, rowHeight));
       page.graphics.drawString(jobCardHeaders[i], headerFont,
-          bounds:
-              Rect.fromLTWH(headerX + 5, currentY + 5, colWidth, headerHeight),
-          format: PdfStringFormat(
-              alignment: PdfTextAlignment.center,
-              lineAlignment: PdfVerticalAlignment.middle)); // Centered text
-
-      headerX += colWidth;
+          bounds: Rect.fromLTWH(
+              margin + i * colWidth + 5, currentY + 5, colWidth, rowHeight));
     }
 
-    currentY += headerHeight; // Move down to first row
+    currentY += rowHeight; // Move to next row
 
     // Iterate through each row in `jobAssociatedModelsList`
     for (int index = 0;
@@ -681,6 +652,7 @@ class JobDetailsController extends GetxController {
         index++) {
       var job = jobAssociatedModelsList?[index];
 
+      // Map values from the model
       List<String> rowValues = [
         'JC${job?.jobCardId ?? ''}',
         'PTW${job?.permitId ?? ''}',
@@ -691,29 +663,94 @@ class JobDetailsController extends GetxController {
         '${job?.status_short ?? ''}'
       ];
 
-      double rowX = margin;
-
+      // Render the row values
       for (int i = 0; i < rowValues.length; i++) {
-        double colWidth = (i == 0)
-            ? colWidthJobCardId
-            : (i == 1)
-                ? colWidthPermitID
-                : (i == 2)
-                    ? colWidthPermitStatus
-                    : (i == 3)
-                        ? colWidthJobCardDate
-                        : colWidthStatus;
+        page.graphics.drawRectangle(
+            pen: borderPen,
+            bounds: Rect.fromLTWH(
+                margin + i * colWidth, currentY, colWidth, rowHeight));
+        page.graphics.drawString(rowValues[i], contentFont,
+            bounds: Rect.fromLTWH(
+                margin + i * colWidth + 5, currentY + 5, colWidth, rowHeight));
+      }
 
+      currentY += rowHeight; // Move to next row
+    }
+
+    // Add the Material Issue / Used section header
+    currentY += 20; // Add some spacing
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+    page.graphics.drawString('Material Issue / Used', headerFont,
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+
+    currentY += sectionHeight;
+
+// Define fixed column widths
+    double colWidthJobCardId = 100;
+    double colWidthMRSId = 100;
+    double colWidthStatus = 100;
+
+// Calculate the remaining width for "Mrs Items List"
+    double colWidthMrsItemsList =
+        pageWidth - (colWidthJobCardId + colWidthMRSId + colWidthStatus);
+
+// Define the Material Issue / Used table headers
+    List<String> materialHeaders = [
+      'Job Card Id',
+      'MRS ID',
+      'Mrs Items List',
+      'Status'
+    ];
+
+// Render shaded header for Material Issue / Used table
+    double headerX = margin;
+    for (int i = 0; i < materialHeaders.length; i++) {
+      double colWidth = (i == 2)
+          ? colWidthMrsItemsList
+          : (i == 0
+              ? colWidthJobCardId
+              : (i == 1 ? colWidthMRSId : colWidthStatus));
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(headerX, currentY, colWidth, rowHeight));
+      page.graphics.drawString(materialHeaders[i], headerFont,
+          bounds:
+              Rect.fromLTWH(headerX + 5, currentY + 5, colWidth, rowHeight));
+      headerX += colWidth;
+    }
+
+    currentY += rowHeight; // Move to next row
+
+// Iterate through each row in `listMrsByJobId`
+    for (int index = 0; index < (listMrsByJobId?.length ?? 0); index++) {
+      var mrs = listMrsByJobId?[index];
+
+      // Map values from the model
+      List<String> rowValues = [
+        '${mrs?.jobCardId ?? ''}',
+        mrs?.is_mrs_return == 0
+            ? "MRS${mrs?.mrsId.toString() ?? ''}"
+            : "RMRS${mrs?.mrs_return_ID.toString() ?? ''}",
+        '${mrs?.mrsItems ?? ''}',
+        '${mrs?.status_short ?? ''}'
+      ];
+
+      // Render the row values
+      double rowX = margin;
+      for (int i = 0; i < rowValues.length; i++) {
+        double colWidth = (i == 2)
+            ? colWidthMrsItemsList
+            : (i == 0
+                ? colWidthJobCardId
+                : (i == 1 ? colWidthMRSId : colWidthStatus));
         page.graphics.drawRectangle(
             pen: borderPen,
             bounds: Rect.fromLTWH(rowX, currentY, colWidth, rowHeight));
-
         page.graphics.drawString(rowValues[i], contentFont,
-            bounds: Rect.fromLTWH(rowX + 5, currentY + 5, colWidth, rowHeight),
-            format: PdfStringFormat(
-                alignment: PdfTextAlignment.center,
-                lineAlignment: PdfVerticalAlignment.middle)); // Centered text
-
+            bounds: Rect.fromLTWH(rowX + 5, currentY + 5, colWidth, rowHeight));
         rowX += colWidth;
       }
 
