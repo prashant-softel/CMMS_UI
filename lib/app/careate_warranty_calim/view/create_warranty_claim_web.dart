@@ -39,8 +39,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
   CreateWarrantyClaimWeb({Key? key}) : super(key: key);
-  final FileUploadController dropzoneController =
-      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
+  final FileUploadController dropzoneController = Get.put(FileUploadController(
+    apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',
+  ));
   final AffectedPartUploadController affectedPartController =
       Get.put(AffectedPartUploadController());
   final HomeController homecontroller = Get.find();
@@ -2130,10 +2131,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                             boxShadow: [
                                                                               BoxShadow(
                                                                                 color: Colors.black26,
-                                                                                offset: const Offset(
-                                                                                  5.0,
-                                                                                  5.0,
-                                                                                ),
+                                                                                offset: const Offset(5.0, 5.0),
                                                                                 blurRadius: 5.0,
                                                                                 spreadRadius: 1.0,
                                                                               ),
@@ -2165,8 +2163,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                               .spaceBetween,
                                                                       children: [
                                                                         Text(
-                                                                          "Required: ",
-                                                                        ),
+                                                                            "Required: "),
                                                                         Container(
                                                                           child:
                                                                               Checkbox(
@@ -2188,18 +2185,14 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                               .spaceBetween,
                                                                       children: [
                                                                         Text(
-                                                                          "Required By Date: ",
-                                                                        ),
+                                                                            "Required By Date: "),
                                                                         Container(
                                                                           decoration:
                                                                               BoxDecoration(
                                                                             boxShadow: [
                                                                               BoxShadow(
                                                                                 color: Colors.black26,
-                                                                                offset: const Offset(
-                                                                                  5.0,
-                                                                                  5.0,
-                                                                                ),
+                                                                                offset: const Offset(5.0, 5.0),
                                                                                 blurRadius: 5.0,
                                                                                 spreadRadius: 1.0,
                                                                               ),
@@ -2218,9 +2211,7 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                             maxLine:
                                                                                 1,
                                                                             widget:
-                                                                                Icon(
-                                                                              Icons.calendar_month,
-                                                                            ),
+                                                                                Icon(Icons.calendar_month),
                                                                             ontap:
                                                                                 () {
                                                                               pickRequiredSupplierDate_web(context);
@@ -2244,13 +2235,22 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                               ColorValues.appGreenColor,
                                                                           onPressed:
                                                                               () {
-                                                                            controller.updateSupplierActionText(
-                                                                              controller.supplierActionTextFieldController.text,
-                                                                              controller.isCheckedRequire.value == true ? 1 : 0,
-                                                                              controller.supplierActionDateTimeCtrlrWeb.text,
-                                                                              // controller.supplierActionSrNumberTextFieldController.text,
-                                                                            );
-                                                                            controller.clearSupplierAction();
+                                                                            // Perform validation checks
+                                                                            if (controller.supplierActionTextFieldController.text.isEmpty) {
+                                                                              showValidationPopup('Please fill in the Supplier Action field.');
+                                                                            } else if (!controller.isCheckedRequire.value) {
+                                                                              showValidationPopup('Please check the Required checkbox.');
+                                                                            } else if (controller.supplierActionDateTimeCtrlrWeb.text.isEmpty) {
+                                                                              showValidationPopup('Please select a Required By Date.');
+                                                                            } else {
+                                                                              // If validation passes, perform the action
+                                                                              controller.updateSupplierActionText(
+                                                                                controller.supplierActionTextFieldController.text,
+                                                                                controller.isCheckedRequire.value == true ? 1 : 0,
+                                                                                controller.supplierActionDateTimeCtrlrWeb.text,
+                                                                              );
+                                                                              controller.clearSupplierAction();
+                                                                            }
                                                                           },
                                                                           text:
                                                                               'Add',
@@ -2261,6 +2261,8 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
                                                                 ),
                                                               ),
                                                             ),
+
+// Function to show validation popup with decoration
                                                             Dimens.boxWidth10,
                                                             Expanded(
                                                               flex: 2,
@@ -3418,4 +3420,26 @@ class CreateWarrantyClaimWeb extends GetView<CreateWarrantyClaimController> {
       Dimens.boxHeight10,
     ]);
   }
+}
+
+void showValidationPopup(String message) {
+  Get.defaultDialog(
+    title: 'Validation Error',
+    middleText: message,
+    backgroundColor: ColorValues.whiteColor,
+    titleStyle: TextStyle(
+      color: ColorValues.cancelColor,
+      fontWeight: FontWeight.bold,
+    ),
+    middleTextStyle: TextStyle(
+      color: Colors.black,
+    ),
+    radius: 10.0,
+    textConfirm: "OK",
+    confirmTextColor: ColorValues.whiteColor,
+    buttonColor: Colors.black54,
+    onConfirm: () {
+      Get.back(); // Close dialog on OK
+    },
+  );
 }

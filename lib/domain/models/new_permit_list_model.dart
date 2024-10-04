@@ -32,7 +32,6 @@ class NewPermitModel {
   String? startDate;
   int? jc_id;
   int? jc_status;
-
   NewPermitModel({
     this.permitId,
     this.ptwStatus,
