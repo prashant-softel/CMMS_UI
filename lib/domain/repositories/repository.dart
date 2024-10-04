@@ -15753,18 +15753,16 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> auditPlanRejectButton(
-    auditPlanRejectJsonString,
-    bool? isLoading,
-  ) async {
+      auditPlanRejectJsonString, bool? isLoading, int? type) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
       if (auth.isNotEmpty) {
         res = await _dataRepository.auditPlanRejectButton(
-          auth: auth,
-          auditPlanRejectJsonString: auditPlanRejectJsonString,
-          isLoading: isLoading ?? false,
-        );
+            auth: auth,
+            auditPlanRejectJsonString: auditPlanRejectJsonString,
+            isLoading: isLoading ?? false,
+            type: type);
       }
       var resourceData = res.data;
 

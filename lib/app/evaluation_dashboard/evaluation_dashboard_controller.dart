@@ -62,9 +62,10 @@ class EvaluationController extends GetxController {
     Get.offAllNamed('${Routes.auditListScreen}/${AppConstants.kEvaluation}');
   }
 
-  // Future<void> auditTask() async {
-  //   evaluationPresenter.clearValue();
+  Future<void> auditTask() async {
+    evaluationPresenter.clearValue();
 
-  //   Get.toNamed(Routes.auditTask, arguments: {'type': AppConstants.kAudit});
-  // }
+    Get.toNamed(Routes.auditTask,
+        arguments: {'type': AppConstants.kEvaluation});
+  }
 }

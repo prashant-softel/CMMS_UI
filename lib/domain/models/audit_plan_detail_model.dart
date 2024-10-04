@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:cmms/domain/models/preventive_checklist_model.dart';
+
 import '../../app/utils/utility.dart';
 
 AuditPlanDetailModel auditPlanDetailModelFromJson(String str) =>
@@ -26,6 +28,9 @@ class AuditPlanDetailModel {
   String? is_PTW;
   String? approved_Date;
   String? approved_by;
+  int? max_score;
+  int? module_Type_id;
+  List<PreventiveCheckListModel>? map_checklist;
 
   AuditPlanDetailModel(
       {this.auditee_Emp_Name,
@@ -48,11 +53,16 @@ class AuditPlanDetailModel {
       this.assignedTo,
       this.employees,
       this.approved_Date,
-      this.approved_by});
+      this.approved_by,
+      this.max_score,
+      this.module_Type_id,
+      this.map_checklist});
 
   factory AuditPlanDetailModel.fromJson(Map<String, dynamic> json) {
     return AuditPlanDetailModel(
       status: json['status'],
+      module_Type_id: json['module_Type_id'],
+      max_score: json['max_score'],
       assignedTo: json['assignedTo'],
       is_PTW: json['is_PTW'],
       employees: json['employees'],
@@ -79,6 +89,10 @@ class AuditPlanDetailModel {
       description: json['description'],
       checklist_name: json['checklist_name'],
       facility_name: json['facility_name'],
+      map_checklist: json['map_checklist'] != null
+          ? List<PreventiveCheckListModel>.from(json["map_checklist"]
+              .map((x) => PreventiveCheckListModel.fromJson(x)))
+          : [],
     );
   }
 }

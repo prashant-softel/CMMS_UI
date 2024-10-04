@@ -1159,7 +1159,8 @@ class AppPages {
       binding: ViewMcPlaningBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.createAudit,
+            name: '${_Paths.createAudit}/:auditId/:type',
+
       page: CreateAuditScreen.new,
       binding: CreateAuditBinding(),
     ),

@@ -1271,12 +1271,13 @@ class DataRepository extends DomainRepository {
     required String auth,
     auditPlanRejectJsonString,
     bool? isLoading,
+    int? type,
   }) async =>
       await connectHelper.auditPlanRejectButton(
-        auth: auth,
-        auditPlanRejectJsonString: auditPlanRejectJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          auditPlanRejectJsonString: auditPlanRejectJsonString,
+          isLoading: isLoading ?? false,
+          type: type);
   Future<ResponseModel> goodsOrderRejectButton({
     required String auth,
     goodsOrderRejectJsonString,

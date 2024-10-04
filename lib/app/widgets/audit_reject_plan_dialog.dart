@@ -23,8 +23,11 @@ class AuditPlanRejectDialog extends GetView {
           insetPadding: Dimens.edgeInsets10_0_10_0,
           contentPadding: EdgeInsets.zero,
           title: Text(
-            controller.type==AppConstants.kMis?"Observation Plan Reject":
-            "Audit Plan Reject",
+            controller.type == AppConstants.kMis
+                ? "Observation Plan Reject"
+                : controller.type == AppConstants.kEvaluation
+                    ? "Evaluation Plan Reject"
+                    : "Audit Plan Reject",
             textAlign: TextAlign.center,
             // style: TextStyle(color: Colors.green),
           ),
@@ -84,12 +87,15 @@ class AuditPlanRejectDialog extends GetView {
               ElevatedButton(
                 style: Styles.darkRedElevatedButtonStyle,
                 onPressed: () {
-                  controller.auditPlanRejectButton(id: controller.auditId.value);
+                  controller.auditPlanRejectButton(
+                      id: controller.auditId.value);
                   Get.back();
                 },
-                child: Text(
-                   controller.type==AppConstants.kMis?"Reject Observation Plan":
-                  'Reject Audit Plan'),
+                child: Text(controller.type == AppConstants.kMis
+                    ? "Reject Observation Plan"
+                    : controller.type == AppConstants.kEvaluation
+                        ? "Reject Plan"
+                        : 'Reject Audit Plan'),
               ),
             ]),
           ],

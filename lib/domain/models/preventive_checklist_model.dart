@@ -25,30 +25,46 @@ class PreventiveCheckListModel {
   String? createdAt;
   String? updatedAt;
   int? updatedById;
-
-  PreventiveCheckListModel({
-    this.id,
-    this.category_id,
-    this.category_name,
-    this.name,
-    this.createdAt,
-    this.createdById,
-    this.createdByName,
-    this.duration,
-    this.facility_id,
-    this.facility_name,
-    this.frequency_id,
-    this.frequency_name,
-    this.manPower,
-    this.status,
-    this.type,
-    this.updatedAt,
-    this.updatedById,
-  });
+  int? map_checlist;
+  int? evalution_plan_id;
+  dynamic weightage;
+  String? comments;
+  int? ptw_required;
+  String? title;
+  PreventiveCheckListModel(
+      {this.id,
+      this.category_id,
+      this.category_name,
+      this.name,
+      this.createdAt,
+      this.createdById,
+      this.createdByName,
+      this.duration,
+      this.facility_id,
+      this.facility_name,
+      this.frequency_id,
+      this.frequency_name,
+      this.manPower,
+      this.status,
+      this.type,
+      this.updatedAt,
+      this.updatedById,
+      this.comments,
+      this.evalution_plan_id,
+      this.map_checlist,
+      this.ptw_required,
+      this.weightage,
+      this.title});
 
   factory PreventiveCheckListModel.fromJson(Map<String, dynamic> json) =>
       PreventiveCheckListModel(
         id: json['id'],
+        title: json['title'],
+        comments: json['comments'],
+        evalution_plan_id: json['evalution_plan_id'],
+        map_checlist: json['map_checlist'],
+        ptw_required: json['ptw_required'],
+        weightage: json['weightage'],
         category_id: json['category_id'],
         category_name: json['category_name'],
         type: json['type'],
@@ -69,6 +85,7 @@ class PreventiveCheckListModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "title": title,
         "category_id": category_id,
         "category_name": category_name,
         "updatedAt": updatedAt,
