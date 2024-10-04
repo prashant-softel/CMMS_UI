@@ -17,6 +17,7 @@ class CreateAuditPlan {
   List<String>? Employees;
   bool? isPTW;
   int? Module_Type_id;
+  int? max_score;
 
   List<EvaluationChecklist>? map_checklist;
 
@@ -34,7 +35,8 @@ class CreateAuditPlan {
       this.id,
       this.Module_Type_id,
       this.isPTW,
-      this.map_checklist});
+      this.map_checklist,
+      this.max_score});
 
   factory CreateAuditPlan.fromJson(Map<String, dynamic> json) =>
       CreateAuditPlan(
@@ -49,6 +51,7 @@ class CreateAuditPlan {
         Description: json['Description'],
         Schedule_Date: json['Schedule_Date'],
         assignedTo: json['assignedTo'],
+        max_score: json["max_score"],
         Employees: json["Employees"] != null
             ? List<String>.from(json["Employees"].map((x) => x))
             : [],
@@ -63,6 +66,7 @@ class CreateAuditPlan {
         'Module_Type_id': Module_Type_id,
         'is_PTW': isPTW,
         'id': id,
+        "max_score": max_score,
         "Employees": List<dynamic>.from(Employees!.map((x) => x)),
         'auditor_id': auditor_id,
         'auditee_id': auditee_id,
@@ -78,22 +82,25 @@ class CreateAuditPlan {
 
 class EvaluationChecklist {
   EvaluationChecklist(
-      {this.checklist_id, required this.weightage, this.comment});
+      {this.checklist_id, required this.weightage, this.comment, this.ptw_req});
 
   int? checklist_id;
   int weightage;
   String? comment;
+  int? ptw_req;
 
   factory EvaluationChecklist.fromJson(Map<String, dynamic> json) =>
       EvaluationChecklist(
         checklist_id: json["checklist_id"],
         weightage: json["asset_item_ID"],
         comment: json["comment"],
+        ptw_req: json["ptw_req"],
       );
 
   Map<String, dynamic> toJson() => {
         "comment": comment,
         "weightage": weightage,
         "checklist_id": checklist_id,
+        "ptw_req": ptw_req
       };
 }

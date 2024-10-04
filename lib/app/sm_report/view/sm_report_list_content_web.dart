@@ -1,8 +1,6 @@
 import 'package:cmms/app/home/home_screen.dart';
-import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/plant_stock_report/plant_stock_report_controller.dart';
 import 'package:cmms/app/sm_report/sm_report_list_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -10,17 +8,11 @@ import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/app/widgets/multidropdown.dart';
-import 'package:cmms/app/widgets/multipule_dropdown_web.dart';
-import 'package:cmms/app/widgets/table_action_button.dart';
-import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:cmms/domain/models/sm_report_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../theme/color_values.dart';
@@ -42,11 +34,11 @@ class _SmReportContentWebState extends State<SmReportContentWeb> {
         id: 'stock_Mangement_Date',
         builder: (controller) {
           return Obx(() {
-            final dataSource = PlantListDataSource(controller);
+            // final dataSource = PlantListDataSource(controller);
 
             return SelectionArea(
               child: Column(children: [
-                HeaderWidget(),
+                HeaderWidgetAllDash(),
                 Container(
                   height: 45,
                   decoration: BoxDecoration(
@@ -126,67 +118,71 @@ class _SmReportContentWebState extends State<SmReportContentWeb> {
                                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Plant Stock Report",
-                                      style: Styles.blackBold16,
+                                      "Select Plants :",
+                                      style: Styles.black15,
+                                    ),
+                                    Dimens.boxWidth2,
+                                    SizedBox(
+                                      width: Get.width *
+                                          .17, // Fixed width for dropdown
+                                      child: Obx(
+                                        () => CustomMultiSelectDialogField(
+                                          buttonText: 'Select Facility Name',
+                                          title: 'Facility Name',
+                                          initialValue: (controller
+                                                  .selectedFacilityIdList
+                                                  .isNotEmpty)
+                                              ? controller
+                                                  .selectedFacilityIdList
+                                              : [],
+                                          items: controller.facilityNameList
+                                              .map(
+                                                (facility) => MultiSelectItem(
+                                                  facility?.id,
+                                                  facility?.name ?? '',
+                                                ),
+                                              )
+                                              .toList(),
+                                          onConfirm: (selectedOptionsList) => {
+                                            controller.facilitySelected(
+                                                selectedOptionsList),
+                                          },
+                                        ),
+                                      ),
                                     ),
                                     Spacer(),
-                                    // Text(
-                                    //   "Select Plants :",
-                                    //   style: Styles.black15,
-                                    // ),
-                                    // Dimens.boxWidth2,
-                                    // SizedBox(
-                                    //   width: Get.width *
-                                    //       .17, // Fixed width for dropdown
-                                    //   child: Obx(
-                                    //     () => CustomMultiDropdown(
-                                    //       title: 'Select Plants',
-                                    //       buttonText: 'Select Plants',
-                                    //       initialValue:
-                                    //           controller.selectedFacilityIdList,
-                                    //       items: controller.facilityList
-                                    //               ?.map(
-                                    //                 (facility) =>
-                                    //                     DropdownItem<Object>(
-                                    //                   label: facility!.name,
-                                    //                   value: facility.name,
-                                    //                 ),
-                                    //               )
-                                    //               .toList() ??
-                                    //           [],
-                                    //       onConfirm: (selectedOptionsList) {
-                                    //         controller.facilitySelected(
-                                    //             selectedOptionsList);
-                                    //       },
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                    // Spacer(),
                                     Text(
                                       "Select Materials : ",
                                       style: Styles.black15,
                                     ),
                                     SizedBox(
                                       width: Get.width *
-                                          .17, // Fixed width for dropdown
-                                      child: Obx(() => CustomMultiDropdown(
-                                            title: 'Select Material',
-                                            buttonText: 'Select Material',
-                                            initialValue: controller
-                                                .selectedAssetsNameIdList,
-                                            items: controller.assetList
-                                                    ?.map((assets) {
-                                                  return DropdownItem<Object>(
-                                                    label: assets?.name ?? "",
-                                                    value: assets?.name ?? "",
-                                                  );
-                                                }).toList() ??
-                                                [],
-                                            onConfirm: (selectedOptionsList) {
-                                              controller.materialSelected(
-                                                  selectedOptionsList);
-                                            },
-                                          )),
+                                          .19, // Fixed width for dropdown
+                                      child: Obx(
+                                        () => CustomMultiSelectDialogField(
+                                          buttonText: 'Select Materials Name',
+                                          title: 'Materials Name',
+                                          initialValue: (controller
+                                                  .selectedAssetsNameIdList
+                                                  .isNotEmpty)
+                                              ? controller
+                                                  .selectedAssetsNameIdList
+                                              : [],
+                                          items: controller
+                                              .selectedAssetsNameList
+                                              .map(
+                                                (facility) => MultiSelectItem(
+                                                  facility?.id,
+                                                  facility?.name ?? '',
+                                                ),
+                                              )
+                                              .toList(),
+                                          onConfirm: (selectedOptionsList) => {
+                                            controller.materialSelected(
+                                                selectedOptionsList),
+                                          },
+                                        ),
+                                      ),
                                     ),
 
                                     // Container(
@@ -227,10 +223,7 @@ class _SmReportContentWebState extends State<SmReportContentWeb> {
                                             includeAsterisk: false),
                                         Dimens.boxWidth2,
                                         CustomTextFieldForStock(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              5,
+                                          width: Get.width * .19,
                                           numberTextField: true,
                                           onTap: () {
                                             controller
@@ -411,57 +404,291 @@ class _SmReportContentWebState extends State<SmReportContentWeb> {
                               // ),
 
                               Dimens.boxHeight5,
-                              controller.smReportList.isEmpty == true &&
-                                      controller.isLoading == false
-                                  ? Center(child: Text('No data'))
-                                  : controller.isLoading.value == true
-                                      ? Center(
-                                          child: Text("Data Loading......"))
-                                      : Expanded(
-                                          child: ValueListenableBuilder(
-                                              valueListenable:
-                                                  controller.columnVisibility,
-                                              builder: (context, value, child) {
-                                                final dataSource =
-                                                    PlantListDataSource(
-                                                        controller);
+                              // controller.smReportList.isEmpty == true &&
+                              //         controller.isLoading == false
+                              //     ? Center(child: Text('No data'))
+                              //     : controller.isLoading.value == true
+                              //         ? Center(
+                              //             child: Text("Data Loading......"))
+                              //         : Expanded(
+                              //             child: ValueListenableBuilder(
+                              //                 valueListenable:
+                              //                     controller.columnVisibility,
+                              //                 builder: (context, value, child) {
+                              //                   final dataSource =
+                              //                       PlantListDataSource(
+                              //                           controller);
 
-                                                return PaginatedDataTable2(
-                                                  // fixedLeftColumns: 1,
-                                                  // dataRowHeight:
-                                                  // 70,
-                                                  //Get.height * 0.10,
-                                                  columnSpacing: 10,
-                                                  source:
-                                                      dataSource, // Custom DataSource class
-                                                  // headingRowHeight: Get.height * 0.12,
-                                                  // minWidth: Get.width * 0.7,
-                                                  minWidth: 3000,
-                                                  showCheckboxColumn: false,
-                                                  rowsPerPage:
-                                                      10, // Number of rows per page
-                                                  availableRowsPerPage: [
-                                                    10,
-                                                    20,
-                                                    30,
-                                                    50
-                                                  ],
-                                                  columns: [
-                                                    for (var entry
-                                                        in value.entries)
-                                                      if (entry.value)
-                                                        buildDataColumn(
-                                                          entry.key,
-                                                          controller.filterText[
-                                                              entry.key]!,
-                                                          controller
-                                                                  .columnwidth[
-                                                              entry.key],
-                                                        ),
-                                                  ],
-                                                );
-                                              }),
-                                        )
+                              //                   return PaginatedDataTable2(
+                              //                     // fixedLeftColumns: 1,
+                              //                     // dataRowHeight:
+                              //                     // 70,
+                              //                     //Get.height * 0.10,
+                              //                     columnSpacing: 10,
+                              //                     source:
+                              //                         dataSource, // Custom DataSource class
+                              //                     // headingRowHeight: Get.height * 0.12,
+                              //                     // minWidth: Get.width * 0.7,
+                              //                     minWidth: 3000,
+                              //                     showCheckboxColumn: false,
+                              //                     rowsPerPage:
+                              //                         10, // Number of rows per page
+                              //                     availableRowsPerPage: [
+                              //                       10,
+                              //                       20,
+                              //                       30,
+                              //                       50
+                              //                     ],
+                              //                     columns: [
+                              //                       for (var entry
+                              //                           in value.entries)
+                              //                         if (entry.value)
+                              //                           buildDataColumn(
+                              //                             entry.key,
+                              //                             controller.filterText[
+                              //                                 entry.key]!,
+                              //                             controller
+                              //                                     .columnwidth[
+                              //                                 entry.key],
+                              //                           ),
+                              //                     ],
+                              //                   );
+                              //                 }),
+                              //           )
+
+                              controller.smReportList.length > 0
+                                  ? Container(
+                                      margin: EdgeInsets.all(10),
+                                      color: Color.fromARGB(255, 245, 248, 250),
+                                      width: Get.width,
+                                      height: Get.height - 290,
+                                      // ((controller.smReportList.length) * 40) + 100,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(16),
+                                        child: DataTable2(
+                                          headingRowHeight: 50,
+                                          columnSpacing: 12,
+                                          horizontalMargin: 12,
+                                          minWidth: 2500,
+                                          columns: [
+                                            DataColumn2(
+                                              fixedWidth: 100,
+                                              label: Text(
+                                                'Material code',
+                                                style: Styles.blackBold14,
+                                              ),
+                                              // size: ColumnSize.L,
+                                            ),
+                                            DataColumn2(
+                                              fixedWidth: 150,
+                                              label: Text(
+                                                'Material category',
+                                                style: Styles.blackBold14,
+                                              ),
+                                              // size: ColumnSize.L,
+                                            ),
+                                            DataColumn2(
+                                              fixedWidth: 250,
+                                              label: Text(
+                                                'Material Description',
+                                                style: Styles.blackBold14,
+                                              ),
+                                              // size: ColumnSize.L,
+                                            ),
+
+                                            DataColumn2(
+                                              fixedWidth: 200,
+                                              label: Text(
+                                                'Company Code',
+                                                style: Styles.blackBold14,
+                                              ),
+                                              // size: ColumnSize.L,
+                                            ),
+                                            // if (controller.module_id.value == 43)
+                                            DataColumn2(
+                                              fixedWidth: 200,
+                                              label: Text(
+                                                'Plant code',
+                                                style: Styles.blackBold14,
+                                              ),
+                                              // size: ColumnSize.L,
+                                            ),
+                                            // if (controller.module_id.value == 43)
+                                            DataColumn2(
+                                              fixedWidth: 200,
+                                              label: Text(
+                                                'Plant Name',
+                                                style: Styles.blackBold14,
+                                              ),
+                                              // size: ColumnSize.L,
+                                            ),
+                                            if (controller.isToggleOn == true)
+                                              DataColumn2(
+                                                fixedWidth: 200,
+                                                label: Text(
+                                                  'Consumption date',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                            if (controller.isToggleOn == true)
+                                              DataColumn2(
+                                                fixedWidth: 200,
+                                                label: Text(
+                                                  'Quantity',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                            if (controller.isToggleOn == false)
+                                              DataColumn2(
+                                                fixedWidth: 150,
+                                                label: Text(
+                                                  'Inward',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                            if (controller.isToggleOn == false)
+                                              DataColumn2(
+                                                fixedWidth: 120,
+                                                label: Text(
+                                                  'Outward',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                            if (controller.isToggleOn == false)
+                                              DataColumn2(
+                                                fixedWidth: 200,
+                                                label: Text(
+                                                  'Min Available Qnty',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                            if (controller.isToggleOn == false)
+                                              DataColumn2(
+                                                fixedWidth: 200,
+                                                label: Text(
+                                                  'Act Available Qnty',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                            if (controller.isToggleOn == false)
+                                              DataColumn2(
+                                                fixedWidth: 120,
+                                                label: Text(
+                                                  'Deviation',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                            DataColumn2(
+                                              fixedWidth: 120,
+                                              label: Text(
+                                                'Amount',
+                                                style: Styles.blackBold14,
+                                              ),
+                                              // size: ColumnSize.L,
+                                            )
+                                          ],
+                                          rows: List<DataRow>.generate(
+                                              controller.smReportList.length,
+                                              (index) => DataRow(
+                                                    cells: [
+                                                      DataCell(Text(
+                                                          '${controller.smReportList[index]?.asset_code.toString()}')),
+                                                      DataCell(Text(controller
+                                                              .smReportList[
+                                                                  index]
+                                                              ?.material_Category
+                                                              .toString() ??
+                                                          "")),
+                                                      DataCell(Text(controller
+                                                              .smReportList[
+                                                                  index]
+                                                              ?.asset_name
+                                                              .toString() ??
+                                                          "")),
+                                                      DataCell(
+                                                          Text("not came")),
+                                                      DataCell(Text(controller
+                                                              .smReportList[
+                                                                  index]
+                                                              ?.facility_ID
+                                                              .toString() ??
+                                                          "")),
+                                                      DataCell(Text(controller
+                                                              .smReportList[
+                                                                  index]
+                                                              ?.facility_Name
+                                                              .toString() ??
+                                                          "")),
+                                                      if (controller
+                                                              .isToggleOn ==
+                                                          true)
+                                                        DataCell(Text(controller
+                                                                    .smReportList[
+                                                                        index]
+                                                                    ?.comsumption_date ==
+                                                                "0001-01-01"
+                                                            ? ""
+                                                            : controller
+                                                                    .smReportList[
+                                                                        index]
+                                                                    ?.comsumption_date
+                                                                    .toString() ??
+                                                                "")),
+                                                      if (controller
+                                                              .isToggleOn ==
+                                                          true)
+                                                        DataCell(Text(controller
+                                                                .smReportList[
+                                                                    index]
+                                                                ?.comsumed_qty
+                                                                .toString() ??
+                                                            "")),
+                                                      if (controller
+                                                              .isToggleOn ==
+                                                          false)
+                                                        DataCell(Text(controller
+                                                                .smReportList[
+                                                                    index]
+                                                                ?.inward
+                                                                .toString() ??
+                                                            "")),
+                                                      if (controller
+                                                              .isToggleOn ==
+                                                          false)
+                                                        DataCell(Text(controller
+                                                                .smReportList[
+                                                                    index]
+                                                                ?.outward
+                                                                .toString() ??
+                                                            "")),
+                                                      if (controller
+                                                              .isToggleOn ==
+                                                          false)
+                                                        DataCell(Text(
+                                                            '${controller.smReportList[index]?.min_available_qty.toString()}')),
+                                                      if (controller
+                                                              .isToggleOn ==
+                                                          false)
+                                                        DataCell(Text(
+                                                            '${controller.smReportList[index]?.act_available_qty.toString()}')),
+                                                      if (controller
+                                                              .isToggleOn ==
+                                                          false)
+                                                        DataCell(Text("dive")),
+                                                      DataCell(Text("ammo")),
+                                                    ],
+                                                  )),
+                                        ),
+                                      ),
+                                    )
+                                  : Dimens.box0,
                             ],
                           ),
                         ),
@@ -610,131 +837,131 @@ class _SmReportContentWebState extends State<SmReportContentWeb> {
   }
 }
 
-class PlantListDataSource extends DataTableSource {
-  final SmReportController controller;
+// class PlantListDataSource extends DataTableSource {
+//   final SmReportController controller;
 
-  late List<SmReportListModel?> filteredPlantList;
+//   late List<SmReportListModel?> filteredPlantList;
 
-  PlantListDataSource(this.controller) {
-    filterMrss();
-  }
+//   PlantListDataSource(this.controller) {
+//     filterMrss();
+//   }
 
-  ///
-  void filterMrss() {
-    filteredPlantList = <SmReportListModel?>[];
-    filteredPlantList = controller.smReportList.where((smReport) {
-      return (smReport?.asset_code ?? '').toString().toLowerCase().contains(
-              controller.materialCodeFilterText.value.toLowerCase()) &&
-          (smReport?.material_Category ?? '').toLowerCase().contains(
-              controller.materialcategoryFilterText.value.toLowerCase()) &&
-          (smReport?.facility_ID ?? '')
-              .toString()
-              .toLowerCase()
-              .contains(controller.plantCodeFilterText.value.toLowerCase()) &&
-          (smReport?.facility_Name ?? '')
-              .toString()
-              .toLowerCase()
-              .contains(controller.plantNameFilterText.value.toLowerCase()) &&
-          (smReport?.inward ?? '')
-              .toString()
-              .toLowerCase()
-              .contains(controller.inwardFilterText.value.toLowerCase()) &&
-          (smReport?.outward ?? '')
-              .toString()
-              .toLowerCase()
-              .contains(controller.outwardFilterText.value.toLowerCase()) &&
-          (smReport?.act_available_qty ?? '')
-              .toString()
-              .toLowerCase()
-              .contains(controller.actQntyFilterText.value.toLowerCase()) &&
-          (smReport?.min_available_qty ?? '')
-              .toString()
-              .toLowerCase()
-              .contains(controller.MinQntyFilterText.value.toLowerCase());
+//   ///
+//   void filterMrss() {
+//     filteredPlantList = <SmReportListModel?>[];
+//     filteredPlantList = controller.smReportList.where((smReport) {
+//       return (smReport?.asset_code ?? '').toString().toLowerCase().contains(
+//               controller.materialCodeFilterText.value.toLowerCase()) &&
+//           (smReport?.material_Category ?? '').toLowerCase().contains(
+//               controller.materialcategoryFilterText.value.toLowerCase()) &&
+//           (smReport?.facility_ID ?? '')
+//               .toString()
+//               .toLowerCase()
+//               .contains(controller.plantCodeFilterText.value.toLowerCase()) &&
+//           (smReport?.facility_Name ?? '')
+//               .toString()
+//               .toLowerCase()
+//               .contains(controller.plantNameFilterText.value.toLowerCase()) &&
+//           (smReport?.inward ?? '')
+//               .toString()
+//               .toLowerCase()
+//               .contains(controller.inwardFilterText.value.toLowerCase()) &&
+//           (smReport?.outward ?? '')
+//               .toString()
+//               .toLowerCase()
+//               .contains(controller.outwardFilterText.value.toLowerCase()) &&
+//           (smReport?.act_available_qty ?? '')
+//               .toString()
+//               .toLowerCase()
+//               .contains(controller.actQntyFilterText.value.toLowerCase()) &&
+//           (smReport?.min_available_qty ?? '')
+//               .toString()
+//               .toLowerCase()
+//               .contains(controller.MinQntyFilterText.value.toLowerCase());
 
-      // Add other filter conditions as needed
-    }).toList();
-    // print({"filteredPlantList": filteredPlantList});
-  }
+//       // Add other filter conditions as needed
+//     }).toList();
+//     // print({"filteredPlantList": filteredPlantList});
+//   }
 
-  @override
-  DataRow? getRow(int index) {
-    // print({"getRow call"});
-    final PlantDetails = filteredPlantList[index];
-    // String nameWithoutSerial = (PlantDetails?.name ?? '').split(' (')[0];
+//   @override
+//   DataRow? getRow(int index) {
+//     // print({"getRow call"});
+//     final PlantDetails = filteredPlantList[index];
+//     // String nameWithoutSerial = (PlantDetails?.name ?? '').split(' (')[0];
 
-    // controller.PlantId.value = PlantDetails?.asset_name ?? 0;
-    var cellsBuffer = [
-      '${PlantDetails?.asset_code ?? ''}',
-      '${PlantDetails?.material_Category ?? ''}',
-      "",
-      "",
-      // '${PlantDetails?.facility_ID ?? ''}',
-      // '${PlantDetails?.facility_Name ?? ''}',
-      '${PlantDetails?.inward ?? ''}',
-      '${PlantDetails?.outward ?? ''}',
-      '${PlantDetails?.min_available_qty ?? ''}',
-      '${PlantDetails?.act_available_qty ?? ''}',
-      "",
-      '${PlantDetails?.comsumption_date ?? ''}',
-      '${PlantDetails?.comsumed_qty ?? ''}',
+//     // controller.PlantId.value = PlantDetails?.asset_name ?? 0;
+//     var cellsBuffer = [
+//       '${PlantDetails?.asset_code ?? ''}',
+//       '${PlantDetails?.material_Category ?? ''}',
+//       "",
+//       "",
+//       // '${PlantDetails?.facility_ID ?? ''}',
+//       // '${PlantDetails?.facility_Name ?? ''}',
+//       '${PlantDetails?.inward ?? ''}',
+//       '${PlantDetails?.outward ?? ''}',
+//       '${PlantDetails?.min_available_qty ?? ''}',
+//       '${PlantDetails?.act_available_qty ?? ''}',
+//       "",
+//       '${PlantDetails?.comsumption_date ?? ''}',
+//       '${PlantDetails?.comsumed_qty ?? ''}',
 
-      ""
-    ];
-    var cells = [];
-    int i = 0;
+//       ""
+//     ];
+//     var cells = [];
+//     int i = 0;
 
-    for (var entry in controller.columnVisibility.value.entries) {
-      // print({"entry.value entry": entry});
-      if (entry.key == "search") {
-        return null;
-      }
-      if (entry.value) {
-        // print({"entry.value removed": entry.key});
-        cells.add(cellsBuffer[i]);
-      }
-      i++;
-    }
-    // cells.add('Actions');
+//     for (var entry in controller.columnVisibility.value.entries) {
+//       // print({"entry.value entry": entry});
+//       if (entry.key == "search") {
+//         return null;
+//       }
+//       if (entry.value) {
+//         // print({"entry.value removed": entry.key});
+//         cells.add(cellsBuffer[i]);
+//       }
+//       i++;
+//     }
+//     // cells.add('Actions');
 
-    // print({"cell": cells});
-    return DataRow.byIndex(
-      index: index,
+//     // print({"cell": cells});
+//     return DataRow.byIndex(
+//       index: index,
 
-      cells: cells.map((value) {
-        return DataCell(
-          Padding(
-            padding: EdgeInsets.zero,
-            // child: Text(value.toString()),
-            child: Text(value.toString()),
-          ),
-        );
-      }).toList(),
-      //   ],
-      onSelectChanged: (_) {
-        // int assetId = PlantDetails?.assetItemID ?? 0;
-        // if (assetId != 0) {
-        //   Get.toNamed(Routes.plantStockReportDetails, arguments: {
-        //     'assetId': assetId,
-        //     'startdate': controller.formattedFromdate1,
-        //     'enddate': controller.formattedTodate1,
-        //   });
-        // }
+//       cells: cells.map((value) {
+//         return DataCell(
+//           Padding(
+//             padding: EdgeInsets.zero,
+//             // child: Text(value.toString()),
+//             child: Text(value.toString()),
+//           ),
+//         );
+//       }).toList(),
+//       //   ],
+//       onSelectChanged: (_) {
+//         // int assetId = PlantDetails?.assetItemID ?? 0;
+//         // if (assetId != 0) {
+//         //   Get.toNamed(Routes.plantStockReportDetails, arguments: {
+//         //     'assetId': assetId,
+//         //     'startdate': controller.formattedFromdate1,
+//         //     'enddate': controller.formattedTodate1,
+//         //   });
+//         // }
 
-        // final _flutterSecureStorage = const FlutterSecureStorage();
+//         // final _flutterSecureStorage = const FlutterSecureStorage();
 
-        // _flutterSecureStorage.delete(key: "mrsId");
-        // Get.toNamed(Routes.mrsViewScreen, arguments: {'mrsId': MrsDetails?.id});
-      },
-    );
-  }
+//         // _flutterSecureStorage.delete(key: "mrsId");
+//         // Get.toNamed(Routes.mrsViewScreen, arguments: {'mrsId': MrsDetails?.id});
+//       },
+//     );
+//   }
 
-  @override
-  int get rowCount => filteredPlantList.length;
+//   @override
+//   int get rowCount => filteredPlantList.length;
 
-  @override
-  bool get isRowCountApproximate => false;
+//   @override
+//   bool get isRowCountApproximate => false;
 
-  @override
-  int get selectedRowCount => 0;
-}
+//   @override
+//   int get selectedRowCount => 0;
+// }

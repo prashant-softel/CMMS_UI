@@ -3025,7 +3025,7 @@ class ConnectHelper {
   Future<ResponseModel> getAssetList({
     String? auth,
     bool? isLoading,
-    int? facilityId,
+    facilityId,
   }) async =>
       await apiWrapper.makeRequest(
         'SMMaster/GetAssetMasterList?facility_id=$facilityId',
@@ -3039,14 +3039,13 @@ class ConnectHelper {
   Future<ResponseModel> getAvailbleSmReportList(
       {required String auth,
       bool? isLoading,
-      int? facilityId,
+      facilityId,
       dynamic startDate,
       dynamic endDate,
       int? userId,
       dynamic selectedAssetsNameIdList}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'SMReports/GetSMAvailibilityReport?facilityID=$facilityId&smassetCategoryID=1,2,3fromDate=$startDate&toDate=$endDate',
-      // 'SMReports/GetStockReport?facility_id=$facilityId&actorTypeID=2&actorID=$facilityId&StartDate=$endDate&EndDate=$startDate&assetMasterIDs=$assetsItems',
+      'SMReports/GetSMAvailibilityReport?facilityID=$facilityId&smassetCategoryID=$selectedAssetsNameIdList&fromDate=2022-01-02&toDate=$startDate',
       Request.get,
       null,
       isLoading ?? false,
@@ -3062,14 +3061,13 @@ class ConnectHelper {
   Future<ResponseModel> getCansumeSmReportList(
       {required String auth,
       bool? isLoading,
-      int? facilityId,
+      facilityId,
       dynamic startDate,
       dynamic endDate,
       int? userId,
       dynamic selectedAssetsNameIdList}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'SMReports/GetSMConsuptionReport?facilityID=$facilityId&smassetCategoryID=1,2,3fromDate=$startDate&toDate=$endDate',
-      // 'SMReports/GetStockReport?facility_id=$facilityId&actorTypeID=2&actorID=$facilityId&StartDate=$endDate&EndDate=$startDate&assetMasterIDs=$assetsItems',
+      'SMReports/GetSMConsuptionReport?facilityID=$facilityId&smassetCategoryID=${selectedAssetsNameIdList}&fromDate=2022-01-02&toDate=$startDate',
       Request.get,
       null,
       isLoading ?? false,

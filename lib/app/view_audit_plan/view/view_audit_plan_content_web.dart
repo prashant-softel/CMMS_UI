@@ -72,8 +72,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                           onTap: () {
                             Get.offAllNamed(
                                 '${Routes.auditListScreen}/${controller.type.value}');
-
- },
+                          },
                           child: controller.type.value == AppConstants.kMis
                               ? Text(" / MIS", style: Styles.greyLight14)
                               : Text(" / AUDIT LIST",
@@ -378,20 +377,29 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                     //   ),
                                     // ),
                                     //  Dimens.boxWidth10,
-                                    controller.auditPlanDetailModel.value
-                                                    ?.status ==
-                                                421 &&
-                                            varUserAccessModel
-                                                    .value.access_list!
-                                                    .where((e) =>
-                                                        e.feature_id ==
-                                                            UserAccessConstants
-                                                                .kAuditPlanFeatureId &&
-                                                        e.approve ==
-                                                            UserAccessConstants
-                                                                .kHaveApproveAccess)
-                                                    .length >
-                                                0
+                                    controller.auditPlanDetailModel.value?.status == 421 &&
+                                                varUserAccessModel.value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kAuditPlanFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveApproveAccess)
+                                                        .length >
+                                                    0 ||
+                                            controller.auditPlanDetailModel.value?.status == 808 &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kAuditPlanFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveApproveAccess)
+                                                        .length >
+                                                    0
                                         ? Container(
                                             height: 45,
                                             child: CustomElevatedButton(
@@ -408,20 +416,29 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                           )
                                         : Dimens.box0,
                                     Dimens.boxWidth10,
-                                    controller.auditPlanDetailModel.value
-                                                    ?.status ==
-                                                421 &&
-                                            varUserAccessModel
-                                                    .value.access_list!
-                                                    .where((e) =>
-                                                        e.feature_id ==
-                                                            UserAccessConstants
-                                                                .kAuditPlanFeatureId &&
-                                                        e.approve ==
-                                                            UserAccessConstants
-                                                                .kHaveApproveAccess)
-                                                    .length >
-                                                0
+                                    controller.auditPlanDetailModel.value?.status == 421 &&
+                                                varUserAccessModel.value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kAuditPlanFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveApproveAccess)
+                                                        .length >
+                                                    0 ||
+                                            controller.auditPlanDetailModel.value?.status == 808 &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kAuditPlanFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveApproveAccess)
+                                                        .length >
+                                                    0
                                         ? Container(
                                             height: 45,
                                             child: CustomElevatedButton(

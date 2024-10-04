@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cmms/app/utils/utility.dart';
+
 List<SmReportListModel> smReportListModelFromJson(String str) =>
     List<SmReportListModel>.from(
         json.decode(str).map((x) => SmReportListModel.fromJson(x)));
@@ -51,7 +53,10 @@ class SmReportListModel {
       SmReportListModel(
         id: json["id"],
         comsumed_qty: json["comsumed_qty"],
-        comsumption_date: json["comsumption_date"],
+         comsumption_date: json['comsumption_date'] == null
+            ? json['comsumption_date']
+            : Utility.getFormatedyearMonthDay(json['comsumption_date']),
+       
         mrs_ID: json["mrs_ID"],
         asset_code: json['asset_code'],
         facility_ID: json['facility_ID'],

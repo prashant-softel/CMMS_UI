@@ -772,11 +772,8 @@ class AuditListListDataSource extends DataTableSource {
                                   int auditId =
                                       AuditPlanPlanningListDetails?.id ?? 0;
                                   if (auditId != 0) {
-                                    Get.toNamed(Routes.viewAuditPlan,
-                                        arguments: {
-                                          'auditId': auditId,
-                                          'type': controller.type.value
-                                        });
+                                    Get.offAllNamed(
+                                        '${Routes.viewAuditPlan}/$auditId/${controller.type.value}');
                                   }
                                 },
                               )
@@ -964,8 +961,8 @@ class AuditListListDataSource extends DataTableSource {
         controller.clearValue();
         int auditId = AuditPlanPlanningListDetails?.id ?? 0;
         if (auditId != 0) {
-          Get.toNamed(Routes.viewAuditPlan,
-              arguments: {'auditId': auditId, 'type': controller.type.value});
+          Get.offAllNamed(
+              '${Routes.viewAuditPlan}/$auditId/${controller.type.value}');
         }
       },
     );

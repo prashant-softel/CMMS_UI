@@ -8,7 +8,7 @@ class SmReportPresenter {
   SmReportPresenter(this.smReportUsecase);
   SmReportUsecase smReportUsecase;
   Future<List<SmReportListModel?>?> getAvailbleSmReportList(
-          {int? facilityId,
+          {facilityId,
           bool? isLoading,
           dynamic endDate,
           dynamic startDate,
@@ -20,7 +20,7 @@ class SmReportPresenter {
           startDate: startDate,
           selectedAssetsNameIdList: selectedAssetsNameIdList);
   Future<List<SmReportListModel?>?> getCansumeSmReportList(
-          {int? facilityId,
+          {facilityId,
           bool? isLoading,
           dynamic endDate,
           dynamic startDate,
@@ -34,7 +34,7 @@ class SmReportPresenter {
 
   Future<List<GetAssetDataModel?>?> getAssetList({
     String? auth,
-    int? facilityId,
+    facilityId,
     bool? isLoading,
   }) async =>
       await smReportUsecase.getAssetList(
