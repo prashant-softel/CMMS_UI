@@ -28,6 +28,7 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/app/new_permit/new_permit_presenter.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
@@ -1294,6 +1295,7 @@ class NewPermitController extends GetxController {
   }
 
   bool checkForm() {
+    // General form validations
     if (selectedFacility.value == '') {
       isFacilitySelected.value = false;
       isFormValid.value = false;
@@ -1327,30 +1329,17 @@ class NewPermitController extends GetxController {
     if (selectedSopPermit.value == '') {
       isSopPermitListSelected.value = false;
     }
-    // if (selectedEquipmentCategoryIdList.isEmpty) {
-    //   Fluttertoast.showToast(msg: "Select the equipment category");
-    // }
-    // if (startDateTimeCtrlr.text == '') {
-    //   Fluttertoast.showToast(msg: 'Start date Field cannot be empty');
-    // }
-    // if (validTillTimeCtrlr.text == '') {
-    //   Fluttertoast.showToast(msg: 'End date Field cannot be empty');
-    // }
-    // if (selectedTypePermit.value == '') {
-    //   Fluttertoast.showToast(msg: 'Permit type should not be empty');
-    // }
-    // if (permitDescriptionCtrlr.text.trim().length < 3) {
-    //   isJobDescriptionInvalid.value = true;
-    // }
-    // if (titleTextCtrlr.text.trim().length < 3) {
-    //   isTitleTextInvalid.value = true;
-    // }
-    // if (isCheckedJSA.value == false) {
-    //   Fluttertoast.showToast(msg: 'JSA checkbox should be checked');
-    // }
-    // if (isCheckedSOP.value == false) {
-    //   Fluttertoast.showToast(msg: 'SOP checkbox should be checked');
-    // }
+
+    // Validate Equipment Isolation if toggle is on
+    if (isToggleOn.value) {
+      if (selectedEquipmentIsolationIdList.isEmpty) {
+        Fluttertoast.showToast(
+            msg: 'Equipment Isolation must be selected when toggle is on');
+        isFormValid.value = false;
+      }
+    }
+
+    // Final validation check
     if (isAssignedToSelected.value == false ||
         isFacilitySelected.value == false ||
         isstartdateInvalid.value == true ||
@@ -1365,6 +1354,7 @@ class NewPermitController extends GetxController {
     } else {
       isFormInvalid.value = false;
     }
+
     return true;
   }
 
