@@ -1440,6 +1440,21 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                         //   onPressed: () =>
                                         //       controller.goToJobCardScreen(),
                                         //   backgroundColor: ColorValues.appPurpleColor,
+
+                                        // Center(
+                                        //   child: Container(
+                                        //     height: 30,
+                                        //     child: CustomElevatedButton(
+                                        //       icon: Icons.print,
+                                        //       backgroundColor:
+                                        //           ColorValues.linktopermitColor,
+                                        //       text: "print",
+                                        //       onPressed: () {
+                                        //         controller.generateInvoice();
+                                        //       },
+                                        //     ),
+                                        //   ),
+                                        // ),
                                       ]),
                                 ],
                               ),
