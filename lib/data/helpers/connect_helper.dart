@@ -11697,7 +11697,7 @@ class ConnectHelper {
   Future<ResponseModel> getGrievanceSummary({
     String? auth,
     bool? isLoading,
-    required int facility_id,
+    required int facilityId,
     required String? fromDate,
     required String? toDate,
   }) async {
@@ -11705,7 +11705,7 @@ class ConnectHelper {
     print('Grievance List: ${response}');
     try {
       response = await apiWrapper.makeRequest(
-        'Grievance/GrievanceSummaryReport?facility_id=$facility_id&fromDate=$fromDate&toDate=$toDate',
+        'Grievance/GrievanceSummaryReport?facilityId=$facilityId&fromDate=$fromDate&toDate=$toDate',
         Request.get,
         null,
         isLoading ?? false,

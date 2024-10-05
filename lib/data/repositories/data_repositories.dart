@@ -6677,7 +6677,7 @@ class DataRepository extends DomainRepository {
       await connectHelper.getGrievanceSummary(
         auth: auth,
         isLoading: isLoading,
-        facility_id: facility_id,
+        facilityId: facility_id,
         fromDate: fromDate,
         toDate: toDate,
       );
