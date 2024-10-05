@@ -23,6 +23,7 @@ class ScheduleCourseListModel {
   String? trainingCompany;
   String? trainer;
   String? mode;
+  String? short_status;
   String? venue;
   int? traningCategoryId;
   int? noOfDays;
@@ -38,6 +39,7 @@ class ScheduleCourseListModel {
       this.trainingCompany,
       this.trainer,
       this.mode,
+      this.short_status,
       this.venue,
       this.traningCategoryId,
       this.noOfDays,
@@ -56,6 +58,7 @@ class ScheduleCourseListModel {
       trainingCompany: json['trainingCompany'],
       trainer: json['trainer'],
       mode: json['mode'],
+      short_status: json['short_status'],
       venue: json['venue'],
       traningCategoryId: json['traning_category_id'],
       noOfDays: json['no_Of_Days'],
@@ -72,6 +75,7 @@ class ScheduleCourseListModel {
         'trainingCompany': trainingCompany,
         'trainer': trainer,
         'mode': mode,
+        'short_status': short_status,
         'venue': venue,
         'traning_category_id': traningCategoryId,
         'no_Of_Days': noOfDays,
