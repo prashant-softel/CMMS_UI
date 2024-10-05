@@ -149,11 +149,34 @@ class CreateGrievanceController extends GetxController {
   }
 
   void saveGrievance() async {
-    try {
-      String _concern = htmlEscape.convert(concernController.text.trim());
-      String _description =
-          htmlEscape.convert(descriptionController.text.trim());
-      selectedAssetsIdList.clear();
+  // Validation logic for empty fields
+  bool isValid = true;
+
+  // Check if concern is empty
+  if (concernController.text.trim().isEmpty) {
+    isConcernInvalid.value = true;
+    isValid = false;
+  } else {
+    isConcernInvalid.value = false;
+  }
+
+  // Check if description is empty
+  if (descriptionController.text.trim().isEmpty) {
+    isDescriptionInvalid.value = true;
+    isValid = false;
+  } else {
+    isDescriptionInvalid.value = false;
+  }
+
+  // If validation fails, return early and do not proceed further
+  if (!isValid) {
+    return;
+  }
+
+  try {
+    String _concern = htmlEscape.convert(concernController.text.trim());
+    String _description = htmlEscape.convert(descriptionController.text.trim());
+    selectedAssetsIdList.clear();
 
       for (var _selectedWorkArea in selectedWorkAreaList) {
         selectedAssetsIdList.add(_selectedWorkArea?.grievanceType ?? 0);

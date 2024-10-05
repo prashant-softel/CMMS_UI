@@ -150,19 +150,19 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                               Dimens.boxHeight15,
                               Column(
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 50),
-                                    child: Row(
+                                    Row(
                                       children: [
-                                        CustomRichText(title: 'Concern: '),
-                                        SizedBox(
-                                            width:
-                                                60), // Assuming you want some space between the text and the TextField
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 53),
+                                          child: CustomRichText(
+                                              title: 'Concern: '),
+                                        ),
+                                        SizedBox(width: 60),
                                         Expanded(
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius:
-                                                  BorderRadius.circular(5),
+                                                  BorderRadius.circular(10),
                                               border: Border.all(
                                                   color: Color.fromARGB(
                                                       255, 227, 224, 224),
@@ -178,107 +178,46 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                                                 ),
                                               ],
                                             ),
+                                            width: (MediaQuery.of(context)
+                                                .size
+                                                .width),
                                             // Remove width property here
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.040,
                                             child: Obx(
-                                              () => TextField(
-                                                style: GoogleFonts.lato(
-                                                  textStyle: TextStyle(
-                                                      fontSize: 16.0,
-                                                      height: 1.0,
-                                                      color: Colors.black),
-                                                ),
-                                                controller: controller
-                                                    .concernController,
-                                                focusNode:
-                                                    controller.concernFocus,
-                                                scrollController:
-                                                    controller.concernScroll,
-                                                autofocus: false,
-                                                decoration: InputDecoration(
-                                                  fillColor:
-                                                      ColorValues.whiteColor,
-                                                  filled: true,
-                                                  contentPadding:
-                                                      EdgeInsets.fromLTRB(
-                                                          5.0, 10.0, 5.0, 10.0),
-                                                  border: InputBorder.none,
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5.0),
-                                                    borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent),
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5.0),
-                                                    borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent),
-                                                  ),
-                                                  focusedErrorBorder: controller
-                                                          .isConcernInvalid
-                                                          .value
-                                                      ? OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          borderSide: BorderSide(
-                                                              color: ColorValues
-                                                                  .redColorDark),
-                                                        )
-                                                      : InputBorder.none,
-                                                  errorBorder: controller
-                                                          .isConcernInvalid
-                                                          .value
-                                                      ? OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          borderSide: BorderSide(
-                                                              color: ColorValues
-                                                                  .redColorDark),
-                                                        )
-                                                      : null,
-                                                  errorText: controller
-                                                          .isConcernInvalid
-                                                          .value
-                                                      ? "Required field"
-                                                      : null,
-                                                ),
-                                                onChanged: (value) {
-                                                  if (value.trim().length > 3) {
-                                                    controller.isConcernInvalid
-                                                        .value = false;
-                                                  } else {
-                                                    controller.isConcernInvalid
-                                                        .value = true;
-                                                  }
-                                                },
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .deny(
-                                                    RegExp('[\'^]'),
-                                                  ),
-                                                ],
+                                          () => TextField(
+                                            style: GoogleFonts.lato(
+                                              textStyle: TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+                                            ),
+                                            controller: controller.concernController,
+                                            focusNode: controller.concernFocus,
+                                            scrollController: controller.concernScroll,
+                                            keyboardType: TextInputType.multiline,
+                                            maxLines: 5,
+                                            autofocus: false,
+                                            decoration: InputDecoration(
+                                              fillColor: ColorValues.whiteColor,
+                                              filled: true,
+                                              contentPadding: Dimens.edgeInsets05_10,
+                                              border: InputBorder.none,
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(10.0),
+                                                borderSide: BorderSide(color: Colors.transparent),
                                               ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(10.0),
+                                                borderSide: BorderSide(color: Colors.transparent),
+                                              ),
+                                              errorText: controller.isConcernInvalid.value ? "Required field" : null,
                                             ),
                                           ),
                                         ),
+
+                                          ),
+                                        ),
                                       ],
-                                    ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 10, right: 10, left: 30),
+                                        top: 30, right: 10, left: 30),
                                     child: Row(
                                       children: [
                                         Padding(
@@ -312,91 +251,34 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                                                 .width),
                                             // Remove width property here
                                             child: Obx(
-                                              () => TextField(
-                                                style: GoogleFonts.lato(
-                                                  textStyle: TextStyle(
-                                                      fontSize: 16.0,
-                                                      height: 1.0,
-                                                      color: Colors.black),
-                                                ),
-                                                controller: controller
-                                                    .descriptionController,
-                                                focusNode:
-                                                    controller.descriptionFocus,
-                                                scrollController: controller
-                                                    .descriptionScroll,
-                                                keyboardType:
-                                                    TextInputType.multiline,
-                                                maxLines: 5,
-                                                autofocus: false,
-                                                decoration: InputDecoration(
-                                                  fillColor:
-                                                      ColorValues.whiteColor,
-                                                  filled: true,
-                                                  contentPadding:
-                                                      Dimens.edgeInsets05_10,
-                                                  border: InputBorder.none,
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                    borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent),
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                    borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent),
-                                                  ),
-                                                  focusedErrorBorder: controller
-                                                          .isDescriptionInvalid
-                                                          .value
-                                                      ? OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          borderSide: BorderSide(
-                                                              color: ColorValues
-                                                                  .redColorDark),
-                                                        )
-                                                      : InputBorder.none,
-                                                  errorBorder: controller
-                                                          .isDescriptionInvalid
-                                                          .value
-                                                      ? OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          borderSide: BorderSide(
-                                                              color: ColorValues
-                                                                  .redColorDark),
-                                                        )
-                                                      : null,
-                                                  errorText: controller
-                                                          .isConcernInvalid
-                                                          .value
-                                                      ? "Required field"
-                                                      : null,
-                                                ),
-                                                onChanged: (value) {
-                                                  if (value.trim().length > 3) {
-                                                    controller
-                                                        .isDescriptionInvalid
-                                                        .value = false;
-                                                  } else {
-                                                    controller
-                                                        .isDescriptionInvalid
-                                                        .value = true;
-                                                  }
-                                                },
-                                              ),
+                                          () => TextField(
+                                            style: GoogleFonts.lato(
+                                              textStyle: TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
                                             ),
+                                            controller: controller.descriptionController,
+                                            focusNode: controller.descriptionFocus,
+                                            scrollController: controller.descriptionScroll,
+                                            keyboardType: TextInputType.multiline,
+                                            maxLines: 5,
+                                            autofocus: false,
+                                            decoration: InputDecoration(
+                                              fillColor: ColorValues.whiteColor,
+                                              filled: true,
+                                              contentPadding: Dimens.edgeInsets05_10,
+                                              border: InputBorder.none,
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(10.0),
+                                                borderSide: BorderSide(color: Colors.transparent),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(10.0),
+                                                borderSide: BorderSide(color: Colors.transparent),
+                                              ),
+                                              errorText: controller.isDescriptionInvalid.value ? "Required field" : null,
+                                            ),
+                                          ),
+                                        ),
+
                                           ),
                                         ),
                                       ],
