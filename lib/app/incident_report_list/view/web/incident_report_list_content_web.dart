@@ -81,11 +81,11 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                 onTap: () {
                                   Get.offNamed(Routes.incidentReportDashboard);
                                 },
-                                child: Text(" / INCIDENT REPORT",
+                                child: Text(" / INCIDENT RECORD",
                                     style: Styles.greyLight14),
                               ),
                               Text(
-                                " / INCIDENT REPORT LIST",
+                                " / INCIDENT RECORD LIST",
                                 style: Styles.greyLight14,
                               )
                               // Text(" / Warranty Claim List",
@@ -116,7 +116,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            "Incident Report List",
+                                            "Incident Record List",
                                             style: Styles.blackBold16,
                                           ),
                                           Spacer(),
@@ -158,7 +158,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                   0
                                               ? ActionButton(
                                                   icon: Icons.add,
-                                                  label: 'Add Incident Report',
+                                                  label: 'Add Incident Record',
                                                   onPressed: () {
                                                     controller.clearStoreData();
                                                     Get.toNamed(Routes

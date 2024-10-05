@@ -152,7 +152,8 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
                                                 ?.map(
                                                   (module) => MultiSelectItem(
                                                     module!.id,
-                                                    module.moduleName ?? 'Unknown',
+                                                    module.moduleName ??
+                                                        'Unknown',
                                                   ),
                                                 )
                                                 ?.toList() ??
@@ -389,13 +390,6 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
                                   "DASHBOARD",
                                   style: Styles.greyLight14,
                                 ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Get.offNamed(Routes.calendarViewDashbord);
-                                },
-                                child: Text(" / CALENDER",
-                                    style: Styles.greyLight14),
                               ),
                               Text(" / CALENDER VIEW",
                                   style: Styles.greyLight14),

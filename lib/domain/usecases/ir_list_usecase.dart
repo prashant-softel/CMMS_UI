@@ -3,10 +3,10 @@ import 'package:cmms/domain/models/incident_report_list_model.dart';
 
 import '../models/facility_model.dart';
 
-class IncidentReportListUsecase {
+class IRListUsecase {
   final Repository _repository;
 
-  IncidentReportListUsecase(this._repository);
+  IRListUsecase(this._repository);
 
   Future<void> generateToken() async {
     return await _repository.generateToken();

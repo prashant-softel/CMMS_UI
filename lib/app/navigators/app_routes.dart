@@ -263,6 +263,9 @@ abstract class Routes {
   static const calendarView = _Paths.calendarView;
   static const smReportList = _Paths.smReportList;
   static const evaluation = _Paths.evaluation;
+  static const irList = _Paths.irList;
+
+  
 }
 
 abstract class _Paths {
@@ -525,4 +528,7 @@ abstract class _Paths {
   static const calendarView = '/calendarView';
   static const smReportList = '/smreportlist';
   static const evaluation = '/evaluation';
+  static const irList = '/irList';
+
+  
 }

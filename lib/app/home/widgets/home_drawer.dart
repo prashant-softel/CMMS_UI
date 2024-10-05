@@ -226,7 +226,7 @@ class HomeDrawer extends GetView<HomeController> {
                                   color: Color(0xffD2D0D0),
                                 ),
                                 press: () {
-                                  Get.offAllNamed(Routes.calendarViewDashbord);
+                                  Get.offAllNamed(Routes.calendarView);
                                 },
                               ),
                               MenuItem(
