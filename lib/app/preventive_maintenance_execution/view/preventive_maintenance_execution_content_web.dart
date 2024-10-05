@@ -254,6 +254,8 @@ class PreventiveMaintenanceExecutionContentWeb
                                       ),
                                       Expanded(
                                         child: DataTable2(
+                                          minWidth: 1200,
+                                          // dataRowHeight: 105,
                                           border: TableBorder.all(
                                               color: Color.fromARGB(
                                                   255, 206, 229, 234)),

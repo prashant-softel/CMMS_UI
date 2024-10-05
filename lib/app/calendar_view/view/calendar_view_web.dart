@@ -152,7 +152,7 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
                                                 ?.map(
                                                   (module) => MultiSelectItem(
                                                     module!.id,
-                                                    module.name ?? 'Unknown',
+                                                    module.moduleName ?? 'Unknown',
                                                   ),
                                                 )
                                                 ?.toList() ??
