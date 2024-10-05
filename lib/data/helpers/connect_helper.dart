@@ -11140,7 +11140,7 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Training/ApproveScheduleCourse',
-      Request.post,
+      Request.put,
       jsonEncode(approveSchedule),
       isLoading ?? false,
       {

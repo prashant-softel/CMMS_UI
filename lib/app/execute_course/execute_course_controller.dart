@@ -14,7 +14,6 @@ class ExecuteCourseController extends GetxController {
 
   ExecuteCoursePresenter schedulePresenter;
   HomeController homeController = Get.find();
-  RxInt facilityId = 0.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
@@ -34,13 +33,14 @@ class ExecuteCourseController extends GetxController {
   DateTime currentDate = DateTime.now();
   RxBool isExecutionDay = false.obs;
   RxInt type = 0.obs;
+   int facilityId = 0;
 
   @override
   void onInit() async {
     await setId();
     facilityIdStreamSubscription =
         homeController.facilityId$.listen((event) async {
-      facilityId.value = event;
+      facilityId = event;
       await getCourseDetails(schedule_id: schedule_id.value);
     });
     super.onInit();
@@ -120,10 +120,10 @@ class ExecuteCourseController extends GetxController {
 
   void approveCourseSchedule(int id) async {
     String _comment = commentCtrlr.text.trim();
-    CommentModel commentModel = CommentModel(
-      id: id,
+    CommentModel commentModel =  CommentModel(
+      id: id, 
       comment: _comment,
-    );
+      );
     var approveSchedule = commentModel.toJson();
     final response = await schedulePresenter.approveCourseSchedule(
       approveSchedule: approveSchedule,

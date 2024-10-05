@@ -562,19 +562,19 @@ class TrainingListDataSource extends DataTableSource {
                                   //             ?.status ==
                                   //         471
                                       // ? 
-                                      TableActionButton(
-                                          color: Colors.lightGreen,
-                                          icon: Icons.calendar_month_outlined,
-                                          message: "Schedule",
-                                          onPress: () {
-                                            controller.scheduleCourse(
-                                              courseId: TrainingCourse?.id ?? 0,
-                                              scheduleId: 0,
-                                            );
-                                          },
-                                        )
+                                      // TableActionButton(
+                                      //     color: Colors.lightGreen,
+                                      //     icon: Icons.calendar_month_outlined,
+                                      //     message: "Schedule",
+                                      //     onPress: () {
+                                      //       controller.scheduleCourse(
+                                      //         courseId: TrainingCourse?.id ?? 0,
+                                      //         scheduleId: 0,
+                                      //       );
+                                      //     },
+                                      //   )
                                       // : Dimens.box0,
-                                      ,
+                                      // ,
                                   // controller.courseList
                                   //             .firstWhereOrNull((element) =>
                                   //                 element?.id ==
@@ -582,20 +582,20 @@ class TrainingListDataSource extends DataTableSource {
                                   //             ?.status ==
                                   //         472
                                       // ?
-                                       TableActionButton(
-                                          color: ColorValues.appLightBlueColor,
-                                          icon: Icons.remove_red_eye,
-                                          message: "View Schedule",
-                                          onPress: () {
-                                            controller.viewScheduleCourse(
-                                              scheduleId:
-                                                  TrainingCourse?.id ?? 0,
-                                            );
-                                          },
-                                        )
+                                      //  TableActionButton(
+                                      //     color: ColorValues.appLightBlueColor,
+                                      //     icon: Icons.remove_red_eye,
+                                      //     message: "View Schedule",
+                                      //     onPress: () {
+                                      //       controller.viewScheduleCourse(
+                                      //         scheduleId:
+                                      //             TrainingCourse?.id ?? 0,
+                                      //       );
+                                      //     },
+                                      //   )
 
                                       // : Dimens.box0,
-                                      ,
+                                      // ,
                                   // controller.courseList
                                   //             .firstWhereOrNull((element) =>
                                   //                 element?.id ==
@@ -603,19 +603,19 @@ class TrainingListDataSource extends DataTableSource {
                                   //             ?.status ==
                                   //         472
                                       // ?
-                                       TableActionButton(
-                                          color: ColorValues.editColor,
-                                          icon: Icons.edit,
-                                          message: "Edit Schedule",
-                                          onPress: () {
-                                            controller.scheduleCourse(
-                                              courseId: TrainingCourse?.id ?? 0,
-                                              scheduleId: 3,
-                                            );
-                                          },
-                                        )
+                                      //  TableActionButton(
+                                      //     color: ColorValues.editColor,
+                                      //     icon: Icons.edit,
+                                      //     message: "Edit Schedule",
+                                      //     onPress: () {
+                                      //       controller.scheduleCourse(
+                                      //         courseId: TrainingCourse?.id ?? 0,
+                                      //         scheduleId: 3,
+                                      //       );
+                                      //     },
+                                      //   )
                                       // : Dimens.box0,
-                                      ,
+                                      // ,
 
                                   TableActionButton(
                                     color: ColorValues.deleteColor,

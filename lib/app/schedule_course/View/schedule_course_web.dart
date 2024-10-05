@@ -108,23 +108,23 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                   style: Styles.blackBold18,
                                 ),
                                 Spacer(),
-                                Text(
-                                  "Course Id: ",
-                                  style: Styles.blackBold16,
-                                ),
-                                Text(
-                                  "${controller.trainingCourse.value.id ?? ""}",
-                                  style: Styles.blue17,
-                                ),
-                                Dimens.boxWidth10,
-                                Text(
-                                  "Course Name: ",
-                                  style: Styles.blackBold16,
-                                ),
-                                Text(
-                                  "${controller.trainingCourse.value.name ?? ""}",
-                                  style: Styles.blue17,
-                                ),
+                                // Text(
+                                //   "Course Id: ",
+                                //   style: Styles.blackBold16,
+                                // ),
+                                // Text(
+                                //   // "${controller.trainingCourse.value.id ?? ""}",
+                                //   // style: Styles.blue17,
+                                // ),
+                                // Dimens.boxWidth10,
+                                // Text(
+                                //   "Course Name: ",
+                                //   style: Styles.blackBold16,
+                                // ),
+                                // Text(
+                                //   // "${controller.trainingCourse.value.name ?? ""}",
+                                //   // style: Styles.blue17,
+                                // ),
                               ],
                             ),
                           ),
@@ -247,6 +247,52 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                                         .value = true;
                                                   }
                                                 },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Dimens.boxHeight10,
+                                       Row(
+                                          children: [
+                                            CustomRichText(
+                                                title: "Course Name: "),
+                                            Dimens.boxWidth10,
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 227, 224, 244),
+                                                      width: 1),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Color.fromARGB(255,
+                                                              236, 234, 234)
+                                                          .withOpacity(0.5),
+                                                      spreadRadius: 2,
+                                                      blurRadius: 5,
+                                                      offset: Offset(0, 2),
+                                                    )
+                                                  ]),
+                                              width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  .2),
+                                              height: 30,
+                                              child: Obx(
+                                                () => DropdownWebWidget(
+                                                  dropdownList:
+                                                      controller.courseList,
+                                                  isValueSelected: controller
+                                                      .isTrainingCourseSelected
+                                                      .value,
+                                                  selectedValue: controller
+                                                      .selectedTrainingCourseName
+                                                      .value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
+                                                ),
                                               ),
                                             ),
                                           ],

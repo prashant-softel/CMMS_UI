@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/schedule_course_list/schedule_course_list_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/schedule_course_list_model.dart';
@@ -199,6 +200,20 @@ class ScheduleCourseListController extends GetxController {
       rowsPerPage: 10,
     );
     update(['schedule_list']);
+  }
+    Future<void> scheduleCourse({required int courseId, required int scheduleId}) async {
+    clearStoreData();
+    Get.toNamed(Routes.scheduleCourse, arguments: {'courseId': courseId, 'scheduleId': scheduleId});
+  }
+    Future<void> viewScheduleCourse({required int scheduleId}) async {
+    clearStoreData();
+    Get.toNamed(
+      Routes.executeCourse,
+      arguments: {
+        'schedule_id': scheduleId,
+        "type": 2,
+      },
+    );
   }
 
   void clearStoreData() {
