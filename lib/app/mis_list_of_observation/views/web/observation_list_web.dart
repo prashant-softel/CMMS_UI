@@ -654,10 +654,11 @@ class ObservationListDataSource extends DataTableSource {
                                 )
                               : ObservationListDetails!.status_code == 552 ||
                                       ObservationListDetails.status_code ==
-                                              553 &&
-                                          controller.getObsById.value!
-                                                  .assigned_to_id !=
-                                              varUserAccessModel.value.user_id
+                                              553 
+                                          //     &&
+                                          // controller.getObsById.value!
+                                          //         .assigned_to_id !=
+                                          //     varUserAccessModel.value.user_id
                                   ? Dimens.box0
                                   : TableActionButton(
                                       color: ColorValues.editColor,

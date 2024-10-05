@@ -76,10 +76,10 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                         : InkWell(
                             onTap: () {
                               controller.clearStoreData();
-                              Get.offNamed(Routes.trainingCourse);
+                              Get.offNamed(Routes.scheduleCourseList);
                             },
                             child: Text(
-                              " / Training Course".toUpperCase(),
+                              " / Training Schedule List".toUpperCase(),
                               style: Styles.greyLight14,
                             ),
                           ),

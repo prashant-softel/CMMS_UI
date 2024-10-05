@@ -18200,7 +18200,10 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
           msg: "Course Scheduled Successfully",
-          fontSize: 16.0,
+          fontSize: 16.0,  );
+           Get.offAllNamed(
+          Routes.scheduleCourseList,
+      
         );
       } else {
         Utility.showDialog(res.errorCode.toString(), 'Add Course');
@@ -18290,6 +18293,9 @@ class Repository {
         Fluttertoast.showToast(
           msg: "Course Scheduled Successfully",
           fontSize: 16.0,
+        );
+          Get.offAllNamed(
+          Routes.scheduleCourseList,
         );
       } else {
         Utility.showDialog(res.errorCode.toString(), 'Add Course');
