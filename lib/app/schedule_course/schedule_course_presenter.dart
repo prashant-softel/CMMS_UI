@@ -38,6 +38,18 @@ class SchedulePresenter {
       isLoading: isLoading,
     );
   }
+    Future<List<TrainingCourseListModel?>?> getTrainingCourseList({
+    int? facilityId,
+    String? start_date,
+    String? end_date,
+    bool? isLoading,
+  }) async =>
+      await trainingUsecase.getTrainingCourseList(
+        facilityId: facilityId,
+        start_date: start_date,
+        end_date: end_date,
+        isLoading: isLoading,
+      );
 
   Future<TrainingCourseListModel> getCourseDetails({
     int? courseId,

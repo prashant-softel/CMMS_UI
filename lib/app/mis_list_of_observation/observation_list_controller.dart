@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/mis_list_of_observation/observation_list_presenter.dart';
+import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/get_observation_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ class ObservationListController extends GetxController {
   RxList<GetObservationList> filteredData = <GetObservationList>[].obs;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
-
+ Rx<GetObservationById?> getObsById = GetObservationById().obs;
   String get formattedFromdate =>
       DateFormat('dd/MM/yyyy').format(fromDate.value);
   String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);

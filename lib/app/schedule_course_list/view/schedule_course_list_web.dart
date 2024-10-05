@@ -132,6 +132,19 @@ class _ScheduleCourseWebState extends State<ScheduleCourseWeb> {
                                               ),
                                             ],
                                           ),
+                                            Dimens.boxWidth10,
+                                          ActionButton(
+                                            icon: Icons.calendar_month_outlined,
+                                            label: "Schedule",
+                                            onPressed: () {
+                                                controller.scheduleCourse(
+                                              // courseId:ScheduleCourse.courseID??0,
+                                              courseId:0,
+                                              scheduleId:0,
+                                            );
+                                            },
+                                            color: ColorValues.addNewColor,
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -514,6 +527,28 @@ class ScheduleCourseListDataSource extends DataTableSource {
                                       );
                                     },
                                   ),
+                                    TableActionButton(
+                                          color: ColorValues.editColor,
+                                          icon: Icons.edit,
+                                          message: "Edit Schedule",
+                                          onPress: () {
+                                            controller.scheduleCourse(
+                                              courseId:  ScheduleCourse.courseID??0,
+                                              scheduleId: ScheduleCourse.scheduleID??0 ,
+                                            );
+                                          },
+                                        ),
+                                   TableActionButton(
+                                          color: ColorValues.appLightBlueColor,
+                                          icon: Icons.remove_red_eye,
+                                          message: "View Schedule",
+                                          onPress: () {
+                                            controller.viewScheduleCourse(
+                                              scheduleId:ScheduleCourse.scheduleID??
+                                                  0,
+                                            );
+                                          },
+                                        ),
                                   // TableActionButton(
                                   //   color: ColorValues.executeColor,
                                   //   icon: Icons.arrow_forward,

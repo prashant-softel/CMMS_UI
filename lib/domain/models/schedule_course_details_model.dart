@@ -8,6 +8,8 @@ class ScheduleCourseDetails {
   String? training_course;
   String? trainer;
   String? mode;
+  String? course_name;
+  int? hfeEmployeeId;
   String? venue;
   String? training_agency;
   String? hfe_Employee;
@@ -19,6 +21,8 @@ class ScheduleCourseDetails {
     this.facility_id,
     this.date_of_Training,
     this.training_course,
+    this.hfeEmployeeId,
+    this.course_name,
     this.trainer,
     this.mode,
     this.venue,
@@ -36,7 +40,9 @@ class ScheduleCourseDetails {
             ? Utility.getFormattedYearMonthDayTime(json["date_of_Trainig"])
             : "",
         training_course: json["training_course"],
+        course_name: json["course_name"],
         trainer: json["trainer"],
+        hfeEmployeeId: json["hfeEmployeeId"],
         mode: json["mode"],
         venue: json["venue"],
         training_agency: json["training_Agency"],
@@ -56,7 +62,9 @@ class ScheduleCourseDetails {
         'facility_id': facility_id,
         'date_of_Trainig': date_of_Training,
         'training_course': training_course,
+        'course_name': course_name,
         'trainer': trainer,
+        'hfeEmployeeId': hfeEmployeeId,
         'mode': mode,
         'venue': venue,
         'training_Agency': training_agency,

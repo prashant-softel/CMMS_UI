@@ -11,6 +11,7 @@ import 'package:cmms/domain/models/training_course_list_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 
 class ScheduleController extends GetxController {
@@ -47,16 +48,18 @@ class ScheduleController extends GetxController {
   TextEditingController trainerName = TextEditingController();
   FocusNode trainerFocus = FocusNode();
   ScrollController trainerScroll = ScrollController();
-
+RxList<TrainingCourseListModel?> courseList = <TrainingCourseListModel>[].obs;
   RxInt id = 0.obs;
   Rx<int> selectedCourseId = 0.obs;
   Rx<String> selectedCourseName = ''.obs;
   Rx<int> selectedEmployeeId = 0.obs;
+
   Rx<String> selectedEmployeeName = ''.obs;
   Rx<String> selectedModeName = ''.obs;
   Rx<int> selectedModeId = 0.obs;
   Rx<int> selectedTrainingAgencyId = 0.obs;
   Rx<String> selectedTrainingAgencyName = ''.obs;
+  Rx<String> selectedTrainingCourseName = ''.obs;
   RxBool isTrainingCourseSelected = true.obs;
   RxBool isTrainingAgencySelected = true.obs;
   RxBool isEmployeeSelected = true.obs;
@@ -67,6 +70,7 @@ class ScheduleController extends GetxController {
   RxInt courseId = 0.obs;
   RxInt scheduleId = 0.obs;
   RxBool isLoading = true.obs;
+   RxList<String> trainingCourseListTableColumns = <String>[].obs;
 
   RxBool isFormInvalid = false.obs;
   RxBool isDateInvalid = false.obs;
@@ -79,7 +83,8 @@ class ScheduleController extends GetxController {
   RxBool isEmployeeNumberInvalid = false.obs;
   RxBool isEmployeeDesignationInvalid = false.obs;
   RxBool isCompanyInvalid = false.obs;
-
+ RxList<TrainingCourseListModel?> filteredData =
+      <TrainingCourseListModel>[].obs;
   Map<dynamic, dynamic> employee_map = {};
   RxList<ScheduleTrainingCourse> scheduleTrainingCourse =
       <ScheduleTrainingCourse>[].obs;
@@ -97,6 +102,26 @@ class ScheduleController extends GetxController {
     StatusModel(id: 2, name: 'Offline'),
     StatusModel(id: 2, name: 'Online + Offline'),
   ].obs;
+    Rx<DateTime> startDate = DateTime.now().obs;
+  Rx<DateTime> endDate = DateTime.now().obs;
+  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 70)).obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
+    String get formattedFromdate =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
+  String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String formatDate(String? inputDateTime) {
+    String formattedDateTimeString = '';
+    if (inputDateTime != null &&
+        inputDateTime.isNotEmpty &&
+        inputDateTime != "null") {
+      DateFormat inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+      DateTime parsedDateTime = inputFormat.parse(inputDateTime);
+      DateFormat outputFormat = DateFormat("yyyy-MM-dd hh:mm");
+      formattedDateTimeString = outputFormat.format(parsedDateTime);
+    }
+    return formattedDateTimeString;
+  }
+
   RxList<EmployeeListModel?> employees = <EmployeeListModel>[].obs;
   RxList<BusinessListModel> trainingAgency = <BusinessListModel>[
     BusinessListModel(
@@ -116,11 +141,17 @@ class ScheduleController extends GetxController {
         homeController.facilityId$.listen((event) async {
       facilityId.value = event;
       await getEmployeeList();
-      await getCourseDetails(courseId.value);
-      if (scheduleId.value != 0) {
-        await getScheduleCourseDetails(schedule_id: scheduleId.value);
-      }
+      // await getCourseDetails(courseId.value);
+      // if (scheduleId.value != 0) {
+      //   await getScheduleCourseDetails(schedule_id: scheduleId.value);
+      // }
+      await  getTrainingCourseList(
+              facilityId: facilityId.value,
+              startDate: formattedFromdate,
+              endDate: formattedTodate,
+            );
     });
+
     commentFocus.addListener(() {
       if (!commentFocus.hasFocus) {
         commentScroll.jumpTo(0.0);
@@ -146,7 +177,7 @@ class ScheduleController extends GetxController {
       if (_courseId == null || _courseId == "" || _courseId == 0) {
         var dataFromPrevioursScreen = Get.arguments;
         courseId.value = dataFromPrevioursScreen['courseId'];
-        scheduleId.value = dataFromPrevioursScreen['scheduleId'];
+        courseId.value = dataFromPrevioursScreen['scheduleId'];
         schedulePresenter.saveValue(courseId: courseId.value.toString());
         schedulePresenter.saveScheduleValue(
             scheduleId: scheduleId.value.toString());
@@ -227,7 +258,6 @@ class ScheduleController extends GetxController {
 
   Future<void> getEmployeePermitList() async {
     employeeNameList.value = <EmployeeListModel>[];
-    
     final _employeeNameList = await schedulePresenter.getEmployeePermitList(
       isLoading: true,
       facility_id: facilityId.value,
@@ -350,8 +380,8 @@ class ScheduleController extends GetxController {
     });
 
     ScheduleTrainingCourse scheduleCourse = ScheduleTrainingCourse(
-      courseId: courseId.value,
-      courseName: trainingCourse.value.name,
+      courseId:selectedCourseId.value,
+      courseName: selectedTrainingCourseName.value,
       comment: _comment,
       trainingAgencyId: selectedTrainingAgencyId.value,
       dateOfTraining: _dateOfTraining,
@@ -372,6 +402,39 @@ class ScheduleController extends GetxController {
 
     print("Successfully scheduled");
   }
+  Future<void> getTrainingCourseList({
+    required int facilityId,
+    String? startDate,
+    String? endDate,
+  }) async {
+    courseList.value = <TrainingCourseListModel>[];
+    final _getTrainingList = await schedulePresenter.getTrainingCourseList(
+      facilityId: facilityId,
+      start_date: startDate,
+      end_date: endDate,
+      isLoading: isLoading.value,
+    );
+
+    if (_getTrainingList != null) {
+      courseList.value = _getTrainingList;
+      filteredData.value = courseList;
+      isLoading.value = false;
+      if (courseList.isNotEmpty) {
+        TrainingCourseListModel? trainingCourse =
+            courseList.firstWhere((element) => element?.id != 0);
+        var trainingCourseListJson = trainingCourse?.toJson();
+        trainingCourseListTableColumns.value = <String>[];
+        for (var key in trainingCourseListJson?.keys.toList() ?? []) {
+          trainingCourseListTableColumns.add(key);
+        }
+      }
+    }
+    // trainingListPaginationController = PaginationController(
+    //   rowCount: courseList.length,
+    //   rowsPerPage: 10,
+    // );
+    update(['training_list']);
+  }
 
   void onValueChanged(dynamic list, dynamic value) {
     print({list, value});
@@ -383,6 +446,16 @@ class ScheduleController extends GetxController {
           selectedEmployeeId.value = employees[employeeIndex]?.id ?? 0;
           isEmployeeSelected.value = true;
           print("facility selected $selectedEmployeeId, $selectedEmployeeName");
+        }
+        break;
+
+         case const (RxList<TrainingCourseListModel>):
+        {
+          int employeeIndex = courseList.indexWhere((x) => x?.name == value);
+          selectedTrainingCourseName.value = courseList[employeeIndex]?.name ?? '';
+          selectedCourseId.value = courseList[employeeIndex]?.id ?? 0;
+          isEmployeeSelected.value = true;
+          print("facility selected $selectedCourseId, $selectedEmployeeName");
         }
         break;
       case const (RxList<BusinessListModel>):

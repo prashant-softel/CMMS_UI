@@ -114,7 +114,8 @@ class TrainingController extends GetxController {
               startDate: formattedFromdate,
               endDate: formattedTodate,
             );
-          });
+          }
+          );
         },
       );
     } catch (e) {
