@@ -73,7 +73,7 @@ class _ScheduleCourseWebState extends State<ScheduleCourseWeb> {
                               ),
                             ),
                             Text(
-                              " / SCHEDULE COURSE LIST",
+                              " /TRAINING SCHEDULE LIST",
                               style: Styles.greyLight14,
                             ),
                           ],
@@ -104,7 +104,7 @@ class _ScheduleCourseWebState extends State<ScheduleCourseWeb> {
                                             MainAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "Schedule Course List",
+                                            "Training Schedule List",
                                             style: Styles.blackBold16,
                                           ),
                                           Spacer(),
@@ -135,7 +135,7 @@ class _ScheduleCourseWebState extends State<ScheduleCourseWeb> {
                                             Dimens.boxWidth10,
                                           ActionButton(
                                             icon: Icons.calendar_month_outlined,
-                                            label: "Schedule",
+                                            label: "Add Schedule",
                                             onPressed: () {
                                                 controller.scheduleCourse(
                                               // courseId:ScheduleCourse.courseID??0,
@@ -464,7 +464,7 @@ class ScheduleCourseListDataSource extends DataTableSource {
     // }
 
     var cellsBuffer = [
-      "SC${ScheduleCourse.scheduleID ?? ""}",
+      "scheduleID",
       'TC${ScheduleCourse.courseID ?? ''}',
       schedDate,
       '${ScheduleCourse.trainingCompany ?? ''}',
@@ -493,17 +493,36 @@ class ScheduleCourseListDataSource extends DataTableSource {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child:
-                // child: (value == 'id')
-                //     ? Column(
-                //         crossAxisAlignment: CrossAxisAlignment.start,
-                //         children: [
-                //           Text(
-                //             'SC${ScheduleCourse.scheduleID}',
-                //           ),
-                //         ],
-                //       )
-                (value == 'Actions')
+            
+                child: (value == 'scheduleID')
+                    ?
+                     Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'SC${ScheduleCourse.scheduleID}',
+                          ),
+                          Dimens.boxHeight10,
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                               decoration: BoxDecoration(
+                                    color:  ColorValues.appGreenColor,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            '${ScheduleCourse.short_status}',
+                            style: Styles.white10.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                        ],
+                      )
+                :(value == 'Actions')
                     ? Wrap(
                         children: [
                           Column(
@@ -511,22 +530,18 @@ class ScheduleCourseListDataSource extends DataTableSource {
                             children: [
                               Wrap(
                                 children: [
-                                  TableActionButton(
-                                    color: ColorValues.appDarkBlueColor,
-                                    icon: Icons.visibility,
-                                    message: 'View',
-                                    onPress: () {
-                                      controller.clearStoreData();
-                                      Get.toNamed(
-                                        Routes.executeCourse,
-                                        arguments: {
-                                          "schedule_id":
-                                              ScheduleCourse.scheduleID,
-                                          "type": 1,
-                                        },
-                                      );
-                                    },
-                                  ),
+                                   TableActionButton(
+                                         color: ColorValues.appDarkBlueColor,
+                                          icon: Icons.visibility,
+                                          message: "View Schedule",
+                                          onPress: () {
+                                            controller.viewScheduleCourse(
+                                              scheduleId:ScheduleCourse.scheduleID??
+                                                  0,
+                                            );
+                                          },
+                                        ),
+
                                     TableActionButton(
                                           color: ColorValues.editColor,
                                           icon: Icons.edit,
@@ -538,32 +553,38 @@ class ScheduleCourseListDataSource extends DataTableSource {
                                             );
                                           },
                                         ),
-                                   TableActionButton(
-                                          color: ColorValues.appLightBlueColor,
-                                          icon: Icons.remove_red_eye,
-                                          message: "View Schedule",
-                                          onPress: () {
-                                            controller.viewScheduleCourse(
-                                              scheduleId:ScheduleCourse.scheduleID??
-                                                  0,
-                                            );
-                                          },
-                                        ),
-                                  // TableActionButton(
-                                  //   color: ColorValues.executeColor,
-                                  //   icon: Icons.arrow_forward,
-                                  //   message: 'Execute',
+                                  //                TableActionButton(
+                                  //   color: ColorValues.appDarkBlueColor,
+                                  //   icon: Icons.visibility,
+                                  //   message: 'View',
                                   //   onPress: () {
                                   //     controller.clearStoreData();
                                   //     Get.toNamed(
                                   //       Routes.executeCourse,
                                   //       arguments: {
                                   //         "schedule_id":
-                                  //             ScheduleCourse.scheduleID
+                                  //             ScheduleCourse.scheduleID,
+                                  //         "type": 1,
                                   //       },
                                   //     );
                                   //   },
                                   // ),
+                                  TableActionButton(
+                                    color: ColorValues.executeColor,
+                                    icon: Icons.arrow_forward,
+                                    message: 'Execute',
+                                    onPress: () {
+                                      controller.clearStoreData();
+                                      Get.toNamed(
+                                        Routes.executeCourse,
+                                        arguments: {
+                                          "schedule_id":
+                                              ScheduleCourse.scheduleID,
+                                               "type": 1,
+                                        },
+                                      );
+                                    },
+                                  ),
                                 ],
                               ),
                             ],

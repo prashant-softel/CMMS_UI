@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class ScheduleController extends GetxController {
   ScheduleController(this.schedulePresenter);
@@ -85,6 +86,7 @@ RxList<TrainingCourseListModel?> courseList = <TrainingCourseListModel>[].obs;
   RxBool isCompanyInvalid = false.obs;
  RxList<TrainingCourseListModel?> filteredData =
       <TrainingCourseListModel>[].obs;
+       RxList<BusinessListModel> moduleList = <BusinessListModel>[].obs;
   Map<dynamic, dynamic> employee_map = {};
   RxList<ScheduleTrainingCourse> scheduleTrainingCourse =
       <ScheduleTrainingCourse>[].obs;
@@ -143,7 +145,7 @@ RxList<TrainingCourseListModel?> courseList = <TrainingCourseListModel>[].obs;
       await getEmployeeList();
       // await getCourseDetails(courseId.value);
       // if (scheduleId.value != 0) {
-      //   await getScheduleCourseDetails(schedule_id: scheduleId.value);
+        await getScheduleCourseDetails(schedule_id: scheduleId.value);
       // }
       await  getTrainingCourseList(
               facilityId: facilityId.value,
@@ -177,7 +179,7 @@ RxList<TrainingCourseListModel?> courseList = <TrainingCourseListModel>[].obs;
       if (_courseId == null || _courseId == "" || _courseId == 0) {
         var dataFromPrevioursScreen = Get.arguments;
         courseId.value = dataFromPrevioursScreen['courseId'];
-        courseId.value = dataFromPrevioursScreen['scheduleId'];
+        scheduleId.value = dataFromPrevioursScreen['scheduleId'];
         schedulePresenter.saveValue(courseId: courseId.value.toString());
         schedulePresenter.saveScheduleValue(
             scheduleId: scheduleId.value.toString());
@@ -212,7 +214,34 @@ RxList<TrainingCourseListModel?> courseList = <TrainingCourseListModel>[].obs;
       isLoading: true,
     );
     scheduleCourseDetails.value = _courseDetails;
+    
   }
+  //   Future<void> getBusinessList(selectedBusinessTypeId, int facilityId) async {
+  //   moduleList.value = <BusinessListModel>[];
+  //   final _moduleList = await schedulePresenter.getBusinessList(
+  //       facilityId: facilityId,
+  //       businessType: selectedBusinessTypeId,
+  //       isLoading: isLoading.value);
+
+  //   if (_moduleList != null) {
+  //     moduleList.value = _moduleList;
+  //     filteredData.value = moduleList.value;
+  //     isLoading.value = false;
+  //     // paginationController = PaginationController(
+  //     //   rowCount: moduleList?.length ?? 0,
+  //     //   rowsPerPage: 10,
+  //     // );
+  //       // if (filteredData.isNotEmpty) {
+  //       // moduleListModel = filteredData[0];
+  //       // var preventiveCheckListJson = moduleListModel?.toJson();
+  //       // moduleListTableColumns.value = <String>[];
+  //       // for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
+  //       //   moduleListTableColumns.add(key);
+  //       // }
+  //       // }
+  //     }
+  //   }
+  // }
 
   void addExternalEmployee() {
     checkFormExternal();

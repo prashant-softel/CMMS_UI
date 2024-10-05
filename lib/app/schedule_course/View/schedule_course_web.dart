@@ -70,10 +70,10 @@ class ScheduleWeb extends GetView<ScheduleController> {
                     InkWell(
                       onTap: () {
                         controller.clearStoreData();
-                        Get.offNamed(Routes.trainingCourse);
+                        Get.offNamed(Routes.scheduleCourseList);
                       },
                       child: Text(
-                        " / TRAINING COURSE",
+                        " / SCHEDULE  LIST",
                         style: Styles.greyLight14,
                       ),
                     ),
