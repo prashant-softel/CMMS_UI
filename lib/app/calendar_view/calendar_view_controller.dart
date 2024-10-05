@@ -47,6 +47,7 @@ class CalendarViewController extends GetxController {
       DateFormat('yyyy-MM-dd').format(fromDate.value);
   String get end_date => DateFormat('yyyy-MM-dd').format(toDate.value);
   String get start_date => DateFormat('yyyy-MM-dd').format(fromDate.value);
+  RxList<int> selectedModuleIdList = <int>[].obs;
 
   @override
   void onInit() async {
@@ -67,6 +68,7 @@ class CalendarViewController extends GetxController {
     allItems.clear(); // Clear previous data
 
     String lststrFacilityIds = homecontroller.selectedFacilityIdList.join(',');
+    String moduleId = selectedModuleIdList.join(',');
 
     print({"facilityData1": lststrFacilityIds});
 
@@ -74,7 +76,8 @@ class CalendarViewController extends GetxController {
         facilityId: lststrFacilityIds,
         endDate: formattedTodate1,
         startDate: formattedFromdate1,
-        isLoading: true);
+        isLoading: true,
+        moduleId: moduleId);
     dashboardList.value = _dashboardList ?? [];
 
     // Process the dashboard list and populate allItems
@@ -166,7 +169,20 @@ class CalendarViewController extends GetxController {
     homecontroller.selectedFacilityIdList.clear(); // Clear the existing list
     homecontroller.selectedFacilityIdList
         .addAll(_selectedFacilityIds); // Add the new selections
-    print('Selected facility IDs: ${homecontroller.selectedFacilityIdList}');
+    // print('Selected facility IDs: ${homecontroller.selectedFacilityIdList}');
+    getdashboardList();
+  }
+
+  void selectedMultiModule(List<int> _selectedModuleIdList) {
+    selectedModuleIdList.clear(); // Clear the existing list
+
+// Clear the existing list
+    // for (var _selectedId in _selectedModuleIdList) {
+    //   selectedModuleIdList.add(_selectedId);
+    // }
+    selectedModuleIdList
+        .addAll(_selectedModuleIdList); // Add the new selections
+    // print('Selected facility IDs: ${homecontroller.selectedFacilityIdList}');
     getdashboardList();
   }
 

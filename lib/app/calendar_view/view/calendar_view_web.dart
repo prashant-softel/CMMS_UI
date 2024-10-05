@@ -137,33 +137,36 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
                                       style: Styles.black15,
                                     ),
                                     Dimens.boxWidth2,
-                                    // Container(
-                                    //   width: 300,
-                                    //   child: CustomMultiSelectDialogField(
-                                    //     title: 'Please Select',
-                                    //     buttonText: 'Select Module',
-                                    //     // initialValue:
-                                    //     //     controller.selectedModuleList,
-                                    //     items: controller.moduleList
-                                    //             ?.map(
-                                    //               (module) => MultiSelectItem(
-                                    //                 module!.id,
-                                    //                 module.moduleName ??
-                                    //                     'Unknown',
-                                    //               ),
-                                    //             )
-                                    //             ?.toList() ??
-                                    //         [],
-                                    //     // onConfirm: (selectedOptionsList) {
-                                    //     //   controller.moduleSelected(
-                                    //     //       selectedOptionsList);
-                                    //     //   print(
-                                    //     //       'Selected Modules: $selectedOptionsList');
-                                    //     //   print(
-                                    //     //       'Updated Selected Modules in Controller: ${controller.selectedModuleList}');
-                                    //     // },
-                                    //   ),
-                                    // ),
+                                    Container(
+                                      width: 300,
+                                      child: CustomMultiSelectDialogField(
+                                        title: 'Please Select',
+                                        buttonText: 'Select Module',
+                                        initialValue: (controller
+                                                .selectedModuleIdList
+                                                .isNotEmpty)
+                                            ? controller.selectedModuleIdList
+                                            : [],
+                                        // initialValue: controller.moduleList,
+                                        items: controller.moduleList
+                                                ?.map(
+                                                  (module) => MultiSelectItem(
+                                                    module!.id,
+                                                    module.name ?? 'Unknown',
+                                                  ),
+                                                )
+                                                ?.toList() ??
+                                            [],
+                                        onConfirm: (selectedOptionsList) {
+                                          controller.selectedMultiModule(
+                                              selectedOptionsList.cast<int>());
+                                          print(
+                                              'Selected Modules: $selectedOptionsList');
+                                          print(
+                                              'Updated Selected Modules in Controller: ${controller.selectedModuleList}');
+                                        },
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
