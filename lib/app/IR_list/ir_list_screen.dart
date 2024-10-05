@@ -1,15 +1,15 @@
+import 'package:cmms/app/IR_list/ir_list_controller.dart';
+import 'package:cmms/app/IR_list/view/web/ir_list_content_web.dart';
+
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
-import 'package:cmms/app/incident_report_list/incident_report_list_controller.dart';
-import 'package:cmms/app/incident_report_list/view/web/incident_report_list_content_web.dart';
-import 'package:cmms/app/incident_report_list/view/web/mobile/incident_report_list_content_mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class IncidentReportListScreen extends GetView<IncidentReportListController> {
-  IncidentReportListScreen({super.key});
-  final controller = Get.find<IncidentReportListController>();
+class IRListScreen extends GetView<IRListController> {
+  IRListScreen({super.key});
+  final controller = Get.find<IRListController>();
   final homecontroller = Get.find<HomeController>();
 
   @override
@@ -18,7 +18,7 @@ class IncidentReportListScreen extends GetView<IncidentReportListController> {
       appBar: Responsive.isMobile(context)
           ? AppBar(
               title: HeadingProfileAppBar(
-                title: "Incident Record",
+                title: "Incident Report",
               ),
             )
           : null,
@@ -45,10 +45,12 @@ class IncidentReportListScreen extends GetView<IncidentReportListController> {
                     child: Column(
                       children: [
                         if (Responsive.isMobile(context))
-                          Expanded(child: IncidentReportListMobile()),
+                          Expanded(
+                            child: Text(""),
+                          ),
                         if (Responsive.isDesktop(context))
                           Expanded(
-                            child: IncidentReportListWeb(),
+                            child: IRListWeb(),
                           )
                       ],
                     ),

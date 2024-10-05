@@ -4,6 +4,8 @@ import 'package:cmms/app/Compliance_Status/Compliance_Status_binding.dart';
 import 'package:cmms/app/Compliance_Status/view/Compliance_Status_screen.dart';
 import 'package:cmms/app/Course_Category/View/course_category_screen.dart';
 import 'package:cmms/app/Course_Category/course_category_binding.dart';
+import 'package:cmms/app/IR_list/ir_list_binding.dart';
+import 'package:cmms/app/IR_list/ir_list_screen.dart';
 import 'package:cmms/app/Statutory-Compliance/Statutory_Compliance_binding.dart';
 import 'package:cmms/app/Statutory-Compliance/view/Statutory_Compliance_screen.dart';
 import 'package:cmms/app/Statutory/statutory_binding.dart';
@@ -46,8 +48,6 @@ import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance_screen
 import 'package:cmms/app/business_List/view/business_list_screen.dart';
 import 'package:cmms/app/calendar_view/calendar_view_binding.dart';
 import 'package:cmms/app/calendar_view/view/calendar_view_screen.dart';
-import 'package:cmms/app/calender_view_dashboard/calendar_view_dashboard_binding.dart';
-import 'package:cmms/app/calender_view_dashboard/calendar_view_dashboard_screen.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
 import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
@@ -1159,8 +1159,7 @@ class AppPages {
       binding: ViewMcPlaningBinding(),
     ),
     GetPage<dynamic>(
-            name: '${_Paths.createAudit}/:auditId/:type',
-
+      name: '${_Paths.createAudit}/:auditId/:type',
       page: CreateAuditScreen.new,
       binding: CreateAuditBinding(),
     ),
@@ -1502,11 +1501,7 @@ class AppPages {
       page: PlantationDataScreen.new,
       binding: PlantationDataBinding(),
     ),
-    GetPage<dynamic>(
-      name: _Paths.calendarViewDashbord,
-      page: CalendarViewDashbordScreen.new,
-      binding: CalendarViewDashbordBinding(),
-    ),
+
     GetPage<dynamic>(
       name: _Paths.cmmsReport,
       page: CmmsReportDashboardScreen.new,
@@ -1558,6 +1553,11 @@ class AppPages {
       name: _Paths.evaluation,
       page: EvaluationScreen.new,
       binding: EvaluationBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.irList,
+      page: IRListScreen.new,
+      binding: IRListBinding(),
     ),
   ];
 }
