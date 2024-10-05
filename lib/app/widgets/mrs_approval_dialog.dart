@@ -25,7 +25,7 @@ class MrsApprovalSuccessDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          '$data',
+          'Message....',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.green),
         ),
@@ -47,7 +47,7 @@ class MrsApprovalSuccessDialog extends GetView {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'MRS Approved Successfully!! ID: ',
+                        '${data}', //'MRS Approved Successfully!! ID: ',
                         style: Styles.black16,
                       ),
                       Text(
