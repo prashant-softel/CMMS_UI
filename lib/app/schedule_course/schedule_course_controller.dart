@@ -49,7 +49,7 @@ class ScheduleController extends GetxController {
   TextEditingController trainerName = TextEditingController();
   FocusNode trainerFocus = FocusNode();
   ScrollController trainerScroll = ScrollController();
-RxList<TrainingCourseListModel?> courseList = <TrainingCourseListModel>[].obs;
+  RxList<TrainingCourseListModel?> courseList = <TrainingCourseListModel>[].obs;
   RxInt id = 0.obs;
   Rx<int> selectedCourseId = 0.obs;
   Rx<String> selectedCourseName = ''.obs;
@@ -71,7 +71,7 @@ RxList<TrainingCourseListModel?> courseList = <TrainingCourseListModel>[].obs;
   RxInt courseId = 0.obs;
   RxInt scheduleId = 0.obs;
   RxBool isLoading = true.obs;
-   RxList<String> trainingCourseListTableColumns = <String>[].obs;
+  RxList<String> trainingCourseListTableColumns = <String>[].obs;
 
   RxBool isFormInvalid = false.obs;
   RxBool isDateInvalid = false.obs;
@@ -84,9 +84,9 @@ RxList<TrainingCourseListModel?> courseList = <TrainingCourseListModel>[].obs;
   RxBool isEmployeeNumberInvalid = false.obs;
   RxBool isEmployeeDesignationInvalid = false.obs;
   RxBool isCompanyInvalid = false.obs;
- RxList<TrainingCourseListModel?> filteredData =
+  RxList<TrainingCourseListModel?> filteredData =
       <TrainingCourseListModel>[].obs;
-       RxList<BusinessListModel> moduleList = <BusinessListModel>[].obs;
+  RxList<BusinessListModel> moduleList = <BusinessListModel>[].obs;
   Map<dynamic, dynamic> employee_map = {};
   RxList<ScheduleTrainingCourse> scheduleTrainingCourse =
       <ScheduleTrainingCourse>[].obs;
@@ -104,11 +104,11 @@ RxList<TrainingCourseListModel?> courseList = <TrainingCourseListModel>[].obs;
     StatusModel(id: 2, name: 'Offline'),
     StatusModel(id: 2, name: 'Online + Offline'),
   ].obs;
-    Rx<DateTime> startDate = DateTime.now().obs;
+  Rx<DateTime> startDate = DateTime.now().obs;
   Rx<DateTime> endDate = DateTime.now().obs;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 70)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
-    String get formattedFromdate =>
+  String get formattedFromdate =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
   String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
   String formatDate(String? inputDateTime) {
@@ -145,13 +145,13 @@ RxList<TrainingCourseListModel?> courseList = <TrainingCourseListModel>[].obs;
       await getEmployeeList();
       // await getCourseDetails(courseId.value);
       // if (scheduleId.value != 0) {
-        await getScheduleCourseDetails(schedule_id: scheduleId.value);
+      await getScheduleCourseDetails(schedule_id: scheduleId.value);
       // }
-      await  getTrainingCourseList(
-              facilityId: facilityId.value,
-              startDate: formattedFromdate,
-              endDate: formattedTodate,
-            );
+      await getTrainingCourseList(
+        facilityId: facilityId.value,
+        startDate: formattedFromdate,
+        endDate: formattedTodate,
+      );
     });
 
     commentFocus.addListener(() {
@@ -214,7 +214,16 @@ RxList<TrainingCourseListModel?> courseList = <TrainingCourseListModel>[].obs;
       isLoading: true,
     );
     scheduleCourseDetails.value = _courseDetails;
-    
+    trainerName.text = scheduleCourseDetails.value?.trainer ?? "";
+    dateOfTraining.text = scheduleCourseDetails.value?.date_of_Training ?? "";
+    venue.text = scheduleCourseDetails.value?.venue ?? "";
+    selectedTrainingCourseName.value =
+        scheduleCourseDetails.value?.course_name ?? "";
+    selectedModeName.value = scheduleCourseDetails.value?.mode ?? "";
+    selectedEmployeeName.value =
+        scheduleCourseDetails.value?.hfe_Employee ?? "";
+    selectedTrainingCourseName.value =
+        scheduleCourseDetails.value?.training_course ?? "";
   }
   //   Future<void> getBusinessList(selectedBusinessTypeId, int facilityId) async {
   //   moduleList.value = <BusinessListModel>[];
@@ -409,7 +418,7 @@ RxList<TrainingCourseListModel?> courseList = <TrainingCourseListModel>[].obs;
     });
 
     ScheduleTrainingCourse scheduleCourse = ScheduleTrainingCourse(
-      courseId:selectedCourseId.value,
+      courseId: selectedCourseId.value,
       courseName: selectedTrainingCourseName.value,
       comment: _comment,
       trainingAgencyId: selectedTrainingAgencyId.value,
@@ -431,6 +440,7 @@ RxList<TrainingCourseListModel?> courseList = <TrainingCourseListModel>[].obs;
 
     print("Successfully scheduled");
   }
+
   Future<void> getTrainingCourseList({
     required int facilityId,
     String? startDate,
@@ -478,10 +488,11 @@ RxList<TrainingCourseListModel?> courseList = <TrainingCourseListModel>[].obs;
         }
         break;
 
-         case const (RxList<TrainingCourseListModel>):
+      case const (RxList<TrainingCourseListModel>):
         {
           int employeeIndex = courseList.indexWhere((x) => x?.name == value);
-          selectedTrainingCourseName.value = courseList[employeeIndex]?.name ?? '';
+          selectedTrainingCourseName.value =
+              courseList[employeeIndex]?.name ?? '';
           selectedCourseId.value = courseList[employeeIndex]?.id ?? 0;
           isEmployeeSelected.value = true;
           print("facility selected $selectedCourseId, $selectedEmployeeName");
