@@ -119,7 +119,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                               : controller.type.value == 2
                                                   ? Get.offNamed(
                                                       '${Routes.pmTaskView}/$taskId')
-                                                  : controller.type.value == 5
+                                                  : controller.type.value == 6
                                                       ? Get.offAllNamed(
                                                           '${Routes.vegExecutionScreen}/${vegexe}/${vegplan}')
                                                       : controller.type.value ==

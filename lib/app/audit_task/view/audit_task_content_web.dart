@@ -358,7 +358,11 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                                                     columns: [
                                                       for (var entry
                                                           in value.entries)
-                                                        if (entry.value)
+                                                        if (entry.value &&
+                                                            !(controller.type ==
+                                                                    5 &&
+                                                                entry.key ==
+                                                                    'PTW')) // Skip PTW column if type == 2
                                                           buildDataColumn(
                                                             entry.key,
                                                             controller
@@ -551,7 +555,7 @@ class PmTaskDataSource extends DataTableSource {
     // print({"getRow call"});
     final pmTaskDetails = filteredPmTaskList[index];
 
-    controller.pmTaskId.value = pmTaskDetails?.id ?? 0;
+    // controller.pmTaskId.value = pmTaskDetails?.id ?? 0;
     var cellsBuffer = [
       "pmTaskId", // '${pmTaskDetails?.id ?? ''}',
       '${pmTaskDetails?.name ?? ''}',
@@ -560,7 +564,7 @@ class PmTaskDataSource extends DataTableSource {
       '${pmTaskDetails?.done_date ?? ''}',
       '${pmTaskDetails?.frequency_name ?? ''}',
       '${pmTaskDetails?.assigned_to_name ?? ''}',
-      '${pmTaskDetails?.permit_code ?? ''}',
+      if (controller.type.value != 5) '${pmTaskDetails?.permit_code ?? ''}',
       'Actions',
     ];
     var cells = [];
@@ -572,12 +576,32 @@ class PmTaskDataSource extends DataTableSource {
         return null;
       }
       if (entry.value) {
-        // print({"entry.value removed": entry.key});
-        cells.add(cellsBuffer[i]);
+        if (!(controller.type.value == 5 && entry.key == 'PTW')) {
+          // print({"entry.value removed": entry.key});
+          cells.add(cellsBuffer[i]);
+        }
       }
       i++;
     }
     cells.add('Actions');
+    // final pmTaskDetails = filteredPmTaskList[index];
+
+    // List<DataCell> cells = [];
+
+    // // Ensure columns and rows match by applying the same logic
+    // int i = 0;
+    // for (var entry in controller.columnVisibility.value.entries) {
+    //   if (entry.value && i < cellsBuffer.length) {
+    //     // Ensure consistency in length
+    //     if (!(controller.type.value == 5 && entry.key == 'PTW')) {
+    //       // Skip PTW column if type == 5
+    //       cells.add(DataCell(Text(cellsBuffer[i])));
+    //     }
+    //   }
+    //   i++;
+    // }
+
+    // cells.add(DataCell(Text('Actions'))); // Always add the Actions column
 
     // print({"cell": cells});
     return DataRow.byIndex(
@@ -720,11 +744,8 @@ class PmTaskDataSource extends DataTableSource {
                                   // controller.clearTypeValue();
                                   int auditTaskId = pmTaskDetails?.id ?? 0;
                                   if (auditTaskId != 0) {
-                                    Get.toNamed(Routes.viewAuditTask,
-                                        arguments: {
-                                          'auditTaskId': auditTaskId,
-                                          'type': controller.type.value
-                                        });
+                                    Get.offAllNamed(
+                                        '${Routes.viewAuditTask}/$auditTaskId/${controller.type.value}');
                                   }
                                 },
                               )
@@ -764,10 +785,8 @@ class PmTaskDataSource extends DataTableSource {
                           e.view == UserAccessConstants.kHaveViewAccess)
                       .length >
                   0
-              ? Get.toNamed(Routes.viewAuditTask, arguments: {
-                  'auditTaskId': taskId,
-                  'type': controller.type.value
-                })
+              ? Get.offAllNamed(
+                  '${Routes.viewAuditTask}/$taskId/${controller.type.value}')
               : null;
         }
       },

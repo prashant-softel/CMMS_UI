@@ -27,8 +27,9 @@ import 'package:cmms/app/utils/url_path.dart';
 class NewPermitWeb extends GetView<NewPermitController> {
   NewPermitWeb({Key? key}) : super(key: key);
   final NewPermitController _controller = Get.find();
-  final FileUploadController dropzoneController =
-      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
+  final FileUploadController dropzoneController = Get.put(FileUploadController(
+    apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',
+  ));
   @override
   Widget build(BuildContext context) {
     return SelectionArea(
@@ -85,9 +86,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                             ? Get.offNamed('${Routes.jobDetails}/$jobId')
                             : controller.typee.value == 2
                                 ? Get.offNamed('${Routes.pmTaskView}/$taskId')
-                                : controller.typee.value == AppConstants.kAudit
-                                    ? Get.offAllNamed(Routes.viewAuditTask,
-                                        arguments: {'auditTaskId': taskId})
+                                : controller.typee.value ==
+                                            AppConstants.kAudit ||
+                                        controller.typee.value ==
+                                            AppConstants.kEvaluation
+                                    ? Get.offAllNamed(
+                                        '${Routes.viewAuditTask}/$taskId/${controller.typee.value}')
                                     : controller.typee.value == 4
                                         ? Get.offAllNamed(
                                             Routes
@@ -95,7 +99,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                             arguments: {
                                                 'mcid': mcid
                                               })
-                                        : controller.typee.value == 5
+                                        : controller.typee.value == 6
                                             ? Get.offAllNamed(
                                                 '${Routes.vegExecutionScreen}/${controller.vegExecutionDetailsModel?.executionId}/${controller.vegExecutionDetailsModel?.planId}')
                                             : Get.offNamed(

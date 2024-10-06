@@ -16,11 +16,21 @@ class AuditPlanMessageApproveDialog extends GetView {
 
   @override
   Widget build(BuildContext context) {
-    String buttonText1 =
-        type == AppConstants.kMis ? 'MIS Plan List' : 'Audit Plan List';
-    String buttonText2 = type == AppConstants.kMis ? 'MIS Task' : 'Audit Task';
-    String buttonText3 =
-        type == AppConstants.kMis ? 'View MIS Plan' : 'View Audit Plan';
+    String buttonText1 = type == AppConstants.kMis
+        ? 'MIS Plan List'
+        : type == AppConstants.kEvaluation
+            ? 'Plan List'
+            : 'Audit Plan List';
+    String buttonText2 = type == AppConstants.kMis
+        ? 'MIS Task'
+        : type == AppConstants.kEvaluation
+            ? 'Evaluation Task'
+            : 'Audit Task';
+    String buttonText3 = type == AppConstants.kMis
+        ? 'View MIS Plan'
+        : type == AppConstants.kEvaluation
+            ? 'View Plan'
+            : 'View Audit Plan';
     return SelectionArea(
       child: StatefulBuilder(builder: ((context, setState) {
         return AlertDialog(
@@ -32,7 +42,9 @@ class AuditPlanMessageApproveDialog extends GetView {
           title: Text(
             type == AppConstants.kMis
                 ? 'MIS Plan Approval'
-                : 'Audit Plan Approval',
+                : type == AppConstants.kEvaluation
+                    ? 'Evaluation Plan Approval'
+                    : 'Audit Plan Approval',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black),
           ),
@@ -77,7 +89,8 @@ class AuditPlanMessageApproveDialog extends GetView {
                   child: ElevatedButton(
                     style: Styles.greenElevatedButtonStyle,
                     onPressed: () {
-                      Get.offAllNamed(Routes.auditTask);
+                      Get.offNamed(Routes.auditTask,
+                          arguments: {'type': controller.type});
                     },
                     child: Text(buttonText2),
                   ),

@@ -4,13 +4,16 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/cumulative_report/cumulative_report_presenter.dart';
 import 'package:cmms/app/utils/save_file_web.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/cumulative_report_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:cmms/domain/models/module_model.dart';
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/veg_task_equipment_model.dart';
 import 'package:cmms/domain/models/veg_task_list_model.dart';
@@ -69,6 +72,13 @@ class CumulativeReportController extends GetxController {
   // RxList<VegTaskEquipmentList?> vegTaskEquipment = <VegTaskEquipmentList>[].obs;
   Rx<VegExecutionDetailsModel?> vegExecutionDetailsModel =
       VegExecutionDetailsModel().obs;
+  Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
+  RxList<JobAssociatedModel?>? jobAssociatedModelsList =
+      <JobAssociatedModel?>[].obs;
+  RxList<MRSListByJobIdModel?>? listMrsByJobId = <MRSListByJobIdModel?>[].obs;
+  RxList<JobDetailsModel?>? jobDetailsList = <JobDetailsModel?>[].obs;
+  RxList<AssociatedPermit>? associatedPermitList = <AssociatedPermit>[].obs;
+
   @override
   void onInit() async {
     await setReportType();
@@ -2163,5 +2173,367 @@ class CumulativeReportController extends GetxController {
         page: page,
         bounds: Rect.fromLTWH(pageWidth - (signatureSize.width + margin),
             currentY + 20, signatureSize.width, signatureSize.height))!;
+  }
+
+  Future<void> generateInvoiceJob() async {
+    try {
+      final PdfDocument document = PdfDocument();
+
+      final PdfPage page = document.pages.add();
+
+      final Size pageSize = page.getClientSize();
+
+      var url = "assets/assets/files/HFELogo.png";
+      var response = await get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        var data = response.bodyBytes;
+
+        PdfBitmap image = PdfBitmap(data);
+
+        final PdfLayoutResult result =
+            drawHeader(page, pageSize, document, image);
+
+        final List<int> bytes = await document.save();
+
+        document.dispose();
+
+        await saveAndLaunchFile(bytes, 'Job Details.pdf');
+      } else {
+        print("Error fetching the image: ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error generating invoice: $e");
+    }
+  }
+
+  PdfLayoutResult drawHeaderJob(
+    PdfPage page,
+    Size pageSize,
+    PdfDocument document,
+    PdfBitmap image,
+  ) {
+    final PdfPen borderPen = PdfPen(PdfColor(142, 180, 219), width: 1.0);
+    final PdfBrush backgroundBrush = PdfSolidBrush(PdfColor(217, 226, 243));
+    final PdfFont headerFont =
+        PdfStandardFont(PdfFontFamily.helvetica, 10, style: PdfFontStyle.bold);
+    final PdfFont contentFont = PdfStandardFont(PdfFontFamily.helvetica, 9);
+
+    double margin = 10; // Margin from all sides
+    double currentY =
+        100; // Start position for the first section below the image
+    double sectionHeight = 20; // Height for each section header
+    double pageWidth = pageSize.width - 2 * margin;
+    double rowHeight = 20; // Height for each table row, including header
+
+    // Draw image
+    page.graphics.drawImage(image, Rect.fromLTWH(margin, 10, 100, 80));
+
+    final String centerText = 'Job Details Report';
+    final PdfFont centerTextFont =
+        PdfStandardFont(PdfFontFamily.helvetica, 12, style: PdfFontStyle.bold);
+    final Size centerTextSize = centerTextFont.measureString(centerText);
+
+    // Calculate the X position to center the text
+    double centerX = (pageSize.width - centerTextSize.width) / 2;
+
+    // Draw the center text after the image
+    page.graphics.drawString(
+      centerText,
+      centerTextFont,
+      bounds: Rect.fromLTWH(
+          centerX, 60, centerTextSize.width, centerTextSize.height),
+    );
+
+    // Site name section
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+    page.graphics.drawString(
+        'Site name : ${jobDetailsModel.value?.facilityName ?? ''}', headerFont,
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    // Job Information section
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        brush: backgroundBrush,
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+    page.graphics.drawString('Job Information', headerFont,
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+    currentY += sectionHeight;
+
+    // Draw Job Information Details (Left Side)
+    double labelWidth = 100; // Keeping width for labels consistent
+    double valueWidth = 150; // Keeping value width consistent
+    double labelX = margin + 5;
+    double valueX = labelX + labelWidth + 5;
+
+    List<String> jobInfoLabelsLeft = [
+      'Job ID',
+      'Job Title',
+      'Equipment Categories',
+      'Fault',
+      'Job Description'
+    ];
+
+    List<String> jobInfoValuesLeft = [
+      'JOb${jobDetailsModel.value?.id ?? ''}',
+      '${jobDetailsModel.value?.jobTitle ?? ''}',
+      '${jobDetailsModel.value?.equipmentCatList?.map((item) => item.name).join(", ") ?? ''}',
+      '${jobDetailsModel.value?.workTypeList?.map((item) => item.name).join(", ") ?? ''}',
+      '${jobDetailsModel.value?.jobDescription ?? ''}',
+    ];
+
+    for (int i = 0; i < jobInfoLabelsLeft.length; i++) {
+      page.graphics.drawString(jobInfoLabelsLeft[i], contentFont,
+          bounds: Rect.fromLTWH(labelX, currentY + 5, labelWidth, rowHeight));
+      page.graphics.drawString(jobInfoValuesLeft[i], contentFont,
+          bounds: Rect.fromLTWH(valueX, currentY + 5, valueWidth, rowHeight));
+      currentY += rowHeight;
+    }
+
+    // Draw Job Information Details (Right Side)
+    double labelWidthRight = 100;
+    double valueWidthRight = 150;
+    double labelXRight = pageWidth / 2 + margin; // Position on the right side
+    double valueXRight = labelXRight + labelWidthRight + 5;
+
+    List<String> jobInfoLabelsRight = [
+      'Block Name',
+      'Equipment Name',
+      'Raised By',
+      'Assigned To',
+      'BreakDown'
+    ];
+    List<String> jobInfoValuesRight = [
+      '${jobDetailsModel.value?.blockName}',
+      '${jobDetailsModel.value?.workingAreaList?.map((item) => item.name).join(", ") ?? ''}',
+      '${jobDetailsModel.value?.createdByName}',
+      '${jobDetailsModel.value?.assignedName ?? ''}',
+      '${jobDetailsModel.value?.breakdownTime ?? ''}',
+    ];
+
+    currentY -= jobInfoLabelsLeft.length *
+        rowHeight; // Reset currentY to align with left side
+
+    for (int i = 0; i < jobInfoLabelsRight.length; i++) {
+      page.graphics.drawString(jobInfoLabelsRight[i], contentFont,
+          bounds: Rect.fromLTWH(
+              labelXRight, currentY + 5, labelWidthRight, rowHeight));
+      page.graphics.drawString(jobInfoValuesRight[i], contentFont,
+          bounds: Rect.fromLTWH(
+              valueXRight, currentY + 5, valueWidthRight, rowHeight));
+      currentY += rowHeight;
+    }
+
+    // Add "Associated JobCard(s)" header before the table
+    currentY += 15;
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+    page.graphics.drawString('Associated JobCard(s)', headerFont,
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+
+    currentY += sectionHeight;
+
+    // Define the table column headers
+    List<String> jobCardHeaders = [
+      'Job Card Id',
+      'Permit ID',
+      'Permit Status',
+      'Job Card Date',
+      'Status'
+    ];
+
+    // Define the same width for all columns
+    double colWidth = pageWidth / jobCardHeaders.length;
+
+    // Render shaded header for table
+    for (int i = 0; i < jobCardHeaders.length; i++) {
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(
+              margin + i * colWidth, currentY, colWidth, rowHeight));
+      page.graphics.drawString(jobCardHeaders[i], headerFont,
+          bounds: Rect.fromLTWH(
+              margin + i * colWidth + 5, currentY + 5, colWidth, rowHeight));
+    }
+
+    currentY += rowHeight; // Move to next row
+
+    // Iterate through each row in `jobAssociatedModelsList`
+    for (int index = 0;
+        index < (jobAssociatedModelsList?.length ?? 0);
+        index++) {
+      var job = jobAssociatedModelsList?[index];
+
+      // Map values from the model
+      List<String> rowValues = [
+        'JC${job?.jobCardId ?? ''}',
+        'PTW${job?.permitId ?? ''}',
+        job?.isExpired == 1
+            ? '${job?.permit_status_short.toString()}(Expired)'
+            : '${job?.permit_status_short ?? ''}',
+        '${job?.jobCardDate ?? ''}',
+        '${job?.status_short ?? ''}'
+      ];
+
+      // Render the row values
+      for (int i = 0; i < rowValues.length; i++) {
+        page.graphics.drawRectangle(
+            pen: borderPen,
+            bounds: Rect.fromLTWH(
+                margin + i * colWidth, currentY, colWidth, rowHeight));
+        page.graphics.drawString(rowValues[i], contentFont,
+            bounds: Rect.fromLTWH(
+                margin + i * colWidth + 5, currentY + 5, colWidth, rowHeight));
+      }
+
+      currentY += rowHeight; // Move to next row
+    }
+
+    // Add the Material Issue / Used section header
+    currentY += 20; // Add some spacing
+    page.graphics.drawRectangle(
+        pen: borderPen,
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+    page.graphics.drawString('Material Issue / Used', headerFont,
+        bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+
+    currentY += sectionHeight;
+
+// Define fixed column widths
+    double colWidthJobCardId = 100;
+    double colWidthMRSId = 100;
+    double colWidthStatus = 100;
+
+// Calculate the remaining width for "Mrs Items List"
+    double colWidthMrsItemsList =
+        pageWidth - (colWidthJobCardId + colWidthMRSId + colWidthStatus);
+
+// Define the Material Issue / Used table headers
+    List<String> materialHeaders = [
+      'Job Card Id',
+      'MRS ID',
+      'Mrs Items List',
+      'Status'
+    ];
+
+// Render shaded header for Material Issue / Used table
+    double headerX = margin;
+    for (int i = 0; i < materialHeaders.length; i++) {
+      double colWidth = (i == 2)
+          ? colWidthMrsItemsList
+          : (i == 0
+              ? colWidthJobCardId
+              : (i == 1 ? colWidthMRSId : colWidthStatus));
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(headerX, currentY, colWidth, rowHeight));
+      page.graphics.drawString(materialHeaders[i], headerFont,
+          bounds:
+              Rect.fromLTWH(headerX + 5, currentY + 5, colWidth, rowHeight));
+      headerX += colWidth;
+    }
+
+    currentY += rowHeight; // Move to next row
+
+// Iterate through each row in `listMrsByJobId`
+    for (int index = 0; index < (listMrsByJobId?.length ?? 0); index++) {
+      var mrs = listMrsByJobId?[index];
+
+      // Map values from the model
+      List<String> rowValues = [
+        '${mrs?.jobCardId ?? ''}',
+        mrs?.is_mrs_return == 0
+            ? "MRS${mrs?.mrsId.toString() ?? ''}"
+            : "RMRS${mrs?.mrs_return_ID.toString() ?? ''}",
+        '${mrs?.mrsItems ?? ''}',
+        '${mrs?.status_short ?? ''}'
+      ];
+
+      // Render the row values
+      double rowX = margin;
+      for (int i = 0; i < rowValues.length; i++) {
+        double colWidth = (i == 2)
+            ? colWidthMrsItemsList
+            : (i == 0
+                ? colWidthJobCardId
+                : (i == 1 ? colWidthMRSId : colWidthStatus));
+        page.graphics.drawRectangle(
+            pen: borderPen,
+            bounds: Rect.fromLTWH(rowX, currentY, colWidth, rowHeight));
+        page.graphics.drawString(rowValues[i], contentFont,
+            bounds: Rect.fromLTWH(rowX + 5, currentY + 5, colWidth, rowHeight));
+        rowX += colWidth;
+      }
+
+      currentY += rowHeight; // Move to next row
+    }
+
+    // Signature section
+    final String signatureText = 'Signature';
+    final Size signatureSize = contentFont.measureString(signatureText);
+    return PdfTextElement(text: signatureText, font: contentFont).draw(
+        page: page,
+        bounds: Rect.fromLTWH(pageWidth - (signatureSize.width + margin),
+            currentY + 20, signatureSize.width, signatureSize.height))!;
+  }
+
+  Future<void> getJobDetails(int? jobId, int facilityId) async {
+    try {
+      jobDetailsList?.value = <JobDetailsModel>[];
+      final _jobDetailsList = await cumulativeReportPresenter.getJobDetails(
+          facilityId: facilityId, jobId: jobId, isLoading: false);
+
+      if (_jobDetailsList != null && _jobDetailsList.isNotEmpty) {
+        jobDetailsModel.value = _jobDetailsList[0];
+        associatedPermitList?.value =
+            jobDetailsModel.value?.associatedPermitList ?? [];
+        getMrsListByModule(jobId: jobId ?? 0, facilityId: facilityId);
+        getjobDetailsModel(jobId ?? 0, facilityId);
+        generateInvoiceJob();
+        update(["jobDetailsModel"]);
+      }
+    } catch (e) {
+      Utility.showDialog(e.toString(), 'getJobDetails');
+    }
+  }
+
+  Future<void> getjobDetailsModel(int jobId, int facilityId) async {
+    try {
+      jobAssociatedModelsList?.value = <JobAssociatedModel>[];
+      final _jobAssociatedModelsList =
+          await cumulativeReportPresenter.getjobDetailsModel(
+              jobId: jobId, isLoading: false, facilityId: facilityId);
+
+      if (_jobAssociatedModelsList != null &&
+          _jobAssociatedModelsList.isNotEmpty) {
+        jobAssociatedModelsList!.value = _jobAssociatedModelsList;
+        // associatedPermitList?.value =
+        //     jobAssociatedModel.value?.associatedPermitList ?? [];
+        update(["getjobDetailsModel"]);
+      }
+    } catch (e) {
+      Utility.showDialog(e.toString(), 'getjobDetailsModel');
+    }
+  }
+
+  Future<void> getMrsListByModule(
+      {required int jobId, required int facilityId}) async {
+    /// TODO: CHANGE THESE VALUES
+    // int moduleType = 81;
+    // // int tempModuleType = 21;
+    // int id = Get.arguments;
+    //
+    listMrsByJobId?.value = await cumulativeReportPresenter.getMrsListByModule(
+          jobId,
+          facilityId,
+          false,
+        ) ??
+        [];
+    update(["JobsLinkdToPermitList"]);
   }
 }

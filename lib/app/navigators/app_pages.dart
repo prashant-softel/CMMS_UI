@@ -1306,7 +1306,7 @@ class AppPages {
       binding: BodyInjuredBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.viewAuditTask,
+      name: '${_Paths.viewAuditTask}/:auditTaskId/:type',
       page: ViewAuditTaskScreen.new,
       binding: ViewAuditTaskBinding(),
     ),

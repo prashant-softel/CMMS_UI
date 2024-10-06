@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:cmms/domain/models/module_model.dart';
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/veg_task_list_model.dart';
@@ -154,5 +155,43 @@ class CumulativeReportUsecase {
         executionId: executionId,
         facilityId: facilityId,
         isLoading: isLoading ?? false,
+      );
+  Future<List<JobDetailsModel?>?> getJobDetails({
+    required String auth,
+    required int jobId,
+    required int facilityId,
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await repository.getJobDetails(
+        auth,
+        jobId,
+        facilityId,
+        userId,
+        isLoading,
+      );
+  Future<List<JobAssociatedModel?>?> getjobDetailsModel({
+    required String auth,
+    required int jobId,
+    required int facilityId,
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await repository.getjobDetailsModel(
+        auth,
+        jobId,
+        facilityId,
+        userId,
+        isLoading,
+      );
+  Future<List<MRSListByJobIdModel>?> getMrsListByModule({
+    jobId,
+    required int facilityId,
+    bool? isLoading,
+  }) async =>
+      await repository.getMrsListByModule(
+        jobId,
+        facilityId,
+        isLoading,
       );
 }

@@ -777,6 +777,50 @@ class _CumulativeReportContentWebState
                                                           '${Routes.jobDetails}/${controller.jobList[index]?.id}');
                                                     },
                                                   ),
+                                                  Dimens.boxWidth5,
+                                                  TableActionButton(
+                                                    color:
+                                                        ColorValues.draftColor,
+                                                    icon: Icons.download,
+                                                    message: 'Download',
+                                                    onPress: () async {
+                                                      await controller
+                                                          .getJobDetails(
+                                                        controller
+                                                                .jobList[index]
+                                                                ?.id ??
+                                                            0,
+                                                        controller
+                                                                .jobList[index]
+                                                                ?.facilityId ??
+                                                            0,
+                                                      );
+                                                      // await controller
+                                                      //     .getMrsListByModule(
+                                                      //   jobId: controller
+                                                      //           .jobList[index]
+                                                      //           ?.id ??
+                                                      //       0,
+                                                      //   facilityId: controller
+                                                      //           .jobList[index]
+                                                      //           ?.facilityId ??
+                                                      //       0,
+                                                      // );
+
+                                                      // await controller
+                                                      //     .getjobDetailsModel(
+                                                      //         controller
+                                                      //                 .jobList[
+                                                      //                     index]
+                                                      //                 ?.id ??
+                                                      //             0,
+                                                      //         controller
+                                                      //                 .jobList[
+                                                      //                     index]
+                                                      //                 ?.facilityId ??
+                                                      //             0);
+                                                    },
+                                                  ),
                                                 ])),
                                               ],
                                             )),

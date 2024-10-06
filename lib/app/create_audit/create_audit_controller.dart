@@ -299,10 +299,10 @@ class CreateAuditController extends GetxController {
     rowItem.forEach((element) {
       EvaluationChecklist item = EvaluationChecklist(
         checklist_id: dropdownMapperData[element[0]["value"]]?.id,
-        title: element[1]["value"] ?? '',
-        comment: element[4]["value"] ?? '',
-        ptw_req: element[3]["value"] == "0" ? 0 : 1,
-        weightage: int.tryParse(element[2]["value"] ?? '0') ?? 0,
+        // title: element[1]["value"] ?? '',
+        comment: element[3]["value"] ?? '',
+        ptw_req: element[2]["value"] == "0" ? 0 : 1,
+        weightage: int.tryParse(element[1]["value"] ?? '0') ?? 0,
       );
       items.add(item);
     });
@@ -354,10 +354,10 @@ class CreateAuditController extends GetxController {
     rowItem.forEach((element) {
       EvaluationChecklist item = EvaluationChecklist(
         checklist_id: dropdownMapperData[element[0]["value"]]?.id,
-        title: element[1]["value"] ?? '',
-        comment: element[4]["value"] ?? '',
-        ptw_req: element[3]["value"] == "0" ? 0 : 1,
-        weightage: int.tryParse(element[2]["value"] ?? '0') ?? 0,
+        // title: element[1]["value"] ?? '',
+        comment: element[3]["value"] ?? '',
+        ptw_req: element[2]["value"] == "0" ? 0 : 1,
+        weightage: int.tryParse(element[1]["value"] ?? '0') ?? 0,
       );
       items.add(item);
     });
@@ -457,7 +457,7 @@ class CreateAuditController extends GetxController {
   void addRowItem() {
     rowItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
-      {'key': "title", "value": ''},
+      // {'key': "title", "value": ''},
       {'key': "Weightage", "value": ''},
       {'key': "ptwreq", "value": ''},
       {'key': "Remark", "value": ''},
