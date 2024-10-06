@@ -7205,12 +7205,12 @@ class Repository {
               ? Get.offAllNamed('${Routes.pmTaskView}/$taskId')
               : type == 1
                   ? Get.offNamed('${Routes.jobDetails}/$jobId')
-                  : type == 3
-                      ? Get.offAllNamed(Routes.viewAuditTask)
+                  : type == 3 || type == 5
+                      ? Get.offAllNamed('${Routes.viewAuditTask}/$taskId/$type')
                       : type == 4
                           ? Get.offAllNamed(
                               Routes.addModuleCleaningExecutionContentWeb)
-                          : type == 5
+                          : type == 6
                               ? Get.offAllNamed(
                                   '${Routes.vegExecutionScreen}/${vegexe}/${vegid}')
                               : Get.offAllNamed(Routes.newPermitList);
@@ -9044,12 +9044,12 @@ class Repository {
     }
   }
 
-  Future<List<DashboardModel?>?> getdashboardList({
-    String? facilityId,
-    dynamic startDate,
-    dynamic endDate,
-    bool? isLoading,String?moduleId
-  }) async {
+  Future<List<DashboardModel?>?> getdashboardList(
+      {String? facilityId,
+      dynamic startDate,
+      dynamic endDate,
+      bool? isLoading,
+      String? moduleId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -9059,7 +9059,8 @@ class Repository {
             facilityId: facilityId ?? "",
             isLoading: isLoading ?? false,
             startDate: startDate,
-            endDate: endDate,moduleId:moduleId);
+            endDate: endDate,
+            moduleId: moduleId);
       }
       if (!res.hasError) {
         final jsonDashboardModelModels = jsonDecode(res.data);

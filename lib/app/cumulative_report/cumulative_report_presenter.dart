@@ -3,9 +3,11 @@ import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:cmms/domain/models/module_model.dart';
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/veg_task_equipment_model.dart';
@@ -174,4 +176,43 @@ class CumulativeReportPresenter {
       facilityId: facilityId,
     );
   }
+
+  Future<List<MRSListByJobIdModel>?> getMrsListByModule(
+    jobId,
+    int facilityId,
+    isLoading,
+  ) async =>
+      await cumulativeReportUsecase.getMrsListByModule(
+        jobId: jobId,
+        facilityId: facilityId,
+        isLoading: isLoading,
+      );
+  Future<List<JobAssociatedModel?>?> getjobDetailsModel({
+    String? auth,
+    required int jobId,
+    required int facilityId,
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await cumulativeReportUsecase.getjobDetailsModel(
+        auth: auth ?? "",
+        jobId: jobId,
+        userId: userId,
+        facilityId: facilityId,
+        isLoading: isLoading,
+      );
+  Future<List<JobDetailsModel?>?> getJobDetails({
+    String? auth,
+    int? jobId,
+    required int facilityId,
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await cumulativeReportUsecase.getJobDetails(
+        auth: auth ?? "",
+        jobId: jobId ?? 0,
+        facilityId: facilityId,
+        userId: userId,
+        isLoading: isLoading,
+      );
 }

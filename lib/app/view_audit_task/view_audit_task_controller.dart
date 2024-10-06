@@ -86,28 +86,34 @@ class ViewAuditTaskController extends GetxController {
   }
 
   Future<void> setauditTaskId() async {
-    try {
-      final _auditTaskId = await viewAuditTaskPresenter.getValue();
-      final _type = await viewAuditTaskPresenter.getTypeValue();
+    final String? _auditId = Get.parameters['auditTaskId'];
+    final String? _type = Get.parameters['type'];
 
-      if (_auditTaskId == null ||
-          _auditTaskId == '' ||
-          _auditTaskId == "null") {
-        var dataFromPreviousScreen = Get.arguments;
+    auditTaskId.value = int.tryParse(_auditId ?? "") ?? 0;
+    type.value = int.tryParse(_type ?? "") ?? 0;
 
-        auditTaskId.value = dataFromPreviousScreen['auditTaskId'];
-        type.value = dataFromPreviousScreen['type'];
+    // try {
+    //   final _auditTaskId = await viewAuditTaskPresenter.getValue();
+    //   final _type = await viewAuditTaskPresenter.getTypeValue();
 
-        viewAuditTaskPresenter.saveValue(
-            auditTaskId: auditTaskId.value.toString());
-        viewAuditTaskPresenter.saveTypeValue(type: type.value.toString());
-      } else {
-        auditTaskId.value = int.tryParse(_auditTaskId) ?? 0;
-        type.value = int.tryParse(_type ?? "") ?? 0;
-      }
-    } catch (e) {
-      Utility.showDialog(e.toString(), 'auditTaskId');
-    }
+    //   if (_auditTaskId == null ||
+    //       _auditTaskId == '' ||
+    //       _auditTaskId == "null") {
+    //     var dataFromPreviousScreen = Get.arguments;
+
+    //     auditTaskId.value = dataFromPreviousScreen['auditTaskId'];
+    //     type.value = dataFromPreviousScreen['type'];
+
+    //     viewAuditTaskPresenter.saveValue(
+    //         auditTaskId: auditTaskId.value.toString());
+    //     viewAuditTaskPresenter.saveTypeValue(type: type.value.toString());
+    //   } else {
+    //     auditTaskId.value = int.tryParse(_auditTaskId) ?? 0;
+    //     type.value = int.tryParse(_type ?? "") ?? 0;
+    //   }
+    // } catch (e) {
+    //   Utility.showDialog(e.toString(), 'auditTaskId');
+    // }
   }
 
   Future<void> getAuditTaskDetails({int? auditTaskId, bool? isloading}) async {

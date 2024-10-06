@@ -826,7 +826,7 @@ class PmTaskDataSource extends DataTableSource {
                           e.view == UserAccessConstants.kHaveViewAccess)
                       .length >
                   0
-              ? Get.toNamed('${Routes.pmTaskView}/$pmTaskId')
+              ? Get.offAllNamed('${Routes.pmTaskView}/$pmTaskId')
               : null;
         }
       },

@@ -464,16 +464,16 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                                                   FontWeight
                                                                       .bold),
                                                         )),
-                                                        DataColumn2(
-                                                            // fixedWidth: 200,
-                                                            label: Text(
-                                                          "Title ",
-                                                          style: TextStyle(
-                                                              fontSize: 15,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        )),
+                                                        // DataColumn2(
+                                                        //     // fixedWidth: 200,
+                                                        //     label: Text(
+                                                        //   "Title ",
+                                                        //   style: TextStyle(
+                                                        //       fontSize: 15,
+                                                        //       fontWeight:
+                                                        //           FontWeight
+                                                        //               .bold),
+                                                        // )),
                                                         DataColumn2(
                                                             fixedWidth: 150,
                                                             label: Text(
@@ -526,22 +526,16 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                                                   ?.name
                                                                   .toString() ??
                                                               '')),
-                                                          DataCell(Text(controller
-                                                                  .auditPlanDetailModel
-                                                                  .value!
-                                                                  .map_checklist![
-                                                                      index]
-                                                                  ?.title
-                                                                  .toString() ??
-                                                              '')),
-                                                          DataCell(Text(controller
-                                                                  .auditPlanDetailModel
-                                                                  .value!
-                                                                  .map_checklist![
-                                                                      index]
-                                                                  ?.weightage
-                                                                  .toString() ??
-                                                              '')),
+                                                          // DataCell(Text(controller
+                                                          //         .auditPlanDetailModel
+                                                          //         .value!
+                                                          //         .map_checklist![
+                                                          //             index]
+                                                          //         ?.title
+                                                          //         .toString() ??
+                                                          //     '')),
+                                                          DataCell(Text(
+                                                              "${controller.auditPlanDetailModel.value!.map_checklist![index]?.weightage.toString() ?? ''}%")),
                                                           DataCell(Wrap(
                                                             children: [
                                                               Text("No"),

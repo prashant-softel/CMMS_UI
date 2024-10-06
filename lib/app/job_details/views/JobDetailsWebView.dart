@@ -789,7 +789,6 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                   ),
                                                 ),
                                               ),
-                                          
                                             ],
                                           ),
                                         )
@@ -870,8 +869,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                               ),
                                             ],
                                           ),
-                                          child: 
-                                          Column(
+                                          child: Column(
                                             children: [
                                               Container(
                                                 alignment: Alignment.topLeft,
@@ -1183,7 +1181,6 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                               // ),
                                             ],
                                           ),
-                                   
                                         )
                                       : Dimens.box0,
                                   // Container(
@@ -1444,20 +1441,20 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                         //       controller.goToJobCardScreen(),
                                         //   backgroundColor: ColorValues.appPurpleColor,
 
-                                        Center(
-                                          child: Container(
-                                            height: 30,
-                                            child: CustomElevatedButton(
-                                              icon: Icons.print,
-                                              backgroundColor:
-                                                  ColorValues.linktopermitColor,
-                                              text: "print",
-                                              onPressed: () {
-                                                controller.generateInvoice();
-                                              },
-                                            ),
-                                          ),
-                                        ),
+                                        // Center(
+                                        //   child: Container(
+                                        //     height: 30,
+                                        //     child: CustomElevatedButton(
+                                        //       icon: Icons.print,
+                                        //       backgroundColor:
+                                        //           ColorValues.linktopermitColor,
+                                        //       text: "print",
+                                        //       onPressed: () {
+                                        //         controller.generateInvoice();
+                                        //       },
+                                        //     ),
+                                        //   ),
+                                        // ),
                                       ]),
                                 ],
                               ),

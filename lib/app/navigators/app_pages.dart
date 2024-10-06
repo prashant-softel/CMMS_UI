@@ -1159,8 +1159,7 @@ class AppPages {
       binding: ViewMcPlaningBinding(),
     ),
     GetPage<dynamic>(
-            name: '${_Paths.createAudit}/:auditId/:type',
-
+      name: '${_Paths.createAudit}/:auditId/:type',
       page: CreateAuditScreen.new,
       binding: CreateAuditBinding(),
     ),
@@ -1307,7 +1306,7 @@ class AppPages {
       binding: BodyInjuredBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.viewAuditTask,
+      name: '${_Paths.viewAuditTask}/:auditTaskId/:type',
       page: ViewAuditTaskScreen.new,
       binding: ViewAuditTaskBinding(),
     ),

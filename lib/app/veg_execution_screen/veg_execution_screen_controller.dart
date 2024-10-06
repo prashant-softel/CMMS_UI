@@ -465,7 +465,7 @@ class VegExecutionController extends GetxController {
         "jobModel": jobDetailsModel.value,
         "permitId": 0,
         "isChecked": false,
-        "type": 5,
+        "type": 6,
         "isFromJobDetails": true,
         "pmTaskModel": pmtaskViewModel.value,
         "mcModel": mcExecutionDetailsModel.value,
