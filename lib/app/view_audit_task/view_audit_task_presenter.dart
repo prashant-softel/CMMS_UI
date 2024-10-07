@@ -170,4 +170,14 @@ class ViewAuditTaskPresenter {
         isattendanceneeded: isattendanceneeded ?? 0,
         isLoading: isLoading ?? false,
       );
+  Future<bool> submitSubTaskCheckList({
+    checkAuditJsonString,
+    required bool isLoading,
+  }) async {
+    viewAuditTaskUsecase.submitSubTaskCheckList(
+      checkAuditJsonString: checkAuditJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 }

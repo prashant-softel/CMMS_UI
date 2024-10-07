@@ -9,10 +9,15 @@ import 'package:cmms/app/view_audit_task/view_audit_task_controller.dart';
 import 'package:cmms/app/widgets/audit_execution_process_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/mis_execution_process_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import '../../widgets/audit_task_approve_reject.dart';
 import '../../widgets/history_table_widget_web.dart';
 
@@ -245,10 +250,10 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                       'Checklist :',
                                                       style: Styles.black17,
                                                     ),
-                                              // Text(
-                                              //   'SOP Number :',
-                                              //   style: Styles.black17,
-                                              // ),
+                                              Text(
+                                                'Max Score :',
+                                                style: Styles.black17,
+                                              ),
                                               Text(
                                                 "Last Done Date:",
                                                 style: Styles.black17,
@@ -311,6 +316,9 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                           : "",
                                                       style: Styles.blue17,
                                                     ),
+                                              Text(
+                                                  " ${controller.auditTasknDetailModel.value.max_score ?? ""}",
+                                                  style: Styles.blue17),
 
                                               Text(
                                                   " ${controller.auditTasknDetailModel.value.last_done_date ?? ""}",
@@ -648,7 +656,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             ),
                                           )
                                         : Dimens.box0,
-                                    Dimens.boxHeight15,
+                                    // Dimens.boxHeight15,
                                     controller.auditTasknDetailModel.value
                                                 .permit_id ==
                                             0
@@ -877,7 +885,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               ],
                                             ),
                                           ),
-                                    Dimens.boxHeight10,
+                                    // Dimens.boxHeight10,
                                     controller.auditTasknDetailModel.value
                                                     ?.map_checklist !=
                                                 null &&
@@ -1097,6 +1105,11 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             ),
                                           )
                                         : Dimens.box0,
+                                    controller.auditTasknDetailModel.value
+                                            .map_checklist!.isNotEmpty
+                                        ? CheckListSubTaskDataTable()
+                                        : Dimens.box0,
+
                                     Dimens.boxHeight10,
                                     (controller.historyList != null &&
                                             controller.historyList!.isNotEmpty)
@@ -1141,267 +1154,33 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                         //  )
                                         : Dimens.box0,
                                     Dimens.boxHeight35,
-                                    Row(
-                                      children: [
-                                        Spacer(),
-                                        // Container(
-                                        //   height: 45,
-                                        //   child: CustomElevatedButton(
-                                        //     backgroundColor: ColorValues.printColor,
-                                        //     text: "Print",
-                                        //     icon: Icons.print,
-                                        //     onPressed: () {
-                                        //       // Get.dialog(
-                                        //       //     GoodsOrderApprovedDialog(
-                                        //       //   id: controller.id,
-                                        //       // ));
-                                        //     },
-                                        //   ),
-                                        // ),
-                                        //  Dimens.boxWidth10,
-                                        controller.auditTasknDetailModel.value
-                                                        .status ==
-                                                    426 &&
-                                                varUserAccessModel
-                                                        .value.access_list!
-                                                        .where((e) =>
-                                                            e.feature_id ==
-                                                                UserAccessConstants
-                                                                    .kAuditExecutionFeatureId &&
-                                                            e.approve ==
-                                                                UserAccessConstants
-                                                                    .kHaveApproveAccess)
-                                                        .length >
-                                                    0
-                                            ? Container(
+                                    controller.type.value ==
+                                            AppConstants.kEvaluation
+                                        ? Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Container(
                                                 height: 45,
                                                 child: CustomElevatedButton(
                                                   backgroundColor:
-                                                      ColorValues.appGreenColor,
-                                                  text: "Approve",
+                                                      ColorValues.submitColor,
+                                                  text: "Submit Sub Task",
                                                   icon: Icons.check,
                                                   onPressed: () {
-                                                    Get.dialog(
-                                                        AuditTaskApprovedRejectDialog(
-                                                      type: 1,
-                                                      moduletype:
-                                                          controller.type.value,
-                                                    ));
-                                                  },
-                                                ),
-                                              )
-                                            : Dimens.box0,
-                                        //  : Dimens.box0,
-                                        Dimens.boxWidth5,
-                                        controller.auditTasknDetailModel.value
-                                                        .status ==
-                                                    426 &&
-                                                varUserAccessModel
-                                                        .value.access_list!
-                                                        .where((e) =>
-                                                            e.feature_id ==
-                                                                UserAccessConstants
-                                                                    .kAuditExecutionFeatureId &&
-                                                            e.approve ==
-                                                                UserAccessConstants
-                                                                    .kHaveApproveAccess)
-                                                        .length >
-                                                    0
-                                            ? Container(
-                                                height: 45,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.rejectColor,
-                                                  text: "Reject",
-                                                  icon: Icons.close,
-                                                  onPressed: () {
-                                                    Get.dialog(
-                                                        AuditTaskApprovedRejectDialog(
-                                                      type: 2,
-                                                      moduletype:
-                                                          controller.type.value,
-                                                    ));
-                                                  },
-                                                ),
-                                              )
-                                            : Dimens.box0,
-                                        //: Dimens.box0,
-                                        Dimens.boxWidth5,
-                                        controller.auditTasknDetailModel.value
-                                                        .status ==
-                                                    425 ||
-                                                controller.auditTasknDetailModel
-                                                            .value.status ==
-                                                        427 &&
-                                                    varUserAccessModel
-                                                            .value.access_list!
-                                                            .where((e) =>
-                                                                e.feature_id ==
-                                                                    UserAccessConstants
-                                                                        .kAuditExecutionFeatureId &&
-                                                                e.approve ==
-                                                                    UserAccessConstants
-                                                                        .kHaveAddAccess)
-                                                            .length >
-                                                        0
-                                            ? Container(
-                                                height: 45,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.addNewColor,
-                                                  text: "Skip",
-                                                  icon: Icons.skip_next_sharp,
-                                                  onPressed: () {
-                                                    Get.dialog(
-                                                        AuditTaskApprovedRejectDialog(
-                                                      type: 3,
-                                                      moduletype:
-                                                          controller.type.value,
-                                                    ));
-                                                  },
-                                                ),
-                                              )
-                                            : Dimens.box0,
-                                        Dimens.boxWidth5,
-
-                                        controller.auditTasknDetailModel.value.status == 430 &&
-                                                    varUserAccessModel.value.access_list!
-                                                            .where((e) =>
-                                                                e.feature_id ==
-                                                                    UserAccessConstants
-                                                                        .kAuditExecutionFeatureId &&
-                                                                e.approve ==
-                                                                    UserAccessConstants
-                                                                        .kHaveAddAccess)
-                                                            .length >
-                                                        0 ||
-                                                controller.auditTasknDetailModel
-                                                            .value.status ==
-                                                        422 &&
-                                                    varUserAccessModel
-                                                            .value.access_list!
-                                                            .where((e) =>
-                                                                e.feature_id ==
-                                                                    UserAccessConstants.kAuditExecutionFeatureId &&
-                                                                e.approve == UserAccessConstants.kHaveAddAccess)
-                                                            .length >
-                                                        0
-                                            ? Container(
-                                                height: 45,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.closeColor,
-                                                  text: "Close",
-                                                  icon: Icons.close,
-                                                  onPressed: () {
-                                                    Get.dialog(
-                                                        AuditTaskApprovedRejectDialog(
-                                                      type: 4,
-                                                      moduletype:
-                                                          controller.type.value,
-                                                    ));
-                                                  },
-                                                ),
-                                              )
-                                            : Dimens.box0,
-                                        Dimens.boxWidth5,
-
-                                        controller.auditTasknDetailModel.value
-                                                        .status ==
-                                                    429 &&
-                                                varUserAccessModel
-                                                        .value.access_list!
-                                                        .where((e) =>
-                                                            e.feature_id ==
-                                                                UserAccessConstants
-                                                                    .kAuditExecutionFeatureId &&
-                                                            e.approve ==
-                                                                UserAccessConstants
-                                                                    .kHaveApproveAccess)
-                                                        .length >
-                                                    0
-                                            ? Container(
-                                                height: 45,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.approveColor,
-                                                  text: "Approve",
-                                                  icon: Icons.check,
-                                                  onPressed: () {
-                                                    Get.dialog(
-                                                        AuditTaskApprovedRejectDialog(
-                                                      type: 5,
-                                                      moduletype:
-                                                          controller.type.value,
-                                                    ));
-                                                  },
-                                                ),
-                                              )
-                                            : Dimens.box0,
-                                        Dimens.boxWidth5,
-
-                                        controller.auditTasknDetailModel.value
-                                                        .status ==
-                                                    429 &&
-                                                varUserAccessModel
-                                                        .value.access_list!
-                                                        .where((e) =>
-                                                            e.feature_id ==
-                                                                UserAccessConstants
-                                                                    .kAuditExecutionFeatureId &&
-                                                            e.approve ==
-                                                                UserAccessConstants
-                                                                    .kHaveApproveAccess)
-                                                        .length >
-                                                    0
-                                            ? Container(
-                                                height: 45,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.rejectColor,
-                                                  text: "Reject",
-                                                  icon: Icons.close,
-                                                  onPressed: () {
-                                                    Get.dialog(
-                                                        AuditTaskApprovedRejectDialog(
-                                                      type: 6,
-                                                      moduletype:
-                                                          controller.type.value,
-                                                    ));
-                                                  },
-                                                ),
-                                              )
-                                            : Dimens.box0,
-                                        Dimens.boxWidth20,
-                                        controller.auditTasknDetailModel.value
-                                                            .status ==
-                                                        425 &&
-                                                    controller.auditTasknDetailModel.value.is_PTW ==
-                                                        "False" &&
-                                                    varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess).length >
-                                                        0 ||
-                                                controller.auditTasknDetailModel.value.status == 427 &&
-                                                    controller.auditTasknDetailModel.value.is_PTW ==
-                                                        "False" &&
-                                                    varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess).length >
-                                                        0 ||
-                                                controller.auditTasknDetailModel.value.status == 138 &&
                                                     controller
-                                                            .auditTasknDetailModel
-                                                            .value
-                                                            .ptw_status ==
-                                                        125 &&
-                                                    controller
-                                                            .auditTasknDetailModel
-                                                            .value
-                                                            .is_PTW ==
-                                                        "True" &&
-                                                    varUserAccessModel
-                                                            .value.access_list!
-                                                            .where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess)
-                                                            .length >
-                                                        0
-                                            ? Container(
+                                                        .submitSubTaskCheckList();
+                                                    // Get.dialog(
+                                                    //     AuditTaskApprovedRejectDialog(
+                                                    //   type: 4,
+                                                    //   moduletype:
+                                                    //       controller.type.value,
+                                                    // ));
+                                                  },
+                                                ),
+                                              ),
+                                              Dimens.boxWidth10,
+                                              Container(
                                                 height: 45,
                                                 child: CustomElevatedButton(
                                                   backgroundColor:
@@ -1409,202 +1188,554 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                   text: "Start",
                                                   icon: Icons.start,
                                                   onPressed: () {
-                                                    controller.auditTasknDetailModel.value
-                                                                    .ptw_tbt_done ==
-                                                                0 &&
+                                                    // controller.auditTasknDetailModel.value
+                                                    //                 .ptw_tbt_done ==
+                                                    //             0 &&
+                                                    //         controller
+                                                    //                 .auditTasknDetailModel
+                                                    //                 .value
+                                                    //                 .is_PTW ==
+                                                    //             "True"
+                                                    //     ? Get.dialog<void>(TbtDoneAuditTaskDialog(
+                                                    //         ptw_id: controller
+                                                    //                 .auditTasknDetailModel
+                                                    //                 .value
+                                                    //                 .permit_id ??
+                                                    //             0,
+                                                    //         id: controller
+                                                    //                 .auditTasknDetailModel
+                                                    //                 .value
+                                                    //                 .id ??
+                                                    //             0))
+                                                    //     : controller
+                                                    //         .startAuditTask();
+                                                  },
+                                                ),
+                                              ),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                height: 45,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.closeColor,
+                                                  text: "Close",
+                                                  icon: Icons.close,
+                                                  onPressed: () {
+                                                    // Get.dialog(
+                                                    //     AuditTaskApprovedRejectDialog(
+                                                    //   type: 4,
+                                                    //   moduletype:
+                                                    //       controller
+                                                    //           .type.value,
+                                                    // ));
+                                                  },
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        : Row(
+                                            children: [
+                                              Spacer(),
+
+                                              // Container(
+                                              //   height: 45,
+                                              //   child: CustomElevatedButton(
+                                              //     backgroundColor: ColorValues.printColor,
+                                              //     text: "Print",
+                                              //     icon: Icons.print,
+                                              //     onPressed: () {
+                                              //       // Get.dialog(
+                                              //       //     GoodsOrderApprovedDialog(
+                                              //       //   id: controller.id,
+                                              //       // ));
+                                              //     },
+                                              //   ),
+                                              // ),
+                                              //  Dimens.boxWidth10,
+                                              controller.auditTasknDetailModel
+                                                              .value.status ==
+                                                          426 &&
+                                                      varUserAccessModel.value
+                                                              .access_list!
+                                                              .where((e) =>
+                                                                  e.feature_id ==
+                                                                      UserAccessConstants
+                                                                          .kAuditExecutionFeatureId &&
+                                                                  e.approve ==
+                                                                      UserAccessConstants
+                                                                          .kHaveApproveAccess)
+                                                              .length >
+                                                          0
+                                                  ? Container(
+                                                      height: 45,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appGreenColor,
+                                                        text: "Approve",
+                                                        icon: Icons.check,
+                                                        onPressed: () {
+                                                          Get.dialog(
+                                                              AuditTaskApprovedRejectDialog(
+                                                            type: 1,
+                                                            moduletype:
+                                                                controller
+                                                                    .type.value,
+                                                          ));
+                                                        },
+                                                      ),
+                                                    )
+                                                  : Dimens.box0,
+                                              //  : Dimens.box0,
+                                              Dimens.boxWidth5,
+                                              controller.auditTasknDetailModel
+                                                              .value.status ==
+                                                          426 &&
+                                                      varUserAccessModel.value
+                                                              .access_list!
+                                                              .where((e) =>
+                                                                  e.feature_id ==
+                                                                      UserAccessConstants
+                                                                          .kAuditExecutionFeatureId &&
+                                                                  e.approve ==
+                                                                      UserAccessConstants
+                                                                          .kHaveApproveAccess)
+                                                              .length >
+                                                          0
+                                                  ? Container(
+                                                      height: 45,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .rejectColor,
+                                                        text: "Reject",
+                                                        icon: Icons.close,
+                                                        onPressed: () {
+                                                          Get.dialog(
+                                                              AuditTaskApprovedRejectDialog(
+                                                            type: 2,
+                                                            moduletype:
+                                                                controller
+                                                                    .type.value,
+                                                          ));
+                                                        },
+                                                      ),
+                                                    )
+                                                  : Dimens.box0,
+                                              //: Dimens.box0,
+                                              Dimens.boxWidth5,
+                                              controller.auditTasknDetailModel
+                                                              .value.status ==
+                                                          425 ||
+                                                      controller.auditTasknDetailModel
+                                                                  .value.status ==
+                                                              427 &&
+                                                          varUserAccessModel
+                                                                  .value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          UserAccessConstants
+                                                                              .kAuditExecutionFeatureId &&
+                                                                      e.approve ==
+                                                                          UserAccessConstants
+                                                                              .kHaveAddAccess)
+                                                                  .length >
+                                                              0
+                                                  ? Container(
+                                                      height: 45,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .addNewColor,
+                                                        text: "Skip",
+                                                        icon: Icons
+                                                            .skip_next_sharp,
+                                                        onPressed: () {
+                                                          Get.dialog(
+                                                              AuditTaskApprovedRejectDialog(
+                                                            type: 3,
+                                                            moduletype:
+                                                                controller
+                                                                    .type.value,
+                                                          ));
+                                                        },
+                                                      ),
+                                                    )
+                                                  : Dimens.box0,
+                                              Dimens.boxWidth5,
+
+                                              controller.auditTasknDetailModel
+                                                                  .value.status ==
+                                                              430 &&
+                                                          varUserAccessModel
+                                                                  .value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id == UserAccessConstants.kAuditExecutionFeatureId &&
+                                                                      e.approve ==
+                                                                          UserAccessConstants
+                                                                              .kHaveAddAccess)
+                                                                  .length >
+                                                              0 ||
+                                                      controller.auditTasknDetailModel
+                                                                  .value.status ==
+                                                              422 &&
+                                                          varUserAccessModel
+                                                                  .value
+                                                                  .access_list!
+                                                                  .where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess)
+                                                                  .length >
+                                                              0
+                                                  ? Container(
+                                                      height: 45,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .closeColor,
+                                                        text: "Close",
+                                                        icon: Icons.close,
+                                                        onPressed: () {
+                                                          Get.dialog(
+                                                              AuditTaskApprovedRejectDialog(
+                                                            type: 4,
+                                                            moduletype:
+                                                                controller
+                                                                    .type.value,
+                                                          ));
+                                                        },
+                                                      ),
+                                                    )
+                                                  : Dimens.box0,
+                                              Dimens.boxWidth5,
+
+                                              controller.auditTasknDetailModel
+                                                              .value.status ==
+                                                          429 &&
+                                                      varUserAccessModel.value
+                                                              .access_list!
+                                                              .where((e) =>
+                                                                  e.feature_id ==
+                                                                      UserAccessConstants
+                                                                          .kAuditExecutionFeatureId &&
+                                                                  e.approve ==
+                                                                      UserAccessConstants
+                                                                          .kHaveApproveAccess)
+                                                              .length >
+                                                          0
+                                                  ? Container(
+                                                      height: 45,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .approveColor,
+                                                        text: "Approve",
+                                                        icon: Icons.check,
+                                                        onPressed: () {
+                                                          Get.dialog(
+                                                              AuditTaskApprovedRejectDialog(
+                                                            type: 5,
+                                                            moduletype:
+                                                                controller
+                                                                    .type.value,
+                                                          ));
+                                                        },
+                                                      ),
+                                                    )
+                                                  : Dimens.box0,
+                                              Dimens.boxWidth5,
+
+                                              controller.auditTasknDetailModel
+                                                              .value.status ==
+                                                          429 &&
+                                                      varUserAccessModel.value
+                                                              .access_list!
+                                                              .where((e) =>
+                                                                  e.feature_id ==
+                                                                      UserAccessConstants
+                                                                          .kAuditExecutionFeatureId &&
+                                                                  e.approve ==
+                                                                      UserAccessConstants
+                                                                          .kHaveApproveAccess)
+                                                              .length >
+                                                          0
+                                                  ? Container(
+                                                      height: 45,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .rejectColor,
+                                                        text: "Reject",
+                                                        icon: Icons.close,
+                                                        onPressed: () {
+                                                          Get.dialog(
+                                                              AuditTaskApprovedRejectDialog(
+                                                            type: 6,
+                                                            moduletype:
+                                                                controller
+                                                                    .type.value,
+                                                          ));
+                                                        },
+                                                      ),
+                                                    )
+                                                  : Dimens.box0,
+                                              Dimens.boxWidth20,
+                                              controller.auditTasknDetailModel
+                                                                  .value.status ==
+                                                              425 &&
+                                                          controller.auditTasknDetailModel.value.is_PTW ==
+                                                              "False" &&
+                                                          varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess).length >
+                                                              0 ||
+                                                      controller.auditTasknDetailModel.value.status == 427 &&
+                                                          controller.auditTasknDetailModel.value.is_PTW ==
+                                                              "False" &&
+                                                          varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess).length >
+                                                              0 ||
+                                                      controller.auditTasknDetailModel.value.status == 138 &&
+                                                          controller
+                                                                  .auditTasknDetailModel
+                                                                  .value
+                                                                  .ptw_status ==
+                                                              125 &&
+                                                          controller.auditTasknDetailModel.value.is_PTW ==
+                                                              "True" &&
+                                                          varUserAccessModel
+                                                                  .value
+                                                                  .access_list!
+                                                                  .where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess)
+                                                                  .length >
+                                                              0
+                                                  ? Container(
+                                                      height: 45,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .startColor,
+                                                        text: "Start",
+                                                        icon: Icons.start,
+                                                        onPressed: () {
+                                                          controller.auditTasknDetailModel.value
+                                                                          .ptw_tbt_done ==
+                                                                      0 &&
+                                                                  controller
+                                                                          .auditTasknDetailModel
+                                                                          .value
+                                                                          .is_PTW ==
+                                                                      "True"
+                                                              ? Get.dialog<void>(TbtDoneAuditTaskDialog(
+                                                                  ptw_id: controller
+                                                                          .auditTasknDetailModel
+                                                                          .value
+                                                                          .permit_id ??
+                                                                      0,
+                                                                  id: controller
+                                                                          .auditTasknDetailModel
+                                                                          .value
+                                                                          .id ??
+                                                                      0))
+                                                              : controller
+                                                                  .startAuditTask();
+                                                        },
+                                                      ),
+                                                    )
+                                                  : Dimens.box0,
+                                              Dimens.boxWidth5,
+                                              controller.auditTasknDetailModel.value.permit_id == 0 &&
+                                                          controller
+                                                                  .auditTasknDetailModel
+                                                                  .value
+                                                                  .is_PTW ==
+                                                              "True" &&
+                                                          controller
+                                                                  .auditTasknDetailModel
+                                                                  .value
+                                                                  .status ==
+                                                              425 &&
+                                                          varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess).length >
+                                                              0 ||
+                                                      controller.auditTasknDetailModel.value.permit_id ==
+                                                              0 &&
+                                                          controller
+                                                                  .auditTasknDetailModel
+                                                                  .value
+                                                                  .is_PTW ==
+                                                              "True" &&
+                                                          controller
+                                                                  .auditTasknDetailModel
+                                                                  .value
+                                                                  .status ==
+                                                              427 &&
+                                                          varUserAccessModel
+                                                                  .value
+                                                                  .access_list!
+                                                                  .where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess)
+                                                                  .length >
+                                                              0
+                                                  ? Container(
+                                                      height: 45,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appGreenColor,
+                                                        text:
+                                                            "Create New Permit",
+                                                        icon: Icons.add,
+                                                        onPressed: () {
+                                                          controller
+                                                              .createNewPermit();
+                                                        },
+                                                      ),
+                                                    )
+                                                  : Dimens.box0,
+                                              Dimens.boxWidth5,
+                                              controller.auditTasknDetailModel
+                                                              .value.status ==
+                                                          421 &&
+                                                      varUserAccessModel.value
+                                                              .access_list!
+                                                              .where((e) =>
+                                                                  e.feature_id ==
+                                                                      UserAccessConstants
+                                                                          .kAuditExecutionFeatureId &&
+                                                                  e.approve ==
+                                                                      UserAccessConstants
+                                                                          .kHaveAddAccess)
+                                                              .length >
+                                                          0
+                                                  ? Container(
+                                                      height: 35,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        // icon: Icons.link,
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .blueColor,
+                                                        text: "Re-assign",
+                                                        onPressed: () {
+                                                          Get.dialog<void>(
+                                                              AssignToAuditTaskDialog(
+                                                                  id: controller
+                                                                          .auditTasknDetailModel
+                                                                          .value
+                                                                          .id ??
+                                                                      0));
+                                                          //controller.printScreen();
+                                                        },
+                                                      ),
+                                                    )
+                                                  : Dimens.box0,
+                                              controller.auditTasknDetailModel
+                                                                  .value.status ==
+                                                              430 &&
+                                                          varUserAccessModel
+                                                                  .value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id == UserAccessConstants.kAuditExecutionFeatureId &&
+                                                                      e.approve ==
+                                                                          UserAccessConstants
+                                                                              .kHaveAddAccess)
+                                                                  .length >
+                                                              0 ||
+                                                      controller.auditTasknDetailModel
+                                                                  .value.status ==
+                                                              422 &&
+                                                          varUserAccessModel
+                                                                  .value
+                                                                  .access_list!
+                                                                  .where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess)
+                                                                  .length >
+                                                              0
+                                                  ? Container(
+                                                      height: 45,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .executeColor,
+                                                        text: "Execute",
+                                                        icon: Icons.start,
+                                                        onPressed: () {
+                                                          controller
+                                                              .auditTasknDetailModel
+                                                              .value
+                                                              .schedules![0]
+                                                              .checklist_observation
+                                                              ?.forEach(
+                                                                  (element) {
                                                             controller
-                                                                    .auditTasknDetailModel
-                                                                    .value
-                                                                    .is_PTW ==
-                                                                "True"
-                                                        ? Get.dialog<void>(
-                                                            TbtDoneAuditTaskDialog(
-                                                                ptw_id: controller
-                                                                        .auditTasknDetailModel
-                                                                        .value
-                                                                        .permit_id ??
-                                                                    0,
-                                                                id: controller
-                                                                        .auditTasknDetailModel
-                                                                        .value
-                                                                        .id ??
-                                                                    0))
-                                                        : controller
-                                                            .startAuditTask();
-                                                  },
-                                                ),
-                                              )
-                                            : Dimens.box0,
-                                        Dimens.boxWidth5,
-                                        controller.auditTasknDetailModel.value.permit_id == 0 &&
-                                                    controller.auditTasknDetailModel
-                                                            .value.is_PTW ==
-                                                        "True" &&
-                                                    controller.auditTasknDetailModel
-                                                            .value.status ==
-                                                        425 &&
-                                                    varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess).length >
-                                                        0 ||
-                                                controller.auditTasknDetailModel
-                                                            .value.permit_id ==
-                                                        0 &&
-                                                    controller
-                                                            .auditTasknDetailModel
-                                                            .value
-                                                            .is_PTW ==
-                                                        "True" &&
-                                                    controller
-                                                            .auditTasknDetailModel
-                                                            .value
-                                                            .status ==
-                                                        427 &&
-                                                    varUserAccessModel
-                                                            .value.access_list!
-                                                            .where((e) => e.feature_id == UserAccessConstants.kAuditExecutionFeatureId && e.approve == UserAccessConstants.kHaveAddAccess)
-                                                            .length >
-                                                        0
-                                            ? Container(
-                                                height: 45,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.appGreenColor,
-                                                  text: "Create New Permit",
-                                                  icon: Icons.add,
-                                                  onPressed: () {
-                                                    controller
-                                                        .createNewPermit();
-                                                  },
-                                                ),
-                                              )
-                                            : Dimens.box0,
-                                        Dimens.boxWidth5,
-                                        controller.auditTasknDetailModel.value
-                                                        .status ==
-                                                    421 &&
-                                                varUserAccessModel
-                                                        .value.access_list!
-                                                        .where((e) =>
-                                                            e.feature_id ==
-                                                                UserAccessConstants
-                                                                    .kAuditExecutionFeatureId &&
-                                                            e.approve ==
-                                                                UserAccessConstants
-                                                                    .kHaveAddAccess)
-                                                        .length >
-                                                    0
-                                            ? Container(
-                                                height: 35,
-                                                child: CustomElevatedButton(
-                                                  // icon: Icons.link,
-                                                  backgroundColor:
-                                                      ColorValues.blueColor,
-                                                  text: "Re-assign",
-                                                  onPressed: () {
-                                                    Get.dialog<void>(
-                                                        AssignToAuditTaskDialog(
-                                                            id: controller
-                                                                    .auditTasknDetailModel
-                                                                    .value
-                                                                    .id ??
-                                                                0));
-                                                    //controller.printScreen();
-                                                  },
-                                                ),
-                                              )
-                                            : Dimens.box0,
-                                        controller.auditTasknDetailModel.value.status == 430 &&
-                                                    varUserAccessModel.value.access_list!
-                                                            .where((e) =>
-                                                                e.feature_id ==
-                                                                    UserAccessConstants
-                                                                        .kAuditExecutionFeatureId &&
-                                                                e.approve ==
-                                                                    UserAccessConstants
-                                                                        .kHaveAddAccess)
-                                                            .length >
-                                                        0 ||
-                                                controller.auditTasknDetailModel
-                                                            .value.status ==
-                                                        422 &&
-                                                    varUserAccessModel
-                                                            .value.access_list!
-                                                            .where((e) =>
-                                                                e.feature_id ==
-                                                                    UserAccessConstants.kAuditExecutionFeatureId &&
-                                                                e.approve == UserAccessConstants.kHaveAddAccess)
-                                                            .length >
-                                                        0
-                                            ? Container(
-                                                height: 45,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.executeColor,
-                                                  text: "Execute",
-                                                  icon: Icons.start,
-                                                  onPressed: () {
-                                                    controller
-                                                        .auditTasknDetailModel
-                                                        .value
-                                                        .schedules![0]
-                                                        .checklist_observation
-                                                        ?.forEach((element) {
-                                                      controller
-                                                          .rowItemAuditobs.value
-                                                          .add([
-                                                        {
-                                                          "key": "checkpoint",
-                                                          "id":
-                                                              '${element.execution_id}',
-                                                          "value":
-                                                              '${element.check_point_name}',
+                                                                .rowItemAuditobs
+                                                                .value
+                                                                .add([
+                                                              {
+                                                                "key":
+                                                                    "checkpoint",
+                                                                "id":
+                                                                    '${element.execution_id}',
+                                                                "value":
+                                                                    '${element.check_point_name}',
+                                                              },
+                                                              {
+                                                                "key":
+                                                                    "requirement",
+                                                                "value":
+                                                                    '${element.requirement}'
+                                                              },
+                                                              {
+                                                                'key': "accept",
+                                                                "value":
+                                                                    '${element.cp_ok.value}'
+                                                              },
+                                                              {
+                                                                'key':
+                                                                    "observation",
+                                                                "value":
+                                                                    '${element.observation}'
+                                                              },
+                                                              {
+                                                                'key':
+                                                                    "uploadimg",
+                                                                "value": '',
+                                                                "uploaded": ""
+                                                              },
+                                                              {
+                                                                'key': "type",
+                                                                'inpute_type':
+                                                                    '${element.check_point_type}',
+                                                                "value":
+                                                                    '${element.type_text}',
+                                                                "min":
+                                                                    '${element.min_range}',
+                                                                "max":
+                                                                    '${element.max_range}'
+                                                              },
+                                                            ]);
+                                                          });
+                                                          controller.type
+                                                                      .value ==
+                                                                  AppConstants
+                                                                      .kMis
+                                                              ? Get.dialog(
+                                                                  // AuditExecutionProcessDialog()
+                                                                  MisExecutionProcessDialog())
+                                                              : Get.dialog(
+                                                                  AuditExecutionProcessDialog());
                                                         },
-                                                        {
-                                                          "key": "requirement",
-                                                          "value":
-                                                              '${element.requirement}'
-                                                        },
-                                                        {
-                                                          'key': "accept",
-                                                          "value":
-                                                              '${element.cp_ok.value}'
-                                                        },
-                                                        {
-                                                          'key': "observation",
-                                                          "value":
-                                                              '${element.observation}'
-                                                        },
-                                                        {
-                                                          'key': "uploadimg",
-                                                          "value": '',
-                                                          "uploaded": ""
-                                                        },
-                                                        {
-                                                          'key': "type",
-                                                          'inpute_type':
-                                                              '${element.check_point_type}',
-                                                          "value":
-                                                              '${element.type_text}',
-                                                          "min":
-                                                              '${element.min_range}',
-                                                          "max":
-                                                              '${element.max_range}'
-                                                        },
-                                                      ]);
-                                                    });
-                                                    controller.type.value ==
-                                                            AppConstants.kMis
-                                                        ? Get.dialog(
-                                                            // AuditExecutionProcessDialog()
-                                                            MisExecutionProcessDialog())
-                                                        : Get.dialog(
-                                                            AuditExecutionProcessDialog());
-                                                  },
-                                                ),
-                                              )
-                                            : Dimens.box0,
-                                        Spacer()
-                                      ],
-                                    ),
+                                                      ),
+                                                    )
+                                                  : Dimens.box0,
+                                              Spacer()
+                                            ],
+                                          ),
                                     Dimens.boxHeight15,
                                   ],
                                 ),
@@ -1623,5 +1754,651 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
         );
       },
     );
+  }
+}
+
+class CheckListSubTaskDataTable extends StatelessWidget {
+  final ViewAuditTaskController controller = Get.find();
+  CheckListSubTaskDataTable({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Widget _rowptwItem(int? defaultValue, {required Function(bool) onCheck}) {
+    //   return CustomSwitchTroggle(
+    //       value: defaultValue == 1 ? true : false,
+    //       onChanged: (value) {
+    //         print("object");
+    //         controller.isPtwToggleOn.value = value!;
+    //         onCheck(value);
+
+    //         //  controller.toggle();
+    //       });
+    // }
+
+    return StatefulBuilder(builder: ((context, setState) {
+      return Obx(
+        () => Container(
+          margin: Dimens.edgeInsets20,
+          height: ((controller.rowItem.length) * 70) + 120,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: ColorValues.lightGreyColorWithOpacity35,
+              width: 1,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: ColorValues.appBlueBackgroundColor,
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Sub Tasks",
+                      style: Styles.blue700,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        controller.addRowItem();
+                      },
+                      child: Container(
+                        height: 25,
+                        width: 70,
+                        decoration: BoxDecoration(
+                          color: ColorValues.addNewColor,
+                          border: Border.all(
+                            color: ColorValues.lightGreyColorWithOpacity35,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
+                        child: Center(
+                          child: Text(
+                            " + Add ",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w100,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: DataTable2(
+                  // dataRowHeight: 90,
+                  columnSpacing: 10,
+                  border: TableBorder.all(
+                      color: Color.fromARGB(255, 206, 229, 234)),
+                  columns: [
+                    DataColumn2(
+                        // fixedWidth: 400,
+                        label: Text(
+                      "CheckList Name",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        // fixedWidth: 200,
+                        label: Text(
+                      "Title",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        // fixedWidth: 150,
+                        label: Text(
+                      "Inspection Date",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        fixedWidth: 85,
+                        label: Text(
+                          "PTW REQ?",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        )),
+                    DataColumn2(
+                        fixedWidth: 100,
+                        label: Text(
+                          "PTW Status",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        )),
+                    DataColumn2(
+                        // fixedWidth: 200,
+                        label: Text(
+                      "Assign To",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        fixedWidth: 70,
+                        label: Text(
+                          "Score ",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        )),
+                    DataColumn2(
+                        fixedWidth: 90,
+                        label: Text(
+                          "status",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        )),
+                    DataColumn2(
+                        // fixedWidth: 100,
+                        label: Text(
+                      "Action",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
+                  ],
+                  rows: List.generate(
+                    controller.rowItem.length,
+                    (rowIndex) {
+                      var row = controller.rowItem[rowIndex];
+                      return DataRow(
+                        // height: 50,
+                        cells: row.map((mapData) {
+                          return DataCell((mapData['key'] == "Drop_down")
+                              ? Padding(
+                                  padding: const EdgeInsets.all(0.0),
+                                  child: DropdownWebWidget(
+                                    width:
+                                        MediaQuery.of(context).size.width / 4,
+                                    dropdownList: controller
+                                        .auditTasknDetailModel
+                                        .value
+                                        .map_checklist!
+                                        // .where((p0) {
+                                        //   return !controller.rowItem
+                                        //       .map((p0) => p0[0]["value"])
+                                        //       .contains(p0!.name);
+                                        // })
+                                        .toList()
+                                        .obs,
+                                    isValueSelected: controller.errorState[
+                                                '$rowIndex-${mapData['key']}'] ==
+                                            true
+                                        ? false
+                                        : true,
+                                    selectedValue: mapData["value"],
+                                    onValueChanged: (list, selectedValue) {
+                                      // controller.errorState.removeWhere(
+                                      //     (key, value) =>
+                                      //         key == '$rowIndex-Drop_down');
+                                      // print({
+                                      //   "web",
+                                      //   controller
+                                      //       .dropdownMapperData[selectedValue]
+                                      // });
+                                      mapData["value"] = selectedValue;
+                                      controller.dropdownMapperData[
+                                              selectedValue] =
+                                          list.firstWhere(
+                                              (element) =>
+                                                  element.name == selectedValue,
+                                              orElse: null);
+                                    },
+                                  ),
+                                )
+                              : (mapData['key'] == "Action ")
+                                  ? Padding(
+                                      padding: EdgeInsets.only(top: 10),
+                                      child: Wrap(
+                                        children: [
+                                          TableActionButton(
+                                            color: ColorValues.appRedColor,
+                                            icon: Icons.delete,
+                                            label: '',
+                                            message: '',
+                                            onPress: () {
+                                              controller.rowItem.remove(row);
+                                            },
+                                          ),
+                                          TableActionButton(
+                                            // label: 'Equipments',
+                                            onPress: () {
+                                              // var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+
+                                              // controller.createNewPermit(scheduleID: filterdData?.scheduleId);
+                                            },
+                                            color: ColorValues.appDarkBlueColor,
+                                            icon: Icons.add,
+                                            message: 'Create New Permit',
+                                          ),
+                                          TableActionButton(
+                                              color:
+                                                  ColorValues.appLightBlueColor,
+                                              icon: Icons.remove_red_eye,
+                                              message: "View Permit",
+                                              onPress: () {
+                                                // var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+                                                // controller.clearTypeStoreData();
+                                                // controller.clearPermitStoreData();
+                                                // controller.viewNewPermitList(permitId: filterdData?.permit_id, jobId: controller.jobDetailsModel.value!.id ?? 0);
+                                              }),
+                                          TableActionButton(
+                                            color: Color.fromARGB(
+                                                255, 116, 78, 130),
+                                            icon: Icons.ads_click,
+                                            message: 'Re-Submit Permit',
+                                            onPress: () {
+                                              //  var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+
+                                              //  controller.editNewPermit(permitId: filterdData?.permit_id, isChecked: false
+                                              // controller
+                                              //     .isChecked
+                                              //     .value
+                                              // );
+                                            },
+                                          ),
+                                          TableActionButton(
+                                            color: ColorValues
+                                                .startColor, //Color.fromARGB(255, 116, 78, 130),
+                                            icon: Icons.start,
+                                            message: 'Start',
+                                            onPress: () {
+                                              // var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+
+                                              ///  controller.editNewPermit(permitId: filterdData?.permit_id, isChecked: false
+                                              // controller
+                                              //     .isChecked
+                                              //     .value
+                                              /// );
+                                            },
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  : (mapData['key'] == "ptwreq")
+                                      ? Text(
+                                          "${controller.dropdownMapperData.value[row[0]['value']]?.ptw_required ?? ""}")
+                                      : (mapData['key'] == "score")
+                                          ? Text(
+                                              "${controller.dropdownMapperData.value[row[0]['value']]?.ptw_required ?? ""}")
+                                          : (mapData['key'] == "PTW_status")
+                                              ? Text(
+                                                  "${controller.dropdownMapperData.value[row[0]['value']]?.ptw_required ?? ""}")
+                                              : (mapData['key'] == "status")
+                                                  ? Text(
+                                                      "${controller.dropdownMapperData.value[row[0]['value']]?.ptw_required ?? ""}")
+                                                  : (mapData['key'] ==
+                                                          "iNSPECTIONDate")
+                                                      ? Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  top: 10.0),
+                                                          child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              _buildTargetDateField_web(
+                                                                context,
+                                                                new TextEditingController(
+                                                                    text: mapData[
+                                                                            "value"] ??
+                                                                        ''),
+                                                                onChanged:
+                                                                    (txt) {
+                                                                  mapData["value"] =
+                                                                      txt;
+                                                                },
+                                                              )
+                                                            ],
+                                                          ),
+                                                        )
+                                                      : (mapData['key'] ==
+                                                              "assign_to")
+                                                          ? Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(0.0),
+                                                              child:
+                                                                  DropdownWebWidget(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    4,
+                                                                dropdownList:
+                                                                    controller
+                                                                        .assignedToList
+                                                                        .where(
+                                                                            (p0) {
+                                                                          return !controller
+                                                                              .rowItem
+                                                                              .map((p0) => p0[0]["value"])
+                                                                              .contains(p0!.name);
+                                                                        })
+                                                                        .toList()
+                                                                        .obs,
+                                                                isValueSelected:
+                                                                    controller.errorState['$rowIndex-${mapData['key']}'] ==
+                                                                            true
+                                                                        ? false
+                                                                        : true,
+                                                                selectedValue:
+                                                                    mapData[
+                                                                        "value"],
+                                                                onValueChanged:
+                                                                    (list,
+                                                                        selectedValue) {
+                                                                  controller
+                                                                      .errorState
+                                                                      .removeWhere((key,
+                                                                              value) =>
+                                                                          key ==
+                                                                          '$rowIndex-Drop_down');
+                                                                  // print({
+                                                                  //   "web",
+                                                                  //   controller
+                                                                  //       .dropdownMapperData[selectedValue]
+                                                                  // });
+                                                                  mapData["value"] =
+                                                                      selectedValue;
+                                                                  controller.dropdownAssigntoMapperData[selectedValue] = list.firstWhere(
+                                                                      (element) =>
+                                                                          element
+                                                                              .name ==
+                                                                          selectedValue,
+                                                                      orElse:
+                                                                          null);
+                                                                },
+                                                              ),
+                                                            )
+
+                                                          // DropdownWebWidget(
+                                                          //     width: (MediaQuery.of(
+                                                          //                 context)
+                                                          //             .size
+                                                          //             .width *
+                                                          //         .3),
+                                                          //     controller:
+                                                          //         controller,
+                                                          //     dropdownList:
+                                                          //         controller
+                                                          //             .assignedToList,
+                                                          //     isValueSelected:
+                                                          //         controller
+                                                          //             .isAssignedToSelected
+                                                          //             .value,
+                                                          //     selectedValue:
+                                                          //         controller
+                                                          //             .selectedAssignedTo
+                                                          //             .value,
+                                                          //     onValueChanged:
+                                                          //         controller
+                                                          //             .onDropdownValueChanged,
+                                                          //   )
+
+                                                          : Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      top: 10),
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Container(
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          color:
+                                                                              Colors.black26,
+                                                                          offset: const Offset(
+                                                                              5.0,
+                                                                              5.0),
+                                                                          blurRadius:
+                                                                              5.0,
+                                                                          spreadRadius:
+                                                                              1.0,
+                                                                        ),
+                                                                      ],
+                                                                      color: ColorValues
+                                                                          .whiteColor,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                      border: controller.errorState['$rowIndex-${mapData['key']}'] ==
+                                                                              true
+                                                                          ? Border.all(
+                                                                              color: Colors
+                                                                                  .red,
+                                                                              width:
+                                                                                  2.0)
+                                                                          : Border.all(
+                                                                              color: ColorValues.appLightBlueColor,
+                                                                              width: 1.0),
+                                                                    ),
+                                                                    child:
+                                                                        LoginCustomTextfield(
+                                                                      keyboardType: (mapData['key'] ==
+                                                                              "Weightage")
+                                                                          ? TextInputType
+                                                                              .number
+                                                                          : TextInputType
+                                                                              .text,
+                                                                      inputFormatters: (mapData['key'] ==
+                                                                              "Weightage")
+                                                                          ? <TextInputFormatter>[
+                                                                              FilteringTextInputFormatter.digitsOnly
+                                                                            ]
+                                                                          : null,
+                                                                      maxLine:
+                                                                          1,
+                                                                      textController:
+                                                                          TextEditingController(
+                                                                              text: mapData["value"] ?? ''),
+                                                                      onChanged:
+                                                                          (txt) {
+                                                                        mapData["value"] =
+                                                                            txt;
+                                                                        if (controller.errorState['$rowIndex-${mapData['key']}'] ==
+                                                                            true) {
+                                                                          controller
+                                                                              .errorState
+                                                                              .remove('$rowIndex-${mapData['key']}');
+                                                                        }
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ));
+                        }).toList(),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }));
+  }
+
+  Widget _buildTargetDateField_web(
+      BuildContext context, TextEditingController textDateController,
+      {required Function(String) onChanged}) {
+    return StatefulBuilder(builder: ((context, setState) {
+      return Column(children: [
+        Container(
+          height: MediaQuery.of(context).size.height * 0.040,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: const Offset(
+                  5.0,
+                  5.0,
+                ),
+                blurRadius: 5.0,
+                spreadRadius: 1.0,
+              ), //BoxShadow
+              BoxShadow(
+                color: ColorValues.whiteColor,
+                offset: const Offset(0.0, 0.0),
+                blurRadius: 0.0,
+                spreadRadius: 0.0,
+              ), //BoxShadow
+            ],
+            color: ColorValues.whiteColor,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: SizedBox(
+            width: Responsive.isDesktop(context)
+                ? MediaQuery.of(context).size.width / 3.9
+                : MediaQuery.of(context).size.width / 1.0,
+            child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
+              onTap: () {
+                setState(() {
+                  pickTargetDateTime_web(
+                    context,
+                    textDateController,
+                  );
+                });
+
+                // }
+
+                // : null;
+              },
+              controller: textDateController,
+              onChanged: (value) {
+                setState(
+                  () {
+                    textDateController.text = value;
+                    onChanged(value);
+                  },
+                );
+              },
+
+              // :null,
+              autofocus: false,
+              decoration: InputDecoration(
+                fillColor: ColorValues.whiteColor,
+                filled: true,
+                // contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                suffixIcon: Icon(Icons.calendar_month),
+              ),
+            ),
+          ),
+        ),
+      ]);
+    }));
+  }
+
+  //Start Date and valid Till
+  Future pickTargetDateTime_web(
+    BuildContext context,
+    TextEditingController textcontroller,
+    // {required Function(String) onChanged}
+  ) async {
+    var dateTime = controller.selectedtargetDateTime.value;
+
+    final date = await pickTargetDate_web(context);
+    if (date == null) {
+      return;
+    }
+
+    // final time = await pickTargetTime_web(context);
+    // if (time == null) {
+    //   return;
+    // }
+
+    dateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      // time.hour,
+      // time.minute,
+    );
+    controller.selectedtargetDateTime.value;
+
+    textcontroller
+      // ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
+      ..selection = TextSelection.fromPosition(
+        TextPosition(
+          offset: textcontroller.text.length,
+          affinity: TextAffinity.upstream,
+        ),
+      );
+
+    textcontroller.text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime);
+
+    // controller.testDataTextCtrlr.text = textcontroller.text;
+    print('Incident reportDate & Time ${textcontroller.text}');
+  }
+
+  Future<DateTime?> pickTargetDate_web(
+    BuildContext context,
+  ) async {
+    DateTime? dateTime = controller.selectedtargetDateTime.value;
+
+    //final initialDate = DateTime.now();
+    final newDate = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime(DateTime.now().year + 5),
+    );
+
+    if (newDate == null) return null;
+
+    return newDate;
+  }
+
+  Future<TimeOfDay?> pickTargetTime_web(
+    BuildContext context,
+  ) async {
+    DateTime dateTime = controller.selectedtargetDateTime.value;
+
+    //final initialTime = TimeOfDay(hour: 12, minute: 0);
+    final newTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData.light(),
+            child: child!,
+          );
+        });
+
+    if (newTime == null) {
+      return null;
+    }
+
+    return newTime;
   }
 }

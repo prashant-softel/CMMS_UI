@@ -4,6 +4,7 @@ import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_audit_task/view_audit_task_presenter.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
+import 'package:cmms/domain/models/create_subTask_checklist.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -53,6 +54,16 @@ class ViewAuditTaskController extends GetxController {
   Uint8List? fileBytes;
   RxString fileName = "".obs;
   int fileId = 0;
+  RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
+
+  RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
+  RxMap<dynamic, dynamic> dropdownAssigntoMapperData = {}.obs;
+
+  RxMap<String, bool> errorState = <String, bool>{}.obs;
+  Rx<bool> isScheduleDateInvalid = false.obs;
+  bool openStartDatePicker = false;
+  Rx<DateTime> selectedtargetDateTime = DateTime.now().obs;
+
   @override
   void onInit() async {
     try {
@@ -127,8 +138,12 @@ class ViewAuditTaskController extends GetxController {
 
     if (_auditTasknDetailModel != null) {
       auditTasknDetailModel.value = _auditTasknDetailModel;
+
       getReAssignedToList(auditTasknDetailModel.value.facility_id);
       getHistory();
+      if (auditTasknDetailModel.value!.map_checklist!.isNotEmpty) {
+        addRowItem();
+      }
     }
     print({"auditPlandetailss", auditTasknDetailModel.value.id});
   }
@@ -559,5 +574,45 @@ class ViewAuditTaskController extends GetxController {
         isLoading: true,
       );
     }
+  }
+
+  void addRowItem() {
+    rowItem.add([
+      {"key": "Drop_down", "value": 'Please Select'},
+      {'key': "title", "value": ''},
+      {'key': "iNSPECTIONDate", "value": ''},
+      {'key': "ptwreq", "value": ''},
+      {'key': "PTW_status", "value": ''},
+      {'key': "assign_to", "value": 'Please Select'},
+      {'key': "score", "value": ''},
+      {'key': "status", "value": ''},
+      {'key': "Action ", "value": ''},
+    ]);
+  }
+
+  Future<bool> submitSubTaskCheckList() async {
+    List<SubTaskChecklist> items = [];
+    rowItem.forEach((element) {
+      SubTaskChecklist item = SubTaskChecklist(
+        checklist_id: dropdownMapperData[element[0]["value"]]?.id,
+        title: element[1]["value"] ?? '',
+        schedule_date: element[3]["value"] ?? '',
+        assign_to: dropdownAssigntoMapperData[element[5]["value"]]?.id,
+      );
+      items.add(item);
+    });
+    CreateSubTaskCheckList createSubTaskCheckList = CreateSubTaskCheckList(
+        task_id: auditTasknDetailModel.value.id,
+        plan_id: auditTasknDetailModel.value.plan_id,
+        map_checklist: items);
+    var checkAuditJsonString = createSubTaskCheckList
+        .toJson(); //createCheckListToJson([createChecklist]);
+
+    print({"checkAuditJsonString", checkAuditJsonString});
+    await viewAuditTaskPresenter.submitSubTaskCheckList(
+      checkAuditJsonString: checkAuditJsonString,
+      isLoading: true,
+    );
+    return true;
   }
 }
