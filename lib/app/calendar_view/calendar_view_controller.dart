@@ -18,6 +18,7 @@ class CalendarViewController extends GetxController {
   final HomeController homecontroller = Get.find();
 
   var docUploadDateTc = TextEditingController();
+  RxBool isHovered = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   Rx<int> selectedDocUploadId = 0.obs;

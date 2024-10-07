@@ -14,6 +14,7 @@ import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'dart:html' as html;
 
 class CalendarViewWeb extends StatefulWidget {
   CalendarViewWeb({
@@ -27,379 +28,400 @@ class CalendarViewWeb extends StatefulWidget {
 class _CalendarViewWebState extends State<CalendarViewWeb>
     with SingleTickerProviderStateMixin {
   var repository = Get.find<Repository>();
+  String? selectedEventId;
+  String? selectedWoDescription;
+
+  @override
+  void initState() {
+    super.initState();
+    _disableRightClickContextMenu(); // Disable the default right-click menu
+  }
+
+  void _disableRightClickContextMenu() {
+    html.document.onContextMenu.listen((event) => event.preventDefault());
+  }
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CalendarViewController>(
-        id: 'dashboard',
-        builder: (controller) {
-          return Stack(
-            children: [
-              Scaffold(
-                body: Obx(() {
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Color.fromARGB(255, 227, 224, 224),
-                              width: 1,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromARGB(255, 236, 234, 234)
-                                    .withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
+      id: 'dashboard',
+      builder: (controller) {
+        return Stack(
+          children: [
+            Scaffold(
+              body: Obx(() {
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Color.fromARGB(255, 227, 224, 224),
+                            width: 1,
                           ),
-                          child: Row(
-                            children: [
-                              Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 50,
-                                    bottom:
-                                        5), // Reduced top and bottom padding
-                                child: Row(
-                                  children: [
-                                    Text('Select Plant',
-                                        style: Styles.black13W400),
-                                    // Dimens.boxWidth10,
-                                    SizedBox(width: 10),
-                                    Obx(
-                                      () => SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                6,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.transparent),
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child:
-                                              DashCustomMultiSelectDialogField(
-                                            title: 'Select Facility',
-                                            initialValue: controller
-                                                .homecontroller.facilityList
-                                                .where((facility) =>
-                                                    facility != null)
-                                                .map((facility) => facility!.id)
-                                                .toList(),
-                                            items: controller
-                                                .homecontroller.facilityList
-                                                .where((facility) =>
-                                                    facility != null)
-                                                .map(
-                                                  (facility) => MultiSelectItem(
-                                                    facility!.id,
-                                                    facility.name ?? '',
-                                                  ),
-                                                )
-                                                .toList(),
-                                            onConfirm: (selectedOptionsList) {
-                                              controller.selectedMultiFacility(
-                                                  selectedOptionsList
-                                                      .cast<int>());
-                                              print(
-                                                  'Equipment list ${controller.homecontroller.selectedFacilityIdList}');
-                                            },
-                                            // titleTextStyle: TextStyle(
-                                            //     fontSize:
-                                            //         12), // Reduced font size
-                                            // chipTextStyle: TextStyle(
-                                            //     fontSize:
-                                            //         12), // Reduced font size
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 5),
-                                child: Row(
-                                  children: [
-                                    Text('Select Module',
-                                        style: Styles.black13W400),
-                                    // Dimens.boxWidth10,
-                                    SizedBox(width: 10),
-                                    Container(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 236, 234, 234)
+                                  .withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 50,
+                                  bottom: 5), // Reduced top and bottom padding
+                              child: Row(
+                                children: [
+                                  Text('Select Plant',
+                                      style: Styles.black13W400),
+                                  // Dimens.boxWidth10,
+                                  SizedBox(width: 10),
+                                  Obx(
+                                    () => SizedBox(
                                       width:
                                           MediaQuery.of(context).size.width / 6,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.transparent),
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      child: DashCustomMultiSelectDialogField(
-                                        title: 'Select Module',
-                                        // buttonText: 'Select Module',
-                                        initialValue: (controller
-                                                .selectedModuleIdList
-                                                .isNotEmpty)
-                                            ? controller.selectedModuleIdList
-                                            : [],
-                                        // initialValue: controller.moduleList,
-                                        items: controller.moduleList
-                                                ?.map(
-                                                  (module) => MultiSelectItem(
-                                                    module!.id,
-                                                    module.moduleName ??
-                                                        'Unknown',
-                                                  ),
-                                                )
-                                                ?.toList() ??
-                                            [],
-                                        onConfirm: (selectedOptionsList) {
-                                          controller.selectedMultiModule(
-                                              selectedOptionsList.cast<int>());
-                                          print(
-                                              'Selected Modules: $selectedOptionsList');
-                                          print(
-                                              'Updated Selected Modules in Controller: ${controller.selectedModuleList}');
-                                        },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.transparent),
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: DashCustomMultiSelectDialogField(
+                                          title: 'Select Facility',
+                                          initialValue: controller
+                                              .homecontroller.facilityList
+                                              .where((facility) =>
+                                                  facility != null)
+                                              .map((facility) => facility!.id)
+                                              .toList(),
+                                          items: controller
+                                              .homecontroller.facilityList
+                                              .where((facility) =>
+                                                  facility != null)
+                                              .map(
+                                                (facility) => MultiSelectItem(
+                                                  facility!.id,
+                                                  facility.name ?? '',
+                                                ),
+                                              )
+                                              .toList(),
+                                          onConfirm: (selectedOptionsList) {
+                                            controller.selectedMultiFacility(
+                                                selectedOptionsList
+                                                    .cast<int>());
+                                            print(
+                                                'Equipment list ${controller.homecontroller.selectedFacilityIdList}');
+                                          },
+                                          // titleTextStyle: TextStyle(
+                                          //     fontSize:
+                                          //         12), // Reduced font size
+                                          // chipTextStyle: TextStyle(
+                                          //     fontSize:
+                                          //         12), // Reduced font size
+                                        ),
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  )
+                                ],
                               ),
-                              Container(
-                                margin: EdgeInsets.only(
-                                    left: 20, top: 10, bottom: 10),
-                                child: Row(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text('Date Range',
-                                            style: Styles.black13W400),
-                                        // Dimens.boxWidth10,
-                                        SizedBox(width: 10),
-                                        CustomTextFieldForStock(
-                                            width:
-                                                MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    6,
-                                            numberTextField: true,
-                                            onTap: () {
-                                              controller
-                                                      .openFromDateToStartDatePicker =
-                                                  !controller
-                                                      .openFromDateToStartDatePicker;
-                                              controller.update(['dashboard']);
-                                            },
-                                            hintText:
-                                                '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
-                                            hintStyle: Styles.black13W400),
-                                      ],
+                            ),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 5),
+                              child: Row(
+                                children: [
+                                  Text('Select Module',
+                                      style: Styles.black13W400),
+                                  // Dimens.boxWidth10,
+                                  SizedBox(width: 10),
+                                  Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 6,
+                                    decoration: BoxDecoration(
+                                      border:
+                                          Border.all(color: Colors.transparent),
+                                      borderRadius: BorderRadius.circular(5),
                                     ),
-                                  ],
-                                ),
+                                    child: DashCustomMultiSelectDialogField(
+                                      title: 'Select Module',
+                                      // buttonText: 'Select Module',
+                                      initialValue: (controller
+                                              .selectedModuleIdList.isNotEmpty)
+                                          ? controller.selectedModuleIdList
+                                          : [],
+                                      // initialValue: controller.moduleList,
+                                      items: controller.moduleList
+                                              ?.map(
+                                                (module) => MultiSelectItem(
+                                                  module!.id,
+                                                  module.moduleName ??
+                                                      'Unknown',
+                                                ),
+                                              )
+                                              ?.toList() ??
+                                          [],
+                                      onConfirm: (selectedOptionsList) {
+                                        controller.selectedMultiModule(
+                                            selectedOptionsList.cast<int>());
+                                        print(
+                                            'Selected Modules: $selectedOptionsList');
+                                        print(
+                                            'Updated Selected Modules in Controller: ${controller.selectedModuleList}');
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
-                              // Dimens.boxWidth10,
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(
+                                  left: 20, top: 10, bottom: 10),
+                              child: Row(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text('Date Range',
+                                          style: Styles.black13W400),
+                                      // Dimens.boxWidth10,
+                                      SizedBox(width: 10),
+                                      CustomTextFieldForStock(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              6,
+                                          numberTextField: true,
+                                          onTap: () {
+                                            controller
+                                                    .openFromDateToStartDatePicker =
+                                                !controller
+                                                    .openFromDateToStartDatePicker;
+                                            controller.update(['dashboard']);
+                                          },
+                                          hintText:
+                                              '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
+                                          hintStyle: Styles.black13W400),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // Dimens.boxWidth10,
 
-                              if (Responsive.isDesktop(context))
-                                Icon(Icons.notifications_active,
-                                    color: ColorValues.greyLightColor),
-                              InkWell(
-                                onTap: () {
-                                  Get.dialog(
-                                    Stack(children: [
-                                      Positioned(
-                                        right: 1,
-                                        top: 70,
-                                        child: Container(
-                                          width: 200,
-                                          child: AlertDialog(
-                                            insetPadding: EdgeInsets.symmetric(
-                                                horizontal: 5.w),
-                                            contentPadding: EdgeInsets.all(20),
-                                            backgroundColor:
-                                                ColorValues.appDarkBlueColor,
-                                            content: Column(
-                                              children: [
-                                                InkWell(
-                                                  onTap: () {
-                                                    // controller.clearStoreData();
-                                                    Get.toNamed(Routes.profile,
-                                                        arguments: {
-                                                          'userId':
-                                                              varUserAccessModel
-                                                                  .value
-                                                                  .user_id,
-                                                        });
-                                                  },
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(Icons.person,
-                                                          color: Color(
-                                                              0xffD2D0D0)),
-                                                      SizedBox(width: 10),
-                                                      Text(
-                                                        "Profile",
-                                                        style: TextStyle(
-                                                          color:
-                                                              Color(0xffD2D0D0),
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
+                            if (Responsive.isDesktop(context))
+                              Icon(Icons.notifications_active,
+                                  color: ColorValues.greyLightColor),
+                            InkWell(
+                              onTap: () {
+                                Get.dialog(
+                                  Stack(children: [
+                                    Positioned(
+                                      right: 1,
+                                      top: 70,
+                                      child: Container(
+                                        width: 200,
+                                        child: AlertDialog(
+                                          insetPadding: EdgeInsets.symmetric(
+                                              horizontal: 5.w),
+                                          contentPadding: EdgeInsets.all(20),
+                                          backgroundColor:
+                                              ColorValues.appDarkBlueColor,
+                                          content: Column(
+                                            children: [
+                                              InkWell(
+                                                onTap: () {
+                                                  // controller.clearStoreData();
+                                                  Get.toNamed(Routes.profile,
+                                                      arguments: {
+                                                        'userId':
+                                                            varUserAccessModel
+                                                                .value.user_id,
+                                                      });
+                                                },
+                                                child: Row(
+                                                  children: [
+                                                    Icon(Icons.person,
+                                                        color:
+                                                            Color(0xffD2D0D0)),
+                                                    SizedBox(width: 10),
+                                                    Text(
+                                                      "Profile",
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xffD2D0D0),
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.w600,
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                Divider(
-                                                    color: Color(0xffD2D0D0)),
-                                                InkWell(
-                                                  onTap: () {
-                                                    Get.toNamed(Routes.setting);
-                                                  },
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(Icons.settings,
-                                                          color: Color(
-                                                              0xffD2D0D0)),
-                                                      SizedBox(width: 10),
-                                                      Text(
-                                                        "Settings",
-                                                        style: TextStyle(
-                                                          color:
-                                                              Color(0xffD2D0D0),
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
+                                              ),
+                                              Divider(color: Color(0xffD2D0D0)),
+                                              InkWell(
+                                                onTap: () {
+                                                  Get.toNamed(Routes.setting);
+                                                },
+                                                child: Row(
+                                                  children: [
+                                                    Icon(Icons.settings,
+                                                        color:
+                                                            Color(0xffD2D0D0)),
+                                                    SizedBox(width: 10),
+                                                    Text(
+                                                      "Settings",
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xffD2D0D0),
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.w600,
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                Divider(
-                                                    color: Color(0xffD2D0D0)),
-                                                InkWell(
-                                                  onTap: () {
-                                                    _isDeleteDialog(repository);
-                                                  },
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(Icons.logout,
-                                                          color: Color(
-                                                              0xffD2D0D0)),
-                                                      SizedBox(width: 10),
-                                                      Text(
-                                                        "Log Out",
-                                                        style: TextStyle(
-                                                          color:
-                                                              Color(0xffD2D0D0),
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
+                                              ),
+                                              Divider(color: Color(0xffD2D0D0)),
+                                              InkWell(
+                                                onTap: () {
+                                                  _isDeleteDialog(repository);
+                                                },
+                                                child: Row(
+                                                  children: [
+                                                    Icon(Icons.logout,
+                                                        color:
+                                                            Color(0xffD2D0D0)),
+                                                    SizedBox(width: 10),
+                                                    Text(
+                                                      "Log Out",
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xffD2D0D0),
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.w600,
                                                       ),
-                                                    ],
-                                                  ),
-                                                )
-                                              ],
-                                            ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
                                           ),
                                         ),
                                       ),
-                                    ]),
-                                  );
-                                },
-                                child: Card(
-                                  elevation: 5,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25.0),
-                                  ),
-                                  color: ColorValues.blueMediumColor,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Row(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 15,
-                                          backgroundColor: Color.fromARGB(
-                                              255, 206, 200, 200),
-                                          child: Icon(Icons.person,
-                                              color:
-                                                  ColorValues.blueMediumColor),
-                                        ), // icon
-                                        if (Responsive.isDesktop(context))
-                                          SizedBox(
-                                              width:
-                                                  5), // space between icon and text
-                                        if (Responsive.isDesktop(context))
-                                          Text(
-                                            "${varUserAccessModel.value.user_name}",
-                                            style: TextStyle(
-                                              color: Colors.black, // text color
-                                              fontSize: 12, // text size
-                                              fontWeight: FontWeight
-                                                  .w500, // text weight
-                                            ),
-                                          ),
-                                        Icon(Icons.keyboard_arrow_down_outlined,
-                                            color: ColorValues.blackColor),
-                                      ],
                                     ),
+                                  ]),
+                                );
+                              },
+                              child: Card(
+                                elevation: 5,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                ),
+                                color: ColorValues.blueMediumColor,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Row(
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 15,
+                                        backgroundColor:
+                                            Color.fromARGB(255, 206, 200, 200),
+                                        child: Icon(Icons.person,
+                                            color: ColorValues.blueMediumColor),
+                                      ), // icon
+                                      if (Responsive.isDesktop(context))
+                                        SizedBox(
+                                            width:
+                                                5), // space between icon and text
+                                      if (Responsive.isDesktop(context))
+                                        Text(
+                                          "${varUserAccessModel.value.user_name}",
+                                          style: TextStyle(
+                                            color: Colors.black, // text color
+                                            fontSize: 12, // text size
+                                            fontWeight:
+                                                FontWeight.w500, // text weight
+                                          ),
+                                        ),
+                                      Icon(Icons.keyboard_arrow_down_outlined,
+                                          color: ColorValues.blackColor),
+                                    ],
                                   ),
                                 ),
                               ),
-
-                              // Dimens.boxWidth10,
-                              SizedBox(width: 10),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          height: 45,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Color.fromARGB(255, 227, 224, 224),
-                              width: 1,
                             ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromARGB(255, 236, 234, 234)
-                                    .withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.home,
-                                color: ColorValues.greyLightColor,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Get.offNamed(Routes.home);
-                                },
-                                child: Text(
-                                  "DASHBOARD",
-                                  style: Styles.greyLight14,
-                                ),
-                              ),
-                              Text(" / CALENDER VIEW",
-                                  style: Styles.greyLight14),
-                            ],
-                          ),
+
+                            // Dimens.boxWidth10,
+                            SizedBox(width: 10),
+                          ],
                         ),
-                        Container(
-                          width: double.infinity,
-                          height: MediaQuery.of(context).size.height,
+                      ),
+                      Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Color.fromARGB(255, 227, 224, 224),
+                            width: 1,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 236, 234, 234)
+                                  .withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.home,
+                              color: ColorValues.greyLightColor,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.offNamed(Routes.home);
+                              },
+                              child: Text(
+                                "DASHBOARD",
+                                style: Styles.greyLight14,
+                              ),
+                            ),
+                            Text(" / CALENDER VIEW", style: Styles.greyLight14),
+                            Spacer(),
+                            MouseRegion(
+                              onEnter: (_) => controller.isHovered.value = true,
+                              onExit: (_) => controller.isHovered.value = false,
+                              child: Stack(
+                                children: [
+                                  Icon(Icons.info_outline),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: 30,
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height,
+                        child: GestureDetector(
+                          onSecondaryTapDown: (details) {
+                            // Use the exact position of the right-click to show the context menu
+                            _showContextMenu(
+                                details.globalPosition, controller);
+                          },
                           child: SfCalendar(
                             view: CalendarView.month,
                             allowedViews: [
@@ -407,7 +429,7 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
                               CalendarView.week,
                               CalendarView.workWeek,
                               CalendarView.month,
-                              CalendarView.timelineMonth
+                              CalendarView.timelineMonth,
                             ],
                             dataSource:
                                 MeetingDataSource(controller.getDataSource()),
@@ -420,11 +442,14 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
                               showAgenda: true,
                             ),
                             onTap: (CalendarTapDetails details) {
-                              print("Calendar tapped at date: ${details.date}");
                               if (details.appointments != null &&
                                   details.appointments!.isNotEmpty) {
                                 final Meeting meeting =
                                     details.appointments!.first;
+                                selectedEventId =
+                                    meeting.eventName; // Assume eventName as ID
+                                selectedWoDescription = meeting
+                                    .eventName; // Assume description stored in eventName
                                 print(
                                     "Tapped on meeting: ${meeting.eventName} from ${meeting.from} to ${meeting.to}");
                               }
@@ -435,56 +460,138 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
                             },
                           ),
                         ),
-                      ],
-                    ),
-                  );
-                }),
-              ),
-              if (controller.openFromDateToStartDatePicker)
-                Positioned(
-                  right: 270,
-                  top: 55,
-                  child: DatePickerWidget(
-                    selectionMode: DateRangePickerSelectionMode.range,
-                    monthCellStyle: DateRangePickerMonthCellStyle(
-                      todayCellDecoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: ColorValues.appDarkBlueColor),
-                    ), // last date of this year
-                    // controller: DateRangePickerController(),
-                    initialSelectedRange: PickerDateRange(
-                      controller.fromDate.value,
-                      controller.toDate.value,
-                    ),
-
-                    onSubmit: (value) {
-                      print('po valu ${value.toString()}');
-                      PickerDateRange? data = value as PickerDateRange;
-
-                      var pickUpDate =
-                          DateTime.parse(data.startDate.toString());
-                      controller.fromDate.value = pickUpDate;
-                      var dropDate = DateTime.parse(data.endDate.toString());
-                      dropDate != null
-                          ? controller.toDate.value = dropDate
-                          : controller.toDate.value = pickUpDate;
-                      controller.getDashBordListByDate();
-                      controller.openFromDateToStartDatePicker = false;
-                      controller.update(['dashboard']);
-
-                      // Get.toNamed(
-                      //   Routes.stockManagementGoodsOrdersScreen,
-                      // );
-                    },
-                    onCancel: () {
-                      controller.openFromDateToStartDatePicker = false;
-                      controller.update(['dashboard']);
-                    },
+                      ),
+                    ],
                   ),
+                );
+              }),
+            ),
+            if (controller.openFromDateToStartDatePicker)
+              Positioned(
+                right: 270,
+                top: 55,
+                child: DatePickerWidget(
+                  selectionMode: DateRangePickerSelectionMode.range,
+                  monthCellStyle: DateRangePickerMonthCellStyle(
+                    todayCellDecoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: ColorValues.appDarkBlueColor),
+                  ),
+                  initialSelectedRange: PickerDateRange(
+                    controller.fromDate.value,
+                    controller.toDate.value,
+                  ),
+                  onSubmit: (value) {
+                    PickerDateRange? data = value as PickerDateRange;
+                    var pickUpDate = DateTime.parse(data.startDate.toString());
+                    controller.fromDate.value = pickUpDate;
+                    var dropDate = DateTime.parse(data.endDate.toString());
+                    dropDate != null
+                        ? controller.toDate.value = dropDate
+                        : controller.toDate.value = pickUpDate;
+                    controller.getDashBordListByDate();
+                    controller.openFromDateToStartDatePicker = false;
+                    controller.update(['dashboard']);
+                  },
+                  onCancel: () {
+                    controller.openFromDateToStartDatePicker = false;
+                    controller.update(['dashboard']);
+                  },
                 ),
-            ],
-          );
-        });
+              ),
+            Obx(() => controller.isHovered.value
+                ? Positioned(
+                    top: 80,
+                    right: 50,
+                    child: Container(
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 4,
+                            offset: Offset(2, 2),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              CircleAvatar(
+                                radius: 10,
+                                backgroundColor: ColorValues.appGreenColor,
+                              ),
+                              SizedBox(height: 5),
+                              CircleAvatar(
+                                radius: 10,
+                                backgroundColor: ColorValues.appDarkBlueColor,
+                              ),
+                              SizedBox(height: 5),
+                              CircleAvatar(
+                                radius: 10,
+                                backgroundColor:
+                                    Color.fromARGB(255, 133, 97, 163),
+                              ),
+                              SizedBox(height: 5),
+                              CircleAvatar(
+                                radius: 10,
+                                backgroundColor:
+                                    Color.fromARGB(255, 78, 126, 129),
+                              )
+                            ],
+                          ),
+                          SizedBox(width: 10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Breakdown Maintenance"),
+                              SizedBox(height: 3),
+                              Text("Preventive Maintenance"),
+                              SizedBox(height: 3),
+                              Text("Module Cleaning"),
+                              SizedBox(height: 3),
+                              Text("Incident Report")
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : SizedBox.shrink()),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showContextMenu(Offset position, CalendarViewController controller) {
+    showMenu(
+      context: context,
+      position: RelativeRect.fromLTRB(
+          position.dx, position.dy, position.dx, position.dy),
+      items: [
+        PopupMenuItem(
+          value: 'open',
+          child: Text('Open in New Tab'),
+        ),
+      ],
+    ).then((value) {
+      if (value == 'open') {
+        _openDuplicateTab();
+      }
+    });
+  }
+
+  void _openDuplicateTab() {
+    // Pass the event details in the query parameters to open in new tab
+    final url =
+        'new_tab.html?eventId=$selectedEventId&woDescription=$selectedWoDescription';
+    html.window.open(url, '_blank');
   }
 }
 
