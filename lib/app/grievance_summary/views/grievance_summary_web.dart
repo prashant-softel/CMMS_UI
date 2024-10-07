@@ -151,14 +151,28 @@ class _NewGrievanceSummaryWebState extends State<GrievanceSummaryWeb> {
                                                   () => DataTable2(
                                                     key: UniqueKey(),
                                                     headingRowHeight: 70,
+                                                    dividerThickness: 1,
+                                                    headingRowColor: MaterialStateColor.resolveWith((states) => Color(0xFFE3E0E0)),
                                                     minWidth: 2500,
                                                     dataRowHeight: 40,
-                                                    border: TableBorder.all(
-                                                        color: Color.fromARGB(
-                                                            255,
-                                                            206,
-                                                            229,
-                                                            234)),
+                                                    border: TableBorder(
+                                                      top: BorderSide(
+                                                        color: Colors.grey, // Color for vertical dividers
+                                                        width: 1, // Thickness for vertical dividers
+                                                      ),
+                                                      horizontalInside: BorderSide(
+                                                        color: Colors.black, // Color for horizontal dividers
+                                                        width: 1, // Thickness for horizontal dividers
+                                                      ),
+                                                      verticalInside: BorderSide(
+                                                        color: Colors.grey, // Color for vertical dividers
+                                                        width: 1, // Thickness for vertical dividers
+                                                      ),
+                                                      bottom: BorderSide(
+                                                        color: Colors.grey, // Color for vertical dividers
+                                                        width: 1, // Thickness for vertical dividers
+                                                      ),
+                                                    ),
                                                     columns: [
                                                       DataColumn2(
                                                           fixedWidth: 100,
