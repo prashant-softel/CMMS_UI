@@ -824,18 +824,17 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                                     children: [
-                                                                                      IgnorePointer(
-                                                                                        ignoring: controller.jobCardDetailsModel.value!.status == 156 || controller.jobCardDetailsModel.value!.status == 158 ? true : false,
-                                                                                        child: TableActionButton(
-                                                                                          color: ColorValues.appRedColor,
-                                                                                          icon: Icons.delete,
-                                                                                          label: '',
-                                                                                          message: '',
-                                                                                          onPress: () {
-                                                                                            controller.rowItem.remove(record);
-                                                                                          },
-                                                                                        ),
-                                                                                      )
+                                                                                      controller.jobCardDetailsModel.value!.status == 156 || controller.jobCardDetailsModel.value!.status == 158
+                                                                                          ? SizedBox()
+                                                                                          : TableActionButton(
+                                                                                              color: ColorValues.appRedColor,
+                                                                                              icon: Icons.delete,
+                                                                                              label: '',
+                                                                                              message: '',
+                                                                                              onPress: () {
+                                                                                                controller.rowItem.remove(record);
+                                                                                              },
+                                                                                            ),
                                                                                     ],
                                                                                   ),
                                                                                 )
@@ -2290,32 +2289,27 @@ class DeployedTeam extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                IgnorePointer(
-                                                  ignoring: controller
-                                                                  .jobCardDetailsModel
-                                                                  .value!
-                                                                  .status ==
-                                                              156 ||
+                                                controller.jobCardDetailsModel
+                                                                .value!.status ==
+                                                            156 ||
+                                                        controller
+                                                                .jobCardDetailsModel
+                                                                .value!
+                                                                .status ==
+                                                            158
+                                                    ? SizedBox()
+                                                    : TableActionButton(
+                                                        color: ColorValues
+                                                            .appRedColor,
+                                                        icon: Icons.delete,
+                                                        label: '',
+                                                        message: '',
+                                                        onPress: () {
                                                           controller
-                                                                  .jobCardDetailsModel
-                                                                  .value!
-                                                                  .status ==
-                                                              158
-                                                      ? true
-                                                      : false,
-                                                  child: TableActionButton(
-                                                    color:
-                                                        ColorValues.appRedColor,
-                                                    icon: Icons.delete,
-                                                    label: '',
-                                                    message: '',
-                                                    onPress: () {
-                                                      controller
-                                                          .employeesDeployed
-                                                          .remove(record);
-                                                    },
-                                                  ),
-                                                )
+                                                              .employeesDeployed
+                                                              .remove(record);
+                                                        },
+                                                      )
                                               ],
                                             ),
                                           )
