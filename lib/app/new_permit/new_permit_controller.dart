@@ -1367,7 +1367,7 @@ class NewPermitController extends GetxController {
 
   void createNewPermit({List<dynamic>? fileIds}) async {
     {
-      // checkForm();
+      checkForm();
       // if (isFormInvalid.value) {
       //   return;
       // }
