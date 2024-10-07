@@ -55,6 +55,8 @@ class ViewAuditTaskController extends GetxController {
   RxString fileName = "".obs;
   int fileId = 0;
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
+  RxMap<int, TextEditingController> dateControllersMap =
+      <int, TextEditingController>{}.obs;
 
   RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
   RxMap<dynamic, dynamic> dropdownAssigntoMapperData = {}.obs;
@@ -577,6 +579,8 @@ class ViewAuditTaskController extends GetxController {
   }
 
   void addRowItem() {
+    int newRowId = rowItem.length;
+
     rowItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
       {'key': "title", "value": ''},
@@ -588,6 +592,8 @@ class ViewAuditTaskController extends GetxController {
       {'key': "status", "value": ''},
       {'key': "Action ", "value": ''},
     ]);
+
+    dateControllersMap[newRowId] = TextEditingController(text: '');
   }
 
   Future<bool> submitSubTaskCheckList() async {

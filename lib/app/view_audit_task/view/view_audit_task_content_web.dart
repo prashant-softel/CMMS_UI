@@ -2065,16 +2065,19 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                                             children: [
                                                               _buildTargetDateField_web(
                                                                 context,
-                                                                new TextEditingController(
-                                                                    text: mapData[
-                                                                            "value"] ??
-                                                                        ''),
+                                                                rowIndex, // Passing the rowIndex correctly
+                                                                textDateController: controller
+                                                                            .dateControllersMap[
+                                                                        rowIndex] ??=
+                                                                    TextEditingController(
+                                                                        text:
+                                                                            ''), // Ensuring the controller is initialized
                                                                 onChanged:
                                                                     (txt) {
                                                                   mapData["value"] =
-                                                                      txt;
+                                                                      txt; // Update the map data with the new value
                                                                 },
-                                                              )
+                                                              ),
                                                             ],
                                                           ),
                                                         )
@@ -2254,9 +2257,9 @@ class CheckListSubTaskDataTable extends StatelessWidget {
     }));
   }
 
-  Widget _buildTargetDateField_web(
-      BuildContext context, TextEditingController textDateController,
-      {required Function(String) onChanged}) {
+  Widget _buildTargetDateField_web(BuildContext context, int rowIndex,
+      {required TextEditingController textDateController,
+      required Function(String) onChanged}) {
     return StatefulBuilder(builder: ((context, setState) {
       return Column(children: [
         Container(
@@ -2265,19 +2268,16 @@ class CheckListSubTaskDataTable extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.black26,
-                offset: const Offset(
-                  5.0,
-                  5.0,
-                ),
+                offset: const Offset(5.0, 5.0),
                 blurRadius: 5.0,
                 spreadRadius: 1.0,
-              ), //BoxShadow
+              ),
               BoxShadow(
                 color: ColorValues.whiteColor,
                 offset: const Offset(0.0, 0.0),
                 blurRadius: 0.0,
                 spreadRadius: 0.0,
-              ), //BoxShadow
+              ),
             ],
             color: ColorValues.whiteColor,
             borderRadius: BorderRadius.circular(5),
@@ -2287,38 +2287,26 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                 ? MediaQuery.of(context).size.width / 3.9
                 : MediaQuery.of(context).size.width / 1.0,
             child: TextField(
+              controller: textDateController,
               style: GoogleFonts.lato(
                 textStyle:
                     TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
               ),
               onTap: () {
                 setState(() {
-                  pickTargetDateTime_web(
-                    context,
-                    textDateController,
-                  );
+                  pickTargetDateTime_web(context, textDateController);
                 });
-
-                // }
-
-                // : null;
               },
-              controller: textDateController,
               onChanged: (value) {
-                setState(
-                  () {
-                    textDateController.text = value;
-                    onChanged(value);
-                  },
-                );
+                setState(() {
+                  textDateController.text = value;
+                  onChanged(value);
+                });
               },
-
-              // :null,
               autofocus: false,
               decoration: InputDecoration(
                 fillColor: ColorValues.whiteColor,
                 filled: true,
-                // contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
