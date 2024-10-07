@@ -219,6 +219,7 @@ class Itemlist {
       this.start_date,
       this.status,
       this.status_long,
+      this.current_status,
       this.wo_decription,
       this.wo_number,
       this.go_id,
@@ -252,6 +253,7 @@ class Itemlist {
   int? status;
   int? plan_id;
   String? status_long;
+  String? current_status;
   String? asset_category;
   String? asset_name;
   String? start_date;
@@ -303,6 +305,7 @@ class Itemlist {
         facility_name: parsedJson['facility_name'],
         wo_number: parsedJson['wo_number'].toString(),
         status: parsedJson['status'],
+        current_status: parsedJson['current_status'],
         plan_id: parsedJson['plan_id'],
         status_long: parsedJson['status_long'],
         asset_category: parsedJson['asset_category'],
@@ -364,6 +367,7 @@ class Itemlist {
         "facility_name": facility_name,
         "wo_number": wo_number,
         "status": status,
+        "current_status": current_status,
         "status_long": status_long,
         "asset_category": asset_category,
         "assetsname": asset_name,

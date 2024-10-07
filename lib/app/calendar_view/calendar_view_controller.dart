@@ -3,7 +3,6 @@ import 'package:cmms/app/calendar_view/calendar_view_presenter.dart';
 import 'package:cmms/app/calendar_view/view/calendar_view_web.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/domain/models/cumulative_report_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/module_model.dart';
 // import 'package:cmms/domain/models/doc_upload_list_model.dart';
@@ -137,6 +136,12 @@ class CalendarViewController extends GetxController {
       }
 
       final String eventName = item?.wo_decription ?? "";
+      final String? currentStatus = item?.current_status;
+      final String fullEventName =
+          currentStatus != null && currentStatus.isNotEmpty
+              ? "$eventName - $currentStatus"
+              : eventName; // Include current status if it exists
+
       final bool isAllDay = false;
 
       // Use the module name from the parent dashboard item
@@ -144,7 +149,7 @@ class CalendarViewController extends GetxController {
           .firstWhere(
               (dashboard) =>
                   dashboard?.cmDashboadDetails?.item_list?.contains(item) ??
-                  false, // Ensure the closure returns bool
+                  false,
               orElse: () => null)
           ?.module_name;
 
@@ -152,7 +157,7 @@ class CalendarViewController extends GetxController {
           Colors.grey; // Default to grey if module name is not found
 
       meetings.add(Meeting(
-        eventName,
+        fullEventName,
         start_date,
         end_date ?? start_date,
         moduleColor,
