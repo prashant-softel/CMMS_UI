@@ -8609,6 +8609,32 @@ class Repository {
     }
   }
 
+  Future<bool> submitSubTaskCheckList(
+      {bool? isLoading, checkAuditJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.submitSubTaskCheckList(
+            auth: auth,
+            isLoading: isLoading,
+            checkAuditJsonString: checkAuditJsonString);
+      }
+      if (!res.hasError) {
+        // Get.offAllNamed(Routes.auditListScreen);
+
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' submitSubTaskCheckList');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
   Future<List<EmployeeModel?>?> getAssignedToEmployee(
     String? auth,
     int? facilityId,
@@ -14966,7 +14992,7 @@ class Repository {
             ...jsonDataList
                 .map((pmPlanListJson) => [
                       pmPlanListJson['facility_name'],
-                      pmPlanListJson['plan_name'],
+                      pmPlanListJson['title'],
                       pmPlanListJson['category_name'],
                       pmPlanListJson['plan_date'],
                       pmPlanListJson['plan_freq_name'],
@@ -15591,7 +15617,7 @@ class Repository {
             ...jsonDataList
                 .map((auditlistjson) => [
                       auditlistjson['id'],
-                      auditlistjson['plan_number'],
+                      auditlistjson['title'],
                       auditlistjson['facility_name'],
                       auditlistjson['auditee_Emp_Name'],
                       auditlistjson['auditor_Emp_Name'],
@@ -18201,10 +18227,10 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
           msg: "Course Scheduled Successfully",
-          fontSize: 16.0,  );
-           Get.offAllNamed(
+          fontSize: 16.0,
+        );
+        Get.offAllNamed(
           Routes.scheduleCourseList,
-      
         );
       } else {
         Utility.showDialog(res.errorCode.toString(), 'Add Course');
@@ -18295,7 +18321,7 @@ class Repository {
           msg: "Course Scheduled Successfully",
           fontSize: 16.0,
         );
-          Get.offAllNamed(
+        Get.offAllNamed(
           Routes.scheduleCourseList,
         );
       } else {

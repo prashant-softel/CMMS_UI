@@ -9257,6 +9257,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> submitSubTaskCheckList({
+    required String auth,
+    bool? isLoading,
+    required checkAuditJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/CreateSubTaskForChecklist',
+      Request.post,
+      checkAuditJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> updateAuditNumber({
     required String auth,
     bool? isLoading,

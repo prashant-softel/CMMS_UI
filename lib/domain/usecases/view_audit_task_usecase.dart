@@ -98,7 +98,8 @@ class ViewAuditTaskUsecase {
       );
   Future<List<HistoryModel>?> getHistory({
     moduleType,
-    id,facility_id,
+    id,
+    facility_id,
     bool? isLoading,
   }) async =>
       await repository.getHistory(
@@ -156,4 +157,10 @@ class ViewAuditTaskUsecase {
         isattendanceneeded,
         isLoading,
       );
+  Future<bool> submitSubTaskCheckList({
+    checkAuditJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.submitSubTaskCheckList(
+          isLoading: isLoading, checkAuditJsonString: checkAuditJsonString);
 }

@@ -72,6 +72,7 @@ class PmtaskViewModel {
   String? site_name;
   int? tbt_start;
   int? is_expired;
+  dynamic? max_score;
   List<PreventiveCheckListModel>? map_checklist;
 
   PmtaskViewModel(
@@ -105,6 +106,7 @@ class PmtaskViewModel {
       this.cancelled_by_name,
       this.closed_at,
       this.is_PTW,
+      this.max_score,
       this.is_expired,
       this.tbt_start,
       this.closed_by_id,
@@ -140,6 +142,7 @@ class PmtaskViewModel {
       PmtaskViewModel(
         status_short_ptw: json["status_short_ptw"] ?? "",
         approved_by: json["approved_by"],
+        max_score: json["max_score"],
         plan_id: json["plan_id"] ?? 0,
         is_expired: json["isExpired"] ?? 0,
         tbt_start: json['tbt_start'] ?? 0,
@@ -218,6 +221,7 @@ class PmtaskViewModel {
 
   Map<String, dynamic> toJson() => {
         "ptw_status": ptw_status,
+        "max_score": max_score,
         "approved_by": approved_by,
         "is_PTW": is_PTW,
         "isExpired": is_expired,

@@ -1597,13 +1597,15 @@ class DataRepository extends DomainRepository {
           String? facilityId,
           bool? isLoading,
           dynamic startDate,
-          dynamic endDate,String?moduleId}) async =>
+          dynamic endDate,
+          String? moduleId}) async =>
       await connectHelper.getdashboardList(
           auth: auth,
           facilityId: facilityId ?? "",
           isLoading: isLoading ?? false,
           startDate: startDate,
-          endDate: endDate,moduleId:moduleId);
+          endDate: endDate,
+          moduleId: moduleId);
   Future<ResponseModel> getPreventiveCheckListForPm(
           {required String auth,
           int? facilityId,
@@ -1871,6 +1873,18 @@ class DataRepository extends DomainRepository {
         userId: userId,
         isLoading: isLoading,
       );
+  Future<ResponseModel> submitSubTaskCheckList({
+    auth,
+    bool? isLoading,
+    checkAuditJsonString,
+  }) async {
+    var response = await connectHelper.submitSubTaskCheckList(
+        auth: auth,
+        isLoading: isLoading,
+        checkAuditJsonString: checkAuditJsonString);
+    return response;
+  }
+
   Future<ResponseModel> getAssignedToListWOAttend({
     required String auth,
     int? facilityId,
