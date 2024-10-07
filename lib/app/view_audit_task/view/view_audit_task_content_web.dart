@@ -1972,9 +1972,16 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                           TableActionButton(
                                             // label: 'Equipments',
                                             onPress: () {
-                                              // var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+                                              var filterdData = controller
+                                                  .auditTasknDetailModel
+                                                  .value
+                                                  .map_checklist
+                                                  ?.firstWhere((e) =>
+                                                      "${e?.id}" ==
+                                                      mapData['value']);
 
-                                              // controller.createNewPermit(scheduleID: filterdData?.scheduleId);
+                                              controller.createNewPermit(
+                                                  scheduleID: filterdData?.id);
                                             },
                                             color: ColorValues.appDarkBlueColor,
                                             icon: Icons.add,
@@ -2025,8 +2032,13 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                       ),
                                     )
                                   : (mapData['key'] == "ptwreq")
-                                      ? Text(
-                                          "${controller.dropdownMapperData.value[row[0]['value']]?.ptw_required ?? ""}")
+                                      ? Text(controller
+                                                  .dropdownMapperData
+                                                  .value[row[0]['value']]
+                                                  ?.ptw_required ==
+                                              1
+                                          ? "YES"
+                                          : "NO")
                                       : (mapData['key'] == "score")
                                           ? Text(
                                               "${controller.dropdownMapperData.value[row[0]['value']]?.ptw_required ?? ""}")

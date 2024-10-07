@@ -321,7 +321,7 @@ class ViewAuditTaskController extends GetxController {
     print('PermitIdArgument:$isChecked');
   }
 
-  createNewPermit() {
+  createNewPermit({int? scheduleID}) {
     clearStoreData();
     clearTypeStoreData();
     clearisCheckedtoreData();
@@ -335,7 +335,7 @@ class ViewAuditTaskController extends GetxController {
       "type": 3,
       "isFromPmTaskDetails": true,
       "mcModel": mcExecutionDetailsModel.value,
-      "scheduleID": 0
+      "scheduleID": scheduleID
     });
   }
 
@@ -596,7 +596,7 @@ class ViewAuditTaskController extends GetxController {
       SubTaskChecklist item = SubTaskChecklist(
         checklist_id: dropdownMapperData[element[0]["value"]]?.id,
         title: element[1]["value"] ?? '',
-        schedule_date: element[3]["value"] ?? '',
+        schedule_date: "2024-10-06T00:00:00Z", // element[3]["value"] ?? '',
         assign_to: dropdownAssigntoMapperData[element[5]["value"]]?.id,
       );
       items.add(item);
