@@ -2191,7 +2191,7 @@ class CumulativeReportController extends GetxController {
         PdfBitmap image = PdfBitmap(data);
 
         final PdfLayoutResult result =
-            drawHeader(page, pageSize, document, image);
+            drawHeaderJob(page, pageSize, document, image);
 
         final List<int> bytes = await document.save();
 
