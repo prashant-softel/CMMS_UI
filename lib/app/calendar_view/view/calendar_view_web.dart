@@ -3,10 +3,8 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/utils/responsive.dart';
-import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/dash_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/repositories/repository.dart';
@@ -126,19 +124,25 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
                                 ),
                               ),
                               Spacer(),
-                              Container(
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 5),
                                 child: Row(
                                   children: [
-                                    Text(
-                                      "Select Module :",
-                                      style: Styles.black15,
-                                    ),
-                                    Dimens.boxWidth2,
+                                    Text('Select Module',
+                                        style: Styles.black13W400),
+                                    // Dimens.boxWidth10,
+                                    SizedBox(width: 10),
                                     Container(
-                                      width: 300,
-                                      child: CustomMultiSelectDialogField(
-                                        title: 'Please Select',
-                                        buttonText: 'Select Module',
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.transparent),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: DashCustomMultiSelectDialogField(
+                                        title: 'Select Module',
+                                        // buttonText: 'Select Module',
                                         initialValue: (controller
                                                 .selectedModuleIdList
                                                 .isNotEmpty)
