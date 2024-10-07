@@ -12,6 +12,7 @@ import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -3481,53 +3482,45 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                 controller.permitId.value == 0
                             ? Center(
                                 child: Container(
-                                    height: 45,
-                                    child: CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appGreenColor,
-                                      text: "Submit",
-                                      onPressed: () {
-                                        controller.isFormInvalid.value = false;
-                                        controller.checkForm() == true &&
-                                                controller.isCheckedJSA.value ==
-                                                    true &&
-                                                controller.isCheckedSOP.value ==
-                                                    true
-                                            ? controller.createNewPermitForPm(
-                                                pmTaskId:
-                                                    controller.scheduleID.value,
-                                                fileIds:
-                                                    dropzoneController.fileIds)
-                                            : controller.isCheckedJSA.value ==
-                                                        true &&
-                                                    controller.isCheckedSOP
-                                                            .value ==
-                                                        true
-                                                ? print("condiation failed")
-                                                : Get.dialog<void>(
-                                                    checkboxAlertBox(),
-                                                  );
-                                        // var jobId = controller.jobModel?.id ?? 0;
-                                        // print('JobId'),
-                                        // controller.isFormInvalid.value =
-                                        //     false;
-                                        // controller.isCheckedJSA.value ==
-                                        //             true &&
-                                        //         controller
-                                        //                 .isCheckedSOP.value ==
-                                        //             true
-                                        //     ? controller
-                                        //         .createNewPermitForJob(
-                                        //             jobId: controller
-                                        //                 .jobModel?.id,
-                                        //             fileIds:
-                                        //                 dropzoneController
-                                        //                     .fileIds)
-                                        //     : Get.dialog<void>(
-                                        //         checkboxAlertBox());
-                                        // controller.linkToPermit(jobId: controller.jobModel?.id);
-                                      },
-                                    )),
+                                  height: 45,
+                                  child: CustomElevatedButton(
+                                    backgroundColor: ColorValues.appGreenColor,
+                                    text: "Submit For Approval",
+                                    onPressed: () {
+                                      controller.isFormInvalid.value = false;
+
+                                      // Check if form is valid and all conditions are met
+                                      if (controller.checkForm() &&
+                                          controller.isCheckedJSA.value &&
+                                          controller.isCheckedSOP.value) {
+                                        // Additional check to ensure Equipment Isolation is selected when required
+                                        if (controller
+                                            .selectedEquipmentIsolationIdList
+                                            .isEmpty) {
+                                          Fluttertoast.showToast(
+                                            msg:
+                                                'Equipment Isolation must be selected when toggle is on',
+                                          );
+                                        } else {
+                                          // If all checks pass, proceed with permit creation
+                                          controller.createNewPermitForPm(
+                                            pmTaskId:
+                                                controller.scheduleID.value,
+                                            fileIds: dropzoneController.fileIds,
+                                          );
+                                        }
+                                      } else {
+                                        // Display appropriate dialog or message if conditions fail
+                                        if (controller.isCheckedJSA.value &&
+                                            controller.isCheckedSOP.value) {
+                                          print("Condition failed");
+                                        } else {
+                                          Get.dialog<void>(checkboxAlertBox());
+                                        }
+                                      }
+                                    },
+                                  ),
+                                ),
                               )
                             : controller.vegExecutionDetailsModel
                                             ?.executionId !=
@@ -3535,218 +3528,213 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                     controller.permitId.value == 0
                                 ? Center(
                                     child: Container(
-                                        height: 45,
-                                        child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appGreenColor,
-                                          text: "Submit",
-                                          onPressed: () {
-                                            controller.isFormInvalid.value =
-                                                false;
-                                            controller.checkForm() == true &&
-                                                    controller.isCheckedJSA
-                                                            .value ==
-                                                        true &&
-                                                    controller.isCheckedSOP
-                                                            .value ==
-                                                        true
-                                                ? controller
-                                                    .createNewPermitForPm(
-                                                        pmTaskId: controller
-                                                            .scheduleID.value,
-                                                        fileIds:
-                                                            dropzoneController
-                                                                .fileIds)
-                                                : controller.isCheckedJSA
-                                                                .value ==
-                                                            true &&
-                                                        controller.isCheckedSOP
-                                                                .value ==
-                                                            true
-                                                    ? print("condiation failed")
-                                                    : Get.dialog<void>(
-                                                        checkboxAlertBox(),
-                                                      );
-                                          },
-                                        )),
+                                      height: 45,
+                                      child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appGreenColor,
+                                        text: "Submit For Approval",
+                                        onPressed: () {
+                                          controller.isFormInvalid.value =
+                                              false;
+
+                                          // Check if form is valid and all conditions are met
+                                          if (controller.checkForm() &&
+                                              controller.isCheckedJSA.value &&
+                                              controller.isCheckedSOP.value) {
+                                            // Additional check to ensure Equipment Isolation is selected
+                                            if (controller
+                                                .selectedEquipmentIsolationIdList
+                                                .isEmpty) {
+                                              Fluttertoast.showToast(
+                                                msg:
+                                                    'Equipment Isolation must be selected when toggle is on',
+                                              );
+                                            } else {
+                                              // If all checks pass, proceed with permit creation
+                                              controller.createNewPermitForPm(
+                                                pmTaskId:
+                                                    controller.scheduleID.value,
+                                                fileIds:
+                                                    dropzoneController.fileIds,
+                                              );
+                                            }
+                                          } else {
+                                            // Display appropriate dialog or message if conditions fail
+                                            if (controller.isCheckedJSA.value &&
+                                                controller.isCheckedSOP.value) {
+                                              print("Condition failed");
+                                            } else {
+                                              Get.dialog<void>(
+                                                  checkboxAlertBox());
+                                            }
+                                          }
+                                        },
+                                      ),
+                                    ),
                                   )
                                 : controller.jobModel?.id != null &&
                                         controller.permitId.value == 0
                                     ? Center(
                                         child: Container(
-                                            height: 45,
-                                            child: CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.appGreenColor,
-                                              text: "Submit For Approval",
-                                              onPressed: () {
-                                                controller.isFormInvalid.value =
-                                                    false;
-                                                controller
-                                                                .checkForm() ==
-                                                            true &&
-                                                        controller.isCheckedJSA
-                                                                .value ==
-                                                            true &&
-                                                        controller.isCheckedSOP
-                                                                .value ==
-                                                            true
-                                                    ? controller
-                                                        .createNewPermitForJob(
-                                                            jobId: controller
-                                                                .jobModel?.id,
-                                                            fileIds:
-                                                                dropzoneController
-                                                                    .fileIds)
-                                                    : controller.isCheckedJSA
-                                                                    .value ==
-                                                                true &&
-                                                            controller
-                                                                    .isCheckedSOP
-                                                                    .value ==
-                                                                true
-                                                        ? print(
-                                                            "condiation failed")
-                                                        : Get.dialog<void>(
-                                                            checkboxAlertBox(),
-                                                          );
-                                                // var jobId = controller.jobModel?.id ?? 0;
-                                                // print('JobId'),
-                                                // controller.isFormInvalid.value =
-                                                //     false;
-                                                // controller.isCheckedJSA.value ==
-                                                //             true &&
-                                                //         controller
-                                                //                 .isCheckedSOP.value ==
-                                                //             true
-                                                //     ? controller
-                                                //         .createNewPermitForJob(
-                                                //             jobId: controller
-                                                //                 .jobModel?.id,
-                                                //             fileIds:
-                                                //                 dropzoneController
-                                                //                     .fileIds)
-                                                //     : Get.dialog<void>(
-                                                //         checkboxAlertBox());
-                                                // controller.linkToPermit(jobId: controller.jobModel?.id);
-                                              },
-                                            )),
+                                          height: 45,
+                                          child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appGreenColor,
+                                            text: "Submit For Approval",
+                                            onPressed: () {
+                                              controller.isFormInvalid.value =
+                                                  false;
+
+                                              // Check if form is valid and all conditions are met
+                                              if (controller.checkForm() &&
+                                                  controller
+                                                      .isCheckedJSA.value &&
+                                                  controller
+                                                      .isCheckedSOP.value) {
+                                                // Additional check to ensure Equipment Isolation is selected
+                                                if (controller
+                                                    .selectedEquipmentIsolationIdList
+                                                    .isEmpty) {
+                                                  Fluttertoast.showToast(
+                                                    msg:
+                                                        'Equipment Isolation must be selected when toggle is on',
+                                                  );
+                                                } else {
+                                                  // If all checks pass, proceed with permit creation
+                                                  controller
+                                                      .createNewPermitForJob(
+                                                    jobId:
+                                                        controller.jobModel?.id,
+                                                    fileIds: dropzoneController
+                                                        .fileIds,
+                                                  );
+                                                }
+                                              } else {
+                                                // Display appropriate dialog or message if conditions fail
+                                                if (controller
+                                                        .isCheckedJSA.value &&
+                                                    controller
+                                                        .isCheckedSOP.value) {
+                                                  print("Condition failed");
+                                                } else {
+                                                  Get.dialog<void>(
+                                                      checkboxAlertBox());
+                                                }
+                                              }
+                                            },
+                                          ),
+                                        ),
                                       )
                                     : controller.pmtaskViewModel?.id != null &&
                                             controller.permitId.value <= 0
                                         ? Center(
                                             child: Container(
-                                                height: 45,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.appGreenColor,
-                                                  text: "Submit For Approval ",
-                                                  onPressed: () {
-                                                    controller.isFormInvalid
-                                                        .value = false;
-                                                    controller.checkForm() == true &&
-                                                            controller
-                                                                    .isCheckedJSA
-                                                                    .value ==
-                                                                true &&
-                                                            controller
-                                                                    .isCheckedSOP
-                                                                    .value ==
-                                                                true
-                                                        ? controller.createNewPermitForPm(
-                                                            pmTaskId: controller
-                                                                .pmtaskViewModel
-                                                                ?.id,
-                                                            activity: controller
-                                                                .pmtaskViewModel
-                                                                ?.plan_title,
-                                                            fileIds:
-                                                                dropzoneController
-                                                                    .fileIds)
-                                                        : controller.isCheckedJSA
-                                                                        .value ==
-                                                                    true &&
-                                                                controller
-                                                                        .isCheckedSOP
-                                                                        .value ==
-                                                                    true
-                                                            ? print(
-                                                                "condiation failed")
-                                                            : Get.dialog<void>(
-                                                                checkboxAlertBox(),
-                                                              );
-                                                    // var jobId = controller.jobModel?.id ?? 0;
-                                                    // print('JobId'),
-                                                    // controller.isFormInvalid.value =
-                                                    //     false;
-                                                    // controller.isCheckedJSA
-                                                    //                 .value ==
-                                                    //             true &&
-                                                    //         controller.isCheckedSOP
-                                                    //                 .value ==
-                                                    //             true
-                                                    //     ? controller
-                                                    //         .createNewPermitForPm(
-                                                    //             pmTaskId: controller
-                                                    //                 .pmtaskViewModel
-                                                    //                 ?.id,
-                                                    //             activity:
-                                                    //                 controller
-                                                    //                     .pmtaskViewModel
-                                                    //                     ?.plan_title,
-                                                    //             fileIds:
-                                                    //                 dropzoneController
-                                                    //                     .fileIds)
-                                                    //     : Get.dialog<void>(
-                                                    //         checkboxAlertBox());
-                                                    // controller.linkToPermit(jobId: controller.jobModel?.id);
-                                                  },
-                                                )),
+                                              height: 45,
+                                              child: CustomElevatedButton(
+                                                backgroundColor:
+                                                    ColorValues.appGreenColor,
+                                                text: "Submit For Approval",
+                                                onPressed: () {
+                                                  controller.isFormInvalid
+                                                      .value = false;
+
+                                                  // Check if form is valid and all conditions are met
+                                                  if (controller.checkForm() &&
+                                                      controller
+                                                          .isCheckedJSA.value &&
+                                                      controller
+                                                          .isCheckedSOP.value) {
+                                                    // Additional check to ensure Equipment Isolation is selected
+                                                    if (controller
+                                                        .selectedEquipmentIsolationIdList
+                                                        .isEmpty) {
+                                                      Fluttertoast.showToast(
+                                                        msg:
+                                                            'Equipment Isolation must be selected when toggle is on',
+                                                      );
+                                                    } else {
+                                                      // If all checks pass, proceed with permit creation
+                                                      controller
+                                                          .createNewPermitForPm(
+                                                        pmTaskId: controller
+                                                            .pmtaskViewModel
+                                                            ?.id,
+                                                        activity: controller
+                                                            .pmtaskViewModel
+                                                            ?.plan_title,
+                                                        fileIds:
+                                                            dropzoneController
+                                                                .fileIds,
+                                                      );
+                                                    }
+                                                  } else {
+                                                    // Display appropriate dialog or message if conditions fail
+                                                    if (controller.isCheckedJSA
+                                                            .value &&
+                                                        controller.isCheckedSOP
+                                                            .value) {
+                                                      print("Condition failed");
+                                                    } else {
+                                                      Get.dialog<void>(
+                                                          checkboxAlertBox());
+                                                    }
+                                                  }
+                                                },
+                                              ),
+                                            ),
                                           )
                                         : controller.permitId.value <= 0
                                             ? Center(
                                                 child: Container(
-                                                    height: 45,
-                                                    child: CustomElevatedButton(
-                                                        backgroundColor:
-                                                            ColorValues
-                                                                .appGreenColor,
-                                                        text:
-                                                            "Submit For Approval",
-                                                        onPressed: () {
+                                                  height: 45,
+                                                  child: CustomElevatedButton(
+                                                    backgroundColor: ColorValues
+                                                        .appGreenColor,
+                                                    text: "Submit For Approval",
+                                                    onPressed: () {
+                                                      controller.isFormInvalid
+                                                          .value = false;
+
+                                                      if (controller
+                                                              .checkForm() &&
                                                           controller
-                                                              .isFormInvalid
-                                                              .value = false;
+                                                              .isCheckedJSA
+                                                              .value &&
                                                           controller
-                                                                          .checkForm() ==
-                                                                      true &&
-                                                                  controller
-                                                                          .isCheckedJSA
-                                                                          .value ==
-                                                                      true &&
-                                                                  controller
-                                                                          .isCheckedSOP
-                                                                          .value ==
-                                                                      true
-                                                              ? controller
-                                                                  .createNewPermit(
-                                                                      fileIds:
-                                                                          dropzoneController
-                                                                              .fileIds)
-                                                              : controller.isCheckedJSA
-                                                                              .value ==
-                                                                          true &&
-                                                                      controller
-                                                                              .isCheckedSOP
-                                                                              .value ==
-                                                                          true
-                                                                  ? print(
-                                                                      "condiation failed")
-                                                                  : Get.dialog<
-                                                                      void>(
-                                                                      checkboxAlertBox(),
-                                                                    );
-                                                        })),
+                                                              .isCheckedSOP
+                                                              .value) {
+                                                        if (controller
+                                                            .selectedEquipmentIsolationIdList
+                                                            .isEmpty) {
+                                                          Fluttertoast
+                                                              .showToast(
+                                                            msg:
+                                                                'Equipment Isolation must be selected when toggle is on',
+                                                          );
+                                                        } else {
+                                                          controller.createNewPermit(
+                                                              fileIds:
+                                                                  dropzoneController
+                                                                      .fileIds);
+                                                        }
+                                                      } else {
+                                                        // Display appropriate dialog or message if conditions fail
+                                                        if (controller
+                                                                .isCheckedJSA
+                                                                .value &&
+                                                            controller
+                                                                .isCheckedSOP
+                                                                .value) {
+                                                          print(
+                                                              "Condition failed");
+                                                        } else {
+                                                          Get.dialog<void>(
+                                                              checkboxAlertBox());
+                                                        }
+                                                      }
+                                                    },
+                                                  ),
+                                                ),
                                               )
                                             : Row(
                                                 children: [
