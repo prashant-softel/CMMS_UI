@@ -8,6 +8,8 @@ class ScheduleCourseDetails {
   String? training_course;
   String? trainer;
   String? mode;
+  int? status;
+  String? short_status;
   String? course_name;
   int? hfeEmployeeId;
   String? venue;
@@ -25,6 +27,8 @@ class ScheduleCourseDetails {
     this.course_name,
     this.trainer,
     this.mode,
+    this.status,
+    this.short_status,
     this.venue,
     this.training_agency,
     this.hfe_Employee,
@@ -44,6 +48,8 @@ class ScheduleCourseDetails {
         trainer: json["trainer"],
         hfeEmployeeId: json["hfeEmployeeId"],
         mode: json["mode"],
+        status: json["status"],
+        short_status: json["short_status"],
         venue: json["venue"],
         training_agency: json["training_Agency"],
         hfe_Employee: json["hfE_Epmloyee"],
@@ -66,6 +72,8 @@ class ScheduleCourseDetails {
         'trainer': trainer,
         'hfeEmployeeId': hfeEmployeeId,
         'mode': mode,
+        'status': status,
+        'short_status': short_status,
         'venue': venue,
         'training_Agency': training_agency,
         'hfE_Epmloyee': hfe_Employee,

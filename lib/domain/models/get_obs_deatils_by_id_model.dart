@@ -13,6 +13,7 @@ class GetObservationById {
   int? status_code;
   String? risk_type;
   String? preventive_action;
+  String? action_taken;
   int? assigned_to_id;
   String? assigned_to_name;
   String? contact_number;
@@ -43,6 +44,7 @@ class GetObservationById {
     this.status_code,
     this.risk_type,
     this.preventive_action,
+    this.action_taken,
     this.assigned_to_id,
     this.assigned_to_name,
     this.contact_number,
@@ -73,6 +75,7 @@ class GetObservationById {
     facility_id: json['facility_id'],
     short_status: json['short_status'],
     contact_number: json['contact_number'],
+    action_taken: json['action_taken'],
     operator_name: json['operator_name'],
     cost_type: json['cost_type'],
     cost_name: json['cost_name'],

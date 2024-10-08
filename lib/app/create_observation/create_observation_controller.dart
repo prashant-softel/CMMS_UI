@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:cmms/app/add_job/views/widgets/observation_created_dialog.dart';
 import 'package:cmms/app/create_observation/create_observation_presenter.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_obs_model.dart';
@@ -272,85 +274,115 @@ class CreateObservationController extends GetxController {
       _facilityId.sink.add(facilityList[0]?.id ?? 0);
     }
   }
-  
+    /// Show alert dialog
+  static void showAlertDialog({
+  int? obsId,
+  String? message,
+  String? title,
+  Function()? onPress,
+}) async {
+  print("Showing Dialog with ID: $obsId and Message: $message");
+  await Get.dialog<void>(
+    obsCreatedDialog(obsId: obsId, message: message),
+    barrierDismissible: false,
+  );
+}
 
-  void createObs({int? position, List<dynamic>? fileIds,int?check_point_type_id}) async {
-    try {
-        // checkObs1();
-        // if (isFormInvalid.value) {
-        //   return;
-        // }
+  goTocreateObsScreen() {
+    Get.offAllNamed(Routes.createObservation);
+  }
+  goToViewDetailsScreen(int _obsId) {
+    Get.offAllNamed('${Routes.viewObservationScreen}/$_obsId');
+  }
+    goToObsListScreen() {
+    Get.offAllNamed(Routes.observationListScreen);
+  }
+ // Function to create observation
+void createObs({int? position, List<dynamic>? fileIds, int? check_point_type_id}) async {
+  try {
+    // Trimmed values from TextControllers
+    String _contractorNameCtrlr = contractorNameCtrlr.text.trim();
+    String _correctivePreventiveCtrlr = correctivePreventiveCtrlr.text.trim();
+    String _contactNumberCtrlr = contactNumberCtrlr.text.trim();
+    String _obsDateTc = obsDateTc.text.trim();
+    String _discriptionCtrlr = discriptionCtrlr.text.trim();
+    String _action_takenCtrlr = action_takenCtrlr.text.trim();
+    String _locationOfObservationCtrlr = locationOfObservationCtrlr.text.trim();
 
-      String _contractorNameCtrlr = contractorNameCtrlr.text.trim();
-      String _correctivePreventiveCtrlr = correctivePreventiveCtrlr.text.trim();
-      // String _responsiblePersonCtrlr = responsiblePersonCtrlr.text.trim();
-      String _contactNumberCtrlr = contactNumberCtrlr.text.trim();
-      String _obsDateTc = obsDateTc.text.trim();
-      String _discriptionCtrlr = discriptionCtrlr.text.trim();
-      String _action_takenCtrlr = discriptionCtrlr.text.trim();
+    // Assigning the correct id based on the selected cost type
+    int idToSend = position == 1 ? 0 : obsId.value;
+    String? targetDateToSend = position == 1 ? null : targetDateTc.text.trim();
 
-      String _locationOfObservationCtrlr =
-          locationOfObservationCtrlr.text.trim();
-      // String _targetDateTc = targetDateTc.text.trim();
+    // Creating the CreateObsModel object
+    CreateObsModel createObsModel = CreateObsModel(
+      id: idToSend,
+      facility_id: facilityId,
+      contact_number: _contactNumberCtrlr,
+      contractor_name: _contractorNameCtrlr,
+      cost_type: selectedCostTypeId,
+      date_of_observation: _obsDateTc,
+      location_of_observation: _locationOfObservationCtrlr,
+      observation_description: _discriptionCtrlr,
+      preventive_action: _correctivePreventiveCtrlr,
+      assigned_to_id: selectedAssignedToId.value,
+      risk_type_id: incidenttypeId,
+      source_of_observation: sourceOfObsId,
+      target_date: targetDateToSend,
+      type_of_observation: typeOfObsId,
+      uploadfileIds: fileIds,
+      action_taken: _action_takenCtrlr,
+    );
 
-      // Assigning the correct id based on the selected cost type
-      int idToSend = position == 1 ? 0 : obsId.value;
-      String? targetDateToSend =
-          position == 1 ? null : targetDateTc.text.trim();
+    // Convert the CreateObsModel instance to JSON
+    var createObsModelJsonString = createObsModel.toJson();
 
-      CreateObsModel createObsModel = CreateObsModel(
-          id: idToSend,
-          facility_id: facilityId,
-          contact_number: _contactNumberCtrlr,
-          contractor_name: _contractorNameCtrlr,
-          cost_type: selectedCostTypeId, // Sending the selected cost type ID
-          date_of_observation: _obsDateTc,
-          location_of_observation: _locationOfObservationCtrlr,
-          observation_description: _discriptionCtrlr,
-          preventive_action: _correctivePreventiveCtrlr,
-          assigned_to_id: selectedAssignedToId.value,
-          //  assignedId: selectedAssignedToId.value,
-          risk_type_id: incidenttypeId,
-          source_of_observation: sourceOfObsId,
-          target_date: position == 1 || position == 2 ? targetDateToSend : null,
-          type_of_observation: typeOfObsId,
-          uploadfileIds: fileIds,
-          action_taken: _action_takenCtrlr);
+    // Call the createObs function from the presenter
+    Map<String, dynamic>? responseCreateObsModel = await createObservationPresenter.createObs(
+      createObs: createObsModelJsonString,
+      isLoading: true,
+      position: position,
+      check_point_type_id: check_point_type_id ?? 0,
+    );
 
-      // Convert the CreateObsModel instance to JSON
-      var createObsModelJsonString = createObsModel.toJson();
-
-      // Call the createObs function from the presenter
-      Map<String, dynamic>? responseCreateObsModel =
-          await createObservationPresenter.createObs(
-        createObs: createObsModelJsonString,
-        isLoading: true,
-        position: position,
-         check_point_type_id:check_point_type_id??0,
-      );
-
-      if (responseCreateObsModel == null) {
-        // Handle response if needed
+    if (responseCreateObsModel != null) {
+      // Handle response if needed
+      var _obsId = 0;
+      var _message = '';
+      if (responseCreateObsModel["id"] != null && responseCreateObsModel["id"].isNotEmpty) {
+        _obsId = responseCreateObsModel["id"][0];
+      }
+      if (responseCreateObsModel["message"] != null) {
+        _message = responseCreateObsModel["message"];
+        // Show alert dialog when response is received
+       
       }
 
-      print('Create Observation data: $createObsModelJsonString');
-    } catch (e) {
-      print(e);
+        showAlertDialog(obsId: _obsId, message: _message);
+       
     }
-  }
 
+    print('Create Observation data: $createObsModelJsonString');
+  } catch (e) {
+    print(e);
+  }
+}
   void viewObsCloseButton({int? id,required int?check_point_type_id}) async {
     {
       String _comment = closeCommentTextFieldCtrlr.text.trim();
+      String _action_takenCtrlr = action_takenCtrlr.text.trim();
 
+    // CreateObsModel createObsModel = CreateObsModel(
+    //   action_taken: _action_takenCtrlr);
       CommentModel commentviewListofObsCloseModel =
-          CommentModel(id: id, comment: _comment);
+          CommentModel(id: id, comment: _comment,action_taken:_action_takenCtrlr);
 
       var ViewObsCloseJsonString = commentviewListofObsCloseModel.toJson();
+      // var createObsModelJsonString = createObsModel.toJson();
 
       Map<String, dynamic>? response =
           await createObservationPresenter.viewObsCloseButton(
         ViewObsCloseJsonString: ViewObsCloseJsonString,
+        // createObsModelJsonString: createObsModelJsonString,
         isLoading: true,
         check_point_type_id:check_point_type_id!,
       );
