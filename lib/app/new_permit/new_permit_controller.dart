@@ -1295,69 +1295,86 @@ class NewPermitController extends GetxController {
   }
 
   bool checkForm() {
+    // Reset form validation state at the beginning
+    isFormValid.value = true; // Start by assuming the form is valid
+
     // General form validations
     if (selectedFacility.value == '') {
       isFacilitySelected.value = false;
       isFormValid.value = false;
+    } else {
+      isFacilitySelected.value = true;
     }
+
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
       isFormValid.value = false;
+    } else {
+      isBlockSelected.value = true;
     }
-    if (workPermitRemarkTextCtrlr.text == '') {
+
+    if (workPermitRemarkTextCtrlr.text.trim() == '') {
       isWorPermitNumberTextInvalid.value = true;
-      isFormValid = false.obs;
+      isFormValid.value = false;
+    } else {
+      isWorPermitNumberTextInvalid.value = false;
     }
-    if (permitDescriptionCtrlr.text == '') {
+
+    if (permitDescriptionCtrlr.text.trim() == '') {
       isJobDescriptionInvalid.value = true;
-      isFormValid = false.obs;
+      isFormValid.value = false;
+    } else {
+      isJobDescriptionInvalid.value = false;
     }
+
     if (startDateTimeCtrlr.text.trim() == '') {
       isstartdateInvalid.value = true;
-      isFormValid = false.obs;
+      isFormValid.value = false;
+    } else {
+      isstartdateInvalid.value = false;
     }
-    if (validTillTimeCtrlr.text.trim() == '') {
-      isstartdateInvalid.value = true;
-      isFormValid = false.obs;
-    }
+
+    // if (validTillTimeCtrlr.text.trim() == '') {
+    //   isValidTillDateInvalid.value =
+    //       true; // Assuming a typo fix here, changed `isstartdateInvalid` to `isValidTillDateInvalid`
+    //   isFormValid.value = false;
+    // } else {
+    //   isValidTillDateInvalid.value = false;
+    // }
+
     if (selectedTypePermit.value == '') {
       isTypePermitSelected.value = false;
+      isFormValid.value = false;
+    } else {
+      isTypePermitSelected.value = true;
     }
+
     if (selectedJobType.value == '') {
       isJobTypeListSelected.value = false;
+      isFormValid.value = false;
+    } else {
+      isJobTypeListSelected.value = true;
     }
+
     if (selectedSopPermit.value == '') {
       isSopPermitListSelected.value = false;
+      isFormValid.value = false;
+    } else {
+      isSopPermitListSelected.value = true;
     }
 
     // Validate Equipment Isolation if toggle is on
-    if (isToggleOn.value) {
-      if (selectedEquipmentIsolationIdList.isEmpty) {
-        Fluttertoast.showToast(
-            msg: 'Equipment Isolation must be selected when toggle is on');
-        isFormValid.value = false;
-      }
+    if (isToggleOn.value && selectedEquipmentIsolationIdList.isEmpty) {
+      Fluttertoast.showToast(
+          msg: 'Equipment Isolation must be selected when toggle is on');
+      isFormValid.value = false;
     }
 
     // Final validation check
-    if (isAssignedToSelected.value == false ||
-        isFacilitySelected.value == false ||
-        isstartdateInvalid.value == true ||
-        isJobTypeListSelected.value == false ||
-        isSopPermitListSelected.value == false ||
-        isBlockSelected.value == false ||
-        isJobDescriptionInvalid == true ||
-        isWorPermitNumberTextInvalid.value == true ||
-        workPermitRemarkTextCtrlr.text == '') {
-      isFormInvalid.value = true;
-      return false;
-    } else {
-      isFormInvalid.value = false;
-    }
+    isFormInvalid.value = !isFormValid.value;
 
-    return true;
+    return isFormValid.value;
   }
-
   //  int?   getAssignedBlockId(String _selectedBlockName) {
   //   final item = blockList
   //   .firstWhere((item) => item?.name == _selectedBlockName);

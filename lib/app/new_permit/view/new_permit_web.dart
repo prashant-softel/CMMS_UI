@@ -3494,21 +3494,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           controller.isCheckedJSA.value &&
                                           controller.isCheckedSOP.value) {
                                         // Additional check to ensure Equipment Isolation is selected when required
-                                        if (controller
-                                            .selectedEquipmentIsolationIdList
-                                            .isEmpty) {
-                                          Fluttertoast.showToast(
-                                            msg:
-                                                'Equipment Isolation must be selected when toggle is on',
-                                          );
-                                        } else {
-                                          // If all checks pass, proceed with permit creation
-                                          controller.createNewPermitForPm(
-                                            pmTaskId:
-                                                controller.scheduleID.value,
-                                            fileIds: dropzoneController.fileIds,
-                                          );
-                                        }
+
+                                        // If all checks pass, proceed with permit creation
+                                        controller.createNewPermitForPm(
+                                          pmTaskId: controller.scheduleID.value,
+                                          fileIds: dropzoneController.fileIds,
+                                        );
                                       } else {
                                         // Display appropriate dialog or message if conditions fail
                                         if (controller.isCheckedJSA.value &&
@@ -3542,22 +3533,14 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               controller.isCheckedJSA.value &&
                                               controller.isCheckedSOP.value) {
                                             // Additional check to ensure Equipment Isolation is selected
-                                            if (controller
-                                                .selectedEquipmentIsolationIdList
-                                                .isEmpty) {
-                                              Fluttertoast.showToast(
-                                                msg:
-                                                    'Equipment Isolation must be selected when toggle is on',
-                                              );
-                                            } else {
-                                              // If all checks pass, proceed with permit creation
-                                              controller.createNewPermitForPm(
-                                                pmTaskId:
-                                                    controller.scheduleID.value,
-                                                fileIds:
-                                                    dropzoneController.fileIds,
-                                              );
-                                            }
+
+                                            // If all checks pass, proceed with permit creation
+                                            controller.createNewPermitForPm(
+                                              pmTaskId:
+                                                  controller.scheduleID.value,
+                                              fileIds:
+                                                  dropzoneController.fileIds,
+                                            );
                                           } else {
                                             // Display appropriate dialog or message if conditions fail
                                             if (controller.isCheckedJSA.value &&
@@ -3592,23 +3575,15 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                   controller
                                                       .isCheckedSOP.value) {
                                                 // Additional check to ensure Equipment Isolation is selected
-                                                if (controller
-                                                    .selectedEquipmentIsolationIdList
-                                                    .isEmpty) {
-                                                  Fluttertoast.showToast(
-                                                    msg:
-                                                        'Equipment Isolation must be selected when toggle is on',
-                                                  );
-                                                } else {
-                                                  // If all checks pass, proceed with permit creation
-                                                  controller
-                                                      .createNewPermitForJob(
-                                                    jobId:
-                                                        controller.jobModel?.id,
-                                                    fileIds: dropzoneController
-                                                        .fileIds,
-                                                  );
-                                                }
+
+                                                // If all checks pass, proceed with permit creation
+                                                controller
+                                                    .createNewPermitForJob(
+                                                  jobId:
+                                                      controller.jobModel?.id,
+                                                  fileIds: dropzoneController
+                                                      .fileIds,
+                                                );
                                               } else {
                                                 // Display appropriate dialog or message if conditions fail
                                                 if (controller
@@ -3645,28 +3620,19 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                       controller
                                                           .isCheckedSOP.value) {
                                                     // Additional check to ensure Equipment Isolation is selected
-                                                    if (controller
-                                                        .selectedEquipmentIsolationIdList
-                                                        .isEmpty) {
-                                                      Fluttertoast.showToast(
-                                                        msg:
-                                                            'Equipment Isolation must be selected when toggle is on',
-                                                      );
-                                                    } else {
-                                                      // If all checks pass, proceed with permit creation
-                                                      controller
-                                                          .createNewPermitForPm(
-                                                        pmTaskId: controller
-                                                            .pmtaskViewModel
-                                                            ?.id,
-                                                        activity: controller
-                                                            .pmtaskViewModel
-                                                            ?.plan_title,
-                                                        fileIds:
-                                                            dropzoneController
-                                                                .fileIds,
-                                                      );
-                                                    }
+
+                                                    // If all checks pass, proceed with permit creation
+                                                    controller
+                                                        .createNewPermitForPm(
+                                                      pmTaskId: controller
+                                                          .pmtaskViewModel?.id,
+                                                      activity: controller
+                                                          .pmtaskViewModel
+                                                          ?.plan_title,
+                                                      fileIds:
+                                                          dropzoneController
+                                                              .fileIds,
+                                                    );
                                                   } else {
                                                     // Display appropriate dialog or message if conditions fail
                                                     if (controller.isCheckedJSA
@@ -3703,20 +3669,10 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                           controller
                                                               .isCheckedSOP
                                                               .value) {
-                                                        if (controller
-                                                            .selectedEquipmentIsolationIdList
-                                                            .isEmpty) {
-                                                          Fluttertoast
-                                                              .showToast(
-                                                            msg:
-                                                                'Equipment Isolation must be selected when toggle is on',
-                                                          );
-                                                        } else {
-                                                          controller.createNewPermit(
-                                                              fileIds:
-                                                                  dropzoneController
-                                                                      .fileIds);
-                                                        }
+                                                        controller.createNewPermit(
+                                                            fileIds:
+                                                                dropzoneController
+                                                                    .fileIds);
                                                       } else {
                                                         // Display appropriate dialog or message if conditions fail
                                                         if (controller
