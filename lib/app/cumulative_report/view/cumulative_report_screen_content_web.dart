@@ -1389,7 +1389,7 @@ class _CumulativeReportContentWebState
                                                 DataCell(Text(
                                                     "${controller.mcTaskList[index]?.deviation.toString() ?? ""}")),
                                                 DataCell(Text(
-                                                    "${controller.mcTaskList[index]?.cleaningType.toString() ?? ""}")),
+                                                    "${controller.mcTaskList[index]?.cleaningTypeName.toString() ?? ""}")),
                                                 DataCell(Text(controller
                                                         .mcTaskList[index]
                                                         ?.water_used
