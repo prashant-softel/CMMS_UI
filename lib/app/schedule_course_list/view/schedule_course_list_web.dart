@@ -502,7 +502,7 @@ class ScheduleCourseListDataSource extends DataTableSource {
                           Text(
                             'SC${ScheduleCourse.scheduleID}',
                           ),
-                          Dimens.boxHeight10,
+                          Dimens.boxHeight0,
                       Align(
                         alignment: Alignment.centerRight,
                         child: Container(

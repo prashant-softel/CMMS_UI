@@ -1210,9 +1210,9 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: "Observation Add Successfully...", fontSize: 16.0);
-        Get.offAllNamed(
-          Routes.observationListScreen,
-        );
+        // Get.offAllNamed(
+        //   Routes.observationListScreen,
+        // );
 
         // if (res.errorCode == 200) {
         //   var responseMap = json.decode(res.data);
@@ -3599,6 +3599,7 @@ class Repository {
 
   Future<Map<String, dynamic>> viewObsCloseButton(
     viewobsCloseJsonString,
+    // createObsModelJsonString,
     bool? isLoading,
     int? check_point_type_id,
   ) async {
@@ -3609,6 +3610,7 @@ class Repository {
         res = await _dataRepository.viewObsCloseButton(
           auth: auth,
           viewobsCloseJsonString: viewobsCloseJsonString,
+          // createObsModelJsonString:createObsModelJsonString,
           check_point_type_id: check_point_type_id,
           isLoading: isLoading ?? false,
         );

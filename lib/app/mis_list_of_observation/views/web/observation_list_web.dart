@@ -570,13 +570,25 @@ class ObservationListDataSource extends DataTableSource {
                           padding:
                               EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                           decoration: BoxDecoration(
-                            color: ObservationListDetails!.observation_status ==
-                                    "Open"
+                            color: ObservationListDetails!.status_code ==
+                                    553
                                 ? ColorValues.yellowColor
-                                : ObservationListDetails.observation_status ==
-                                        "In Time"
-                                    ? ColorValues.appGreenColor
-                                    : ColorValues.appRedColor,
+                                : ObservationListDetails.status_code ==
+                                        556
+                                    // ? ColorValues.approveStatusColor
+                                    //  : ObservationListDetails.status_code ==
+                                    //     551
+                                    // ? ColorValues.createdStatusColor
+                                    //  : ObservationListDetails.status_code ==
+                                    //     552
+                                    // ? ColorValues.assignStatusColor
+                                    //  : ObservationListDetails.status_code ==
+                                    //     556
+                                    ? ColorValues.approveColor
+                                     : ObservationListDetails.status_code ==
+                                        555
+                                    ? ColorValues.rejectColor
+                                     : ColorValues.approveStatusColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
