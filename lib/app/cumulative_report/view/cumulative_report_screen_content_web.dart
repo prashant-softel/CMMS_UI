@@ -474,7 +474,9 @@ class _CumulativeReportContentWebState
                                       DataColumn2(
                                         fixedWidth: 150,
                                         label: Text(
-                                          'Scheduled Qnty',
+                                          controller.module_id.value == 43
+                                              ? 'Scheduled Qnty'
+                                              : 'Scheduled Area',
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
@@ -482,7 +484,9 @@ class _CumulativeReportContentWebState
                                       DataColumn2(
                                         fixedWidth: 120,
                                         label: Text(
-                                          'Actual Qnty',
+                                          controller.module_id.value == 43
+                                              ? 'Actual Qnty'
+                                              : 'Actual Area',
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
@@ -1099,7 +1103,7 @@ class _CumulativeReportContentWebState
                                       DataColumn2(
                                         fixedWidth: 130,
                                         label: Text(
-                                          'Scheduled Qnty',
+                                          'Scheduled Area',
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
@@ -1107,7 +1111,7 @@ class _CumulativeReportContentWebState
                                       DataColumn2(
                                         fixedWidth: 150,
                                         label: Text(
-                                          'Actual Qnty ',
+                                          'Actual Area ',
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,

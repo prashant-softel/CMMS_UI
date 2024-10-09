@@ -9,6 +9,8 @@ String jobListToJson(List<JobModel> data) =>
 class JobModel {
   factory JobModel.fromJson(Map<String, dynamic> json) => JobModel(
         id: json['id'] == null ? 0 : json['id'],
+        latestJCPTWStatus:
+            json['latestJCPTWStatus'] == null ? 0 : json['latestJCPTWStatus'],
         ptw_id: json['ptw_id'] == null ? 0 : json['ptw_id'],
         userId: json['userId'] == null ? 0 : json['userId'],
         isolation: json['isolation'] == null ? 0 : json['isolation'],
@@ -81,6 +83,7 @@ class JobModel {
       this.latestJCStatusShort,
       this.latestJCStatus,
       this.permitType,
+      this.latestJCPTWStatus,
       this.isolation});
 
   int? id;
@@ -107,10 +110,11 @@ class JobModel {
   int? status;
   String? latestJCStatusShort;
   int? isolation;
+  int? latestJCPTWStatus;
   Map<String, dynamic> toJson() => {
         'id': id, "permitType": permitType, "isolation": isolation,
         'ptw_id': ptw_id,
-        'userId': userId,
+        'userId': userId, 'latestJCPTWStatus': latestJCPTWStatus,
         'facilityId': facilityId,
         'facilityName': facilityName,
         'jobDate': jobDate?.toIso8601String(),
