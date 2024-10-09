@@ -304,12 +304,12 @@ class _ObservationWebState extends State<ObservationListWeb> {
 
                                                     return PaginatedDataTable2(
                                                       columnSpacing: 10,
-                                                      dataRowHeight: 60,
+                                                      dataRowHeight: 75,
                                                       source:
                                                           dataSource, // Custom DataSource class
                                                       // headingRowHeight:
                                                       //     Get.height * 0.12,
-                                                      minWidth: 2650,
+                                                      minWidth: 2250,
 
                                                       showCheckboxColumn: false,
                                                       rowsPerPage: 10,
@@ -523,11 +523,12 @@ class ObservationListDataSource extends DataTableSource {
           : '${ObservationListDetails?.closed_date ?? '-'}',
       // closedDate,
 
-      ObservationListDetails?.cost_name == "Empty"
+      ObservationListDetails?.cost_name == ""
           ? "-"
           : '${ObservationListDetails?.cost_name ?? '-'}',
-      '${ObservationListDetails?.remaining_days ?? ''}',
-      (ObservationListDetails?.remaining_days ?? 0) >= 0 ? 'InTime' : 'OutTime',
+          // 'remaining_days',
+      // '${ObservationListDetails?.remaining_days ?? ''}',
+      // (ObservationListDetails?.remaining_days ?? 0) >= 0 ? 'InTime' : 'OutTime',
 
       // '${ObservationListDetails?.status_code ?? ''}',
 
@@ -556,51 +557,65 @@ class ObservationListDataSource extends DataTableSource {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: (value == 'id')
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        ' OBS${ObservationListDetails?.id}',
-                      ),
-                      Dimens.boxHeight10,
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-                          decoration: BoxDecoration(
-                            color: ObservationListDetails!.status_code ==
-                                    553
-                                ? ColorValues.yellowColor
-                                : ObservationListDetails.status_code ==
-                                        556
-                                    // ? ColorValues.approveStatusColor
-                                    //  : ObservationListDetails.status_code ==
-                                    //     551
-                                    // ? ColorValues.createdStatusColor
-                                    //  : ObservationListDetails.status_code ==
-                                    //     552
-                                    // ? ColorValues.assignStatusColor
-                                    //  : ObservationListDetails.status_code ==
-                                    //     556
-                                    ? ColorValues.approveColor
-                                     : ObservationListDetails.status_code ==
-                                        555
-                                    ? ColorValues.rejectColor
-                                     : ColorValues.approveStatusColor,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            '${ObservationListDetails.short_status}',
-                            style: Styles.white10.copyWith(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
+            child: (value == 'id' || value == 'remaining_days')
+    ? Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // ID Text
+          Text(
+            ' OBS${ObservationListDetails?.id}',
+          ),
+          Dimens.boxHeight10,
+
+          // Short status box
+          Align(
+            alignment: Alignment.centerRight,
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+              decoration: BoxDecoration(
+                color: ObservationListDetails!.status_code == 553
+                    ? ColorValues.yellowColor
+                    : ObservationListDetails.status_code == 556
+                        ? ColorValues.approveColor
+                        : ObservationListDetails.status_code == 555
+                            ? ColorValues.rejectColor
+                            : ColorValues.approveStatusColor,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Text(
+                '${ObservationListDetails.short_status}',
+                style: Styles.white10.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          Dimens.boxHeight2,
+
+          // Remaining days status box
+          Align(
+            alignment: Alignment.centerRight,
+            child: Container(
+                 decoration: BoxDecoration(
+                color: (ObservationListDetails.remaining_days ?? 0) >= 0
+                    ? ColorValues.yellowColor
+               : ColorValues.rejectColor,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+              child: Text(
+                (ObservationListDetails.remaining_days ?? 0) >= 0
+                    ? 'InTime'
+                    : 'OutTime',
+                style: Styles.white10.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
+      )
+
                 : (value == 'Actions')
                     ? Row(
                         children: [

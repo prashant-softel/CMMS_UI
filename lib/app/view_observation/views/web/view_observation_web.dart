@@ -107,28 +107,36 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                         Spacer(),
                                         Container(
                                           padding: EdgeInsets.all(5),
-                                         decoration: BoxDecoration(
-                            color: controller.getObsById.value!.status_code==
-                                    553
-                                ? ColorValues.yellowColor
-                                : controller.getObsById.value!.status_code==
-                                        556
-                                    // ? ColorValues.approveStatusColor
-                                    //  : ObservationListDetails.status_code ==
-                                    //     551
-                                    // ? ColorValues.createdStatusColor
-                                    //  : ObservationListDetails.status_code ==
-                                    //     552
-                                    // ? ColorValues.assignStatusColor
-                                    //  : ObservationListDetails.status_code ==
-                                    //     556
-                                    ? ColorValues.approveColor
-                                     : controller.getObsById.value!.status_code ==
-                                        555
-                                    ? ColorValues.rejectColor
-                                     : ColorValues.approveStatusColor,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
+                                          decoration: BoxDecoration(
+                                            color: controller.getObsById.value!
+                                                        .status_code ==
+                                                    553
+                                                ? ColorValues.yellowColor
+                                                : controller.getObsById.value!
+                                                            .status_code ==
+                                                        556
+                                                    // ? ColorValues.approveStatusColor
+                                                    //  : ObservationListDetails.status_code ==
+                                                    //     551
+                                                    // ? ColorValues.createdStatusColor
+                                                    //  : ObservationListDetails.status_code ==
+                                                    //     552
+                                                    // ? ColorValues.assignStatusColor
+                                                    //  : ObservationListDetails.status_code ==
+                                                    //     556
+                                                    ? ColorValues.approveColor
+                                                    : controller
+                                                                .getObsById
+                                                                .value!
+                                                                .status_code ==
+                                                            555
+                                                        ? ColorValues
+                                                            .rejectColor
+                                                        : ColorValues
+                                                            .approveStatusColor,
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
                                           child: Center(
                                             child: Text(
                                               "${controller.getObsById.value!.short_status == null ? "" : controller.getObsById.value!.short_status}",
@@ -345,11 +353,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                         SizedBox(height: 20),
                                         Container(
                                           margin: Dimens.edgeInsets20,
-                                          height:110,
-                                              // ((controller.file_list?.length ??
-                                              //             0) *
-                                              //         40) +
-                                              //     130,
+                                          height: 110,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: ColorValues
@@ -366,33 +370,38 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                               ),
                                             ],
                                           ),
-                                          child: Column(children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    'Observation Description:',
-                                                    style: Styles.blue700,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Row(
+                                              crossAxisAlignment: CrossAxisAlignment
+                                                  .start, // Align heading and text to the top
+                                              children: [
+                                                Text(
+                                                  'Observation Description:',
+                                                  style: Styles.blue700,
+                                                ),
+                                                SizedBox(
+                                                    width:
+                                                        5), // Add space between heading and description
+                                                Expanded(
+                                                  // Ensure the text takes up the remaining space
+                                                  child: Text(
+                                                    " ${controller.getObsById.value?.observation_description ?? ""}",
+                                                    style: Styles.black15,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines:
+                                                        4, // Limit to 2 lines
                                                   ),
-                                                    SizedBox(height: 5),
-                                                  Text(
-                                                      " ${controller.getObsById.value?.observation_description ?? ""}",
-                                                      style: Styles.black15),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
-                                          ]),
+                                          ),
                                         ),
                                         SizedBox(height: 10),
                                         Container(
                                           margin: Dimens.edgeInsets20,
-                                          height:110,
-                                              // ((controller.file_list?.length ??
-                                              //             0) *
-                                              //         40) +
-                                              //     130,
+                                          height: 110,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: ColorValues
@@ -409,37 +418,39 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                               ),
                                             ],
                                           ),
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      'Corrective/Preventive Action:',
-                                                      style: Styles.blue700,
-                                                    ),
-                                                      SizedBox(height: 5),
-                                                  Text(
-                                                      " ${controller.getObsById.value?.preventive_action ?? ""}",
-                                                      style: Styles.black15),
-                                                  ],
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start, // Align to the top
+                                              children: [
+                                                Text(
+                                                  'Corrective/Preventive Action:',
+                                                  style: Styles.blue700,
                                                 ),
-                                                
-                                              ),
-                                         
-                                            ],
+                                                SizedBox(
+                                                    width:
+                                                        5), // Space between heading and description
+                                                Expanded(
+                                                  // Prevent overflow for long text
+                                                  child: Text(
+                                                    " ${controller.getObsById.value?.preventive_action ?? ""}",
+                                                    style: Styles.black15,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines:
+                                                        4, // Limit to 2 lines if text is long
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                         SizedBox(height: 10),
                                         Container(
                                           margin: Dimens.edgeInsets20,
-                                          height:110,
-                                              // ((controller.file_list?.length ??
-                                              //             0) *
-                                              //         40) +
-                                              //     130,
+                                          height: 110,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: ColorValues
@@ -456,26 +467,33 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                               ),
                                             ],
                                           ),
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      'Action Taken:',
-                                                      style: Styles.blue700,
-                                                    ),
-                                                      SizedBox(height: 5),
-                                                  Text(
-                                                      " ${controller.getObsById.value?.action_taken ?? ""}",
-                                                      style: Styles.black15),
-                                                  ],
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start, // Align to the top
+                                              children: [
+                                                Text(
+                                                  'Action Taken:',
+                                                  style: Styles.blue700,
                                                 ),
-                                              ),
-                                              
-                                            ],
+                                                SizedBox(
+                                                    width:
+                                                        5), // Space between heading and description
+                                                Expanded(
+                                                  // Ensure the text takes up the remaining space and wraps
+                                                  child: Text(
+                                                    " ${controller.getObsById.value?.action_taken ?? ""}",
+                                                    style: Styles.black15,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines:
+                                                        2, // Limit to 2 lines if text is long
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
 

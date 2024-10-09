@@ -78,14 +78,14 @@ class ObservationListController extends GetxController {
     "created by": true,
     "Closed Date": true,
     "Cost type": true,
-    "Remaining days": true,
-    "Timeline": true,
+    // "Remaining days": true,
+    // "Timeline": true,
     // "Status": true,
   });
   final Map<String, double> columnwidth = {
     "Id": 120,
     "Month": 100,
-    "Observation Date": 200,
+    "Observation Date": 100,
     "Contractor Name": 200,
     "Location": 120,
     "Type": 100,
@@ -97,8 +97,8 @@ class ObservationListController extends GetxController {
     "created by": 150,
     "Closed Date": 150,
     "Cost type": 150,
-    "Remaining days": 190,
-    "Timeline": 150,
+    // "Remaining days": 190,
+    // "Timeline": 150,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {

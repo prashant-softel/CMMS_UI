@@ -25,7 +25,7 @@ class ListOfObsCloseDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          " Observation Close",
+          " Close Observation",
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -95,7 +95,7 @@ class ListOfObsCloseDialog extends GetView {
                 print('obs  id:$id');
                 // Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
               },
-              child: Text('Close view'),
+              child: Text('Observation Close'),
             ),
           ]),
         ],

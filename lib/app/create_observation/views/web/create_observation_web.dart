@@ -147,21 +147,36 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                   : Container(
                                                       padding:
                                                           EdgeInsets.all(5),
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        border: Border.all(
-                                                          color: ColorValues
-                                                              .approveColor,
-                                                          width: 1,
-                                                        ),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                              color: ColorValues
-                                                                  .approveColor),
-                                                        ],
-                                                      ),
+                                                       decoration: BoxDecoration(
+                                            color: controller.getObsById.value!
+                                                        .status_code ==
+                                                    553
+                                                ? ColorValues.yellowColor
+                                                : controller.getObsById.value!
+                                                            .status_code ==
+                                                        556
+                                                    // ? ColorValues.approveStatusColor
+                                                    //  : ObservationListDetails.status_code ==
+                                                    //     551
+                                                    // ? ColorValues.createdStatusColor
+                                                    //  : ObservationListDetails.status_code ==
+                                                    //     552
+                                                    // ? ColorValues.assignStatusColor
+                                                    //  : ObservationListDetails.status_code ==
+                                                    //     556
+                                                    ? ColorValues.approveColor
+                                                    : controller
+                                                                .getObsById
+                                                                .value!
+                                                                .status_code ==
+                                                            555
+                                                        ? ColorValues
+                                                            .rejectColor
+                                                        : ColorValues
+                                                            .approveStatusColor,
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
                                                       child: Center(
                                                         child: Text(
                                                           "${controller.getObsById.value!.short_status == null ? "" : controller.getObsById.value!.short_status}",
@@ -1005,12 +1020,15 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                   controller.getObsById.value!
                                                                   .status_code ==
                                                               552 &&
+                                                              
                                                           controller
                                                                   .getObsById
                                                                   .value!
                                                                   .assigned_to_id ==
                                                               varUserAccessModel
-                                                                  .value.user_id
+                                                                  .value.user_id 
+                                                                  // ||
+                                                                  // controller.getObsById.value!.status_code == 555
                                                       ? Padding(
                                                           padding:
                                                               const EdgeInsets
@@ -1251,10 +1269,10 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                     //         0
                     //     ?
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // Dimens.boxWidth30,
                         // SizedBox(width: 40),
-                        Spacer(),
                         Spacer(),
                         controller.obsId == 0
                             ? Container(
@@ -1269,7 +1287,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                 ),
                               )
                             : Dimens.box0,
-                        Dimens.boxWidth5,
+                             Dimens.boxWidth10,
                         controller.obsId == 0
                             ? Container(
                                 height: 40,
@@ -1284,6 +1302,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                   },
                                 ),
                               )
+                              
                             : controller.type != 1
                                 ? Container(
                                     height: 40,
@@ -1326,7 +1345,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                     ),
                                   )
                                 : Dimens.box0,
-                        Dimens.boxWidth15,
                         controller.obsId != 0 &&
                                 controller.type == 1 &&
                                 varUserAccessModel.value.access_list!
@@ -1349,7 +1367,9 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                 &&
                                 controller.getObsById.value!.status_code !=
                                     553 &&
-                                controller.getObsById.value!.status_code != 556
+                                controller.getObsById.value!.status_code != 556 
+                                // &&
+                                // controller.getObsById.value!.status_code != 555 
                             ? Container(
                                 height: 40,
                                 child: CustomElevatedButton(
@@ -1368,7 +1388,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                 ),
                               )
                             : Dimens.box0,
-                        Dimens.boxWidth15,
                         //Approve
                         controller.obsId != 0 &&
                                 controller.type == 1 &&
@@ -1401,7 +1420,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                 ),
                               )
                             : Dimens.box0,
-                        Dimens.boxWidth15,
+                            Dimens.boxWidth10,
                         //reject
                         controller.obsId != 0 &&
                                 controller.type == 1 &&
@@ -1437,7 +1456,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                 ),
                               )
                             : Dimens.box0,
-                        Dimens.boxWidth15,
                         // controller.getObsById.value != null &&
                         controller.getObsById.value!.status_code == 552 &&
                                 // controller.obsId != 0 &&
@@ -1448,6 +1466,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                 // &&
                                 controller.getObsById.value!.assigned_to_id ==
                                     varUserAccessModel.value.user_id
+                                    // && controller.getObsById.value!.status_code == 555
                             ? Container(
                                 height: 45,
                                 child: CustomElevatedButton(
