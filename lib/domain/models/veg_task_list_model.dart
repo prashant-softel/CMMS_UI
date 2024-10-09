@@ -60,11 +60,11 @@ class VegTaskListModel {
         planId: json['planId'],
         responsibility: json['responsibility'] ?? '',
         sitename: json['sitename'] ?? '',
-        abondend: json['abondend'] ?? '',
+        abondend: json['abandoned'] ?? '',
         remark: json['remark'] ?? '',
         frequency: json['frequency'],
         noOfDays: json['noOfDays'],
-        water_used: json['water_used'] ?? 0,
+        water_used: json['waterUsed'] ?? 0,
         scheduled_Qnty: json['scheduled_Qnty'] ?? 0,
         actual_Qnty: json['actual_Qnty'] ?? 0,
         deviation: json['deviation'] ?? 0,
@@ -81,7 +81,7 @@ class VegTaskListModel {
         title: json['title'],
         abondond_done_date: json['abondond_done_date'] == "0001-01-01T05:30:00"
             ? ''
-            : Utility.getFormatedyearMonthDay(json['abondond_done_date']),
+            : Utility.getFormatedyearMonthDay(json['abandoned_done_date']),
       );
 
   Map<String, dynamic> toJson() => {
@@ -94,16 +94,16 @@ class VegTaskListModel {
         "scheduled_Qnty": scheduled_Qnty,
         "sitename": sitename,
         "remark": remark,
-        "abondend": abondend,
+        "abandoned": abondend,
         "frequency": frequency,
         "noOfDays": noOfDays,
-        "water_used": water_used,
+        "waterUsed": water_used,
         "scheduledDate": scheduledDate,
         "doneDate": doneDate,
         "lastDoneDate": lastDoneDate,
         "status": status,
         "status_short": status_short,
         "title": title,
-        "abondond_done_date": abondond_done_date
+        "abandoned_done_date": abondond_done_date
       };
 }

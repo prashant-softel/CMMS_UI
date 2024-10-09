@@ -289,7 +289,7 @@ class JobListContentWeb extends StatelessWidget {
                                         'Job Title',
                                         // ColumnSize.M,
                                         controller.jobDetailsFilterText,
-                                        200),
+                                        250),
                                     buildDataColumn(
                                         'breakdownTime',
                                         'BreakdownTime',
@@ -369,40 +369,40 @@ class JobListContentWeb extends StatelessWidget {
         DataColumn2(
       // size: columnSize,
       fixedWidth: fixedWidth,
-       onSort: header == "Actions"
-        ? null
-        : (int columnIndex, bool ascending) {
-            final controller = Get.find<JobListController>();
-            controller.sortData(header);
-          },
+      onSort: header == "Actions"
+          ? null
+          : (int columnIndex, bool ascending) {
+              final controller = Get.find<JobListController>();
+              controller.sortData(header);
+            },
 
       label: //
           Column(
               mainAxisAlignment: MainAxisAlignment.center, //
               children: [
-                 Row(
-          children: [
-            Text(
-              header,
-              style: Styles.black16W500,
-            ),
-            if (header != "Actions")
-              Obx(() {
-                final controller = Get.find<JobListController>();
+            Row(
+              children: [
+                Text(
+                  header,
+                  style: Styles.black16W500,
+                ),
+                if (header != "Actions")
+                  Obx(() {
+                    final controller = Get.find<JobListController>();
 
-                return AnimatedRotation(
-                  turns: controller.currentSortColumn.value == header
-                      ? (controller.isAscending.value ? 0.5 : 0.0)
-                      : 0.0,
-                  duration: Duration(milliseconds: 300),
-                  child: Icon(
-                    Icons.expand_more,
-                    size: 20,
-                  ),
-                );
-              }),
-          ],
-        ),
+                    return AnimatedRotation(
+                      turns: controller.currentSortColumn.value == header
+                          ? (controller.isAscending.value ? 0.5 : 0.0)
+                          : 0.0,
+                      duration: Duration(milliseconds: 300),
+                      child: Icon(
+                        Icons.expand_more,
+                        size: 20,
+                      ),
+                    );
+                  }),
+              ],
+            ),
             // SizedBox(
             //   height: Get.height * 0.05,
             //   child: TextField(
@@ -530,30 +530,55 @@ class JobDataSource extends DataTableSource {
                   color: jobDetails?.status == 101
                       ? ColorValues.createdColor
                       : jobDetails?.status == 102
-                          ? ColorValues.assignStatusColor
-                          : jobDetails?.latestJCStatus == 151
-                              ? ColorValues.createsColor
-                              : jobDetails?.latestJCStatus == 152
-                                  ? ColorValues.startColor
-                                  : jobDetails?.latestJCStatus == 153
-                                      ? Color.fromARGB(255, 181, 129, 179)
-                                      : jobDetails?.latestJCStatus == 155
-                                          ? ColorValues
-                                              .waitingForApproveStatusColor
-                                          : ColorValues.lightBlueColor,
+                          ? ColorValues.appLightBlueColor
+                          : jobDetails?.latestJCStatus == 151 &&
+                                  jobDetails?.latestJCPTWStatus == 124
+                              ? ColorValues.rejectColor
+                              : jobDetails?.latestJCStatus == 151
+                                  ? ColorValues.appYellowColor
+                                  : jobDetails?.latestJCStatus == 152
+                                      ? ColorValues.linktopermitColor
+                                      : jobDetails?.latestJCStatus == 153
+                                          ? Color.fromARGB(255, 181, 129, 179)
+                                          : jobDetails?.latestJCStatus == 155 ||
+                                                  jobDetails?.latestJCStatus ==
+                                                      156 ||
+                                                  jobDetails?.latestJCStatus ==
+                                                      157
+                                              ? ColorValues
+                                                  .waitingForApproveStatusColor
+                                              : jobDetails?.latestJCStatus ==
+                                                      158
+                                                  ? ColorValues.approveColor
+                                                  : ColorValues.lightBlueColor,
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: jobDetails?.status == 101
-                    ? Text(" Job Created")
+                    ? Text(" Job Created",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ))
                     : jobDetails?.status == 102
-                        ? Text("Job Assigned")
+                        ? Text("Job Assigned",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ))
                         :
                         //         : jobDetails?.status == 103
                         //             ? Text('${jobDetails?.latestJCStatusShort ?? ''}')
                         //    :
                         Text(
                             //'${jobDetails?.status ?? ''}
-                            ' ${jobDetails?.latestJCStatusShort ?? ''}'),
+                            ' ${jobDetails?.latestJCStatusShort ?? ''}',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            )),
               ),
               Text(
                 '${controller.formatDate(jobDetails?.jobDate?.toString() ?? '')}',

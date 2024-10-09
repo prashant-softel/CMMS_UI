@@ -612,8 +612,12 @@ class _SmReportContentWebState extends State<SmReportContentWeb> {
                                                               ?.asset_name
                                                               .toString() ??
                                                           "")),
-                                                      DataCell(
-                                                          Text("not came")),
+                                                      DataCell(Text(controller
+                                                              .smReportList[
+                                                                  index]
+                                                              ?.asset_code
+                                                              .toString() ??
+                                                          "")),
                                                       DataCell(Text(controller
                                                               .smReportList[
                                                                   index]

@@ -143,9 +143,33 @@ class ViewAuditTaskController extends GetxController {
 
       getReAssignedToList(auditTasknDetailModel.value.facility_id);
       getHistory();
-      if (auditTasknDetailModel.value!.map_checklist!.isNotEmpty) {
+      if (auditTasknDetailModel.value!.map_checklist!.isNotEmpty &&
+          auditTasknDetailModel.value.sub_PmTask!.isEmpty) {
         addRowItem();
       }
+      _auditTasknDetailModel.sub_PmTask?.forEach((element) {
+        rowItem.add([
+          {
+            "key": "Drop_down",
+            "value": '${element.name}',
+            "subtask_id": '${element.subtask_id}'
+          },
+          {'key': "title", "value": '${element.title}'},
+          {'key': "iNSPECTIONDate", "value": '${element.schedule_date}'},
+          {'key': "ptwreq", "value": ''},
+          {'key': "PTW_status", "value": ''},
+          {'key': "assign_to", "value": '${element.assign_name}'},
+          {'key': "score", "value": ''},
+          {'key': "status", "value": ''},
+          {'key': "Action ", "value": ''},
+        ]);
+        // dropdownMapperData[element.asset_name] = assetItemList.firstWhere(
+        //     (e) => e!.asset_type == element.asset_type,
+        //     orElse: null);
+        // dropdownMapperData[element.asset_name] = assetItemList.firstWhere(
+        //     (e) => e!.available_qty == element.available_qty,
+        //     orElse: null);
+      });
     }
     print({"auditPlandetailss", auditTasknDetailModel.value.id});
   }
@@ -334,7 +358,7 @@ class ViewAuditTaskController extends GetxController {
       "jobModel": jobDetailsModel.value,
       "permitId": 0,
       "isChecked": false,
-      "type": 3,
+      "type": type.value,
       "isFromPmTaskDetails": true,
       "mcModel": mcExecutionDetailsModel.value,
       "scheduleID": scheduleID
@@ -582,7 +606,7 @@ class ViewAuditTaskController extends GetxController {
     int newRowId = rowItem.length;
 
     rowItem.add([
-      {"key": "Drop_down", "value": 'Please Select'},
+      {"key": "Drop_down", "value": 'Please Select', "subtask_id": ""},
       {'key': "title", "value": ''},
       {'key': "iNSPECTIONDate", "value": ''},
       {'key': "ptwreq", "value": ''},
