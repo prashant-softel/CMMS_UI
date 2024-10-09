@@ -128,7 +128,7 @@ class HomeDrawer extends GetView<HomeController> {
                                 color: Color(0xffD2D0D0),
                                 title: "Vegetation Control",
                                 iconWidget: Icon(
-                                  Icons.eco,
+                                  Icons.eco_outlined,
                                   color: Color(0xffD2D0D0),
                                 ),
                                 press: () {
@@ -270,7 +270,10 @@ class HomeDrawer extends GetView<HomeController> {
                                 height: 16,
                                 color: Color(0xffD2D0D0),
                                 title: "Evaluation",
-                                icon: "assets/files/images.png",
+                                iconWidget: Icon(
+                                  Icons.assessment_outlined,
+                                  color: Color(0xffD2D0D0),
+                                ),
                                 press: () {
                                   Get.offAllNamed(Routes.evaluation);
                                 },
