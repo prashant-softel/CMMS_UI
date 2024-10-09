@@ -1706,7 +1706,7 @@ class NewPermitController extends GetxController {
         facility_id: facilityId,
         blockId: selectedBlockId, comment: "",
 
-        lotoId: typee.value == 5 || typee.value == 4
+        lotoId: typee.value == 6 || typee.value == 4
             ? 8
             : selectedEquipmentCategoryIdList.first,
         permitTypeId: selectedPermitTypeId,

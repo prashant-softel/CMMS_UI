@@ -1097,7 +1097,7 @@ class _CumulativeReportContentWebState
                                         // size: ColumnSize.L,
                                       ),
                                       DataColumn2(
-                                        fixedWidth: 100,
+                                        fixedWidth: 130,
                                         label: Text(
                                           'Scheduled Qnty',
                                           style: Styles.blackBold14,

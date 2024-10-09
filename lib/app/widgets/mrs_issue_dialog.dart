@@ -87,7 +87,7 @@ class MrsIssueSuccessDialog extends GetView {
                         controller.clearStoreData();
                         controller.clearStoreDataa();
                         String type = 0.toString();
-                        Get.offNamed(
+                        Get.offAllNamed(
                             '${Routes.mrsApprovalScreen}/${mrsId![0].toString()}/$type');
 
                         // Get.offAllNamed(Routes.mrsApprovalScreen,
