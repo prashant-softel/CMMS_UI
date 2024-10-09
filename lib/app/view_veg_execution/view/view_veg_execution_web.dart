@@ -113,47 +113,30 @@ class ViewVegExecutionContentWeb extends GetView<ViewVegExecutionController> {
                                             ),
                                             Spacer(),
                                             Container(
-                                              // height: 30,
-                                              // width: MediaQuery.of(context)
-                                              //         .size
-                                              //         .width /
-                                              //     5,
-                                              padding: EdgeInsets.all(5),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                border: Border.all(
-                                                  color: controller
-                                                              .vegExecutionDetailsModel
-                                                              .value
-                                                              ?.status ==
-                                                          380
-                                                      ? ColorValues.approveColor
-                                                      : ColorValues.appRedColor,
-                                                  width: 1,
-                                                ),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: controller
+                                              height: 30,
+                                              child: CustomElevatedButton(
+                                                backgroundColor: controller
+                                                            .vegExecutionDetailsModel
+                                                            .value
+                                                            ?.status ==
+                                                        702
+                                                    ? ColorValues.startColor
+                                                    : controller
                                                                 .vegExecutionDetailsModel
                                                                 .value
                                                                 ?.status ==
-                                                            380 //125
-
+                                                            704
                                                         ? ColorValues
-                                                            .approveColor
+                                                            .approveStatusColor
                                                         : ColorValues
-                                                            .appRedColor,
-                                                  ),
-                                                ],
+                                                            .rejectedStatusColor,
+                                                onPressed: () async {},
+                                                text:
+                                                    "${controller.vegExecutionDetailsModel.value?.status_short ?? ""}",
+
+                                                // ${controller.auditTasknDetailModel.value.status ?? ""}
                                               ),
-                                              child: Center(
-                                                  child: Text(
-                                                '${controller.vegExecutionDetailsModel.value?.status_short}',
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              )),
-                                            )
+                                            ),
                                           ],
                                         ),
                                         Divider(

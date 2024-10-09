@@ -472,7 +472,7 @@ class _SmReportContentWebState extends State<SmReportContentWeb> {
                                           minWidth: 2500,
                                           columns: [
                                             DataColumn2(
-                                              fixedWidth: 100,
+                                              fixedWidth: 120,
                                               label: Text(
                                                 'Material code',
                                                 style: Styles.blackBold14,
@@ -496,23 +496,23 @@ class _SmReportContentWebState extends State<SmReportContentWeb> {
                                               // size: ColumnSize.L,
                                             ),
 
-                                            DataColumn2(
-                                              fixedWidth: 200,
-                                              label: Text(
-                                                'Company Code',
-                                                style: Styles.blackBold14,
-                                              ),
-                                              // size: ColumnSize.L,
-                                            ),
-                                            // if (controller.module_id.value == 43)
-                                            DataColumn2(
-                                              fixedWidth: 200,
-                                              label: Text(
-                                                'Plant code',
-                                                style: Styles.blackBold14,
-                                              ),
-                                              // size: ColumnSize.L,
-                                            ),
+                                            // DataColumn2(
+                                            //   fixedWidth: 200,
+                                            //   label: Text(
+                                            //     'Company Code',
+                                            //     style: Styles.blackBold14,
+                                            //   ),
+                                            //   // size: ColumnSize.L,
+                                            // ),
+                                            // // if (controller.module_id.value == 43)
+                                            // DataColumn2(
+                                            //   fixedWidth: 200,
+                                            //   label: Text(
+                                            //     'Plant code',
+                                            //     style: Styles.blackBold14,
+                                            //   ),
+                                            //   // size: ColumnSize.L,
+                                            // ),
                                             // if (controller.module_id.value == 43)
                                             DataColumn2(
                                               fixedWidth: 200,
@@ -612,18 +612,18 @@ class _SmReportContentWebState extends State<SmReportContentWeb> {
                                                               ?.asset_name
                                                               .toString() ??
                                                           "")),
-                                                      DataCell(Text(controller
-                                                              .smReportList[
-                                                                  index]
-                                                              ?.asset_code
-                                                              .toString() ??
-                                                          "")),
-                                                      DataCell(Text(controller
-                                                              .smReportList[
-                                                                  index]
-                                                              ?.facility_ID
-                                                              .toString() ??
-                                                          "")),
+                                                      // DataCell(Text(controller
+                                                      //         .smReportList[
+                                                      //             index]
+                                                      //         ?.asset_code
+                                                      //         .toString() ??
+                                                      //     "")),
+                                                      // DataCell(Text(controller
+                                                      //         .smReportList[
+                                                      //             index]
+                                                      //         ?.facility_ID
+                                                      //         .toString() ??
+                                                      //     "")),
                                                       DataCell(Text(controller
                                                               .smReportList[
                                                                   index]

@@ -1144,6 +1144,14 @@ class _CumulativeReportContentWebState
                                         // size: ColumnSize.L,
                                       ),
                                       DataColumn2(
+                                        fixedWidth: 200,
+                                        label: Text(
+                                          'Abondoned',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
                                         fixedWidth: 150,
                                         label: Text(
                                           'Remarks',
@@ -1186,6 +1194,11 @@ class _CumulativeReportContentWebState
                                                 DataCell(Text(controller
                                                         .vegTaskList[index]
                                                         ?.time_taken
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .vegTaskList[index]
+                                                        ?.abondend
                                                         .toString() ??
                                                     "")),
                                                 DataCell(Text(controller

@@ -166,11 +166,11 @@ class AddModuleCleaningExecutionContentWeb
                                                                             : controller.mcExecutionDetailsModel.value?.status == 367
                                                                                 ? ColorValues.yellowColor
                                                                                 : controller.mcExecutionDetailsModel.value?.status == 368
-                                                                                    ? ColorValues.linktopermitColor
+                                                                                    ? ColorValues.rejectColor
                                                                                     : controller.mcExecutionDetailsModel.value?.status == 381
-                                                                                        ? const Color.fromARGB(255, 83, 105, 72)
+                                                                                        ? ColorValues.approveColor
                                                                                         : controller.mcExecutionDetailsModel.value?.status == 382
-                                                                                            ? const Color.fromARGB(255, 142, 99, 96)
+                                                                                            ? ColorValues.rejectColor
                                                                                             : controller.mcExecutionDetailsModel.value?.status == 383
                                                                                                 ? ColorValues.approveColor
                                                                                                 : controller.mcExecutionDetailsModel.value?.status == 384
@@ -1132,14 +1132,14 @@ class AddModuleCleaningExecutionContentWeb
                                                             controller
                                                                 .totalCleaned);
                                                         controller.anyScheduleTrue
-                                                                        .value ==
-                                                                    true &&
+                                                                            .value ==
+                                                                        true &&
+                                                                    controller.totalSchedule ==
+                                                                        total ||
                                                                 controller
-                                                                        .totalSchedule ==
-                                                                    total||controller
-                                                                    .allScheduleTrue
-                                                                    .value ==
-                                                                true
+                                                                        .allScheduleTrue
+                                                                        .value ==
+                                                                    true
                                                             ? Get.dialog<void>(CustomCalibrationDialog(
                                                                 id: controller
                                                                         .mcExecutionDetailsModel
@@ -1152,7 +1152,6 @@ class AddModuleCleaningExecutionContentWeb
                                                                         ?.title ??
                                                                     "",
                                                                 starttype: 3))
-                                                            
                                                             : Get.defaultDialog(
                                                                 radius: 5,
                                                                 title: 'Alert',

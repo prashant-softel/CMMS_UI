@@ -578,9 +578,100 @@ class VegExcutionListDataSource extends DataTableSource {
                                               VegTaskListModel(id: 00),
                                         )
                                         ?.status ==
-                                    301
+                                    721
                                 ? ColorValues.approveColor
-                                : ColorValues.addNewColor,
+                                : controller.vegTaskList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e?.id ==
+                                                  VegExcutionListDetails!.id,
+                                              orElse: () =>
+                                                  VegTaskListModel(id: 00),
+                                            )
+                                            ?.status ==
+                                        722
+                                    ? ColorValues.startColor
+                                    : controller.vegTaskList
+                                                .firstWhere(
+                                                  (e) =>
+                                                      e?.id ==
+                                                      VegExcutionListDetails!
+                                                          .id,
+                                                  orElse: () =>
+                                                      VegTaskListModel(id: 00),
+                                                )
+                                                ?.status ==
+                                            725
+                                        ? ColorValues.appLightBlueColor
+                                        : controller.vegTaskList
+                                                    .firstWhere(
+                                                      (e) =>
+                                                          e?.id ==
+                                                          VegExcutionListDetails!
+                                                              .id,
+                                                      orElse: () =>
+                                                          VegTaskListModel(
+                                                              id: 00),
+                                                    )
+                                                    ?.status ==
+                                                726
+                                            ? ColorValues.rejectColor
+                                            : controller.vegTaskList
+                                                        .firstWhere(
+                                                          (e) =>
+                                                              e?.id ==
+                                                              VegExcutionListDetails!
+                                                                  .id,
+                                                          orElse: () =>
+                                                              VegTaskListModel(
+                                                                  id: 00),
+                                                        )
+                                                        ?.status ==
+                                                    727
+                                                ? ColorValues.approveColor
+                                                : controller.vegTaskList
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.id ==
+                                                                  VegExcutionListDetails!
+                                                                      .id,
+                                                              orElse: () =>
+                                                                  VegTaskListModel(
+                                                                      id: 00),
+                                                            )
+                                                            ?.status ==
+                                                        724
+                                                    ? ColorValues.closeColor
+                                                    : controller.vegTaskList
+                                                                .firstWhere(
+                                                                  (e) =>
+                                                                      e?.id ==
+                                                                      VegExcutionListDetails!
+                                                                          .id,
+                                                                  orElse: () =>
+                                                                      VegTaskListModel(
+                                                                          id: 00),
+                                                                )
+                                                                ?.status ==
+                                                            731
+                                                        ? ColorValues
+                                                            .approveColor
+                                                        : controller.vegTaskList
+                                                                    .firstWhere(
+                                                                      (e) =>
+                                                                          e?.id ==
+                                                                          VegExcutionListDetails!
+                                                                              .id,
+                                                                      orElse: () =>
+                                                                          VegTaskListModel(
+                                                                              id: 00),
+                                                                    )
+                                                                    ?.status ==
+                                                                734
+                                                            ? ColorValues
+                                                                .appLightBlueColor
+                                                            : ColorValues
+                                                                .addNewColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(

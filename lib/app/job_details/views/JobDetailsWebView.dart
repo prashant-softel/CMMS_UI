@@ -127,31 +127,41 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                   102
                                               ? ColorValues.assignStatusColor
                                               : controller.jobDetailsModel.value
-                                                          ?.latestJCStatus ==
-                                                      151
-                                                  ? ColorValues.createsColor
+                                                              ?.latestJCStatus ==
+                                                          151 &&
+                                                      controller
+                                                              .jobDetailsModel
+                                                              .value
+                                                              ?.latestJCPTWStatus ==
+                                                          124
+                                                  ? ColorValues.rejectColor
                                                   : controller
                                                               .jobDetailsModel
                                                               .value
                                                               ?.latestJCStatus ==
-                                                          152
-                                                      ? ColorValues.startColor
+                                                          151
+                                                      ? ColorValues
+                                                          .appYellowColor
                                                       : controller
                                                                   .jobDetailsModel
                                                                   .value
                                                                   ?.latestJCStatus ==
-                                                              153
-                                                          ? Color.fromARGB(255,
-                                                              181, 129, 179)
+                                                              152
+                                                          ? ColorValues
+                                                              .startColor
                                                           : controller
                                                                       .jobDetailsModel
                                                                       .value
                                                                       ?.latestJCStatus ==
-                                                                  155
-                                                              ? ColorValues
-                                                                  .waitingForApproveStatusColor
-                                                              : ColorValues
-                                                                  .lightBlueColor,
+                                                                  157
+                                                              ? ColorValues.waitingForApproveStatusColor
+                                                              : controller.jobDetailsModel.value?.latestJCStatus == 158
+                                                                  ? ColorValues.approveColor
+                                                                  : controller.jobDetailsModel.value?.latestJCStatus == 153
+                                                                      ? Color.fromARGB(255, 181, 129, 179)
+                                                                      : controller.jobDetailsModel.value?.latestJCStatus == 155
+                                                                          ? ColorValues.waitingForApproveStatusColor
+                                                                          : ColorValues.lightBlueColor,
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     child: controller.jobDetailsModel.value
