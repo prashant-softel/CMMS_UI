@@ -70,7 +70,7 @@ class MCTaskListModel {
         sitename: json["sitename"] ?? '',
         frequency: json["frequency"],
         noOfDays: json["noOfDays"],
-        water_used: json["water_used"],
+        water_used: json["waterUsed"],
         scheduledDate: Utility.getFormatedyearMonthDay(json['scheduledDate']),
         doneDate: Utility.getFormatedyearMonthDay(json['doneDate']),
         status: json['status'],
@@ -80,12 +80,12 @@ class MCTaskListModel {
         waterused: json["waterused"] ?? 0,
         scheduled_Qnty: json["scheduled_Qnty"] ?? 0,
         actual_Qnty: json["actual_Qnty"] ?? 0,
-        abondend: json["abondend"] ?? '',
+        abondend: json["abandoned"] ?? '',
         remark: json["remark"] ?? '',
         deviation: json["deviation"] ?? 0,
         time_taken: json["time_taken"] ?? 0,
         abondond_done_date:
-            Utility.getFormatedyearMonthDay(json['abondond_done_date']),
+            Utility.getFormatedyearMonthDay(json['abandoned_done_date']),
       );
 
   Map<String, dynamic> toJson() => {
@@ -98,18 +98,18 @@ class MCTaskListModel {
         "waterused": waterused,
         "scheduled_Qnty": scheduled_Qnty,
         "actual_Qnty": actual_Qnty,
-        "abondend": abondend,
+        "abandoned": abondend,
         "remark": remark,
         "deviation": deviation,
         "time_taken": time_taken,
         "frequency": frequency,
         "noOfDays": noOfDays,
-        "water_used": water_used,
+        "waterUsed": water_used,
         "scheduledDate": scheduledDate,
         "doneDate": doneDate,
         "status": status,
         "status_short": status_short,
         "title": title,
-        "abondond_done_date": abondond_done_date
+        "abandoned_done_date": abondond_done_date
       };
 }

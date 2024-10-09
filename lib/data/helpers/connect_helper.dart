@@ -8110,7 +8110,7 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       // 'PMScheduleView/LinkPermitToPMTask?schedule_id=$scheduleId&permit_id=$permitId',
 
-      type == 3
+      type == 3 || type == 5
           ? 'AuditPlan/AuditLinkToPermit?audit_id=$scheduleId&ptw_id=$permitId&facility_id=$facilityId'
           : type == 4
               ? 'MC/LinkPermitToModuleCleaning?scheduleId=$scheduleId&permit_id=$permitId&facility_id=$facilityId'

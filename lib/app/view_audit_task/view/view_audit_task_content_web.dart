@@ -1160,59 +1160,70 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Container(
-                                                height: 45,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.submitColor,
-                                                  text: "Submit Sub Task",
-                                                  icon: Icons.check,
-                                                  onPressed: () {
-                                                    controller
-                                                        .submitSubTaskCheckList();
-                                                    // Get.dialog(
-                                                    //     AuditTaskApprovedRejectDialog(
-                                                    //   type: 4,
-                                                    //   moduletype:
-                                                    //       controller.type.value,
-                                                    // ));
-                                                  },
-                                                ),
-                                              ),
+                                              controller.auditTasknDetailModel
+                                                      .value.sub_PmTask!.isEmpty
+                                                  ? Container(
+                                                      height: 45,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .submitColor,
+                                                        text: "Submit Sub Task",
+                                                        icon: Icons.check,
+                                                        onPressed: () {
+                                                          controller
+                                                              .submitSubTaskCheckList();
+                                                          // Get.dialog(
+                                                          //     AuditTaskApprovedRejectDialog(
+                                                          //   type: 4,
+                                                          //   moduletype:
+                                                          //       controller.type.value,
+                                                          // ));
+                                                        },
+                                                      ),
+                                                    )
+                                                  : Dimens.box0,
                                               Dimens.boxWidth10,
-                                              Container(
-                                                height: 45,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.startColor,
-                                                  text: "Start",
-                                                  icon: Icons.start,
-                                                  onPressed: () {
-                                                    // controller.auditTasknDetailModel.value
-                                                    //                 .ptw_tbt_done ==
-                                                    //             0 &&
-                                                    //         controller
-                                                    //                 .auditTasknDetailModel
-                                                    //                 .value
-                                                    //                 .is_PTW ==
-                                                    //             "True"
-                                                    //     ? Get.dialog<void>(TbtDoneAuditTaskDialog(
-                                                    //         ptw_id: controller
-                                                    //                 .auditTasknDetailModel
-                                                    //                 .value
-                                                    //                 .permit_id ??
-                                                    //             0,
-                                                    //         id: controller
-                                                    //                 .auditTasknDetailModel
-                                                    //                 .value
-                                                    //                 .id ??
-                                                    //             0))
-                                                    //     : controller
-                                                    //         .startAuditTask();
-                                                  },
-                                                ),
-                                              ),
-                                              Dimens.boxWidth10,
+                                              controller.auditTasknDetailModel
+                                                      .value.sub_PmTask!.isEmpty
+                                                  ? Dimens.box0
+                                                  : Container(
+                                                      height: 45,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .startColor,
+                                                        text: "Start",
+                                                        icon: Icons.start,
+                                                        onPressed: () {
+                                                          // controller.auditTasknDetailModel.value
+                                                          //                 .ptw_tbt_done ==
+                                                          //             0 &&
+                                                          //         controller
+                                                          //                 .auditTasknDetailModel
+                                                          //                 .value
+                                                          //                 .is_PTW ==
+                                                          //             "True"
+                                                          //     ? Get.dialog<void>(TbtDoneAuditTaskDialog(
+                                                          //         ptw_id: controller
+                                                          //                 .auditTasknDetailModel
+                                                          //                 .value
+                                                          //                 .permit_id ??
+                                                          //             0,
+                                                          //         id: controller
+                                                          //                 .auditTasknDetailModel
+                                                          //                 .value
+                                                          //                 .id ??
+                                                          //             0))
+                                                          //     :
+                                                          controller
+                                                              .startAuditTask();
+                                                        },
+                                                      ),
+                                                    ),
+                                              // Dimens.boxWidth10,
                                               Container(
                                                 height: 45,
                                                 child: CustomElevatedButton(
@@ -1805,33 +1816,37 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                       "Sub Tasks",
                       style: Styles.blue700,
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        controller.addRowItem();
-                      },
-                      child: Container(
-                        height: 25,
-                        width: 70,
-                        decoration: BoxDecoration(
-                          color: ColorValues.addNewColor,
-                          border: Border.all(
-                            color: ColorValues.lightGreyColorWithOpacity35,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                        ),
-                        child: Center(
-                          child: Text(
-                            " + Add ",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
+                    controller.auditTasknDetailModel.value.sub_PmTask!.isEmpty
+                        ? GestureDetector(
+                            onTap: () {
+                              controller.addRowItem();
+                            },
+                            child: Container(
+                              height: 25,
+                              width: 70,
+                              decoration: BoxDecoration(
+                                color: ColorValues.addNewColor,
+                                border: Border.all(
+                                  color:
+                                      ColorValues.lightGreyColorWithOpacity35,
+                                  width: 1,
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  " + Add ",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w100,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
-                    ),
+                          )
+                        : Dimens.box0,
                   ],
                 ),
               ),
@@ -1960,28 +1975,32 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                       padding: EdgeInsets.only(top: 10),
                                       child: Wrap(
                                         children: [
-                                          TableActionButton(
-                                            color: ColorValues.appRedColor,
-                                            icon: Icons.delete,
-                                            label: '',
-                                            message: '',
-                                            onPress: () {
-                                              controller.rowItem.remove(row);
-                                            },
-                                          ),
+                                          controller.auditTasknDetailModel.value
+                                                  .sub_PmTask!.isEmpty
+                                              ? TableActionButton(
+                                                  color:
+                                                      ColorValues.appRedColor,
+                                                  icon: Icons.delete,
+                                                  label: '',
+                                                  message: '',
+                                                  onPress: () {
+                                                    controller.rowItem
+                                                        .remove(row);
+                                                  },
+                                                )
+                                              : Dimens.box0,
                                           TableActionButton(
                                             // label: 'Equipments',
                                             onPress: () {
-                                              var filterdData = controller
-                                                  .auditTasknDetailModel
-                                                  .value
-                                                  .map_checklist
-                                                  ?.firstWhere((e) =>
-                                                      "${e?.id}" ==
-                                                      mapData['value']);
+                                              var subtaskId = row.firstWhere(
+                                                      (item) =>
+                                                          item['key'] ==
+                                                          'Drop_down')[
+                                                  'subtask_id'];
 
                                               controller.createNewPermit(
-                                                  scheduleID: filterdData?.id);
+                                                  scheduleID: int.tryParse(
+                                                      subtaskId ?? ""));
                                             },
                                             color: ColorValues.appDarkBlueColor,
                                             icon: Icons.add,

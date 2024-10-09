@@ -74,6 +74,7 @@ class PmtaskViewModel {
   int? is_expired;
   dynamic? max_score;
   List<PreventiveCheckListModel>? map_checklist;
+  List<PreventiveCheckListModel>? sub_PmTask;
 
   PmtaskViewModel(
       {this.assigned_to_name,
@@ -136,7 +137,8 @@ class PmtaskViewModel {
       this.workdescription,
       this.new_remark,
       this.site_name,
-      this.map_checklist});
+      this.map_checklist,
+      this.sub_PmTask});
 
   factory PmtaskViewModel.fromJson(Map<String, dynamic> json) =>
       PmtaskViewModel(
@@ -210,6 +212,10 @@ class PmtaskViewModel {
         permit_type: json["permit_type"] ?? "",
         map_checklist: json['map_checklist'] != null
             ? List<PreventiveCheckListModel>.from(json["map_checklist"]
+                .map((x) => PreventiveCheckListModel.fromJson(x)))
+            : [],
+        sub_PmTask: json['sub_PmTask'] != null
+            ? List<PreventiveCheckListModel>.from(json["sub_PmTask"]
                 .map((x) => PreventiveCheckListModel.fromJson(x)))
             : [],
         schedules: List<ScheduleCheckPoint>.from(

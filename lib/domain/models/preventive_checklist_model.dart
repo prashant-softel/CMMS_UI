@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cmms/app/utils/utility.dart';
+
 List<PreventiveCheckListModel> preventiveCheckListModelFromJson(String str) =>
     List<PreventiveCheckListModel>.from(
         json.decode(str).map((x) => PreventiveCheckListModel.fromJson(x)));
@@ -31,6 +33,11 @@ class PreventiveCheckListModel {
   String? comments;
   int? ptw_required;
   String? title;
+  int? subtask_id;
+  int? assign_to;
+  String? assign_name;
+  String? schedule_date;
+
   PreventiveCheckListModel(
       {this.id,
       this.category_id,
@@ -54,11 +61,21 @@ class PreventiveCheckListModel {
       this.map_checlist,
       this.ptw_required,
       this.weightage,
-      this.title});
+      this.title,
+      this.assign_name,
+      this.assign_to,
+      this.schedule_date,
+      this.subtask_id});
 
   factory PreventiveCheckListModel.fromJson(Map<String, dynamic> json) =>
       PreventiveCheckListModel(
         id: json['id'],
+        assign_name: json['assign_name'],
+        assign_to: json['assign_to'],
+        schedule_date: json['schedule_date'] == null
+            ? json['schedule_date']
+            : Utility.getFormatedyearMonthDay(json['schedule_date']),
+        subtask_id: json['subtask_id'],
         title: json['title'],
         comments: json['comments'],
         evalution_plan_id: json['evalution_plan_id'],
@@ -85,6 +102,10 @@ class PreventiveCheckListModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "subtask_id": subtask_id,
+        "assign_name": assign_name,
+        "schedule_date": schedule_date,
+        "assign_to": assign_to,
         "title": title,
         "category_id": category_id,
         "category_name": category_name,

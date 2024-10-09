@@ -495,13 +495,13 @@ class Repository {
           var responseMap = json.decode(res.data);
           var permitForJob = responseMap['id'];
           print('CreateForJobPermitResponse:${permitForJob[0]}');
-          if (pmTaskId != null && type == 3) {
+          if (pmTaskId != null && type == 3 || pmTaskId != null && type == 5) {
             scheduleLinkToPermit(
                 pmTaskId, activity, permitForJob[0], true, type, facilityId);
           } else if (pmTaskId != null && type == 4) {
             scheduleLinkToPermit(
                 pmTaskId, activity, permitForJob[0], true, type, facilityId);
-          } else if (pmTaskId != null && type == 5) {
+          } else if (pmTaskId != null && type == 6) {
             vegscheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true,
                 type, vegplanId, vegexid, facilityId);
           } else {

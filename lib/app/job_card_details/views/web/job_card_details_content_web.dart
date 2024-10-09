@@ -178,8 +178,15 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                           155
                                                       ? ColorValues
                                                           .waitingForApproveStatusColor
-                                                      : ColorValues
-                                                          .lightBlueColor,
+                                                      : controller
+                                                                  .jobCardDetailsModel
+                                                                  .value
+                                                                  ?.status ==
+                                                              158
+                                                          ? ColorValues
+                                                              .approveStatusColor
+                                                          : ColorValues
+                                                              .lightBlueColor,
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     child: Text(
@@ -217,7 +224,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              Text("Asset Category Name:",
+                                              Text("Equipement name:",
                                                   style: Styles.black14),
                                               SizedBox(width: 2),
                                               Text(
@@ -279,7 +286,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                   style: Styles.black14),
                                               SizedBox(width: 2),
                                               Text(
-                                                  " ${controller.jobCardDetailsModel.value?.createdBy ?? ""}",
+                                                  " ${controller.jobCardDetailsModel.value?.plantName ?? ""}",
                                                   style: Styles.blue14),
                                             ],
                                           ),

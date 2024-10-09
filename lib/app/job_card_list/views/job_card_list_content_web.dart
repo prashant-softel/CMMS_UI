@@ -532,7 +532,9 @@ class JobDataSource extends DataTableSource {
                                         : JobDetails.currentStatus == 155
                                             ? ColorValues
                                                 .waitingForApproveStatusColor
-                                            : ColorValues.lightBlueColor,
+                                            : JobDetails.currentStatus == 158
+                                                ? ColorValues.approveColor
+                                                : ColorValues.lightBlueColor,
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: Text(

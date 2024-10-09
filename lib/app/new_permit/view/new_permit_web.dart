@@ -121,20 +121,26 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                       "/ AUDIT TASK ",
                                       style: Styles.greyLight14,
                                     )
-                                  : controller.typee.value == 4
+                                  : controller.typee.value ==
+                                          AppConstants.kEvaluation
                                       ? Text(
-                                          "/ MC TASK ",
+                                          "/ EVALUATION TASK ",
                                           style: Styles.greyLight14,
                                         )
-                                      : controller.typee.value == 5
+                                      : controller.typee.value == 4
                                           ? Text(
-                                              "/ VEG TASK ",
+                                              "/ MC TASK ",
                                               style: Styles.greyLight14,
                                             )
-                                          : Text(
-                                              "/ PERMIT LIST",
-                                              style: Styles.greyLight14,
-                                            )),
+                                          : controller.typee.value == 6
+                                              ? Text(
+                                                  "/ VEG TASK ",
+                                                  style: Styles.greyLight14,
+                                                )
+                                              : Text(
+                                                  "/ PERMIT LIST",
+                                                  style: Styles.greyLight14,
+                                                )),
                   controller.newPermitDetailsModel.value?.permitNo == null
                       ? Text(
                           " / ADD NEW PERMIT",
@@ -188,11 +194,18 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                             AppConstants.kAudit
                                         ? Text('REQUEST A PERMIT FOR AUDIT',
                                             style: Styles.blackBold14)
-                                        : (controller.jobModel?.id != null)
-                                            ? Text('REQUEST A PERMIT FOR JOB',
+                                        : controller.typee.value ==
+                                                AppConstants.kEvaluation
+                                            ? Text(
+                                                'REQUEST A PERMIT FOR EVALUATION',
                                                 style: Styles.blackBold14)
-                                            : Text('REQUEST A PERMIT TO WORK',
-                                                style: Styles.blackBold14),
+                                            : (controller.jobModel?.id != null)
+                                                ? Text(
+                                                    'REQUEST A PERMIT FOR JOB',
+                                                    style: Styles.blackBold14)
+                                                : Text(
+                                                    'REQUEST A PERMIT TO WORK',
+                                                    style: Styles.blackBold14),
                               ),
                             ],
                           ),
@@ -276,8 +289,11 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           flex: 1,
                                           child: GestureDetector(
                                             onTap: () {
-                                              controller.type ==
-                                                      AppConstants.kAudit
+                                              controller.typee ==
+                                                          AppConstants.kAudit ||
+                                                      controller.typee ==
+                                                          AppConstants
+                                                              .kEvaluation
                                                   ? controller.viewAudDetails()
                                                   : controller.viewPMTDetails();
                                             },
@@ -285,7 +301,11 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               controller.typee.value ==
                                                       AppConstants.kAudit
                                                   ? 'AUD${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}'
-                                                  : 'PMT${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}',
+                                                  : controller.typee.value ==
+                                                          AppConstants
+                                                              .kEvaluation
+                                                      ? 'EVAL${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}'
+                                                      : 'PMT${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}',
                                               style: TextStyle(
                                                 decoration:
                                                     TextDecoration.underline,
@@ -309,7 +329,9 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           flex: 2,
                                           child: Text(
                                             controller.typee.value ==
-                                                    AppConstants.kAudit
+                                                        AppConstants.kAudit ||
+                                                    controller.typee.value ==
+                                                        AppConstants.kEvaluation
                                                 ? 'NA'
                                                 : '${controller.pmtaskViewModel?.category_name}',
                                           ),
@@ -3624,8 +3646,15 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                     // If all checks pass, proceed with permit creation
                                                     controller
                                                         .createNewPermitForPm(
-                                                      pmTaskId: controller
-                                                          .pmtaskViewModel?.id,
+                                                      pmTaskId: controller.typee
+                                                                  .value ==
+                                                              AppConstants
+                                                                  .kEvaluation
+                                                          ? controller
+                                                              .scheduleID.value
+                                                          : controller
+                                                              .pmtaskViewModel
+                                                              ?.id,
                                                       activity: controller
                                                           .pmtaskViewModel
                                                           ?.plan_title,

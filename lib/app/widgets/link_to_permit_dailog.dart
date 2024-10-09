@@ -95,7 +95,7 @@ class LinkToPermitDialog extends GetView {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Spacer(),
-                type == 3
+                type == 3 || type == 5
                     ? ElevatedButton(
                         style: Styles.greenElevatedButtonStyle,
                         onPressed: () {
@@ -111,7 +111,8 @@ class LinkToPermitDialog extends GetView {
                           // Get.offAllNamed(Routes.viewAuditTask,
                           //     arguments: {'auditTaskId': taskId, 'type': type});
                         },
-                        child: const Text('View Audit'),
+                        child:
+                            Text(type == 3 ? 'View Audit' : 'View Evaluation'),
                       )
                     : type == 4
                         ? ElevatedButton(
@@ -130,7 +131,7 @@ class LinkToPermitDialog extends GetView {
                             },
                             child: const Text('View MC'),
                           )
-                        : type == 5
+                        : type == 6
                             ? ElevatedButton(
                                 style: Styles.greenElevatedButtonStyle,
                                 onPressed: () {
@@ -213,7 +214,7 @@ class LinkToPermitDialog extends GetView {
                         },
                         child: const Text('Add Mrs'),
                       ),
-                type == 3
+                type == 3 || type == 5
                     ? ElevatedButton(
                         style: Styles.yellowElevatedButtonStyle,
                         onPressed: () {
@@ -227,7 +228,8 @@ class LinkToPermitDialog extends GetView {
                               arguments: {'type': type});
                           Get.back();
                         },
-                        child: const Text('Audit list'),
+                        child:
+                            Text(type == 3 ? 'Audit List' : "Evaluation List"),
                       )
                     : type == 4
                         ? ElevatedButton(
@@ -246,7 +248,7 @@ class LinkToPermitDialog extends GetView {
                             },
                             child: const Text('MC List'),
                           )
-                        : type == 5
+                        : type == 6
                             ? ElevatedButton(
                                 style: Styles.yellowElevatedButtonStyle,
                                 onPressed: () {
