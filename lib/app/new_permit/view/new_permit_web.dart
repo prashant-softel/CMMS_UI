@@ -1992,7 +1992,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                           );
                                                                         }
 
-                                                                        final initialValue = controller.typee == 4 || controller.typee == 5
+                                                                        final initialValue = controller.typee == 4 || controller.typee == 6
                                                                             ? controller.equipmentCategoryList?.where((category) => category?.name == 'Inverter')?.map((category) => category?.id)?.toList() ??
                                                                                 []
                                                                             : (controller.selectedEquipmentCategoryIdList.isNotEmpty
@@ -2006,7 +2006,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                           ignoring: controller.lstAssociatedMc?.length != 0 ||
                                                                               controller.lstAssociatedVc?.length != 0 ||
                                                                               controller.typee == 4 ||
-                                                                              controller.typee == 5,
+                                                                              controller.typee == 6,
                                                                           child:
                                                                               CustomMultiSelectDialogField(
                                                                             title:

@@ -532,7 +532,7 @@ class NewPermitController extends GetxController {
         scheduleID.value = dataFromPreviousScreen['scheduleID'];
         if (typee.value == 4) {
           mcExecutionDetailsModel = dataFromPreviousScreen['mcModel'];
-        } else if (typee.value == 5) {
+        } else if (typee.value == 6) {
           vegExecutionDetailsModel = dataFromPreviousScreen['vegModel'];
         }
         pmtaskViewModel = dataFromPreviousScreen['pmTaskModel'];

@@ -108,17 +108,26 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                         ),
                                         Spacer(),
                                         Container(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 2, horizontal: 5),
-                                          margin: EdgeInsets.only(top: 5),
-                                          decoration: BoxDecoration(
-                                            color: ColorValues.addNewColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: Text(
-                                            "Status"
-                                            " ${controller.vegPlanDetailsModel.value!.statusShort ?? ""}",
+                                          height: 30,
+                                          child: CustomElevatedButton(
+                                            backgroundColor: controller
+                                                        .vegPlanDetailsModel
+                                                        .value
+                                                        ?.status ==
+                                                    702
+                                                ? ColorValues.startColor
+                                                : controller.vegPlanDetailsModel
+                                                            .value?.status ==
+                                                        704
+                                                    ? ColorValues
+                                                        .approveStatusColor
+                                                    : ColorValues
+                                                        .rejectedStatusColor,
+                                            onPressed: () async {},
+                                            text:
+                                                "${controller.vegPlanDetailsModel.value?.statusShort ?? ""}",
+
+                                            // ${controller.auditTasknDetailModel.value.status ?? ""}
                                           ),
                                         ),
                                       ],
@@ -470,9 +479,7 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                 icon: Icons.close,
                                 onPressed: () {
                                   Get.dialog(ApproveVegPlan(
-                                    id: controller.id.value,type:1
-                                  ));
-
+                                      id: controller.id.value, type: 1));
                                 },
                               ),
                             ),

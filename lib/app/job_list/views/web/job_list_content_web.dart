@@ -557,14 +557,14 @@ class JobDataSource extends DataTableSource {
                     ? Text(" Job Created",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: 12,
                           fontWeight: FontWeight.w400,
                         ))
                     : jobDetails?.status == 102
                         ? Text("Job Assigned",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 16,
+                              fontSize: 12,
                               fontWeight: FontWeight.w400,
                             ))
                         :
@@ -576,7 +576,7 @@ class JobDataSource extends DataTableSource {
                             ' ${jobDetails?.latestJCStatusShort ?? ''}',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 16,
+                              fontSize: 12,
                               fontWeight: FontWeight.w400,
                             )),
               ),

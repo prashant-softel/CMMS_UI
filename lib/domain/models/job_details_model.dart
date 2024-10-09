@@ -53,7 +53,8 @@ class JobDetailsModel {
       this.associatedPermitList,
       this.latestJCStatus,
       this.toolsRequiredList,
-      this.latestJCStatusShort});
+      this.latestJCStatusShort,
+      this.latestJCPTWStatus});
 
   int? id;
   int? facilityId;
@@ -61,6 +62,7 @@ class JobDetailsModel {
   String? latestJCStatusShort;
   int? blockId;
   String? blockName;
+  int? latestJCPTWStatus;
   int? status;
   String? statusShort;
   String? statusLong;
@@ -87,6 +89,9 @@ class JobDetailsModel {
   factory JobDetailsModel.fromJson(Map<String, dynamic> json) =>
       JobDetailsModel(
         id: json["id"] == null ? 0 : json['id'],
+        latestJCPTWStatus:
+            json["latestJCPTWStatus"] == null ? 0 : json['latestJCPTWStatus'],
+
         facilityId: json["facility_id"] == null ? 0 : json['facility_id'],
         facilityName:
             json["facility_name"] == null ? '' : json['facility_name'],
@@ -146,6 +151,7 @@ class JobDetailsModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "latestJCPTWStatus": latestJCPTWStatus,
         "facility_id": facilityId,
         "facility_name": facilityName,
         "block_id": blockId,
