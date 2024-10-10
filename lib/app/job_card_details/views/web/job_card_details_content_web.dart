@@ -737,195 +737,224 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                                 FontWeight
                                                                     .bold),
                                                       )),
-                                                  DataColumn2(
-                                                      fixedWidth: 70,
-                                                      label: Text(
-                                                        "Action",
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      )),
+                                                  if ((controller
+                                                              .listMrsByTaskId!
+                                                              .value
+                                                              .firstWhereOrNull(
+                                                                  (element) =>
+                                                                      element?.jobCardId !=
+                                                                          0 ||
+                                                                      element?.pmId !=
+                                                                          0)
+                                                              ?.mrs_return_ID ==
+                                                          0 &&
+                                                      controller
+                                                              .allTrue.value ==
+                                                          false))
+                                                    DataColumn2(
+                                                        fixedWidth: 70,
+                                                        label: Text(
+                                                          "Action",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
                                                 ],
                                                 rows: controller.rowItem.value
                                                     .map((record) {
-                                                  return DataRow(
-                                                    // height: 130,
-                                                    cells:
-                                                        record.map((mapData) {
-                                                      return DataCell(
-                                                        (mapData['key'] ==
-                                                                "Drop_down")
-                                                            ? DropdownWebStock(
-                                                                width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width,
-                                                                dropdownList: controller
-                                                                    .cmmrsItems!
-                                                                    .where((item) =>
-                                                                        item?.issued_qty !=
-                                                                        item?.used_qty)
-                                                                    .toList()
-                                                                    .obs,
-                                                                selectedValue:
-                                                                    mapData[
-                                                                        "value"],
-                                                                onValueChanged:
-                                                                    (list,
-                                                                        selectedValue) {
-                                                                  mapData["value"] =
-                                                                      selectedValue;
-                                                                  controller.dropdownMapperData[
-                                                                          selectedValue] =
-                                                                      list.firstWhere(
-                                                                    (element) =>
-                                                                        element
-                                                                            .name ==
-                                                                        selectedValue,
-                                                                    orElse: () =>
-                                                                        null,
-                                                                  );
-                                                                  Future.delayed(
-                                                                      Duration
-                                                                          .zero,
-                                                                      () {
-                                                                    //  setState(() {});
-                                                                  });
-                                                                },
-                                                              )
-                                                            : (mapData['key'] ==
-                                                                    "Drop_down_eq")
-                                                                ? DropdownWebStock(
-                                                                    width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width,
-                                                                    dropdownList: controller
-                                                                        .workingAreaList!
-                                                                        .where(
-                                                                            (p0) {
-                                                                          return !controller
-                                                                              .rowItem
-                                                                              .map((p0) => p0[0]["value"])
-                                                                              .contains(p0.name);
-                                                                        })
-                                                                        .toList()
-                                                                        .obs,
-                                                                    selectedValue:
-                                                                        mapData[
-                                                                            "value"],
-                                                                    onValueChanged:
-                                                                        (list,
-                                                                            selectedValue) {
-                                                                      // print('paifcghb:${controller.assetList}');
-                                                                      // print({selectedValue: selectedValue});
-                                                                      mapData["value"] =
-                                                                          selectedValue;
-                                                                      controller.dropdownMapperDataworkingArea[selectedValue] = list.firstWhere(
+                                                  // Create a list of cells ensuring it contains only non-null DataCells
+                                                  List<DataCell> cells = record
+                                                      .map((mapData) {
+                                                        if (mapData['key'] ==
+                                                                "Action " &&
+                                                            !(controller.listMrsByTaskId!
+                                                                        .value
+                                                                        .firstWhereOrNull(
                                                                           (element) =>
-                                                                              element.name ==
-                                                                              selectedValue,
-                                                                          orElse:
-                                                                              null);
-                                                                      Future.delayed(
-                                                                          Duration
-                                                                              .zero,
-                                                                          () {
-                                                                        //  setState(() {});
-                                                                      });
-                                                                    },
-                                                                  )
-                                                                : (mapData['key'] ==
-                                                                        "Sr_No")
-                                                                    ? Text(
-                                                                        "${controller.dropdownMapperData[record[0]['value']]?.serial_number ?? ""}")
-                                                                    : (mapData['key'] ==
-                                                                            "code")
-                                                                        ? Text(
-                                                                            "${controller.dropdownMapperData[record[0]['value']]?.asset_MDM_code ?? ""}")
-                                                                        : (mapData['key'] ==
-                                                                                "Material_Type")
-                                                                            ? Text("${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
-                                                                            : (mapData['key'] == "Action ")
-                                                                                ? Padding(
-                                                                                    padding: EdgeInsets.only(top: 10),
-                                                                                    child: Column(
-                                                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                      children: [
-                                                                                        TableActionButton(
-                                                                                          color: ColorValues.appRedColor,
-                                                                                          icon: Icons.delete,
-                                                                                          label: '',
-                                                                                          message: '',
-                                                                                          onPress: () {
-                                                                                            controller.rowItem.remove(record);
-                                                                                          },
+                                                                              element?.jobCardId != 0 ||
+                                                                              element?.pmId != 0,
+                                                                        )
+                                                                        ?.mrs_return_ID ==
+                                                                    0 &&
+                                                                controller
+                                                                        .allTrue
+                                                                        .value ==
+                                                                    false)) {
+                                                          return null; // Skip this cell if the Action column is not displayed
+                                                        }
+                                                        return DataCell(
+                                                          (mapData['key'] ==
+                                                                  "Drop_down")
+                                                              ? DropdownWebStock(
+                                                                  width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
+                                                                  dropdownList: controller
+                                                                      .cmmrsItems!
+                                                                      .where((item) =>
+                                                                          item?.issued_qty !=
+                                                                          item?.used_qty)
+                                                                      .toList()
+                                                                      .obs,
+                                                                  selectedValue:
+                                                                      mapData[
+                                                                          "value"],
+                                                                  onValueChanged:
+                                                                      (list,
+                                                                          selectedValue) {
+                                                                    mapData["value"] =
+                                                                        selectedValue;
+                                                                    controller.dropdownMapperData[
+                                                                            selectedValue] =
+                                                                        list.firstWhere(
+                                                                      (element) =>
+                                                                          element
+                                                                              .name ==
+                                                                          selectedValue,
+                                                                      orElse: () =>
+                                                                          null,
+                                                                    );
+                                                                    Future.delayed(
+                                                                        Duration
+                                                                            .zero,
+                                                                        () {
+                                                                      // setState(() {});
+                                                                    });
+                                                                  },
+                                                                )
+                                                              : (mapData['key'] ==
+                                                                      "Drop_down_eq")
+                                                                  ? DropdownWebStock(
+                                                                      width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width,
+                                                                      dropdownList: controller
+                                                                          .workingAreaList!
+                                                                          .where(
+                                                                              (p0) {
+                                                                            return !controller.rowItem.map((p0) => p0[0]["value"]).contains(p0.name);
+                                                                          })
+                                                                          .toList()
+                                                                          .obs,
+                                                                      selectedValue:
+                                                                          mapData[
+                                                                              "value"],
+                                                                      onValueChanged:
+                                                                          (list,
+                                                                              selectedValue) {
+                                                                        // print('paifcghb:${controller.assetList}');
+                                                                        // print({selectedValue: selectedValue});
+                                                                        mapData["value"] =
+                                                                            selectedValue;
+                                                                        controller.dropdownMapperDataworkingArea[selectedValue] = list.firstWhere(
+                                                                            (element) =>
+                                                                                element.name ==
+                                                                                selectedValue,
+                                                                            orElse:
+                                                                                null);
+                                                                        Future.delayed(
+                                                                            Duration.zero,
+                                                                            () {
+                                                                          //  setState(() {});
+                                                                        });
+                                                                      },
+                                                                    )
+                                                                  : (mapData['key'] ==
+                                                                          "Issued_Qty")
+                                                                      ? Text(
+                                                                          "${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0)}")
+                                                                      : (mapData['key'] ==
+                                                                              "Used_Qty")
+                                                                          ? Text(
+                                                                              "${(controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0)}")
+                                                                          : (mapData['key'] == "Consumed_Qty")
+                                                                              ? Padding(
+                                                                                  padding: const EdgeInsets.only(top: 10),
+                                                                                  child: Container(
+                                                                                    decoration: BoxDecoration(
+                                                                                      boxShadow: [
+                                                                                        BoxShadow(
+                                                                                          color: Colors.black26,
+                                                                                          offset: const Offset(5.0, 5.0),
+                                                                                          blurRadius: 5.0,
+                                                                                          spreadRadius: 1.0,
                                                                                         ),
                                                                                       ],
+                                                                                      color: ColorValues.whiteColor,
+                                                                                      borderRadius: BorderRadius.circular(5),
                                                                                     ),
-                                                                                  )
-                                                                                : (mapData['key'] == "Issued_Qty")
-                                                                                    ? Text("${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0)}")
-                                                                                    : (mapData['key'] == "Used_Qty")
-                                                                                        ? Text("${(controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0)}")
-                                                                                        : (mapData['key'] == "Consumed_Qty")
-                                                                                            ? Padding(
-                                                                                                padding: const EdgeInsets.only(top: 10),
-                                                                                                child: Container(
-                                                                                                  decoration: BoxDecoration(
-                                                                                                    boxShadow: [
-                                                                                                      BoxShadow(
-                                                                                                        color: Colors.black26,
-                                                                                                        offset: const Offset(5.0, 5.0),
-                                                                                                        blurRadius: 5.0,
-                                                                                                        spreadRadius: 1.0,
+                                                                                    child: LoginCustomTextfield(
+                                                                                      width: Get.width * 0.4,
+                                                                                      keyboardType: TextInputType.number,
+                                                                                      inputFormatters: <TextInputFormatter>[
+                                                                                        FilteringTextInputFormatter.digitsOnly
+                                                                                      ],
+                                                                                      // maxLines: 1,
+                                                                                      textController: TextEditingController(text: mapData["value"] ?? ''),
+                                                                                      onChanged: (txt) {
+                                                                                        int intialQty = int.tryParse(mapData['intialQty'] ?? "") ?? 0;
+                                                                                        num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
+                                                                                        mapData["value"] = txt;
+
+                                                                                        var data = controller.rowItem.value.where((element) => element[0]['value'] == record[0]['value']);
+
+                                                                                        int totalconsumed = 0;
+                                                                                        data.forEach((element) {
+                                                                                          totalconsumed = (totalconsumed + (int.tryParse("${element[7]['value']}") ?? 0));
+                                                                                        });
+
+                                                                                        if (txt.isNotEmpty) {
+                                                                                          if (totalconsumed > issuedQty) {
+                                                                                            setState(() {
+                                                                                              txt = intialQty.toString();
+                                                                                              mapData['value'] = intialQty.toString();
+                                                                                            });
+                                                                                            Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
+                                                                                          }
+                                                                                        } else if (txt.isEmpty) {
+                                                                                          txt = intialQty.toString();
+                                                                                        }
+                                                                                        mapData["value"] = txt;
+                                                                                      },
+                                                                                    ),
+                                                                                  ))
+                                                                              : (mapData['key'] == "Sr_No")
+                                                                                  ? Text("${controller.dropdownMapperData[record[0]['value']]?.serial_number ?? ""}")
+                                                                                  : (mapData['key'] == "code")
+                                                                                      ? Text("${controller.dropdownMapperData[record[0]['value']]?.asset_MDM_code ?? ""}")
+                                                                                      : (mapData['key'] == "Material_Type")
+                                                                                          ? Text("${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
+                                                                                          : (mapData['key'] == "Action ")
+                                                                                              ? Padding(
+                                                                                                  padding: EdgeInsets.only(top: 10),
+                                                                                                  child: Column(
+                                                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                    children: [
+                                                                                                      TableActionButton(
+                                                                                                        color: ColorValues.appRedColor,
+                                                                                                        icon: Icons.delete,
+                                                                                                        label: '',
+                                                                                                        message: '',
+                                                                                                        onPress: () {
+                                                                                                          controller.rowItem.remove(record);
+                                                                                                        },
                                                                                                       ),
                                                                                                     ],
-                                                                                                    color: ColorValues.whiteColor,
-                                                                                                    borderRadius: BorderRadius.circular(5),
                                                                                                   ),
-                                                                                                  child: LoginCustomTextfield(
-                                                                                                    width: Get.width * 0.4,
-                                                                                                    keyboardType: TextInputType.number,
-                                                                                                    inputFormatters: <TextInputFormatter>[
-                                                                                                      FilteringTextInputFormatter.digitsOnly
-                                                                                                    ],
-                                                                                                    // maxLines: 1,
-                                                                                                    textController: TextEditingController(text: mapData["value"] ?? ''),
-                                                                                                    onChanged: (txt) {
-                                                                                                      int intialQty = int.tryParse(mapData['intialQty'] ?? "") ?? 0;
-                                                                                                      num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
-                                                                                                      mapData["value"] = txt;
+                                                                                                )
+                                                                                              : Text(mapData['value'] ?? ''),
+                                                        );
+                                                      })
+                                                      .whereType<
+                                                          DataCell>() // Ensures that we only keep non-null DataCells
+                                                      .toList();
 
-                                                                                                      var data = controller.rowItem.value.where((element) => element[0]['value'] == record[0]['value']);
-
-                                                                                                      int totalconsumed = 0;
-                                                                                                      data.forEach((element) {
-                                                                                                        totalconsumed = (totalconsumed + (int.tryParse("${element[7]['value']}") ?? 0));
-                                                                                                      });
-
-                                                                                                      if (txt.isNotEmpty) {
-                                                                                                        if (totalconsumed > issuedQty) {
-                                                                                                          setState(() {
-                                                                                                            txt = intialQty.toString();
-                                                                                                            mapData['value'] = intialQty.toString();
-                                                                                                          });
-                                                                                                          Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
-                                                                                                        }
-                                                                                                      } else if (txt.isEmpty) {
-                                                                                                        txt = intialQty.toString();
-                                                                                                      }
-                                                                                                      mapData["value"] = txt;
-                                                                                                    },
-                                                                                                  ),
-                                                                                                ))
-                                                                                            : Text(mapData['value'] ?? ''),
-                                                      );
-                                                    }).toList(),
-                                                  );
+                                                  return DataRow(cells: cells);
                                                 }).toList(),
                                               );
                                             }),
