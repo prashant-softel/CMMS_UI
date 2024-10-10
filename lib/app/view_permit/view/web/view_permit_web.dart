@@ -3743,30 +3743,19 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                       ///Extend Permit Button
 
                       // controller.viewPermitDetailsModel.value?.isExpired == 1 ||
-                      controller.viewPermitDetailsModel.value!.tbT_Done_Check ==
-                                  1 &&
-                              controller
-                                      .viewPermitDetailsModel.value?.requester_id ==
-                                  varUserAccessModel.value.user_id &&
-                              controller.viewPermitDetailsModel.value
-                                      ?.ptwStatus ==
-                                  PermitStatusConstants.PTW_APPROVE &&
-                              varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id ==
-                                              UserAccessConstants
-                                                  .kPermitFeatureId &&
-                                          e.edit ==
-                                              UserAccessConstants
-                                                  .kHaveEditAccess)
-                                      .length >
-                                  0 &&
-                              (controller.viewPermitDetailsModel.value
-                                      ?.isExpired ==
-                                  0) &&
-                              (controller.viewPermitDetailsModel.value
-                                          ?.lstAssociatedJobs![0]!.jc_status ==
-                                      152)
+                    controller.viewPermitDetailsModel.value!.tbT_Done_Check == 1 &&
+controller.viewPermitDetailsModel.value?.requester_id == varUserAccessModel.value.user_id &&
+controller.viewPermitDetailsModel.value?.ptwStatus == PermitStatusConstants.PTW_APPROVE &&
+varUserAccessModel.value.access_list!
+    .where((e) =>
+        e.feature_id == UserAccessConstants.kPermitFeatureId &&
+        e.edit == UserAccessConstants.kHaveEditAccess)
+    .isNotEmpty &&
+(controller.viewPermitDetailsModel.value?.isExpired == 0) &&
+(controller.viewPermitDetailsModel.value?.lstAssociatedJobs != null &&
+    controller.viewPermitDetailsModel.value!.lstAssociatedJobs!.isNotEmpty &&
+    controller.viewPermitDetailsModel.value!.lstAssociatedJobs![0]!.jc_status == 152)
+
 
                                   // &&
                                   // controller.isOneHour(

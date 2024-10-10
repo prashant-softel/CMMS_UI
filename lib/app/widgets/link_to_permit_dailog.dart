@@ -277,8 +277,10 @@ class LinkToPermitDialog extends GetView {
                     //     _controller.formattedFromdate,
                     //     false);
                     //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
-                    Get.offAllNamed(Routes.viewPermitScreen,
-                        arguments: {"permitId": permitId, "type": type});
+                    // Get.offAllNamed(Routes.viewPermitScreen,
+                    //     arguments: {"permitId": permitId, "type": type});
+                    Get.offAllNamed(
+                        '${Routes.viewPermitScreen}/$permitId/$type');
 
                     Get.back();
                   },

@@ -115,7 +115,6 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                 BorderRadius.circular(5),
                                           ),
                                           child: Text(
-                                            "Status"
                                             " ${controller.mcPlanDetailsModel.value?.status_short ?? ""}",
                                           ),
                                         ),
