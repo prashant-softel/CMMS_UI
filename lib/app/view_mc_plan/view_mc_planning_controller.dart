@@ -75,20 +75,27 @@ class ViewMcPlaningController extends GetxController {
   void onInit() async {
     try {
       await setUserId();
+
+      // Create a Completer to wait for a valid facilityId
+      Completer<void> facilityIdCompleter = Completer<void>();
+
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
+        if (facilityId != 0 && !facilityIdCompleter.isCompleted) {
+          facilityIdCompleter.complete();
+        }
       });
+
+      // Wait for the Completer to complete, ensuring we have a valid facilityId
+      await facilityIdCompleter.future;
+
       if (mcid != 0) {
-        Future.delayed(Duration(seconds: 1), () {
-          getMcPlanDetail(planId: mcid.value, facilityId: facilityId);
-        });
+        await getMcPlanDetail(planId: mcid.value, facilityId: facilityId);
       }
-      Future.delayed(Duration(seconds: 1), () {
-        getEquipmentModelList(facilityId, true);
-      });
-      Future.delayed(Duration(seconds: 1), () {
-        getMcPlanHistory(id: mcid.value, facilityId: facilityId);
-      });
+
+      await getEquipmentModelList(facilityId, true);
+      await getMcPlanHistory(id: mcid.value, facilityId: facilityId);
+
       super.onInit();
     } catch (e) {
       print(e);

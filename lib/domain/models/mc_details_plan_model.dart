@@ -84,9 +84,12 @@ class McPalningDetailsModel {
         noOfCleaningDays: json['noOfCleaningDays'],
         createdById: json['createdById'],
         createdBy: json['createdBy'],
-        createdAt: json['createdAt'],
-        startDate: json[
-            'createdAt'], //Utility.getFormatedyearMonthDay(json['startDate']),
+        createdAt: json['createdAt'] == null
+            ? json['createdAt']
+            : Utility.getFormattedYearMonthDayTime(json['createdAt']),
+        startDate: json['createdAt'] == null
+            ? json['createdAt']
+            : Utility.getFormatedyearMonthDay(json['createdAt']),
         approvedById: json['approvedById'],
         approvedBy: json['approvedBy'],
         approvedAt: json['approvedAt'],
