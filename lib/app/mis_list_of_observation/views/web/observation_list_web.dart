@@ -309,7 +309,7 @@ class _ObservationWebState extends State<ObservationListWeb> {
                                                           dataSource, // Custom DataSource class
                                                       // headingRowHeight:
                                                       //     Get.height * 0.12,
-                                                      minWidth: 2250,
+                                                      minWidth: 1750,
 
                                                       showCheckboxColumn: false,
                                                       rowsPerPage: 10,
