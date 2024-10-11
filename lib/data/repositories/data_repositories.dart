@@ -1764,16 +1764,13 @@ class DataRepository extends DomainRepository {
           userId: userId,
           selectedAssetsNameIdList: selectedAssetsNameIdList);
 
-  Future<ResponseModel> getInventoryCategoryList({
-    String? auth,
-    bool? isLoading,
-    int? facilityId,
-  }) async {
+  Future<ResponseModel> getInventoryCategoryList(
+      {String? auth, bool? isLoading, int? facilityId, int? blockId}) async {
     return await connectHelper.getInventoryCategoryList(
-      auth: auth,
-      isLoading: isLoading,
-      facilityId: facilityId,
-    );
+        auth: auth,
+        isLoading: isLoading,
+        facilityId: facilityId,
+        blockId: blockId);
   }
 
   //  Future<ResponseModel> getAffectedPartList({

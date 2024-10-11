@@ -761,7 +761,22 @@ class PermitListDataSource extends DataTableSource {
                                                             .PTW_EXTEND_REQUEST_APPROVE
                                                     ? Color.fromARGB(
                                                         255, 181, 129, 179)
-                                                    : ColorValues.appRedColor,
+                                                    : controller.newPermitList
+                                                                .firstWhere(
+                                                                  (e) =>
+                                                                      "${e?.permitId}" ==
+                                                                      "${PermitDetails?.permitId}",
+                                                                  orElse: () =>
+                                                                      NewPermitModel(
+                                                                          permitId:
+                                                                              000),
+                                                                )
+                                                                ?.ptwStatus ==
+                                                            PermitStatusConstants
+                                                                .PTW_CLOSED
+                                                        ? ColorValues.closeColor
+                                                        : ColorValues
+                                                            .appRedColor,
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: Text(

@@ -540,17 +540,23 @@ class JobDataSource extends DataTableSource {
                                       ? ColorValues.linktopermitColor
                                       : jobDetails?.latestJCStatus == 153
                                           ? Color.fromARGB(255, 181, 129, 179)
-                                          : jobDetails?.latestJCStatus == 155 ||
-                                                  jobDetails?.latestJCStatus ==
-                                                      156 ||
-                                                  jobDetails?.latestJCStatus ==
-                                                      157
-                                              ? ColorValues
-                                                  .waitingForApproveStatusColor
+                                          : jobDetails?.latestJCStatus == 156
+                                              ? ColorValues.closeColor
                                               : jobDetails?.latestJCStatus ==
-                                                      158
-                                                  ? ColorValues.approveColor
-                                                  : ColorValues.lightBlueColor,
+                                                          157 ||
+                                                      jobDetails
+                                                              ?.latestJCStatus ==
+                                                          154
+                                                  ? ColorValues
+                                                      .waitingForApproveStatusColor
+                                                  : jobDetails?.latestJCStatus ==
+                                                              158 ||
+                                                          jobDetails
+                                                                  ?.latestJCStatus ==
+                                                              155
+                                                      ? ColorValues.approveColor
+                                                      : ColorValues
+                                                          .lightBlueColor,
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: jobDetails?.status == 101

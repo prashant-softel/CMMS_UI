@@ -24,16 +24,13 @@ class EditJobUsecase {
         isLoading,
       );
 
-  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
-    String? auth,
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
+  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList(
+          {String? auth,
+          int? facilityId,
+          bool? isLoading,
+          int? blockId}) async =>
       await repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+          auth, facilityId, isLoading, blockId);
 
   Future<List<EmployeeModel?>?> getAssignedToEmployee({
     String? auth,

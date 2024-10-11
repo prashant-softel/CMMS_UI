@@ -131,11 +131,9 @@ class EditJobController extends GetxController {
         selectedFacilityId = event;
 
         await getBlocksList(selectedFacilityId);
-        await getInventoryCategoryList();
+        // await getInventoryCategoryList();
 
-        if (isInventoryCategoryListLoaded.value &&
-            blockList != null &&
-            equipmentCategoryList.isNotEmpty) {
+        if (blockList != null) {
           await getJobDetails(jobID.value, selectedFacilityId);
         }
 
@@ -237,7 +235,7 @@ class EditJobController extends GetxController {
       selectedAssignedToId = jobDetailsModel.value?.assignedId ?? 0;
 
       if (selectedBlockId != 0) {
-        // getInventoryCategoryList();
+        getInventoryCategoryList(blockId: selectedBlockId);
 
         // Set Equipment Categories
         List<int> selectedCategoryIds = [];
@@ -388,16 +386,14 @@ class EditJobController extends GetxController {
   //     print(e);
   //   }
   // }
-  Future<void> getInventoryCategoryList({String? facilityId}) async {
+  Future<void> getInventoryCategoryList({int? blockId}) async {
     equipmentCategoryList.value = <InventoryCategoryModel>[];
 
     isInventoryCategoryListLoaded.value = false;
 
     try {
-      final _equipmentCategoryList =
-          await editJobPresenter.getInventoryCategoryList(
-        isLoading: true,
-      );
+      final _equipmentCategoryList = await editJobPresenter
+          .getInventoryCategoryList(isLoading: true, blockId: blockId);
 
       if (_equipmentCategoryList != null) {
         for (var equimentCategory in _equipmentCategoryList) {
@@ -742,7 +738,7 @@ class EditJobController extends GetxController {
             // selectedWorkAreaList.value = [];
             // selectedAssignedTo.value ='';
             // selectedWorkTypeList.value = [];
-            getInventoryCategoryList();
+            getInventoryCategoryList(blockId: selectedBlockId);
             // getWorkTypeList();
             // getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
           } else {

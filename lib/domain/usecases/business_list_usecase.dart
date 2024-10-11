@@ -1,4 +1,3 @@
-
 import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
@@ -17,11 +16,7 @@ class BusinessListUsecase {
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+      await repository.getInventoryCategoryList(auth, facilityId, isLoading, 0);
   Future<List<CountryModel?>?> getCountryList({
     bool? isLoading,
   }) async =>
@@ -29,22 +24,16 @@ class BusinessListUsecase {
         isLoading,
       );
 
-  Future<List<CountryState?>?> getStateList({
+  Future<List<CountryState?>?> getStateList({int? selectedCountryId
+          // bool? isLoading,
 
-    int? selectedCountryId
-    // bool? isLoading,
-
-  }) async =>
+          }) async =>
       await repository.getStateList(
         // true,
         selectedCountryId!,
       );
 
-
-  Future<List<CityModel?>?> getCityList({
-    int? selectedStateId
-
-  }) async =>
+  Future<List<CityModel?>?> getCityList({int? selectedStateId}) async =>
       await repository.getCityList(
         true,
         selectedStateId!,
@@ -62,9 +51,8 @@ class BusinessListUsecase {
         // blockId : blockId,
         // categoryIds,
         businessType: businessType,
-        isLoading : isLoading,
+        isLoading: isLoading,
       );
-
 
   Future<List<BusinessListModel?>?> getBusinessList({
     required int? businessType,
@@ -76,12 +64,11 @@ class BusinessListUsecase {
     required bool isLoading,
   }) async =>
       await repository.getBusinessList(
-        // blockId : blockId,
-        // categoryIds,
-        businessType: businessType,
-        isLoading : isLoading,
-        facilityId: facilityId
-      );
+          // blockId : blockId,
+          // categoryIds,
+          businessType: businessType,
+          isLoading: isLoading,
+          facilityId: facilityId);
   Future<List<FrequencyModel?>?> getFrequencyList({
     bool? isLoading,
   }) async =>
@@ -95,7 +82,7 @@ class BusinessListUsecase {
       await repository.createBusinessListNumber(
           isLoading: isLoading, businesslistJsonString: businesslistJsonString);
   deleteBusiness(
-      {required Object business_id, required bool isLoading}) async =>
+          {required Object business_id, required bool isLoading}) async =>
       await repository.deleteBusinessList(
         business_id,
         isLoading,
@@ -108,5 +95,4 @@ class BusinessListUsecase {
         isLoading: isLoading,
         modulelistJsonString: modulelistJsonString,
       );
-
 }

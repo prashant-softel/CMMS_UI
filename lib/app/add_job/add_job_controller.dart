@@ -205,12 +205,10 @@ class AddJobController extends GetxController {
     update(['toolsRequiredToWorkTypeList']);
   }
 
-  Future<void> getInventoryCategoryList(String? facilityId) async {
+  Future<void> getInventoryCategoryList(int? blockId) async {
     equipmentCategoryList.value = <InventoryCategoryModel>[];
-    final _equipmentCategoryList =
-        await addJobPresenter.getInventoryCategoryList(
-      isLoading: false,
-    );
+    final _equipmentCategoryList = await addJobPresenter
+        .getInventoryCategoryList(isLoading: true, blockId: blockId);
     if (_equipmentCategoryList != null) {
       for (var equimentCategory in _equipmentCategoryList) {
         equipmentCategoryList.add(equimentCategory);
@@ -425,7 +423,7 @@ class AddJobController extends GetxController {
             // selectedWorkAreaList.value = [];
             // selectedAssignedTo.value ='';
             // selectedWorkTypeList.value = [];
-            getInventoryCategoryList(selectedBlockId.toString());
+            getInventoryCategoryList(selectedBlockId);
             // getWorkTypeList();
             // getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
           } else {
