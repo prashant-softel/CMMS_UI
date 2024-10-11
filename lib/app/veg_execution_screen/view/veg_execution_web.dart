@@ -162,7 +162,7 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                                                 : ColorValues.rejectedStatusColor,
                                                 onPressed: () async {},
                                                 text:
-                                                    "121${controller.vegExecutionDetailsModel.value?.status_short ?? ""}",
+                                                    "${controller.vegExecutionDetailsModel.value?.status_short ?? ""}",
 
                                                 // ${controller.auditTasknDetailModel.value.status ?? ""}
                                               ),

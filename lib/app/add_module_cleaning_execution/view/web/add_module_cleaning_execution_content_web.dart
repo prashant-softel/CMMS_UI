@@ -148,7 +148,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                         ?.status ==
                                                                     363
                                                                 ? ColorValues
-                                                                    .completeColor
+                                                                    .closeColor
                                                                 : controller
                                                                             .mcExecutionDetailsModel
                                                                             .value
@@ -1124,7 +1124,7 @@ class AddModuleCleaningExecutionContentWeb
                                                     child: CustomElevatedButton(
                                                       backgroundColor:
                                                           ColorValues
-                                                              .cancelColor,
+                                                              .closeColor,
                                                       text: "Close",
                                                       onPressed: () {
                                                         int total = (controller
