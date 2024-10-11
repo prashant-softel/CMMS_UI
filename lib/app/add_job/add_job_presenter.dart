@@ -35,16 +35,16 @@ class AddJobPresenter {
       );
 
   ///
-  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
-    String? auth,
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
+  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList(
+          {String? auth,
+          int? facilityId,
+          bool? isLoading,
+          int? blockId}) async =>
       await addJobUsecase.getInventoryCategoryList(
-        auth: auth ?? "",
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth ?? "",
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          blockId: blockId);
 
   ///
   Future<List<EmployeeModel?>?> getAssignedToList({
@@ -62,12 +62,11 @@ class AddJobPresenter {
   Future<List<ToolsModel?>?> getToolsRequiredToWorkTypeList({
     String? auth,
     String? workTypeIds,
-
     bool? isLoading,
   }) async {
     print("Fault id in presenter: $workTypeIds");
     return addJobUsecase.getToolsRequiredToWorkTypeList(
-      auth:auth ?? "",
+      auth: auth ?? "",
       workTypeIds: workTypeIds,
       isLoading: isLoading,
     );

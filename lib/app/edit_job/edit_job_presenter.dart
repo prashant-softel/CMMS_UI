@@ -35,16 +35,16 @@ class EditJobPresenter {
       );
 
   ///
-  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
-    String? auth,
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
+  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList(
+          {String? auth,
+          int? facilityId,
+          bool? isLoading,
+          int? blockId}) async =>
       await editJobUsecase.getInventoryCategoryList(
-        auth: auth ?? "",
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth ?? "",
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          blockId: blockId);
 
   ///
   Future<List<EmployeeModel?>?> getAssignedToEmployee({

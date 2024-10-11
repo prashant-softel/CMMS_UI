@@ -154,7 +154,8 @@ class WarrantyClaimUsecase {
       facility_id: facility_id,
     );
   }
-      Future<List<EmployeeModel?>?> getAssignedToList({
+
+  Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
     int? featureId,
@@ -167,17 +168,13 @@ class WarrantyClaimUsecase {
         isLoading,
       );
 
-
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,
     int? facilityId,
     bool? isLoading,
   }) async =>
       await _repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+          auth, facilityId, isLoading, 0);
 
   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
     required bool isLoading,

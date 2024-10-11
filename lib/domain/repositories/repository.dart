@@ -8049,19 +8049,16 @@ class Repository {
   }
 
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList(
-    String? auth,
-    int? facilityId,
-    bool? isLoading,
-  ) async {
+      String? auth, int? facilityId, bool? isLoading, int? blockId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
       if (auth.isNotEmpty) {
         res = await _dataRepository.getInventoryCategoryList(
-          auth: auth,
-          isLoading: isLoading,
-          facilityId: facilityId,
-        );
+            auth: auth,
+            isLoading: isLoading,
+            facilityId: facilityId,
+            blockId: blockId);
       }
       if (!res.hasError) {
         final jsonInventoryCategoryModels = jsonDecode(res.data);

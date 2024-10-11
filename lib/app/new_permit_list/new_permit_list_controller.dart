@@ -48,7 +48,7 @@ class NewPermitListController extends GetxController {
     // "search": true,
   });
   final Map<String, double> columnwidth = {
-    "Permit Id": 153,
+    "Permit Id": 170,
     "Title": 150,
     "Permit Type Name": 200,
     "Equipment Category": 220,

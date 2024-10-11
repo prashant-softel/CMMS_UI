@@ -12,11 +12,7 @@ class CountrylistUsecase {
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+      await repository.getInventoryCategoryList(auth, facilityId, isLoading, 0);
 
   Future<List<CountryModel?>?> getCountryList({
     // int? type,
@@ -55,5 +51,4 @@ class CountrylistUsecase {
         isLoading: isLoading,
         modulelistJsonString: modulelistJsonString,
       );
-
 }

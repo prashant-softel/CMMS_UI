@@ -34,25 +34,16 @@ class ModuleCleaningPlanningUsecase {
         facilityId,
       );
 
-  Future<Map<String, dynamic>> updateMcPlan({
-    updateMcPlans,
-    bool? isLoading,int?facility_id
-  }) async =>
-      await repository.updateMcPlan(
-        updateMcPlans,
-        isLoading,facility_id
-      );
+  Future<Map<String, dynamic>> updateMcPlan(
+          {updateMcPlans, bool? isLoading, int? facility_id}) async =>
+      await repository.updateMcPlan(updateMcPlans, isLoading, facility_id);
 
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+      await repository.getInventoryCategoryList(auth, facilityId, isLoading, 0);
   Future<Map<String, dynamic>> createPmPlan({
     createPmPlanJsonString,
     bool? isLoading,

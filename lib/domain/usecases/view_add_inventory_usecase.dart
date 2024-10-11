@@ -76,7 +76,8 @@ class ViewAddInventoryUsecase {
       BusinessType: BusinessType,
     );
   }
-Future<List<BusinessTypeModel>> getBusinessTypeList({
+
+  Future<List<BusinessTypeModel>> getBusinessTypeList({
     required int? businessType,
     required bool isLoading,
   }) async =>
@@ -95,6 +96,7 @@ Future<List<BusinessTypeModel>> getBusinessTypeList({
       businessType: businessType,
     );
   }
+
   Future<List<BlockModel?>?> getBlocksList({
     String? auth,
     int? facilityId,
@@ -170,10 +172,7 @@ Future<List<BusinessTypeModel>> getBusinessTypeList({
     bool? isLoading,
   }) async =>
       await _repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+          auth, facilityId, isLoading, 0);
 
   Future<List<WarrantyTypeModel?>?> getWarrantyTypeList({
     bool? isLoading,

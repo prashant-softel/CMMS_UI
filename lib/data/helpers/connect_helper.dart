@@ -3084,13 +3084,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getInventoryCategoryList({
-    String? auth,
-    bool? isLoading,
-    int? facilityId,
-  }) async =>
+  Future<ResponseModel> getInventoryCategoryList(
+          {String? auth,
+          bool? isLoading,
+          int? facilityId,
+          int? blockId}) async =>
       await apiWrapper.makeRequest(
-        'Inventory/GetInventoryCategoryList',
+        'Inventory/GetInventoryCategoryList?block_id=$blockId',
         Request.getMultiparts,
         null,
         isLoading ?? false,
