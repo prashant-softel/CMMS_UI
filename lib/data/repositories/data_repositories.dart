@@ -2891,16 +2891,10 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  Future<ResponseModel> updateJobCard({
-    String? auth,
-    jobCard,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> updateJobCard(
+      {String? auth, jobCard, bool? isLoading, int? type}) async {
     return await connectHelper.updateJobCard(
-      auth: auth,
-      jobCard: jobCard,
-      isLoading: isLoading,
-    );
+        auth: auth, jobCard: jobCard, isLoading: isLoading, type: type);
   }
 
   Future<ResponseModel> carryForwardJob({
@@ -5180,15 +5174,13 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  Future<ResponseModel> createAuditNumber({
-    auth,
-    bool? isLoading,
-    checkAuditJsonString,
-  }) async {
+  Future<ResponseModel> createAuditNumber(
+      {auth, bool? isLoading, checkAuditJsonString, int? type}) async {
     var response = await connectHelper.createAuditNumber(
         auth: auth,
         isLoading: isLoading,
-        checkAuditJsonString: checkAuditJsonString);
+        checkAuditJsonString: checkAuditJsonString,
+        type: type);
     return response;
   }
 

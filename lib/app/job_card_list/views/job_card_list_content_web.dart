@@ -246,7 +246,7 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                                                     //  ColumnSize.S,
                                                     controller
                                                         .JobCardIdFilterText,
-                                                    200,
+                                                    250,
                                                   ),
                                                   buildDataColumn(
                                                       "JobId",
@@ -487,7 +487,7 @@ class JobDataSource extends DataTableSource {
         controller.clearStoreData();
         int jobCardId = JobDetails?.jobCardId ?? 0;
         if (jobCardId != 0) {
-          Get.toNamed('${Routes.jobCard}/$jobCardId');
+          Get.toNamed('${Routes.jobCard}/$jobCardId/0');
         }
       },
       cells: [
@@ -524,17 +524,24 @@ class JobDataSource extends DataTableSource {
                           margin: EdgeInsets.only(top: 5),
                           decoration: BoxDecoration(
                             color: JobDetails!.currentStatus == 151
-                                ? ColorValues.createsColor
+                                ? ColorValues.rejectColor
                                 : JobDetails.currentStatus == 152
-                                    ? ColorValues.startColor
+                                    ? ColorValues.linktopermitColor
                                     : JobDetails.currentStatus == 153
                                         ? Color.fromARGB(255, 181, 129, 179)
                                         : JobDetails.currentStatus == 155
-                                            ? ColorValues
-                                                .waitingForApproveStatusColor
+                                            ? ColorValues.approveColor
                                             : JobDetails.currentStatus == 158
-                                                ? ColorValues.approveColor
-                                                : ColorValues.lightBlueColor,
+                                                ? ColorValues.approveStatusColor
+                                                : JobDetails.currentStatus ==
+                                                            157 ||
+                                                        JobDetails
+                                                                .currentStatus ==
+                                                            154
+                                                    ? ColorValues
+                                                        .waitingForApproveStatusColor
+                                                    : ColorValues
+                                                        .lightBlueColor,
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: Text(
@@ -564,7 +571,8 @@ class JobDataSource extends DataTableSource {
                                   controller.clearStoreData();
                                   int jobCardId = JobDetails?.jobCardId ?? 0;
                                   if (jobCardId != 0) {
-                                    Get.toNamed('${Routes.jobCard}/$jobCardId');
+                                    Get.toNamed(
+                                        '${Routes.jobCard}/$jobCardId/0');
                                   }
                                 },
                               )

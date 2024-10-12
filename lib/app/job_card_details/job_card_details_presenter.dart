@@ -106,22 +106,15 @@ class JobCardDetailsPresenter {
       );
 
   ///
-  Future<Map<String, dynamic>?> updateJobCard(
-    jobCard,
-    isLoading,
-  ) async =>
+  Future<Map<String, dynamic>?> updateJobCard(jobCard, isLoading, type) async =>
       await jobCardDetailsUsecase.updateJobCard(
-        jobCard: jobCard,
-        isLoading: isLoading,
-      );
+          jobCard: jobCard, isLoading: isLoading, type: type);
   Future<Map<String, dynamic>?> carryForwardJob(
-    jobCard,
-    isLoading,closePtwJsonString
-  ) async =>
+          jobCard, isLoading, closePtwJsonString) async =>
       await jobCardDetailsUsecase.carryForwardJob(
         jobCard: jobCard,
-        isLoading: isLoading,        closePtwJsonString: closePtwJsonString,
-
+        isLoading: isLoading,
+        closePtwJsonString: closePtwJsonString,
       );
   Future<Map<String, dynamic>?> closeJob(
     jobCard,

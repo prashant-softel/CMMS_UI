@@ -9,15 +9,12 @@ import '../../../theme/styles.dart';
 import '../../job_card_details_controller.dart';
 
 class JobCardUpdatedDialog extends GetView<JobCardDetailsController> {
-  const JobCardUpdatedDialog({
-    this.jobId,
-    this.message,
-    super.key,
-  });
+  const JobCardUpdatedDialog({this.jobId, this.message, super.key, this.type});
 
   ///
   final List<dynamic>? jobId;
   final String? message;
+  final int? type;
 
   ///
   @override
@@ -62,7 +59,7 @@ class JobCardUpdatedDialog extends GetView<JobCardDetailsController> {
                           child: Text("Job Card"),
                           onPressed: () async {
                             Get.offAllNamed(
-                                '${Routes.jobCard}/${controller.jobCardId.value}');
+                                '${Routes.jobCard}/${controller.jobCardId.value}/$type');
 
                             // try {
                             //   Get.put(FileUploadController());

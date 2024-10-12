@@ -109,6 +109,8 @@ class JobCardDetailsController extends GetxController {
   RxMap plantDetails = {}.obs;
 
   Rx<int> jobCardId = 0.obs;
+  Rx<int> type = 0.obs;
+
   Rx<bool> isJobCardStarted = false.obs;
   var comment = '';
 
@@ -185,7 +187,9 @@ class JobCardDetailsController extends GetxController {
   @override
   void onInit() async {
     try {
-      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
+      Get.put(FileUploadController(
+        apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',
+      ));
 
       await setJcId();
       facilityIdStreamSubscription =
@@ -357,7 +361,10 @@ class JobCardDetailsController extends GetxController {
 
   Future<void> setJcId() async {
     final String? _JcId = Get.parameters['JcId'];
+    final String? _type = Get.parameters['type'];
+
     jobCardId.value = int.tryParse(_JcId ?? "") ?? 0;
+    type.value = int.tryParse(_type ?? "") ?? 0;
 
     // try {
     //   final _jobCardId = await jobCardDetailsPresenter.getValue();
@@ -644,10 +651,7 @@ class JobCardDetailsController extends GetxController {
       };
 
       Map<String, dynamic>? responseMapJobCardUpdated =
-          await jobCardDetailsPresenter.updateJobCard(
-        jobCard,
-        true,
-      );
+          await jobCardDetailsPresenter.updateJobCard(jobCard, true, type);
 
       if (responseMapJobCardUpdated != null) {
         var _jobId = 0;
@@ -891,7 +895,9 @@ class JobCardDetailsController extends GetxController {
       );
       if (response == true) {
         try {
-          Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
+          Get.put(FileUploadController(
+            apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',
+          ));
 
           final _flutterSecureStorage = const FlutterSecureStorage();
 
@@ -959,7 +965,9 @@ class JobCardDetailsController extends GetxController {
       );
       if (response == true) {
         try {
-          Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
+          Get.put(FileUploadController(
+            apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',
+          ));
 
           jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
                 jobCardId: jobCardId.value,

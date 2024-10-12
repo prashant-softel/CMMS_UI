@@ -728,9 +728,9 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                   "JcId":
                                                                       jobCardId
                                                                 });
-
+                                                                int type = 1;
                                                                 Get.offAllNamed(
-                                                                    '${Routes.jobCard}/$jobCardId');
+                                                                    '${Routes.jobCard}/$jobCardId/$type');
                                                               }),
                                                           varUserAccessModel
                                                                       .value

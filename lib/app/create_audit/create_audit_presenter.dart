@@ -48,14 +48,12 @@ class CreateAuditPresenter {
         selectedfrequencyId: selectedfrequencyId,
         isLoading: isLoading ?? false,
       );
-  Future<bool> createAuditNumber({
-    checkAuditJsonString,
-    required bool isLoading,
-  }) async {
+  Future<bool> createAuditNumber(
+      {checkAuditJsonString, required bool isLoading, int? type}) async {
     createAuditUsecase.createAuditNumber(
-      checkAuditJsonString: checkAuditJsonString,
-      isLoading: isLoading,
-    );
+        checkAuditJsonString: checkAuditJsonString,
+        isLoading: isLoading,
+        type: type);
     return true;
   }
 

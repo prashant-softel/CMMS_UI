@@ -9708,19 +9708,17 @@ class Repository {
 
   ///
   Future<Map<String, dynamic>> updateJobCard(
-    jobCard,
-    bool? isLoading,
-  ) async {
+      jobCard, bool? isLoading, int? type) async {
     // final res = ResponseModel(data: '', hasError: false);
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
       if (auth.isNotEmpty) {
         res = await _dataRepository.updateJobCard(
-          auth: auth,
-          jobCard: json.encode(jobCard),
-          isLoading: isLoading,
-        );
+            auth: auth,
+            jobCard: json.encode(jobCard),
+            isLoading: isLoading,
+            type: type);
         print({"res.data", res.data});
       }
       if (!res.hasError) {
@@ -15493,7 +15491,7 @@ class Repository {
   }
 
   Future<bool> createAuditNumber(
-      {bool? isLoading, checkAuditJsonString}) async {
+      {bool? isLoading, checkAuditJsonString, int? type}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -15501,7 +15499,8 @@ class Repository {
         res = await _dataRepository.createAuditNumber(
             auth: auth,
             isLoading: isLoading,
-            checkAuditJsonString: checkAuditJsonString);
+            checkAuditJsonString: checkAuditJsonString,
+            type: type);
       }
       if (!res.hasError) {
         // Get.offAllNamed(Routes.auditListScreen);
