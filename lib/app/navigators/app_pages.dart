@@ -518,7 +518,7 @@ class AppPages {
       binding: FacilityBinding(),
     ),
     GetPage<dynamic>(
-      name: '${_Paths.jobCardDetails}/:JcId',
+      name: '${_Paths.jobCardDetails}/:JcId/:type',
       page: JobCardDetailsScreen.new,
       binding: JobCardDetailsBinding(),
     ),

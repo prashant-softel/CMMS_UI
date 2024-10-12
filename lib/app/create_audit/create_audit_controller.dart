@@ -327,9 +327,9 @@ class CreateAuditController extends GetxController {
 
     print({"checkAuditJsonString", checkAuditJsonString});
     await createAuditPresenter.createAuditNumber(
-      checkAuditJsonString: checkAuditJsonString,
-      isLoading: true,
-    );
+        checkAuditJsonString: checkAuditJsonString,
+        isLoading: true,
+        type: type.value);
     return true;
   }
 

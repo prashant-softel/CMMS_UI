@@ -92,6 +92,7 @@ import 'package:get/get.dart';
 import '../../app/job_card_details/views/widgets/approve_jc_dailog.dart';
 import '../../app/job_card_details/views/widgets/reject_jc_dialog.dart';
 import '../../app/widgets/audit_task_msg_receive_dialog.dart';
+import '../../app/widgets/create_update_audit_msg.dart';
 import '../../app/widgets/pm_plan_approve_msg_dialog.dart';
 
 /// The helper class which will connect to the world to get the data.
@@ -5212,11 +5213,8 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> updateJobCard({
-    String? auth,
-    jobCard,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> updateJobCard(
+      {String? auth, jobCard, bool? isLoading, int? type}) async {
     var responseModel = await apiWrapper.makeRequest(
       'JC/UpdateJC',
       Request.put,
@@ -5231,9 +5229,9 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(
         JobCardUpdatedDialog(
-          message: parsedJson['message'],
-          jobId: parsedJson['id'],
-        ),
+            message: parsedJson['message'],
+            jobId: parsedJson['id'],
+            type: type),
         barrierDismissible: false);
     return responseModel;
   }
@@ -8723,8 +8721,9 @@ class ConnectHelper {
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      //   'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
-      'PM/GetPMPlanList?facility_id=${facilityId}', Request.get,
+      'PM/GetPMPlanList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
+      // 'PM/GetPMPlanList?facility_id=${facilityId}',
+      Request.get,
       // &self_view=${self_view}
       null,
       isLoading ?? true,
@@ -9240,11 +9239,11 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> createAuditNumber({
-    required String auth,
-    bool? isLoading,
-    required checkAuditJsonString,
-  }) async {
+  Future<ResponseModel> createAuditNumber(
+      {required String auth,
+      bool? isLoading,
+      required checkAuditJsonString,
+      int? type}) async {
     var responseModel = await apiWrapper.makeRequest(
       'AuditPlan/CreateAuditPlan',
       Request.post,
@@ -9256,6 +9255,11 @@ class ConnectHelper {
       },
     );
 
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(CreateAuditPlanMessageDialog(
+        data: parsedJson['message'], id: parsedJson['id'], type: type));
+    // print('jcId2:${parsedJson['id']}');
     return responseModel;
   }
 
