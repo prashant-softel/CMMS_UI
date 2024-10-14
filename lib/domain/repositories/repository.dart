@@ -99,6 +99,7 @@ import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/models/request_order_list.model.dart';
+import 'package:cmms/domain/models/resolution_type_model.dart';
 import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/schedule_course_details_model.dart';
@@ -6782,6 +6783,36 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> closeGrievanceDetails({
+    grievanceJson,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.closeGrievanceDetails(
+          auth: auth,
+          grievanceJson: grievanceJson,
+          isLoading: isLoading,
+        );
+        print(res.data);
+      }
+      if (!res.hasError) {
+        var responseMap = json.decode(res.data);
+        return responseMap;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'closeGrievanceDetails');
+        return Map();
+      }
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+
   Future<void> deleteGrievanceDetails({int? Id, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -6800,6 +6831,33 @@ class Repository {
       }
     } catch (error) {
       print(error.toString());
+    }
+  }
+
+  Future<List<ResolutionTypeModel?>?> getResolutionType({bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getResolutionType(
+            auth: auth, isLoading: isLoading);
+      }
+      if (!res.hasError) {
+        final jsonResolutionType = jsonDecode(res.data);
+        final List<ResolutionTypeModel> _resolutionType = jsonResolutionType
+            .map<ResolutionTypeModel>((m) =>
+                ResolutionTypeModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        return _resolutionType;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getResolutionTypeList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+
+      return [];
     }
   }
 

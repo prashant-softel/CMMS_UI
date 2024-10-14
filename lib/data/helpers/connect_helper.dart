@@ -9406,6 +9406,26 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> closeGrievanceDetails({
+    required String auth,
+    required grievanceJson,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Grievance/CloseGrievance',
+      Request.put,
+      jsonEncode(grievanceJson),
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
   Future<ResponseModel> deleteGrievanceDetails({
     required String auth,
     int? Id,
@@ -9543,6 +9563,25 @@ class ConnectHelper {
     try {
       response = await apiWrapper.makeRequest(
         'MISMaster/GetGrievanceTypeList',
+        Request.get,
+        null,
+        true,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+    return response;
+  }
+
+  Future<ResponseModel> getResolutionType(
+      {String? auth, bool? isLoading}) async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    try {
+      response = await apiWrapper.makeRequest(
+        'MISMaster/GetResolutionLevelList',
         Request.get,
         null,
         true,

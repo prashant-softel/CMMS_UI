@@ -4,12 +4,14 @@ import 'package:cmms/app/create_grievance/create_grievance_presenter.dart';
 import 'package:cmms/app/grievance_list/grievance_list_presenter.dart';
 import 'package:cmms/app/home/home_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/domain/models/close_grievance.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/grievance_List_model.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/grievance_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
+import 'package:cmms/domain/models/resolution_type_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -41,10 +43,20 @@ class CreateGrievanceController extends GetxController {
   ScrollController descriptionScroll = ScrollController();
   var GrievanceTitleCtrlr = TextEditingController();
   ScrollController GrievancetitleScroll = ScrollController();
+
+ FocusNode actionTakenFocus = FocusNode();
+  ScrollController actionTakenScroll = ScrollController();
+  var actionTakenController = TextEditingController();
+  
+
+
+
+  
   Rx<bool> isConcernInvalid = false.obs;
   Rx<bool> isFormInvalid = false.obs;
   Rx<bool> isGrievanceTitleInvalid = false.obs;
   Rx<bool> isDescriptionInvalid = false.obs;
+  Rx<bool> isActionTakenInvalid = false.obs;
   //FocusNode descFocus = FocusNode();
   HtmlEscape htmlEscape = HtmlEscape();
   Rx<GetRODetailsByIDModel?> getPurchaseDetailsByIDModel =
@@ -68,9 +80,14 @@ class CreateGrievanceController extends GetxController {
   RxList<CreateGrievanceModel?> selectedWorkAreaList =
       <CreateGrievanceModel>[].obs;
   RxList<GrievanceTypeModel?> grievanceType = <GrievanceTypeModel>[].obs;
+  RxList<ResolutionTypeModel?> resolutionType = <ResolutionTypeModel>[].obs;
+
   int? selectedGrievanceTypeId = 0;
   Rx<bool> isGrievanceTypeSelected = true.obs;
   Rx<String> selectedGrievanceType = ''.obs;
+  int? selectedResolutionTypeId = 0;
+  Rx<bool> isResolutionTypeSelected = true.obs;
+  Rx<String> selectedResolutionType = ''.obs;
   Rx<int> grievanceId = 0.obs;
   Rx<bool> isLoading = true.obs;
   GrievanceListModel grievanceData = GrievanceListModel();
@@ -87,6 +104,7 @@ class CreateGrievanceController extends GetxController {
         print("griev ${grievanceId}");
       }
       await getGrievanceType();
+      await getResolutionType();
     } catch (e) {
       print(e.toString());
     }
@@ -124,6 +142,18 @@ class CreateGrievanceController extends GetxController {
       _grievanceType != [];
       for (var grievance in _grievanceType) {
         grievanceType.add(grievance);
+      }
+      // selectedTypePermit.value = grievanceType[0]?.name ?? '';
+    }
+  }
+
+  Future<void> getResolutionType() async {
+    final _resolutionType = await createGrievancePresenter.getResolutionType();
+
+    if (_resolutionType != null) {
+      _resolutionType != [];
+      for (var resolution in _resolutionType) {
+        resolutionType.add(resolution);
       }
       // selectedTypePermit.value = grievanceType[0]?.name ?? '';
     }
@@ -213,27 +243,51 @@ class CreateGrievanceController extends GetxController {
   }
 
   void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      case const (RxList<GrievanceTypeModel>):
-        {
-          if (value != "Please Select") {
-            int grievanceTypeIndex =
-              grievanceType.indexWhere((x) => x?.name == value);
-          // selectedTypePermitId = facilityList[grievanceTypeIndex]?.id ?? 0;
+  switch (list.runtimeType) {
+    case const (RxList<GrievanceTypeModel>):
+      {
+        if (value != "Please Select") {
+          int grievanceTypeIndex = grievanceType.indexWhere((x) => x?.name == value);
           selectedGrievanceTypeId = grievanceType[grievanceTypeIndex]?.id ?? 0;
           print('Grievance Type Id: $selectedGrievanceTypeId');
           if (selectedGrievanceTypeId != 0) {
             isGrievanceTypeSelected.value = true;
           }
           selectedGrievanceType.value = value;
-            
-          }else{
-            selectedGrievanceTypeId=0;
-          }
+        } else {
+          selectedGrievanceTypeId = 0;
+          isGrievanceTypeSelected.value = false;
+          selectedGrievanceType.value = '';
         }
-        break;
-    }
+      }
+      break;
+
+    case const (RxList<ResolutionTypeModel>):
+      {
+        if (value != "Please Select") {
+          int resolutionTypeIndex = resolutionType.indexWhere((x) => x?.name == value);
+          selectedResolutionTypeId = resolutionType[resolutionTypeIndex]?.id ?? 0;
+          print('Resolution Type Id: $selectedResolutionTypeId');
+          if (selectedResolutionTypeId != 0) {
+            isResolutionTypeSelected.value = true;
+          }
+          selectedResolutionType.value = value;
+        } else {
+          selectedResolutionTypeId = 0;
+          isResolutionTypeSelected.value = false;
+          selectedResolutionType.value = '';
+        }
+      }
+      break;
+
+    default:
+      {
+        print('Invalid list type');
+      }
+      break;
   }
+}
+
 
   Future<void> setUserId() async {
     try {
@@ -318,6 +372,44 @@ class CreateGrievanceController extends GetxController {
       }
       if (responseMapGrievanceUpdate["message"] != null) {
         _message = responseMapGrievanceUpdate["message"];
+      }
+      grievanceId.value = 0;
+      clearStoreData();
+      showAlertDialog(grievanceId: grievanceId.value, message: _message);
+        } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  void closeGrievanceDetails() async {
+    try {
+      int _id = grievanceId.value;
+      String _actionTaken = actionTakenController.text.trim();
+      int? _resolution = selectedResolutionTypeId;
+      var ms = '';
+
+      CloseGrievanceModel grievanceTypeJson = CloseGrievanceModel(
+        id: _id,
+        actionTaken:_actionTaken,
+        resolutionLevel: _resolution,
+      );
+
+      var grievanceJson = grievanceTypeJson.toJson();
+      print({"Grievance", grievanceJson});
+      Map<String, dynamic>? responseMapGrievanceClosed =
+          await createGrievancePresenter.closeGrievanceDetails(
+        grievanceJson: grievanceJson,
+        isLoading: true,
+      );
+
+      // var _grievanceId = 0;
+      var _message = '';
+      if (responseMapGrievanceClosed["grievanceType"] != null &&
+          responseMapGrievanceClosed["grievanceType"].isNotEmpty) {
+        // _grievanceId = responseMapGrievanceUpdate["grievanceType"][0];
+      }
+      if (responseMapGrievanceClosed["message"] != null) {
+        _message = responseMapGrievanceClosed["message"];
       }
       grievanceId.value = 0;
       clearStoreData();

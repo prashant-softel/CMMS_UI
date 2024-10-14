@@ -2,6 +2,7 @@ import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/grievance_List_model.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/resolution_type_model.dart';
 import 'package:cmms/domain/usecases/create_grievance_usecase.dart';
 
 class CreateGrievancePresenter {
@@ -20,6 +21,9 @@ class CreateGrievancePresenter {
 
   Future<List<GrievanceTypeModel?>?> getGrievanceType() async =>
       await createGrievanceUsecase.getGrievanceType(true);
+
+  Future<List<ResolutionTypeModel?>?> getResolutionType() async =>
+  await createGrievanceUsecase.getResolutionType(true);
 
   Future<List<HistoryModel>?> getRoHistory(
     moduleType,
@@ -76,6 +80,16 @@ class CreateGrievancePresenter {
     bool? isLoading,
   }) async {
      return createGrievanceUsecase.updateGrievanceDetails(
+      grievanceJson: grievanceJson,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>>  closeGrievanceDetails({
+    grievanceJson,
+    bool? isLoading,
+  }) async {
+     return createGrievanceUsecase.closeGrievanceDetails(
       grievanceJson: grievanceJson,
       isLoading: isLoading,
     );
