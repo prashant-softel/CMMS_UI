@@ -5260,6 +5260,19 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> closeGrievanceDetails({
+    auth,
+    grievanceJson,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.closeGrievanceDetails(
+      auth: auth,
+      grievanceJson: grievanceJson,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+
   Future<ResponseModel> deleteGrievanceDetails({
     auth,
     int? Id,
@@ -5420,6 +5433,15 @@ class DataRepository extends DomainRepository {
         auth: auth,
         grievance: grievance,
         isLoading: isLoading ?? false,
+      );
+
+       Future<ResponseModel> getResolutionType({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getResolutionType(
+        auth: auth,
+        isLoading: isLoading,
       );
 
   Future<ResponseModel> createBodyInjured({

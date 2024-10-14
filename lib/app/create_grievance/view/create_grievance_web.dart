@@ -25,6 +25,9 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic>? args = Get.arguments;  // Get the passed arguments
+    bool isActionTaken = args?['actionTaken'] ?? false;
+    bool isEdit = args?['isEdit'] ?? false;
     return Obx(
       () => SelectionArea(
         child: Column(
@@ -71,7 +74,7 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  Text(" / CREATE GRIEVANCE ", style: Styles.greyLight14),
+                  Text(isActionTaken ? " / ACTION TAKEN " : isEdit ? " / UPDATE GRIEVANCE " :" / CREATE GRIEVANCE ", style: Styles.greyLight14),
                   Spacer(),
                 ],
               ),
@@ -100,7 +103,7 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                                 padding: const EdgeInsets.only(
                                     top: 10, right: 10, left: 10),
                                 child: Text(
-                                  " Create Grievance",
+                                  isActionTaken ? " Action Taken" : "Create Grievance" ,
                                   style: Styles.blackBold14,
                                 ),
                               ),
@@ -131,17 +134,25 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                                     width:
                                         MediaQuery.of(context).size.width / 5,
                                     child: Obx(
-                                      () => DropdownWebWidget(
-                                        dropdownList: controller.grievanceType,
-                                        isValueSelected: controller
-                                            .isGrievanceTypeSelected.value,
-                                        selectedValue: controller
-                                            .selectedGrievanceType.value,
-                                        onValueChanged:
-                                            controller.onValueChanged,
+                                    () => Container(
+                                      padding: isActionTaken ? EdgeInsets.symmetric(vertical: 8.0) : null, 
+                                      decoration: BoxDecoration(
+                                        color:  Colors.grey[300] , // Change fill color
+                                        borderRadius: BorderRadius.circular(10.0),
+                                        border: Border.all(color: Colors.transparent), // Border color
+                                      ),
+                                      child: AbsorbPointer(
+                                        absorbing: isActionTaken, // Prevent interaction if action is taken
+                                        child: DropdownWebWidget(
+                                          dropdownList: controller.grievanceType,
+                                          isValueSelected: controller.isGrievanceTypeSelected.value,
+                                          selectedValue: controller.selectedGrievanceType.value,
+                                          onValueChanged: controller.onValueChanged, // Keep this method, but it will be disabled if absorbed
+                                        ),
                                       ),
                                     ),
                                   ),
+                                ),
                                 ],
                               ),
 
@@ -191,10 +202,11 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                                             focusNode: controller.concernFocus,
                                             scrollController: controller.concernScroll,
                                             keyboardType: TextInputType.multiline,
+                                            readOnly: isActionTaken,
                                             maxLines: 5,
                                             autofocus: false,
                                             decoration: InputDecoration(
-                                              fillColor: ColorValues.whiteColor,
+                                              fillColor: isActionTaken ? Colors.grey[300] : ColorValues.whiteColor,
                                               filled: true,
                                               contentPadding: Dimens.edgeInsets05_10,
                                               border: InputBorder.none,
@@ -259,6 +271,112 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                                             focusNode: controller.descriptionFocus,
                                             scrollController: controller.descriptionScroll,
                                             keyboardType: TextInputType.multiline,
+                                            readOnly: isActionTaken,
+                                            maxLines: 5,
+                                            autofocus: false,
+                                            decoration: InputDecoration(
+                                              fillColor: isActionTaken ? Colors.grey[300] : ColorValues.whiteColor,
+                                              filled: true,
+                                              contentPadding: Dimens.edgeInsets05_10,
+                                              border: InputBorder.none,
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(10.0),
+                                                borderSide: BorderSide(color: Colors.transparent),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(10.0),
+                                                borderSide: BorderSide(color: Colors.transparent),
+                                              ),
+                                              errorText: controller.isDescriptionInvalid.value ? "Required field" : null,
+                                            ),
+                                          ),
+                                        ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Dimens.boxHeight15,
+                                  if (isActionTaken)
+                            Padding(
+                              padding: const EdgeInsets.only(left: 51.0),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Resolution Type:',
+                                    style: Styles.blackBold14,
+                                    textAlign: TextAlign.start,
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width / 5,
+                                    child: Obx(
+                                      () => 
+                                        DropdownWebWidget(
+                                        dropdownList: 
+                                        controller.resolutionType,
+                                        isValueSelected: controller
+                                            .isResolutionTypeSelected.value,
+                                        selectedValue: controller
+                                            .selectedResolutionType.value,
+                                        onValueChanged:
+                                            controller.onValueChanged,// Update with resolution change method
+       
+                                          ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+    
+ 
+          
+                      
+                                   if (isActionTaken)
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 30, right: 10, left: 30),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 20),
+                                          child: CustomRichText(
+                                              title: 'Action Taken: '),
+                                        ),
+                                        SizedBox(width: 40),
+                                        Expanded(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
+                                                  color: Color.fromARGB(
+                                                      255, 227, 224, 224),
+                                                  width: 1),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Color.fromARGB(
+                                                          255, 236, 234, 234)
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0, 2),
+                                                ),
+                                              ],
+                                            ),
+                                            width: (MediaQuery.of(context)
+                                                .size
+                                                .width),
+                                            // Remove width property here
+                                            child: Obx(
+                                          () => TextField(
+                                            style: GoogleFonts.lato(
+                                              textStyle: TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+                                            ),
+                                            controller: controller.actionTakenController,
+                                            focusNode: controller.actionTakenFocus,
+                                            scrollController: controller.actionTakenScroll,
+                                            keyboardType: TextInputType.multiline,
                                             maxLines: 5,
                                             autofocus: false,
                                             decoration: InputDecoration(
@@ -274,7 +392,7 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                                                 borderRadius: BorderRadius.circular(10.0),
                                                 borderSide: BorderSide(color: Colors.transparent),
                                               ),
-                                              errorText: controller.isDescriptionInvalid.value ? "Required field" : null,
+                                              errorText: controller.isActionTakenInvalid.value ? "Required field" : null,
                                             ),
                                           ),
                                         ),
@@ -299,20 +417,24 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                                     },
                                   ),
                                   Dimens.boxWidth15,
-                                  controller.grievanceId.value > 0
-                                      ? CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appGreenColor,
-                                          text: 'Update Grievance',
-                                          onPressed:
-                                              controller.updateGrievanceDetails,
-                                        )
-                                      : CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appGreenColor,
-                                          text: 'Create Grievance',
-                                          onPressed: controller.saveGrievance,
-                                        ),
+
+                                 controller.grievanceId.value > 0 && isActionTaken
+                        ? CustomElevatedButton(
+                            backgroundColor: ColorValues.blueColor, // Red for close action
+                            text: 'Close Grievance',
+                            onPressed: controller.closeGrievanceDetails, // Method to close grievance
+                          )
+                        : controller.grievanceId.value > 0 && isActionTaken == false// Check if there is an existing grievance
+                            ? CustomElevatedButton(
+                                backgroundColor: ColorValues.appGreenColor,
+                                text: 'Update Grievance',
+                                onPressed: controller.updateGrievanceDetails, // Method to update grievance
+                              )
+                            : CustomElevatedButton(
+                                backgroundColor: ColorValues.appGreenColor,
+                                text: 'Create Grievance',
+                                onPressed: controller.saveGrievance, // Method to save new grievance
+                              )
                                 ],
                               ),
                               Dimens.boxHeight15,

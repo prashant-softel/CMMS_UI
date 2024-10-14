@@ -145,6 +145,15 @@ class GrievanceController extends GetxController {
     clearStoreData();
     Get.toNamed(Routes.addGrievance, arguments: {
       "grievanceId": grievanceId,
+      "isEdit": true,
+    });
+  }
+
+    Future<void> closeGrievance({int? grievanceId}) async {
+    clearStoreData();
+    Get.toNamed(Routes.addGrievance, arguments: {
+      "grievanceId": grievanceId,
+      "actionTaken": true,
     });
   }
 
