@@ -47,46 +47,47 @@ class PreventiveCheckListModel {
   int? ptw_status;
   int? isolation;
   String? status_short;
-  List<ScheduleCheckPoint>? sub_schedules;
+  // List<ScheduleCheckPoint>? sub_schedules;
 
-  PreventiveCheckListModel(
-      {this.id,
-      this.category_id,
-      this.category_name,
-      this.name,
-      this.createdAt,
-      this.createdById,
-      this.createdByName,
-      this.duration,
-      this.facility_id,
-      this.facility_name,
-      this.frequency_id,
-      this.frequency_name,
-      this.manPower,
-      this.status,
-      this.type,
-      this.updatedAt,
-      this.updatedById,
-      this.comments,
-      this.evalution_plan_id,
-      this.map_checlist,
-      this.ptw_required,
-      this.weightage,
-      this.title,
-      this.assign_name,
-      this.assign_to,
-      this.schedule_date,
-      this.subtask_id,
-      this.isolation,
-      this.permit_code,
-      this.permit_id,
-      this.ptw_status,
-      this.ptw_tbt_done,
-      this.status_of,
-      this.status_short_ptw,
-      this.tbt_start,
-      this.status_short,
-      this.sub_schedules});
+  PreventiveCheckListModel({
+    this.id,
+    this.category_id,
+    this.category_name,
+    this.name,
+    this.createdAt,
+    this.createdById,
+    this.createdByName,
+    this.duration,
+    this.facility_id,
+    this.facility_name,
+    this.frequency_id,
+    this.frequency_name,
+    this.manPower,
+    this.status,
+    this.type,
+    this.updatedAt,
+    this.updatedById,
+    this.comments,
+    this.evalution_plan_id,
+    this.map_checlist,
+    this.ptw_required,
+    this.weightage,
+    this.title,
+    this.assign_name,
+    this.assign_to,
+    this.schedule_date,
+    this.subtask_id,
+    this.isolation,
+    this.permit_code,
+    this.permit_id,
+    this.ptw_status,
+    this.ptw_tbt_done,
+    this.status_of,
+    this.status_short_ptw,
+    this.tbt_start,
+    this.status_short,
+    // this.sub_schedules
+  });
 
   factory PreventiveCheckListModel.fromJson(Map<String, dynamic> json) =>
       PreventiveCheckListModel(
@@ -128,15 +129,15 @@ class PreventiveCheckListModel {
         createdByName: json['createdByName'],
         updatedAt: json['updatedAt'],
         updatedById: json['updatedById'],
-        sub_schedules: List<ScheduleCheckPoint>.from(
-            json["sub_schedules"].map((x) => ScheduleCheckPoint.fromJson(x))),
+        // sub_schedules: List<ScheduleCheckPoint>.from(
+        //     json["sub_schedules"].map((x) => ScheduleCheckPoint.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "status_short_sub": status_short,
-        "sub_schedules":
-            List<dynamic>.from(sub_schedules?.map((x) => x.toJson()) ?? []),
+        // "sub_schedules":
+        //     List<dynamic>.from(sub_schedules?.map((x) => x.toJson()) ?? []),
         "permit_code": permit_code,
         "isolation": isolation,
         "permit_id": permit_id,
