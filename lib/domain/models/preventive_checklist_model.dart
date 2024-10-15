@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cmms/app/utils/utility.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 
 List<PreventiveCheckListModel> preventiveCheckListModelFromJson(String str) =>
     List<PreventiveCheckListModel>.from(
@@ -37,6 +38,16 @@ class PreventiveCheckListModel {
   int? assign_to;
   String? assign_name;
   String? schedule_date;
+  int? ptw_tbt_done;
+  String? status_short_ptw;
+  int? tbt_start;
+  int? status_of;
+  int? permit_id;
+  String? permit_code;
+  int? ptw_status;
+  int? isolation;
+  String? status_short;
+  List<ScheduleCheckPoint>? sub_schedules;
 
   PreventiveCheckListModel(
       {this.id,
@@ -65,11 +76,30 @@ class PreventiveCheckListModel {
       this.assign_name,
       this.assign_to,
       this.schedule_date,
-      this.subtask_id});
+      this.subtask_id,
+      this.isolation,
+      this.permit_code,
+      this.permit_id,
+      this.ptw_status,
+      this.ptw_tbt_done,
+      this.status_of,
+      this.status_short_ptw,
+      this.tbt_start,
+      this.status_short,
+      this.sub_schedules});
 
   factory PreventiveCheckListModel.fromJson(Map<String, dynamic> json) =>
       PreventiveCheckListModel(
         id: json['id'],
+        status_short: json['status_short_sub'],
+        permit_code: json['permit_code'],
+        isolation: json['isolation'],
+        permit_id: json['permit_id'],
+        ptw_status: json['ptw_status'],
+        ptw_tbt_done: json['ptw_tbt_done'],
+        status_of: json['status_of'],
+        status_short_ptw: json['status_short_ptw_sub'],
+        tbt_start: json['tbt_start'],
         assign_name: json['assign_name'],
         assign_to: json['assign_to'],
         schedule_date: json['schedule_date'] == null
@@ -98,10 +128,23 @@ class PreventiveCheckListModel {
         createdByName: json['createdByName'],
         updatedAt: json['updatedAt'],
         updatedById: json['updatedById'],
+        sub_schedules: List<ScheduleCheckPoint>.from(
+            json["sub_schedules"].map((x) => ScheduleCheckPoint.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "status_short_sub": status_short,
+        "sub_schedules":
+            List<dynamic>.from(sub_schedules?.map((x) => x.toJson()) ?? []),
+        "permit_code": permit_code,
+        "isolation": isolation,
+        "permit_id": permit_id,
+        "ptw_status": ptw_status,
+        "ptw_tbt_done": ptw_tbt_done,
+        "status_of": status_of,
+        "status_short_ptw_sub": status_short_ptw,
+        "tbt_start": tbt_start,
         "subtask_id": subtask_id,
         "assign_name": assign_name,
         "schedule_date": schedule_date,

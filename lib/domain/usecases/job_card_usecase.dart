@@ -27,8 +27,17 @@ class JobCardUsecase {
     bool? isLoading,
     bool? isExport,
     bool? self_view,
+    dynamic endDate,
+    dynamic startDate,
   }) async =>
-      await repository.jobCardList(facilityId, isLoading, isExport, self_view);
+      await repository.jobCardList(
+        facilityId,
+        isLoading,
+        isExport,
+        self_view,
+        startDate,
+        endDate,
+      );
 
   ///
   Future<Map<String, dynamic>?> createJobCard({

@@ -1,15 +1,19 @@
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/job_card_list/job_card_list_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/job_card_model.dart';
 
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -85,238 +89,308 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                       behavior: ScrollConfiguration.of(context)
                           .copyWith(scrollbars: false),
                       child: SingleChildScrollView(
-                        child: Container(
-                          width: Get.width * 7,
-                          height: Get.height * 0.86,
-                          child: Card(
-                            color: Color.fromARGB(255, 245, 248, 250),
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "Job Card List ",
-                                          style: Styles.blackBold16,
-                                        ),
-                                        Spacer(),
-                                        // ActionButton(
-                                        //   icon: Icons.add,
-                                        //   label: "Add New",
-                                        //   onPressed: () {
-                                        //     Get.toNamed(Routes.addUser);
-                                        //   },
-                                        //   color: ColorValues.addNewColor,
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
-                                  Divider(
-                                    color: ColorValues.greyLightColour,
-                                  ),
-                                  Row(
+                        child: Stack(
+                          children: [
+                            Container(
+                              width: Get.width * 7,
+                              height: Get.height * 0.86,
+                              child: Card(
+                                color: Color.fromARGB(255, 245, 248, 250),
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Container(
-                                        height: 35,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {
-                                              controller.export();
-                                            },
-                                            text: 'Excel'),
-                                      ),
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //     backgroundColor:
-                                      //         ColorValues.appLightBlueColor,
-                                      //     onPressed: () {},
-                                      //     text: 'columnVisibility'.tr,
-                                      //   ),
-                                      // ),
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'Copy'),
-                                      // ),
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'Excel'),
-                                      // ),
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'PDF'),
-                                      // ),
-                                      Spacer(),
-                                      Container(
-                                        width: 300,
-                                        height: 40,
-                                        margin: Dimens.edgeInsets0_0_7_0,
-                                        child: TextField(
-                                          style: GoogleFonts.lato(
-                                            textStyle: TextStyle(
-                                                fontSize: 16.0,
-                                                height: 1.0,
-                                                color: Colors.black),
-                                          ),
-                                          onChanged: (value) =>
-                                              controller.search(value),
-                                          decoration: InputDecoration(
-                                            enabledBorder:
-                                                const OutlineInputBorder(
-                                              borderSide: const BorderSide(
-                                                color: Colors.grey,
-                                                width: 0.0,
-                                              ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Job Card List ",
+                                              style: Styles.blackBold16,
                                             ),
-                                            focusedBorder:
-                                                const OutlineInputBorder(
-                                              borderSide: const BorderSide(
-                                                color: Colors.grey,
-                                                width: 0.0,
-                                              ),
+                                            Spacer(),
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title: 'Date Range'),
+                                                Dimens.boxWidth2,
+                                                CustomTextFieldForStock(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                  numberTextField: true,
+                                                  onTap: () {
+                                                    controller
+                                                            .openFromDateToStartDatePicker =
+                                                        !controller
+                                                            .openFromDateToStartDatePicker;
+                                                    controller
+                                                        .update(['job_list']);
+                                                  },
+                                                  hintText:
+                                                      '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
+                                                ),
+                                              ],
                                             ),
-                                            contentPadding:
-                                                Dimens.edgeInsets05_10,
-                                            hintText: 'search'.tr,
-                                            hintStyle: Styles.grey16,
-                                          ),
+                                          ],
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  controller.jobList.isEmpty == true &&
-                                          controller.isLoading == false
-                                      ? Center(child: Text('No data'))
-                                      : controller.isLoading.value == true
-                                          ? Center(
-                                              child: Text("Data Loading......"))
-                                          : Expanded(
-                                              child: PaginatedDataTable2(
-                                                columnSpacing: 10,
-                                                dataRowHeight: 70,
-                                                source: dataSource,
-                                                minWidth: Get.width * 1.2,
-                                                showCheckboxColumn: false,
-                                                rowsPerPage:
-                                                    10, // Number of rows per page
-                                                availableRowsPerPage: [
-                                                  10,
-                                                  20,
-                                                  30,
-                                                  50
-                                                ],
-                                                columns: [
-                                                  // buildDataColumn(
-                                                  //   'Id',
-                                                  //   'Id',
-                                                  //   //  ColumnSize.S,
-                                                  //   controller.IdFilterText,
-                                                  //   100,
-                                                  // ),
-                                                  buildDataColumn(
-                                                    'JobCardId',
-                                                    'Job Card Id',
-                                                    //  ColumnSize.S,
-                                                    controller
-                                                        .JobCardIdFilterText,
-                                                    250,
-                                                  ),
-                                                  buildDataColumn(
-                                                      "JobId",
-                                                      "Job Id",
-                                                      // ColumnSize.M,
-                                                      controller
-                                                          .JobIdFilterText,
-                                                      130),
-                                                  // buildDataColumn(
-                                                  //   'PermitId',
-                                                  //   'Permit Id',
-                                                  //   //  ColumnSize.S,
-                                                  //   controller
-                                                  //       .PermitIdFilterText,
-                                                  //   130,
-                                                  // ),
-                                                  buildDataColumn(
-                                                    'PermitNo',
-                                                    'Permit No.',
-                                                    //  ColumnSize.S,
-                                                    controller
-                                                        .PermitNoFilterText,
-                                                    150,
-                                                  ),
-                                                  buildDataColumn(
-                                                      "JobAssignedTo",
-                                                      "Assigned To", // ColumnSize.L,
-                                                      controller
-                                                          .JobAssingedToFilterText,
-                                                      200),
-                                                  buildDataColumn(
-                                                      "Job Title",
-                                                      "Job Title",
-                                                      // ColumnSize.L,
-                                                      controller
-                                                          .DescriptionFilterText,
-                                                      200),
-                                                  buildDataColumn(
-                                                      "StartTime",
-                                                      "Start Time",
-                                                      // ColumnSize.L,
-                                                      controller
-                                                          .StartTimeFilterText,
-                                                      200),
-                                                  buildDataColumn(
-                                                      "EndTime",
-                                                      "End Time",
-                                                      // ColumnSize.L,
-                                                      controller
-                                                          .EndTimeFilterText,
-                                                      200),
-                                                  // buildDataColumn(
-                                                  //     "Status",
-                                                  //     "Status",
-                                                  //     // ColumnSize.L,
-                                                  //     controller
-                                                  //         .PermitStatusFilterText,
-                                                  //     100),
-                                                  buildDataColumn(
-                                                      'Action'.tr,
-                                                      'Actions',
-                                                      // ColumnSize.L,
-                                                      controller
-                                                          .ActionFilterText,
-                                                      130),
-                                                ],
+                                      Divider(
+                                        color: ColorValues.greyLightColour,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            height: 35,
+                                            margin: EdgeInsets.only(left: 10),
+                                            child: CustomElevatedButton(
+                                                backgroundColor: ColorValues
+                                                    .appLightBlueColor,
+                                                onPressed: () {
+                                                  controller.export();
+                                                },
+                                                text: 'Excel'),
+                                          ),
+                                          // Container(
+                                          //   height: 35,
+                                          //   margin: EdgeInsets.only(left: 10),
+                                          //   child: CustomElevatedButton(
+                                          //     backgroundColor:
+                                          //         ColorValues.appLightBlueColor,
+                                          //     onPressed: () {},
+                                          //     text: 'columnVisibility'.tr,
+                                          //   ),
+                                          // ),
+                                          // Container(
+                                          //   height: 35,
+                                          //   margin: EdgeInsets.only(left: 10),
+                                          //   child: CustomElevatedButton(
+                                          //       backgroundColor:
+                                          //           ColorValues.appLightBlueColor,
+                                          //       onPressed: () {},
+                                          //       text: 'Copy'),
+                                          // ),
+                                          // Container(
+                                          //   height: 35,
+                                          //   margin: EdgeInsets.only(left: 10),
+                                          //   child: CustomElevatedButton(
+                                          //       backgroundColor:
+                                          //           ColorValues.appLightBlueColor,
+                                          //       onPressed: () {},
+                                          //       text: 'Excel'),
+                                          // ),
+                                          // Container(
+                                          //   height: 35,
+                                          //   margin: EdgeInsets.only(left: 10),
+                                          //   child: CustomElevatedButton(
+                                          //       backgroundColor:
+                                          //           ColorValues.appLightBlueColor,
+                                          //       onPressed: () {},
+                                          //       text: 'PDF'),
+                                          // ),
+                                          Spacer(),
+                                          Container(
+                                            width: 300,
+                                            height: 40,
+                                            margin: Dimens.edgeInsets0_0_7_0,
+                                            child: TextField(
+                                              style: GoogleFonts.lato(
+                                                textStyle: TextStyle(
+                                                    fontSize: 16.0,
+                                                    height: 1.0,
+                                                    color: Colors.black),
                                               ),
-                                            )
-                                ]),
-                          ),
+                                              onChanged: (value) =>
+                                                  controller.search(value),
+                                              decoration: InputDecoration(
+                                                enabledBorder:
+                                                    const OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                    color: Colors.grey,
+                                                    width: 0.0,
+                                                  ),
+                                                ),
+                                                focusedBorder:
+                                                    const OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                    color: Colors.grey,
+                                                    width: 0.0,
+                                                  ),
+                                                ),
+                                                contentPadding:
+                                                    Dimens.edgeInsets05_10,
+                                                hintText: 'search'.tr,
+                                                hintStyle: Styles.grey16,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      controller.jobList.isEmpty == true &&
+                                              controller.isLoading == false
+                                          ? Center(child: Text('No data'))
+                                          : controller.isLoading.value == true
+                                              ? Center(
+                                                  child: Text(
+                                                      "Data Loading......"))
+                                              : Expanded(
+                                                  child: PaginatedDataTable2(
+                                                    columnSpacing: 10,
+                                                    dataRowHeight: 70,
+                                                    source: dataSource,
+                                                    minWidth: Get.width * 1.2,
+                                                    showCheckboxColumn: false,
+                                                    rowsPerPage:
+                                                        10, // Number of rows per page
+                                                    availableRowsPerPage: [
+                                                      10,
+                                                      20,
+                                                      30,
+                                                      50
+                                                    ],
+                                                    columns: [
+                                                      // buildDataColumn(
+                                                      //   'Id',
+                                                      //   'Id',
+                                                      //   //  ColumnSize.S,
+                                                      //   controller.IdFilterText,
+                                                      //   100,
+                                                      // ),
+                                                      buildDataColumn(
+                                                        'JobCardId',
+                                                        'Job Card Id',
+                                                        //  ColumnSize.S,
+                                                        controller
+                                                            .JobCardIdFilterText,
+                                                        250,
+                                                      ),
+                                                      buildDataColumn(
+                                                          "JobId",
+                                                          "Job Id",
+                                                          // ColumnSize.M,
+                                                          controller
+                                                              .JobIdFilterText,
+                                                          130),
+                                                      // buildDataColumn(
+                                                      //   'PermitId',
+                                                      //   'Permit Id',
+                                                      //   //  ColumnSize.S,
+                                                      //   controller
+                                                      //       .PermitIdFilterText,
+                                                      //   130,
+                                                      // ),
+                                                      buildDataColumn(
+                                                        'PermitNo',
+                                                        'Permit No.',
+                                                        //  ColumnSize.S,
+                                                        controller
+                                                            .PermitNoFilterText,
+                                                        150,
+                                                      ),
+                                                      buildDataColumn(
+                                                          "JobAssignedTo",
+                                                          "Assigned To", // ColumnSize.L,
+                                                          controller
+                                                              .JobAssingedToFilterText,
+                                                          200),
+                                                      buildDataColumn(
+                                                          "Job Title",
+                                                          "Job Title",
+                                                          // ColumnSize.L,
+                                                          controller
+                                                              .DescriptionFilterText,
+                                                          200),
+                                                      buildDataColumn(
+                                                          "StartTime",
+                                                          "Start Time",
+                                                          // ColumnSize.L,
+                                                          controller
+                                                              .StartTimeFilterText,
+                                                          200),
+                                                      buildDataColumn(
+                                                          "EndTime",
+                                                          "End Time",
+                                                          // ColumnSize.L,
+                                                          controller
+                                                              .EndTimeFilterText,
+                                                          200),
+                                                      // buildDataColumn(
+                                                      //     "Status",
+                                                      //     "Status",
+                                                      //     // ColumnSize.L,
+                                                      //     controller
+                                                      //         .PermitStatusFilterText,
+                                                      //     100),
+                                                      buildDataColumn(
+                                                          'Action'.tr,
+                                                          'Actions',
+                                                          // ColumnSize.L,
+                                                          controller
+                                                              .ActionFilterText,
+                                                          130),
+                                                    ],
+                                                  ),
+                                                )
+                                    ]),
+                              ),
+                            ),
+                            if (controller.openFromDateToStartDatePicker)
+                              Positioned(
+                                right: 150,
+                                top: 60,
+                                child: DatePickerWidget(
+                                  selectionMode:
+                                      DateRangePickerSelectionMode.range,
+                                  monthCellStyle: DateRangePickerMonthCellStyle(
+                                    todayCellDecoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: ColorValues.appDarkBlueColor),
+                                  ), // last date of this year
+                                  // controller: DateRangePickerController(),
+                                  initialSelectedRange: PickerDateRange(
+                                    controller.fromDate.value,
+                                    controller.toDate.value,
+                                  ),
+
+                                  onSubmit: (value) {
+                                    print('po valu ${value.toString()}');
+                                    PickerDateRange? data =
+                                        value as PickerDateRange;
+
+                                    var pickUpDate = DateTime.parse(
+                                        data.startDate.toString());
+                                    controller.fromDate.value = pickUpDate;
+                                    var dropDate =
+                                        DateTime.parse(data.endDate.toString());
+                                    dropDate != null
+                                        ? controller.toDate.value = dropDate
+                                        : controller.toDate.value = pickUpDate;
+
+                                    controller.getjobcardListByDate();
+                                    controller.openFromDateToStartDatePicker =
+                                        false;
+                                    controller.update(['job_list']);
+
+                                    // Get.toNamed(
+                                    //   Routes.stockManagementGoodsOrdersScreen,
+                                    // );
+                                  },
+                                  onCancel: () {
+                                    controller.openFromDateToStartDatePicker =
+                                        false;
+                                    controller.update(['job_list']);
+                                  },
+                                ),
+                              ),
+                          ],
                         ),
                       ),
                     ),

@@ -738,14 +738,18 @@ class DataRepository extends DomainRepository {
           int? userId,
           bool? self_view,
           bool? isLoading,
-          dynamic categoryid}) async =>
+          dynamic categoryid,
+          dynamic startDate,
+          dynamic endDate}) async =>
       await connectHelper.getJobList(
           auth: auth,
           facilityId: facilityId,
           userId: userId,
           self_view: self_view,
           isLoading: isLoading ?? false,
-          categoryid: categoryid);
+          categoryid: categoryid,
+          startDate: startDate,
+          endDate: endDate);
   Future<ResponseModel> getGoodsOrdersList({
     int? facility_id,
     String? start_date,
@@ -3548,18 +3552,20 @@ class DataRepository extends DomainRepository {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
-  Future<ResponseModel> jobCardList({
-    required String auth,
-    int? facilityId,
-    bool? isLoading,
-    bool? self_view,
-  }) async =>
+  Future<ResponseModel> jobCardList(
+          {required String auth,
+          int? facilityId,
+          bool? isLoading,
+          bool? self_view,
+          dynamic startDate,
+          dynamic endDate}) async =>
       await connectHelper.jobCardList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-        self_view: self_view,
-      );
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          self_view: self_view,
+          startDate: startDate,
+          endDate: endDate);
   Future<ResponseModel> getUserDetails({
     String? auth,
     int? userId,

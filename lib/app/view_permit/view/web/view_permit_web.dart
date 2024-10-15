@@ -145,21 +145,29 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                   )
                                                 : controller.type.value == 5
                                                     ? Text(
-                                                        "/ VEG TASK",
+                                                        "/ EVALUATION TASK",
                                                         style:
                                                             Styles.greyLight14,
                                                       )
-                                                    : controller.type.value == 4
+                                                    : controller.type.value == 6
                                                         ? Text(
-                                                            "/ MC TASK",
+                                                            "/ VEG TASK",
                                                             style: Styles
                                                                 .greyLight14,
                                                           )
-                                                        : Text(
-                                                            "/ PERMIT LIST",
-                                                            style: Styles
-                                                                .greyLight14,
-                                                          )),
+                                                        : controller.type
+                                                                    .value ==
+                                                                4
+                                                            ? Text(
+                                                                "/ MC TASK",
+                                                                style: Styles
+                                                                    .greyLight14,
+                                                              )
+                                                            : Text(
+                                                                "/ PERMIT LIST",
+                                                                style: Styles
+                                                                    .greyLight14,
+                                                              )),
 
                                     Text(" / VIEW PERMIT",
                                         style: Styles.greyLight14)

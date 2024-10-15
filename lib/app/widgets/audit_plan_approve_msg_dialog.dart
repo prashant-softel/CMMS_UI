@@ -89,8 +89,7 @@ class AuditPlanMessageApproveDialog extends GetView {
                   child: ElevatedButton(
                     style: Styles.greenElevatedButtonStyle,
                     onPressed: () {
-                      Get.offNamed(Routes.auditTask,
-                          arguments: {'type': controller.type});
+                      Get.offNamed(Routes.auditTask, arguments: {'type': type});
                     },
                     child: Text(buttonText2),
                   ),

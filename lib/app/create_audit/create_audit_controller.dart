@@ -301,7 +301,7 @@ class CreateAuditController extends GetxController {
         checklist_id: dropdownMapperData[element[0]["value"]]?.id,
         // title: element[1]["value"] ?? '',
         comment: element[3]["value"] ?? '',
-        ptw_req: element[2]["value"] == "0" ? 0 : 1,
+        ptw_req: element[2]["value"] == "" ? 0 : 1,
         weightage: int.tryParse(element[1]["value"] ?? '0') ?? 0,
       );
       items.add(item);
