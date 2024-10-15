@@ -214,18 +214,21 @@ class CumulativeReportController extends GetxController {
     jobList.value = <JobModel>[];
 
     final _jobList = await cumulativeReportPresenter.getJobList(
-        facilityId: lststrFacilityIds,
-        self_view: varUserAccessModel.value.access_list!
-                    .where((e) =>
-                        e.feature_id == UserAccessConstants.kJobFeatureId &&
-                        e.selfView == UserAccessConstants.kHaveSelfViewAccess)
-                    .length >
-                0
-            ? true
-            : false,
-        isLoading: true,
-        isExport: false,
-        categoryid: categoryid);
+      facilityId: lststrFacilityIds,
+      self_view: varUserAccessModel.value.access_list!
+                  .where((e) =>
+                      e.feature_id == UserAccessConstants.kJobFeatureId &&
+                      e.selfView == UserAccessConstants.kHaveSelfViewAccess)
+                  .length >
+              0
+          ? true
+          : false,
+      isLoading: true,
+      isExport: false,
+      categoryid: categoryid,
+      startDate: formattedTodate1,
+      endDate: formattedFromdate1,
+    );
 
     if (_jobList != null && _jobList.isNotEmpty) {
       filteredData.value = _jobList;

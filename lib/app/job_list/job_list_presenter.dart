@@ -17,14 +17,17 @@ class JobListPresenter {
     // int? userId,
     required bool self_view,
     bool? isLoading,
+    dynamic endDate,
+    dynamic startDate,
   }) async =>
       await jobUsecase.getJobList(
-        auth: auth ?? "",
-        facilityId: facilityId ?? 0,
-        self_view: self_view,
-        isLoading: isLoading ?? false,
-        isExport: isExport,
-      );
+          auth: auth ?? "",
+          facilityId: facilityId ?? 0,
+          self_view: self_view,
+          isLoading: isLoading ?? false,
+          isExport: isExport,
+          endDate: endDate,
+          startDate: startDate);
   void clearValue() async => jobUsecase.clearValue();
   void clearTypeValue() async => jobUsecase.clearTypeValue();
 }

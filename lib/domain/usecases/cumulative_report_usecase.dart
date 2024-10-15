@@ -41,16 +41,18 @@ class CumulativeReportUsecase {
         startDate,
         endDate,
       );
-  Future<List<JobModel?>?> getJobList(
-          {
-          // required String auth,
-          dynamic facilityId,
-          bool? self_view,
-          bool? isExport,
-          bool? isLoading,
-          dynamic categoryid}) async =>
-      await repository.getJobList(
-          "", facilityId, isLoading, isExport, self_view, categoryid);
+  Future<List<JobModel?>?> getJobList({
+    // required String auth,
+    dynamic facilityId,
+    bool? self_view,
+    bool? isExport,
+    bool? isLoading,
+    dynamic categoryid,
+    dynamic endDate,
+    dynamic startDate,
+  }) async =>
+      await repository.getJobList("", facilityId, isLoading, isExport,
+          self_view, categoryid, startDate, endDate);
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,
     int? facilityId,

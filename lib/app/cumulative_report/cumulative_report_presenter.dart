@@ -53,22 +53,26 @@ class CumulativeReportPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
-  Future<List<JobModel?>?> getJobList(
-          {
-          // String? auth,
-          dynamic facilityId,
-          // int? userId,
-          bool? isLoading,
-          bool? isExport,
-          required bool self_view,
-          dynamic categoryid}) async =>
+  Future<List<JobModel?>?> getJobList({
+    // String? auth,
+    dynamic facilityId,
+    // int? userId,
+    bool? isLoading,
+    bool? isExport,
+    required bool self_view,
+    dynamic categoryid,
+    dynamic endDate,
+    dynamic startDate,
+  }) async =>
       await cumulativeReportUsecase.getJobList(
           // auth: auth ?? "",
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           isExport: isExport,
           self_view: self_view,
-          categoryid: categoryid);
+          categoryid: categoryid,
+          endDate: endDate,
+          startDate: startDate);
   Future<List<PmTaskListModel?>?> getPmTaskList(
           {dynamic facilityId,
           bool? isLoading,

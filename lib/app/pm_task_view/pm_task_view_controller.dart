@@ -92,30 +92,39 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   void onInit() async {
     try {
       await setScheduleId();
+
+      // Subscribe to facilityId$ stream to listen for changes.
       facilityIdStreamSubscription =
           homeController.facilityId$.listen((event) async {
+        print('Received facilityId: $event'); // Debugging log
+
         facilityId = event;
         if (facilityId > 0) {
           isFacilitySelected.value = true;
-          if (scheduleId != 0) {
+
+          if (scheduleId.value != 0) {
+            // Perform necessary API calls or updates.
             await getPmtaskViewList(
-                scheduleId: scheduleId.value,
-                isloading: true,
-                facilityId: facilityId);
+              scheduleId: scheduleId.value,
+              isloading: true,
+              facilityId: facilityId,
+            );
             getHistory(facilityId);
             getMrsListByModuleTask(taskId: scheduleId.value);
           }
+
           getReAssignedToList(facilityId);
         }
       });
 
-      // textControllers =
-      //     List.generate(permitValuesCount, (_) => TextEditingController());
+      // Optional: If you have any textControllers or permitValues, initialize them.
+      // textControllers = List.generate(
+      //     permitValuesCount, (_) => TextEditingController());
       // permitValues = RxList<String>.filled(permitValuesCount, '');
 
       super.onInit();
     } catch (e) {
-      print(e);
+      print('Error in onInit: $e');
     }
   }
 

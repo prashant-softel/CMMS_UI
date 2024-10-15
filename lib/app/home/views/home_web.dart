@@ -1200,7 +1200,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                         ),
                                                         DataColumn2(
                                                           label: Text(
-                                                              'Plan Date',
+                                                              'Plan/Start Date',
                                                               style: TextStyle(
                                                                   fontWeight:
                                                                       FontWeight
@@ -1264,7 +1264,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                   Id.substring(
                                                                       Id.indexOf(
                                                                               "PMT") +
-                                                                          2);
+                                                                          3);
                                                               String mcId =
                                                                   Id.substring(
                                                                       Id.indexOf(
@@ -1276,17 +1276,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                     '${Routes.jobDetails}/$jobId');
                                                               } else if (prefix ==
                                                                   'PMT') {
-                                                                Get.offNamed(
+                                                                Get.offAllNamed(
                                                                     '${Routes.pmTaskView}/$taskId');
-                                                                Get.toNamed(
-                                                                  Routes
-                                                                      .pmTaskView,
-                                                                  arguments: {
-                                                                    'pmTaskId':
-                                                                        int.tryParse(
-                                                                            taskId)
-                                                                  },
-                                                                );
                                                               } else if (prefix ==
                                                                   'MC') {
                                                                 Get.toNamed(
@@ -1415,7 +1406,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                       String
                                                                           taskId =
                                                                           Id.substring(Id.indexOf("PMT") +
-                                                                              2);
+                                                                              3);
                                                                       String
                                                                           mcId =
                                                                           Id.substring(Id.indexOf("MC") +
@@ -1447,7 +1438,6 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                       ),
                                                     ),
                                                   ),
-                                                
                                                 );
                                               },
                                             ),
@@ -2924,7 +2914,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                             ),
                                                             DataColumn2(
                                                               label: Text(
-                                                                  'Start Date',
+                                                                  'Plan Date',
                                                                   style: Styles
                                                                       .blackBold14),
                                                             ),
@@ -2954,31 +2944,24 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                               onSelectChanged:
                                                                   (selected) {
                                                                 if (selected!) {
-                                                                  controller
-                                                                      .clearStoreJobData();
-                                                                  controller
-                                                                      .clearStorePmData();
                                                                   String Id = controller
-                                                                          .allItems[
+                                                                          .dashboardPmList
+                                                                          .value
+                                                                          ?.cmDashboadDetails
+                                                                          ?.item_list?[
                                                                               index]
-                                                                          ?.wo_number ??
+                                                                          .wo_number ??
                                                                       "";
                                                                   String
-                                                                      prefix =
-                                                                      Id.replaceAll(
-                                                                          RegExp(
-                                                                              r'\d+$'),
-                                                                          '');
-
-                                                                  String
-                                                                      taskId =
+                                                                      pmTaskId =
                                                                       Id.substring(
                                                                           Id.indexOf("PMT") +
-                                                                              2);
-                                                                  if (prefix ==
-                                                                      'PMT') {
-                                                                    Get.offNamed(
-                                                                        '${Routes.pmTaskView}/$taskId');
+                                                                              3);
+
+                                                                  if (pmTaskId !=
+                                                                      null) {
+                                                                    Get.offAllNamed(
+                                                                        '${Routes.pmTaskView}/$pmTaskId');
                                                                   }
                                                                 }
                                                               },
@@ -3113,7 +3096,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                               controller.dashboardPmList.value?.cmDashboadDetails?.item_list?[index].wo_number ?? "";
                                                                           String
                                                                               pmTaskId =
-                                                                              Id.substring(Id.indexOf("PMT") + 2);
+                                                                              Id.substring(Id.indexOf("PMT") + 3);
 
                                                                           if (pmTaskId !=
                                                                               null) {

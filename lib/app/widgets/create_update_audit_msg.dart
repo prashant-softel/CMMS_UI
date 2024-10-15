@@ -72,7 +72,9 @@ class CreateAuditPlanMessageDialog extends GetView {
                     style: Styles.yellowElevatedButtonStyle,
                     onPressed: () async {
                       Get.back();
-                      Get.offAllNamed('${Routes.viewAuditPlan}/$id/${type}');
+                      String planId = id![0].toString();
+                      Get.offAllNamed(
+                          '${Routes.viewAuditPlan}/$planId/${type}');
 
                       // controller.clearStoreData();
 

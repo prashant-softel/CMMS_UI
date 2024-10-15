@@ -1005,9 +1005,11 @@ class ConnectHelper {
       dynamic facilityId,
       bool? self_view,
       int? userId,
-      dynamic categoryid}) async {
+      dynamic categoryid,
+      dynamic startDate,
+      dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Job/GetJobList?facility_id=$facilityId&userId=$userId&self_view=$self_view&categoryid=$categoryid',
+      'Job/GetJobList?facility_id=$facilityId&userId=$userId&self_view=$self_view&start_date=${endDate}&end_date=${startDate}&categoryid=$categoryid',
       Request.get,
       null,
       isLoading ?? false,
@@ -6289,14 +6291,15 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> jobCardList({
-    required String auth,
-    bool? isLoading,
-    int? facilityId,
-    bool? self_view,
-  }) async {
+  Future<ResponseModel> jobCardList(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      bool? self_view,
+      dynamic startDate,
+      dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'JC/GetJCList?facility_id=$facilityId&self_view=$self_view',
+      'JC/GetJCList?facility_id=$facilityId&self_view=$self_view&start_date=${endDate}&end_date=${startDate}',
       Request.get,
       null,
       isLoading ?? false,

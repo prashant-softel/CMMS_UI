@@ -79,7 +79,7 @@ class AuditPlanDetailModel {
           ? json['approved_Date']
           : Utility.getFormatedyearMonthDay(json['approved_Date']),
       approved_by: json['approved_by'],
-      plan_number: json['plan_number'],
+      plan_number: json['title'],
       id: json['id'],
       frequencyApplicable: json['frequencyApplicable'],
       frequency: json['frequency'],

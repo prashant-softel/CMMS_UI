@@ -6546,12 +6546,15 @@ class Repository {
   }
 
   Future<List<JobModel?>?> getJobList(
-      String auth,
-      dynamic facilityId,
-      bool? isLoading,
-      bool? isExport,
-      bool? self_view,
-      dynamic categoryid) async {
+    String auth,
+    dynamic facilityId,
+    bool? isLoading,
+    bool? isExport,
+    bool? self_view,
+    dynamic categoryid,
+    dynamic startDate,
+    dynamic endDate,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       int userId = varUserAccessModel.value.user_id ?? 0;
@@ -6564,7 +6567,9 @@ class Repository {
             userId: userId,
             self_view: self_view,
             isLoading: isLoading ?? false,
-            categoryid: categoryid);
+            categoryid: categoryid,
+            startDate: startDate,
+            endDate: endDate);
         // print({"res.data", res.data});
       }
       if (!res.hasError) {
@@ -11442,17 +11447,24 @@ class Repository {
   }
 
   Future<List<JobCardModel>> jobCardList(
-      int? facilityId, bool? isLoading, bool? isExport, bool? self_view) async {
+    int? facilityId,
+    bool? isLoading,
+    bool? isExport,
+    bool? self_view,
+    dynamic startDate,
+    dynamic endDate,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
       if (auth.isNotEmpty) {
         res = await _dataRepository.jobCardList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          isLoading: isLoading ?? false,
-          self_view: self_view,
-        );
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            isLoading: isLoading ?? false,
+            self_view: self_view,
+            startDate: startDate,
+            endDate: endDate);
       }
       if (!res.hasError) {
         final jsonJobCardListModelModels = jsonDecode(res.data);

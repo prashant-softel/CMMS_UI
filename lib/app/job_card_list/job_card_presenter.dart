@@ -15,7 +15,6 @@ class JobCardPresenter {
     String? auth,
     int? facilityId,
     bool? isLoading,
-    
   }) async =>
       await jobCardDetailsUsecase.getAssignedToList(
         auth: auth ?? "",
@@ -27,13 +26,16 @@ class JobCardPresenter {
     bool? isLoading,
     bool? isExport,
     bool? self_view,
+    dynamic endDate,
+    dynamic startDate,
   }) async =>
       await jobCardDetailsUsecase.jobCardList(
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-        isExport: isExport,
-         self_view: self_view
-      );
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          isExport: isExport,
+          self_view: self_view,
+          endDate: endDate,
+          startDate: startDate);
 
   ///
   Future<Map<String, dynamic>?> createJobCard({
@@ -65,7 +67,7 @@ class JobCardPresenter {
   }) async =>
       await jobCardDetailsUsecase.getPermitDetails(
         permitId: permitId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
 
