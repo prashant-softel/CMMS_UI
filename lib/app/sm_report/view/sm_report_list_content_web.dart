@@ -687,7 +687,8 @@ class _SmReportContentWebState extends State<SmReportContentWeb> {
                                                           false)
                                                         DataCell(Text(
                                                             '${controller.smReportList[index]?.devation.toString()}%')),
-                                                      DataCell(Text("ammo")),
+                                                      DataCell(Text(
+                                                          "${controller.smReportList[index]?.per_item_cost.toString()}")),
                                                     ],
                                                   )),
                                         ),
