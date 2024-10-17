@@ -420,18 +420,18 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
 
                                  controller.grievanceId.value > 0 && isActionTaken
                         ? CustomElevatedButton(
-                            backgroundColor: ColorValues.blueColor, // Red for close action
+                            backgroundColor: ColorValues.closeColor, // Red for close action
                             text: 'Close Grievance',
                             onPressed: controller.closeGrievanceDetails, // Method to close grievance
                           )
                         : controller.grievanceId.value > 0 && isActionTaken == false// Check if there is an existing grievance
                             ? CustomElevatedButton(
-                                backgroundColor: ColorValues.appGreenColor,
+                                backgroundColor: ColorValues.editColor,
                                 text: 'Update Grievance',
                                 onPressed: controller.updateGrievanceDetails, // Method to update grievance
                               )
                             : CustomElevatedButton(
-                                backgroundColor: ColorValues.appGreenColor,
+                                backgroundColor: ColorValues.createdColor,
                                 text: 'Create Grievance',
                                 onPressed: controller.saveGrievance, // Method to save new grievance
                               )
