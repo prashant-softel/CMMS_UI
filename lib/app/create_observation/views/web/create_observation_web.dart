@@ -17,11 +17,8 @@ import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/list_of_obs_dialog.dart';
 import 'package:cmms/app/widgets/reject_obs_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cmms/app/app.dart';
@@ -40,9 +37,7 @@ class CreateObservationWeb extends StatefulWidget {
 class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
   final HomeController homecontroller = Get.find();
   final FileUploadController dropzoneController = Get.put(
-    FileUploadController(
-      apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',
-    ),
+    FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',),
   );
   @override
   Widget build(BuildContext context) {
@@ -164,7 +159,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                       ),
                                                       child: Center(
                                                         child: Text(
-                                                          "${controller.getObsById.value!.short_status == null ? "" : controller.getObsById.value!.short_status}",
+                                                          "Status ${controller.getObsById.value!.short_status == null ? "" : controller.getObsById.value!.short_status}",
                                                           style: TextStyle(
                                                             color: Colors.white,
                                                           ),
@@ -241,54 +236,37 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                 )
                                                               : Dimens.box0,
                                                           Dimens.boxHeight5,
-                                                          IgnorePointer(
-                                                            ignoring: controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    552 ||
-                                                                controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    553 ||
-                                                                    controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    556,
-                                                            child: Row(
-                                                              children: [
-                                                                CustomRichText(
-                                                                    title:
-                                                                        'Risk Type'),
-                                                                Dimens
-                                                                    .boxWidth3,
-                                                                Obx(
-                                                                  () =>
-                                                                      DropdownWebStock(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width /
-                                                                        5,
-                                                                    dropdownList:
-                                                                        controller
-                                                                            .incidentrisktypeList,
-                                                                    isValueSelected:
-                                                                        controller
-                                                                            .isRiskTypeListSelected
-                                                                            .value,
-                                                                    selectedValue:
-                                                                        controller
-                                                                            .selectedRiskTypeList
-                                                                            .value,
-                                                                    onValueChanged:
-                                                                        controller
-                                                                            .onValueChanged,
-                                                                  ),
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Risk Type'),
+                                                              Dimens.boxWidth3,
+                                                              Obx(
+                                                                () =>
+                                                                    DropdownWebStock(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .incidentrisktypeList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isRiskTypeListSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedRiskTypeList
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
                                                                 ),
-                                                              ],
-                                                            ),
+                                                              ),
+                                                            ],
                                                           ),
                                                           Dimens.boxHeight5,
                                                           // controller.obsId !=
@@ -344,48 +322,32 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                   controller
                                                                           .type ==
                                                                       1
-                                                              ? IgnorePointer(
-                                                                  ignoring: controller
-                                                                              .getObsById
-                                                                              .value!
-                                                                              .status_code ==
-                                                                          552 ||
-                                                                      controller
-                                                                              .getObsById
-                                                                              .value!
-                                                                              .status_code ==
-                                                                          553 ||
-                                                                    controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    556,
-                                                                  child: Row(
-                                                                    children: [
-                                                                      CustomRichText(
-                                                                          title:
-                                                                              'Assigned To'),
-                                                                      Dimens
-                                                                          .boxWidth3,
-                                                                      Obx(
-                                                                        () =>
-                                                                            DropdownWebStock(
-                                                                          width:
-                                                                              MediaQuery.of(context).size.width / 5,
-                                                                          dropdownList:
-                                                                              controller.assignedToList,
-                                                                          isValueSelected: controller
-                                                                              .isAssignedToSelected
-                                                                              .value,
-                                                                          selectedValue: controller
-                                                                              .selectedAssignedTo
-                                                                              .value,
-                                                                          onValueChanged:
-                                                                              controller.onValueChanged,
-                                                                        ),
+                                                              ? Row(
+                                                                  children: [
+                                                                    CustomRichText(
+                                                                        title:
+                                                                            'Assigned To'),
+                                                                    Dimens
+                                                                        .boxWidth3,
+                                                                    Obx(
+                                                                      () =>
+                                                                          DropdownWebStock(
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width /
+                                                                                5,
+                                                                        dropdownList:
+                                                                            controller.assignedToList,
+                                                                        isValueSelected: controller
+                                                                            .isAssignedToSelected
+                                                                            .value,
+                                                                        selectedValue: controller
+                                                                            .selectedAssignedTo
+                                                                            .value,
+                                                                        onValueChanged:
+                                                                            controller.onValueChanged,
                                                                       ),
-                                                                    ],
-                                                                  ),
+                                                                    ),
+                                                                  ],
                                                                 )
                                                               : SizedBox
                                                                   .shrink(),
@@ -441,48 +403,32 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                   controller
                                                                           .type ==
                                                                       1
-                                                              ? IgnorePointer(
-                                                                  ignoring: controller
-                                                                              .getObsById
-                                                                              .value!
-                                                                              .status_code ==
-                                                                          552 ||
-                                                                      controller
-                                                                              .getObsById
-                                                                              .value!
-                                                                              .status_code ==
-                                                                          553 ||
-                                                                    controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    556,
-                                                                  child: Row(
-                                                                    children: [
-                                                                      CustomRichText(
-                                                                          title:
-                                                                              'Cost Type'),
-                                                                      Dimens
-                                                                          .boxWidth3,
-                                                                      Obx(
-                                                                        () =>
-                                                                            DropdownWebStock(
-                                                                          width:
-                                                                              MediaQuery.of(context).size.width / 5,
-                                                                          dropdownList:
-                                                                              controller.costType,
-                                                                          isValueSelected: controller
-                                                                              .isCostTypeListSelected
-                                                                              .value,
-                                                                          selectedValue: controller
-                                                                              .selectedCostTypeList
-                                                                              .value,
-                                                                          onValueChanged:
-                                                                              controller.onValueChanged,
-                                                                        ),
+                                                              ? Row(
+                                                                  children: [
+                                                                    CustomRichText(
+                                                                        title:
+                                                                            'Cost Type'),
+                                                                    Dimens
+                                                                        .boxWidth3,
+                                                                    Obx(
+                                                                      () =>
+                                                                          DropdownWebStock(
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width /
+                                                                                5,
+                                                                        dropdownList:
+                                                                            controller.costType,
+                                                                        isValueSelected: controller
+                                                                            .isCostTypeListSelected
+                                                                            .value,
+                                                                        selectedValue: controller
+                                                                            .selectedCostTypeList
+                                                                            .value,
+                                                                        onValueChanged:
+                                                                            controller.onValueChanged,
                                                                       ),
-                                                                    ],
-                                                                  ),
+                                                                    ),
+                                                                  ],
                                                                 )
                                                               : SizedBox
                                                                   .shrink(),
@@ -590,172 +536,123 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             ),
                                                           ),
                                                           Dimens.boxHeight5,
-                                                          IgnorePointer(
-                                                            ignoring: controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    552 ||
-                                                                controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    553 ||
-                                                                    controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    556,
-                                                            child: Row(
-                                                              children: [
-                                                                CustomRichText(
-                                                                    title:
-                                                                        'Type of Observation'),
-                                                                Dimens
-                                                                    .boxWidth3,
-                                                                Container(
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(5),
-                                                                  ),
-                                                                  child:
-                                                                      DropdownWebStock(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width /
-                                                                        5,
-                                                                    dropdownList:
-                                                                        controller
-                                                                            .typeOfObsList,
-                                                                    isValueSelected:
-                                                                        controller
-                                                                            .isSelectedTypeOfObs
-                                                                            .value,
-                                                                    selectedValue:
-                                                                        controller
-                                                                            .selectedTypeOfObs
-                                                                            .value,
-                                                                    onValueChanged:
-                                                                        controller
-                                                                            .onValueChanged,
-                                                                  ),
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Type of Observation'),
+                                                              Dimens.boxWidth3,
+                                                              Container(
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
                                                                 ),
-                                                              ],
-                                                            ),
+                                                                child:
+                                                                    DropdownWebStock(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .typeOfObsList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isSelectedTypeOfObs
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedTypeOfObs
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
                                                           Dimens.boxHeight5,
-                                                          IgnorePointer(
-                                                            ignoring: controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    552 ||
-                                                                controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    553 ||
-                                                                    controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    556,
-                                                            child: Row(
-                                                              children: [
-                                                                CustomRichText(
-                                                                    title:
-                                                                        'Location of Observation'),
-                                                                Dimens
-                                                                    .boxWidth3,
-                                                                LoginCustomTextfield(
-                                                                    width: (MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        .2),
-                                                                    textController:
-                                                                        controller
-                                                                            .locationOfObservationCtrlr,
-                                                                    //validate
-                                                                    errorController: controller
-                                                                            .islocationofObservationInvalid
-                                                                            .value
-                                                                        ? "Required field"
-                                                                        : null,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      if (value
-                                                                              .trim()
-                                                                              .length >
-                                                                          0) {
-                                                                        controller
-                                                                            .islocationofObservationInvalid
-                                                                            .value = false;
-                                                                      } else {
-                                                                        controller
-                                                                            .islocationofObservationInvalid
-                                                                            .value = true;
-                                                                      }
-                                                                    }),
-                                                              ],
-                                                            ),
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Location of Observation'),
+                                                              Dimens.boxWidth3,
+                                                              LoginCustomTextfield(
+                                                                  width: (MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      .2),
+                                                                  textController:
+                                                                      controller
+                                                                          .locationOfObservationCtrlr,
+                                                                  //validate
+                                                                  errorController: controller
+                                                                          .islocationofObservationInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    if (value
+                                                                            .trim()
+                                                                            .length >
+                                                                        0) {
+                                                                      controller
+                                                                          .islocationofObservationInvalid
+                                                                          .value = false;
+                                                                    } else {
+                                                                      controller
+                                                                          .islocationofObservationInvalid
+                                                                          .value = true;
+                                                                    }
+                                                                  }),
+                                                            ],
                                                           ),
                                                           Dimens.boxHeight5,
-                                                          IgnorePointer(
-                                                            ignoring: controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    552 ||
-                                                                controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    553 ||
-                                                                    controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    556,
-                                                            child: Row(
-                                                              children: [
-                                                                CustomRichText(
-                                                                    title:
-                                                                        'Source of Observation'),
-                                                                Dimens
-                                                                    .boxWidth3,
-                                                                Container(
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(5),
-                                                                  ),
-                                                                  child:
-                                                                      DropdownWebStock(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width /
-                                                                        5,
-                                                                    dropdownList:
-                                                                        controller
-                                                                            .sourceOfObsList,
-                                                                    isValueSelected:
-                                                                        controller
-                                                                            .isSelectedSourceOfObs
-                                                                            .value,
-                                                                    selectedValue:
-                                                                        controller
-                                                                            .selectedSourceOfObs
-                                                                            .value,
-                                                                    onValueChanged:
-                                                                        controller
-                                                                            .onValueChanged,
-                                                                  ),
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Source of Observation'),
+                                                              Dimens.boxWidth3,
+                                                              Container(
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
                                                                 ),
-                                                              ],
-                                                            ),
+                                                                child:
+                                                                    DropdownWebStock(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .sourceOfObsList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isSelectedSourceOfObs
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedSourceOfObs
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
                                                           Dimens.boxHeight5,
                                                           controller.obsId !=
@@ -763,63 +660,52 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                   controller
                                                                           .type ==
                                                                       1
-                                                              ? IgnorePointer(
-                                                                  ignoring: controller
-                                                                              .getObsById
-                                                                              .value!
-                                                                              .status_code ==
-                                                                          552 ||
-                                                                      controller
-                                                                              .getObsById
-                                                                              .value!
-                                                                              .status_code ==
-                                                                          553 ||
-                                                                    controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    556,
-                                                                  child: Row(
-                                                                    children: [
-                                                                      CustomRichText(
-                                                                          title:
-                                                                              'Target Date'),
-                                                                      Dimens
-                                                                          .boxWidth3,
-                                                                      CustomTextFieldForStock(
-                                                                        width:
-                                                                            MediaQuery.of(context).size.width /
-                                                                                5,
-                                                                        numberTextField:
-                                                                            true,
-                                                                        onTap:
-                                                                            () {
-                                                                          controller.openTargetObsDatePicker =
-                                                                              !controller.openTargetObsDatePicker;
+                                                              ? Row(
+                                                                  children: [
+                                                                    CustomRichText(
+                                                                        title:
+                                                                            'Target Date'),
+                                                                    Dimens
+                                                                        .boxWidth3,
+                                                                    CustomTextFieldForStock(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width /
+                                                                          5,
+                                                                      numberTextField:
+                                                                          true,
+                                                                      onTap:
+                                                                          () {
+                                                                        controller.openTargetObsDatePicker =
+                                                                            !controller.openTargetObsDatePicker;
+                                                                        controller
+                                                                            .update([
+                                                                          'stock_Mangement'
+                                                                        ]);
+                                                                      },
+                                                                      textController:
                                                                           controller
-                                                                              .update([
-                                                                            'stock_Mangement'
-                                                                          ]);
-                                                                        },
-                                                                        textController:
-                                                                            controller.targetDateTc,
-                                                                        errorController: controller.isTargetDateInvalid.value
-                                                                            ? "Required field"
-                                                                            : null,
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          if (value.trim().length >
-                                                                              0) {
-                                                                            controller.isTargetDateInvalid.value =
-                                                                                false;
-                                                                          } else {
-                                                                            controller.isTargetDateInvalid.value =
-                                                                                true;
-                                                                          }
-                                                                        },
-                                                                      ),
-                                                                    ],
-                                                                  ),
+                                                                              .targetDateTc,
+                                                                      errorController: controller
+                                                                              .isTargetDateInvalid
+                                                                              .value
+                                                                          ? "Required field"
+                                                                          : null,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        if (value.trim().length >
+                                                                            0) {
+                                                                          controller
+                                                                              .isTargetDateInvalid
+                                                                              .value = false;
+                                                                        } else {
+                                                                          controller
+                                                                              .isTargetDateInvalid
+                                                                              .value = true;
+                                                                        }
+                                                                      },
+                                                                    ),
+                                                                  ],
                                                                 )
                                                               : SizedBox
                                                                   .shrink(),
@@ -834,79 +720,60 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                     padding: const EdgeInsets
                                                         .symmetric(
                                                         horizontal: 20),
-                                                    child: IgnorePointer(
-                                                      ignoring: controller
-                                                                  .getObsById
-                                                                  .value!
-                                                                  .status_code ==
-                                                              552 ||
-                                                          controller
-                                                                  .getObsById
-                                                                  .value!
-                                                                  .status_code ==
-                                                              553 ||
-                                                                    controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    556,
-                                                      child: Row(children: [
-                                                        Text(
-                                                            '         Observation Description: ',
-                                                            style:
-                                                                Styles.blue14),
-                                                        Expanded(
-                                                          child: TextField(
-                                                            controller: controller
-                                                                .discriptionCtrlr,
-                                                            style: GoogleFonts
-                                                                .lato(
-                                                              textStyle: TextStyle(
-                                                                  fontSize:
-                                                                      16.0,
-                                                                  height: 1.0,
-                                                                  color: Colors
-                                                                      .black),
-                                                            ),
-                                                            decoration:
-                                                                InputDecoration(
-                                                              disabledBorder:
-                                                                  OutlineInputBorder(
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: ColorValues
-                                                                      .appLightGreyColor,
-                                                                  width: 1.0,
-                                                                ),
-                                                              ),
-                                                              enabledBorder:
-                                                                  OutlineInputBorder(
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: ColorValues
-                                                                      .appLightBlueColor,
-                                                                  width: 1.0,
-                                                                ),
-                                                              ),
-                                                              focusedBorder:
-                                                                  OutlineInputBorder(
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: ColorValues
-                                                                      .appLightBlueColor,
-                                                                  width: 1.0,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            keyboardType:
-                                                                TextInputType
-                                                                    .multiline,
-                                                            minLines: 3,
-                                                            maxLines: null,
+                                                    child: Row(children: [
+                                                      Text(
+                                                          '         Observation Description: ',
+                                                          style: Styles.blue14),
+                                                      Expanded(
+                                                        child: TextField(
+                                                          controller: controller
+                                                              .discriptionCtrlr,
+                                                          style:
+                                                              GoogleFonts.lato(
+                                                            textStyle: TextStyle(
+                                                                fontSize: 16.0,
+                                                                height: 1.0,
+                                                                color: Colors
+                                                                    .black),
                                                           ),
+                                                          decoration:
+                                                              InputDecoration(
+                                                            disabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: ColorValues
+                                                                    .appLightGreyColor,
+                                                                width: 1.0,
+                                                              ),
+                                                            ),
+                                                            enabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: ColorValues
+                                                                    .appLightBlueColor,
+                                                                width: 1.0,
+                                                              ),
+                                                            ),
+                                                            focusedBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: ColorValues
+                                                                    .appLightBlueColor,
+                                                                width: 1.0,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .multiline,
+                                                          minLines: 3,
+                                                          maxLines: null,
                                                         ),
-                                                      ]),
-                                                    ),
+                                                      ),
+                                                    ]),
                                                   ),
                                                   Dimens.boxHeight10,
                                                   controller.obsId != 0 &&
@@ -917,88 +784,68 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                   .symmetric(
                                                                   horizontal:
                                                                       20),
-                                                          child: IgnorePointer(
-                                                            ignoring: controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    552 ||
-                                                                controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    553 ||
+                                                          child: Row(children: [
+                                                            Text(
+                                                                'Corrective/Preventive Action: ',
+                                                                style: Styles
+                                                                    .blue14),
+                                                            Expanded(
+                                                              child: TextField(
+                                                                controller:
                                                                     controller
-                                                                        .getObsById
-                                                                        .value!
-                                                                        .status_code ==
-                                                                    556,
-                                                            child: Row(
-                                                                children: [
-                                                                  Text(
-                                                                      'Corrective/Preventive Action: ',
-                                                                      style: Styles
-                                                                          .blue14),
-                                                                  Expanded(
-                                                                    child:
-                                                                        TextField(
-                                                                      controller:
-                                                                          controller
-                                                                              .correctivePreventiveCtrlr,
-                                                                      style: GoogleFonts
-                                                                          .lato(
-                                                                        textStyle: TextStyle(
-                                                                            fontSize:
-                                                                                16.0,
-                                                                            height:
-                                                                                1.0,
-                                                                            color:
-                                                                                Colors.black),
-                                                                      ),
-                                                                      decoration:
-                                                                          InputDecoration(
-                                                                        disabledBorder:
-                                                                            OutlineInputBorder(
-                                                                          borderSide:
-                                                                              BorderSide(
-                                                                            color:
-                                                                                ColorValues.appLightGreyColor,
-                                                                            width:
-                                                                                1.0,
-                                                                          ),
-                                                                        ),
-                                                                        enabledBorder:
-                                                                            OutlineInputBorder(
-                                                                          borderSide:
-                                                                              BorderSide(
-                                                                            color:
-                                                                                ColorValues.appLightBlueColor,
-                                                                            width:
-                                                                                1.0,
-                                                                          ),
-                                                                        ),
-                                                                        focusedBorder:
-                                                                            OutlineInputBorder(
-                                                                          borderSide:
-                                                                              BorderSide(
-                                                                            color:
-                                                                                ColorValues.appLightBlueColor,
-                                                                            width:
-                                                                                1.0,
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                      keyboardType:
-                                                                          TextInputType
-                                                                              .multiline,
-                                                                      minLines:
-                                                                          3,
-                                                                      maxLines:
-                                                                          null,
+                                                                        .correctivePreventiveCtrlr,
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .lato(
+                                                                  textStyle: TextStyle(
+                                                                      fontSize:
+                                                                          16.0,
+                                                                      height:
+                                                                          1.0,
+                                                                      color: Colors
+                                                                          .black),
+                                                                ),
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  disabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: ColorValues
+                                                                          .appLightGreyColor,
+                                                                      width:
+                                                                          1.0,
                                                                     ),
                                                                   ),
-                                                                ]),
-                                                          ),
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: ColorValues
+                                                                          .appLightBlueColor,
+                                                                      width:
+                                                                          1.0,
+                                                                    ),
+                                                                  ),
+                                                                  focusedBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: ColorValues
+                                                                          .appLightBlueColor,
+                                                                      width:
+                                                                          1.0,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .multiline,
+                                                                minLines: 3,
+                                                                maxLines: null,
+                                                              ),
+                                                            ),
+                                                          ]),
                                                         )
                                                       : SizedBox.shrink(),
                                                   Dimens.boxHeight15,
@@ -1011,7 +858,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                   .assigned_to_id ==
                                                               varUserAccessModel
                                                                   .value.user_id
-                                                      ? Padding(
+                                                      ? 
+                                                      Padding(
                                                           padding:
                                                               const EdgeInsets
                                                                   .symmetric(
@@ -1238,9 +1086,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                 ),
               ),
             ),
-           
-            floatingActionButton: 
-            Obx(() =>
+            floatingActionButton: Obx(() =>
                     // varUserAccessModel
                     //             .value.access_list!
                     //             .where((e) =>
@@ -1252,9 +1098,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                     //     ?
                     Row(
                       children: [
-                        // Dimens.boxWidth30,
-                        // SizedBox(width: 40),
-                        Spacer(),
                         Spacer(),
                         controller.obsId == 0
                             ? Container(
@@ -1269,7 +1112,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                 ),
                               )
                             : Dimens.box0,
-                        Dimens.boxWidth5,
+                        Dimens.boxWidth15,
                         controller.obsId == 0
                             ? Container(
                                 height: 40,
@@ -1361,8 +1204,10 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                     controller.createObs(
                                       position: 2,
                                       fileIds: dropzoneController.fileIds,
-                                      check_point_type_id:
+                                       check_point_type_id:
                                           controller.checkpointtypeId.value,
+
+
                                     );
                                   },
                                 ),
@@ -1381,11 +1226,12 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                 UserAccessConstants
                                                     .kHaveApproveAccess)
                                         .length >
-                                    0 &&
-                                controller.getObsById.value!.status_code == 553
-                            //     &&
-                            // controller.getObsById.value!.createdid !=
-                            //     varUserAccessModel.value.user_id
+                                    0 && 
+                                controller.getObsById.value!.status_code ==
+                                    553 
+                                //     &&
+                                // controller.getObsById.value!.createdid !=
+                                //     varUserAccessModel.value.user_id
                             ? Container(
                                 height: 40,
                                 child: CustomElevatedButton(
@@ -1416,12 +1262,12 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                         .length >
                                     0 &&
                                 controller.getObsById.value!.status_code == 553
-                            // ||
-                            // controller.getObsById.value!.status_code ==
-                            //         551
-                            // &&
-                            // controller.getObsById.value!.createdid !=
-                            //     varUserAccessModel.value.user_id
+                                // ||
+                                // controller.getObsById.value!.status_code ==
+                                //         551
+                                // &&
+                                // controller.getObsById.value!.createdid !=
+                                //     varUserAccessModel.value.user_id
                             ? Container(
                                 height: 40,
                                 child: CustomElevatedButton(

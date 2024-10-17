@@ -214,17 +214,16 @@ class ScheduleController extends GetxController {
       isLoading: true,
     );
     scheduleCourseDetails.value = _courseDetails;
-    trainerName.text = scheduleCourseDetails.value.trainer ?? "";
-    dateOfTraining.text = scheduleCourseDetails.value.date_of_Training ?? "";
-    venue.text = scheduleCourseDetails.value.venue ?? "";
+    trainerName.text = scheduleCourseDetails.value?.trainer ?? "";
+    dateOfTraining.text = scheduleCourseDetails.value?.date_of_Training ?? "";
+    venue.text = scheduleCourseDetails.value?.venue ?? "";
     selectedTrainingCourseName.value =
-        scheduleCourseDetails.value.course_name ?? "";
-    selectedModeName.value = scheduleCourseDetails.value.mode ?? "";
+        scheduleCourseDetails.value?.course_name ?? "";
+    selectedModeName.value = scheduleCourseDetails.value?.mode ?? "";
     selectedEmployeeName.value =
-        scheduleCourseDetails.value.hfe_Employee ?? "";
+        scheduleCourseDetails.value?.hfe_Employee ?? "";
     selectedTrainingCourseName.value =
-        scheduleCourseDetails.value.training_course ?? "";
-        
+        scheduleCourseDetails.value?.training_course ?? "";
   }
   //   Future<void> getBusinessList(selectedBusinessTypeId, int facilityId) async {
   //   moduleList.value = <BusinessListModel>[];
@@ -428,7 +427,6 @@ class ScheduleController extends GetxController {
       facility_id: facilityId.value,
       trainerName: _trainerName,
       hfeEmployeeId: selectedEmployeeId.value,
-      // hfeEmployeeId: 1,
       mode: selectedModeName.value,
       internalEmployees: internalEmployees,
       externalEmployees: externalEmployees,
@@ -480,16 +478,15 @@ class ScheduleController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print({list, value});
     switch (list.runtimeType) {
-       case const (RxList<EmployeeListModel>):
+      case const (RxList<EmployeeModel>):
         {
-          int modeIndex = employeeNameList.indexWhere((x) => x?.name == value);
-          selectedEmployeeNamesList.value =
-              employeeNameList[modeIndex]?.name ?? "";
-          selectedEmployeeId.value = employeeNameList[modeIndex]?.id ?? 0;
-          print("empy new  selected $selectedEmployeeId, $selectedEmployeeNamesList");
+          int employeeIndex = employees.indexWhere((x) => x?.name == value);
+          selectedEmployeeName.value = employees[employeeIndex]?.name ?? '';
+          selectedEmployeeId.value = employees[employeeIndex]?.id ?? 0;
+          isEmployeeSelected.value = true;
+          print("facility selected $selectedEmployeeId, $selectedEmployeeName");
         }
         break;
-
 
       case const (RxList<TrainingCourseListModel>):
         {

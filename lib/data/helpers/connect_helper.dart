@@ -4939,7 +4939,6 @@ class ConnectHelper {
   Future<ResponseModel> viewObsCloseButton({
     required String auth,
     viewobsCloseJsonString,
-    // createObsModelJsonString,
     bool? isLoading,
     int? check_point_type_id,
   }) async {
@@ -4947,7 +4946,6 @@ class ConnectHelper {
       'MISMaster/CloseObservation?check_point_type_id=$check_point_type_id',
       Request.post,
       viewobsCloseJsonString,
-      // createObsModelJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

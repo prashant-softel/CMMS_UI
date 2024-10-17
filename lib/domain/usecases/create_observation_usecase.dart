@@ -107,13 +107,11 @@ Future<List<EmployeeModel?>?> getAssignedToList({
       );
        Future<Map<String, dynamic>> viewObsCloseButton({
     viewobsCloseJsonString,
-    // createObsModelJsonString,
     int? check_point_type_id,
     bool? isLoading,
   }) async =>
       await repository.viewObsCloseButton(
         viewobsCloseJsonString,
-        // createObsModelJsonString,
         isLoading,
         check_point_type_id,
       );

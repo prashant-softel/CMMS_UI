@@ -122,13 +122,11 @@ class CreateObservationPresenter {
   }
       Future<Map<String, dynamic>?> viewObsCloseButton({
     ViewObsCloseJsonString,
-    // createObsModelJsonString,
     required int check_point_type_id,
     required bool isLoading,
   }) async {
     return createObservationUsecase.viewObsCloseButton(
       viewobsCloseJsonString: ViewObsCloseJsonString,
-      // createObsModelJsonString: createObsModelJsonString,
       check_point_type_id:check_point_type_id,
       isLoading: isLoading,
     );

@@ -6,8 +6,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:cmms/app/utils/url_path.dart';
+import 'package:url_launcher/url_launcher.dart';import 'package:cmms/app/utils/url_path.dart';
 
 class ViewObservationWeb extends StatefulWidget {
   ViewObservationWeb({
@@ -83,6 +82,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                         child: SingleChildScrollView(
                           child: Container(
                             width: Get.width * 7,
+                            
                             margin:
                                 EdgeInsets.only(left: 10, top: 10, right: 10),
                             child: Card(
@@ -107,28 +107,19 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                         Spacer(),
                                         Container(
                                           padding: EdgeInsets.all(5),
-                                         decoration: BoxDecoration(
-                            color: controller.getObsById.value!.status_code==
-                                    553
-                                ? ColorValues.yellowColor
-                                : controller.getObsById.value!.status_code==
-                                        556
-                                    // ? ColorValues.approveStatusColor
-                                    //  : ObservationListDetails.status_code ==
-                                    //     551
-                                    // ? ColorValues.createdStatusColor
-                                    //  : ObservationListDetails.status_code ==
-                                    //     552
-                                    // ? ColorValues.assignStatusColor
-                                    //  : ObservationListDetails.status_code ==
-                                    //     556
-                                    ? ColorValues.approveColor
-                                     : controller.getObsById.value!.status_code ==
-                                        555
-                                    ? ColorValues.rejectColor
-                                     : ColorValues.approveStatusColor,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            border: Border.all(
+                                              color: ColorValues.approveColor,
+                                              width: 1,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color:
+                                                      ColorValues.approveColor),
+                                            ],
+                                          ),
                                           child: Center(
                                             child: Text(
                                               "${controller.getObsById.value!.short_status == null ? "" : controller.getObsById.value!.short_status}",
@@ -180,7 +171,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                               style: Styles
                                                                   .black17,
                                                             ),
-                                                            Text(
+                                                              Text(
                                                               "Contact Number:",
                                                               style: Styles
                                                                   .black17,
@@ -205,11 +196,11 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                               style: Styles
                                                                   .black17,
                                                             ),
-                                                            // Text(
-                                                            //   "Corrective/Preventive Action:",
-                                                            //   style: Styles
-                                                            //       .black17,
-                                                            // ),
+                                                              Text(
+                                                              "Corrective/Preventive Action:",
+                                                              style: Styles
+                                                                  .black17,
+                                                            ),
                                                           ],
                                                         ),
                                                         // Dimens.boxWidth10,
@@ -227,7 +218,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                                 "${controller.getObsById.value?.operator_name ?? ""}",
                                                                 style: Styles
                                                                     .blue17),
-                                                            Text(
+                                                                      Text(
                                                                 "${controller.getObsById.value?.contact_number ?? ""}",
                                                                 style: Styles
                                                                     .blue17),
@@ -247,10 +238,10 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                                 "${controller.getObsById.value?.target_date ?? ""}",
                                                                 style: Styles
                                                                     .blue17),
-                                                            // Text(
-                                                            //     "${controller.getObsById.value?.preventive_action ?? ""}",
-                                                            //     style: Styles
-                                                            //         .blue17),
+                                                                      Text(
+                                                                "${controller.getObsById.value?.preventive_action ?? ""}",
+                                                                style: Styles
+                                                                    .blue17),
                                                           ],
                                                         ),
                                                         Spacer(),
@@ -264,7 +255,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                             //   style: Styles
                                                             //       .black17,
                                                             // ),
-                                                            Text(
+                                                              Text(
                                                               "Risk Type:",
                                                               style: Styles
                                                                   .black17,
@@ -304,7 +295,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
-                                                            Text(
+                                                              Text(
                                                                 "${controller.getObsById.value?.risk_type ?? ""}",
                                                                 style: Styles
                                                                     .blue17),
@@ -313,7 +304,7 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                                             //     style: Styles
                                                             //         .blue17),
                                                             Text(
-                                                                " ${controller.getObsById.value?.cost_name ?? ""}",
+                                                                " ${controller.getObsById.value?.cost_type ?? ""}",
                                                                 style: Styles
                                                                     .blue17),
                                                             Text(
@@ -342,143 +333,6 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                             ),
                                           ),
                                         ),
-                                        SizedBox(height: 20),
-                                        Container(
-                                          margin: Dimens.edgeInsets20,
-                                          height:110,
-                                              // ((controller.file_list?.length ??
-                                              //             0) *
-                                              //         40) +
-                                              //     130,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: ColorValues
-                                                  .lightGreyColorWithOpacity35,
-                                              width: 1,
-                                            ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: ColorValues
-                                                    .appBlueBackgroundColor,
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                          child: Column(children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    'Observation Description:',
-                                                    style: Styles.blue700,
-                                                  ),
-                                                    SizedBox(height: 5),
-                                                  Text(
-                                                      " ${controller.getObsById.value?.observation_description ?? ""}",
-                                                      style: Styles.black15),
-                                                ],
-                                              ),
-                                            ),
-                                          ]),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Container(
-                                          margin: Dimens.edgeInsets20,
-                                          height:110,
-                                              // ((controller.file_list?.length ??
-                                              //             0) *
-                                              //         40) +
-                                              //     130,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: ColorValues
-                                                  .lightGreyColorWithOpacity35,
-                                              width: 1,
-                                            ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: ColorValues
-                                                    .appBlueBackgroundColor,
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      'Corrective/Preventive Action:',
-                                                      style: Styles.blue700,
-                                                    ),
-                                                      SizedBox(height: 5),
-                                                  Text(
-                                                      " ${controller.getObsById.value?.preventive_action ?? ""}",
-                                                      style: Styles.black15),
-                                                  ],
-                                                ),
-                                                
-                                              ),
-                                         
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Container(
-                                          margin: Dimens.edgeInsets20,
-                                          height:110,
-                                              // ((controller.file_list?.length ??
-                                              //             0) *
-                                              //         40) +
-                                              //     130,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: ColorValues
-                                                  .lightGreyColorWithOpacity35,
-                                              width: 1,
-                                            ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: ColorValues
-                                                    .appBlueBackgroundColor,
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      'Action Taken:',
-                                                      style: Styles.blue700,
-                                                    ),
-                                                      SizedBox(height: 5),
-                                                  Text(
-                                                      " ${controller.getObsById.value?.action_taken ?? ""}",
-                                                      style: Styles.black15),
-                                                  ],
-                                                ),
-                                              ),
-                                              
-                                            ],
-                                          ),
-                                        ),
-
                                         SizedBox(height: 20),
                                         Container(
                                           margin: Dimens.edgeInsets20,
