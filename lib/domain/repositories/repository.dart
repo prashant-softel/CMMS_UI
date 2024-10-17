@@ -2869,11 +2869,14 @@ class Repository {
     }
   }
 
-  Future<List<ModuleCleaningListPlanModel>> getModuleCleaningListPlan(
-      {required int? facility_id,
-      required bool isLoading,
-      bool? self_view,
-      bool? isExport}) async {
+  Future<List<ModuleCleaningListPlanModel>> getModuleCleaningListPlan({
+    required int? facility_id,
+    required bool isLoading,
+    bool? self_view,
+    bool? isExport,
+    dynamic startDate,
+    dynamic endDate,
+  }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
@@ -2881,11 +2884,12 @@ class Repository {
       dynamic res;
       if (auth.isNotEmpty) {
         res = await _dataRepository.getModuleCleaningListPlan(
-          facility_id: facility_id,
-          isLoading: isLoading,
-          self_view: self_view,
-          auth: auth,
-        );
+            facility_id: facility_id,
+            isLoading: isLoading,
+            self_view: self_view,
+            auth: auth,
+            startDate: startDate,
+            endDate: endDate);
         print('getModuleCleaningListPlan: ${res.data}');
       }
       if (!res.hasError) {
@@ -6815,7 +6819,6 @@ class Repository {
     }
   }
 
-
   Future<void> deleteGrievanceDetails({int? Id, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -6837,7 +6840,8 @@ class Repository {
     }
   }
 
-  Future<List<ResolutionTypeModel?>?> getResolutionType({bool? isLoading}) async {
+  Future<List<ResolutionTypeModel?>?> getResolutionType(
+      {bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -16014,10 +16018,13 @@ class Repository {
     }
   }
 
-  Future<List<VegetationPlanListModel>> getVegetationPlanList(
-      {required int? facility_id,
-      required bool isLoading,
-      bool? isExport}) async {
+  Future<List<VegetationPlanListModel>> getVegetationPlanList({
+    required int? facility_id,
+    required bool isLoading,
+    bool? isExport,
+    dynamic startDate,
+    dynamic endDate,
+  }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
@@ -16025,10 +16032,11 @@ class Repository {
       dynamic res;
       if (auth.isNotEmpty) {
         res = await _dataRepository.getVegetationPlanList(
-          facility_id: facility_id,
-          isLoading: isLoading,
-          auth: auth,
-        );
+            facility_id: facility_id,
+            isLoading: isLoading,
+            auth: auth,
+            startDate: startDate,
+            endDate: endDate);
         print('getVegetationPlanList: ${res.data}');
       }
       if (!res.hasError) {

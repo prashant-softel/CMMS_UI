@@ -1,14 +1,18 @@
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -30,7 +34,7 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ModuleCleaningListPlanController>(
-        id: 'stock_Mangement_Date',
+        id: 'PreventiveMaintenanceTask',
         builder: (controller) {
           return Obx(
             () {
@@ -111,7 +115,32 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                           style: Styles.blackBold16,
                                         ),
                                         Spacer(),
-                                        Dimens.boxWidth10,
+                                        Spacer(),
+                                        Row(
+                                          children: [
+                                            CustomRichText(title: 'Date Range'),
+                                            Dimens.boxWidth2,
+                                            CustomTextFieldForStock(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
+                                              numberTextField: true,
+                                              onTap: () {
+                                                controller
+                                                        .openFromDateToStartDatePicker =
+                                                    !controller
+                                                        .openFromDateToStartDatePicker;
+                                                controller.update([
+                                                  'PreventiveMaintenanceTask'
+                                                ]);
+                                              },
+                                              hintText:
+                                                  '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
+                                            ),
+                                          ],
+                                        ),
+                                        Dimens.boxWidth2,
                                         varUserAccessModel.value.access_list!
                                                     .where((e) =>
                                                         e.feature_id ==
@@ -334,6 +363,56 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                               ),
                             ),
                           ),
+                          if (controller.openFromDateToStartDatePicker)
+                            Positioned(
+                              right: 150,
+                              top: 60,
+                              child: DatePickerWidget(
+                                selectionMode:
+                                    DateRangePickerSelectionMode.range,
+                                monthCellStyle: DateRangePickerMonthCellStyle(
+                                  todayCellDecoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: ColorValues.appDarkBlueColor),
+                                ), // last date of this year
+                                // controller: DateRangePickerController(),
+                                initialSelectedRange: PickerDateRange(
+                                  controller.fromDate.value,
+                                  controller.toDate.value,
+                                ),
+
+                                onSubmit: (value) {
+                                  print('po valu ${value.toString()}');
+                                  PickerDateRange? data =
+                                      value as PickerDateRange;
+
+                                  var pickUpDate =
+                                      DateTime.parse(data.startDate.toString());
+                                  controller.fromDate.value = pickUpDate;
+                                  var dropDate =
+                                      DateTime.parse(data.endDate.toString());
+                                  dropDate != null
+                                      ? controller.toDate.value = dropDate
+                                      : controller.toDate.value = pickUpDate;
+
+                                  controller.mcPlanListByDate();
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
+                                  controller
+                                      .update(['PreventiveMaintenanceTask']);
+
+                                  // Get.toNamed(
+                                  //   Routes.stockManagementGoodsOrdersScreen,
+                                  // );
+                                },
+                                onCancel: () {
+                                  controller.openFromDateToStartDatePicker =
+                                      false;
+                                  controller
+                                      .update(['PreventiveMaintenanceTask']);
+                                },
+                              ),
+                            ),
                         ],
                       ),
                     ],

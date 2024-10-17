@@ -1193,14 +1193,15 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getModuleCleaningListPlan({
-    required bool isLoading,
-    required String auth,
-    bool? self_view,
-    int? facility_id,
-  }) async {
+  Future<ResponseModel> getModuleCleaningListPlan(
+      {required bool isLoading,
+      required String auth,
+      bool? self_view,
+      int? facility_id,
+      dynamic startDate,
+      dynamic endDate}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MC/GetMCPlanList?facilityId=$facility_id&self_view=$self_view',
+      'MC/GetMCPlanList?facilityId=$facility_id&self_view=$self_view&start_date=${endDate}&end_date=${startDate}',
       Request.getMultiparts,
       null,
       isLoading,
@@ -9781,13 +9782,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getVegetationPlanList({
-    required bool isLoading,
-    required String auth,
-    int? facility_id,
-  }) async {
+  Future<ResponseModel> getVegetationPlanList(
+      {required bool isLoading,
+      required String auth,
+      int? facility_id,
+      dynamic startDate,
+      dynamic endDate}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Vegetation/GetVegetationPlanList?facilityId=$facility_id',
+      'Vegetation/GetVegetationPlanList?facilityId=$facility_id&start_date=${endDate}&end_date=${startDate}',
       Request.getMultiparts,
       null,
       isLoading,

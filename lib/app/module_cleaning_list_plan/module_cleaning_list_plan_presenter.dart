@@ -10,15 +10,18 @@ class ModuleCleaningListPlanPresenter {
   Future<List<ModuleCleaningListPlanModel>> getModuleCleaningListPlan({
     required bool isLoading,
     bool? isExport,
-     bool? self_view,
+    bool? self_view,
     required int? facility_id,
+    dynamic endDate,
+    dynamic startDate,
   }) async {
     return moduleCleaningListPlanUsecase.getModuleCleaningListPlan(
-      isLoading: isLoading,
-      facility_id: facility_id,
-      self_view: self_view,
-      isExport: isExport
-    );
+        isLoading: isLoading,
+        facility_id: facility_id,
+        self_view: self_view,
+        isExport: isExport,
+        endDate: endDate,
+        startDate: startDate);
   }
 
   void clearValueMcId() async => moduleCleaningListPlanUsecase.clearValueMcId();

@@ -866,18 +866,20 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  Future<ResponseModel> getModuleCleaningListPlan({
-    int? facility_id,
-    required bool isLoading,
-    bool? self_view,
-    required String auth,
-  }) async {
+  Future<ResponseModel> getModuleCleaningListPlan(
+      {int? facility_id,
+      required bool isLoading,
+      bool? self_view,
+      required String auth,
+      dynamic startDate,
+      dynamic endDate}) async {
     return await connectHelper.getModuleCleaningListPlan(
-      isLoading: isLoading,
-      auth: auth,
-      facility_id: facility_id,
-      self_view: self_view,
-    );
+        isLoading: isLoading,
+        auth: auth,
+        facility_id: facility_id,
+        self_view: self_view,
+        startDate: startDate,
+        endDate: endDate);
   }
 
   Future<ResponseModel> getwcCertifiacteList({
@@ -5439,7 +5441,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-       Future<ResponseModel> getResolutionType({
+  Future<ResponseModel> getResolutionType({
     String? auth,
     bool? isLoading,
   }) async =>
@@ -5493,16 +5495,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  Future<ResponseModel> getVegetationPlanList({
-    int? facility_id,
-    required bool isLoading,
-    required String auth,
-  }) async {
+  Future<ResponseModel> getVegetationPlanList(
+      {int? facility_id,
+      required bool isLoading,
+      required String auth,
+      dynamic startDate,
+      dynamic endDate}) async {
     return await connectHelper.getVegetationPlanList(
-      isLoading: isLoading,
-      auth: auth,
-      facility_id: facility_id,
-    );
+        isLoading: isLoading,
+        auth: auth,
+        facility_id: facility_id,
+        startDate: startDate,
+        endDate: endDate);
   }
 
   Future<ResponseModel> createVegetationPlan(

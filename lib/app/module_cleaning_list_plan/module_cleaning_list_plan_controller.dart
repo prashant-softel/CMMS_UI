@@ -7,6 +7,7 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class ModuleCleaningListPlanController extends GetxController {
@@ -60,6 +61,12 @@ class ModuleCleaningListPlanController extends GetxController {
   ModuleCleaningListPlanModel? moduleCleaningListModel;
   RxList<String> moduleCleaningListTableColumns = <String>[].obs;
   bool openFromDateToStartDatePicker = false;
+  String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
 
   PaginationController paginationController = PaginationController(
     rowCount: 0,
@@ -82,36 +89,45 @@ class ModuleCleaningListPlanController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getModuleCleaningListPlan(facilityId, false,false);
+        getModuleCleaningListPlan(facilityId, false, false);
       });
     });
     super.onInit();
   }
 
   void export() {
-    getModuleCleaningListPlan(facilityId, true,true, isExportOnly: true);
+    getModuleCleaningListPlan(facilityId, true, true, isExportOnly: true);
   }
 
-  Future<void> getModuleCleaningListPlan(int facilityId, bool isExport,bool self_view,
+  void mcPlanListByDate() {
+    getModuleCleaningListPlan(facilityId, false, false);
+  }
+
+  Future<void> getModuleCleaningListPlan(
+      int facilityId, bool isExport, bool self_view,
       {bool isExportOnly = false}) async {
     if (!isExportOnly) {
       moduleCleaningListPlan.value = <ModuleCleaningListPlanModel>[];
       filteredData.value = <ModuleCleaningListPlanModel>[];
     }
 
-       bool selfview = varUserAccessModel.value.access_list!
+    bool selfview = varUserAccessModel.value.access_list!
             .where((e) =>
-                e.feature_id == UserAccessConstants.kModuleCleaningplanFeatureId &&
+                e.feature_id ==
+                    UserAccessConstants.kModuleCleaningplanFeatureId &&
                 e.selfView == UserAccessConstants.kHaveSelfViewAccess)
             .length >
         0;
 
     final _moduleCleaningListPlan =
         await moduleCleaningListPlanPresenter.getModuleCleaningListPlan(
-            isLoading: isLoading.value,
-            facility_id: facilityId,
-             self_view: selfview,
-            isExport: isExport);
+      isLoading: isLoading.value,
+      facility_id: facilityId,
+      self_view: selfview,
+      isExport: isExport,
+      startDate: formattedTodate1,
+      endDate: formattedFromdate1,
+    );
 
     if (!isExportOnly) {
       moduleCleaningListPlan.value = _moduleCleaningListPlan;
@@ -133,10 +149,6 @@ class ModuleCleaningListPlanController extends GetxController {
         }
       }
     }
-  }
-
-  void mcPlanListByDate() {
-    getModuleCleaningListPlan(facilityId, false,false);
   }
 
   void onValueChanged(dynamic list, dynamic value) {
@@ -232,5 +244,4 @@ class ModuleCleaningListPlanController extends GetxController {
     }
     update();
   }
-
 }
