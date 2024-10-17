@@ -685,7 +685,8 @@ class _SmReportContentWebState extends State<SmReportContentWeb> {
                                                       if (controller
                                                               .isToggleOn ==
                                                           false)
-                                                        DataCell(Text("dive")),
+                                                        DataCell(Text(
+                                                            '${controller.smReportList[index]?.devation.toString()}%')),
                                                       DataCell(Text("ammo")),
                                                     ],
                                                   )),

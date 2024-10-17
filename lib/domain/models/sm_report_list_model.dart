@@ -28,7 +28,7 @@ class SmReportListModel {
       this.outward,
       this.per_item_cost,
       this.comsumption_date,
-      this.comsumed_qty});
+      this.comsumed_qty,this.devation});
 
   dynamic id;
   dynamic mrs_ID;
@@ -48,10 +48,10 @@ class SmReportListModel {
   dynamic act_available_qty;
   dynamic comsumed_qty;
   dynamic comsumption_date;
-
+dynamic devation;
   factory SmReportListModel.fromJson(Map<String, dynamic> json) =>
       SmReportListModel(
-        id: json["id"],
+        id: json["id"],devation:json["devation"],
         comsumed_qty: json["comsumed_qty"],
          comsumption_date: json['comsumption_date'] == null
             ? json['comsumption_date']
@@ -75,7 +75,7 @@ class SmReportListModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "id": id,"devation":devation,
         "comsumption_date": comsumption_date,
         "comsumed_qty": comsumed_qty,
         "mrs_ID": mrs_ID,

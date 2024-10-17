@@ -1530,7 +1530,7 @@ class AppPages {
       binding: KaizensListBinding(),
     ),
     GetPage<dynamic>(
-      name: '${_Paths.cumulativeReport}/:type',
+      name: '${_Paths.cumulativeReport}',
       page: CumulativeReportScreen.new,
       binding: CumulativeReportBinding(),
     ),

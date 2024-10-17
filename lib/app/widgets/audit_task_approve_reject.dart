@@ -33,10 +33,10 @@ class AuditTaskApprovedRejectDialog extends GetView {
                     : type == 3
                         ? "Plan Skip"
                         : type == 4
-                            ? "Plan Close"
+                            ? "Close"
                             : type == 5
-                                ? "Plan Approve"
-                                : "Plan Reject",
+                                ? "Approve"
+                                : "Reject",
             textAlign: TextAlign.center,
             // style: TextStyle(color: Colors.green),
           ),
@@ -103,7 +103,7 @@ class AuditTaskApprovedRejectDialog extends GetView {
                           ? controller.auditTaskRejectButton(id: id)
                           : type == 3
                               ? controller.auditTaskSkipButton(id: id)
-                              : type == 4
+                              : type == 4 || type == 12
                                   ? controller.auditTaskCloseButton(id: id)
                                   : type == 5
                                       ? controller.auditTaskCloseApproveButton(
@@ -117,16 +117,16 @@ class AuditTaskApprovedRejectDialog extends GetView {
                 },
                 child: Text(
                   type == 1
-                      ? "Approve Plan"
+                      ? "Approve"
                       : type == 2
-                          ? 'Reject Plan'
+                          ? 'Reject'
                           : type == 3
                               ? "Skip Plan"
                               : type == 4
-                                  ? "Close Plan"
+                                  ? "Close"
                                   : type == 5
-                                      ? "Approve Plan"
-                                      : "Reject Plan",
+                                      ? "Approve"
+                                      : "Reject",
                 ),
               ),
             ]),

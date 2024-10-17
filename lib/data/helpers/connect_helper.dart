@@ -9281,6 +9281,10 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+        type: 11, data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
   }
@@ -9427,7 +9431,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> deleteGrievanceDetails({
     required String auth,

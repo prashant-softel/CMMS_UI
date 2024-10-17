@@ -264,8 +264,6 @@ abstract class Routes {
   static const smReportList = _Paths.smReportList;
   static const evaluation = _Paths.evaluation;
   static const irList = _Paths.irList;
-
-  
 }
 
 abstract class _Paths {
@@ -523,12 +521,10 @@ abstract class _Paths {
   static const trainingSummary = '/training-summary';
   static const grievanceSummary = '/grievance-summary';
   static const cmmsReport = '/cmms-report';
-  static const cumulativeReport = '/cumulative-report';
+  static const cumulativeReport = '/report';
   static const wcCertificatesList = '/wcCertificatesList';
   static const calendarView = '/calendarView';
   static const smReportList = '/smreportlist';
   static const evaluation = '/evaluation';
   static const irList = '/irList';
-
-  
 }

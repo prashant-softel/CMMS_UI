@@ -81,13 +81,19 @@ class CumulativeReportController extends GetxController {
 
   @override
   void onInit() async {
-    await setReportType();
+    // await setReportType();
 
     await getFacilityList();
     await getModuleList();
     await getInventoryCategoryList();
 
     super.onInit();
+  }
+
+  var checkpointType = 'Basic'.obs;
+
+  void updatecheCkpointType(String value) {
+    checkpointType.value = value;
   }
 
   Future<void> setReportType() async {
