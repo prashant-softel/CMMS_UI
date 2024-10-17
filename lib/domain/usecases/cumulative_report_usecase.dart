@@ -4,6 +4,7 @@ import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/job_card_details_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:cmms/domain/models/module_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
@@ -166,6 +167,14 @@ class CumulativeReportUsecase {
         jobId,
         facilityId,
         userId,
+        isLoading,
+      );
+  Future<List<JobCardDetailsModel?>?> getJobCardDetails({
+    int? jobCardId,
+    bool? isLoading,
+  }) async =>
+      await repository.getJobCardDetails(
+        jobCardId,
         isLoading,
       );
   Future<List<JobAssociatedModel?>?> getjobDetailsModel({
