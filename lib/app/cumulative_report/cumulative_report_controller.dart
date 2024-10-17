@@ -9,6 +9,7 @@ import 'package:cmms/domain/models/cumulative_report_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/job_card_details_model.dart';
 import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
@@ -38,6 +39,8 @@ class CumulativeReportController extends GetxController {
   RxList<int> selectedCategoryIdList = <int>[].obs;
 
   bool openFromDateToStartDatePicker = false;
+  RxList<JobCardDetailsModel?> jobCardList = <JobCardDetailsModel?>[].obs;
+  Rx<JobCardDetailsModel?> jobCardDetailsModel = JobCardDetailsModel().obs;
 
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
@@ -2501,11 +2504,23 @@ class CumulativeReportController extends GetxController {
         jobDetailsModel.value = _jobDetailsList[0];
         associatedPermitList?.value =
             jobDetailsModel.value?.associatedPermitList ?? [];
-        getMrsListByModule(jobId: jobId ?? 0, facilityId: facilityId);
-        getjobDetailsModel(jobId ?? 0, facilityId);
-        generateInvoiceJob();
+        await getMrsListByModule(jobId: jobId ?? 0, facilityId: facilityId);
+        await getjobDetailsModel(jobId ?? 0, facilityId);
+        await generateInvoiceJob();
         update(["jobDetailsModel"]);
       }
+    } catch (e) {
+      Utility.showDialog(e.toString(), 'getJobDetails');
+    }
+  }
+
+  Future<void> getJobCardDetails(int? jobCardId, int facilityId) async {
+    try {
+      jobCardList.value = await cumulativeReportPresenter.getJobCardDetails(
+            jobCardId: jobCardId,
+            isLoading: true,
+          ) ??
+          [];
     } catch (e) {
       Utility.showDialog(e.toString(), 'getJobDetails');
     }
