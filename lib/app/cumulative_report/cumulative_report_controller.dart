@@ -67,7 +67,7 @@ class CumulativeReportController extends GetxController {
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   RxList<ScheduleCheckPoint?>? scheduleCheckPoint = <ScheduleCheckPoint?>[].obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
-
+  List<JobCardDetailsModel> allJobCardDetails = [];
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
   Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
@@ -2483,6 +2483,148 @@ class CumulativeReportController extends GetxController {
       }
 
       currentY += rowHeight; // Move to next row
+    } // Render All Job Cards in PDF
+    for (var jobCard in allJobCardDetails) {
+      // Add a new page if the content exceeds the current page size
+      if (currentY > pageSize.height - 100) {
+        page = document.pages.add(); // Add a new page
+        currentY = 30; // Reset the Y position for the new page
+      }
+
+      // Add the jobCardId at the top of the section
+      page.graphics.drawString('JobCard ID: ${jobCard?.id ?? ''}', headerFont,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      currentY += sectionHeight;
+
+      // Site name for each JobCard
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString(
+          'Site name : ${jobCard?.plantName ?? ''}', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
+
+      // Job Information for each JobCard
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('Job Information', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
+
+      // Draw Job Information Details (Left Side)
+      List<String> jobInfoLabelsLeft = [
+        'Job ID',
+        'Breakdown start time',
+        'Job raised on',
+        'Type of Job',
+        'Performed by'
+      ];
+      List<String> jobInfoValuesLeft = [
+        'JOB${jobCard?.jobId ?? ''}',
+        '${jobCard?.jobId ?? ''}',
+        '${jobCard?.assetCategoryName ?? ''}',
+        '${jobCard?.blockName ?? ''}',
+        '${jobCard?.currentStatus ?? ''}',
+      ];
+      double rowHeight = 15;
+      for (int i = 0; i < jobInfoLabelsLeft.length; i++) {
+        page.graphics.drawString(jobInfoLabelsLeft[i], contentFont,
+            bounds: Rect.fromLTWH(labelX, currentY + 5, labelWidth, rowHeight));
+        page.graphics.drawString(jobInfoValuesLeft[i], contentFont,
+            bounds: Rect.fromLTWH(valueX, currentY + 5, valueWidth, rowHeight));
+        currentY += rowHeight;
+      }
+
+      // Draw Job Information Details (Right Side)
+      List<String> jobInfoLabelsRight = [
+        'Job title',
+        'Breakdown end time',
+        'Job closed on',
+        'TAT'
+      ];
+      List<String> jobInfoValuesRight = [
+        '${jobCard?.title ?? ''}',
+        jobCard?.status == 158 ? '${jobCard.title ?? ''}' : '',
+        jobCard?.status == 158 ? '${jobCard?.title ?? ''}' : '',
+        '${jobCard?.title ?? ''} Minutes',
+      ];
+
+      currentY -= jobInfoLabelsLeft.length *
+          rowHeight; // Reset currentY to align with left side
+      for (int i = 0; i < jobInfoLabelsRight.length; i++) {
+        page.graphics.drawString(jobInfoLabelsRight[i], contentFont,
+            bounds: Rect.fromLTWH(
+                labelXRight, currentY + 5, labelWidthRight, rowHeight));
+        page.graphics.drawString(jobInfoValuesRight[i], contentFont,
+            bounds: Rect.fromLTWH(
+                valueXRight, currentY + 5, valueWidthRight, rowHeight));
+        currentY += rowHeight;
+      }
+
+      // Equipment details for each JobCard
+      currentY += 20; // Adding some space before the next section
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('Equipment details', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
+
+      // Define column widths for the Equipment details table
+      double columnWidth = pageWidth / 3; // Split page into 3 columns
+
+      // Define Equipment Table Headers
+      List<String> equipmentHeaders = [
+        'S. No',
+        'Equipment category',
+        'Equipment name'
+      ];
+
+      // Draw Equipment Headers
+      for (int i = 0; i < equipmentHeaders.length; i++) {
+        page.graphics.drawString(equipmentHeaders[i], contentFont,
+            bounds: Rect.fromLTWH(margin + (i * columnWidth), currentY + 5,
+                columnWidth, rowHeight));
+      }
+      currentY += rowHeight; // Move down after rendering headers
+
+      // Draw each equipment name from the schedules
+      for (int i = 0;
+          i < (jobCardDetailsModel.value?.assetCategoryName?.length ?? 0);
+          i++) {
+        var schedule = jobCardDetailsModel.value!.assetCategoryName![i];
+
+        // Draw the serial number
+        page.graphics.drawString('${i + 1}', contentFont,
+            bounds: Rect.fromLTWH(
+                margin, currentY + 5, columnWidth, rowHeight)); // S. No
+
+        // Draw the equipment category
+        page.graphics.drawString(
+            '${schedule.equipmentCategory ?? ''}', contentFont,
+            bounds: Rect.fromLTWH(margin + columnWidth, currentY + 5,
+                columnWidth, rowHeight)); // Equipment category
+
+        // Draw the equipment name
+        page.graphics.drawString('${schedule.equipmentName ?? ''}', contentFont,
+            bounds: Rect.fromLTWH(margin + 2 * columnWidth, currentY + 5,
+                columnWidth, rowHeight)); // Equipment name
+
+        currentY += rowHeight; // Move to next row
+
+        // Add a new page if content exceeds page height
+        if (currentY > pageSize.height - 100) {
+          page = document.pages.add(); // Add a new page
+          currentY = 30; // Reset Y position for the new page
+        }
+      }
+
+      // Add space between jobCard sections
+      currentY += 20;
     }
 
     // Signature section
@@ -2516,12 +2658,18 @@ class CumulativeReportController extends GetxController {
 
   Future<void> getJobCardDetails(int? jobCardId, int facilityId) async {
     try {
-      jobCardList.value = await cumulativeReportPresenter.getJobCardDetails(
-            jobCardId: jobCardId,
-            isLoading: true,
-          ) ??
-          [];
-      jobCardDetailsModel.value = jobCardList.value[0];
+      // Await the result, which might contain nullable items
+      List<JobCardDetailsModel?> jobCardDetails =
+          await cumulativeReportPresenter.getJobCardDetails(
+                jobCardId: jobCardId,
+                isLoading: true,
+              ) ??
+              [];
+
+      // Filter out any null values and add only non-null values to allJobCardDetails
+      allJobCardDetails.addAll(jobCardDetails
+          .where((detail) => detail != null)
+          .cast<JobCardDetailsModel>());
     } catch (e) {
       Utility.showDialog(e.toString(), 'getJobDetails');
     }
