@@ -2505,7 +2505,7 @@ class CumulativeReportController extends GetxController {
         associatedPermitList?.value =
             jobDetailsModel.value?.associatedPermitList ?? [];
         await getMrsListByModule(jobId: jobId ?? 0, facilityId: facilityId);
-        await getjobDetailsModel(jobId ?? 0, facilityId);
+        await getJobCardList(jobId ?? 0, facilityId);
         await generateInvoiceJob();
         update(["jobDetailsModel"]);
       }
@@ -2521,14 +2521,17 @@ class CumulativeReportController extends GetxController {
             isLoading: true,
           ) ??
           [];
+      jobCardDetailsModel.value = jobCardList.value[0];
     } catch (e) {
       Utility.showDialog(e.toString(), 'getJobDetails');
     }
   }
 
-  Future<void> getjobDetailsModel(int jobId, int facilityId) async {
+  Future<void> getJobCardList(int jobId, int facilityId) async {
     try {
       jobAssociatedModelsList?.value = <JobAssociatedModel>[];
+
+      // Fetching the job details
       final _jobAssociatedModelsList =
           await cumulativeReportPresenter.getjobDetailsModel(
               jobId: jobId, isLoading: false, facilityId: facilityId);
@@ -2536,8 +2539,16 @@ class CumulativeReportController extends GetxController {
       if (_jobAssociatedModelsList != null &&
           _jobAssociatedModelsList.isNotEmpty) {
         jobAssociatedModelsList!.value = _jobAssociatedModelsList;
-        // associatedPermitList?.value =
-        //     jobAssociatedModel.value?.associatedPermitList ?? [];
+
+        for (var job in _jobAssociatedModelsList) {
+          final jobCardId = job?.jobCardId;
+
+          if (jobCardId != null) {
+            await getJobCardDetails(jobCardId, facilityId);
+            print('jobCardId: $jobCardId');
+          }
+        }
+
         update(["getjobDetailsModel"]);
       }
     } catch (e) {
