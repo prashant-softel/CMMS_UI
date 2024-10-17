@@ -115,43 +115,58 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                             ),
                                             Spacer(),
                                             Container(
-                                              padding: EdgeInsets.all(5),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                border: Border.all(
-                                                  color: controller
-                                                              .vegExecutionDetailsModel
-                                                              .value
-                                                              ?.status ==
-                                                          360
-                                                      ? ColorValues.approveColor
-                                                      : ColorValues.appRedColor,
-                                                  width: 1,
-                                                ),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: controller
+                                              height: 30,
+                                              child: CustomElevatedButton(
+                                                backgroundColor: controller
+                                                            .vegExecutionDetailsModel
+                                                            .value
+                                                            ?.status ==
+                                                        721
+                                                    ? ColorValues.approveColor
+                                                    : controller
                                                                 .vegExecutionDetailsModel
                                                                 .value
                                                                 ?.status ==
-                                                            360 //125
+                                                            722
+                                                        ? ColorValues.startColor
+                                                        : controller
+                                                                    .vegExecutionDetailsModel
+                                                                    .value
+                                                                    ?.status ==
+                                                                725
+                                                            ? ColorValues
+                                                                .appLightBlueColor
+                                                            : controller
+                                                                        .vegExecutionDetailsModel
+                                                                        .value
+                                                                        ?.status ==
+                                                                    726
+                                                                ? ColorValues
+                                                                    .rejectColor
+                                                                : controller
+                                                                            .vegExecutionDetailsModel
+                                                                            .value
+                                                                            ?.status ==
+                                                                        727
+                                                                    ? ColorValues
+                                                                        .approveColor
+                                                                    : controller.vegExecutionDetailsModel.value?.status ==
+                                                                            724
+                                                                        ? ColorValues
+                                                                            .closeColor
+                                                                        : controller.vegExecutionDetailsModel.value?.status ==
+                                                                                731
+                                                                            ? ColorValues.approveColor
+                                                                            : controller.vegExecutionDetailsModel.value?.status == 734
+                                                                                ? ColorValues.appLightBlueColor
+                                                                                : ColorValues.rejectedStatusColor,
+                                                onPressed: () async {},
+                                                text:
+                                                    "${controller.vegExecutionDetailsModel.value?.status_short ?? ""}",
 
-                                                        ? ColorValues
-                                                            .approveColor
-                                                        : ColorValues
-                                                            .appRedColor,
-                                                  ),
-                                                ],
+                                                // ${controller.auditTasknDetailModel.value.status ?? ""}
                                               ),
-                                              child: Center(
-                                                child: Text(
-                                                  '${controller.vegExecutionDetailsModel.value?.status_short}',
-                                                  style: TextStyle(
-                                                      color: Colors.white),
-                                                ),
-                                              ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                         Divider(
@@ -226,7 +241,7 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                   ' ${controller.vegExecutionDetailsModel.value?.title}',
                                                   style: Styles.blue17,
                                                 ),
-                                                 Text(
+                                                Text(
                                                   controller.vegExecutionDetailsModel
                                                               .value?.status !=
                                                           721
@@ -234,7 +249,6 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                       : '',
                                                   style: Styles.blue17,
                                                 ),
-                                               
                                               ],
                                             ),
                                             Spacer(),
@@ -818,7 +832,7 @@ class VegExecutionWeb extends GetView<VegExecutionController> {
                                                     child: CustomElevatedButton(
                                                       backgroundColor:
                                                           ColorValues
-                                                              .addNewColor,
+                                                              .startColor,
                                                       text: "Start",
                                                       onPressed: () {
                                                         Get.dialog<void>(

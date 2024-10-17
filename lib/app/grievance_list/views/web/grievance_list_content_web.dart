@@ -293,7 +293,7 @@ class GrievanceListContentWeb extends StatelessWidget {
                                                     GrievanceListDataSource(
                                                         controller);
                                                 return PaginatedDataTable2(
-                                                  columnSpacing: 10,
+                                                  columnSpacing: 8,
                                                   // dataRowHeight:
                                                   //     Get.height * 0.12,
                                                   dataRowHeight: 40,
@@ -406,6 +406,78 @@ DataColumn2 buildDataColumn(
   //double? fixedWidth,
   //  {required Function(String) onSearchCallBack}
 ) {
+  if (header == 'Resolution at Level') {
+    return DataColumn2(
+      label: SizedBox(
+        width: 100, // Adjust width to ensure text doesn't overlap
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Resolution',
+              textAlign: TextAlign.center, // Ensures text stays centered
+            ),
+            Text(
+              'At Level',
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  else if (header == 'Grievance Closed Date') {
+    return DataColumn2(
+      label: SizedBox(
+        width: 100, // Adjust width to ensure text doesn't overlap
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Grievance',
+              textAlign: TextAlign.center, // Ensures text stays centered
+            ),
+            Text(
+              'Closed Date',
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  else if (header == 'Date') {
+    return DataColumn2(
+      label: SizedBox(
+        width: 100, // Adjust width to ensure text doesn't overlap
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Date',
+              textAlign: TextAlign.center, // Ensures text stays centered
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  else if (header == 'Actions') {
+    return DataColumn2(
+      label: SizedBox(
+        width: 100, // Adjust width to ensure text doesn't overlap
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Actions',
+              textAlign: TextAlign.center, // Ensures text stays centered
+            ),
+          ],
+        ),
+      ),
+    );
+  }
   return //
       DataColumn2(
     // size: columnSize,
@@ -415,37 +487,6 @@ DataColumn2 buildDataColumn(
         Column(
             mainAxisAlignment: MainAxisAlignment.center, //
             children: [
-          // SizedBox(
-          //   height: Get.height * 0.05,
-          //   child: TextField(
-          //     style: GoogleFonts.lato(
-          //       textStyle:
-          //           TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-          //     ),
-          //     onChanged: (value) {
-          //       filterText.value = value;
-          //       //   onSearchCallBack(value);
-          //     },
-          //     textAlign: TextAlign.left,
-          //     decoration: InputDecoration(
-          //       hintText: 'Filter',
-          //       contentPadding:
-          //           EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
-          //       border: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(5),
-          //         borderSide: BorderSide(color: Colors.black),
-          //       ),
-          //       focusedBorder: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(5),
-          //         borderSide: BorderSide(color: Colors.black),
-          //       ),
-          //       enabledBorder: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(5),
-          //         borderSide: BorderSide(color: Colors.black),
-          //       ),
-          //     ),
-          //   ),
-          // ),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
@@ -470,23 +511,33 @@ class GrievanceListDataSource extends DataTableSource {
     grievanceListModel = controller.grievanceList.where((GrievanceList) {
       return (GrievanceList?.id ?? '').toString().toLowerCase().contains(
               controller.GrievanceTypeFilterText.value.toLowerCase()) &&
+              
+            (GrievanceList?.grievanceType ?? '').toLowerCase().contains(
+              controller.GrievanceTypeFilterText.value.toLowerCase()) &&
+              (GrievanceList?.createdAt ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.CreatedAtFilterText.value.toLowerCase()) &&
           (GrievanceList?.concern ?? '')
               .toString()
               .toLowerCase()
               .contains(controller.ConcernFilterText.value.toLowerCase()) &&
-          // (GrievanceList?.description ?? '')
-          //     .toString()
-          //     .toLowerCase()
-          //     .contains(controller.DescriptionFilterText.value.toLowerCase()) &&
-          (GrievanceList?.grievanceType ?? '').toLowerCase().contains(
-              controller.GrievanceTypeFilterText.value.toLowerCase()) &&
-          // (GrievanceList?.description ?? '')
-          //     .toLowerCase()
-          //     .contains(controller.DescriptionFilterText.value.toLowerCase()) &&
-          (GrievanceList?.createdAt ?? '')
+              (GrievanceList?.resolutionLevel ?? '')
               .toString()
               .toLowerCase()
-              .contains(controller.CreatedAtFilterText.value.toLowerCase());
+              .contains(controller.ResolutionTypeFilterText.value.toLowerCase()) &&
+          (GrievanceList?.actionTaken ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.ActionTakenFilterText.value.toLowerCase())&&
+              (GrievanceList?.closedAt ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.GrievanceClosedDateFilterText.value.toLowerCase())&&
+          (GrievanceList?.statusShort ?? '')
+              .toLowerCase()
+              .contains(controller.StatusShortFilterText.value.toLowerCase());
+          
     }).toList();
   }
 
@@ -498,10 +549,13 @@ class GrievanceListDataSource extends DataTableSource {
     //controller.permitId.value = GrievanceDetails?.id ?? 0;
     var cellsBuffer = [
       'GR${GrievanceDetails?.id ?? ''}',
-      '${GrievanceDetails?.concern ?? ''}',
-      // '${GrievanceDetails?.description ?? ''}',
       '${GrievanceDetails?.grievanceType ?? ''}',
-      '${GrievanceDetails?.createdAt ?? ''}',
+      '${formatDateString(GrievanceDetails?.createdAt) ?? ''}',
+      '${GrievanceDetails?.concern ?? ''}',
+      '${_getResolutionLevelLabel(GrievanceDetails?.resolutionLevel)}',
+      '${GrievanceDetails?.actionTaken ?? ''}',
+      '${formatDateString(GrievanceDetails?.closedAt) ?? ''}',
+      '${GrievanceDetails?.statusShort ?? ''}',
       'Actions',
     ];
     var cells = [];
@@ -512,58 +566,99 @@ class GrievanceListDataSource extends DataTableSource {
       if (entry.key == "search") {
         return null;
       }
-      if (entry.value) {
-        // print({"entry.value removed": entry.key});
-        cells.add(cellsBuffer[i]);
+if (entry.value) {
+      var cellValue = cellsBuffer[i];
+
+      // Check if the column is "Resolution at Level" to center-align it
+      if (entry.key == 'Resolution at Level') {
+        cells.add(DataCell(
+ // Apply padding to the right
+      Padding(
+            padding: EdgeInsets.only(left:35),
+            child: Text(cellValue.toString()),
+          ), // Center-align
+        ));
+        
+      } else {
+        cells.add(DataCell(
+          Padding(
+            padding: EdgeInsets.zero,
+            child: Text(cellValue.toString()),
+          ),
+        ));
       }
       i++;
     }
-    cells.add('Actions');
-
-    // print({"cell": cells});
-    return DataRow.byIndex(
-      index: index,
-      cells: cells.map((value) {
-        return DataCell(
-          Padding(
-            padding: EdgeInsets.zero,
-            child: (value == 'Actions')
-                ? Wrap(
-                    children: [
-                      TableActionButton(
-                        color: ColorValues.editColor,
-                        icon: Icons.edit_outlined,
-                        message: "edit",
-                        onPress: () {
-                          int? id = GrievanceDetails?.id;
-                          controller.editGrievance(grievanceId: id);
-                        },
-                      ),
-                      TableActionButton(
-                        color: ColorValues.deleteColor,
-                        icon: Icons.delete_outline,
-                        message: "delete",
-                        onPress: () {
-                          int? id = GrievanceDetails?.id;
-                          controller.deleteGrievanceDetails(grievanceId: id);
-                        },
-                      ),
-                      // TableActionButton(
-                      //   color: ColorValues.viewColor,
-                      //   icon: Icons.view_column,
-                      // ),
-                    ],
-                  )
-                : Text(value.toString()),
-          ),
-        );
-      }).toList(),
-      //   ],
-      // onSelectChanged: (_) {
-      //   controller.viewNewPermitList(permitId: GrievanceDetails?.permitId);
-      // },
-    );
   }
+
+  // Add the "Actions" DataCell with buttons
+  cells.add(DataCell(
+    Wrap(
+      children: [
+        TableActionButton(
+          color: ColorValues.editColor,
+          icon: Icons.edit_outlined,
+          message: "edit",
+          onPress: () {
+            int? id = GrievanceDetails?.id;
+            controller.editGrievance(grievanceId: id);
+          },
+        ),
+        TableActionButton(
+          color: ColorValues.closeColor,
+          icon: Icons.call_to_action_outlined,
+          message: "action taken",
+          onPress: () {
+            int? id = GrievanceDetails?.id;
+            controller.closeGrievance(grievanceId: id);
+          },
+        ),
+        TableActionButton(
+          color: ColorValues.deleteColor,
+          icon: Icons.delete_outline,
+          message: "delete",
+          onPress: () {
+            int? id = GrievanceDetails?.id;
+            controller.deleteGrievanceDetails(grievanceId: id);
+          },
+        ),
+      ],
+    ),
+  ));
+
+  return DataRow.byIndex(
+    index: index,
+    cells: cells.map((value) => value as DataCell).toList(),
+  );
+}
+
+
+String _getResolutionLevelLabel(int? resolutionLevel) {
+  switch (resolutionLevel) {
+    case 1:
+      return 'L1';
+    case 2:
+      return 'L2';
+    case 3:
+      return 'L3';
+    default:
+      return  ''; // If it's not 1, 2, or 3, return the original value
+  }
+}
+
+
+
+String formatDateString(String? dateString) {
+  if (dateString == null || dateString.isEmpty || dateString == "0001-01-01T00:00:00" ||  dateString == "0001-01-01T05:30:00") {
+    return ''; // Return an empty string if the date is null or empty
+  }
+
+  // Replace the 'T' with a space to format it as 'YYYY-MM-DD HH:MM:SS'
+  String formattedDate = dateString.replaceAll('T', ' ');
+
+  // Optionally, keep only the date and time but remove seconds and milliseconds
+  return formattedDate.substring(0, 16); // Keep only YYYY-MM-DD HH:MM
+}
 
   @override
   int get rowCount => grievanceListModel.length;

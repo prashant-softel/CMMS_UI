@@ -56,7 +56,7 @@ class WarrantyTypeUsecase {
   }) async {
     return _repository.getBusinessList(
       isLoading: isLoading,
-      facilityId:facilityId,
+      facilityId: facilityId,
       businessType: businessType,
     );
   }
@@ -83,10 +83,7 @@ class WarrantyTypeUsecase {
     bool? isLoading,
   }) async =>
       await _repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+          auth, facilityId, isLoading, 0);
 
   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
     required bool isLoading,
@@ -128,7 +125,7 @@ class WarrantyTypeUsecase {
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);
-      
+
   Future<String?> getUserAccessList() async =>
       await _repository.getUserAccessData(LocalKeys.userAccess);
 }

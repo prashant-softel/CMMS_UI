@@ -492,7 +492,7 @@ Widget _content(context, controller) {
                                                     print({"JcId": jobCardId});
 
                                                     Get.toNamed(
-                                                        '${Routes.jobCard}/$jobCardId');
+                                                        '${Routes.jobCard}/$jobCardId/1');
                                                   }),
                                               varUserAccessModel
                                                           .value.access_list!

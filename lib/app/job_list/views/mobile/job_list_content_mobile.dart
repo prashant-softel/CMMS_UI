@@ -15,7 +15,7 @@ class JobListContentMobile extends GetView<JobListController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<JobListController>(
-        id: 'PreventiveMaintenanceTask',
+        id: 'job_list',
         builder: (context) {
           return Scaffold(
             body: Obx(
@@ -29,7 +29,7 @@ class JobListContentMobile extends GetView<JobListController> {
                           onPressed: () {
                             controller.openFromDateToStartDatePicker =
                                 !controller.openFromDateToStartDatePicker;
-                            controller.update(['PreventiveMaintenanceTask']);
+                            controller.update(['job_list']);
                           },
                         ),
                         Expanded(
@@ -349,12 +349,12 @@ class JobListContentMobile extends GetView<JobListController> {
                             controller.toDate.value = dropDate;
                             controller.getjobListByDate();
                             controller.openFromDateToStartDatePicker = false;
-                            controller.update(['PreventiveMaintenanceTask']);
+                            controller.update(['job_list']);
                           }
                         },
                         onCancel: () {
                           controller.openFromDateToStartDatePicker = false;
-                          controller.update(['PreventiveMaintenanceTask']);
+                          controller.update(['job_list']);
                         },
                       ),
                     ),

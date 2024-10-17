@@ -914,8 +914,8 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                 ),
                                 if (controller.openStartDatePicker)
                                   Positioned(
-                                    right: 65,
-                                    top: 230,
+                                    right: 110,
+                                    top: 130,
                                     child: DatePickerWidget(
                                       // last date of this year
                                       controller: DateRangePickerController(),

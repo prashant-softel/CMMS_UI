@@ -1,4 +1,6 @@
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/utils/app_constants.dart';
+import 'package:cmms/app/utils/debouncer.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_audit_task/view_audit_task_presenter.dart';
@@ -47,7 +49,11 @@ class ViewAuditTaskController extends GetxController {
   Rx<bool> isAssignedToSelected = true.obs;
   int selectedAssignedToId = 0;
   var isToggleokOn = false.obs;
+  List<TextEditingController> textEditingControllerList = [];
+  final debounce = Debounce(milliseconds: 400);
 
+  var isToggleOn = false.obs;
+  var isToggleBoolOn = false.obs;
   Rx<List<List<Map<String, String>>>> rowItemAuditobs =
       Rx<List<List<Map<String, String>>>>([]);
   RxString startresponseMessage = ''.obs;
@@ -85,7 +91,7 @@ class ViewAuditTaskController extends GetxController {
 
   Future<void> getHistory() async {
     /// TODO: CHANGE THESE VALUES
-    int moduleType = 41;
+    int moduleType = type.value == AppConstants.kEvaluation ? 409 : 41;
     //
     historyList?.value = await viewAuditTaskPresenter.getHistory(
             // tempModuleType,
@@ -132,6 +138,7 @@ class ViewAuditTaskController extends GetxController {
   Future<void> getAuditTaskDetails({int? auditTaskId, bool? isloading}) async {
     auditTasknDetailModel.value = PmtaskViewModel();
     rowItemAuditobs.value = [];
+    rowItem.value = [];
     final _auditTasknDetailModel =
         await viewAuditTaskPresenter.getAuditTaskDetails(
       auditTaskId: auditTaskId,
@@ -141,35 +148,48 @@ class ViewAuditTaskController extends GetxController {
     if (_auditTasknDetailModel != null) {
       auditTasknDetailModel.value = _auditTasknDetailModel;
 
-      getReAssignedToList(auditTasknDetailModel.value.facility_id);
-      getHistory();
+      await getReAssignedToList(auditTasknDetailModel.value.facility_id);
+      await getHistory();
       if (auditTasknDetailModel.value!.map_checklist!.isNotEmpty &&
           auditTasknDetailModel.value.sub_PmTask!.isEmpty) {
         addRowItem();
       }
-      _auditTasknDetailModel.sub_PmTask?.forEach((element) {
-        rowItem.add([
-          {
-            "key": "Drop_down",
-            "value": '${element.name}',
-            "subtask_id": '${element.subtask_id}'
-          },
-          {'key': "title", "value": '${element.title}'},
-          {'key': "iNSPECTIONDate", "value": '${element.schedule_date}'},
-          {'key': "ptwreq", "value": ''},
-          {'key': "PTW_status", "value": ''},
-          {'key': "assign_to", "value": '${element.assign_name}'},
-          {'key': "score", "value": ''},
-          {'key': "status", "value": ''},
-          {'key': "Action ", "value": ''},
-        ]);
-        // dropdownMapperData[element.asset_name] = assetItemList.firstWhere(
-        //     (e) => e!.asset_type == element.asset_type,
-        //     orElse: null);
-        // dropdownMapperData[element.asset_name] = assetItemList.firstWhere(
-        //     (e) => e!.available_qty == element.available_qty,
-        //     orElse: null);
-      });
+      if (assignedToList.isNotEmpty) {
+        _auditTasknDetailModel.sub_PmTask?.forEach((element) {
+          rowItem.add([
+            {
+              "key": "Drop_down",
+              "value": '${element.name}',
+              "subtask_id": '${element.subtask_id}'
+            },
+            {'key': "title", "value": '${element.title}'},
+            {'key': "iNSPECTIONDate", "value": '${element.schedule_date}'},
+            {'key': "ptwreq", "value": '${element.ptw_required}'},
+            {'key': "PTW_status", "value": '${element.status_short_ptw}'},
+            {
+              'key': "assign_to",
+              "value": '${element.assign_name}',
+              "assign_id": '${element.assign_to}',
+            },
+            {'key': "score", "value": ''},
+            {'key': "status", "value": '${element.status_short}'},
+            {'key': "Action ", "value": ''},
+          ]);
+          dropdownMapperData[element.name] = auditTasknDetailModel
+              .value.map_checklist!
+              .firstWhere((e) => e.id == element.id, orElse: null);
+          dropdownAssigntoMapperData[element.assign_name] = assignedToList
+              .firstWhere((e) => e!.name == element.assign_name, orElse: null);
+          // final matchedChecklist = _auditTasknDetailModel.map_checklist!
+          //     .firstWhere((e) => e?.id == element.id, orElse: null);
+
+          // if (matchedChecklist != null) {
+          //   dropdownMapperData[element.id] = matchedChecklist;
+          //   // dropdownMapperData[element.ptw_required] = matchedChecklist;
+          // }
+          print("Mapping element: ${dropdownMapperData[element.id]}");
+        });
+      }
     }
     print({"auditPlandetailss", auditTasknDetailModel.value.id});
   }
@@ -193,8 +213,10 @@ class ViewAuditTaskController extends GetxController {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentauditTaskAproveModel =
-          CommentModel(id: id, comment: _comment);
+      CommentModel commentauditTaskAproveModel = CommentModel(
+          id: id,
+          comment: _comment,
+          facilityId: auditTasknDetailModel.value.facility_id);
 
       var auditTaskApproveJsonString = commentauditTaskAproveModel.toJson();
 
@@ -223,8 +245,10 @@ class ViewAuditTaskController extends GetxController {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentauditTaskRejectModel =
-          CommentModel(id: id, comment: _comment);
+      CommentModel commentauditTaskRejectModel = CommentModel(
+          id: id,
+          comment: _comment,
+          facilityId: auditTasknDetailModel.value.facility_id);
 
       var auditTaskRejectJsonString = commentauditTaskRejectModel.toJson();
 
@@ -243,8 +267,10 @@ class ViewAuditTaskController extends GetxController {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentauditTaskSkipModel =
-          CommentModel(id: id, comment: _comment);
+      CommentModel commentauditTaskSkipModel = CommentModel(
+          id: id,
+          comment: _comment,
+          facilityId: auditTasknDetailModel.value.facility_id);
 
       var auditTaskSkipJsonString = commentauditTaskSkipModel.toJson();
 
@@ -263,8 +289,10 @@ class ViewAuditTaskController extends GetxController {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentauditTaskCloseModel =
-          CommentModel(id: id, comment: _comment);
+      CommentModel commentauditTaskCloseModel = CommentModel(
+          id: id,
+          comment: _comment,
+          facilityId: auditTasknDetailModel.value.facility_id);
       ClosePermitModel ptwClose = ClosePermitModel(
           id: auditTasknDetailModel.value.permit_id,
           comment: _comment,
@@ -291,8 +319,10 @@ class ViewAuditTaskController extends GetxController {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentauditTaskCloseModel =
-          CommentModel(id: id, comment: _comment);
+      CommentModel commentauditTaskCloseModel = CommentModel(
+          id: id,
+          comment: _comment,
+          facilityId: auditTasknDetailModel.value.facility_id);
 
       var auditTaskCloseApproveJsonString = commentauditTaskCloseModel.toJson();
 
@@ -311,8 +341,10 @@ class ViewAuditTaskController extends GetxController {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentauditTaskCloseModel =
-          CommentModel(id: id, comment: _comment);
+      CommentModel commentauditTaskCloseModel = CommentModel(
+          id: id,
+          comment: _comment,
+          facilityId: auditTasknDetailModel.value.facility_id);
 
       var auditTaskCloseRejectJsonString = commentauditTaskCloseModel.toJson();
 
@@ -385,10 +417,10 @@ class ViewAuditTaskController extends GetxController {
     viewAuditTaskPresenter.clearpmTaskValue();
   }
 
-  void startAuditTask() async {
+  void startAuditTask(int? id) async {
     Map<String, dynamic>? responseMapStart =
         await viewAuditTaskPresenter.startAuditTask(
-      auditTaskId: auditTaskId.value,
+      auditTaskId: id,
       isLoading: true,
     );
     // if (responseMapStart != null && responseMapStart.length > 0) {
@@ -516,7 +548,7 @@ class ViewAuditTaskController extends GetxController {
     ));
   }
 
-  void updateAuditTaskExecution() async {
+  void updateAuditTaskExecution({int? exeType, int? subtask_id}) async {
     Get.back();
     PmFiles fil = PmFiles(file_id: 0, pm_event: 0);
     List<PmFiles> pmfile = <PmFiles>[fil];
@@ -529,6 +561,7 @@ class ViewAuditTaskController extends GetxController {
           job_create: 0, // int.tryParse(element[7]["job_value"] ?? '0'),
           text: element[5]["value"] ?? '',
           cp_ok: int.tryParse(element[2]["value"] ?? '0'),
+          is_job_deleted: 0,
           pm_files: []);
       addObservations.add(item);
     });
@@ -536,7 +569,9 @@ class ViewAuditTaskController extends GetxController {
     List<SchedulesTask> schedule = <SchedulesTask>[];
     // checklistObservations?.forEach((e) {
     schedule.add(SchedulesTask(
-        schedule_id: auditTasknDetailModel.value.schedules![0].schedule_id ?? 0,
+        schedule_id: exeType == 1
+            ? subtask_id ?? 0
+            : auditTasknDetailModel.value.schedules![0].schedule_id ?? 0,
         add_observations: addObservations));
     // });
 
@@ -611,7 +646,7 @@ class ViewAuditTaskController extends GetxController {
       {'key': "iNSPECTIONDate", "value": ''},
       {'key': "ptwreq", "value": ''},
       {'key': "PTW_status", "value": ''},
-      {'key': "assign_to", "value": 'Please Select'},
+      {'key': "assign_to", "value": 'Please Select', "assign_id": ''},
       {'key': "score", "value": ''},
       {'key': "status", "value": ''},
       {'key': "Action ", "value": ''},
@@ -624,9 +659,10 @@ class ViewAuditTaskController extends GetxController {
     List<SubTaskChecklist> items = [];
     rowItem.forEach((element) {
       SubTaskChecklist item = SubTaskChecklist(
+        subtask_id: int.tryParse(element[0]["subtask_id"] ?? "") ?? 0,
         checklist_id: dropdownMapperData[element[0]["value"]]?.id,
         title: element[1]["value"] ?? '',
-        schedule_date: "2024-10-06T00:00:00Z", // element[3]["value"] ?? '',
+        schedule_date: "2024-10-15T00:00:00Z", // element[3]["value"] ?? '',
         assign_to: dropdownAssigntoMapperData[element[5]["value"]]?.id,
       );
       items.add(item);

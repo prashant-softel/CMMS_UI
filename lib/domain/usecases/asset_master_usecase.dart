@@ -15,11 +15,7 @@ class AssetMasterUsecase {
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+      await repository.getInventoryCategoryList(auth, facilityId, isLoading, 0);
 
   Future<List<AssetMasterModel?>?> getAssetMasterList({
     int? type,
@@ -28,11 +24,7 @@ class AssetMasterUsecase {
     bool? isExport,
   }) async =>
       await repository.getAssetMasterList(
-        type,
-        facilityId,
-        isLoading,
-        isExport
-      );
+          type, facilityId, isLoading, isExport);
 
   // Future<List<ModuleListModel?>?> getModuleList({
   //   int? type,
@@ -70,9 +62,9 @@ class AssetMasterUsecase {
         isLoading: isLoading,
         modulelistJsonString: modulelistJsonString,
       );
-      
- void clearValue() async => repository.clearData(LocalKeys.mrsId);
- void clearpmTaskValue() async => repository.clearData(LocalKeys.pmTaskModel);
+
+  void clearValue() async => repository.clearData(LocalKeys.mrsId);
+  void clearpmTaskValue() async => repository.clearData(LocalKeys.pmTaskModel);
   void clearStoreTaskData() async => repository.clearData(LocalKeys.pmTaskId);
   void clearStoreTaskActivityData() async =>
       repository.clearData(LocalKeys.activity);
@@ -83,6 +75,5 @@ class AssetMasterUsecase {
   void clearStoreTaskWhereUsedData() async =>
       repository.clearData(LocalKeys.whereUsed);
   void clearStoreDataJobId() async => repository.clearData(LocalKeys.jobId);
-  void clearPermitStoreData() async =>
-      repository.clearData(LocalKeys.permitId);
+  void clearPermitStoreData() async => repository.clearData(LocalKeys.permitId);
 }

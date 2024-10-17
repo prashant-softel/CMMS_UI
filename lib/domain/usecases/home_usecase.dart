@@ -113,10 +113,7 @@ class HomeUsecase {
     bool? isLoading,
   }) async =>
       await _repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+          auth, facilityId, isLoading, 0);
 
   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
     required bool isLoading,

@@ -99,6 +99,7 @@ import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/models/request_order_list.model.dart';
+import 'package:cmms/domain/models/resolution_type_model.dart';
 import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/schedule_course_details_model.dart';
@@ -6544,12 +6545,15 @@ class Repository {
   }
 
   Future<List<JobModel?>?> getJobList(
-      String auth,
-      dynamic facilityId,
-      bool? isLoading,
-      bool? isExport,
-      bool? self_view,
-      dynamic categoryid) async {
+    String auth,
+    dynamic facilityId,
+    bool? isLoading,
+    bool? isExport,
+    bool? self_view,
+    dynamic categoryid,
+    dynamic startDate,
+    dynamic endDate,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       int userId = varUserAccessModel.value.user_id ?? 0;
@@ -6562,7 +6566,9 @@ class Repository {
             userId: userId,
             self_view: self_view,
             isLoading: isLoading ?? false,
-            categoryid: categoryid);
+            categoryid: categoryid,
+            startDate: startDate,
+            endDate: endDate);
         // print({"res.data", res.data});
       }
       if (!res.hasError) {
@@ -6780,6 +6786,36 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> closeGrievanceDetails({
+    grievanceJson,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.closeGrievanceDetails(
+          auth: auth,
+          grievanceJson: grievanceJson,
+          isLoading: isLoading,
+        );
+        print(res.data);
+      }
+      if (!res.hasError) {
+        var responseMap = json.decode(res.data);
+        return responseMap;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'closeGrievanceDetails');
+        return Map();
+      }
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+
   Future<void> deleteGrievanceDetails({int? Id, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -6798,6 +6834,33 @@ class Repository {
       }
     } catch (error) {
       print(error.toString());
+    }
+  }
+
+  Future<List<ResolutionTypeModel?>?> getResolutionType({bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      dynamic res;
+      if (auth.isNotEmpty) {
+        res = await _dataRepository.getResolutionType(
+            auth: auth, isLoading: isLoading);
+      }
+      if (!res.hasError) {
+        final jsonResolutionType = jsonDecode(res.data);
+        final List<ResolutionTypeModel> _resolutionType = jsonResolutionType
+            .map<ResolutionTypeModel>((m) =>
+                ResolutionTypeModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        return _resolutionType;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getResolutionTypeList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+
+      return [];
     }
   }
 
@@ -8047,19 +8110,16 @@ class Repository {
   }
 
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList(
-    String? auth,
-    int? facilityId,
-    bool? isLoading,
-  ) async {
+      String? auth, int? facilityId, bool? isLoading, int? blockId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
       if (auth.isNotEmpty) {
         res = await _dataRepository.getInventoryCategoryList(
-          auth: auth,
-          isLoading: isLoading,
-          facilityId: facilityId,
-        );
+            auth: auth,
+            isLoading: isLoading,
+            facilityId: facilityId,
+            blockId: blockId);
       }
       if (!res.hasError) {
         final jsonInventoryCategoryModels = jsonDecode(res.data);
@@ -9709,19 +9769,17 @@ class Repository {
 
   ///
   Future<Map<String, dynamic>> updateJobCard(
-    jobCard,
-    bool? isLoading,
-  ) async {
+      jobCard, bool? isLoading, int? type) async {
     // final res = ResponseModel(data: '', hasError: false);
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
       if (auth.isNotEmpty) {
         res = await _dataRepository.updateJobCard(
-          auth: auth,
-          jobCard: json.encode(jobCard),
-          isLoading: isLoading,
-        );
+            auth: auth,
+            jobCard: json.encode(jobCard),
+            isLoading: isLoading,
+            type: type);
         print({"res.data", res.data});
       }
       if (!res.hasError) {
@@ -11445,17 +11503,24 @@ class Repository {
   }
 
   Future<List<JobCardModel>> jobCardList(
-      int? facilityId, bool? isLoading, bool? isExport, bool? self_view) async {
+    int? facilityId,
+    bool? isLoading,
+    bool? isExport,
+    bool? self_view,
+    dynamic startDate,
+    dynamic endDate,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
       if (auth.isNotEmpty) {
         res = await _dataRepository.jobCardList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          isLoading: isLoading ?? false,
-          self_view: self_view,
-        );
+            auth: auth,
+            facilityId: facilityId ?? 0,
+            isLoading: isLoading ?? false,
+            self_view: self_view,
+            startDate: startDate,
+            endDate: endDate);
       }
       if (!res.hasError) {
         final jsonJobCardListModelModels = jsonDecode(res.data);
@@ -15494,7 +15559,7 @@ class Repository {
   }
 
   Future<bool> createAuditNumber(
-      {bool? isLoading, checkAuditJsonString}) async {
+      {bool? isLoading, checkAuditJsonString, int? type}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -15502,7 +15567,8 @@ class Repository {
         res = await _dataRepository.createAuditNumber(
             auth: auth,
             isLoading: isLoading,
-            checkAuditJsonString: checkAuditJsonString);
+            checkAuditJsonString: checkAuditJsonString,
+            type: type);
       }
       if (!res.hasError) {
         // Get.offAllNamed(Routes.auditListScreen);

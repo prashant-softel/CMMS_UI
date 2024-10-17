@@ -13,11 +13,7 @@ class CreatePreventiveChecklistUsecase {
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+      await repository.getInventoryCategoryList(auth, facilityId, isLoading, 0);
   Future<List<FrequencyModel?>?> getFrequencyList({
     bool? isLoading,
   }) async =>
@@ -28,8 +24,8 @@ class CreatePreventiveChecklistUsecase {
     checklistJsonString,
     bool? isLoading,
   }) async =>
-      await repository.createCheckListNumber(isLoading: isLoading,checklistJsonString:checklistJsonString);
-     Future<List<FacilityModel?>?> getFacilityList() async =>
+      await repository.createCheckListNumber(
+          isLoading: isLoading, checklistJsonString: checklistJsonString);
+  Future<List<FacilityModel?>?> getFacilityList() async =>
       await repository.getFacilityList(true);
-   
 }

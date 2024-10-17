@@ -77,10 +77,7 @@ class AddModuleCleaningExecutionUsecase {
     bool? isLoading,
   }) async =>
       await _repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+          auth, facilityId, isLoading, 0);
   Future<List<HistoryModel>?> getHistory({
     moduleType,
     id,

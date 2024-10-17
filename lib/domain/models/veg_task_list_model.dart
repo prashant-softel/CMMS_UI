@@ -30,33 +30,34 @@ class VegTaskListModel {
   dynamic status_short;
   int? water_used;
   dynamic title;
-
-  VegTaskListModel({
-    this.id,
-    this.planId,
-    this.responsibility,
-    this.scheduled_Qnty,
-    this.actual_Qnty,
-    this.deviation,
-    this.remark,
-    this.time_taken,
-    this.sitename,
-    this.abondend,
-    this.frequency,
-    this.noOfDays,
-    this.scheduledDate,
-    this.doneDate,
-    this.lastDoneDate,
-    this.status,
-    this.status_short,
-    this.water_used,
-    this.title,
-    this.abondond_done_date,
-  });
+  dynamic cleaningTypeName;
+  VegTaskListModel(
+      {this.id,
+      this.planId,
+      this.responsibility,
+      this.scheduled_Qnty,
+      this.actual_Qnty,
+      this.deviation,
+      this.remark,
+      this.time_taken,
+      this.sitename,
+      this.abondend,
+      this.frequency,
+      this.noOfDays,
+      this.scheduledDate,
+      this.doneDate,
+      this.lastDoneDate,
+      this.status,
+      this.status_short,
+      this.water_used,
+      this.title,
+      this.abondond_done_date,
+      this.cleaningTypeName});
 
   factory VegTaskListModel.fromJson(Map<String, dynamic> json) =>
       VegTaskListModel(
         id: json['executionId'],
+        cleaningTypeName: json['cleaningTypeName'],
         planId: json['planId'],
         responsibility: json['responsibility'] ?? '',
         sitename: json['sitename'] ?? '',
@@ -86,6 +87,7 @@ class VegTaskListModel {
 
   Map<String, dynamic> toJson() => {
         "executionId": id,
+        "cleaningTypeName": cleaningTypeName,
         "planId": planId,
         "responsibility": responsibility,
         "deviation": deviation,

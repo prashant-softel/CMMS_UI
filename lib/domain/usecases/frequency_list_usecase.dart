@@ -13,11 +13,7 @@ class FrequencylistUsecase {
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+      await repository.getInventoryCategoryList(auth, facilityId, isLoading, 0);
   Future<List<PreventiveCheckListModel?>?> getPreventiveCheckList({
     int? type,
     int? facilityId,

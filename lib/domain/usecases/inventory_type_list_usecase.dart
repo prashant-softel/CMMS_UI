@@ -13,11 +13,7 @@ class InventoryTypeListUsecase {
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+      await repository.getInventoryCategoryList(auth, facilityId, isLoading, 0);
   Future<List<InventoryTypeListModel?>?> getInventoryTypeList({
     int? type,
     int? facilityId,

@@ -18,9 +18,19 @@ class JobListUsecase {
     bool? self_view,
     bool? isExport,
     bool? isLoading,
+    dynamic endDate,
+    dynamic startDate,
   }) async =>
       await repository.getJobList(
-          auth, facilityId, self_view, isLoading, isExport, "");
+        auth,
+        facilityId,
+        self_view,
+        isLoading,
+        isExport,
+        "",
+        startDate,
+        endDate,
+      );
   void clearValue() async => repository.clearData(LocalKeys.jobId);
   void clearTypeValue() async => repository.clearData(LocalKeys.typeEdit);
 }

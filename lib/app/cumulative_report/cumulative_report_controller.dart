@@ -9,6 +9,7 @@ import 'package:cmms/domain/models/cumulative_report_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/job_card_details_model.dart';
 import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
@@ -38,6 +39,8 @@ class CumulativeReportController extends GetxController {
   RxList<int> selectedCategoryIdList = <int>[].obs;
 
   bool openFromDateToStartDatePicker = false;
+  RxList<JobCardDetailsModel?> jobCardList = <JobCardDetailsModel?>[].obs;
+  Rx<JobCardDetailsModel?> jobCardDetailsModel = JobCardDetailsModel().obs;
 
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
@@ -81,13 +84,19 @@ class CumulativeReportController extends GetxController {
 
   @override
   void onInit() async {
-    await setReportType();
+    // await setReportType();
 
     await getFacilityList();
     await getModuleList();
     await getInventoryCategoryList();
 
     super.onInit();
+  }
+
+  var checkpointType = 'Basic'.obs;
+
+  void updatecheCkpointType(String value) {
+    checkpointType.value = value;
   }
 
   Future<void> setReportType() async {
@@ -214,18 +223,21 @@ class CumulativeReportController extends GetxController {
     jobList.value = <JobModel>[];
 
     final _jobList = await cumulativeReportPresenter.getJobList(
-        facilityId: lststrFacilityIds,
-        self_view: varUserAccessModel.value.access_list!
-                    .where((e) =>
-                        e.feature_id == UserAccessConstants.kJobFeatureId &&
-                        e.selfView == UserAccessConstants.kHaveSelfViewAccess)
-                    .length >
-                0
-            ? true
-            : false,
-        isLoading: true,
-        isExport: false,
-        categoryid: categoryid);
+      facilityId: lststrFacilityIds,
+      self_view: varUserAccessModel.value.access_list!
+                  .where((e) =>
+                      e.feature_id == UserAccessConstants.kJobFeatureId &&
+                      e.selfView == UserAccessConstants.kHaveSelfViewAccess)
+                  .length >
+              0
+          ? true
+          : false,
+      isLoading: true,
+      isExport: false,
+      categoryid: categoryid,
+      startDate: formattedTodate1,
+      endDate: formattedFromdate1,
+    );
 
     if (_jobList != null && _jobList.isNotEmpty) {
       filteredData.value = _jobList;
@@ -2492,9 +2504,9 @@ class CumulativeReportController extends GetxController {
         jobDetailsModel.value = _jobDetailsList[0];
         associatedPermitList?.value =
             jobDetailsModel.value?.associatedPermitList ?? [];
-        getMrsListByModule(jobId: jobId ?? 0, facilityId: facilityId);
-        getjobDetailsModel(jobId ?? 0, facilityId);
-        generateInvoiceJob();
+        await getMrsListByModule(jobId: jobId ?? 0, facilityId: facilityId);
+        await getJobCardList(jobId ?? 0, facilityId);
+        await generateInvoiceJob();
         update(["jobDetailsModel"]);
       }
     } catch (e) {
@@ -2502,9 +2514,24 @@ class CumulativeReportController extends GetxController {
     }
   }
 
-  Future<void> getjobDetailsModel(int jobId, int facilityId) async {
+  Future<void> getJobCardDetails(int? jobCardId, int facilityId) async {
+    try {
+      jobCardList.value = await cumulativeReportPresenter.getJobCardDetails(
+            jobCardId: jobCardId,
+            isLoading: true,
+          ) ??
+          [];
+      jobCardDetailsModel.value = jobCardList.value[0];
+    } catch (e) {
+      Utility.showDialog(e.toString(), 'getJobDetails');
+    }
+  }
+
+  Future<void> getJobCardList(int jobId, int facilityId) async {
     try {
       jobAssociatedModelsList?.value = <JobAssociatedModel>[];
+
+      // Fetching the job details
       final _jobAssociatedModelsList =
           await cumulativeReportPresenter.getjobDetailsModel(
               jobId: jobId, isLoading: false, facilityId: facilityId);
@@ -2512,8 +2539,16 @@ class CumulativeReportController extends GetxController {
       if (_jobAssociatedModelsList != null &&
           _jobAssociatedModelsList.isNotEmpty) {
         jobAssociatedModelsList!.value = _jobAssociatedModelsList;
-        // associatedPermitList?.value =
-        //     jobAssociatedModel.value?.associatedPermitList ?? [];
+
+        for (var job in _jobAssociatedModelsList) {
+          final jobCardId = job?.jobCardId;
+
+          if (jobCardId != null) {
+            await getJobCardDetails(jobCardId, facilityId);
+            print('jobCardId: $jobCardId');
+          }
+        }
+
         update(["getjobDetailsModel"]);
       }
     } catch (e) {

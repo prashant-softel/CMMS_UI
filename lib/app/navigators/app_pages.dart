@@ -518,7 +518,7 @@ class AppPages {
       binding: FacilityBinding(),
     ),
     GetPage<dynamic>(
-      name: '${_Paths.jobCardDetails}/:JcId',
+      name: '${_Paths.jobCardDetails}/:JcId/:type',
       page: JobCardDetailsScreen.new,
       binding: JobCardDetailsBinding(),
     ),
@@ -1530,7 +1530,7 @@ class AppPages {
       binding: KaizensListBinding(),
     ),
     GetPage<dynamic>(
-      name: '${_Paths.cumulativeReport}/:type',
+      name: '${_Paths.cumulativeReport}',
       page: CumulativeReportScreen.new,
       binding: CumulativeReportBinding(),
     ),

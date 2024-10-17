@@ -9,8 +9,10 @@ import '../theme/styles.dart';
 class AuditTaskApprovedRejectDialog extends GetView {
   int? type;
   int? moduletype;
+  int? id;
 
-  AuditTaskApprovedRejectDialog({super.key, this.type, this.moduletype});
+  AuditTaskApprovedRejectDialog(
+      {super.key, this.type, this.moduletype, this.id});
   final ViewAuditTaskController controller = Get.find();
 
   @override
@@ -31,10 +33,10 @@ class AuditTaskApprovedRejectDialog extends GetView {
                     : type == 3
                         ? "Plan Skip"
                         : type == 4
-                            ? "Plan Close"
+                            ? "Close"
                             : type == 5
-                                ? "Plan Approve"
-                                : "Plan Reject",
+                                ? "Approve"
+                                : "Reject",
             textAlign: TextAlign.center,
             // style: TextStyle(color: Colors.green),
           ),
@@ -58,7 +60,6 @@ class AuditTaskApprovedRejectDialog extends GetView {
                           height: 20,
                         ),
                         TextField(
-
                           controller: controller.approveCommentTextFieldCtrlr,
                           maxLines: 4,
                           decoration: InputDecoration(
@@ -96,26 +97,19 @@ class AuditTaskApprovedRejectDialog extends GetView {
               ElevatedButton(
                 style: Styles.greenElevatedButtonStyle,
                 onPressed: () {
-                  type == 1 
-                      ? controller.auditTaskApprovedButton(
-                          id: controller.auditTasknDetailModel.value.id)
+                  type == 1
+                      ? controller.auditTaskApprovedButton(id: id)
                       : type == 2
-                          ? controller.auditTaskRejectButton(
-                              id: controller.auditTasknDetailModel.value.id)
+                          ? controller.auditTaskRejectButton(id: id)
                           : type == 3
-                              ? controller.auditTaskSkipButton(
-                                  id: controller.auditTasknDetailModel.value.id)
-                              : type == 4
-                                  ? controller.auditTaskCloseButton(
-                                      id: controller
-                                          .auditTasknDetailModel.value.id)
+                              ? controller.auditTaskSkipButton(id: id)
+                              : type == 4 || type == 12
+                                  ? controller.auditTaskCloseButton(id: id)
                                   : type == 5
                                       ? controller.auditTaskCloseApproveButton(
-                                          id: controller
-                                              .auditTasknDetailModel.value.id)
+                                          id: id)
                                       : controller.auditTaskCloseRejectButton(
-                                          id: controller
-                                              .auditTasknDetailModel.value.id);
+                                          id: id);
 
                   // // print('Goods order id:$id');
                   clearCommentText();
@@ -123,16 +117,16 @@ class AuditTaskApprovedRejectDialog extends GetView {
                 },
                 child: Text(
                   type == 1
-                      ? "Approve Plan"
+                      ? "Approve"
                       : type == 2
-                          ? 'Reject Plan'
+                          ? 'Reject'
                           : type == 3
                               ? "Skip Plan"
                               : type == 4
-                                  ? "Close Plan"
+                                  ? "Close"
                                   : type == 5
-                                      ? "Approve Plan"
-                                      : "Reject Plan",
+                                      ? "Approve"
+                                      : "Reject",
                 ),
               ),
             ]),
@@ -141,7 +135,8 @@ class AuditTaskApprovedRejectDialog extends GetView {
       })),
     );
   }
+
   void clearCommentText() {
-  controller.approveCommentTextFieldCtrlr.clear();
-}
+    controller.approveCommentTextFieldCtrlr.clear();
+  }
 }

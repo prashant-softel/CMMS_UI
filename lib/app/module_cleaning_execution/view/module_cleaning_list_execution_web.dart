@@ -700,7 +700,7 @@ class MCExcutionListDataSource extends DataTableSource {
                                                                         ?.status ==
                                                                     368
                                                                 ? ColorValues
-                                                                    .linktopermitColor
+                                                                    .rejectColor
                                                                 : controller
                                                                             .mcTaskList
                                                                             .firstWhere(
@@ -709,12 +709,8 @@ class MCExcutionListDataSource extends DataTableSource {
                                                                             )
                                                                             ?.status ==
                                                                         381
-                                                                    ? const Color
-                                                                        .fromARGB(
-                                                                        255,
-                                                                        83,
-                                                                        105,
-                                                                        72)
+                                                                    ? ColorValues
+                                                                        .approveColor
                                                                     : controller
                                                                                 .mcTaskList
                                                                                 .firstWhere(
@@ -723,12 +719,8 @@ class MCExcutionListDataSource extends DataTableSource {
                                                                                 )
                                                                                 ?.status ==
                                                                             382
-                                                                        ? const Color
-                                                                            .fromARGB(
-                                                                            255,
-                                                                            142,
-                                                                            99,
-                                                                            96)
+                                                                        ? ColorValues
+                                                                            .rejectColor
                                                                         : controller.mcTaskList
                                                                                     .firstWhere(
                                                                                       (e) => e?.executionId == McExcutionListDetails!.executionId,

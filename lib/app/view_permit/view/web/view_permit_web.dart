@@ -145,21 +145,29 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                   )
                                                 : controller.type.value == 5
                                                     ? Text(
-                                                        "/ VEG TASK",
+                                                        "/ EVALUATION TASK",
                                                         style:
                                                             Styles.greyLight14,
                                                       )
-                                                    : controller.type.value == 4
+                                                    : controller.type.value == 6
                                                         ? Text(
-                                                            "/ MC TASK",
+                                                            "/ VEG TASK",
                                                             style: Styles
                                                                 .greyLight14,
                                                           )
-                                                        : Text(
-                                                            "/ PERMIT LIST",
-                                                            style: Styles
-                                                                .greyLight14,
-                                                          )),
+                                                        : controller.type
+                                                                    .value ==
+                                                                4
+                                                            ? Text(
+                                                                "/ MC TASK",
+                                                                style: Styles
+                                                                    .greyLight14,
+                                                              )
+                                                            : Text(
+                                                                "/ PERMIT LIST",
+                                                                style: Styles
+                                                                    .greyLight14,
+                                                              )),
 
                                     Text(" / VIEW PERMIT",
                                         style: Styles.greyLight14)
@@ -195,43 +203,6 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                       padding: EdgeInsets.all(5),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                          color: (controller
-                                                          .viewPermitDetailsModel
-                                                          .value
-                                                          ?.ptwStatus ==
-                                                      PermitStatusConstants
-                                                          .PTW_APPROVE) &&
-                                                  (controller
-                                                          .viewPermitDetailsModel
-                                                          .value
-                                                          ?.tbT_Done_Check ==
-                                                      0) // tbt not done but approved
-                                              ? ColorValues.createsColor
-                                              : controller.viewPermitDetailsModel
-                                                          .value?.ptwStatus ==
-                                                      PermitStatusConstants
-                                                          .PTW_CREATED
-                                                  ? ColorValues.yellowColor
-                                                  : controller
-                                                              .viewPermitDetailsModel
-                                                              .value
-                                                              ?.ptwStatus ==
-                                                          PermitStatusConstants
-                                                              .PTW_APPROVE
-                                                      ? ColorValues.approveColor
-                                                      : controller
-                                                                  .viewPermitDetailsModel
-                                                                  .value
-                                                                  ?.ptwStatus ==
-                                                              PermitStatusConstants
-                                                                  .PTW_EXTEND_REQUEST_APPROVE
-                                                          ? Color.fromARGB(255,
-                                                              181, 129, 179)
-                                                          : ColorValues
-                                                              .appRedColor,
-                                          width: 1,
-                                        ),
                                         boxShadow: [
                                           BoxShadow(
                                             color: (controller
@@ -267,8 +238,9 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                                     .PTW_EXTEND_REQUEST_APPROVE //135
                                                             ? Color.fromARGB(
                                                                 255, 181, 129, 179)
-                                                            : ColorValues
-                                                                .appRedColor,
+                                                            : controller.viewPermitDetailsModel.value?.ptwStatus == PermitStatusConstants.PTW_CLOSED //135
+                                                                ? ColorValues.closeColor
+                                                                : ColorValues.appRedColor,
                                           ),
                                         ],
                                       ),
@@ -3745,28 +3717,34 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                       // controller.viewPermitDetailsModel.value?.isExpired == 1 ||
                       controller.viewPermitDetailsModel.value!.tbT_Done_Check ==
                                   1 &&
-                              controller
-                                      .viewPermitDetailsModel.value?.requester_id ==
+                              controller.viewPermitDetailsModel.value
+                                      ?.requester_id ==
                                   varUserAccessModel.value.user_id &&
                               controller.viewPermitDetailsModel.value
                                       ?.ptwStatus ==
                                   PermitStatusConstants.PTW_APPROVE &&
                               varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id ==
-                                              UserAccessConstants
-                                                  .kPermitFeatureId &&
-                                          e.edit ==
-                                              UserAccessConstants
-                                                  .kHaveEditAccess)
-                                      .length >
-                                  0 &&
+                                  .where((e) =>
+                                      e.feature_id ==
+                                          UserAccessConstants
+                                              .kPermitFeatureId &&
+                                      e.edit ==
+                                          UserAccessConstants.kHaveEditAccess)
+                                  .isNotEmpty &&
                               (controller.viewPermitDetailsModel.value
                                       ?.isExpired ==
                                   0) &&
                               (controller.viewPermitDetailsModel.value
-                                          ?.lstAssociatedJobs![0]!.jc_status ==
-                                      152)
+                                              ?.lstAssociatedJobs !=
+                                          null &&
+                                      controller.viewPermitDetailsModel.value!
+                                          .lstAssociatedJobs!.isNotEmpty &&
+                                      controller
+                                              .viewPermitDetailsModel
+                                              .value!
+                                              .lstAssociatedJobs![0]!
+                                              .jc_status ==
+                                          152)
 
                                   // &&
                                   // controller.isOneHour(

@@ -738,14 +738,18 @@ class DataRepository extends DomainRepository {
           int? userId,
           bool? self_view,
           bool? isLoading,
-          dynamic categoryid}) async =>
+          dynamic categoryid,
+          dynamic startDate,
+          dynamic endDate}) async =>
       await connectHelper.getJobList(
           auth: auth,
           facilityId: facilityId,
           userId: userId,
           self_view: self_view,
           isLoading: isLoading ?? false,
-          categoryid: categoryid);
+          categoryid: categoryid,
+          startDate: startDate,
+          endDate: endDate);
   Future<ResponseModel> getGoodsOrdersList({
     int? facility_id,
     String? start_date,
@@ -1764,16 +1768,13 @@ class DataRepository extends DomainRepository {
           userId: userId,
           selectedAssetsNameIdList: selectedAssetsNameIdList);
 
-  Future<ResponseModel> getInventoryCategoryList({
-    String? auth,
-    bool? isLoading,
-    int? facilityId,
-  }) async {
+  Future<ResponseModel> getInventoryCategoryList(
+      {String? auth, bool? isLoading, int? facilityId, int? blockId}) async {
     return await connectHelper.getInventoryCategoryList(
-      auth: auth,
-      isLoading: isLoading,
-      facilityId: facilityId,
-    );
+        auth: auth,
+        isLoading: isLoading,
+        facilityId: facilityId,
+        blockId: blockId);
   }
 
   //  Future<ResponseModel> getAffectedPartList({
@@ -2892,16 +2893,10 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  Future<ResponseModel> updateJobCard({
-    String? auth,
-    jobCard,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> updateJobCard(
+      {String? auth, jobCard, bool? isLoading, int? type}) async {
     return await connectHelper.updateJobCard(
-      auth: auth,
-      jobCard: jobCard,
-      isLoading: isLoading,
-    );
+        auth: auth, jobCard: jobCard, isLoading: isLoading, type: type);
   }
 
   Future<ResponseModel> carryForwardJob({
@@ -3555,18 +3550,20 @@ class DataRepository extends DomainRepository {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
-  Future<ResponseModel> jobCardList({
-    required String auth,
-    int? facilityId,
-    bool? isLoading,
-    bool? self_view,
-  }) async =>
+  Future<ResponseModel> jobCardList(
+          {required String auth,
+          int? facilityId,
+          bool? isLoading,
+          bool? self_view,
+          dynamic startDate,
+          dynamic endDate}) async =>
       await connectHelper.jobCardList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-        self_view: self_view,
-      );
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          self_view: self_view,
+          startDate: startDate,
+          endDate: endDate);
   Future<ResponseModel> getUserDetails({
     String? auth,
     int? userId,
@@ -5181,15 +5178,13 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  Future<ResponseModel> createAuditNumber({
-    auth,
-    bool? isLoading,
-    checkAuditJsonString,
-  }) async {
+  Future<ResponseModel> createAuditNumber(
+      {auth, bool? isLoading, checkAuditJsonString, int? type}) async {
     var response = await connectHelper.createAuditNumber(
         auth: auth,
         isLoading: isLoading,
-        checkAuditJsonString: checkAuditJsonString);
+        checkAuditJsonString: checkAuditJsonString,
+        type: type);
     return response;
   }
 
@@ -5262,6 +5257,19 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async {
     var response = await connectHelper.updateGrievanceDetails(
+      auth: auth,
+      grievanceJson: grievanceJson,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> closeGrievanceDetails({
+    auth,
+    grievanceJson,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.closeGrievanceDetails(
       auth: auth,
       grievanceJson: grievanceJson,
       isLoading: isLoading,
@@ -5429,6 +5437,15 @@ class DataRepository extends DomainRepository {
         auth: auth,
         grievance: grievance,
         isLoading: isLoading ?? false,
+      );
+
+       Future<ResponseModel> getResolutionType({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getResolutionType(
+        auth: auth,
+        isLoading: isLoading,
       );
 
   Future<ResponseModel> createBodyInjured({

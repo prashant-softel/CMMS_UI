@@ -40,19 +40,27 @@ class GrievanceController extends GetxController {
   StreamSubscription<String>? facilityNameStreamSubscription;
 
   RxString GrievanceIdFilterText = ''.obs;
-  RxString GrievanceTypeFilterText = ''.obs;
-  RxString ConcernFilterText = ''.obs;
-  RxString DescriptionFilterText = ''.obs;
+   RxString GrievanceTypeFilterText = ''.obs;
   RxString CreatedAtFilterText = ''.obs;
+  RxString ConcernFilterText = ''.obs;
+  RxString ResolutionTypeFilterText = ''.obs;
+  RxString ActionTakenFilterText = ''.obs;
+  RxString GrievanceClosedDateFilterText = ''.obs;
+  RxString StatusShortFilterText = ''.obs;
+  
 
   @override
   void onInit() async {
     this.filterText = {
       "Grievance Id": GrievanceIdFilterText,
-      "Concern": ConcernFilterText,
-      // "Description": DescriptionFilterText,
       "Grievance Type": GrievanceTypeFilterText,
-      "Created At": CreatedAtFilterText,
+      "Date": CreatedAtFilterText,
+      "Concern": ConcernFilterText,
+      "Resolution at Level": ResolutionTypeFilterText,
+      "Action Taken": ActionTakenFilterText,
+      "Grievance Closed Date": GrievanceClosedDateFilterText,
+      "Status": StatusShortFilterText,
+      
     };
 
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
@@ -76,10 +84,13 @@ class GrievanceController extends GetxController {
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "Grievance Id": true,
-    "Concern": true,
-    // "Description": true,
     "Grievance Type": true,
-    "Created At": true,
+    "Date": true,
+    "Concern": true,
+    "Resolution at Level": true,
+    "Action Taken": true,
+    "Grievance Closed Date": true,
+    "Status": true,
   });
 
   Map<String, RxString> filterText = {};
@@ -143,8 +154,17 @@ class GrievanceController extends GetxController {
 
   Future<void> editGrievance({int? grievanceId}) async {
     clearStoreData();
-    Get.toNamed(Routes.addGrievance, arguments: {
+    Get.offAllNamed(Routes.addGrievance, arguments: {
       "grievanceId": grievanceId,
+      "isEdit": true,
+    });
+  }
+
+    Future<void> closeGrievance({int? grievanceId}) async {
+    clearStoreData();
+    Get.offAllNamed(Routes.addGrievance, arguments: {
+      "grievanceId": grievanceId,
+      "actionTaken": true,
     });
   }
 

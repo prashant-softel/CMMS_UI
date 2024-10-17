@@ -165,7 +165,7 @@ class LinkToPermitDialog extends GetView {
                                 child: const Text('View Task'),
                               ),
                 Dimens.boxWidth10,
-                type == 3 || type == 4 || type == 5
+                type == 3 || type == 4 || type == 6 || type == 5
                     ? Dimens.box0
                     : ElevatedButton(
                         style: Styles.yellowElevatedButtonStyle,
@@ -277,8 +277,10 @@ class LinkToPermitDialog extends GetView {
                     //     _controller.formattedFromdate,
                     //     false);
                     //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
-                    Get.offAllNamed(Routes.viewPermitScreen,
-                        arguments: {"permitId": permitId, "type": type});
+                    // Get.offAllNamed(Routes.viewPermitScreen,
+                    //     arguments: {"permitId": permitId, "type": type});
+                    Get.offAllNamed(
+                        '${Routes.viewPermitScreen}/$permitId/$type');
 
                     Get.back();
                   },

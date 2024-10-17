@@ -27,7 +27,7 @@ class EditWarrantyClaimUsecase {
         isLoading,
       );
 
-   Future<List<EmployeeListModel2>> getEmployeesList(
+  Future<List<EmployeeListModel2>> getEmployeesList(
       {required bool isLoading, required int? facility_id}) async {
     return _repository.getEmployeesList(
       isLoading: isLoading,
@@ -35,8 +35,8 @@ class EditWarrantyClaimUsecase {
     );
   }
 
-   Future<ViewWarrantyClaimModel?> getEditWarrantyClaimDetail({
-    bool? isLoading,  
+  Future<ViewWarrantyClaimModel?> getEditWarrantyClaimDetail({
+    bool? isLoading,
     required int wc_id,
     required int facilityId,
   }) async =>
@@ -60,16 +60,13 @@ class EditWarrantyClaimUsecase {
     );
   }
 
- 
-
-  Future<List<BusinessListModel>> getBusinessList({
-    required bool isLoading,
-    required int? businessType,
-    required int facilityId
-  }) async {
+  Future<List<BusinessListModel>> getBusinessList(
+      {required bool isLoading,
+      required int? businessType,
+      required int facilityId}) async {
     return _repository.getBusinessList(
       isLoading: isLoading,
-      facilityId:facilityId,
+      facilityId: facilityId,
       businessType: businessType,
     );
   }
@@ -96,10 +93,7 @@ class EditWarrantyClaimUsecase {
     bool? isLoading,
   }) async =>
       await _repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+          auth, facilityId, isLoading, 0);
 
   Future<List<InventoryCategoryModel?>?> getAffectedPartList({
     String? auth,
@@ -107,10 +101,7 @@ class EditWarrantyClaimUsecase {
     bool? isLoading,
   }) async =>
       await _repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+          auth, facilityId, isLoading, 0);
 
   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
     required bool isLoading,
@@ -152,7 +143,7 @@ class EditWarrantyClaimUsecase {
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);
-      
+
   // Future<String?> getUserAccessList() async =>
   //     await _repository.getUserAccessData(LocalKeys.userAccess);
 }

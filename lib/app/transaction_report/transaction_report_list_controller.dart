@@ -496,7 +496,8 @@ class TransactionReportListController extends GetxController {
                 0
             ? true
             : false,
-        isLoading: true,
+        isLoading: true, startDate: formattedTodate1,
+        endDate: formattedFromdate1,
       );
 
       if (_jobList != null && _jobList.isNotEmpty) {

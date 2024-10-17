@@ -92,6 +92,7 @@ import 'package:get/get.dart';
 import '../../app/job_card_details/views/widgets/approve_jc_dailog.dart';
 import '../../app/job_card_details/views/widgets/reject_jc_dialog.dart';
 import '../../app/widgets/audit_task_msg_receive_dialog.dart';
+import '../../app/widgets/create_update_audit_msg.dart';
 import '../../app/widgets/pm_plan_approve_msg_dialog.dart';
 
 /// The helper class which will connect to the world to get the data.
@@ -1004,9 +1005,11 @@ class ConnectHelper {
       dynamic facilityId,
       bool? self_view,
       int? userId,
-      dynamic categoryid}) async {
+      dynamic categoryid,
+      dynamic startDate,
+      dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Job/GetJobList?facility_id=$facilityId&userId=$userId&self_view=$self_view&categoryid=$categoryid',
+      'Job/GetJobList?facility_id=$facilityId&userId=$userId&self_view=$self_view&start_date=${endDate}&end_date=${startDate}&categoryid=$categoryid',
       Request.get,
       null,
       isLoading ?? false,
@@ -3084,13 +3087,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getInventoryCategoryList({
-    String? auth,
-    bool? isLoading,
-    int? facilityId,
-  }) async =>
+  Future<ResponseModel> getInventoryCategoryList(
+          {String? auth,
+          bool? isLoading,
+          int? facilityId,
+          int? blockId}) async =>
       await apiWrapper.makeRequest(
-        'Inventory/GetInventoryCategoryList',
+        'Inventory/GetInventoryCategoryList?block_id=$blockId',
         Request.getMultiparts,
         null,
         isLoading ?? false,
@@ -5210,11 +5213,8 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> updateJobCard({
-    String? auth,
-    jobCard,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> updateJobCard(
+      {String? auth, jobCard, bool? isLoading, int? type}) async {
     var responseModel = await apiWrapper.makeRequest(
       'JC/UpdateJC',
       Request.put,
@@ -5229,9 +5229,9 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(
         JobCardUpdatedDialog(
-          message: parsedJson['message'],
-          jobId: parsedJson['id'],
-        ),
+            message: parsedJson['message'],
+            jobId: parsedJson['id'],
+            type: type),
         barrierDismissible: false);
     return responseModel;
   }
@@ -6289,14 +6289,15 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> jobCardList({
-    required String auth,
-    bool? isLoading,
-    int? facilityId,
-    bool? self_view,
-  }) async {
+  Future<ResponseModel> jobCardList(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      bool? self_view,
+      dynamic startDate,
+      dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'JC/GetJCList?facility_id=$facilityId&self_view=$self_view',
+      'JC/GetJCList?facility_id=$facilityId&self_view=$self_view&start_date=${endDate}&end_date=${startDate}',
       Request.get,
       null,
       isLoading ?? false,
@@ -8721,8 +8722,9 @@ class ConnectHelper {
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      //   'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
-      'PM/GetPMPlanList?facility_id=${facilityId}', Request.get,
+      'PM/GetPMPlanList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
+      // 'PM/GetPMPlanList?facility_id=${facilityId}',
+      Request.get,
       // &self_view=${self_view}
       null,
       isLoading ?? true,
@@ -9238,11 +9240,11 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> createAuditNumber({
-    required String auth,
-    bool? isLoading,
-    required checkAuditJsonString,
-  }) async {
+  Future<ResponseModel> createAuditNumber(
+      {required String auth,
+      bool? isLoading,
+      required checkAuditJsonString,
+      int? type}) async {
     var responseModel = await apiWrapper.makeRequest(
       'AuditPlan/CreateAuditPlan',
       Request.post,
@@ -9254,6 +9256,11 @@ class ConnectHelper {
       },
     );
 
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(CreateAuditPlanMessageDialog(
+        data: parsedJson['message'], id: parsedJson['id'], type: type));
+    // print('jcId2:${parsedJson['id']}');
     return responseModel;
   }
 
@@ -9272,6 +9279,10 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+        type: 11, data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
   }
@@ -9388,6 +9399,25 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Grievance/UpdateGrievance',
+      Request.put,
+      jsonEncode(grievanceJson),
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> closeGrievanceDetails({
+    required String auth,
+    required grievanceJson,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Grievance/CloseGrievance',
       Request.put,
       jsonEncode(grievanceJson),
       isLoading ?? true,
@@ -9537,6 +9567,25 @@ class ConnectHelper {
     try {
       response = await apiWrapper.makeRequest(
         'MISMaster/GetGrievanceTypeList',
+        Request.get,
+        null,
+        true,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+    return response;
+  }
+
+  Future<ResponseModel> getResolutionType(
+      {String? auth, bool? isLoading}) async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    try {
+      response = await apiWrapper.makeRequest(
+        'MISMaster/GetResolutionLevelList',
         Request.get,
         null,
         true,

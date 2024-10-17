@@ -61,13 +61,16 @@ class TransactionReportListPresenter {
     // int? userId,
     required bool self_view,
     bool? isLoading,
+    dynamic endDate,
+    dynamic startDate,
   }) async =>
       await transactionReportListUsecase.getJobList(
-        auth: auth ?? "",
-        facilityId: facilityId ?? 0,
-        self_view: self_view,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth ?? "",
+          facilityId: facilityId ?? 0,
+          self_view: self_view,
+          isLoading: isLoading ?? false,
+          endDate: endDate,
+          startDate: startDate);
   Future<List<InventoryModel?>?> inventoryList({
     required bool isLoading,
     int? facilityId,

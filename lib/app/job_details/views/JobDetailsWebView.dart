@@ -118,52 +118,78 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                         vertical: 2, horizontal: 5),
                                     margin: EdgeInsets.only(top: 5),
                                     decoration: BoxDecoration(
-                                      color: controller.jobDetailsModel.value
-                                                  ?.status ==
+                                      color: controller.jobDetailsModel.value?.status ==
                                               101
                                           ? ColorValues.createdColor
-                                          : controller.jobDetailsModel.value
-                                                      ?.status ==
+                                          : controller.jobDetailsModel.value?.status ==
                                                   102
-                                              ? ColorValues.assignStatusColor
+                                              ? ColorValues.appLightBlueColor
                                               : controller.jobDetailsModel.value
                                                           ?.latestJCStatus ==
-                                                      151
-                                                  ? ColorValues.createsColor
+                                                      156
+                                                  ? ColorValues.closeColor
                                                   : controller
-                                                              .jobDetailsModel
-                                                              .value
-                                                              ?.latestJCStatus ==
-                                                          152
-                                                      ? ColorValues.startColor
+                                                                  .jobDetailsModel
+                                                                  .value
+                                                                  ?.latestJCStatus ==
+                                                              151 &&
+                                                          controller
+                                                                  .jobDetailsModel
+                                                                  .value
+                                                                  ?.latestJCPTWStatus ==
+                                                              124
+                                                      ? ColorValues.rejectColor
                                                       : controller
                                                                   .jobDetailsModel
                                                                   .value
                                                                   ?.latestJCStatus ==
-                                                              153
-                                                          ? Color.fromARGB(255,
-                                                              181, 129, 179)
+                                                              151
+                                                          ? ColorValues
+                                                              .appYellowColor
                                                           : controller
                                                                       .jobDetailsModel
                                                                       .value
                                                                       ?.latestJCStatus ==
-                                                                  155
+                                                                  152
                                                               ? ColorValues
-                                                                  .waitingForApproveStatusColor
-                                                              : ColorValues
-                                                                  .lightBlueColor,
+                                                                  .linktopermitColor
+                                                              : controller.jobDetailsModel.value?.latestJCStatus == 157 ||
+                                                                      controller.jobDetailsModel.value?.latestJCStatus == 154
+                                                                  ? ColorValues.waitingForApproveStatusColor
+                                                                  : controller.jobDetailsModel.value?.latestJCStatus == 158
+                                                                      ? ColorValues.approveColor
+                                                                      : controller.jobDetailsModel.value?.latestJCStatus == 153
+                                                                          ? Color.fromARGB(255, 181, 129, 179)
+                                                                          : controller.jobDetailsModel.value?.latestJCStatus == 155
+                                                                              ? ColorValues.approveColor
+                                                                              : ColorValues.lightBlueColor,
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     child: controller.jobDetailsModel.value
                                                 ?.status ==
                                             101
-                                        ? Text(" Job Created")
+                                        ? Text(" Job Created",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                            ))
                                         : controller.jobDetailsModel.value
                                                     ?.status ==
                                                 102
-                                            ? Text("Job Assigned")
+                                            ? Text("Job Assigned",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                ))
                                             : Text(
-                                                '${controller.jobDetailsModel.value?.latestJCStatusShort ?? ''}'),
+                                                '${controller.jobDetailsModel.value?.latestJCStatusShort ?? ''}',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                )),
                                   ),
                                 ],
                               ),
@@ -702,9 +728,9 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                   "JcId":
                                                                       jobCardId
                                                                 });
-
+                                                                int type = 1;
                                                                 Get.offAllNamed(
-                                                                    '${Routes.jobCard}/$jobCardId');
+                                                                    '${Routes.jobCard}/$jobCardId/$type');
                                                               }),
                                                           varUserAccessModel
                                                                       .value
@@ -1420,7 +1446,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                             onPressed: () =>
                                                 controller.createNewPermit(),
                                             backgroundColor:
-                                                ColorValues.appLightBlueColor,
+                                                ColorValues.appGreenColor,
                                           ),
                                         //:
                                         // if (controller

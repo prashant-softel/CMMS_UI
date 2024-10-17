@@ -4,6 +4,7 @@ import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/job_card_details_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:cmms/domain/models/module_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
@@ -41,26 +42,24 @@ class CumulativeReportUsecase {
         startDate,
         endDate,
       );
-  Future<List<JobModel?>?> getJobList(
-          {
-          // required String auth,
-          dynamic facilityId,
-          bool? self_view,
-          bool? isExport,
-          bool? isLoading,
-          dynamic categoryid}) async =>
-      await repository.getJobList(
-          "", facilityId, isLoading, isExport, self_view, categoryid);
+  Future<List<JobModel?>?> getJobList({
+    // required String auth,
+    dynamic facilityId,
+    bool? self_view,
+    bool? isExport,
+    bool? isLoading,
+    dynamic categoryid,
+    dynamic endDate,
+    dynamic startDate,
+  }) async =>
+      await repository.getJobList("", facilityId, isLoading, isExport,
+          self_view, categoryid, startDate, endDate);
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await repository.getInventoryCategoryList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+      await repository.getInventoryCategoryList(auth, facilityId, isLoading, 0);
   Future<List<PmTaskListModel?>?> getPmTaskList(
           {dynamic facilityId,
           bool? isLoading,
@@ -168,6 +167,14 @@ class CumulativeReportUsecase {
         jobId,
         facilityId,
         userId,
+        isLoading,
+      );
+  Future<List<JobCardDetailsModel?>?> getJobCardDetails({
+    int? jobCardId,
+    bool? isLoading,
+  }) async =>
+      await repository.getJobCardDetails(
+        jobCardId,
         isLoading,
       );
   Future<List<JobAssociatedModel?>?> getjobDetailsModel({

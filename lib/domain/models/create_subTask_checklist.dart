@@ -29,22 +29,29 @@ class CreateSubTaskCheckList {
 
 class SubTaskChecklist {
   SubTaskChecklist(
-      {this.checklist_id, this.schedule_date, this.title, this.assign_to});
+      {this.checklist_id,
+      this.schedule_date,
+      this.title,
+      this.assign_to,
+      this.subtask_id});
   int? checklist_id;
   int? assign_to;
   String? title;
   String? schedule_date;
+  int? subtask_id;
   factory SubTaskChecklist.fromJson(Map<String, dynamic> json) =>
       SubTaskChecklist(
           checklist_id: json["checklist_id"],
           schedule_date: json["schedule_date"],
           assign_to: json["assign_to"],
-          title: json['title']);
+          title: json['title'],
+          subtask_id: json['subtask_id']);
 
   Map<String, dynamic> toJson() => {
         "schedule_date": schedule_date,
         "checklist_id": checklist_id,
         "title": title,
-        "assign_to": assign_to
+        "assign_to": assign_to,
+        "subtask_id": subtask_id
       };
 }

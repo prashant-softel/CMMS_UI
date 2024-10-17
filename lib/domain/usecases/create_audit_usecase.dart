@@ -60,12 +60,12 @@ class CreateAuditUsecase {
         facilityId,
         isLoading,
       );
-  Future<bool> createAuditNumber({
-    checkAuditJsonString,
-    bool? isLoading,
-  }) async =>
+  Future<bool> createAuditNumber(
+          {checkAuditJsonString, bool? isLoading, int? type}) async =>
       await repository.createAuditNumber(
-          isLoading: isLoading, checkAuditJsonString: checkAuditJsonString);
+          isLoading: isLoading,
+          checkAuditJsonString: checkAuditJsonString,
+          type: type);
   Future<Map<String, dynamic>> updateAuditNumber({
     checkAuditJsonString,
     bool? isLoading,

@@ -178,17 +178,20 @@ class JobListController extends GetxController {
 
     if (facilityId > 0) {
       final _jobList = await jobListPresenter.getJobList(
-          facilityId: facilityId,
-          self_view: varUserAccessModel.value.access_list!
-                      .where((e) =>
-                          e.feature_id == UserAccessConstants.kJobFeatureId &&
-                          e.selfView == UserAccessConstants.kHaveSelfViewAccess)
-                      .length >
-                  0
-              ? true
-              : false,
-          isLoading: isLoading,
-          isExport: isExport);
+        facilityId: facilityId,
+        self_view: varUserAccessModel.value.access_list!
+                    .where((e) =>
+                        e.feature_id == UserAccessConstants.kJobFeatureId &&
+                        e.selfView == UserAccessConstants.kHaveSelfViewAccess)
+                    .length >
+                0
+            ? true
+            : false,
+        isLoading: isLoading,
+        isExport: isExport,
+        startDate: formattedTodate1,
+        endDate: formattedFromdate1,
+      );
 
       if (_jobList != null && _jobList.isNotEmpty && !isExportOnly) {
         filteredData.value = _jobList;

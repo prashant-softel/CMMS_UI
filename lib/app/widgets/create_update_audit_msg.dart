@@ -1,5 +1,6 @@
+import 'package:cmms/app/create_audit/create_audit_controller.dart';
+import 'package:cmms/app/create_pm_plan/create_pm_plan_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/app/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../navigators/app_pages.dart';
@@ -7,30 +8,16 @@ import '../theme/dimens.dart';
 import '../theme/styles.dart';
 import '../view_audit_plan/view_audit_plan_controller.dart';
 
-class AuditPlanMessageApproveDialog extends GetView {
+class CreateAuditPlanMessageDialog extends GetView {
   String? data;
   List<dynamic>? id;
   int? type;
-  AuditPlanMessageApproveDialog({super.key, this.data, this.id, this.type});
-  final ViewAuditPlanController controller = Get.find();
+
+  CreateAuditPlanMessageDialog({super.key, this.data, this.id, this.type});
+  final CreateAuditController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    String buttonText1 = type == AppConstants.kMis
-        ? 'MIS Plan List'
-        : type == AppConstants.kEvaluation
-            ? 'Plan List'
-            : 'Audit Plan List';
-    String buttonText2 = type == AppConstants.kMis
-        ? 'MIS Task'
-        : type == AppConstants.kEvaluation
-            ? 'Evaluation Task'
-            : 'Audit Task';
-    String buttonText3 = type == AppConstants.kMis
-        ? 'View MIS Plan'
-        : type == AppConstants.kEvaluation
-            ? 'View Plan'
-            : 'View Audit Plan';
     return SelectionArea(
       child: StatefulBuilder(builder: ((context, setState) {
         return AlertDialog(
@@ -40,11 +27,7 @@ class AuditPlanMessageApproveDialog extends GetView {
           insetPadding: Dimens.edgeInsets10_0_10_0,
           contentPadding: EdgeInsets.zero,
           title: Text(
-            type == AppConstants.kMis
-                ? 'MIS Plan Approval'
-                : type == AppConstants.kEvaluation
-                    ? 'Evaluation Plan Approval'
-                    : 'Audit Plan Approval',
+            'Craete Plan',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black),
           ),
@@ -78,42 +61,22 @@ class AuditPlanMessageApproveDialog extends GetView {
                     style: Styles.darkBlueElevatedButtonStyle,
                     onPressed: () {
                       Get.offAllNamed('${Routes.auditListScreen}/${type}');
-
-                      // Get.offAllNamed(Routes.auditListScreen);
                     },
-                    child: Text(buttonText1),
+                    child: const Text('Plan List'),
                   ),
                 ),
                 Dimens.boxWidth10,
-                Center(
-                  child: ElevatedButton(
-                    style: Styles.greenElevatedButtonStyle,
-                    onPressed: () {
-                      Get.offNamed(Routes.auditTask, arguments: {'type': type});
-                    },
-                    child: Text(buttonText2),
-                  ),
-                ),
                 Dimens.boxWidth10,
                 Center(
                   child: ElevatedButton(
                     style: Styles.yellowElevatedButtonStyle,
                     onPressed: () async {
                       Get.back();
-                      try {
-                        await controller.setauditPlanId();
-                        if (controller.auditId.value != 0) {
-                          print({"fghvjbggjhjgk", controller.auditId});
+                      String planId = id![0].toString();
+                      Get.offAllNamed(
+                          '${Routes.viewAuditPlan}/$planId/${type}');
 
-                          await controller.getAuditPlanDetails(
-                              auditPlanId: controller.auditId.value,
-                              facilityId: controller.facilityId,
-                              isloading: true);
-                          await controller.getHistory(controller.facilityId);
-                        }
-                      } catch (e) {
-                        print(e);
-                      }
+                      // controller.clearStoreData();
 
                       // Future.delayed(Duration(seconds: 1), () {
                       //   controller.getUnitCurrencyList();
@@ -130,7 +93,7 @@ class AuditPlanMessageApproveDialog extends GetView {
                       //   }
                       // });
                     },
-                    child: Text(buttonText3),
+                    child: const Text('View Plan'),
                   ),
                 ),
                 Dimens.boxWidth10,

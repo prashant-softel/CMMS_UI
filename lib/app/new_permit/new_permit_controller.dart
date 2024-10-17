@@ -532,7 +532,7 @@ class NewPermitController extends GetxController {
         scheduleID.value = dataFromPreviousScreen['scheduleID'];
         if (typee.value == 4) {
           mcExecutionDetailsModel = dataFromPreviousScreen['mcModel'];
-        } else if (typee.value == 5) {
+        } else if (typee.value == 6) {
           vegExecutionDetailsModel = dataFromPreviousScreen['vegModel'];
         }
         pmtaskViewModel = dataFromPreviousScreen['pmTaskModel'];
@@ -1464,7 +1464,7 @@ class NewPermitController extends GetxController {
         longitude: 0,
         comment: "",
         block_ids: selectedEmployeeNameIdList,
-        category_ids: typee.value == 5 || typee.value == 4
+        category_ids: typee.value == 6 || typee.value == 4
             ? [8]
             : selectedEquipmentCategoryIdList,
         uploadfile_ids: fileIds,
@@ -1590,7 +1590,7 @@ class NewPermitController extends GetxController {
         latitude: 0,
         longitude: 0,
         block_ids: selectedEmployeeNameIdList,
-        category_ids: typee.value == 5 || typee.value == 4
+        category_ids: typee.value == 6 || typee.value == 4
             ? [8]
             : selectedEquipmentCategoryIdList,
         is_loto_required: loto_map_list.length > 0 ? true : false,
@@ -1709,7 +1709,7 @@ class NewPermitController extends GetxController {
         latitude: 0,
         longitude: 0,
         block_ids: selectedEmployeeNameIdList,
-        category_ids: typee.value == 5 || typee.value == 4
+        category_ids: typee.value == 6 || typee.value == 4
             ? [8]
             : selectedEquipmentCategoryIdList,
         is_loto_required: loto_map_list.length > 0 ? true : false,
@@ -1862,7 +1862,7 @@ class NewPermitController extends GetxController {
       CreatePermitModel updatePermitModel = CreatePermitModel(
         facility_id: facilityId,
         blockId: selectedBlockId,
-        lotoId: typee.value == 5 || typee.value == 4
+        lotoId: typee.value == 6 || typee.value == 4
             ? 8
             : selectedEquipmentCategoryIdList.first,
         permit_id: permitId.value,
@@ -1882,7 +1882,7 @@ class NewPermitController extends GetxController {
         latitude: 0,
         longitude: 0,
         block_ids: selectedEmployeeNameIdList,
-        category_ids: typee.value == 5 || typee.value == 4
+        category_ids: typee.value == 6 || typee.value == 4
             ? [8]
             : selectedEquipmentCategoryIdList,
         uploadfile_ids: files,
@@ -1985,7 +1985,7 @@ class NewPermitController extends GetxController {
         comment: workPermitRemarkTextCtrlr.text.trim(),
 
         blockId: selectedBlockId,
-        lotoId: typee.value == 5 || typee.value == 4
+        lotoId: typee.value == 6 || typee.value == 4
             ? 8
             : selectedEquipmentCategoryIdList.first,
         permitTypeId: selectedPermitTypeId,
@@ -2001,7 +2001,7 @@ class NewPermitController extends GetxController {
         latitude: 0,
         longitude: 0,
         block_ids: selectedEmployeeNameIdList,
-        category_ids: typee.value == 5 || typee.value == 4
+        category_ids: typee.value == 6 || typee.value == 4
             ? [8]
             : selectedEquipmentCategoryIdList,
         uploadfile_ids: fileIds,

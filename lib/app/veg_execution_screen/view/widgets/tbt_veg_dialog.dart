@@ -109,7 +109,7 @@ class TbtDoneVegDialog extends GetView<VegExecutionController> {
                                   Get.toNamed(Routes.createPermit, arguments: {
                                     "permitId": ptw_id,
                                     "isChecked": false,
-                                    "type": 5,
+                                    "type": 6,
                                     "isFromJobDetails": true,
                                     "jobModel":
                                         controller.jobDetailsModel.value,

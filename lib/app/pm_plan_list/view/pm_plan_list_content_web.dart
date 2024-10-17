@@ -1,14 +1,18 @@
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/pm_plan_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -81,250 +85,339 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                     ),
                   ),
                   Expanded(
-                    child: Container(
-                      width: Get.width * 7,
-                      margin: EdgeInsets.all(10),
-                      height: Get.height,
-                      child: Card(
-                        color: Color.fromARGB(255, 245, 248, 250),
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "PM Plans ",
-                                      style: Styles.blackBold16,
-                                    ),
-                                    Spacer(),
-                                    varUserAccessModel.value.access_list!
-                                                .where((e) =>
-                                                    e.feature_id ==
-                                                        UserAccessConstants
-                                                            .kPmPlanFeatureId &&
-                                                    e.add ==
-                                                        UserAccessConstants
-                                                            .kHaveAddAccess)
-                                                .length >
-                                            0
-                                        ? ActionButton(
-                                            icon: Icons.add,
-                                            label: "Add New",
-                                            onPressed: () {
-                                              controller.clearStoreData();
-                                              Get.toNamed(Routes.createPmPlan);
-                                            },
-                                            color: ColorValues.addNewColor,
-                                          )
-                                        : Dimens.box0
-                                  ],
-                                ),
-                              ),
-                              Divider(
-                                color: ColorValues.greyLightColour,
-                              ),
-                              Row(
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: Get.width * 7,
+                          margin: EdgeInsets.all(10),
+                          height: Get.height,
+                          child: Card(
+                            color: Color.fromARGB(255, 245, 248, 250),
+                            elevation: 10,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  PopupMenuButton<String>(
-                                    tooltip: "",
-                                    elevation: 25.0,
-                                    child: Container(
-                                      height: 35,
-                                      margin: EdgeInsets.only(left: 10),
-                                      padding: EdgeInsets.only(
-                                          top: 4, bottom: 4, right: 8, left: 8),
-                                      decoration: BoxDecoration(
-                                          color: ColorValues.appLightBlueColor,
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black26,
-                                              offset: const Offset(4.0, 2.0),
-                                              blurRadius: 5.0,
-                                              spreadRadius: 1.0,
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "PM Plans ",
+                                          style: Styles.blackBold16,
+                                        ),
+                                        Spacer(),
+                                        Row(
+                                          children: [
+                                            CustomRichText(title: 'Date Range'),
+                                            Dimens.boxWidth2,
+                                            CustomTextFieldForStock(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
+                                              numberTextField: true,
+                                              onTap: () {
+                                                controller
+                                                        .openFromDateToStartDatePicker =
+                                                    !controller
+                                                        .openFromDateToStartDatePicker;
+                                                controller
+                                                    .update(['pmPlan_list']);
+                                              },
+                                              hintText:
+                                                  '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
                                             ),
-                                          ]),
-                                      child: Text(
-                                        'Column Visibility',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
+                                          ],
                                         ),
-                                      ),
+                                        Dimens.boxWidth2,
+                                        varUserAccessModel.value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kPmPlanFeatureId &&
+                                                        e.add ==
+                                                            UserAccessConstants
+                                                                .kHaveAddAccess)
+                                                    .length >
+                                                0
+                                            ? ActionButton(
+                                                icon: Icons.add,
+                                                label: "Add New",
+                                                onPressed: () {
+                                                  controller.clearStoreData();
+                                                  Get.toNamed(
+                                                      Routes.createPmPlan);
+                                                },
+                                                color: ColorValues.addNewColor,
+                                              )
+                                            : Dimens.box0
+                                      ],
                                     ),
-                                    itemBuilder: (BuildContext context) =>
-                                        <PopupMenuEntry<String>>[]..addAll(
-                                              controller.columnVisibility.value
-                                                  .entries
-                                                  .map((e) {
-                                            return PopupMenuItem<String>(
-                                                child: ValueListenableBuilder(
-                                                    valueListenable: controller
-                                                        .columnVisibility,
-                                                    builder: (context, value,
-                                                        child) {
-                                                      return Row(
-                                                        children: [
-                                                          Checkbox(
-                                                            value: value[e.key],
-                                                            onChanged:
-                                                                (newValue) {
-                                                              controller
-                                                                  .setColumnVisibility(
-                                                                      e.key,
-                                                                      newValue!);
-                                                            },
-                                                          ),
-                                                          Text(e.key),
-                                                        ],
-                                                      );
-                                                    }));
-                                          })),
-                                    onSelected: (String value) {
-                                      // Handle column selection
-                                    },
                                   ),
-                                  // Container(
-                                  //   height: 35,
-                                  //   margin: EdgeInsets.only(left: 10),
-                                  //   child: CustomElevatedButton(
-                                  //       backgroundColor:
-                                  //           ColorValues.appLightBlueColor,
-                                  //       onPressed: () {},
-                                  //       text: 'Copy'),
-                                  // ),
-                                  Container(
-                                    decoration: BoxDecoration(boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        offset: const Offset(2.0, 1.0),
-                                        blurRadius: 5.0,
-                                        spreadRadius: 1.0,
-                                      )
-                                    ]),
-                                    height: 35,
-                                    margin: EdgeInsets.only(left: 10),
-                                    child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appLightBlueColor,
-                                        onPressed: () {
-                                          controller.export();
+                                  Divider(
+                                    color: ColorValues.greyLightColour,
+                                  ),
+                                  Row(
+                                    children: [
+                                      PopupMenuButton<String>(
+                                        tooltip: "",
+                                        elevation: 25.0,
+                                        child: Container(
+                                          height: 35,
+                                          margin: EdgeInsets.only(left: 10),
+                                          padding: EdgeInsets.only(
+                                              top: 4,
+                                              bottom: 4,
+                                              right: 8,
+                                              left: 8),
+                                          decoration: BoxDecoration(
+                                              color:
+                                                  ColorValues.appLightBlueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset:
+                                                      const Offset(4.0, 2.0),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                              ]),
+                                          child: Text(
+                                            'Column Visibility',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                        itemBuilder: (BuildContext context) =>
+                                            <PopupMenuEntry<String>>[]..addAll(
+                                                  controller.columnVisibility
+                                                      .value.entries
+                                                      .map((e) {
+                                                return PopupMenuItem<String>(
+                                                    child:
+                                                        ValueListenableBuilder(
+                                                            valueListenable:
+                                                                controller
+                                                                    .columnVisibility,
+                                                            builder: (context,
+                                                                value, child) {
+                                                              return Row(
+                                                                children: [
+                                                                  Checkbox(
+                                                                    value: value[
+                                                                        e.key],
+                                                                    onChanged:
+                                                                        (newValue) {
+                                                                      controller.setColumnVisibility(
+                                                                          e.key,
+                                                                          newValue!);
+                                                                    },
+                                                                  ),
+                                                                  Text(e.key),
+                                                                ],
+                                                              );
+                                                            }));
+                                              })),
+                                        onSelected: (String value) {
+                                          // Handle column selection
                                         },
-                                        text: 'Excel'),
-                                  ),
-                                  // Container(
-                                  //   height: 35,
-                                  //   margin: EdgeInsets.only(left: 10),
-                                  //   child: CustomElevatedButton(
-                                  //       backgroundColor:
-                                  //           ColorValues.appLightBlueColor,
-                                  //       onPressed: () {},
-                                  //       text: 'PDF'),
-                                  // ),
-                                  Spacer(),
-                                  Container(
-                                    width: 300,
-                                    height: 40,
-                                    margin: Dimens.edgeInsets0_0_7_0,
-                                    child: TextField(
-                                      style: GoogleFonts.lato(
-                                        textStyle: TextStyle(
-                                            fontSize: 16.0,
-                                            height: 1.0,
-                                            color: Colors.black),
                                       ),
-                                      onChanged: (value) =>
-                                          controller.search(value),
-                                      decoration: InputDecoration(
-                                        enabledBorder: const OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: Colors.grey,
-                                            width: 0.0,
+                                      // Container(
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'Copy'),
+                                      // ),
+                                      Container(
+                                        decoration: BoxDecoration(boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            offset: const Offset(2.0, 1.0),
+                                            blurRadius: 5.0,
+                                            spreadRadius: 1.0,
+                                          )
+                                        ]),
+                                        height: 35,
+                                        margin: EdgeInsets.only(left: 10),
+                                        child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appLightBlueColor,
+                                            onPressed: () {
+                                              controller.export();
+                                            },
+                                            text: 'Excel'),
+                                      ),
+                                      // Container(
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'PDF'),
+                                      // ),
+                                      Spacer(),
+                                      Container(
+                                        width: 300,
+                                        height: 40,
+                                        margin: Dimens.edgeInsets0_0_7_0,
+                                        child: TextField(
+                                          style: GoogleFonts.lato(
+                                            textStyle: TextStyle(
+                                                fontSize: 16.0,
+                                                height: 1.0,
+                                                color: Colors.black),
+                                          ),
+                                          onChanged: (value) =>
+                                              controller.search(value),
+                                          decoration: InputDecoration(
+                                            enabledBorder:
+                                                const OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                color: Colors.grey,
+                                                width: 0.0,
+                                              ),
+                                            ),
+                                            focusedBorder:
+                                                const OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                color: Colors.grey,
+                                                width: 0.0,
+                                              ),
+                                            ),
+                                            contentPadding:
+                                                EdgeInsets.only(left: 3),
+                                            hintText: 'search'.tr,
+                                            hintStyle: Styles.grey16,
                                           ),
                                         ),
-                                        focusedBorder: const OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: Colors.grey,
-                                            width: 0.0,
-                                          ),
-                                        ),
-                                        contentPadding:
-                                            EdgeInsets.only(left: 3),
-                                        hintText: 'search'.tr,
-                                        hintStyle: Styles.grey16,
                                       ),
-                                    ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              controller.pmPlanList.isEmpty == true &&
-                                      controller.isLoading == false
-                                  ? Center(child: Text("No data"))
-                                  : controller.isLoading.value == true
-                                      ? Center(
-                                          child: Text("Data Loading......"))
-                                      : Expanded(
-                                          child: ValueListenableBuilder(
-                                              valueListenable:
-                                                  controller.columnVisibility,
-                                              builder: (context, value, child) {
-                                                final dataSource =
-                                                    PmPlanDataSource(
-                                                        controller);
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  controller.pmPlanList.isEmpty == true &&
+                                          controller.isLoading == false
+                                      ? Center(child: Text("No data"))
+                                      : controller.isLoading.value == true
+                                          ? Center(
+                                              child: Text("Data Loading......"))
+                                          : Expanded(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    final dataSource =
+                                                        PmPlanDataSource(
+                                                            controller);
 
-                                                return PaginatedDataTable2(
-                                                  // fixedLeftColumns: 1,
-                                                  // dataRowHeight: Get.height * 0.12,
-                                                  columnSpacing: 10,
-                                                  source:
-                                                      dataSource, // Custom DataSource class
-                                                  // headingRowHeight: Get.height * 0.12,
-                                                  minWidth:
-                                                      2000, //Get.width * 1.2,
-                                                  showCheckboxColumn: false,
-                                                  rowsPerPage:
-                                                      10, // Number of rows per page
-                                                  availableRowsPerPage: [
-                                                    10,
-                                                    20,
-                                                    30,
-                                                    50
-                                                  ],
-                                                  columns: [
-                                                    for (var entry
-                                                        in value.entries)
-                                                      if (entry.value)
+                                                    return PaginatedDataTable2(
+                                                      // fixedLeftColumns: 1,
+                                                      // dataRowHeight: Get.height * 0.12,
+                                                      columnSpacing: 10,
+                                                      source:
+                                                          dataSource, // Custom DataSource class
+                                                      // headingRowHeight: Get.height * 0.12,
+                                                      minWidth:
+                                                          2000, //Get.width * 1.2,
+                                                      showCheckboxColumn: false,
+                                                      rowsPerPage:
+                                                          10, // Number of rows per page
+                                                      availableRowsPerPage: [
+                                                        10,
+                                                        20,
+                                                        30,
+                                                        50
+                                                      ],
+                                                      columns: [
+                                                        for (var entry
+                                                            in value.entries)
+                                                          if (entry.value)
+                                                            buildDataColumn(
+                                                              entry.key,
+                                                              controller
+                                                                      .filterText[
+                                                                  entry.key]!,
+                                                              controller
+                                                                      .columnwidth[
+                                                                  entry.key],
+                                                            ),
                                                         buildDataColumn(
-                                                          entry.key,
-                                                          controller.filterText[
-                                                              entry.key]!,
+                                                          'Actions',
                                                           controller
-                                                                  .columnwidth[
-                                                              entry.key],
+                                                              .tittleFilterText,
+                                                          200,
                                                         ),
-                                                    buildDataColumn(
-                                                      'Actions',
-                                                      controller
-                                                          .tittleFilterText,
-                                                      200,
-                                                    ),
-                                                  ],
-                                                );
-                                              }),
-                                        )
-                            ]),
-                      ),
+                                                      ],
+                                                    );
+                                                  }),
+                                            )
+                                ]),
+                          ),
+                        ),
+                        if (controller.openFromDateToStartDatePicker)
+                          Positioned(
+                            right: 150,
+                            top: 60,
+                            child: DatePickerWidget(
+                              selectionMode: DateRangePickerSelectionMode.range,
+                              monthCellStyle: DateRangePickerMonthCellStyle(
+                                todayCellDecoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: ColorValues.appDarkBlueColor),
+                              ), // last date of this year
+                              // controller: DateRangePickerController(),
+                              initialSelectedRange: PickerDateRange(
+                                controller.fromDate.value,
+                                controller.toDate.value,
+                              ),
+
+                              onSubmit: (value) {
+                                print('po valu ${value.toString()}');
+                                PickerDateRange? data =
+                                    value as PickerDateRange;
+
+                                var pickUpDate =
+                                    DateTime.parse(data.startDate.toString());
+                                controller.fromDate.value = pickUpDate;
+                                var dropDate =
+                                    DateTime.parse(data.endDate.toString());
+                                dropDate != null
+                                    ? controller.toDate.value = dropDate
+                                    : controller.toDate.value = pickUpDate;
+
+                                controller.getPmPlanListByDate();
+                                controller.openFromDateToStartDatePicker =
+                                    false;
+                                controller
+                                    .update(['PreventiveMaintenanceTask']);
+
+                                // Get.toNamed(
+                                //   Routes.stockManagementGoodsOrdersScreen,
+                                // );
+                              },
+                              onCancel: () {
+                                controller.openFromDateToStartDatePicker =
+                                    false;
+                                controller
+                                    .update(['PreventiveMaintenanceTask']);
+                              },
+                            ),
+                          ),
+                      ],
                     ),
                   ),
                 ],
@@ -347,12 +440,12 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
         DataColumn2(
       // size: columnSize,
       fixedWidth: fixedWidth,
-          onSort: header == "Actions"
-        ? null
-        : (int columnIndex, bool ascending) {
-            final controller = Get.find<PmPlanListController>();
-            controller.sortData(header);
-          },
+      onSort: header == "Actions"
+          ? null
+          : (int columnIndex, bool ascending) {
+              final controller = Get.find<PmPlanListController>();
+              controller.sortData(header);
+            },
 
       label: //
           Column(
@@ -397,29 +490,29 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
             //     style: Styles.black16W500,
             //   ),
             // ),
-             Row(
-          children: [
-            Text(
-              header,
-              style: Styles.black16W500,
-            ),
-            if (header != "Actions")
-              Obx(() {
-                final controller = Get.find<PmPlanListController>();
+            Row(
+              children: [
+                Text(
+                  header,
+                  style: Styles.black16W500,
+                ),
+                if (header != "Actions")
+                  Obx(() {
+                    final controller = Get.find<PmPlanListController>();
 
-                return AnimatedRotation(
-                  turns: controller.currentSortColumn.value == header
-                      ? (controller.isAscending.value ? 0.5 : 0.0)
-                      : 0.0,
-                  duration: Duration(milliseconds: 300),
-                  child: Icon(
-                    Icons.expand_more,
-                    size: 20,
-                  ),
-                );
-              }),
-          ],
-        ),
+                    return AnimatedRotation(
+                      turns: controller.currentSortColumn.value == header
+                          ? (controller.isAscending.value ? 0.5 : 0.0)
+                          : 0.0,
+                      duration: Duration(milliseconds: 300),
+                      child: Icon(
+                        Icons.expand_more,
+                        size: 20,
+                      ),
+                    );
+                  }),
+              ],
+            ),
           ]),
       // ),
     );

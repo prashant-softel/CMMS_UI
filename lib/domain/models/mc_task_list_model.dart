@@ -48,7 +48,7 @@ class MCTaskListModel {
   dynamic cleaningType;
   int? waterused;
   int? deviation;
-  int? time_taken;
+  dynamic time_taken;
   dynamic responsibility;
   dynamic frequency;
   int? noOfDays;
