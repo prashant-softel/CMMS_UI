@@ -25,7 +25,8 @@ class Cumulativereport {
       this.remark,
       this.scheduledQuantity,
       this.timeTaken,
-      this.waterUsed});
+      this.waterUsed,
+      this.no_of_task});
 
   dynamic site_name;
   int? Created;
@@ -44,6 +45,7 @@ class Cumulativereport {
   dynamic remark;
   dynamic deviation;
   dynamic timeTaken;
+  dynamic no_of_task;
   factory Cumulativereport.fromJson(Map<String, dynamic> json) =>
       Cumulativereport(
         site_name: json["site_name"] == null ? "" : json["site_name"],
@@ -61,6 +63,7 @@ class Cumulativereport {
             : json["closedOnTimeCreate"],
         timeTaken: json["timeTaken"],
         deviation: json["deviation"],
+        no_of_task: json["no_of_task"],
         remark: json["remark"],
         abandoned: json["abandoned"],
         actualQuantity: json["actualQuantity"],
@@ -70,6 +73,7 @@ class Cumulativereport {
       );
   Map<String, dynamic> toJson() => {
         'cleaningType': cleaningType,
+        "no_of_task": no_of_task,
         'waterUsed': waterUsed,
         'scheduledQuantity': scheduledQuantity,
         'actualQuantity': actualQuantity,

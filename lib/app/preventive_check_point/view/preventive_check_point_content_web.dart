@@ -522,7 +522,8 @@ class PreventiveCheckPointContentWeb
                                                       'Text',
                                                       'Bool',
                                                       'Range',
-                                                      'Input Range'
+                                                      'Input Range',
+                                                      'three state boolean'
                                                     ].map<
                                                             DropdownMenuItem<
                                                                 String>>(

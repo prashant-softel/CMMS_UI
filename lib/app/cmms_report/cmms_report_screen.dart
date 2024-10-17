@@ -116,20 +116,18 @@ class CmmsReportDashboardScreen extends GetView<CmmsReportDashboardController> {
                             //             .length >
                             //         0
                             //     ?
-                            _incidentReportList(
-                                tittle: "Basic Report",
-                                ontap: () {
-                                  String type = 1.toString();
-                                  Get.offNamed(
-                                      '${Routes.cumulativeReport}/$type');
-                                }),
+                            // _incidentReportList(
+                            //     tittle: "Basic Report",
+                            //     ontap: () {
+                            //       Get.offNamed(
+                            //           '${Routes.cumulativeReport}');
+                            //     }),
                             // : Dimens.box0,
                             _incidentReportList(
-                                tittle: "Cumulative Report",
+                                tittle: "Report",
                                 ontap: () {
                                   String type = 2.toString();
-                                  Get.offNamed(
-                                      '${Routes.cumulativeReport}/$type');
+                                  Get.offNamed('${Routes.cumulativeReport}');
                                 }),
                             _incidentReportList(
                                 tittle: "SM Report",

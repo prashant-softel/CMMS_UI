@@ -314,7 +314,9 @@ class PreventiveCheckPointController extends GetxController {
                   ? 1
                   : checkpointType.value == "Range"
                       ? 2
-                      : 3,
+                      : checkpointType.value == "Input Range"
+                          ? 3
+                          : 4,
           max: _max,
           min: _min);
 
@@ -613,7 +615,9 @@ class PreventiveCheckPointController extends GetxController {
                 ? 1
                 : checkpointType.value == "Range"
                     ? 2
-                    : 3,
+                    : checkpointType.value == "Input Range"
+                        ? 3
+                        : 4,
         max: _max,
         min: _min);
 

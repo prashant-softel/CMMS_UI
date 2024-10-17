@@ -77,11 +77,12 @@ class _CumulativeReportContentWebState
                       },
                       child: Text(" / REPORT", style: Styles.greyLight14),
                     ),
-                    Text(
-                        controller.type.value == 1
-                            ? " / BASIC REPORT"
-                            : " / CUMULATIVE REPORT",
-                        style: Styles.greyLight14)
+                    // Text(
+                    //     controller.checkpointType.value ==
+                    // "Basic"
+                    //         ? " / BASIC REPORT"
+                    //         : " / CUMULATIVE REPORT",
+                    //     style: Styles.greyLight14)
                   ],
                 ),
               ),
@@ -97,10 +98,69 @@ class _CumulativeReportContentWebState
                           child: Row(
                             children: [
                               Text(
-                                controller.type.value == 1
-                                    ? "BASIC REPORT"
-                                    : "CUMULATIVE REPORT",
+                                "REPORT",
+                                // controller.checkpointType.value ==
+                                // "Basic"
+                                //     ? "BASIC REPORT"
+                                //     : "CUMULATIVE REPORT",
                                 style: Styles.blackBold16,
+                              ),
+                              Spacer(),
+                              Text(
+                                "Report Type:   ",
+                                style: Styles.black14,
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(6),
+                                  border: Border.all(
+                                    color: Color.fromARGB(255, 227, 224, 224),
+                                    width: 1,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      offset: const Offset(
+                                        5.0,
+                                        5.0,
+                                      ),
+                                      blurRadius: 5.0,
+                                      spreadRadius: 1.0,
+                                    ),
+                                    BoxShadow(
+                                      color: ColorValues.whiteColor,
+                                      offset: const Offset(0.0, 0.0),
+                                      blurRadius: 0.0,
+                                      spreadRadius: 0.0,
+                                    ),
+                                  ],
+                                ),
+                                width: (MediaQuery.of(context).size.width * .2),
+                                height: 35,
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<String>(
+                                    isExpanded: true,
+                                    value: controller.checkpointType.value,
+                                    onChanged: (value) => controller
+                                      ..updatecheCkpointType(value!),
+                                    items: <String>[
+                                      'Basic',
+                                      'Cumulative',
+                                    ].map<DropdownMenuItem<String>>(
+                                        (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Container(
+                                          margin: EdgeInsets.only(left: 10),
+                                          child: Text(
+                                            value,
+                                            style: Styles.black12,
+                                          ),
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -123,9 +183,11 @@ class _CumulativeReportContentWebState
                                   ),
                                   Dimens.boxWidth2,
                                   SizedBox(
-                                    width: controller.type.value == 1 &&
+                                    width: controller.checkpointType.value ==
+                                                    "Basic" &&
                                                 controller.module_id == 2 ||
-                                            controller.type.value == 1 &&
+                                            controller.checkpointType.value ==
+                                                    "Basic" &&
                                                 controller.module_id == 39
                                         ? MediaQuery.of(context).size.width / 7
                                         : MediaQuery.of(context).size.width / 5,
@@ -163,9 +225,11 @@ class _CumulativeReportContentWebState
                                     Dimens.boxWidth2,
                                     DropdownWebWidget(
                                       height: 40,
-                                      width: controller.type.value == 1 &&
+                                      width: controller.checkpointType.value ==
+                                                      "Basic" &&
                                                   controller.module_id == 2 ||
-                                              controller.type.value == 1 &&
+                                              controller.checkpointType.value ==
+                                                      "Basic" &&
                                                   controller.module_id == 39
                                           ? MediaQuery.of(context).size.width /
                                               7
@@ -181,9 +245,10 @@ class _CumulativeReportContentWebState
                                   ],
                                 ),
                               ),
-                              controller.type.value == 1 &&
+                              controller.checkpointType.value == "Basic" &&
                                           controller.module_id == 2 ||
-                                      controller.type.value == 1 &&
+                                      controller.checkpointType.value ==
+                                              "Basic" &&
                                           controller.module_id == 39
                                   ? Container(
                                       child: Row(
@@ -236,9 +301,11 @@ class _CumulativeReportContentWebState
                                   ),
                                   Dimens.boxWidth2,
                                   CustomTextFieldForStock(
-                                    width: controller.type.value == 1 &&
+                                    width: controller.checkpointType.value ==
+                                                    "Basic" &&
                                                 controller.module_id == 2 ||
-                                            controller.type.value == 1 &&
+                                            controller.checkpointType.value ==
+                                                    "Basic" &&
                                                 controller.module_id == 39
                                         ? MediaQuery.of(context).size.width / 7
                                         : MediaQuery.of(context).size.width / 5,
@@ -260,16 +327,23 @@ class _CumulativeReportContentWebState
                                 child: CustomElevatedButton(
                                   backgroundColor: ColorValues.appDarkBlueColor,
                                   onPressed: () {
-                                    if (controller.type.value == 1 &&
+                                    if (controller.checkpointType.value ==
+                                            "Basic" &&
                                         controller.module_id == 2) {
                                       controller.getJobList();
-                                    } else if (controller.type.value == 1 &&
+                                    } else if (controller
+                                                .checkpointType.value ==
+                                            "Basic" &&
                                         controller.module_id == 39) {
                                       controller.getPmTaskList();
-                                    } else if (controller.type.value == 1 &&
+                                    } else if (controller
+                                                .checkpointType.value ==
+                                            "Basic" &&
                                         controller.module_id == 44) {
                                       controller.getVegTaskList();
-                                    } else if (controller.type.value == 1 &&
+                                    } else if (controller
+                                                .checkpointType.value ==
+                                            "Basic" &&
                                         controller.module_id == 43) {
                                       controller.getMCTaskList();
                                     } else {
@@ -502,7 +576,7 @@ class _CumulativeReportContentWebState
                                       DataColumn2(
                                         fixedWidth: 140,
                                         label: Text(
-                                          'No. of cycles',
+                                          'No. of task',
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
@@ -564,15 +638,11 @@ class _CumulativeReportContentWebState
                                                         ?.deviation
                                                         .toString() ??
                                                     "")),
-                                                if (controller
-                                                        .module_id.value ==
-                                                    43)
-                                                  DataCell(Text(controller
-                                                          .cumulativereport[
-                                                              index]
-                                                          ?.NotStarted
-                                                          .toString() ??
-                                                      "")),
+                                                DataCell(Text(controller
+                                                        .cumulativereport[index]
+                                                        ?.no_of_task
+                                                        .toString() ??
+                                                    "")),
                                                 if (controller
                                                         .module_id.value ==
                                                     43)
@@ -582,11 +652,15 @@ class _CumulativeReportContentWebState
                                                           ?.cleaningType
                                                           .toString() ??
                                                       "")),
-                                                DataCell(Text(controller
-                                                        .cumulativereport[index]
-                                                        ?.waterUsed
-                                                        .toString() ??
-                                                    "")),
+                                                if (controller
+                                                        .module_id.value ==
+                                                    43)
+                                                  DataCell(Text(controller
+                                                          .cumulativereport[
+                                                              index]
+                                                          ?.waterUsed
+                                                          .toString() ??
+                                                      "")),
                                                 DataCell(Text(controller
                                                         .cumulativereport[index]
                                                         ?.timeTaken
@@ -605,12 +679,12 @@ class _CumulativeReportContentWebState
                             : Dimens.box0,
                         controller.jobList.length > 0 &&
                                 controller.module_id.value == 2 &&
-                                controller.type.value == 1
+                                controller.checkpointType.value == "Basic"
                             ? Container(
                                 margin: EdgeInsets.all(20),
                                 color: Color.fromARGB(255, 245, 248, 250),
                                 width: Get.width,
-                                height: Get.height - 290,
+                                height: Get.height - 320,
                                 // ((controller.jobList.length) * 40) + 100,
                                 child: Padding(
                                   padding: const EdgeInsets.all(16),
@@ -834,12 +908,12 @@ class _CumulativeReportContentWebState
                             : Dimens.box0,
                         controller.pmTaskList.length > 0 &&
                                 controller.module_id.value == 39 &&
-                                controller.type.value == 1
+                                controller.checkpointType.value == "Basic"
                             ? Container(
                                 margin: EdgeInsets.all(20),
                                 color: Color.fromARGB(255, 245, 248, 250),
                                 width: Get.width,
-                                height: Get.height - 290,
+                                height: Get.height - 330,
                                 child: Padding(
                                   padding: const EdgeInsets.all(16),
                                   child: DataTable2(
@@ -885,7 +959,7 @@ class _CumulativeReportContentWebState
                                       DataColumn2(
                                         fixedWidth: 200,
                                         label: Text(
-                                          'Start date',
+                                          'Plan date',
                                           style: Styles.blackBold14,
                                         ),
                                         // size: ColumnSize.L,
@@ -983,7 +1057,7 @@ class _CumulativeReportContentWebState
                                                     "")),
                                                 DataCell(Text(controller
                                                         .pmTaskList[index]
-                                                        ?.start_date
+                                                        ?.due_date
                                                         .toString() ??
                                                     "")),
                                                 DataCell(Text(controller
@@ -1062,12 +1136,12 @@ class _CumulativeReportContentWebState
                             : Dimens.box0,
                         controller.vegTaskList.length > 0 &&
                                 controller.module_id.value == 44 &&
-                                controller.type.value == 1
+                                controller.checkpointType.value == "Basic"
                             ? Container(
                                 margin: EdgeInsets.all(20),
                                 color: Color.fromARGB(255, 245, 248, 250),
                                 width: Get.width,
-                                height: Get.height - 290,
+                                height: Get.height - 300,
                                 child: Padding(
                                   padding: const EdgeInsets.all(16),
                                   child: DataTable2(
@@ -1190,7 +1264,11 @@ class _CumulativeReportContentWebState
                                                         ?.deviation
                                                         .toString() ??
                                                     "")),
-                                                DataCell(Text("")),
+                                                DataCell(Text(controller
+                                                        .vegTaskList[index]
+                                                        ?.cleaningTypeName
+                                                        .toString() ??
+                                                    "")),
                                                 DataCell(Text(controller
                                                         .vegTaskList[index]
                                                         ?.time_taken
@@ -1264,12 +1342,12 @@ class _CumulativeReportContentWebState
                             : Dimens.box0,
                         controller.mcTaskList.length > 0 &&
                                 controller.module_id.value == 43 &&
-                                controller.type.value == 1
+                                controller.checkpointType.value == "Basic"
                             ? Container(
                                 margin: EdgeInsets.all(20),
                                 color: Color.fromARGB(255, 245, 248, 250),
                                 width: Get.width,
-                                height: Get.height - 290,
+                                height: Get.height - 300,
                                 child: Padding(
                                   padding: const EdgeInsets.all(16),
                                   child: DataTable2(
