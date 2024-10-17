@@ -2485,7 +2485,7 @@ class CumulativeReportController extends GetxController {
       currentY += rowHeight; // Move to next row
     } // Render All Job Cards in PDF
     for (var jobCard in allJobCardDetails) {
-      // Add a new page if the content exceeds the current page size
+      // Add a new page for each JobCard if the content exceeds the page height
       if (currentY > pageSize.height - 100) {
         page = document.pages.add(); // Add a new page
         currentY = 30; // Reset the Y position for the new page
@@ -2522,13 +2522,21 @@ class CumulativeReportController extends GetxController {
         'Type of Job',
         'Performed by'
       ];
+
+      // Accessing the values from LstCmjcJobDetailList
+      LstCmjcJobDetailList? jobDetails =
+          jobCard.lstCmjcJobDetailList?.isNotEmpty ?? false
+              ? jobCard.lstCmjcJobDetailList!.first
+              : null;
+
       List<String> jobInfoValuesLeft = [
         'JOB${jobCard?.jobId ?? ''}',
-        '${jobCard?.jobId ?? ''}',
-        '${jobCard?.assetCategoryName ?? ''}',
-        '${jobCard?.blockName ?? ''}',
-        '${jobCard?.currentStatus ?? ''}',
+        '${jobDetails?.breakdownStartTime ?? ''}',
+        '${jobDetails?.jobRaisedOn ?? ''}',
+        '${jobDetails?.typeOfJob ?? ''}',
+        '${jobDetails?.performBy ?? ''}',
       ];
+
       double rowHeight = 15;
       for (int i = 0; i < jobInfoLabelsLeft.length; i++) {
         page.graphics.drawString(jobInfoLabelsLeft[i], contentFont,
@@ -2546,10 +2554,14 @@ class CumulativeReportController extends GetxController {
         'TAT'
       ];
       List<String> jobInfoValuesRight = [
-        '${jobCard?.title ?? ''}',
-        jobCard?.status == 158 ? '${jobCard.title ?? ''}' : '',
-        jobCard?.status == 158 ? '${jobCard?.title ?? ''}' : '',
-        '${jobCard?.title ?? ''} Minutes',
+        '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.jobTitle ?? ''}',
+        jobCardDetailsModel.value!.status == 158
+            ? '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.breakdownEndTime ?? ''}'
+            : "",
+        jobCardDetailsModel.value!.status == 158
+            ? '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.jobClosedOn ?? ''}'
+            : "",
+        '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.turnaroundTimeMinutes ?? ''} Minutes',
       ];
 
       currentY -= jobInfoLabelsLeft.length *
