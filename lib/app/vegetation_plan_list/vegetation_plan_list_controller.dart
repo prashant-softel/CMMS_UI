@@ -8,6 +8,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/vegetation_list_plan_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class VegetationPlanListController extends GetxController {
@@ -65,6 +66,12 @@ class VegetationPlanListController extends GetxController {
   );
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
+  String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
 
   Rx<bool> isLoading = true.obs;
   @override
@@ -103,9 +110,12 @@ class VegetationPlanListController extends GetxController {
 
     final _vegetationPlanList =
         await vegetationPlanListPresenter.getVegetationPlanList(
-            isLoading: isLoading.value,
-            facility_id: facilityId,
-            isExport: isExport);
+      isLoading: isLoading.value,
+      facility_id: facilityId,
+      isExport: isExport,
+      startDate: formattedTodate1,
+      endDate: formattedFromdate1,
+    );
 
     if (!isExportOnly) {
       vegetationPlanList.value = _vegetationPlanList;
@@ -281,5 +291,4 @@ class VegetationPlanListController extends GetxController {
 
     update(); // Trigger UI update after sorting
   }
-  
 }

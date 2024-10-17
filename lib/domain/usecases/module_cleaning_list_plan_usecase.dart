@@ -14,12 +14,16 @@ class ModuleCleaningListPlanUsecase {
     required int? facility_id,
     bool? self_view,
     bool? isExport,
+    dynamic endDate,
+    dynamic startDate,
   }) async {
     return repository.getModuleCleaningListPlan(
       isLoading: isLoading,
       facility_id: facility_id,
       isExport: isExport,
-      self_view:self_view,
+      self_view: self_view,
+      startDate: startDate,
+      endDate: endDate,
     );
   }
 

@@ -12,9 +12,15 @@ class VegetationPlanListPresenter {
     required bool isLoading,
     required int? facility_id,
     bool? isExport,
+    dynamic endDate,
+    dynamic startDate,
   }) async {
     return vegetationlistUsecase.getVegetationPlanList(
-        isLoading: isLoading, facility_id: facility_id, isExport: isExport);
+        isLoading: isLoading,
+        facility_id: facility_id,
+        isExport: isExport,
+        endDate: endDate,
+        startDate: startDate);
   }
 
   deleteVegPlan(
