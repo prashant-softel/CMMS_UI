@@ -2485,6 +2485,89 @@ class CumulativeReportController extends GetxController {
       currentY += rowHeight; // Move to next row
     }
 
+// Add JobCardId details section after "Material Issue / Used"
+    currentY += 20; // Add some spacing
+
+// Loop through each jobCardId and render details for each
+    for (int index = 0;
+        index < (jobAssociatedModelsList?.length ?? 0);
+        index++) {
+      var job = jobAssociatedModelsList?[index];
+
+      // Draw the jobCardId and related details
+      final String jobCardIdText = 'JobCard ID: JC${job?.jobCardId ?? ''}';
+      page.graphics.drawString(
+        jobCardIdText,
+        contentFont,
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, rowHeight),
+      );
+      currentY += rowHeight;
+
+      final String jobCardDetailsText =
+          'Details of JobCard ID: JC${job?.jobCardId ?? ''}';
+      page.graphics.drawString(
+        jobCardDetailsText,
+        contentFont,
+        bounds: Rect.fromLTWH(margin, currentY, pageWidth, rowHeight),
+      );
+      currentY += rowHeight;
+
+      // Draw the table headers for JobCardId details
+      List<String> jobCardHeaders = [
+        'Permit ID',
+        'Permit Status',
+        'Job Card Date',
+        'Status'
+      ];
+      double colWidth = pageWidth / jobCardHeaders.length;
+
+      // Render shaded header for JobCardId table
+      for (int i = 0; i < jobCardHeaders.length; i++) {
+        page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(
+              margin + i * colWidth, currentY, colWidth, rowHeight),
+        );
+        page.graphics.drawString(
+          jobCardHeaders[i],
+          headerFont,
+          bounds: Rect.fromLTWH(
+              margin + i * colWidth + 5, currentY + 5, colWidth, rowHeight),
+        );
+      }
+      currentY += rowHeight;
+
+      // Render jobCardId row values
+      List<String> jobCardRowValues = [
+        'PTW${job?.permitId ?? ''}',
+        job?.isExpired == 1
+            ? '${job?.permit_status_short.toString()}(Expired)'
+            : '${job?.permit_status_short ?? ''}',
+        '${job?.jobCardDate ?? ''}',
+        '${job?.status_short ?? ''}'
+      ];
+
+      // Draw the values for JobCardId details
+      for (int i = 0; i < jobCardRowValues.length; i++) {
+        page.graphics.drawRectangle(
+          pen: borderPen,
+          bounds: Rect.fromLTWH(
+              margin + i * colWidth, currentY, colWidth, rowHeight),
+        );
+        page.graphics.drawString(
+          jobCardRowValues[i],
+          contentFont,
+          bounds: Rect.fromLTWH(
+              margin + i * colWidth + 5, currentY + 5, colWidth, rowHeight),
+        );
+      }
+      currentY += rowHeight;
+
+      // Add spacing between jobCardIds if there are multiple
+      currentY += 10;
+    }
+
     // Signature section
     final String signatureText = 'Signature';
     final Size signatureSize = contentFont.measureString(signatureText);
