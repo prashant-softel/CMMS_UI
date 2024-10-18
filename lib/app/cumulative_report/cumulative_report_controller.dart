@@ -3182,6 +3182,21 @@ class CumulativeReportController extends GetxController {
             bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
         currentY += rowHeight; // Move to next row after the message
       }
+      currentY += 25;
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('Remarks', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
+
+      page.graphics.drawString('${jobCard.remarkNew ?? ''}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin + 5, currentY + 5, pageWidth - 10, rowHeight * 2),
+          format: PdfStringFormat(alignment: PdfTextAlignment.left));
+      currentY += rowHeight;
+      checkPageOverflow();
     }
 
     // Signature section
@@ -3250,6 +3265,7 @@ class CumulativeReportController extends GetxController {
 
           if (jobCardId != null) {
             await getJobCardDetails(jobCardId, facilityId);
+            await getHistory(4, jobCardId, facilityId);
             print('jobCardId: $jobCardId');
           }
         }
