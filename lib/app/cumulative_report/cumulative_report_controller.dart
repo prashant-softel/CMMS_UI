@@ -2790,8 +2790,8 @@ class CumulativeReportController extends GetxController {
         currentY += rowHeight;
       }
       currentY += 10; // Adding some space before the next section
-
-// Draw the PTW Information section header
+// PTW Information section
+      currentY += 25; // Adding some space before PTW section
       page.graphics.drawRectangle(
           pen: borderPen,
           brush: backgroundBrush,
@@ -2801,101 +2801,71 @@ class CumulativeReportController extends GetxController {
       currentY += sectionHeight;
       checkPageOverflow();
 
-// Define static widths for the S. No, PTW ID, and Isolation taken columns
-      double ptwIdWidth = 50; // Width for PTW ID
-      double isolationTakenWidth = 80; // Width for Isolation taken
-      double remainingWidth = pageWidth -
-          (ptwIdWidth +
-              serialNoWidth +
-              isolationTakenWidth); // Calculate remaining width
+// Define static widths for PTW columns
+      double ptwIdWidth = 50;
+      double isolationWidth = pageWidth / 4;
+      double permitTypeWidth = pageWidth / 4;
+      double equipmentWidth =
+          pageWidth - (ptwIdWidth + isolationWidth + permitTypeWidth);
 
-// Headers for PTW Information section
+// Draw PTW headers
       List<String> ptwHeaders = [
         'S. No',
         'PTW ID',
         'Isolation taken',
         'Permit type',
-        'Isolated equipment\'s'
+        'Isolated equipment(s)'
       ];
-
-// Draw the headers with static widths
       page.graphics.drawString(ptwHeaders[0], contentFont,
-          bounds:
-              Rect.fromLTWH(margin, currentY + 5, serialNoWidth, rowHeight));
+          bounds: Rect.fromLTWH(margin, currentY + 5, ptwIdWidth, rowHeight));
       page.graphics.drawString(ptwHeaders[1], contentFont,
           bounds: Rect.fromLTWH(
-              margin + serialNoWidth, currentY + 5, ptwIdWidth, rowHeight));
+              margin + ptwIdWidth, currentY + 5, ptwIdWidth, rowHeight));
       page.graphics.drawString(ptwHeaders[2], contentFont,
-          bounds: Rect.fromLTWH(margin + serialNoWidth + ptwIdWidth,
-              currentY + 5, isolationTakenWidth, rowHeight));
+          bounds: Rect.fromLTWH(margin + ptwIdWidth * 2, currentY + 5,
+              isolationWidth, rowHeight));
       page.graphics.drawString(ptwHeaders[3], contentFont,
-          bounds: Rect.fromLTWH(
-              margin + serialNoWidth + ptwIdWidth + isolationTakenWidth,
-              currentY + 5,
-              remainingWidth / 2,
-              rowHeight));
+          bounds: Rect.fromLTWH(margin + ptwIdWidth * 3, currentY + 5,
+              permitTypeWidth, rowHeight));
       page.graphics.drawString(ptwHeaders[4], contentFont,
-          bounds: Rect.fromLTWH(
-              margin +
-                  serialNoWidth +
-                  ptwIdWidth +
-                  isolationTakenWidth +
-                  remainingWidth / 2,
-              currentY + 5,
-              remainingWidth / 2,
-              rowHeight));
+          bounds: Rect.fromLTWH(margin + ptwIdWidth * 4, currentY + 5,
+              equipmentWidth, rowHeight));
 
-      currentY += rowHeight;
+      currentY += rowHeight; // Move down after rendering headers
+      checkPageOverflow();
 
-// Extract data from LstPermitDetailList and display the PTW information
-      if (jobCardDetailsModel.value!.lstPermitDetailList != null &&
-          jobCardDetailsModel.value!.lstPermitDetailList!.isNotEmpty) {
+// Render PTW data from jobCard.lstPermitDetailList
+      if (jobCard.lstPermitDetailList != null &&
+          jobCard.lstPermitDetailList!.isNotEmpty) {
         int serialNo = 1;
-        for (var permit in jobCardDetailsModel.value!.lstPermitDetailList!) {
-          // Draw the PTW data
+        for (var permit in jobCard.lstPermitDetailList!) {
           page.graphics.drawString('$serialNo', contentFont,
               bounds: Rect.fromLTWH(
-                  margin, currentY + 5, serialNoWidth, rowHeight)); // S. No
+                  margin, currentY + 5, ptwIdWidth, rowHeight)); // S. No
           page.graphics.drawString('${permit.permitId ?? ''}', contentFont,
-              bounds: Rect.fromLTWH(margin + serialNoWidth, currentY + 5,
+              bounds: Rect.fromLTWH(margin + ptwIdWidth, currentY + 5,
                   ptwIdWidth, rowHeight)); // PTW ID
           page.graphics.drawString(
               '${permit.isolationTaken ?? ''}', contentFont,
-              bounds: Rect.fromLTWH(
-                  margin + serialNoWidth + ptwIdWidth,
-                  currentY + 5,
-                  isolationTakenWidth,
-                  rowHeight)); // Isolation taken
+              bounds: Rect.fromLTWH(margin + ptwIdWidth * 2, currentY + 5,
+                  isolationWidth, rowHeight)); // Isolation
           page.graphics.drawString('${permit.permitType ?? ''}', contentFont,
-              bounds: Rect.fromLTWH(
-                  margin + serialNoWidth + ptwIdWidth + isolationTakenWidth,
-                  currentY + 5,
-                  remainingWidth / 2,
-                  rowHeight)); // Permit type
+              bounds: Rect.fromLTWH(margin + ptwIdWidth * 3, currentY + 5,
+                  permitTypeWidth, rowHeight)); // Permit type
           page.graphics.drawString(
               '${permit.isolatedEquipment ?? ''}', contentFont,
-              bounds: Rect.fromLTWH(
-                  margin +
-                      serialNoWidth +
-                      ptwIdWidth +
-                      isolationTakenWidth +
-                      remainingWidth / 2,
-                  currentY + 5,
-                  remainingWidth / 2,
-                  rowHeight)); // Isolated equipment's
-
+              bounds: Rect.fromLTWH(margin + ptwIdWidth * 4, currentY + 5,
+                  equipmentWidth, rowHeight)); // Isolated equipment
           currentY += rowHeight;
+          checkPageOverflow();
           serialNo++;
         }
       } else {
-        // Draw the "No PTW information available" message below the headers
-        page.graphics.drawString('No PTW information available', contentFont,
+        page.graphics.drawString('No PTW Information available', contentFont,
             bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
-
         currentY += rowHeight;
       }
-      currentY += 25; // Adding some space before the next section
-
+ currentY += 25; // Addi
 // TBT section header
       page.graphics.drawRectangle(
           pen: borderPen,
