@@ -2491,24 +2491,35 @@ class CumulativeReportController extends GetxController {
         currentY = 30; // Reset the Y position for the new page
       }
 
-      // Add the jobCardId at the top of the section
-      page.graphics.drawString('JobCard ID: ${jobCard?.id ?? ''}', headerFont,
-          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
-      currentY += sectionHeight;
+      // Add space above the "Site Name" and "Job Card ID" row
+      currentY += 20; // Space from the top
 
-      // Site name for each JobCard
+      // Define widths for the Site Name and Job Card ID columns
+      double siteNameWidth = pageWidth / 2; // 50% of page width
+      double jobCardIdWidth = pageWidth / 2; // 50% of page width
+
+      // Draw Site Name and JobCard ID in the same bordered rectangle
       page.graphics.drawRectangle(
-          pen: borderPen,
+          pen: borderPen, // Apply border for the row
           bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+
+      // Draw Site name on the left
       page.graphics.drawString(
           'Site name : ${jobCard?.plantName ?? ''}', headerFont,
-          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
-      currentY += sectionHeight;
+          bounds: Rect.fromLTWH(
+              margin + 5, currentY + 5, siteNameWidth, sectionHeight));
 
-      // Job Information for each JobCard
+      // Draw JobCard ID on the right
+      page.graphics.drawString('Job Card ID : ${jobCard?.id ?? ''}', headerFont,
+          bounds: Rect.fromLTWH(margin + siteNameWidth, currentY + 5,
+              jobCardIdWidth, sectionHeight));
+
+      currentY += sectionHeight; // Move to the next section
+
+      // Job Information header with a background color and border
       page.graphics.drawRectangle(
           pen: borderPen,
-          brush: backgroundBrush,
+          brush: backgroundBrush, // Apply background color for the header
           bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
       page.graphics.drawString('Job Information', headerFont,
           bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
@@ -2537,6 +2548,7 @@ class CumulativeReportController extends GetxController {
         '${jobDetails?.performBy ?? ''}',
       ];
 
+      // Draw the left side job info
       double rowHeight = 15;
       for (int i = 0; i < jobInfoLabelsLeft.length; i++) {
         page.graphics.drawString(jobInfoLabelsLeft[i], contentFont,
@@ -2552,6 +2564,43 @@ class CumulativeReportController extends GetxController {
         }
       }
 
+      // Draw Job Information Details (Right Side)
+      List<String> jobInfoLabelsRight = [
+        'Job title',
+        'Breakdown end time',
+        'Job closed on',
+        'TAT'
+      ];
+
+      List<String> jobInfoValuesRight = [
+        '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.jobTitle ?? ''}',
+        jobCardDetailsModel.value!.status == 158
+            ? '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.breakdownEndTime ?? ''}'
+            : "",
+        jobCardDetailsModel.value!.status == 158
+            ? '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.jobClosedOn ?? ''}'
+            : "",
+        '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.turnaroundTimeMinutes ?? ''} Minutes',
+      ];
+
+      // Right-side job info layout
+      currentY -= jobInfoLabelsLeft.length *
+          rowHeight; // Reset currentY to align with left side again
+      for (int i = 0; i < jobInfoLabelsRight.length; i++) {
+        page.graphics.drawString(jobInfoLabelsRight[i], contentFont,
+            bounds: Rect.fromLTWH(
+                labelXRight, currentY + 5, labelWidthRight, rowHeight));
+        page.graphics.drawString(jobInfoValuesRight[i], contentFont,
+            bounds: Rect.fromLTWH(
+                valueXRight, currentY + 5, valueWidthRight, rowHeight));
+        currentY += rowHeight;
+
+        // Check if a new page is needed before continuing
+        if (currentY > pageSize.height - 120) {
+          page = document.pages.add(); // Add a new page
+          currentY = 30; // Reset the Y position for the new page
+        }
+      }
       // Equipment details for each JobCard
       currentY += 20; // Adding some space before the next section
       page.graphics.drawRectangle(
@@ -2616,8 +2665,7 @@ class CumulativeReportController extends GetxController {
         page.graphics.drawString('No equipment data available', contentFont,
             bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
       }
-
-      currentY += 20; // Add space between jobCard sections
+      currentY += 20; // Add space between jobCard sections if needed
     }
 
     // Signature section
