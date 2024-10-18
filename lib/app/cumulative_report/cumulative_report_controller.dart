@@ -2859,6 +2859,117 @@ class CumulativeReportController extends GetxController {
 
         currentY += rowHeight;
       }
+      currentY += 25; // Adding some space before the next section
+
+// TBT section header
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('TBT conducted by', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
+
+// Define static widths for the TBT table columns
+      double tbtConductedByWidth =
+          pageWidth / 4; // Width for 'TBT conducted by'
+      double tbtDoneTimeWidth = pageWidth / 4; // Width for 'TBT done time'
+      double startTimeWidth = pageWidth / 4; // Width for 'Start time'
+      double statusWidth = pageWidth / 4; // Width for 'Status'
+
+// Headers for TBT section
+      List<String> tbtHeaders = [
+        'TBT conducted by',
+        'TBT done time',
+        'Start time',
+        'Status'
+      ];
+
+// Draw the headers with static widths
+      page.graphics.drawString(tbtHeaders[0], contentFont,
+          bounds: Rect.fromLTWH(
+              margin, currentY + 5, tbtConductedByWidth, rowHeight));
+      page.graphics.drawString(tbtHeaders[1], contentFont,
+          bounds: Rect.fromLTWH(margin + tbtConductedByWidth, currentY + 5,
+              tbtDoneTimeWidth, rowHeight));
+      page.graphics.drawString(tbtHeaders[2], contentFont,
+          bounds: Rect.fromLTWH(margin + tbtConductedByWidth + tbtDoneTimeWidth,
+              currentY + 5, startTimeWidth, rowHeight));
+      page.graphics.drawString(tbtHeaders[3], contentFont,
+          bounds: Rect.fromLTWH(
+              margin + tbtConductedByWidth + tbtDoneTimeWidth + startTimeWidth,
+              currentY + 5,
+              statusWidth,
+              rowHeight));
+
+      currentY += rowHeight;
+
+// Extract and display the TBT data from LstPermitDetailList
+      if (jobCardDetailsModel.value!.lstPermitDetailList != null &&
+          jobCardDetailsModel.value!.lstPermitDetailList!.isNotEmpty) {
+        for (var permit in jobCardDetailsModel.value!.lstPermitDetailList!) {
+          if (permit.tbTDoneCheck == 1) {
+            // Draw the TBT data
+            page.graphics.drawString(
+                '${permit.tbTConductedByName ?? ''}', contentFont,
+                bounds: Rect.fromLTWH(margin, currentY + 5, tbtConductedByWidth,
+                    rowHeight)); // TBT conducted by
+            page.graphics.drawString(
+                '${permit.tbTDoneTime == "0001-01-01T00:00:00" ? '' : permit.tbTDoneTime ?? ''}',
+                contentFont,
+                bounds: Rect.fromLTWH(
+                    margin + tbtConductedByWidth,
+                    currentY + 5,
+                    tbtDoneTimeWidth,
+                    rowHeight)); // TBT done time
+            page.graphics.drawString(
+                '${permit.startTime == "0001-01-01T00:00:00" ? '' : permit.startTime ?? ''}',
+                contentFont,
+                bounds: Rect.fromLTWH(
+                    margin + tbtConductedByWidth + tbtDoneTimeWidth,
+                    currentY + 5,
+                    startTimeWidth,
+                    rowHeight)); // Start time
+            page.graphics.drawString('${permit.statusShort ?? ''}', contentFont,
+                bounds: Rect.fromLTWH(
+                    margin +
+                        tbtConductedByWidth +
+                        tbtDoneTimeWidth +
+                        startTimeWidth,
+                    currentY + 5,
+                    statusWidth,
+                    rowHeight)); // Status
+
+            currentY += rowHeight;
+          }
+        }
+      } else {
+        // Draw the "No TBT information available" message below the headers
+        page.graphics.drawString('No TBT information available', contentFont,
+            bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
+
+        currentY += rowHeight;
+      }
+      // Work description section
+      currentY += 25; // Adding space before the next section
+
+// Draw the Work description section header
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('Work description', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
+
+// Add the work description from JobCardDetailsModel
+      page.graphics.drawString(
+          '${jobCardDetailsModel.value?.description ?? ''}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin + 5, currentY + 5, pageWidth - 10, rowHeight * 2),
+          format: PdfStringFormat(alignment: PdfTextAlignment.left));
+
+      currentY += rowHeight * 2; // Move down after adding the description
     }
 
     // Signature section
