@@ -2802,11 +2802,11 @@ class CumulativeReportController extends GetxController {
       checkPageOverflow();
 
 // Define static widths for PTW columns
-      double ptwIdWidth = 50;
-      double isolationWidth = pageWidth / 4;
-      double permitTypeWidth = pageWidth / 4;
-      double equipmentWidth =
-          pageWidth - (ptwIdWidth + isolationWidth + permitTypeWidth);
+
+      double ptwIdWidth = pageWidth * 0.20; // 20% for PTW ID
+      double isolationWidth = pageWidth * 0.20; // 20% for Isolation taken
+      double permitTypeWidth = pageWidth * 0.25; // 25% for Permit type
+      double equipmentWidth = pageWidth * 0.25; // 25% for Isolated equipment
 
 // Draw PTW headers
       List<String> ptwHeaders = [
@@ -2817,19 +2817,30 @@ class CumulativeReportController extends GetxController {
         'Isolated equipment(s)'
       ];
       page.graphics.drawString(ptwHeaders[0], contentFont,
-          bounds: Rect.fromLTWH(margin, currentY + 5, ptwIdWidth, rowHeight));
+          bounds:
+              Rect.fromLTWH(margin, currentY + 5, serialNoWidth, rowHeight));
       page.graphics.drawString(ptwHeaders[1], contentFont,
           bounds: Rect.fromLTWH(
-              margin + ptwIdWidth, currentY + 5, ptwIdWidth, rowHeight));
+              margin + serialNoWidth, currentY + 5, ptwIdWidth, rowHeight));
       page.graphics.drawString(ptwHeaders[2], contentFont,
-          bounds: Rect.fromLTWH(margin + ptwIdWidth * 2, currentY + 5,
-              isolationWidth, rowHeight));
+          bounds: Rect.fromLTWH(margin + serialNoWidth + ptwIdWidth,
+              currentY + 5, isolationWidth, rowHeight));
       page.graphics.drawString(ptwHeaders[3], contentFont,
-          bounds: Rect.fromLTWH(margin + ptwIdWidth * 3, currentY + 5,
-              permitTypeWidth, rowHeight));
+          bounds: Rect.fromLTWH(
+              margin + serialNoWidth + ptwIdWidth + isolationWidth,
+              currentY + 5,
+              permitTypeWidth,
+              rowHeight));
       page.graphics.drawString(ptwHeaders[4], contentFont,
-          bounds: Rect.fromLTWH(margin + ptwIdWidth * 4, currentY + 5,
-              equipmentWidth, rowHeight));
+          bounds: Rect.fromLTWH(
+              margin +
+                  serialNoWidth +
+                  ptwIdWidth +
+                  isolationWidth +
+                  permitTypeWidth,
+              currentY + 5,
+              equipmentWidth,
+              rowHeight));
 
       currentY += rowHeight; // Move down after rendering headers
       checkPageOverflow();
@@ -2841,21 +2852,31 @@ class CumulativeReportController extends GetxController {
         for (var permit in jobCard.lstPermitDetailList!) {
           page.graphics.drawString('$serialNo', contentFont,
               bounds: Rect.fromLTWH(
-                  margin, currentY + 5, ptwIdWidth, rowHeight)); // S. No
+                  margin, currentY + 5, serialNoWidth, rowHeight)); // S. No
           page.graphics.drawString('${permit.permitId ?? ''}', contentFont,
-              bounds: Rect.fromLTWH(margin + ptwIdWidth, currentY + 5,
+              bounds: Rect.fromLTWH(margin + serialNoWidth, currentY + 5,
                   ptwIdWidth, rowHeight)); // PTW ID
           page.graphics.drawString(
               '${permit.isolationTaken ?? ''}', contentFont,
-              bounds: Rect.fromLTWH(margin + ptwIdWidth * 2, currentY + 5,
-                  isolationWidth, rowHeight)); // Isolation
+              bounds: Rect.fromLTWH(margin + serialNoWidth + ptwIdWidth,
+                  currentY + 5, isolationWidth, rowHeight)); // Isolation
           page.graphics.drawString('${permit.permitType ?? ''}', contentFont,
-              bounds: Rect.fromLTWH(margin + ptwIdWidth * 3, currentY + 5,
-                  permitTypeWidth, rowHeight)); // Permit type
+              bounds: Rect.fromLTWH(
+                  margin + serialNoWidth + ptwIdWidth + isolationWidth,
+                  currentY + 5,
+                  permitTypeWidth,
+                  rowHeight)); // Permit type
           page.graphics.drawString(
               '${permit.isolatedEquipment ?? ''}', contentFont,
-              bounds: Rect.fromLTWH(margin + ptwIdWidth * 4, currentY + 5,
-                  equipmentWidth, rowHeight)); // Isolated equipment
+              bounds: Rect.fromLTWH(
+                  margin +
+                      serialNoWidth +
+                      ptwIdWidth +
+                      isolationWidth +
+                      permitTypeWidth,
+                  currentY + 5,
+                  equipmentWidth,
+                  rowHeight)); // Isolated equipment
           currentY += rowHeight;
           checkPageOverflow();
           serialNo++;
@@ -2865,7 +2886,8 @@ class CumulativeReportController extends GetxController {
             bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
         currentY += rowHeight;
       }
- currentY += 25; // Addi
+
+      currentY += 25; // Addi
 // TBT section header
       page.graphics.drawRectangle(
           pen: borderPen,
