@@ -427,6 +427,22 @@ class CumulativeReportController extends GetxController {
     update(["historyList"]);
   }
 
+  Future<void> getHistoryJob(
+    int moduleType,
+    int taskId,
+    int facilityId,
+  ) async {
+    historyList?.value = await cumulativeReportPresenter.getHistory(
+          moduleType,
+          taskId,
+          facilityId,
+          true,
+        ) ??
+        [];
+
+    update(["historyList"]);
+  }
+
   Future<void> generateInvoicePm() async {
     final PdfDocument document = PdfDocument();
 
@@ -3197,6 +3213,113 @@ class CumulativeReportController extends GetxController {
           format: PdfStringFormat(alignment: PdfTextAlignment.left));
       currentY += rowHeight;
       checkPageOverflow();
+      // Add "Job Card History" section header after remarks
+      currentY += 25; // Adding some space before the history section
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('Job Card History', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
+      checkPageOverflow();
+
+// Define static widths for history columns
+      double timeStampWidth = 100;
+      double postedByWidth = 100;
+      double commentsWidth = pageWidth - (timeStampWidth + postedByWidth + 100);
+
+// Draw the headers for the history table
+      List<String> historyHeaders = [
+        'Time Stamp',
+        'Posted By',
+        'Comments',
+        'Status'
+      ];
+      page.graphics.drawString(historyHeaders[0], contentFont,
+          bounds:
+              Rect.fromLTWH(margin, currentY + 5, timeStampWidth, rowHeight));
+      page.graphics.drawString(historyHeaders[1], contentFont,
+          bounds: Rect.fromLTWH(
+              margin + timeStampWidth, currentY + 5, postedByWidth, rowHeight));
+      page.graphics.drawString(historyHeaders[2], contentFont,
+          bounds: Rect.fromLTWH(margin + timeStampWidth + postedByWidth,
+              currentY + 5, commentsWidth, rowHeight));
+      page.graphics.drawString(historyHeaders[3], contentFont,
+          bounds: Rect.fromLTWH(
+              margin + timeStampWidth + postedByWidth + commentsWidth,
+              currentY + 5,
+              statusWidth,
+              rowHeight));
+
+      currentY += rowHeight; // Move down after drawing headers
+
+// Iterate through the job card history list and render each entry
+      for (var history in historyList!.value) {
+        // Check if we need to add a new page
+        if (currentY + rowHeight > pageHeight - margin) {
+          page = document.pages.add();
+          currentY = margin; // Reset Y position for the new page
+
+          // Re-draw the "Job Card History" header on the new page
+          page.graphics.drawRectangle(
+              pen: borderPen,
+              brush: backgroundBrush,
+              bounds:
+                  Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+          page.graphics.drawString('Job Card History', headerFont,
+              bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+          currentY += sectionHeight;
+
+          // Redraw column headers on the new page
+          page.graphics.drawString(historyHeaders[0], contentFont,
+              bounds: Rect.fromLTWH(
+                  margin, currentY + 5, timeStampWidth, rowHeight));
+          page.graphics.drawString(historyHeaders[1], contentFont,
+              bounds: Rect.fromLTWH(margin + timeStampWidth, currentY + 5,
+                  postedByWidth, rowHeight));
+          page.graphics.drawString(historyHeaders[2], contentFont,
+              bounds: Rect.fromLTWH(margin + timeStampWidth + postedByWidth,
+                  currentY + 5, commentsWidth, rowHeight));
+          page.graphics.drawString(historyHeaders[3], contentFont,
+              bounds: Rect.fromLTWH(
+                  margin + timeStampWidth + postedByWidth + commentsWidth,
+                  currentY + 5,
+                  statusWidth,
+                  rowHeight));
+
+          currentY += rowHeight; // Move down after drawing headers
+        }
+
+        // Render the history details
+        String timeStamp = history?.createdAt?.result != null
+            ? history!.createdAt!.result
+                .toString()
+                .substring(0, 16)
+                .replaceFirst('T', ' ')
+            : 'N/A';
+        String postedBy = history?.createdByName ?? 'Unknown';
+        String comments = history?.comment ?? 'No comments';
+        String status = history?.status_name ?? 'Unknown status';
+
+        page.graphics.drawString(timeStamp, contentFont,
+            bounds:
+                Rect.fromLTWH(margin, currentY + 5, timeStampWidth, rowHeight));
+        page.graphics.drawString(postedBy, contentFont,
+            bounds: Rect.fromLTWH(margin + timeStampWidth, currentY + 5,
+                postedByWidth, rowHeight));
+        page.graphics.drawString(comments, contentFont,
+            bounds: Rect.fromLTWH(margin + timeStampWidth + postedByWidth,
+                currentY + 5, commentsWidth, rowHeight));
+        page.graphics.drawString(status, contentFont,
+            bounds: Rect.fromLTWH(
+                margin + timeStampWidth + postedByWidth + commentsWidth,
+                currentY + 5,
+                statusWidth,
+                rowHeight));
+
+        currentY += rowHeight; // Move to the next row
+      }
     }
 
     // Signature section
@@ -3265,7 +3388,7 @@ class CumulativeReportController extends GetxController {
 
           if (jobCardId != null) {
             await getJobCardDetails(jobCardId, facilityId);
-            await getHistory(4, jobCardId, facilityId);
+            await getHistoryJob(4, jobCardId, facilityId);
             print('jobCardId: $jobCardId');
           }
         }
