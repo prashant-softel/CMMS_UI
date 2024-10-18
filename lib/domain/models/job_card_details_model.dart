@@ -193,6 +193,7 @@ class LstCmjcJobDetailList {
     this.status,
     this.statusShort,
     this.performBy,
+    this.ptwId,
     this.breakdownEndTime,
     this.breakdownStartTime,
     this.jobClosedOn,
@@ -207,6 +208,7 @@ class LstCmjcJobDetailList {
   String? employee_name;
   int? employee_ID;
   int? jobId;
+  int? ptwId;
   String? jobTitle;
   String? jobAssignedEmployeeName;
   String? jobDescription;
@@ -230,6 +232,7 @@ class LstCmjcJobDetailList {
         jobDescription: json["job_description"],
         workType: json["work_type"],
         facilityId: json["facility_id"],
+        ptwId: json["ptwId"],
         status: json["status"],
         statusShort: json["status_short"],
         performBy: json["perform_by"],
@@ -251,6 +254,7 @@ class LstCmjcJobDetailList {
         "job_description": jobDescription,
         "work_type": workType,
         "facility_id": facilityId,
+        "ptwId": ptwId,
         "status": status,
         "status_short": statusShort,
         "perform_by": performBy,

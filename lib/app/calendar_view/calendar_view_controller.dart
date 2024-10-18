@@ -102,7 +102,7 @@ class CalendarViewController extends GetxController {
     if (_moduleList != null) {
       // Filter the modules to include only the specified items
       final filteredModules = _moduleList.where((module) {
-        return module?.id == 2 || module?.id == 26 || module?.id == 81; //||
+        return module?.software_id == 2 || module?.software_id == 26 || module?.software_id == 81; //||
         // module?.id == ;
       }).toList();
 
