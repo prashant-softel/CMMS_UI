@@ -2292,7 +2292,7 @@ class CumulativeReportController extends GetxController {
     currentY += sectionHeight;
     checkPageOverflow();
 
-    // Job Information section
+    // Job Information section header
     page.graphics.drawRectangle(
         pen: borderPen,
         brush: backgroundBrush,
@@ -2302,9 +2302,10 @@ class CumulativeReportController extends GetxController {
     currentY += sectionHeight;
     checkPageOverflow();
 
-    // Draw Job Information Details (Left Side)
-    double labelWidth = 100; // Keeping width for labels consistent
-    double valueWidth = 150; // Keeping value width consistent
+// Draw Job Information Details (Left Side)
+    double labelWidth = 120; // Increase width for labels
+    double valueWidth =
+        pageWidth / 2 - labelWidth - margin - 15; // Increase value width
     double labelX = margin + 5;
     double valueX = labelX + labelWidth + 5;
 
@@ -2324,17 +2325,41 @@ class CumulativeReportController extends GetxController {
       '${jobDetailsModel.value?.jobDescription ?? ''}',
     ];
 
+// Create PdfLayoutFormat for text wrapping
+    PdfLayoutFormat layoutFormat = PdfLayoutFormat(
+      layoutType:
+          PdfLayoutType.paginate, // Paginate if the text overflows the page
+    );
+
+// Calculate maximum height based on the text content
     for (int i = 0; i < jobInfoLabelsLeft.length; i++) {
-      page.graphics.drawString(jobInfoLabelsLeft[i], contentFont,
-          bounds: Rect.fromLTWH(labelX, currentY + 5, labelWidth, rowHeight));
-      page.graphics.drawString(jobInfoValuesLeft[i], contentFont,
-          bounds: Rect.fromLTWH(valueX, currentY + 5, valueWidth, rowHeight));
-      currentY += rowHeight;
+      String value = jobInfoValuesLeft[i];
+      // Create the PdfTextElement
+      PdfTextElement textElement =
+          PdfTextElement(text: value, font: contentFont);
+      Size layoutSize =
+          Size(valueWidth, double.infinity); // Limit width to valueWidth
+
+      // Draw text and get layout result
+      PdfLayoutResult? result = textElement.draw(
+          page: page,
+          bounds: Rect.fromLTWH(valueX, currentY + 5, valueWidth, 0),
+          format: layoutFormat);
+
+      // Ensure result is not null
+      if (result != null) {
+        double textHeight = result.bounds.height;
+        page.graphics.drawString(jobInfoLabelsLeft[i], contentFont,
+            bounds:
+                Rect.fromLTWH(labelX, currentY + 5, labelWidth, textHeight));
+        currentY +=
+            textHeight + 5; // Move down by the actual height of the text
+      }
     }
 
-    // Draw Job Information Details (Right Side)
-    double labelWidthRight = 100;
-    double valueWidthRight = 150;
+// Draw Job Information Details (Right Side)
+    double labelWidthRight = 120;
+    double valueWidthRight = pageWidth / 2 - labelWidthRight - margin - 15;
     double labelXRight = pageWidth / 2 + margin; // Position on the right side
     double valueXRight = labelXRight + labelWidthRight + 5;
 
@@ -2357,13 +2382,27 @@ class CumulativeReportController extends GetxController {
         rowHeight; // Reset currentY to align with left side
 
     for (int i = 0; i < jobInfoLabelsRight.length; i++) {
-      page.graphics.drawString(jobInfoLabelsRight[i], contentFont,
-          bounds: Rect.fromLTWH(
-              labelXRight, currentY + 5, labelWidthRight, rowHeight));
-      page.graphics.drawString(jobInfoValuesRight[i], contentFont,
-          bounds: Rect.fromLTWH(
-              valueXRight, currentY + 5, valueWidthRight, rowHeight));
-      currentY += rowHeight;
+      String value = jobInfoValuesRight[i];
+      PdfTextElement textElement =
+          PdfTextElement(text: value, font: contentFont);
+      Size layoutSize = Size(
+          valueWidthRight, double.infinity); // Limit width to valueWidthRight
+
+      // Draw text and get layout result
+      PdfLayoutResult? result = textElement.draw(
+          page: page,
+          bounds: Rect.fromLTWH(valueXRight, currentY + 5, valueWidthRight, 0),
+          format: layoutFormat);
+
+      // Ensure result is not null
+      if (result != null) {
+        double textHeight = result.bounds.height;
+        page.graphics.drawString(jobInfoLabelsRight[i], contentFont,
+            bounds: Rect.fromLTWH(
+                labelXRight, currentY + 5, labelWidthRight, textHeight));
+        currentY +=
+            textHeight + 5; // Adjust position based on height used by text
+      }
     }
 
     // Add "Associated JobCard(s)" header before the table
