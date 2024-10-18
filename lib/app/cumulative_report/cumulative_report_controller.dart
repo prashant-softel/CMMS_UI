@@ -2235,7 +2235,17 @@ class CumulativeReportController extends GetxController {
         100; // Start position for the first section below the image
     double sectionHeight = 20; // Height for each section header
     double pageWidth = pageSize.width - 2 * margin;
-    double rowHeight = 20; // Height for each table row, including header
+    double rowHeight = 20;
+    double pageHeight = pageSize.height; // Get the height of the page
+    double marginBottom = 20; // Bottom margin
+
+    // Function to check if a new page is needed
+    void checkPageOverflow() {
+      if (currentY + rowHeight > pageHeight - marginBottom) {
+        page = document.pages.add(); // Create a new page
+        currentY = margin; // Reset the Y position for the new page
+      }
+    } // Height for each table row, including header
 
     // Draw image
     page.graphics.drawImage(image, Rect.fromLTWH(margin, 10, 100, 80));
@@ -2264,6 +2274,7 @@ class CumulativeReportController extends GetxController {
         'Site name : ${jobDetailsModel.value?.facilityName ?? ''}', headerFont,
         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
+    checkPageOverflow();
 
     // Job Information section
     page.graphics.drawRectangle(
@@ -2273,6 +2284,7 @@ class CumulativeReportController extends GetxController {
     page.graphics.drawString('Job Information', headerFont,
         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
+    checkPageOverflow();
 
     // Draw Job Information Details (Left Side)
     double labelWidth = 100; // Keeping width for labels consistent
@@ -2347,6 +2359,7 @@ class CumulativeReportController extends GetxController {
         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
 
     currentY += sectionHeight;
+    checkPageOverflow();
 
     // Define the table column headers
     List<String> jobCardHeaders = [
@@ -2414,6 +2427,7 @@ class CumulativeReportController extends GetxController {
         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
 
     currentY += sectionHeight;
+    checkPageOverflow();
 
 // Define fixed column widths
     double colWidthJobCardId = 100;
@@ -2514,7 +2528,8 @@ class CumulativeReportController extends GetxController {
           bounds: Rect.fromLTWH(margin + siteNameWidth, currentY + 5,
               jobCardIdWidth, sectionHeight));
 
-      currentY += sectionHeight; // Move to the next section
+      currentY += sectionHeight;
+      checkPageOverflow(); // Move to the next section
 
       // Job Information header with a background color and border
       page.graphics.drawRectangle(
@@ -2524,6 +2539,7 @@ class CumulativeReportController extends GetxController {
       page.graphics.drawString('Job Information', headerFont,
           bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
       currentY += sectionHeight;
+      checkPageOverflow();
 
       // Draw Job Information Details (Left Side)
       List<String> jobInfoLabelsLeft = [
@@ -2612,6 +2628,7 @@ class CumulativeReportController extends GetxController {
       page.graphics.drawString('Equipment details', headerFont,
           bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
       currentY += sectionHeight;
+      checkPageOverflow();
 
       // Define column widths for the Equipment details table
       double columnWidth = pageWidth / 3; // Split page into 3 columns
@@ -2680,6 +2697,7 @@ class CumulativeReportController extends GetxController {
       page.graphics.drawString('Permit carried by', headerFont,
           bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
       currentY += sectionHeight;
+      checkPageOverflow();
 
       // Define static widths for the columns
       double serialNoWidth = 40; // Width for S. No
@@ -2765,6 +2783,7 @@ class CumulativeReportController extends GetxController {
       page.graphics.drawString('PTW Information', headerFont,
           bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
       currentY += sectionHeight;
+      checkPageOverflow();
 
 // Define static widths for the S. No, PTW ID, and Isolation taken columns
       double ptwIdWidth = 50; // Width for PTW ID
@@ -2869,6 +2888,7 @@ class CumulativeReportController extends GetxController {
       page.graphics.drawString('TBT conducted by', headerFont,
           bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
       currentY += sectionHeight;
+      checkPageOverflow();
 
 // Define static widths for the TBT table columns
       double tbtConductedByWidth =
@@ -2960,6 +2980,7 @@ class CumulativeReportController extends GetxController {
       page.graphics.drawString('Work description', headerFont,
           bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
       currentY += sectionHeight;
+      checkPageOverflow();
 
       // Add static description after Work description
       page.graphics.drawString('${jobCard.description ?? ''}', contentFont,
@@ -2967,8 +2988,125 @@ class CumulativeReportController extends GetxController {
               margin + 5, currentY + 5, pageWidth - 10, rowHeight * 2),
           format: PdfStringFormat(alignment: PdfTextAlignment.left));
       currentY += rowHeight * 2;
+      currentY += 10; // Adding space before the next section
+// Material consumption section header
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('Material consumption', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
+      checkPageOverflow();
+
+// Define static widths for the columns
+      double eqpIdWidth = 50;
+      double idWidth = 40;
+      double typeWidth = 80;
+      double issuedQtyWidth = 60;
+      double usedQtyWidth = 60;
+
+// Calculate remaining width for the name column
+      double nameColumnWidth = pageWidth -
+          (eqpIdWidth + idWidth + typeWidth + issuedQtyWidth + usedQtyWidth);
+
+// Draw the headers
+      page.graphics.drawString('Eqp ID', contentFont,
+          bounds: Rect.fromLTWH(margin, currentY + 5, eqpIdWidth, rowHeight));
+      page.graphics.drawString('ID', contentFont,
+          bounds: Rect.fromLTWH(
+              margin + eqpIdWidth, currentY + 5, idWidth, rowHeight));
+      page.graphics.drawString('Name', contentFont,
+          bounds: Rect.fromLTWH(margin + eqpIdWidth + idWidth, currentY + 5,
+              nameColumnWidth, rowHeight));
+      page.graphics.drawString('Type', contentFont,
+          bounds: Rect.fromLTWH(margin + eqpIdWidth + idWidth + nameColumnWidth,
+              currentY + 5, typeWidth, rowHeight));
+      page.graphics.drawString('Issued Qty', contentFont,
+          bounds: Rect.fromLTWH(
+              margin + eqpIdWidth + idWidth + nameColumnWidth + typeWidth,
+              currentY + 5,
+              issuedQtyWidth,
+              rowHeight));
+      page.graphics.drawString('Used Qty', contentFont,
+          bounds: Rect.fromLTWH(
+              margin +
+                  eqpIdWidth +
+                  idWidth +
+                  nameColumnWidth +
+                  typeWidth +
+                  issuedQtyWidth,
+              currentY + 5,
+              usedQtyWidth,
+              rowHeight));
+
+      currentY += rowHeight; // Move down after headers
+      checkPageOverflow();
+
+// Draw the material consumption data
+      List<MaterialConsumptionJob>? materialConsumptionList = jobCard
+          .materialConsumption; // Ensure this is the correct list you're using
+
+      if (materialConsumptionList != null &&
+          materialConsumptionList.isNotEmpty) {
+        for (int i = 0; i < materialConsumptionList.length; i++) {
+          var materialConsumption = materialConsumptionList[i];
+
+          page.graphics.drawString(
+              '${materialConsumption.equipmentId ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(
+                  margin, currentY + 5, eqpIdWidth, rowHeight)); // Equipment ID
+
+          page.graphics.drawString(
+              '${materialConsumption.materialId ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(margin + eqpIdWidth, currentY + 5, idWidth,
+                  rowHeight)); // Material ID
+
+          page.graphics.drawString(
+              '${materialConsumption.materialName ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(margin + eqpIdWidth + idWidth, currentY + 5,
+                  nameColumnWidth, rowHeight)); // Material name
+
+          page.graphics.drawString(
+              '${materialConsumption.materialType ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(
+                  margin + eqpIdWidth + idWidth + nameColumnWidth,
+                  currentY + 5,
+                  typeWidth,
+                  rowHeight)); // Material type
+
+          page.graphics.drawString(
+              '${materialConsumption.issuedQty ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(
+                  margin + eqpIdWidth + idWidth + nameColumnWidth + typeWidth,
+                  currentY + 5,
+                  issuedQtyWidth,
+                  rowHeight)); // Issued quantity
+
+          page.graphics.drawString(
+              '${materialConsumption.usedQty ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(
+                  margin +
+                      eqpIdWidth +
+                      idWidth +
+                      nameColumnWidth +
+                      typeWidth +
+                      issuedQtyWidth,
+                  currentY + 5,
+                  usedQtyWidth,
+                  rowHeight)); // Used quantity
+
+          currentY += rowHeight; // Move to the next row
+          checkPageOverflow();
+        }
+      } else {
+        // If there is no material consumption data available
+        page.graphics.drawString(
+            'No material consumption data available', contentFont,
+            bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
+        currentY += rowHeight;
+      }
     }
-    
 
     // Signature section
     final String signatureText = 'Signature';
