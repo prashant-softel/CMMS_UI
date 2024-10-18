@@ -427,6 +427,22 @@ class CumulativeReportController extends GetxController {
     update(["historyList"]);
   }
 
+  Future<void> getHistoryJob(
+    int moduleType,
+    int taskId,
+    int facilityId,
+  ) async {
+    historyList?.value = await cumulativeReportPresenter.getHistory(
+          moduleType,
+          taskId,
+          facilityId,
+          true,
+        ) ??
+        [];
+
+    update(["historyList"]);
+  }
+
   Future<void> generateInvoicePm() async {
     final PdfDocument document = PdfDocument();
 
@@ -2235,7 +2251,17 @@ class CumulativeReportController extends GetxController {
         100; // Start position for the first section below the image
     double sectionHeight = 20; // Height for each section header
     double pageWidth = pageSize.width - 2 * margin;
-    double rowHeight = 20; // Height for each table row, including header
+    double rowHeight = 20;
+    double pageHeight = pageSize.height; // Get the height of the page
+    double marginBottom = 20; // Bottom margin
+
+    // Function to check if a new page is needed
+    void checkPageOverflow() {
+      if (currentY + rowHeight > pageHeight - marginBottom) {
+        page = document.pages.add(); // Create a new page
+        currentY = margin; // Reset the Y position for the new page
+      }
+    } // Height for each table row, including header
 
     // Draw image
     page.graphics.drawImage(image, Rect.fromLTWH(margin, 10, 100, 80));
@@ -2264,6 +2290,7 @@ class CumulativeReportController extends GetxController {
         'Site name : ${jobDetailsModel.value?.facilityName ?? ''}', headerFont,
         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
+    checkPageOverflow();
 
     // Job Information section
     page.graphics.drawRectangle(
@@ -2273,6 +2300,7 @@ class CumulativeReportController extends GetxController {
     page.graphics.drawString('Job Information', headerFont,
         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
     currentY += sectionHeight;
+    checkPageOverflow();
 
     // Draw Job Information Details (Left Side)
     double labelWidth = 100; // Keeping width for labels consistent
@@ -2347,6 +2375,7 @@ class CumulativeReportController extends GetxController {
         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
 
     currentY += sectionHeight;
+    checkPageOverflow();
 
     // Define the table column headers
     List<String> jobCardHeaders = [
@@ -2414,6 +2443,7 @@ class CumulativeReportController extends GetxController {
         bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
 
     currentY += sectionHeight;
+    checkPageOverflow();
 
 // Define fixed column widths
     double colWidthJobCardId = 100;
@@ -2514,7 +2544,8 @@ class CumulativeReportController extends GetxController {
           bounds: Rect.fromLTWH(margin + siteNameWidth, currentY + 5,
               jobCardIdWidth, sectionHeight));
 
-      currentY += sectionHeight; // Move to the next section
+      currentY += sectionHeight;
+      checkPageOverflow(); // Move to the next section
 
       // Job Information header with a background color and border
       page.graphics.drawRectangle(
@@ -2524,6 +2555,7 @@ class CumulativeReportController extends GetxController {
       page.graphics.drawString('Job Information', headerFont,
           bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
       currentY += sectionHeight;
+      checkPageOverflow();
 
       // Draw Job Information Details (Left Side)
       List<String> jobInfoLabelsLeft = [
@@ -2612,6 +2644,7 @@ class CumulativeReportController extends GetxController {
       page.graphics.drawString('Equipment details', headerFont,
           bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
       currentY += sectionHeight;
+      checkPageOverflow();
 
       // Define column widths for the Equipment details table
       double columnWidth = pageWidth / 3; // Split page into 3 columns
@@ -2680,6 +2713,7 @@ class CumulativeReportController extends GetxController {
       page.graphics.drawString('Permit carried by', headerFont,
           bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
       currentY += sectionHeight;
+      checkPageOverflow();
 
       // Define static widths for the columns
       double serialNoWidth = 40; // Width for S. No
@@ -2755,9 +2789,9 @@ class CumulativeReportController extends GetxController {
 
         currentY += rowHeight;
       }
-      currentY += 10; // Adding some space before the next section
 
-// Draw the PTW Information section header
+// PTW Information section
+      currentY += 25; // Adding some space before PTW section
       page.graphics.drawRectangle(
           pen: borderPen,
           brush: backgroundBrush,
@@ -2765,25 +2799,23 @@ class CumulativeReportController extends GetxController {
       page.graphics.drawString('PTW Information', headerFont,
           bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
       currentY += sectionHeight;
+      checkPageOverflow();
 
-// Define static widths for the S. No, PTW ID, and Isolation taken columns
-      double ptwIdWidth = 50; // Width for PTW ID
-      double isolationTakenWidth = 80; // Width for Isolation taken
-      double remainingWidth = pageWidth -
-          (ptwIdWidth +
-              serialNoWidth +
-              isolationTakenWidth); // Calculate remaining width
+// Define static widths for PTW columns
 
-// Headers for PTW Information section
+      double ptwIdWidth = pageWidth * 0.20; // 20% for PTW ID
+      double isolationWidth = pageWidth * 0.20; // 20% for Isolation taken
+      double permitTypeWidth = pageWidth * 0.25; // 25% for Permit type
+      double equipmentWidth = pageWidth * 0.25; // 25% for Isolated equipment
+
+// Draw PTW headers
       List<String> ptwHeaders = [
         'S. No',
         'PTW ID',
         'Isolation taken',
         'Permit type',
-        'Isolated equipment\'s'
+        'Isolated equipment(s)'
       ];
-
-// Draw the headers with static widths
       page.graphics.drawString(ptwHeaders[0], contentFont,
           bounds:
               Rect.fromLTWH(margin, currentY + 5, serialNoWidth, rowHeight));
@@ -2792,32 +2824,32 @@ class CumulativeReportController extends GetxController {
               margin + serialNoWidth, currentY + 5, ptwIdWidth, rowHeight));
       page.graphics.drawString(ptwHeaders[2], contentFont,
           bounds: Rect.fromLTWH(margin + serialNoWidth + ptwIdWidth,
-              currentY + 5, isolationTakenWidth, rowHeight));
+              currentY + 5, isolationWidth, rowHeight));
       page.graphics.drawString(ptwHeaders[3], contentFont,
           bounds: Rect.fromLTWH(
-              margin + serialNoWidth + ptwIdWidth + isolationTakenWidth,
+              margin + serialNoWidth + ptwIdWidth + isolationWidth,
               currentY + 5,
-              remainingWidth / 2,
+              permitTypeWidth,
               rowHeight));
       page.graphics.drawString(ptwHeaders[4], contentFont,
           bounds: Rect.fromLTWH(
               margin +
                   serialNoWidth +
                   ptwIdWidth +
-                  isolationTakenWidth +
-                  remainingWidth / 2,
+                  isolationWidth +
+                  permitTypeWidth,
               currentY + 5,
-              remainingWidth / 2,
+              equipmentWidth,
               rowHeight));
 
-      currentY += rowHeight;
+      currentY += rowHeight; // Move down after rendering headers
+      checkPageOverflow();
 
-// Extract data from LstPermitDetailList and display the PTW information
-      if (jobCardDetailsModel.value!.lstPermitDetailList != null &&
-          jobCardDetailsModel.value!.lstPermitDetailList!.isNotEmpty) {
+// Render PTW data from jobCard.lstPermitDetailList
+      if (jobCard.lstPermitDetailList != null &&
+          jobCard.lstPermitDetailList!.isNotEmpty) {
         int serialNo = 1;
-        for (var permit in jobCardDetailsModel.value!.lstPermitDetailList!) {
-          // Draw the PTW data
+        for (var permit in jobCard.lstPermitDetailList!) {
           page.graphics.drawString('$serialNo', contentFont,
               bounds: Rect.fromLTWH(
                   margin, currentY + 5, serialNoWidth, rowHeight)); // S. No
@@ -2826,16 +2858,13 @@ class CumulativeReportController extends GetxController {
                   ptwIdWidth, rowHeight)); // PTW ID
           page.graphics.drawString(
               '${permit.isolationTaken ?? ''}', contentFont,
-              bounds: Rect.fromLTWH(
-                  margin + serialNoWidth + ptwIdWidth,
-                  currentY + 5,
-                  isolationTakenWidth,
-                  rowHeight)); // Isolation taken
+              bounds: Rect.fromLTWH(margin + serialNoWidth + ptwIdWidth,
+                  currentY + 5, isolationWidth, rowHeight)); // Isolation
           page.graphics.drawString('${permit.permitType ?? ''}', contentFont,
               bounds: Rect.fromLTWH(
-                  margin + serialNoWidth + ptwIdWidth + isolationTakenWidth,
+                  margin + serialNoWidth + ptwIdWidth + isolationWidth,
                   currentY + 5,
-                  remainingWidth / 2,
+                  permitTypeWidth,
                   rowHeight)); // Permit type
           page.graphics.drawString(
               '${permit.isolatedEquipment ?? ''}', contentFont,
@@ -2843,21 +2872,445 @@ class CumulativeReportController extends GetxController {
                   margin +
                       serialNoWidth +
                       ptwIdWidth +
-                      isolationTakenWidth +
-                      remainingWidth / 2,
+                      isolationWidth +
+                      permitTypeWidth,
                   currentY + 5,
-                  remainingWidth / 2,
-                  rowHeight)); // Isolated equipment's
-
+                  equipmentWidth,
+                  rowHeight)); // Isolated equipment
           currentY += rowHeight;
+          checkPageOverflow();
           serialNo++;
         }
       } else {
-        // Draw the "No PTW information available" message below the headers
-        page.graphics.drawString('No PTW information available', contentFont,
+        page.graphics.drawString('No PTW Information available', contentFont,
             bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
-
         currentY += rowHeight;
+      }
+
+// TBT conducted by section
+      currentY += 25; // Adding some space before the TBT section
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('TBT conducted by', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
+      checkPageOverflow();
+
+// Define static widths for TBT columns
+      double tbtConductedByWidth =
+          pageWidth * 0.25; // 25% for 'TBT conducted by'
+      double tbtDoneTimeWidth = pageWidth * 0.25; // 25% for 'TBT done time'
+      double startTimeWidth = pageWidth * 0.25; // 25% for 'Start time'
+      double statusWidth = pageWidth * 0.25; // 25% for 'Status'
+
+// Draw TBT headers
+      List<String> tbtHeaders = [
+        'TBT conducted by',
+        'TBT done time',
+        'Start time',
+        'Status'
+      ];
+      page.graphics.drawString(tbtHeaders[0], contentFont,
+          bounds: Rect.fromLTWH(
+              margin, currentY + 5, tbtConductedByWidth, rowHeight));
+      page.graphics.drawString(tbtHeaders[1], contentFont,
+          bounds: Rect.fromLTWH(margin + tbtConductedByWidth, currentY + 5,
+              tbtDoneTimeWidth, rowHeight));
+      page.graphics.drawString(tbtHeaders[2], contentFont,
+          bounds: Rect.fromLTWH(margin + tbtConductedByWidth + tbtDoneTimeWidth,
+              currentY + 5, startTimeWidth, rowHeight));
+      page.graphics.drawString(tbtHeaders[3], contentFont,
+          bounds: Rect.fromLTWH(
+              margin + tbtConductedByWidth + tbtDoneTimeWidth + startTimeWidth,
+              currentY + 5,
+              statusWidth,
+              rowHeight));
+
+      currentY += rowHeight; // Move down after headers
+      checkPageOverflow();
+
+// Render TBT data from jobCardDetailsModel.lstPermitDetailList
+      if (jobCard.lstPermitDetailList != null &&
+          jobCard.lstPermitDetailList!.isNotEmpty) {
+        for (var permit in jobCard.lstPermitDetailList!) {
+          if (permit.tbTDoneCheck == 1) {
+            // Draw TBT data
+            page.graphics.drawString(
+                '${permit.tbTConductedByName ?? ''}', contentFont,
+                bounds: Rect.fromLTWH(margin, currentY + 5, tbtConductedByWidth,
+                    rowHeight)); // TBT conducted by
+            page.graphics.drawString(
+                '${permit.tbTDoneTime == "0001-01-01T00:00:00" ? '' : permit.tbTDoneTime ?? ''}',
+                contentFont,
+                bounds: Rect.fromLTWH(
+                    margin + tbtConductedByWidth,
+                    currentY + 5,
+                    tbtDoneTimeWidth,
+                    rowHeight)); // TBT done time
+            page.graphics.drawString(
+                '${permit.startTime == "0001-01-01T00:00:00" ? '' : permit.startTime ?? ''}',
+                contentFont,
+                bounds: Rect.fromLTWH(
+                    margin + tbtConductedByWidth + tbtDoneTimeWidth,
+                    currentY + 5,
+                    startTimeWidth,
+                    rowHeight)); // Start time
+            page.graphics.drawString('${permit.statusShort ?? ''}', contentFont,
+                bounds: Rect.fromLTWH(
+                    margin +
+                        tbtConductedByWidth +
+                        tbtDoneTimeWidth +
+                        startTimeWidth,
+                    currentY + 5,
+                    statusWidth,
+                    rowHeight)); // Status
+
+            currentY += rowHeight;
+            checkPageOverflow();
+          }
+        }
+      } else {
+        // Draw "No TBT information available" if no data is present
+        page.graphics.drawString('No TBT information available', contentFont,
+            bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
+        currentY += rowHeight;
+      }
+
+      // Work description section
+
+      currentY += 25;
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('Work description', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
+      checkPageOverflow();
+
+      // Add static description after Work description
+      page.graphics.drawString('${jobCard.description ?? ''}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin + 5, currentY + 5, pageWidth - 10, rowHeight * 2),
+          format: PdfStringFormat(alignment: PdfTextAlignment.left));
+      currentY += rowHeight * 2;
+      currentY += 10; // Adding space before the next section
+// Material consumption section header
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('Material consumption', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
+      checkPageOverflow();
+
+// Define static widths for the columns
+      double eqpIdWidth = 50;
+      double idWidth = 40;
+      double typeWidth = 80;
+      double issuedQtyWidth = 60;
+      double usedQtyWidth = 60;
+
+// Calculate remaining width for the name column
+      double nameColumnWidth = pageWidth -
+          (eqpIdWidth + idWidth + typeWidth + issuedQtyWidth + usedQtyWidth);
+
+// Draw the headers
+      page.graphics.drawString('Eqp ID', contentFont,
+          bounds: Rect.fromLTWH(margin, currentY + 5, eqpIdWidth, rowHeight));
+      page.graphics.drawString('ID', contentFont,
+          bounds: Rect.fromLTWH(
+              margin + eqpIdWidth, currentY + 5, idWidth, rowHeight));
+      page.graphics.drawString('Name', contentFont,
+          bounds: Rect.fromLTWH(margin + eqpIdWidth + idWidth, currentY + 5,
+              nameColumnWidth, rowHeight));
+      page.graphics.drawString('Type', contentFont,
+          bounds: Rect.fromLTWH(margin + eqpIdWidth + idWidth + nameColumnWidth,
+              currentY + 5, typeWidth, rowHeight));
+      page.graphics.drawString('Issued Qty', contentFont,
+          bounds: Rect.fromLTWH(
+              margin + eqpIdWidth + idWidth + nameColumnWidth + typeWidth,
+              currentY + 5,
+              issuedQtyWidth,
+              rowHeight));
+      page.graphics.drawString('Used Qty', contentFont,
+          bounds: Rect.fromLTWH(
+              margin +
+                  eqpIdWidth +
+                  idWidth +
+                  nameColumnWidth +
+                  typeWidth +
+                  issuedQtyWidth,
+              currentY + 5,
+              usedQtyWidth,
+              rowHeight));
+
+      currentY += rowHeight; // Move down after headers
+      checkPageOverflow();
+
+// Draw the material consumption data
+      List<MaterialConsumptionJob>? materialConsumptionList = jobCard
+          .materialConsumption; // Ensure this is the correct list you're using
+
+      if (materialConsumptionList != null &&
+          materialConsumptionList.isNotEmpty) {
+        for (int i = 0; i < materialConsumptionList.length; i++) {
+          var materialConsumption = materialConsumptionList[i];
+
+          page.graphics.drawString(
+              '${materialConsumption.equipmentId ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(
+                  margin, currentY + 5, eqpIdWidth, rowHeight)); // Equipment ID
+
+          page.graphics.drawString(
+              '${materialConsumption.materialId ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(margin + eqpIdWidth, currentY + 5, idWidth,
+                  rowHeight)); // Material ID
+
+          page.graphics.drawString(
+              '${materialConsumption.materialName ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(margin + eqpIdWidth + idWidth, currentY + 5,
+                  nameColumnWidth, rowHeight)); // Material name
+
+          page.graphics.drawString(
+              '${materialConsumption.materialType ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(
+                  margin + eqpIdWidth + idWidth + nameColumnWidth,
+                  currentY + 5,
+                  typeWidth,
+                  rowHeight)); // Material type
+
+          page.graphics.drawString(
+              '${materialConsumption.issuedQty ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(
+                  margin + eqpIdWidth + idWidth + nameColumnWidth + typeWidth,
+                  currentY + 5,
+                  issuedQtyWidth,
+                  rowHeight)); // Issued quantity
+
+          page.graphics.drawString(
+              '${materialConsumption.usedQty ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(
+                  margin +
+                      eqpIdWidth +
+                      idWidth +
+                      nameColumnWidth +
+                      typeWidth +
+                      issuedQtyWidth,
+                  currentY + 5,
+                  usedQtyWidth,
+                  rowHeight)); // Used quantity
+
+          currentY += rowHeight; // Move to the next row
+          checkPageOverflow();
+        }
+      } else {
+        // If there is no material consumption data available
+        page.graphics.drawString(
+            'No material consumption data available', contentFont,
+            bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
+        currentY += rowHeight;
+      }
+      // Tools carried section
+      currentY += 25; // Adding some space before the next section
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('Tools carried', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
+
+// Define column widths for Tools carried section
+      double serialNoWidthTools = 40;
+      double toolNameWidth = pageWidth / 2;
+      double toolCountWidth = pageWidth - serialNoWidthTools - toolNameWidth;
+
+// Draw the column headers for Tools carried section
+      List<String> toolsHeaders = ['S. No', 'Tool name', 'No. of tools'];
+
+      page.graphics.drawString(toolsHeaders[0], contentFont,
+          bounds: Rect.fromLTWH(
+              margin, currentY + 5, serialNoWidthTools, rowHeight));
+      page.graphics.drawString(toolsHeaders[1], contentFont,
+          bounds: Rect.fromLTWH(margin + serialNoWidthTools, currentY + 5,
+              toolNameWidth, rowHeight));
+      page.graphics.drawString(toolsHeaders[2], contentFont,
+          bounds: Rect.fromLTWH(margin + serialNoWidthTools + toolNameWidth,
+              currentY + 5, toolCountWidth, rowHeight));
+
+      currentY += rowHeight; // Move to next row after headers
+
+// Initialize tool serial number
+      int toolIndex = 1;
+
+// Get the toolList from the jobCard object
+      List<ToolList>? toolList = jobCard.toolList;
+
+// Check if toolList is not null and not empty
+      if (toolList != null && toolList.isNotEmpty) {
+        for (int i = 0; i < toolList.length; i++) {
+          var tool = toolList[i];
+
+          // Only add tools that have valid names and a number greater than 0
+          if (tool.toolName != null &&
+              tool.noOfTools != null &&
+              tool.noOfTools! > 0) {
+            // Draw serial number
+            page.graphics.drawString('$toolIndex', contentFont,
+                bounds: Rect.fromLTWH(
+                    margin, currentY + 5, serialNoWidthTools, rowHeight));
+
+            // Draw tool name
+            page.graphics.drawString(tool.toolName ?? '', contentFont,
+                bounds: Rect.fromLTWH(margin + serialNoWidthTools, currentY + 5,
+                    toolNameWidth, rowHeight));
+
+            // Draw number of tools
+            page.graphics.drawString('${tool.noOfTools}', contentFont,
+                bounds: Rect.fromLTWH(
+                    margin + serialNoWidthTools + toolNameWidth,
+                    currentY + 5,
+                    toolCountWidth,
+                    rowHeight));
+
+            currentY += rowHeight; // Move to next row after each tool
+            toolIndex++; // Increment serial number
+
+            // Check for page overflow and add a new page if needed
+            checkPageOverflow();
+          }
+        }
+      } else {
+        // If there is no tool data available
+        page.graphics.drawString('No tools carried', contentFont,
+            bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
+        currentY += rowHeight; // Move to next row after the message
+      }
+      currentY += 25;
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('Remarks', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
+
+      page.graphics.drawString('${jobCard.remarkNew ?? ''}', contentFont,
+          bounds: Rect.fromLTWH(
+              margin + 5, currentY + 5, pageWidth - 10, rowHeight * 2),
+          format: PdfStringFormat(alignment: PdfTextAlignment.left));
+      currentY += rowHeight;
+      checkPageOverflow();
+      // Add "Job Card History" section header after remarks
+      currentY += 25; // Adding some space before the history section
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('Job Card History', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
+      checkPageOverflow();
+
+// Define static widths for history columns
+      double timeStampWidth = 100;
+      double postedByWidth = 100;
+      double commentsWidth = pageWidth - (timeStampWidth + postedByWidth + 100);
+
+// Draw the headers for the history table
+      List<String> historyHeaders = [
+        'Time Stamp',
+        'Posted By',
+        'Comments',
+        'Status'
+      ];
+      page.graphics.drawString(historyHeaders[0], contentFont,
+          bounds:
+              Rect.fromLTWH(margin, currentY + 5, timeStampWidth, rowHeight));
+      page.graphics.drawString(historyHeaders[1], contentFont,
+          bounds: Rect.fromLTWH(
+              margin + timeStampWidth, currentY + 5, postedByWidth, rowHeight));
+      page.graphics.drawString(historyHeaders[2], contentFont,
+          bounds: Rect.fromLTWH(margin + timeStampWidth + postedByWidth,
+              currentY + 5, commentsWidth, rowHeight));
+      page.graphics.drawString(historyHeaders[3], contentFont,
+          bounds: Rect.fromLTWH(
+              margin + timeStampWidth + postedByWidth + commentsWidth,
+              currentY + 5,
+              statusWidth,
+              rowHeight));
+
+      currentY += rowHeight; // Move down after drawing headers
+
+// Iterate through the job card history list and render each entry
+      for (var history in historyList!.value) {
+        // Check if we need to add a new page
+        if (currentY + rowHeight > pageHeight - margin) {
+          page = document.pages.add();
+          currentY = margin; // Reset Y position for the new page
+
+          // Re-draw the "Job Card History" header on the new page
+          page.graphics.drawRectangle(
+              pen: borderPen,
+              brush: backgroundBrush,
+              bounds:
+                  Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+          page.graphics.drawString('Job Card History', headerFont,
+              bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+          currentY += sectionHeight;
+
+          // Redraw column headers on the new page
+          page.graphics.drawString(historyHeaders[0], contentFont,
+              bounds: Rect.fromLTWH(
+                  margin, currentY + 5, timeStampWidth, rowHeight));
+          page.graphics.drawString(historyHeaders[1], contentFont,
+              bounds: Rect.fromLTWH(margin + timeStampWidth, currentY + 5,
+                  postedByWidth, rowHeight));
+          page.graphics.drawString(historyHeaders[2], contentFont,
+              bounds: Rect.fromLTWH(margin + timeStampWidth + postedByWidth,
+                  currentY + 5, commentsWidth, rowHeight));
+          page.graphics.drawString(historyHeaders[3], contentFont,
+              bounds: Rect.fromLTWH(
+                  margin + timeStampWidth + postedByWidth + commentsWidth,
+                  currentY + 5,
+                  statusWidth,
+                  rowHeight));
+
+          currentY += rowHeight; // Move down after drawing headers
+        }
+
+        // Render the history details
+        String timeStamp = history?.createdAt?.result != null
+            ? history!.createdAt!.result
+                .toString()
+                .substring(0, 16)
+                .replaceFirst('T', ' ')
+            : 'N/A';
+        String postedBy = history?.createdByName ?? 'Unknown';
+        String comments = history?.comment ?? 'No comments';
+        String status = history?.status_name ?? 'Unknown status';
+
+        page.graphics.drawString(timeStamp, contentFont,
+            bounds:
+                Rect.fromLTWH(margin, currentY + 5, timeStampWidth, rowHeight));
+        page.graphics.drawString(postedBy, contentFont,
+            bounds: Rect.fromLTWH(margin + timeStampWidth, currentY + 5,
+                postedByWidth, rowHeight));
+        page.graphics.drawString(comments, contentFont,
+            bounds: Rect.fromLTWH(margin + timeStampWidth + postedByWidth,
+                currentY + 5, commentsWidth, rowHeight));
+        page.graphics.drawString(status, contentFont,
+            bounds: Rect.fromLTWH(
+                margin + timeStampWidth + postedByWidth + commentsWidth,
+                currentY + 5,
+                statusWidth,
+                rowHeight));
+
+        currentY += rowHeight; // Move to the next row
       }
     }
     page.graphics.drawRectangle(
@@ -3380,6 +3833,7 @@ class CumulativeReportController extends GetxController {
 
           if (jobCardId != null) {
             await getJobCardDetails(jobCardId, facilityId);
+            await getHistoryJob(4, jobCardId, facilityId);
             print('jobCardId: $jobCardId');
           }
         }

@@ -78,7 +78,7 @@ class JobCardDetailsModel {
   List<FilesModel>? fileListJc;
   List<ToolList>? toolList;
   List<int>? uploadFileIds;
-  List<MaterialConsumption>? materialConsumption;
+  List<MaterialConsumptionJob>? materialConsumption;
 
   factory JobCardDetailsModel.fromJson(Map<String, dynamic> json) =>
       JobCardDetailsModel(
@@ -130,9 +130,9 @@ class JobCardDetailsModel {
         uploadFileIds: json["uploadfile_ids"] != null
             ? List<int>.from(json["uploadfile_ids"].map((x) => x))
             : null,
-        materialConsumption: List<MaterialConsumption>.from(
+        materialConsumption: List<MaterialConsumptionJob>.from(
             json["material_consumption"]
-                .map((x) => MaterialConsumption.fromJson(x))),
+                .map((x) => MaterialConsumptionJob.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -432,8 +432,8 @@ class AssetCategories {
       };
 }
 
-class MaterialConsumption {
-  MaterialConsumption({
+class MaterialConsumptionJob {
+  MaterialConsumptionJob({
     this.materialId,
     this.materialName,
     this.usedQty,
@@ -449,8 +449,8 @@ class MaterialConsumption {
   String? materialType;
   int? equipmentId;
 
-  factory MaterialConsumption.fromJson(Map<String, dynamic> json) =>
-      MaterialConsumption(
+  factory MaterialConsumptionJob.fromJson(Map<String, dynamic> json) =>
+      MaterialConsumptionJob(
         materialId: json["material_ID"],
         materialName: json["material_name"],
         usedQty: json["used_qty"]?.toDouble(),
