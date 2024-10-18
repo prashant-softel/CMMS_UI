@@ -25,25 +25,25 @@ class UpdatePmExecutionMdel {
 }
 
 class SchedulesTask {
-  SchedulesTask({
-    required this.schedule_id,
-    this.add_observations,
-  });
+  SchedulesTask(
+      {required this.schedule_id, this.add_observations, this.subtask_id});
 
   int schedule_id;
-
+  int? subtask_id;
   List<AddObservations>? add_observations;
 
   factory SchedulesTask.fromJson(Map<String, dynamic> json) {
     AddObservations(observation_value_controller: TextEditingController());
     return SchedulesTask(
       schedule_id: json["schedule_id"],
+      subtask_id: json["subtask_id"],
       add_observations: List<AddObservations>.from(
           json["add_observations"].map((x) => AddObservations.fromJson(x))),
     );
   }
   Map<String, dynamic> toJson() => {
         "schedule_id": schedule_id,
+        "subtask_id": subtask_id,
         "add_observations":
             List<dynamic>.from(add_observations!.map((x) => x.toJson())),
       };

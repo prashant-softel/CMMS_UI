@@ -548,7 +548,8 @@ class ViewAuditTaskController extends GetxController {
     ));
   }
 
-  void updateAuditTaskExecution({int? exeType, int? subtask_id}) async {
+  void updateAuditTaskExecution(
+      {int? exeType, int? subtask_id, int? scheduleID}) async {
     Get.back();
     PmFiles fil = PmFiles(file_id: 0, pm_event: 0);
     List<PmFiles> pmfile = <PmFiles>[fil];
@@ -570,8 +571,9 @@ class ViewAuditTaskController extends GetxController {
     // checklistObservations?.forEach((e) {
     schedule.add(SchedulesTask(
         schedule_id: exeType == 1
-            ? subtask_id ?? 0
+            ? scheduleID ?? 0
             : auditTasknDetailModel.value.schedules![0].schedule_id ?? 0,
+        subtask_id: subtask_id ?? 0,
         add_observations: addObservations));
     // });
 
