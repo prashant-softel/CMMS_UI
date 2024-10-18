@@ -2483,10 +2483,10 @@ class CumulativeReportController extends GetxController {
       }
 
       currentY += rowHeight; // Move to next row
-    } // Render All Job Cards in PDF
+    }
     for (var jobCard in allJobCardDetails) {
       // Add a new page for each JobCard if the content exceeds the page height
-      if (currentY > pageSize.height - 100) {
+      if (currentY > pageSize.height - 120) {
         page = document.pages.add(); // Add a new page
         currentY = 30; // Reset the Y position for the new page
       }
@@ -2544,36 +2544,12 @@ class CumulativeReportController extends GetxController {
         page.graphics.drawString(jobInfoValuesLeft[i], contentFont,
             bounds: Rect.fromLTWH(valueX, currentY + 5, valueWidth, rowHeight));
         currentY += rowHeight;
-      }
 
-      // Draw Job Information Details (Right Side)
-      List<String> jobInfoLabelsRight = [
-        'Job title',
-        'Breakdown end time',
-        'Job closed on',
-        'TAT'
-      ];
-      List<String> jobInfoValuesRight = [
-        '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.jobTitle ?? ''}',
-        jobCardDetailsModel.value!.status == 158
-            ? '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.breakdownEndTime ?? ''}'
-            : "",
-        jobCardDetailsModel.value!.status == 158
-            ? '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.jobClosedOn ?? ''}'
-            : "",
-        '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.turnaroundTimeMinutes ?? ''} Minutes',
-      ];
-
-      currentY -= jobInfoLabelsLeft.length *
-          rowHeight; // Reset currentY to align with left side
-      for (int i = 0; i < jobInfoLabelsRight.length; i++) {
-        page.graphics.drawString(jobInfoLabelsRight[i], contentFont,
-            bounds: Rect.fromLTWH(
-                labelXRight, currentY + 5, labelWidthRight, rowHeight));
-        page.graphics.drawString(jobInfoValuesRight[i], contentFont,
-            bounds: Rect.fromLTWH(
-                valueXRight, currentY + 5, valueWidthRight, rowHeight));
-        currentY += rowHeight;
+        // Check if a new page is needed before continuing
+        if (currentY > pageSize.height - 120) {
+          page = document.pages.add(); // Add a new page
+          currentY = 30; // Reset the Y position for the new page
+        }
       }
 
       // Equipment details for each JobCard
@@ -2589,14 +2565,13 @@ class CumulativeReportController extends GetxController {
       // Define column widths for the Equipment details table
       double columnWidth = pageWidth / 3; // Split page into 3 columns
 
-      // Define Equipment Table Headers
+      // Draw Equipment Headers
       List<String> equipmentHeaders = [
         'S. No',
         'Equipment category',
         'Equipment name'
       ];
 
-      // Draw Equipment Headers
       for (int i = 0; i < equipmentHeaders.length; i++) {
         page.graphics.drawString(equipmentHeaders[i], contentFont,
             bounds: Rect.fromLTWH(margin + (i * columnWidth), currentY + 5,
@@ -2604,39 +2579,45 @@ class CumulativeReportController extends GetxController {
       }
       currentY += rowHeight; // Move down after rendering headers
 
-      // Draw each equipment name from the schedules
-      for (int i = 0;
-          i < (jobCardDetailsModel.value?.assetCategoryName?.length ?? 0);
-          i++) {
-        var schedule = jobCardDetailsModel.value!.assetCategoryName![i];
+      // Correctly accessing the equipment data from jobCard
+      List<AssetCategories>? equipmentList = jobCard.assetCategoryName;
 
-        // Draw the serial number
-        page.graphics.drawString('${i + 1}', contentFont,
-            bounds: Rect.fromLTWH(
-                margin, currentY + 5, columnWidth, rowHeight)); // S. No
+      if (equipmentList != null && equipmentList.isNotEmpty) {
+        for (int i = 0; i < equipmentList.length; i++) {
+          var equipment = equipmentList[i];
 
-        // Draw the equipment category
-        page.graphics.drawString(
-            '${schedule.equipmentCategory ?? ''}', contentFont,
-            bounds: Rect.fromLTWH(margin + columnWidth, currentY + 5,
-                columnWidth, rowHeight)); // Equipment category
+          // Draw the serial number
+          page.graphics.drawString('${i + 1}', contentFont,
+              bounds: Rect.fromLTWH(
+                  margin, currentY + 5, columnWidth, rowHeight)); // S. No
 
-        // Draw the equipment name
-        page.graphics.drawString('${schedule.equipmentName ?? ''}', contentFont,
-            bounds: Rect.fromLTWH(margin + 2 * columnWidth, currentY + 5,
-                columnWidth, rowHeight)); // Equipment name
+          // Draw the equipment category
+          page.graphics.drawString(
+              '${equipment.equipmentCategory ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(margin + columnWidth, currentY + 5,
+                  columnWidth, rowHeight)); // Equipment category
 
-        currentY += rowHeight; // Move to next row
+          // Draw the equipment name
+          page.graphics.drawString(
+              '${equipment.equipmentName ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(margin + 2 * columnWidth, currentY + 5,
+                  columnWidth, rowHeight)); // Equipment name
 
-        // Add a new page if content exceeds page height
-        if (currentY > pageSize.height - 100) {
-          page = document.pages.add(); // Add a new page
-          currentY = 30; // Reset Y position for the new page
+          currentY += rowHeight; // Move to next row
+
+          // Add a new page if content exceeds page height
+          if (currentY > pageSize.height - 120) {
+            page = document.pages.add(); // Add a new page
+            currentY = 30; // Reset Y position for the new page
+          }
         }
+      } else {
+        // Display a message if no equipment data is available
+        page.graphics.drawString('No equipment data available', contentFont,
+            bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
       }
 
-      // Add space between jobCard sections
-      currentY += 20;
+      currentY += 20; // Add space between jobCard sections
     }
 
     // Signature section
