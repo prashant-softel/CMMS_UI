@@ -2789,7 +2789,7 @@ class CumulativeReportController extends GetxController {
 
         currentY += rowHeight;
       }
-      currentY += 10; // Adding some space before the next section
+
 // PTW Information section
       currentY += 25; // Adding some space before PTW section
       page.graphics.drawRectangle(
@@ -2887,8 +2887,8 @@ class CumulativeReportController extends GetxController {
         currentY += rowHeight;
       }
 
-      currentY += 25; // Addi
-// TBT section header
+// TBT conducted by section
+      currentY += 25; // Adding some space before the TBT section
       page.graphics.drawRectangle(
           pen: borderPen,
           brush: backgroundBrush,
@@ -2898,22 +2898,20 @@ class CumulativeReportController extends GetxController {
       currentY += sectionHeight;
       checkPageOverflow();
 
-// Define static widths for the TBT table columns
+// Define static widths for TBT columns
       double tbtConductedByWidth =
-          pageWidth / 4; // Width for 'TBT conducted by'
-      double tbtDoneTimeWidth = pageWidth / 4; // Width for 'TBT done time'
-      double startTimeWidth = pageWidth / 4; // Width for 'Start time'
-      double statusWidth = pageWidth / 4; // Width for 'Status'
+          pageWidth * 0.25; // 25% for 'TBT conducted by'
+      double tbtDoneTimeWidth = pageWidth * 0.25; // 25% for 'TBT done time'
+      double startTimeWidth = pageWidth * 0.25; // 25% for 'Start time'
+      double statusWidth = pageWidth * 0.25; // 25% for 'Status'
 
-// Headers for TBT section
+// Draw TBT headers
       List<String> tbtHeaders = [
         'TBT conducted by',
         'TBT done time',
         'Start time',
         'Status'
       ];
-
-// Draw the headers with static widths
       page.graphics.drawString(tbtHeaders[0], contentFont,
           bounds: Rect.fromLTWH(
               margin, currentY + 5, tbtConductedByWidth, rowHeight));
@@ -2930,14 +2928,15 @@ class CumulativeReportController extends GetxController {
               statusWidth,
               rowHeight));
 
-      currentY += rowHeight;
+      currentY += rowHeight; // Move down after headers
+      checkPageOverflow();
 
-// Extract and display the TBT data from LstPermitDetailList
-      if (jobCardDetailsModel.value!.lstPermitDetailList != null &&
-          jobCardDetailsModel.value!.lstPermitDetailList!.isNotEmpty) {
-        for (var permit in jobCardDetailsModel.value!.lstPermitDetailList!) {
+// Render TBT data from jobCardDetailsModel.lstPermitDetailList
+      if (jobCard.lstPermitDetailList != null &&
+          jobCard.lstPermitDetailList!.isNotEmpty) {
+        for (var permit in jobCard.lstPermitDetailList!) {
           if (permit.tbTDoneCheck == 1) {
-            // Draw the TBT data
+            // Draw TBT data
             page.graphics.drawString(
                 '${permit.tbTConductedByName ?? ''}', contentFont,
                 bounds: Rect.fromLTWH(margin, currentY + 5, tbtConductedByWidth,
@@ -2969,15 +2968,16 @@ class CumulativeReportController extends GetxController {
                     rowHeight)); // Status
 
             currentY += rowHeight;
+            checkPageOverflow();
           }
         }
       } else {
-        // Draw the "No TBT information available" message below the headers
+        // Draw "No TBT information available" if no data is present
         page.graphics.drawString('No TBT information available', contentFont,
             bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
-
         currentY += rowHeight;
       }
+
       // Work description section
 
       currentY += 25;
