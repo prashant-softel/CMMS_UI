@@ -3106,6 +3106,82 @@ class CumulativeReportController extends GetxController {
             bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
         currentY += rowHeight;
       }
+      // Tools carried section
+      currentY += 25; // Adding some space before the next section
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('Tools carried', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
+
+// Define column widths for Tools carried section
+      double serialNoWidthTools = 40;
+      double toolNameWidth = pageWidth / 2;
+      double toolCountWidth = pageWidth - serialNoWidthTools - toolNameWidth;
+
+// Draw the column headers for Tools carried section
+      List<String> toolsHeaders = ['S. No', 'Tool name', 'No. of tools'];
+
+      page.graphics.drawString(toolsHeaders[0], contentFont,
+          bounds: Rect.fromLTWH(
+              margin, currentY + 5, serialNoWidthTools, rowHeight));
+      page.graphics.drawString(toolsHeaders[1], contentFont,
+          bounds: Rect.fromLTWH(margin + serialNoWidthTools, currentY + 5,
+              toolNameWidth, rowHeight));
+      page.graphics.drawString(toolsHeaders[2], contentFont,
+          bounds: Rect.fromLTWH(margin + serialNoWidthTools + toolNameWidth,
+              currentY + 5, toolCountWidth, rowHeight));
+
+      currentY += rowHeight; // Move to next row after headers
+
+// Initialize tool serial number
+      int toolIndex = 1;
+
+// Get the toolList from the jobCard object
+      List<ToolList>? toolList = jobCard.toolList;
+
+// Check if toolList is not null and not empty
+      if (toolList != null && toolList.isNotEmpty) {
+        for (int i = 0; i < toolList.length; i++) {
+          var tool = toolList[i];
+
+          // Only add tools that have valid names and a number greater than 0
+          if (tool.toolName != null &&
+              tool.noOfTools != null &&
+              tool.noOfTools! > 0) {
+            // Draw serial number
+            page.graphics.drawString('$toolIndex', contentFont,
+                bounds: Rect.fromLTWH(
+                    margin, currentY + 5, serialNoWidthTools, rowHeight));
+
+            // Draw tool name
+            page.graphics.drawString(tool.toolName ?? '', contentFont,
+                bounds: Rect.fromLTWH(margin + serialNoWidthTools, currentY + 5,
+                    toolNameWidth, rowHeight));
+
+            // Draw number of tools
+            page.graphics.drawString('${tool.noOfTools}', contentFont,
+                bounds: Rect.fromLTWH(
+                    margin + serialNoWidthTools + toolNameWidth,
+                    currentY + 5,
+                    toolCountWidth,
+                    rowHeight));
+
+            currentY += rowHeight; // Move to next row after each tool
+            toolIndex++; // Increment serial number
+
+            // Check for page overflow and add a new page if needed
+            checkPageOverflow();
+          }
+        }
+      } else {
+        // If there is no tool data available
+        page.graphics.drawString('No tools carried', contentFont,
+            bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
+        currentY += rowHeight; // Move to next row after the message
+      }
     }
 
     // Signature section
