@@ -2564,7 +2564,7 @@ class CumulativeReportController extends GetxController {
         }
       }
 
-      // Draw Job Information Details (Right Side)
+      // Now, extract and display Job Information Details (Right Side)
       List<String> jobInfoLabelsRight = [
         'Job title',
         'Breakdown end time',
@@ -2573,14 +2573,15 @@ class CumulativeReportController extends GetxController {
       ];
 
       List<String> jobInfoValuesRight = [
-        '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.jobTitle ?? ''}',
+        '${jobDetails?.jobTitle ?? ''}',
         jobCardDetailsModel.value!.status == 158
-            ? '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.breakdownEndTime ?? ''}'
+            ? '${jobDetails?.breakdownEndTime ?? ''}'
             : "",
         jobCardDetailsModel.value!.status == 158
-            ? '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.jobClosedOn ?? ''}'
+            ? '${jobDetails?.jobClosedOn ?? ''}'
             : "",
-        '${jobCardDetailsModel.value?.lstCmjcJobDetailList?.first.turnaroundTimeMinutes ?? ''} Minutes',
+
+        '${jobDetails?.turnaroundTimeMinutes ?? ''} Minutes', // Extract TAT (turnaround time in minutes)
       ];
 
       // Right-side job info layout
