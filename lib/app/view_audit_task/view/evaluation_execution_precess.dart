@@ -17,8 +17,12 @@ class EvaluationExecutionProcessDialog extends GetView {
   int? subtask_id;
   String? title;
   String? checkList_Number;
+  int? scheduleID;
   EvaluationExecutionProcessDialog(
-      {required this.subtask_id, required this.title, this.checkList_Number});
+      {required this.subtask_id,
+      required this.title,
+      this.checkList_Number,
+      this.scheduleID});
 
   final ViewAuditTaskController controller = Get.find();
   Widget _rowItem(int? defaultValue, {required Function(bool) onCheck}) {
@@ -247,220 +251,6 @@ class EvaluationExecutionProcessDialog extends GetView {
                                             }).toList(),
                                           );
                                         }).toList(),
-                                        //     .map((record) {
-                                        //   return DataRow(
-                                        //     // height: 130,
-                                        //     cells: record.map((mapData) {
-                                        //       return
-                                        //       DataCell(
-                                        //         (mapData['key'] ==
-                                        //                 "observation")
-                                        //             ? Padding(
-                                        //                 padding:
-                                        //                     const EdgeInsets
-                                        //                         .all(8.0),
-                                        //                 child:
-                                        //                     LoginCustomTextfield(
-                                        //                   width:
-                                        //                       (Get.width * .4),
-                                        //                   textController:
-                                        //                       new TextEditingController(
-                                        //                           text: mapData[
-                                        //                                   "value"] ??
-                                        //                               ''),
-                                        //                   onChanged: (txt) {
-                                        //                     mapData["value"] =
-                                        //                         txt;
-                                        //                   },
-                                        //                   maxLine: 5,
-                                        //                 ),
-                                        //               )
-                                        //             : (mapData['key'] ==
-                                        //                     "checkpoint")
-                                        //                 ? Text(
-                                        //                     mapData['value'] ??
-                                        //                         '')
-                                        //                 : (mapData['key'] ==
-                                        //                         "requirement")
-                                        //                     ? Text(mapData[
-                                        //                             'value'] ??
-                                        //                         '')
-                                        //                     : (mapData['key'] ==
-                                        //                             "uploadimg")
-                                        //                         ? Row(
-                                        //                             mainAxisAlignment:
-                                        //                                 MainAxisAlignment
-                                        //                                     .center,
-                                        //                             children: [
-                                        //                               InkWell(
-                                        //                                 onTap:
-                                        //                                     () async {
-                                        //                                   try {
-                                        //                                     final result =
-                                        //                                         await FilePicker.platform.pickFiles(
-                                        //                                       type: FileType.image,
-                                        //                                     );
-                                        //                                     if (result != null &&
-                                        //                                         result.files.single.bytes != null) {
-                                        //                                       setState(() {
-                                        //                                         mapData['uploaded'] = result.files.single.name;
-                                        //                                         controller.fileName.value = result.files.single.name;
-                                        //                                         controller.fileBytes = result.files.single.bytes;
-                                        //                                       });
-                                        //                                       controller.browseFiles(
-                                        //                                         fileBytes: controller.fileBytes,
-                                        //                                       );
-                                        //                                     } else {
-                                        //                                       // Handle the case where no file is picked
-                                        //                                       print('No file selected');
-                                        //                                     }
-                                        //                                   } catch (e) {
-                                        //                                     // Handle the error scenario
-                                        //                                     print('Error picking file: $e');
-                                        //                                   }
-                                        //                                 },
-                                        //                                 child:
-                                        //                                     Container(
-                                        //                                   decoration:
-                                        //                                       BoxDecoration(
-                                        //                                     borderRadius:
-                                        //                                         BorderRadius.circular(5),
-                                        //                                     color:
-                                        //                                         ColorValues.appDarkBlueColor,
-                                        //                                     border:
-                                        //                                         Border.all(
-                                        //                                       color: ColorValues.appDarkBlueColor,
-                                        //                                       width: 1,
-                                        //                                     ),
-                                        //                                   ),
-                                        //                                   child: Icon(
-                                        //                                       Icons.upload,
-                                        //                                       size: 30,
-                                        //                                       color: ColorValues.whiteColor),
-                                        //                                 ),
-                                        //                               ),
-                                        //                               SizedBox(
-                                        //                                   width:
-                                        //                                       10), // Add some spacing between the icon and text
-                                        //                               Expanded(
-                                        //                                 // Wrap with Expanded to handle long filenames gracefully
-                                        //                                 child:
-                                        //                                     SingleChildScrollView(
-                                        //                                   scrollDirection:
-                                        //                                       Axis.horizontal,
-                                        //                                   child:
-                                        //                                       Text(
-                                        //                                     "${mapData['uploaded'] ?? 'No file selected'}",
-                                        //                                     overflow:
-                                        //                                         TextOverflow.ellipsis,
-                                        //                                   ),
-                                        //                                 ),
-                                        //                               ),
-                                        //                             ],
-                                        //                           )
-                                        //                         : (mapData['key'] ==
-                                        //                                 "accept")
-                                        //                             ? _rowcpOkItem(
-                                        //                                 int.tryParse(
-                                        //                                     '${mapData['value']}'),
-                                        //                                 onCheck:
-                                        //                                     (val) {
-                                        //                                 mapData[
-                                        //                                     'value'] = val ==
-                                        //                                         true
-                                        //                                     ? "1"
-                                        //                                     : "0";
-                                        //                                 // updateJob(record);
-                                        //                                 Future.delayed(
-                                        //                                     Duration.zero,
-                                        //                                     () {
-                                        //                                   setState(
-                                        //                                       () {});
-                                        //                                 });
-                                        //                               })
-                                        //                             : (mapData['key'] ==
-                                        //                                         "accept") &&
-                                        //                                     mapData['value'] ==
-                                        //                                         4
-                                        //                                 ? Column(
-                                        //                                     mainAxisAlignment:
-                                        //                                         MainAxisAlignment.center, // Center the radio buttons
-                                        //                                     crossAxisAlignment:
-                                        //                                         CrossAxisAlignment.start,
-                                        //                                     children: [
-                                        //                                       RadioListTile<int>(
-                                        //                                         title: Text('YES'),
-                                        //                                         value: 1,
-                                        //                                         groupValue: int.tryParse('${mapData['value']}'),
-                                        //                                         visualDensity: const VisualDensity(
-                                        //                                           horizontal: VisualDensity.minimumDensity,
-                                        //                                           vertical: VisualDensity.minimumDensity,
-                                        //                                         ),
-                                        //                                         onChanged: (int? value) {
-                                        //                                           setState(() {
-                                        //                                             mapData['value'] = value.toString();
-                                        //                                           });
-                                        //                                         },
-                                        //                                         dense: true,
-                                        //                                         contentPadding: EdgeInsets.zero,
-                                        //                                       ),
-                                        //                                       RadioListTile<int>(
-                                        //                                         title: Text('NO'),
-                                        //                                         value: 2,
-                                        //                                         groupValue: int.tryParse('${mapData['value']}'),
-                                        //                                         visualDensity: VisualDensity.compact,
-                                        //                                         onChanged: (int? value) {
-                                        //                                           setState(() {
-                                        //                                             mapData['value'] = value.toString();
-                                        //                                           });
-                                        //                                         },
-                                        //                                         dense: true,
-                                        //                                         contentPadding: EdgeInsets.zero,
-                                        //                                       ),
-                                        //                                       RadioListTile<int>(
-                                        //                                         title: Text('NA'),
-                                        //                                         value: 3,
-                                        //                                         groupValue: int.tryParse('${mapData['value']}'),
-                                        //                                         visualDensity: VisualDensity.compact,
-                                        //                                         onChanged: (int? value) {
-                                        //                                           setState(() {
-                                        //                                             mapData['value'] = value.toString();
-                                        //                                           });
-                                        //                                         },
-                                        //                                         dense: true,
-                                        //                                         contentPadding: EdgeInsets.zero,
-                                        //                                       ),
-                                        //                                     ],
-                                        //                                   )
-                                        //                                 : (mapData['key'] == "type" &&
-                                        //                                         mapData['inpute_type'] == "0")
-                                        //                                     ? Text('Text')
-                                        //                                     : (mapData['key'] == "type" && mapData['inpute_type'] == "2")
-                                        //                                         ? Padding(
-                                        //                                             padding: const EdgeInsets.all(8.0),
-                                        //                                             child: Column(
-                                        //                                               children: [
-                                        //                                                 LoginCustomTextfield(
-                                        //                                                     width: (Get.width * .8),
-                                        //                                                     textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                        //                                                     onChanged: (txt) {
-                                        //                                                       mapData["value"] = txt;
-                                        //                                                     }),
-                                        //                                                 Row(
-                                        //                                                   children: [
-                                        //                                                     Text("Min:${mapData["min"]}"),
-                                        //                                                     Dimens.boxWidth15,
-                                        //                                                     Text("Max:${mapData["max"]}")
-                                        //                                                   ],
-                                        //                                                 )
-                                        //                                               ],
-                                        //                                             ))
-                                        //                                         : Text(mapData['value'] ?? ''),
-                                        //       );
-                                        //     }).toList(),
-                                        //   );
-
-                                        // }).toList(),
                                       ),
                                     ),
                                   ),
@@ -519,7 +309,9 @@ class EvaluationExecutionProcessDialog extends GetView {
                                     // Get.back();
                                     // controller.transferItem();
                                     controller.updateAuditTaskExecution(
-                                        exeType: 1, subtask_id: subtask_id);
+                                        exeType: 1,
+                                        subtask_id: subtask_id,
+                                        scheduleID: scheduleID);
                                   },
                                 ),
                               )

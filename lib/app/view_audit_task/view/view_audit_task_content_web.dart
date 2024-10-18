@@ -2596,8 +2596,11 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                                             "";
                                                     var checkList_Number =
                                                         filterdData?.name ?? "";
-                                                    int subtask_id = filterdData
-                                                            ?.subtask_id ??
+                                                    int scheduleID = filterdData
+                                                            ?.sub_schedules![0]
+                                                            .schedule_id ??
+                                                        0; int subtask_id = filterdData
+                                                            ?.subtask_id??
                                                         0;
 
 // Display the dialog
@@ -2607,7 +2610,8 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                                             subtask_id:
                                                                 subtask_id,
                                                             checkList_Number:
-                                                                checkList_Number));
+                                                                checkList_Number, scheduleID:
+                                                                scheduleID,));
                                                   },
                                                 )
                                               : Dimens.box0,
