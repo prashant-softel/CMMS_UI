@@ -2602,6 +2602,7 @@ class CumulativeReportController extends GetxController {
           currentY = 30; // Reset the Y position for the new page
         }
       }
+
       // Equipment details for each JobCard
       currentY += 20; // Adding some space before the next section
       page.graphics.drawRectangle(
@@ -2667,6 +2668,93 @@ class CumulativeReportController extends GetxController {
             bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
       }
       currentY += 20; // Add space between jobCard sections if needed
+
+      // Permit carried by section
+      currentY += 10; // Adding some space before the next section
+
+      // Draw the permit section with header
+      page.graphics.drawRectangle(
+          pen: borderPen,
+          brush: backgroundBrush,
+          bounds: Rect.fromLTWH(margin, currentY, pageWidth, sectionHeight));
+      page.graphics.drawString('Permit carried by', headerFont,
+          bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
+      currentY += sectionHeight;
+
+      // Define static widths for the columns
+      double serialNoWidth = 40; // Width for S. No
+      double employeeIdWidth = 80; // Width for Employee ID
+      double employeeNameWidth = 180; // Width for Employee Name
+      double companyWidth = pageWidth -
+          (serialNoWidth +
+              employeeIdWidth +
+              employeeNameWidth); // Remaining width for Company
+
+      // Headers for Permit carried by section
+      List<String> permitHeaders = [
+        'S. No',
+        'Employee ID',
+        'Employee name',
+        'Company'
+      ];
+
+      // Draw the headers with static widths
+      page.graphics.drawString(permitHeaders[0], contentFont,
+          bounds:
+              Rect.fromLTWH(margin, currentY + 5, serialNoWidth, rowHeight));
+      page.graphics.drawString(permitHeaders[1], contentFont,
+          bounds: Rect.fromLTWH(margin + serialNoWidth, currentY + 5,
+              employeeIdWidth, rowHeight));
+      page.graphics.drawString(permitHeaders[2], contentFont,
+          bounds: Rect.fromLTWH(margin + serialNoWidth + employeeIdWidth,
+              currentY + 5, employeeNameWidth, rowHeight));
+      page.graphics.drawString(permitHeaders[3], contentFont,
+          bounds: Rect.fromLTWH(
+              margin + serialNoWidth + employeeIdWidth + employeeNameWidth,
+              currentY + 5,
+              companyWidth,
+              rowHeight));
+
+      currentY += rowHeight;
+
+      // Access permit data from jobCard details
+      if (jobCard.lstCmjcJobDetailList != null &&
+          jobCard.lstCmjcJobDetailList!.isNotEmpty) {
+        int serialNo = 1;
+        for (var permit in jobCard.lstCmjcJobDetailList!) {
+          // Draw Permit Data
+          page.graphics.drawString('$serialNo', contentFont,
+              bounds: Rect.fromLTWH(
+                  margin, currentY + 5, serialNoWidth, rowHeight)); // S. No
+          page.graphics.drawString('${permit.employee_ID ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(margin + serialNoWidth, currentY + 5,
+                  employeeIdWidth, rowHeight)); // Employee ID
+          page.graphics.drawString('${permit.employee_name ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(margin + serialNoWidth + employeeIdWidth,
+                  currentY + 5, employeeNameWidth, rowHeight)); // Employee name
+          page.graphics.drawString('${permit.company ?? ''}', contentFont,
+              bounds: Rect.fromLTWH(
+                  margin + serialNoWidth + employeeIdWidth + employeeNameWidth,
+                  currentY + 5,
+                  companyWidth,
+                  rowHeight)); // Company
+
+          currentY += rowHeight;
+          serialNo++;
+
+          // Check if a new page is needed before continuing
+          if (currentY > pageSize.height - 120) {
+            page = document.pages.add(); // Add a new page
+            currentY = 30; // Reset Y position for the new page
+          }
+        }
+      } else {
+        // Draw the "No permit carried out" message below the headers
+        page.graphics.drawString('No Permit Carried Out', contentFont,
+            bounds: Rect.fromLTWH(margin, currentY + 5, pageWidth, rowHeight));
+
+        currentY += rowHeight;
+      }
     }
 
     // Signature section
