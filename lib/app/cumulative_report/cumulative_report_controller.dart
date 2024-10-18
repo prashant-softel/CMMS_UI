@@ -2951,9 +2951,8 @@ class CumulativeReportController extends GetxController {
         currentY += rowHeight;
       }
       // Work description section
-      currentY += 25; // Adding space before the next section
 
-// Draw the Work description section header
+      currentY += 25;
       page.graphics.drawRectangle(
           pen: borderPen,
           brush: backgroundBrush,
@@ -2962,15 +2961,14 @@ class CumulativeReportController extends GetxController {
           bounds: Rect.fromLTWH(margin + 5, currentY + 5, 0, 0));
       currentY += sectionHeight;
 
-// Add the work description from JobCardDetailsModel
-      page.graphics.drawString(
-          '${jobCardDetailsModel.value?.description ?? ''}', contentFont,
+      // Add static description after Work description
+      page.graphics.drawString('${jobCard.description ?? ''}', contentFont,
           bounds: Rect.fromLTWH(
               margin + 5, currentY + 5, pageWidth - 10, rowHeight * 2),
           format: PdfStringFormat(alignment: PdfTextAlignment.left));
-
-      currentY += rowHeight * 2; // Move down after adding the description
+      currentY += rowHeight * 2;
     }
+    
 
     // Signature section
     final String signatureText = 'Signature';
