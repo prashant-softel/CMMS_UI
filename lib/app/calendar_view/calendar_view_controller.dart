@@ -102,7 +102,9 @@ class CalendarViewController extends GetxController {
     if (_moduleList != null) {
       // Filter the modules to include only the specified items
       final filteredModules = _moduleList.where((module) {
-        return module?.software_id == 2 || module?.software_id == 26 || module?.software_id == 81; //||
+        return module?.software_id == 2 ||
+            module?.software_id == 26 ||
+            module?.software_id == 81; //||
         // module?.id == ;
       }).toList();
 
@@ -114,7 +116,6 @@ class CalendarViewController extends GetxController {
     print("Creating data source from allItems.");
     final List<Meeting> meetings = <Meeting>[];
 
-    // Define a map for module name and corresponding color
     final Map<String, Color> moduleColors = {
       'Breakdown Maintenance': ColorValues.appGreenColor,
       'Preventive Maintenance': ColorValues.appDarkBlueColor,
@@ -141,11 +142,14 @@ class CalendarViewController extends GetxController {
       final String fullEventName =
           currentStatus != null && currentStatus.isNotEmpty
               ? "$eventName - $currentStatus"
-              : eventName; // Include current status if it exists
+              : eventName;
+      final int planId = item?.plan_id ?? 0;
 
       final bool isAllDay = false;
+      final String woNumber = item?.wo_number ?? "N/A"; // Add wo_number
+      final String woDescription =
+          item?.wo_decription ?? "No description"; // Add wo_description
 
-      // Use the module name from the parent dashboard item
       final String? moduleName = dashboardList
           .firstWhere(
               (dashboard) =>
@@ -154,16 +158,18 @@ class CalendarViewController extends GetxController {
               orElse: () => null)
           ?.module_name;
 
-      final Color moduleColor = moduleColors[moduleName] ??
-          Colors.grey; // Default to grey if module name is not found
+      final Color moduleColor = moduleColors[moduleName] ?? Colors.grey;
 
       meetings.add(Meeting(
-        fullEventName,
-        start_date,
-        end_date ?? start_date,
-        moduleColor,
-        isAllDay,
-      ));
+          fullEventName,
+          start_date,
+          end_date ?? start_date,
+          moduleColor,
+          isAllDay,
+          woNumber, // Include wo_number
+          woDescription,
+          planId // Include wo_description
+          ));
     }
 
     return meetings;

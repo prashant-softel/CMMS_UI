@@ -14,14 +14,21 @@ class PermitMessageCancelRequestDialog extends GetView {
   int? jobId;
   int? type;
   String? taskId;
-
+  int? vegplanId;
+  int? vegexid;
+  int? mcplanId;
+  int? mctaskId;
   PermitMessageCancelRequestDialog(
       {super.key,
       this.createPermitData,
       this.data,
       this.jobId,
       this.type,
-      this.taskId});
+      this.taskId,
+      this.vegplanId,
+      this.mcplanId,
+      this.mctaskId,
+      this.vegexid});
   final ViewPermitController _controller = Get.find();
 
   @override
@@ -95,7 +102,18 @@ class PermitMessageCancelRequestDialog extends GetView {
                     ? Get.toNamed('${Routes.jobDetails}/$taskId')
                     : type == 2
                         ? Get.offAllNamed('${Routes.pmTaskView}/$taskId')
-                        : Get.offAllNamed(Routes.newPermitList);
+                        : type == 3
+                            ? Get.offAllNamed('${Routes.viewAuditTask}/$taskId')
+                            : type == 4
+                                ? Get.offAllNamed(
+                                    '${Routes.addModuleCleaningExecutionContentWeb}/$mctaskId/$mcplanId')
+                                : type == 5
+                                    ? Get.offAllNamed(
+                                        '${Routes.viewAuditTask}/$taskId')
+                                    : type == 6
+                                        ? Get.offAllNamed(
+                                            '${Routes.vegExecutionScreen}/${vegexid}/${vegplanId}')
+                                        : Get.offAllNamed(Routes.newPermitList);
               },
               child: const Text('Ok'),
             ),

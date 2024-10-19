@@ -465,8 +465,17 @@ class Repository {
     }
   }
 
-  Future<Map<String, dynamic>> createNewPermitForPm(newPermit, pmTaskId,
-      activity, bool? isLoading, type, vegplanId, vegexid, facilityId) async {
+  Future<Map<String, dynamic>> createNewPermitForPm(
+      newPermit,
+      pmTaskId,
+      activity,
+      bool? isLoading,
+      type,
+      vegplanId,
+      vegexid,
+      facilityId,
+      mcplanId,
+      mctaskId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -497,17 +506,17 @@ class Repository {
           var permitForJob = responseMap['id'];
           print('CreateForJobPermitResponse:${permitForJob[0]}');
           if (pmTaskId != null && type == 3 || pmTaskId != null && type == 5) {
-            scheduleLinkToPermit(
-                pmTaskId, activity, permitForJob[0], true, type, facilityId);
+            scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true,
+                type, facilityId, mcplanId, mctaskId);
           } else if (pmTaskId != null && type == 4) {
-            scheduleLinkToPermit(
-                pmTaskId, activity, permitForJob[0], true, type, facilityId);
+            scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true,
+                type, facilityId, mcplanId, mctaskId);
           } else if (pmTaskId != null && type == 6) {
             vegscheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true,
                 type, vegplanId, vegexid, facilityId);
           } else {
-            scheduleLinkToPermit(
-                pmTaskId, activity, permitForJob[0], true, 0, facilityId);
+            scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true, 0,
+                facilityId, mcplanId, mctaskId);
           }
           return responseMap;
         }
@@ -523,21 +532,33 @@ class Repository {
   }
 
   //Update New Permit
-  Future<Map<String, dynamic>> updateNewPermit(newPermit, bool? isLoading,
-      bool? resubmit, int? type, vegplanId, vegexid, taskId) async {
+  Future<Map<String, dynamic>> updateNewPermit(
+    newPermit,
+    bool? isLoading,
+    bool? resubmit,
+    int? type,
+    vegplanId,
+    vegexid,
+    taskId,
+    mcplanId,
+    mcexid,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
       if (auth.isNotEmpty) {
         res = await _dataRepository.updateNewPermit(
-            auth: auth,
-            newPermit: newPermit,
-            isLoading: isLoading ?? false,
-            resubmit: resubmit,
-            type: type,
-            vegplanId: vegplanId,
-            vegexid: vegexid,
-            taskId: taskId);
+          auth: auth,
+          newPermit: newPermit,
+          isLoading: isLoading ?? false,
+          resubmit: resubmit,
+          type: type,
+          vegplanId: vegplanId,
+          vegexid: vegexid,
+          taskId: taskId,
+          mcplanId: mcplanId,
+          mcexid: mcexid,
+        );
       }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -569,21 +590,33 @@ class Repository {
   }
 
   /// sesubmit permit
-  Future<Map<String, dynamic>> resubmitPermit(newPermit, bool? isLoading,
-      bool? resubmit, int? type, vegplanId, vegexid, taskId) async {
+  Future<Map<String, dynamic>> resubmitPermit(
+    newPermit,
+    bool? isLoading,
+    bool? resubmit,
+    int? type,
+    vegplanId,
+    vegexid,
+    taskId,
+    mcplanId,
+    mcexid,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
       if (auth.isNotEmpty) {
         res = await _dataRepository.resubmitPermit(
-            auth: auth,
-            newPermit: newPermit,
-            isLoading: isLoading ?? false,
-            resubmit: resubmit,
-            type: type,
-            vegplanId: vegplanId,
-            vegexid: vegexid,
-            taskId: taskId);
+          auth: auth,
+          newPermit: newPermit,
+          isLoading: isLoading ?? false,
+          resubmit: resubmit,
+          type: type,
+          vegplanId: vegplanId,
+          vegexid: vegexid,
+          taskId: taskId,
+          mcplanId: mcplanId,
+          mcexid: mcexid,
+        );
       }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -7247,7 +7280,9 @@ class Repository {
       bool? isLoading,
       int? vegexe,
       int? vegid,
-      String? taskId) async {
+      String? taskId,
+      mcplanId,
+      mctaskId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -7276,7 +7311,7 @@ class Repository {
                       ? Get.offAllNamed('${Routes.viewAuditTask}/$taskId/$type')
                       : type == 4
                           ? Get.offAllNamed(
-                              Routes.addModuleCleaningExecutionContentWeb)
+                              '${Routes.addModuleCleaningExecutionContentWeb}/$mctaskId/$mcplanId')
                           : type == 6
                               ? Get.offAllNamed(
                                   '${Routes.vegExecutionScreen}/${vegexe}/${vegid}')
@@ -7362,7 +7397,11 @@ class Repository {
       bool? isLoading,
       int? jobId,
       int? type,
-      String? taskId) async {
+      String? taskId,
+      vegplanId,
+      vegexid,
+      mcplanId,
+      mctaskId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
@@ -7374,7 +7413,11 @@ class Repository {
             isLoading: isLoading ?? false,
             jobId: jobId,
             type: type,
-            taskId: taskId);
+            taskId: taskId,
+            vegexid: vegexid,
+            vegplanId: vegplanId,
+            mcplanId: mcplanId,
+            mctaskId: mctaskId);
         print('PermitCancelRequestResponse: ${res.data}');
       }
       if (!res.hasError) {
@@ -7560,16 +7603,24 @@ class Repository {
 
   ///Abandon MC Execution
   Future<Map<String, dynamic>> abandonExecutionButton(
-      abandoneJsonString, bool? isLoading, int? facility_id) async {
+    abandoneJsonString,
+    bool? isLoading,
+    int? facility_id,
+    mcplanId,
+    mcexid,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
       if (auth.isNotEmpty) {
         res = await _dataRepository.abandonExecutionButton(
-            auth: auth,
-            abandoneJsonString: json.encode(abandoneJsonString),
-            isLoading: isLoading ?? false,
-            facility_id: facility_id);
+          auth: auth,
+          abandoneJsonString: json.encode(abandoneJsonString),
+          isLoading: isLoading ?? false,
+          facility_id: facility_id,
+          mcplanId: mcplanId,
+          mcexid: mcexid,
+        );
       }
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
@@ -7831,7 +7882,9 @@ class Repository {
       bool? isLoading,
       int? vegexe,
       int? vegid,
-      String? taskId) async {
+      String? taskId,
+      mcplanId,
+      mctaskId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -7847,7 +7900,9 @@ class Repository {
             type: type,
             vegexe: vegexe,
             vegid: vegid,
-            taskId: taskId);
+            taskId: taskId,
+            mcplanId: mcplanId,
+            mctaskId: mctaskId);
       }
       var resourceData = res.data;
 
@@ -14498,8 +14553,15 @@ class Repository {
     }
   }
 
-  Future<Map<String, dynamic>> scheduleLinkToPermit(scheduleId, activity,
-      permitId, bool? isLoading, type, int? facilityId) async {
+  Future<Map<String, dynamic>> scheduleLinkToPermit(
+      scheduleId,
+      activity,
+      permitId,
+      bool? isLoading,
+      type,
+      int? facilityId,
+      mcplanId,
+      mctaskId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -14511,7 +14573,9 @@ class Repository {
             activity: activity,
             isLoading: isLoading ?? false,
             type: type,
-            facilityId: facilityId);
+            facilityId: facilityId,
+            mcplanId: mcplanId,
+            mctaskId: mctaskId);
       }
       if (!res.hasError) {
         if (res.errorCode == 200) {

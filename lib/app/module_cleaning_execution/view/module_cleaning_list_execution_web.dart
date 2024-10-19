@@ -763,9 +763,12 @@ class MCExcutionListDataSource extends DataTableSource {
                               if (id != 0) {
                                 controller.clearStoreDataMcid();
                                 controller.clearStoreDataPlanid();
-                                Get.toNamed(
-                                    Routes.addModuleCleaningExecutionContentWeb,
-                                    arguments: {"mcid": id, "planId": planId});
+                                Get.offAllNamed(
+                                    '${Routes.addModuleCleaningExecutionContentWeb}/$id/$planId');
+
+                                // Get.toNamed(
+                                //     Routes.addModuleCleaningExecutionContentWeb,
+                                //     arguments: {"mcid": id, "planId": planId});
                               }
                             },
                           ),
@@ -782,8 +785,11 @@ class MCExcutionListDataSource extends DataTableSource {
         if (id != 0) {
           controller.clearStoreDataMcid();
           controller.clearStoreDataPlanid();
-          Get.toNamed(Routes.addModuleCleaningExecutionContentWeb,
-              arguments: {"mcid": id, "planId": planId});
+          Get.offAllNamed(
+              '${Routes.addModuleCleaningExecutionContentWeb}/$id/$planId');
+
+          // Get.toNamed(Routes.addModuleCleaningExecutionContentWeb,
+          //     arguments: {"mcid": id, "planId": planId});
         }
       },
     );

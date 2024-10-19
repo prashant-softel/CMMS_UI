@@ -1688,7 +1688,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                               20),
                                                                       // Spacer(),
                                                                       Text(
-                                                                        '${controller.woOnTimeSum.value}',
+                                                                        '${controller.dashboardBmList.value?.cmDashboadDetails?.wo_on_time}',
                                                                         style: Styles
                                                                             .black13,
                                                                       ),
@@ -1723,7 +1723,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                               35),
                                                                       // Spacer(),
                                                                       Text(
-                                                                        '${controller.woDelaySum.value}',
+                                                                        '${controller.dashboardBmList.value?.cmDashboadDetails?.wo_delay}',
                                                                         style: Styles
                                                                             .black13,
                                                                       ),
@@ -1756,7 +1756,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                               20),
                                                                       // Spacer(),
                                                                       Text(
-                                                                        '${controller.woBacklogSum.value}',
+                                                                        '${controller.dashboardBmList.value?.cmDashboadDetails?.wo_backlog}',
                                                                         style: Styles
                                                                             .black13,
                                                                       ),
@@ -2525,7 +2525,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                               20),
                                                                       // Spacer(),
                                                                       Text(
-                                                                        '${controller.woOnTimeSum.value}',
+                                                                        '${controller.dashboardPmList.value?.cmDashboadDetails?.wo_on_time}',
                                                                         style: Styles
                                                                             .black13,
                                                                       ),
@@ -2560,7 +2560,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                               35),
                                                                       // Spacer(),
                                                                       Text(
-                                                                        '${controller.woDelaySum.value}',
+                                                                        '${controller.dashboardPmList.value?.cmDashboadDetails?.wo_delay}',
                                                                         style: Styles
                                                                             .black13,
                                                                       ),
@@ -2595,7 +2595,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                               20),
                                                                       // Spacer(),
                                                                       Text(
-                                                                        '${controller.woBacklogSum.value}',
+                                                                        '${controller.dashboardPmList.value?.cmDashboadDetails?.wo_backlog}',
                                                                         style: Styles
                                                                             .black13,
                                                                       ),
@@ -3531,7 +3531,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                               20),
                                                                       // Spacer(),
                                                                       Text(
-                                                                        '${controller.woOnTimeSum.value}',
+                                                                        '${controller.dashboardMcList.value?.cmDashboadDetails?.wo_on_time}',
                                                                         style: Styles
                                                                             .black13,
                                                                       ),
@@ -3566,7 +3566,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                               35),
                                                                       // Spacer(),
                                                                       Text(
-                                                                        '${controller.woDelaySum.value}',
+                                                                        '${controller.dashboardMcList.value?.cmDashboadDetails?.wo_delay}',
                                                                         style: Styles
                                                                             .black13,
                                                                       ),
@@ -3601,7 +3601,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                               20),
                                                                       // Spacer(),
                                                                       Text(
-                                                                        '${controller.woBacklogSum.value}',
+                                                                        '${controller.dashboardMcList.value?.cmDashboadDetails?.wo_backlog}',
                                                                         style: Styles
                                                                             .black13,
                                                                       ),
@@ -4132,15 +4132,18 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
                                                                       "";
                                                                   if (prefix ==
                                                                       'MC') {
-                                                                    Get.toNamed(
-                                                                        Routes
-                                                                            .addModuleCleaningExecutionContentWeb,
-                                                                        arguments: {
-                                                                          "mcid":
-                                                                              int.tryParse(mcId),
-                                                                          "planId":
-                                                                              int.tryParse(planId)
-                                                                        });
+                                                                    Get.offAllNamed(
+                                                                        '${Routes.addModuleCleaningExecutionContentWeb}/$mcId/$planId');
+
+                                                                    // Get.toNamed(
+                                                                    //     Routes
+                                                                    //         .addModuleCleaningExecutionContentWeb,
+                                                                    //     arguments: {
+                                                                    //       "mcid":
+                                                                    //           int.tryParse(mcId),
+                                                                    //       "planId":
+                                                                    //           int.tryParse(planId)
+                                                                    //     });
                                                                   }
                                                                 }
                                                               },
@@ -4307,12 +4310,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb>
 
                                                                         if (mcId !=
                                                                             null) {
-                                                                          Get.toNamed(
-                                                                              Routes.addModuleCleaningExecutionContentWeb,
-                                                                              arguments: {
-                                                                                "mcid": int.tryParse(mcId),
-                                                                                "planId": int.tryParse(planId)
-                                                                              });
+                                                                          Get.offAllNamed(
+                                                                              '${Routes.addModuleCleaningExecutionContentWeb}/$mcId/$planId');
                                                                         }
                                                                       },
                                                                     ),

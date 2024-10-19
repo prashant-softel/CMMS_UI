@@ -13,13 +13,18 @@ class PermitMessageApproveDialog extends GetView {
   String? data;
   int? jobId;
   int? ptwStatus;
+  int? mcplanId;
+  int? mctaskId;
 
-  PermitMessageApproveDialog(
-      {super.key,
-      this.createPermitData,
-      this.data,
-      this.jobId,
-      this.ptwStatus});
+  PermitMessageApproveDialog({
+    super.key,
+    this.createPermitData,
+    this.data,
+    this.jobId,
+    this.ptwStatus,
+    this.mcplanId,
+    this.mctaskId,
+  });
   final ViewPermitController _controller = Get.find();
 
   @override

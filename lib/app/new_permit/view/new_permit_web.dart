@@ -94,12 +94,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                     ? Get.offAllNamed(
                                         '${Routes.viewAuditTask}/$taskId/${controller.typee.value}')
                                     : controller.typee.value == 4
-                                        ? Get.offAllNamed(
-                                            Routes
-                                                .addModuleCleaningExecutionContentWeb,
-                                            arguments: {
-                                                'mcid': mcid
-                                              })
+                                        ? controller.viewMCTDetails()
                                         : controller.typee.value == 6
                                             ? Get.offAllNamed(
                                                 '${Routes.vegExecutionScreen}/${controller.vegExecutionDetailsModel?.executionId}/${controller.vegExecutionDetailsModel?.planId}')

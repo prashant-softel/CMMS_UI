@@ -37,12 +37,6 @@ import 'app/job_list/job_list_controller.dart';
 Future<void> mainCommon(AppConfig appConfig) async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
-    // FlutterBranchSdk.validateSDKIntegration();
-    // if (!GetPlatform.isWeb) {
-    //   await Firebase.initializeApp();
-    //   // The following lines are the same as previously explained in "Handling uncaught errors"
-    //   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-    // }
 
     appFlavor = (appConfig.flavoredApp == 2) ? AppFlavor.PROD : AppFlavor.DEV;
     await initServices();
@@ -50,14 +44,9 @@ Future<void> mainCommon(AppConfig appConfig) async {
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
         .then(
       (value) => runApp(
-        MediaQuery(
-          data: MediaQueryData(
-            size: Size(Get.width * 1, Get.height * 1),
-          ),
-          child: MyApp(
-            appTitle: appConfig.appTitle!,
-            themeMode: appConfig.themeMode!,
-          ),
+        MyApp(
+          appTitle: appConfig.appTitle!,
+          themeMode: appConfig.themeMode!,
         ),
       ),
     );

@@ -29,6 +29,7 @@ class EndMCExecutionDetailsModel {
   int? ptw_status;
   int? ptw_tbt_done;
   String? status_short_ptw;
+  int? planId;
   List<Schedules> schedules;
 
   EndMCExecutionDetailsModel({
@@ -46,6 +47,7 @@ class EndMCExecutionDetailsModel {
     this.startedBy,
     this.startedAt,
     this.abandonedBy,
+    this.planId,
     this.abandonedAt,
     this.status,
     this.status_short,
@@ -61,6 +63,7 @@ class EndMCExecutionDetailsModel {
   factory EndMCExecutionDetailsModel.fromJson(Map<String, dynamic> json) =>
       EndMCExecutionDetailsModel(
         id: json['id'],
+        planId: json['planId'],
         status_short_ptw: json['status_short_ptw'] == 'Invalid'
             ? ''
             : json['status_short_ptw'] ?? '',
@@ -94,6 +97,7 @@ class EndMCExecutionDetailsModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "planId": planId,
         "status_short_ptw":
             status_short_ptw == 'Invalid' ? '' : status_short_ptw,
         "executionId": executionId,

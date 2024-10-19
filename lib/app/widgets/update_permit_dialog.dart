@@ -14,6 +14,8 @@ class UpdateNewPermitDialog extends GetView {
   int? vegexid;
   int? vegplanId;
   String? taskId;
+  int? mcexid;
+  int? mcplanId;
   UpdateNewPermitDialog(
       {super.key,
       this.createPermitData,
@@ -22,7 +24,9 @@ class UpdateNewPermitDialog extends GetView {
       this.type,
       this.vegplanId,
       this.vegexid,
-      this.taskId});
+      this.taskId,
+      this.mcplanId,
+      this.mcexid});
   final NewPermitController controller = Get.find();
 
   @override
@@ -177,8 +181,8 @@ class UpdateNewPermitDialog extends GetView {
                         : type == 4
                             ? ElevatedButton(
                                 style: Styles.darkBlueElevatedButtonStyle,
-                                onPressed: () => Get.offAllNamed(Routes
-                                    .addModuleCleaningExecutionContentWeb),
+                                onPressed: () => Get.offAllNamed(
+                                    '${Routes.addModuleCleaningExecutionContentWeb}/$mcexid/$mcplanId'),
                                 child: const Text('View MC'),
                               )
                             : type == 6

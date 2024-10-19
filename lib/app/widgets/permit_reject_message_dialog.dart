@@ -17,17 +17,22 @@ class PermitMessageRejectDialog extends GetView {
   int? type;
   int? vegid;
   String? taskId;
+  int? mcplanId;
+  int? mctaskId;
 
-  PermitMessageRejectDialog(
-      {super.key,
-      this.createPermitData,
-      this.data,
-      this.ptwStatus,
-      this.jobId,
-      this.type,
-      this.vegid,
-      this.vegexe,
-      this.taskId});
+  PermitMessageRejectDialog({
+    super.key,
+    this.createPermitData,
+    this.data,
+    this.ptwStatus,
+    this.jobId,
+    this.type,
+    this.vegid,
+    this.vegexe,
+    this.taskId,
+    this.mcplanId,
+    this.mctaskId,
+  });
   final ViewPermitController controller = Get.find();
 
   @override
@@ -103,8 +108,8 @@ class PermitMessageRejectDialog extends GetView {
                             ? Get.offAllNamed(Routes.viewAuditTask)
                             : type == 4
                                 ? Get.offAllNamed(
-                                    Routes.addModuleCleaningExecutionContentWeb)
-                                : type == 5
+                                    '${Routes.addModuleCleaningExecutionContentWeb}/$mctaskId/$mcplanId')
+                                : type == 6
                                     ? Get.offAllNamed(
                                         '${Routes.vegExecutionScreen}/${vegexe}/${vegid}')
                                     : Get.offAllNamed(Routes.newPermitList);

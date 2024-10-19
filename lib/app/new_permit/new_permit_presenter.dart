@@ -239,7 +239,9 @@ class NewPermitPresenter {
       int? type,
       int? vegplanId,
       int? vegexid,
-      int? facilityId}) async {
+      int? facilityId,
+      int? mcplanId,
+      int? mctaskId}) async {
     return newPermitUsecase.createNewPermitForPm(
         newPermit: newPermit,
         pmTaskId: pmTaskId,
@@ -248,43 +250,57 @@ class NewPermitPresenter {
         type: type,
         vegexid: vegexid,
         vegplanId: vegplanId,
-        facilityId: facilityId);
+        facilityId: facilityId,
+        mcplanId: mcplanId,
+        mctaskId: mctaskId);
   }
 
-  Future<Map<String, dynamic>?> updateNewPermit(
-      {newPermit,
-      required bool isLoading,
-      required bool resubmit,
-      int? type,
-      int? vegplanId,
-      int? vegexid,
-      String? taskId}) async {
+  Future<Map<String, dynamic>?> updateNewPermit({
+    newPermit,
+    required bool isLoading,
+    required bool resubmit,
+    int? type,
+    int? vegplanId,
+    int? vegexid,
+    String? taskId,
+    int? mcplanId,
+    int? mcexid,
+  }) async {
     return newPermitUsecase.updateNewPermit(
-        type: type,
-        newPermit: newPermit,
-        isLoading: isLoading,
-        resubmit: resubmit,
-        vegexid: vegexid,
-        vegplanId: vegplanId,
-        taskId: taskId);
+      type: type,
+      newPermit: newPermit,
+      isLoading: isLoading,
+      resubmit: resubmit,
+      vegexid: vegexid,
+      vegplanId: vegplanId,
+      taskId: taskId,
+      mcexid: mcexid,
+      mcplanId: mcplanId,
+    );
   }
 
-  Future<Map<String, dynamic>?> resubmitPermit(
-      {newPermit,
-      required bool isLoading,
-      required bool resubmit,
-      int? type,
-      int? vegplanId,
-      int? vegexid,
-      String? taskId}) async {
+  Future<Map<String, dynamic>?> resubmitPermit({
+    newPermit,
+    required bool isLoading,
+    required bool resubmit,
+    int? type,
+    int? vegplanId,
+    int? vegexid,
+    String? taskId,
+    int? mcplanId,
+    int? mcexid,
+  }) async {
     return newPermitUsecase.resubmitPermit(
-        newPermit: newPermit,
-        isLoading: isLoading,
-        resubmit: true,
-        type: type,
-        vegexid: vegexid,
-        vegplanId: vegplanId,
-        taskId: taskId);
+      newPermit: newPermit,
+      isLoading: isLoading,
+      resubmit: true,
+      type: type,
+      vegexid: vegexid,
+      vegplanId: vegplanId,
+      taskId: taskId,
+      mcexid: mcexid,
+      mcplanId: mcplanId,
+    );
   }
 
   Future<NewPermitDetailModel?> getNewPermitDetail(

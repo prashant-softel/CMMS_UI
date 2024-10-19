@@ -15,6 +15,8 @@ class LinkToPermitDialog extends GetView {
   int? type;
   int? vegexid;
   int? vegplanId;
+  int? mcplanId;
+  int? mctaskId;
   LinkToPermitDialog(
       {super.key,
       this.approveIncidentReportData,
@@ -24,7 +26,9 @@ class LinkToPermitDialog extends GetView {
       this.type,
       this.permitId,
       this.vegplanId,
-      this.vegexid});
+      this.vegexid,
+      this.mcplanId,
+      this.mctaskId});
   final NewPermitController controller = Get.find();
 
   @override
@@ -126,8 +130,11 @@ class LinkToPermitDialog extends GetView {
                               //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
                               Get.back();
                               Get.offAllNamed(
-                                  Routes.addModuleCleaningExecutionContentWeb,
-                                  arguments: {"mcid": taskId, "planId": 0});
+                                  '${Routes.addModuleCleaningExecutionContentWeb}/$mctaskId/$mcplanId');
+
+                              // Get.offAllNamed(
+                              //     Routes.addModuleCleaningExecutionContentWeb,
+                              //     arguments: {"mcid": taskId, "planId": 0});
                             },
                             child: const Text('View MC'),
                           )

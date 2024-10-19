@@ -1277,11 +1277,11 @@ class ConnectHelper {
     print('reqOrderApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageApproveDialog(
-      data: parsedJson['message'],
-      jobId: jobId,
-      ptwStatus: int.tryParse('$ptwStatus'),
-    ));
+    // Get.dialog<void>(PermitMessageApproveDialog(
+    //   data: parsedJson['message'],
+    //   jobId: jobId,
+    //   ptwStatus: int.tryParse('$ptwStatus'),
+    // ));
     return responseModel;
   }
   // Future<ResponseModel> permitApprovedButton(
@@ -2170,7 +2170,11 @@ class ConnectHelper {
       bool? isLoading,
       int? jobId,
       int? type,
-      String? taskId}) async {
+      String? taskId,
+      int? vegplanId,
+      int? vegexid,
+      int? mcplanId,
+      int? mctaskId}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitCancelRequest',
@@ -2187,7 +2191,14 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(PermitMessageCancelRequestDialog(
-        data: parsedJson['message'], jobId: jobId, type: type, taskId: taskId));
+        data: parsedJson['message'],
+        jobId: jobId,
+        type: type,
+        taskId: taskId,
+        vegexid: vegexid,
+        vegplanId: vegplanId,
+        mcplanId: mcplanId,
+        mctaskId: mctaskId));
 
     return responseModel;
   }
@@ -2359,11 +2370,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> abandonExecutionButton(
-      {required String auth,
-      abandoneJsonString,
-      bool? isLoading,
-      int? facility_id}) async {
+  Future<ResponseModel> abandonExecutionButton({
+    required String auth,
+    abandoneJsonString,
+    bool? isLoading,
+    int? facility_id,
+    int? mcplanId,
+    int? mcexid,
+  }) async {
     var responseModel = await apiWrapper.makeRequest(
       'MC/AbandonMCExecution?facility_id=$facility_id',
       Request.put,
@@ -2377,8 +2391,11 @@ class ConnectHelper {
     print('AbandonExecutionResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(
-        AbandonMCExecutionMessageDialog(data: parsedJson['message']));
+    Get.dialog<void>(AbandonMCExecutionMessageDialog(
+      data: parsedJson['message'],
+      mcplanId: mcplanId,
+      mcexid: mcexid,
+    ));
 
     return responseModel;
   }
@@ -2550,7 +2567,9 @@ class ConnectHelper {
       int? type,
       int? vegexe,
       int? vegid,
-      String? taskId}) async {
+      String? taskId,
+      int? mcplanId,
+      int? mctaskId}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       ptwStatus == '133' ? 'Permit/PermitExtendReject' : 'Permit/PermitReject',
@@ -2573,7 +2592,9 @@ class ConnectHelper {
         vegid: vegid,
         type: type,
         vegexe: vegexe,
-        taskId: taskId));
+        taskId: taskId,
+        mcplanId: mcplanId,
+        mctaskId: mctaskId));
 
     return responseModel;
   }
@@ -3573,15 +3594,18 @@ class ConnectHelper {
   }
 
   //Update New Permit123
-  Future<ResponseModel> updateNewPermit(
-      {required String auth,
-      newPermit,
-      bool? isLoading,
-      bool? resubmit,
-      int? type,
-      vegplanId,
-      vegexid,
-      taskId}) async {
+  Future<ResponseModel> updateNewPermit({
+    required String auth,
+    newPermit,
+    bool? isLoading,
+    bool? resubmit,
+    int? type,
+    vegplanId,
+    vegexid,
+    taskId,
+    mcplanId,
+    mcexid,
+  }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/UpdatePermit?resubmit=$resubmit',
       Request.patch,
@@ -3598,27 +3622,33 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(
         UpdateNewPermitDialog(
-            data: parsedJson['message'],
-            PtwId: parsedJson['id'],
-            type: type,
-            vegplanId: vegplanId,
-            vegexid: vegexid,
-            taskId: taskId),
+          data: parsedJson['message'],
+          PtwId: parsedJson['id'],
+          type: type,
+          vegplanId: vegplanId,
+          vegexid: vegexid,
+          taskId: taskId,
+          mcplanId: mcplanId,
+          mcexid: mcexid,
+        ),
         barrierDismissible: false);
 
     return responseModel;
   }
 
   ///resubmit permit
-  Future<ResponseModel> resubmitPermit(
-      {required String auth,
-      newPermit,
-      bool? isLoading,
-      bool? resubmit,
-      int? type,
-      vegplanId,
-      vegexid,
-      taskId}) async {
+  Future<ResponseModel> resubmitPermit({
+    required String auth,
+    newPermit,
+    bool? isLoading,
+    bool? resubmit,
+    int? type,
+    vegplanId,
+    vegexid,
+    taskId,
+    mcplanId,
+    mcexid,
+  }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Permit/UpdatePermit?resubmit=$resubmit',
       Request.patch,
@@ -3634,12 +3664,15 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(UpdateNewPermitDialog(
-        data: parsedJson['message'],
-        PtwId: parsedJson['id'],
-        type: type,
-        vegplanId: vegplanId,
-        vegexid: vegexid,
-        taskId: taskId));
+      data: parsedJson['message'],
+      PtwId: parsedJson['id'],
+      type: type,
+      vegplanId: vegplanId,
+      vegexid: vegexid,
+      taskId: taskId,
+      mcplanId: mcplanId,
+      mcexid: mcexid,
+    ));
 
     return responseModel;
   }
@@ -8106,7 +8139,9 @@ class ConnectHelper {
       activity,
       bool? isLoading,
       type,
-      facilityId}) async {
+      facilityId,
+      mcplanId,
+      mctaskId}) async {
     var responseModel = await apiWrapper.makeRequest(
       // 'PMScheduleView/LinkPermitToPMTask?schedule_id=$scheduleId&permit_id=$permitId',
 
@@ -8132,7 +8167,9 @@ class ConnectHelper {
             taskId: scheduleId,
             activity: activity,
             type: type,
-            permitId: permitId //parsedJson['id']
+            permitId: permitId,
+            mcplanId: mcplanId,
+            mctaskId: mctaskId //parsedJson['id']
             ),
         barrierDismissible: false);
     print('jcId2:${parsedJson['id']}');

@@ -53,9 +53,20 @@ class ViewPermitUsecase {
           bool? isLoading,
           int? vegexe,
           int? vegid,
-          String? taskId}) async =>
-      await repository.permitApprovedButton(rejectCancelPermitJsonString,
-          ptwStatus, jobId, type, isLoading, vegexe, vegid, taskId);
+          String? taskId,
+          int? mcplanId,
+          int? mctaskId}) async =>
+      await repository.permitApprovedButton(
+          rejectCancelPermitJsonString,
+          ptwStatus,
+          jobId,
+          type,
+          isLoading,
+          vegexe,
+          vegid,
+          taskId,
+          mcplanId,
+          mctaskId);
   // Future<void> permitApprovedButton({
   //   String? comment,
   //   String? id,
@@ -97,9 +108,21 @@ class ViewPermitUsecase {
           bool? isLoading,
           int? jobId,
           int? type,
-          String? taskId}) async =>
+          String? taskId,
+          vegplanId,
+          vegexid,
+          int? mcplanId,
+          int? mctaskId}) async =>
       await repository.permitCancelRequestButton(
-          cancelPermitJsonString, isLoading, jobId, type, taskId);
+          cancelPermitJsonString,
+          isLoading,
+          jobId,
+          type,
+          taskId,
+          vegplanId,
+          vegexid,
+          mcplanId,
+          mctaskId);
 
   Future<CreateSOPModel?> browseFiles(
       Uint8List? fileBytes, String fileName, bool isLoading) async {
@@ -146,9 +169,21 @@ class ViewPermitUsecase {
           int? type,
           int? vegexe,
           int? vegid,
-          String? taskId}) async =>
-      await repository.permitRejectButton(rejectExtendPermitJsonString, id,
-          ptwStatus, jobId, type, isLoading, vegexe, vegid, taskId);
+          String? taskId,
+          int? mcplanId,
+          int? mctaskId}) async =>
+      await repository.permitRejectButton(
+          rejectExtendPermitJsonString,
+          id,
+          ptwStatus,
+          jobId,
+          type,
+          isLoading,
+          vegexe,
+          vegid,
+          taskId,
+          mcplanId,
+          mctaskId);
 
   // Future<void> permitCancelByApproverButton({
   //   String? comment,

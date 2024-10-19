@@ -234,30 +234,56 @@ class NewPermitUsecase {
           type,
           vegplanId,
           vegexid,
-          facilityId}) async =>
+          facilityId,
+          int? mcplanId,
+          int? mctaskId}) async =>
       await repository.createNewPermitForPm(newPermit, pmTaskId, activity,
-          isLoading, type, vegplanId, vegexid, facilityId);
-  Future<Map<String, dynamic>> updateNewPermit(
-          {int? type,
-          newPermit,
-          bool? isLoading,
-          required bool resubmit,
-          vegplanId,
-          vegexid,
-          taskId}) async =>
+          isLoading, type, vegplanId, vegexid, facilityId, mcplanId, mctaskId);
+  Future<Map<String, dynamic>> updateNewPermit({
+    int? type,
+    newPermit,
+    bool? isLoading,
+    required bool resubmit,
+    vegplanId,
+    vegexid,
+    taskId,
+    mcplanId,
+    mcexid,
+  }) async =>
       await repository.updateNewPermit(
-          newPermit, isLoading, resubmit, type, vegplanId, vegexid, taskId);
+        newPermit,
+        isLoading,
+        resubmit,
+        type,
+        vegplanId,
+        vegexid,
+        taskId,
+        mcplanId,
+        mcexid,
+      );
 
-  Future<Map<String, dynamic>> resubmitPermit(
-          {newPermit,
-          bool? isLoading,
-          required bool resubmit,
-          int? type,
-          vegplanId,
-          String? taskId,
-          vegexid}) async =>
+  Future<Map<String, dynamic>> resubmitPermit({
+    newPermit,
+    bool? isLoading,
+    required bool resubmit,
+    int? type,
+    vegplanId,
+    String? taskId,
+    vegexid,
+    mcplanId,
+    mcexid,
+  }) async =>
       await repository.resubmitPermit(
-          newPermit, isLoading, resubmit, type, vegplanId, vegexid, taskId);
+        newPermit,
+        isLoading,
+        resubmit,
+        type,
+        vegplanId,
+        vegexid,
+        taskId,
+        mcplanId,
+        mcexid,
+      );
 
   Future<NewPermitDetailModel?> getNewPermitDetail({
     bool? isLoading,

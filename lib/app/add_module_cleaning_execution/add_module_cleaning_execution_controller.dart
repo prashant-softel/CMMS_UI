@@ -223,29 +223,35 @@ class AddModuleCleaningExecutionController extends GetxController {
   }
 
   Future<void> setMcId() async {
-    try {
-      final _mcid = await addModuleCleaningExecutionPresenter.getValueMcId();
-      final _planId =
-          await addModuleCleaningExecutionPresenter.getValuePlanId();
+    final String? _mcid = Get.parameters['mcid'];
+    final String? _planId = Get.parameters['planId'];
 
-      if (_mcid == null || _mcid == '' || _mcid == "null") {
-        data = Get.arguments;
+    mcid.value = int.tryParse(_mcid ?? "") ?? 0;
+    planId.value = int.tryParse(_planId ?? "") ?? 0;
 
-        mcid.value = data['mcid'];
+    // try {
+    //   final _mcid = await addModuleCleaningExecutionPresenter.getValueMcId();
+    //   final _planId =
+    //       await addModuleCleaningExecutionPresenter.getValuePlanId();
 
-        planId.value = data['planId'];
+    //   if (_mcid == null || _mcid == '' || _mcid == "null") {
+    //     data = Get.arguments;
 
-        addModuleCleaningExecutionPresenter.saveValueMcId(
-            mcid: mcid.value.toString());
-        addModuleCleaningExecutionPresenter.saveValuePlanId(
-            planId: planId.value.toString());
-      } else {
-        mcid.value = int.tryParse(_mcid) ?? 0;
-        planId.value = int.tryParse(_planId.toString()) ?? 0;
-      }
-    } catch (e) {
-      // Utility.showDialog(e.toString(), 'mcid');
-    }
+    //     mcid.value = data['mcid'];
+
+    //     planId.value = data['planId'];
+
+    //     addModuleCleaningExecutionPresenter.saveValueMcId(
+    //         mcid: mcid.value.toString());
+    //     addModuleCleaningExecutionPresenter.saveValuePlanId(
+    //         planId: planId.value.toString());
+    //   } else {
+    //     mcid.value = int.tryParse(_mcid) ?? 0;
+    //     planId.value = int.tryParse(_planId.toString()) ?? 0;
+    //   }
+    // } catch (e) {
+    //   // Utility.showDialog(e.toString(), 'mcid');
+    // }
   }
 
   void clearPermitStoreData() {
@@ -497,9 +503,12 @@ class AddModuleCleaningExecutionController extends GetxController {
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
       Map<String, dynamic>? response =
           await addModuleCleaningExecutionPresenter.abandonAllExecutionButton(
-              abandoneJsonString: abandoneJsonString,
-              isLoading: true,
-              facility_id: facilityId);
+        abandoneJsonString: abandoneJsonString,
+        isLoading: true,
+        facility_id: facilityId,
+        mcexid: mcExecutionDetailsModel.value?.executionId,
+        mcplanId: mcExecutionDetailsModel.value?.executionId,
+      );
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }
@@ -1379,5 +1388,4 @@ class AddModuleCleaningExecutionController extends GetxController {
         bounds: Rect.fromLTWH(pageWidth - (signatureSize.width + margin),
             currentY + 20, signatureSize.width, signatureSize.height))!;
   }
-
 }

@@ -1,3 +1,4 @@
+import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +10,11 @@ import '../theme/styles.dart';
 class AbandonMCExecutionMessageDialog extends GetView {
   String? createData;
   String? data;
-
-  AbandonMCExecutionMessageDialog({super.key, this.createData, this.data});
-  final ModuleCleaningListExecutionController _controller = Get.find();
+  int? mcplanId;
+  int? mcexid;
+  AbandonMCExecutionMessageDialog(
+      {super.key, this.createData, this.data, this.mcplanId, this.mcexid});
+  final AddModuleCleaningExecutionController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -79,11 +82,11 @@ class AbandonMCExecutionMessageDialog extends GetView {
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
                 Get.offAllNamed(Routes.moduleCleaningListExecution);
-                _controller.getMCTaskList(
-                    _controller.facilityId,
-                    _controller.formattedTodate,
-                    _controller.formattedFromdate,
-                    false);
+                // _controller.getMCTaskList(
+                //     _controller.facilityId,
+                //     _controller.formattedTodate,
+                //     _controller.formattedFromdate,
+                //     false);
                 Get.back();
               },
               child: const Text('Ok'),

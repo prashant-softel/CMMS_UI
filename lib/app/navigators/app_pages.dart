@@ -1014,7 +1014,7 @@ class AppPages {
       binding: AuditListScreenBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.addModuleCleaningExecutionContentWeb,
+      name: '${_Paths.addModuleCleaningExecutionContentWeb}/:mcid/:planId',
       page: AddModuleCleaningExecutionScreen.new,
       binding: AddModuleCleaningExecutionBinding(),
     ),

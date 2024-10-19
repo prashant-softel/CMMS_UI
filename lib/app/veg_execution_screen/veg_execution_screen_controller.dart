@@ -487,7 +487,7 @@ class VegExecutionController extends GetxController {
       "jobModel": jobDetailsModel.value,
       "permitId": permitId,
       "isChecked": isChecked,
-      "type": 5,
+      "type": 6,
       "isFromJobDetails": true,
       "pmTaskModel": pmtaskViewModel.value,
       "mcModel": mcExecutionDetailsModel.value,
@@ -527,7 +527,7 @@ class VegExecutionController extends GetxController {
     //   "jobId": jobId,
     //   "type": 5,
     // });
-    String type = 5.toString();
+    String type = 6.toString();
     Get.offNamed('${Routes.viewPermitScreen}/$permitId/$type');
   }
 

@@ -1152,7 +1152,8 @@ class AddModuleCleaningExecutionContentWeb
                                                                         ?.title ??
                                                                     "",
                                                                 starttype: 3))
-                                                            : Get.defaultDialog(
+                                                            : 
+                                                            Get.defaultDialog(
                                                                 radius: 5,
                                                                 title: 'Alert',
                                                                 middleText:

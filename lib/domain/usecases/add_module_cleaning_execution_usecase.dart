@@ -28,10 +28,20 @@ class AddModuleCleaningExecutionUsecase {
     await _repository.endMcExecutionButton(executionId, isLoading, facility_id);
   }
 
-  Future<Map<String, dynamic>> abandonAllExecutionButton(
-          {abandoneJsonString, bool? isLoading, int? facility_id}) async =>
+  Future<Map<String, dynamic>> abandonAllExecutionButton({
+    abandoneJsonString,
+    bool? isLoading,
+    int? facility_id,
+    mcplanId,
+    mcexid,
+  }) async =>
       await _repository.abandonExecutionButton(
-          abandoneJsonString, isLoading, facility_id);
+        abandoneJsonString,
+        isLoading,
+        facility_id,
+        mcplanId,
+        mcexid,
+      );
 
   Future<void> startMCExecutionScheduleButton(
       {int? scheduleId, bool? isLoading, int? facility_id}) async {

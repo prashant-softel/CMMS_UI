@@ -1748,7 +1748,9 @@ class NewPermitController extends GetxController {
               type: typee.value,
               vegplanId: vegExecutionDetailsModel?.planId,
               vegexid: vegExecutionDetailsModel?.executionId,
-              facilityId: facilityId);
+              facilityId: facilityId,
+              mcplanId: mcExecutionDetailsModel?.planId,
+              mctaskId: mcExecutionDetailsModel?.executionId);
       if (responseNewPermitCreatedForJob != null) {
         //  CreateNewPermitDialog();
         // showAlertDialog();
@@ -1809,6 +1811,19 @@ class NewPermitController extends GetxController {
       String jobId = listAssociatedJobs!.isEmpty
           ? jobModel?.id.toString() ?? ''
           : listAssociatedJobs![0]?.jobId.toString() ?? '';
+      String vegplanId = lstAssociatedVc!.isEmpty
+          ? ""
+          : lstAssociatedVc![0]?.plan_id.toString() ?? '';
+
+      String vegexid = lstAssociatedVc!.isEmpty
+          ? ""
+          : lstAssociatedVc![0]?.executionId.toString() ?? '';
+      String mctaskId = lstAssociatedMc!.isEmpty
+          ? ""
+          : lstAssociatedMc![0]?.executionId.toString() ?? '';
+      String mcplanId = lstAssociatedMc!.isEmpty
+          ? ""
+          : lstAssociatedMc![0]?.plan_id.toString() ?? '';
 
       //UserId
       int userId = varUserAccessModel.value.user_id ?? 0;
@@ -1918,9 +1933,11 @@ class NewPermitController extends GetxController {
               resubmit: isChecked.value,
               isLoading: true,
               type: typee.value,
-              vegplanId: vegExecutionDetailsModel?.planId,
-              vegexid: vegExecutionDetailsModel?.executionId,
-              taskId: typee.value == 1 ? jobId : taskId);
+              vegexid: int.tryParse(vegexid),
+              vegplanId: int.tryParse(vegplanId),
+              taskId: typee.value == 1 ? jobId : taskId,
+              mcplanId: int.tryParse(mcplanId),
+              mcexid: int.tryParse(mctaskId));
       if (responseUpdatePermit != null) {
         //  CreateNewPermitDialog();
         // showAlertDialog();
@@ -1941,6 +1958,20 @@ class NewPermitController extends GetxController {
       String jobId = listAssociatedJobs!.isEmpty
           ? jobModel?.id.toString() ?? ''
           : listAssociatedJobs![0]?.jobId.toString() ?? '';
+      String vegplanId = lstAssociatedVc!.isEmpty
+          ? ""
+          : lstAssociatedVc![0]?.plan_id.toString() ?? '';
+
+      String vegexid = lstAssociatedVc!.isEmpty
+          ? ""
+          : lstAssociatedVc![0]?.executionId.toString() ?? '';
+      String mctaskId = lstAssociatedMc!.isEmpty
+          ? ""
+          : lstAssociatedMc![0]?.executionId.toString() ?? '';
+      String mcplanId = lstAssociatedMc!.isEmpty
+          ? ""
+          : lstAssociatedMc![0]?.plan_id.toString() ?? '';
+
       String _description =
           htmlEscape.convert(permitDescriptionCtrlr.text.trim());
       String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
@@ -2036,9 +2067,11 @@ class NewPermitController extends GetxController {
               resubmit: true,
               isLoading: true,
               type: typee.value,
-              vegplanId: vegExecutionDetailsModel?.planId,
-              vegexid: vegExecutionDetailsModel?.executionId,
-              taskId: typee.value == 1 ? jobId : taskId);
+              vegexid: int.tryParse(vegexid),
+              vegplanId: int.tryParse(vegplanId),
+              taskId: typee.value == 1 ? jobId : taskId,
+              mcplanId: int.tryParse(mcplanId),
+              mcexid: int.tryParse(mctaskId));
       if (responseNewPermitCreated != null) {
         //  CreateNewPermitDialog();
         // showAlertDialog();
@@ -2140,7 +2173,10 @@ class NewPermitController extends GetxController {
   }
 
   Future<void> viewMCTDetails() async {
-    Get.toNamed(Routes.addModuleCleaningExecutionContentWeb);
+    Get.offAllNamed(
+        '${Routes.addModuleCleaningExecutionContentWeb}/${mcExecutionDetailsModel?.executionId ?? 0}/${mcExecutionDetailsModel?.planId ?? 0}');
+
+    // Get.toNamed(Routes.addModuleCleaningExecutionContentWeb);
   }
 
   Future<void> viewVegTDetails() async {

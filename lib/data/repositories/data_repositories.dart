@@ -1345,14 +1345,22 @@ class DataRepository extends DomainRepository {
           bool? isLoading,
           int? jobId,
           int? type,
-          String? taskId}) async =>
+          String? taskId,
+          int? vegplanId,
+          int? vegexid,
+          int? mcplanId,
+          int? mctaskId}) async =>
       await connectHelper.permitCancelRequestButton(
           auth: auth,
           cancelPermitJsonString: cancelPermitJsonString,
           isLoading: isLoading ?? false,
           jobId: jobId,
           type: type,
-          taskId: taskId);
+          taskId: taskId,
+          vegexid: vegexid,
+          vegplanId: vegplanId,
+          mcplanId: mcplanId,
+          mctaskId: mctaskId);
 
   Future<ResponseModel> permitCancelByApproverButton({
     required String auth,
@@ -1511,7 +1519,9 @@ class DataRepository extends DomainRepository {
           int? type,
           int? vegexe,
           int? vegid,
-          String? taskId}) async =>
+          String? taskId,
+          int? mcplanId,
+          int? mctaskId}) async =>
       await connectHelper.permitRejectButton(
           auth: auth,
           rejectExtendPermitJsonString: rejectExtendPermitJsonString,
@@ -1522,7 +1532,9 @@ class DataRepository extends DomainRepository {
           type: type,
           vegexe: vegexe,
           vegid: vegid,
-          taskId: taskId);
+          taskId: taskId,
+          mcplanId: mcplanId,
+          mctaskId: mctaskId);
 
   Future<ResponseModel> incidentReportRejectButton({
     required String auth,
@@ -2101,43 +2113,55 @@ class DataRepository extends DomainRepository {
         pmTaskId: pmTaskId,
         isLoading: isLoading ?? false,
       );
-  Future<ResponseModel> updateNewPermit(
-          {required String auth,
-          newPermit,
-          bool? isLoading,
-          bool? resubmit,
-          int? type,
-          vegplanId,
-          vegexid,
-          taskId}) async =>
+  Future<ResponseModel> updateNewPermit({
+    required String auth,
+    newPermit,
+    bool? isLoading,
+    bool? resubmit,
+    int? type,
+    vegplanId,
+    vegexid,
+    taskId,
+    mcplanId,
+    mcexid,
+  }) async =>
       await connectHelper.updateNewPermit(
-          auth: auth,
-          newPermit: newPermit,
-          isLoading: isLoading ?? false,
-          resubmit: resubmit,
-          type: type,
-          vegplanId: vegplanId,
-          vegexid: vegexid,
-          taskId: taskId);
+        auth: auth,
+        newPermit: newPermit,
+        isLoading: isLoading ?? false,
+        resubmit: resubmit,
+        type: type,
+        vegplanId: vegplanId,
+        vegexid: vegexid,
+        taskId: taskId,
+        mcplanId: mcplanId,
+        mcexid: mcexid,
+      );
 
-  Future<ResponseModel> resubmitPermit(
-          {required String auth,
-          newPermit,
-          int? type,
-          bool? isLoading,
-          bool? resubmit,
-          vegplanId,
-          vegexid,
-          taskId}) async =>
+  Future<ResponseModel> resubmitPermit({
+    required String auth,
+    newPermit,
+    int? type,
+    bool? isLoading,
+    bool? resubmit,
+    vegplanId,
+    vegexid,
+    taskId,
+    mcplanId,
+    mcexid,
+  }) async =>
       await connectHelper.resubmitPermit(
-          auth: auth,
-          newPermit: newPermit,
-          isLoading: isLoading ?? false,
-          type: type,
-          resubmit: resubmit,
-          vegplanId: vegplanId,
-          vegexid: vegexid,
-          taskId: taskId);
+        auth: auth,
+        newPermit: newPermit,
+        isLoading: isLoading ?? false,
+        type: type,
+        resubmit: resubmit,
+        vegplanId: vegplanId,
+        vegexid: vegexid,
+        taskId: taskId,
+        mcplanId: mcplanId,
+        mcexid: mcexid,
+      );
 
   Future<ResponseModel> createSOP({
     required String auth,
@@ -2958,16 +2982,22 @@ class DataRepository extends DomainRepository {
   }
 
 //
-  Future<ResponseModel> abandonExecutionButton(
-          {required String auth,
-          abandoneJsonString,
-          bool? isLoading,
-          int? facility_id}) async =>
+  Future<ResponseModel> abandonExecutionButton({
+    required String auth,
+    abandoneJsonString,
+    bool? isLoading,
+    int? facility_id,
+    mcplanId,
+    mcexid,
+  }) async =>
       await connectHelper.abandonExecutionButton(
-          auth: auth,
-          abandoneJsonString: abandoneJsonString,
-          isLoading: isLoading ?? false,
-          facility_id: facility_id);
+        auth: auth,
+        abandoneJsonString: abandoneJsonString,
+        isLoading: isLoading ?? false,
+        facility_id: facility_id,
+        mcplanId: mcplanId,
+        mcexid: mcexid,
+      );
 
   Future<ResponseModel> abandonScheduleExecutionButton(
           {required String auth,
@@ -4658,7 +4688,9 @@ class DataRepository extends DomainRepository {
           activity,
           bool? isLoading,
           type,
-          facilityId}) async =>
+          facilityId,
+          mcplanId,
+          mctaskId}) async =>
       await connectHelper.scheduleLinkToPermit(
           auth: auth,
           scheduleId: scheduleId,
@@ -4666,7 +4698,9 @@ class DataRepository extends DomainRepository {
           activity: activity,
           isLoading: isLoading ?? false,
           type: type,
-          facilityId: facilityId);
+          facilityId: facilityId,
+          mcplanId: mcplanId,
+          mctaskId: mctaskId);
   Future<ResponseModel> vegscheduleLinkToPermit(
           {required String auth,
           scheduleId,

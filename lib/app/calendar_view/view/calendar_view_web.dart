@@ -10,6 +10,7 @@ import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:get/get.dart';
@@ -30,6 +31,7 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
   var repository = Get.find<Repository>();
   String? selectedEventId;
   String? selectedWoDescription;
+  int? selectedPlanID;
 
   @override
   void initState() {
@@ -446,12 +448,30 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
                                   details.appointments!.isNotEmpty) {
                                 final Meeting meeting =
                                     details.appointments!.first;
-                                selectedEventId =
-                                    meeting.eventName; // Assume eventName as ID
+                                selectedEventId = meeting
+                                    .eventName; // Assuming eventName is the ID
                                 selectedWoDescription = meeting
-                                    .eventName; // Assume description stored in eventName
+                                    .woDescription; // Get the description
+                                selectedPlanID = meeting.planId;
+                                // Show toast with wo_number and wo_description
+                                // Fluttertoast.showToast(
+                                //   msg:
+                                //       'WO Number: ${meeting.woNumber}, Description: ${meeting.woDescription}',
+                                //   toastLength: Toast.LENGTH_SHORT,
+                                //   gravity: ToastGravity.BOTTOM,
+                                //   timeInSecForIosWeb: 3,
+                                //   backgroundColor: Colors.black,
+                                //   textColor: Colors.white,
+                                //   fontSize: 16.0,
+                                // );
+
+                                _openDuplicateTab(
+                                    selectedEventId: meeting.woNumber,
+                                    controller: controller,
+                                    selectedPlanID: selectedPlanID);
+                                // Log the event details for debugging purposes
                                 print(
-                                    "Tapped on meeting: ${meeting.eventName} from ${meeting.from} to ${meeting.to}");
+                                    "Tapped on meeting: ${meeting.eventName}, Description: ${meeting.woDescription}, WO Number: ${meeting.woNumber}, From: ${meeting.from}, To: ${meeting.to}");
                               }
                             },
                             onViewChanged: (ViewChangedDetails details) {
@@ -460,7 +480,7 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
                             },
                           ),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 );
@@ -582,28 +602,53 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
       ],
     ).then((value) {
       if (value == 'open') {
-        _openDuplicateTab();
+        // _openDuplicateTab();
       }
     });
   }
 
-  void _openDuplicateTab() {
+  void _openDuplicateTab(
+      {String? selectedEventId,
+      required CalendarViewController controller,
+      int? selectedPlanID}) {
     // Pass the event details in the query parameters to open in new tab
-    final url =
-        'new_tab.html?eventId=$selectedEventId&woDescription=$selectedWoDescription';
+
+    String Id =
+        selectedEventId ?? ""; //controller.allItems[index]?.wo_number ?? "";
+    // String planId = controller.allItems[index]?.plan_id.toString() ?? "";
+    String prefix = Id.replaceAll(RegExp(r'\d+$'), '');
+
+    String jobId = Id.substring(Id.indexOf("BM") + 2);
+    String taskId = Id.substring(Id.indexOf("PMT") + 3);
+    String mcId = Id.substring(Id.indexOf("MC") + 2);
+
+    final url = prefix == 'BM'
+        ? '/#${Routes.jobDetails}/$jobId'
+        : (prefix == 'PMT')
+            ? '/#${Routes.pmTaskView}/$taskId'
+            :
+            // :
+            prefix == 'MC'
+                ? '/#${Routes.addModuleCleaningExecutionContentWeb}/$mcId/$selectedPlanID'
+                : '/#${Routes.login}';
     html.window.open(url, '_blank');
   }
 }
 
 // Class representing an individual meeting
+// Class representing an individual meeting
 class Meeting {
-  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
+  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay,
+      this.woNumber, this.woDescription, this.planId);
 
   String eventName;
   DateTime from;
   DateTime to;
   Color background;
   bool isAllDay;
+  String woNumber; // Add the work order number
+  String woDescription;
+  int planId; // Add the work order description
 }
 
 // DataSource class for SfCalendar

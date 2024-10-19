@@ -48,13 +48,16 @@ class ModuleCleaningListExecutionMobile
                                 if (id != 0) {
                                   controller.clearStoreDataMcid();
                                   controller.clearStoreDataPlanid();
-                                  Get.toNamed(
-                                      Routes
-                                          .addModuleCleaningExecutionContentWeb,
-                                      arguments: {
-                                        "mcid": id,
-                                        "planId": planId
-                                      });
+                                  Get.offAllNamed(
+                                      '${Routes.addModuleCleaningExecutionContentWeb}/$id/$planId');
+
+                                  // Get.toNamed(
+                                  //     Routes
+                                  //         .addModuleCleaningExecutionContentWeb,
+                                  //     arguments: {
+                                  //       "mcid": id,
+                                  //       "planId": planId
+                                  //     });
                                 }
                               },
                               child: Container(
@@ -253,7 +256,8 @@ class ModuleCleaningListExecutionMobile
                                             mcTaskModel.scheduledDate ==
                                                     "0001-01-01"
                                                 ? '-'
-                                                : mcTaskModel.scheduledDate ?? ""),
+                                                : mcTaskModel.scheduledDate ??
+                                                    ""),
                                         buildInfoRow(
                                             'Done Date: ',
                                             mcTaskModel.doneDate == "0001-01-01"

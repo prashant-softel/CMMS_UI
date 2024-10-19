@@ -55,7 +55,9 @@ class ViewPermitPresenter {
       int? type,
       int? vegexe,
       int? vegid,
-      String? taskId}) async {
+      String? taskId,
+      int? mcplanId,
+      int? mctaskId}) async {
     return viewPermitUsecase.permitApprovedButton(
         rejectCancelPermitJsonString: rejectCancelPermitJsonString,
         ptwStatus: ptwStatus,
@@ -64,7 +66,9 @@ class ViewPermitPresenter {
         type: type,
         vegid: vegid,
         vegexe: vegexe,
-        taskId: taskId);
+        taskId: taskId,
+        mcplanId: mcplanId,
+        mctaskId: mctaskId);
   }
   // Future<void> permitApprovedButton({
   //   String? comment,
@@ -122,13 +126,21 @@ class ViewPermitPresenter {
       required bool isLoading,
       int? jobId,
       int? type,
-      String? taskId}) async {
+      String? taskId,
+      int? vegplanId,
+      int? vegexid,
+      int? mcplanId,
+      int? mctaskId}) async {
     return viewPermitUsecase.permitCancelRequestButton(
         cancelPermitJsonString: cancelPermitJsonString,
         isLoading: isLoading,
         jobId: jobId,
         type: type,
-        taskId: taskId);
+        taskId: taskId,
+        vegexid: vegexid,
+        vegplanId: vegplanId,
+        mcplanId: mcplanId,
+        mctaskId: mctaskId);
   }
 
   Future<Map<String, dynamic>?> permitExtendButton({
@@ -167,7 +179,9 @@ class ViewPermitPresenter {
       int? type,
       String? taskId,
       int? vegexe,
-      int? vegid}) async {
+      int? vegid,
+      int? mcplanId,
+      int? mctaskId}) async {
     return viewPermitUsecase.permitRejectButton(
         rejectExtendPermitJsonString: rejectExtendPermitJsonString,
         id: id,
@@ -177,7 +191,9 @@ class ViewPermitPresenter {
         type: type,
         vegid: vegid,
         vegexe: vegexe,
-        taskId: taskId);
+        taskId: taskId,
+        mcplanId: mcplanId,
+        mctaskId: mctaskId);
   }
 
   // Future<void> permitCancelByApproverButton({

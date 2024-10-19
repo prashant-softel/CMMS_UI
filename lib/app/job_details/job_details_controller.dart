@@ -561,7 +561,7 @@ class JobDetailsController extends GetxController {
     ];
 
     List<String> jobInfoValuesLeft = [
-      'JOb${jobDetailsModel.value?.id ?? ''}',
+      'JOB${jobDetailsModel.value?.id ?? ''}',
       '${jobDetailsModel.value?.jobTitle ?? ''}',
       '${jobDetailsModel.value?.equipmentCatList?.map((item) => item.name).join(", ") ?? ''}',
       '${jobDetailsModel.value?.workTypeList?.map((item) => item.name).join(", ") ?? ''}',

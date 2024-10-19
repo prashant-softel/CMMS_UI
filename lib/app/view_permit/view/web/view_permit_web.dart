@@ -110,9 +110,34 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       ?.jobId
                                                       .toString() ??
                                                   '';
-                                          var vegexe;
-                                          var mcid;
-                                          var vegplan;
+                                          var vegexe = controller
+                                                  .lstAssociatedVc!.isEmpty
+                                              ? ""
+                                              : controller.lstAssociatedVc![0]
+                                                      ?.executionId
+                                                      .toString() ??
+                                                  '';
+                                          var mcid = controller
+                                                  .lstAssociatedMc!.isEmpty
+                                              ? ""
+                                              : controller.lstAssociatedMc![0]
+                                                      ?.executionId
+                                                      .toString() ??
+                                                  '';
+                                          var mcPlanid = controller
+                                                  .lstAssociatedMc!.isEmpty
+                                              ? ""
+                                              : controller.lstAssociatedMc![0]
+                                                      ?.plan_id
+                                                      .toString() ??
+                                                  '';
+                                          var vegplan = controller
+                                                  .lstAssociatedVc!.isEmpty
+                                              ? ""
+                                              : controller.lstAssociatedVc![0]
+                                                      ?.executionId
+                                                      .toString() ??
+                                                  '';
                                           controller.type.value == 1
                                               ? Get.offNamed(
                                                   '${Routes.jobDetails}/$jobId')
@@ -125,11 +150,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       : controller.type.value ==
                                                               4
                                                           ? Get.offAllNamed(
-                                                              Routes
-                                                                  .addModuleCleaningExecutionContentWeb,
-                                                              arguments: {
-                                                                  'mcid': mcid
-                                                                })
+                                                              '${Routes.addModuleCleaningExecutionContentWeb}/$mcid/$mcPlanid')
                                                           : Get.offNamed(Routes
                                                               .newPermitList);
                                         },
@@ -1209,14 +1230,18 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                           controller
                                                               .clearStoreDataPMtaskId();
                                                           Get.offAllNamed(
-                                                              Routes
-                                                                  .addModuleCleaningExecutionContentWeb,
-                                                              arguments: {
-                                                                'mcid': controller
-                                                                    .lstAssociatedMc?[
-                                                                        index]
-                                                                    ?.plan_id
-                                                              });
+                                                              '${Routes.addModuleCleaningExecutionContentWeb}/${controller.lstAssociatedMc?[index]?.executionId}/${controller.lstAssociatedMc?[index]?.plan_id}');
+
+                                                          // Get.offAllNamed(
+
+                                                          //     Routes
+                                                          //         .addModuleCleaningExecutionContentWeb,
+                                                          //     arguments: {
+                                                          //       'mcid': controller
+                                                          //           .lstAssociatedMc?[
+                                                          //               index]
+                                                          //           ?.plan_id
+                                                          //     });
                                                         },
                                                         child: Text(
                                                           "MCT${controller.lstAssociatedMc?[index]?.executionId.toString() ?? ''}",

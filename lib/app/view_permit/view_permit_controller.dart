@@ -570,6 +570,12 @@ class ViewPermitController extends GetxController {
       String jobId = listAssociatedJobs!.isEmpty
           ? ""
           : listAssociatedJobs![0]?.jobId.toString() ?? '';
+      String mctaskId = lstAssociatedMc!.isEmpty
+          ? ""
+          : lstAssociatedMc![0]?.executionId.toString() ?? '';
+      String mcplanId = lstAssociatedMc!.isEmpty
+          ? ""
+          : lstAssociatedMc![0]?.plan_id.toString() ?? '';
       AproveExtendPermitModel commentRejectCancelPermitModel =
           AproveExtendPermitModel(
         id: permitId,
@@ -583,19 +589,20 @@ class ViewPermitController extends GetxController {
 
       Map<String, dynamic>? response =
           await viewPermitPresenter.permitApprovedButton(
-        rejectCancelPermitJsonString: rejectCancelPermitJsonString,
-        ptwStatus: ptwStatus,
-        jobId: int.tryParse(jobId),
-        type: type,
-        isLoading: true,
-        vegid: lstAssociatedVc!.value.length > 0
-            ? lstAssociatedVc![0]!.plan_id
-            : 0,
-        vegexe: lstAssociatedVc!.value.length > 0
-            ? lstAssociatedVc![0]!.executionId
-            : 0,
-        taskId: type == 1 ? jobId : taskId,
-      );
+              rejectCancelPermitJsonString: rejectCancelPermitJsonString,
+              ptwStatus: ptwStatus,
+              jobId: int.tryParse(jobId),
+              type: type,
+              isLoading: true,
+              vegid: lstAssociatedVc!.value.length > 0
+                  ? lstAssociatedVc![0]!.plan_id
+                  : 0,
+              vegexe: lstAssociatedVc!.value.length > 0
+                  ? lstAssociatedVc![0]!.executionId
+                  : 0,
+              taskId: type == 1 ? jobId : taskId,
+              mcplanId: int.tryParse(mcplanId),
+              mctaskId: int.tryParse(mctaskId));
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }
@@ -690,6 +697,19 @@ class ViewPermitController extends GetxController {
       String jobId = listAssociatedJobs!.isEmpty
           ? ""
           : listAssociatedJobs![0]?.jobId.toString() ?? '';
+      String vegplanId = lstAssociatedVc!.isEmpty
+          ? ""
+          : lstAssociatedVc![0]?.plan_id.toString() ?? '';
+
+      String vegexid = lstAssociatedVc!.isEmpty
+          ? ""
+          : lstAssociatedVc![0]?.executionId.toString() ?? '';
+      String mctaskId = lstAssociatedMc!.isEmpty
+          ? ""
+          : lstAssociatedMc![0]?.executionId.toString() ?? '';
+      String mcplanId = lstAssociatedMc!.isEmpty
+          ? ""
+          : lstAssociatedMc![0]?.plan_id.toString() ?? '';
       String _cancelComment = cancelCommentRequestTextFieldCtrlr.text.trim();
       List<int> data = [];
       permitCancelConditionList!.value.forEach((element) {
@@ -709,12 +729,15 @@ class ViewPermitController extends GetxController {
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
       Map<String, dynamic>? response =
           await viewPermitPresenter.permitCancelRequestButton(
-        cancelPermitJsonString: cancelPermitJsonString,
-        jobId: int.tryParse(jobId),
-        isLoading: true,
-        type: type.value,
-        taskId: type.value == 1 ? jobId : taskId,
-      );
+              cancelPermitJsonString: cancelPermitJsonString,
+              jobId: int.tryParse(jobId),
+              isLoading: true,
+              type: type.value,
+              taskId: type.value == 1 ? jobId : taskId,
+              vegexid: int.tryParse(vegexid),
+              vegplanId: int.tryParse(vegplanId),
+              mcplanId: int.tryParse(mcplanId),
+              mctaskId: int.tryParse(mctaskId));
       print('cancelPermitRequest:$cancelPermitJsonString');
       if (response == true) {
         //getCalibrationList(facilityId, true);
@@ -793,6 +816,12 @@ class ViewPermitController extends GetxController {
       {int? permitId, String? ptwStatus, int? jobId, String? taskId}) async {
     {
       String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
+      String mctaskId = lstAssociatedMc!.isEmpty
+          ? ""
+          : lstAssociatedMc![0]?.executionId.toString() ?? '';
+      String mcplanId = lstAssociatedMc!.isEmpty
+          ? ""
+          : lstAssociatedMc![0]?.plan_id.toString() ?? '';
 
       CommentModel commentRejectExtendPermitModel =
           CommentModel(id: permitId, comment: _rejectComment);
@@ -801,21 +830,23 @@ class ViewPermitController extends GetxController {
           commentRejectExtendPermitModel.toJson();
 
       Map<String, dynamic>? response =
-          await viewPermitPresenter.permitRejectButton(
-        rejectExtendPermitJsonString: rejectExtendPermitJsonString,
-        id: permitId,
-        ptwStatus: ptwStatus,
-        jobId: jobId,
-        taskId: taskId,
-        isLoading: true,
-        type: type.value,
-        vegid: lstAssociatedVc!.value.length > 0
-            ? lstAssociatedVc![0]!.plan_id
-            : 0,
-        vegexe: lstAssociatedVc!.value.length > 0
-            ? lstAssociatedVc![0]!.executionId
-            : 0,
-      );
+          await viewPermitPresenter
+              .permitRejectButton(
+                  rejectExtendPermitJsonString: rejectExtendPermitJsonString,
+                  id: permitId,
+                  ptwStatus: ptwStatus,
+                  jobId: jobId,
+                  taskId: taskId,
+                  isLoading: true,
+                  type: type.value,
+                  vegid: lstAssociatedVc!.value.length > 0
+                      ? lstAssociatedVc![0]!.plan_id
+                      : 0,
+                  vegexe: lstAssociatedVc!.value.length > 0
+                      ? lstAssociatedVc![0]!.executionId
+                      : 0,
+                  mcplanId: int.tryParse(mcplanId),
+                  mctaskId: int.tryParse(mctaskId));
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }
