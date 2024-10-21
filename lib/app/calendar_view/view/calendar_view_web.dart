@@ -34,16 +34,6 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
   int? selectedPlanID;
 
   @override
-  void initState() {
-    super.initState();
-    _disableRightClickContextMenu(); // Disable the default right-click menu
-  }
-
-  void _disableRightClickContextMenu() {
-    html.document.onContextMenu.listen((event) => event.preventDefault());
-  }
-
-  @override
   Widget build(BuildContext context) {
     return GetBuilder<CalendarViewController>(
       id: 'dashboard',
@@ -594,12 +584,7 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
       context: context,
       position: RelativeRect.fromLTRB(
           position.dx, position.dy, position.dx, position.dy),
-      items: [
-        PopupMenuItem(
-          value: 'open',
-          child: Text('Open in New Tab'),
-        ),
-      ],
+      items: [],
     ).then((value) {
       if (value == 'open') {
         // _openDuplicateTab();
