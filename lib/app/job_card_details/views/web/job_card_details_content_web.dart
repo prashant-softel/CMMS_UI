@@ -1870,7 +1870,11 @@ class DeployedTeam extends StatelessWidget {
                       style: Styles.blue700,
                     ),
                     controller.jobCardDetailsModel.value!.status == 158 ||
-                            controller.jobCardDetailsModel.value!.status == 156
+                            controller.jobCardDetailsModel.value!.status ==
+                                156 ||
+                            controller.jobCardDetailsModel.value!.status ==
+                                155 ||
+                            controller.jobCardDetailsModel.value!.status == 153
                         ? Dimens.box0
                         : GestureDetector(
                             onTap: () {
@@ -1908,7 +1912,9 @@ class DeployedTeam extends StatelessWidget {
                 child: Obx(() {
                   bool showActionColumn =
                       controller.jobCardDetailsModel.value!.status != 156 &&
-                          controller.jobCardDetailsModel.value!.status != 158;
+                          controller.jobCardDetailsModel.value!.status != 158 &&
+                          controller.jobCardDetailsModel.value!.status != 155 &&
+                          controller.jobCardDetailsModel.value!.status != 153;
 
                   return DataTable2(
                     // minWidth: MediaQuery.sizeOf(context).width,
