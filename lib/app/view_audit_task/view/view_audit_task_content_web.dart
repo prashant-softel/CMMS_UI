@@ -1110,8 +1110,8 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             ),
                                           )
                                         : Dimens.box0,
-                                    controller.auditTasknDetailModel.value
-                                            .map_checklist!.isNotEmpty
+                                    controller.auditTasknDetailModel.value.map_checklist != null && 
+    controller.auditTasknDetailModel.value.map_checklist!.isNotEmpty
                                         ? CheckListSubTaskDataTable()
                                         : Dimens.box0,
 
@@ -1190,7 +1190,10 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               // : Dimens.box0,
                                               Dimens.boxWidth10,
 
-                                              controller
+                                              controller.auditTasknDetailModel
+                                                              .value.sub_PmTask !=
+                                                          null &&
+                                                      controller
                                                           .auditTasknDetailModel
                                                           .value
                                                           .sub_PmTask!
@@ -1815,6 +1818,14 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                         icon: Icons.start,
                                                         onPressed: () {
                                                           controller
+                                                              .rowItemAuditobs
+                                                              .value = [];
+                                                          controller
+                                                              .auditTasknDetailModel
+                                                              .value
+                                                              .schedules![0]
+                                                              .checklist_observation = [];
+                                                          controller
                                                               .auditTasknDetailModel
                                                               .value
                                                               .schedules![0]
@@ -2113,7 +2124,31 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                       child: Wrap(
                                         children: [
                                           controller.auditTasknDetailModel.value
-                                                  .sub_PmTask!.isEmpty
+                                                      .sub_PmTask!.isEmpty ||
+                                                  controller
+                                                          .auditTasknDetailModel
+                                                          .value
+                                                          .sub_PmTask!
+                                                          .isNotEmpty &&
+                                                      controller
+                                                              .auditTasknDetailModel
+                                                              .value
+                                                              .sub_PmTask!
+                                                              .firstWhere(
+                                                            (e) =>
+                                                                e?.subtask_id
+                                                                    .toString()
+                                                                    .trim() ==
+                                                                row[0]['subtask_id']
+                                                                    .toString(),
+                                                            orElse: () {
+                                                              return PreventiveCheckListModel(
+                                                                  ptw_status:
+                                                                      -1);
+                                                            },
+                                                          ).status_of ==
+                                                          425 ||
+                                                  row[7]['value'] == ''
                                               ? TableActionButton(
                                                   color:
                                                       ColorValues.appRedColor,
@@ -2208,7 +2243,8 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                                               ptw_status: -1);
                                                         },
                                                       ).ptw_status !=
-                                                      0
+                                                      0 &&
+                                                  row[7]['value'] != ''
                                               ? TableActionButton(
                                                   color: ColorValues
                                                       .appLightBlueColor,
@@ -2282,23 +2318,6 @@ class CheckListSubTaskDataTable extends StatelessWidget {
 
                                                     // Find the matching subtask in sub_PmTask
                                                     // final task =
-                                                    controller
-                                                            .auditTasknDetailModel
-                                                            .value
-                                                            .sub_PmTask!
-                                                            .firstWhere(
-                                                          (e) =>
-                                                              e?.subtask_id
-                                                                  .toString()
-                                                                  .trim() ==
-                                                              row[0]['subtask_id']
-                                                                  .toString(),
-                                                          orElse: () {
-                                                            return PreventiveCheckListModel(
-                                                                ptw_status: -1);
-                                                          },
-                                                        ).ptw_status ==
-                                                        121;
 
                                                     // Log the found task and status
                                                     //   print(
@@ -2325,24 +2344,24 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                                     //         ).ptw_status == 121}");
                                                     //   return false;
                                                     // }
-                                                    // var filterdData = controller
-                                                    //     .auditTasknDetailModel
-                                                    //     .value
-                                                    //     .sub_PmTask
-                                                    //     ?.firstWhere((e) =>
-                                                    //         "${e?.subtask_id}" ==
-                                                    //         row[0]['subtask_id']);
+                                                    var filterdData = controller
+                                                        .auditTasknDetailModel
+                                                        .value
+                                                        .sub_PmTask
+                                                        ?.firstWhere((e) =>
+                                                            "${e?.subtask_id}" ==
+                                                            row[0]
+                                                                ['subtask_id']);
 
                                                     // // Log the found status for debugging
                                                     // print(
                                                     //     "Found status for subtask ${row[0]['subtask_id']}: ${controller.auditTasknDetailModel.value.sub_PmTask!.firstWhere((e) => "${e?.subtask_id}" == row[0]['"subtask_id"'], orElse: () => PreventiveCheckListModel(ptw_status: -1)).ptw_status == 121}");
                                                     // //  var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
 
-                                                    //  controller.editNewPermit(permitId: filterdData?.permit_id, isChecked: false
-                                                    // controller
-                                                    //     .isChecked
-                                                    //     .value
-                                                    // );
+                                                    controller.editNewPermit(
+                                                        permitId: filterdData
+                                                            ?.permit_id,
+                                                        isChecked: false);
                                                   },
                                                 )
                                               : Dimens.box0,
@@ -2599,19 +2618,20 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                                     int scheduleID = filterdData
                                                             ?.sub_schedules![0]
                                                             .schedule_id ??
-                                                        0; int subtask_id = filterdData
-                                                            ?.subtask_id??
+                                                        0;
+                                                    int subtask_id = filterdData
+                                                            ?.subtask_id ??
                                                         0;
 
 // Display the dialog
                                                     Get.dialog(
                                                         EvaluationExecutionProcessDialog(
-                                                            title: title,
-                                                            subtask_id:
-                                                                subtask_id,
-                                                            checkList_Number:
-                                                                checkList_Number, scheduleID:
-                                                                scheduleID,));
+                                                      title: title,
+                                                      subtask_id: subtask_id,
+                                                      checkList_Number:
+                                                          checkList_Number,
+                                                      scheduleID: scheduleID,
+                                                    ));
                                                   },
                                                 )
                                               : Dimens.box0,
@@ -2760,7 +2780,9 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                       : (mapData['key'] == "score")
                                           ? Text("${mapData["value"]}")
                                           : (mapData['key'] == "PTW_status")
-                                              ? Text("${mapData["value"]}")
+                                              ? Text(mapData["value"] == "null"
+                                                  ? ""
+                                                  : "${mapData["value"]}")
                                               : (mapData['key'] == "status")
                                                   ? Text("${mapData["value"]}")
                                                   : (mapData['key'] ==

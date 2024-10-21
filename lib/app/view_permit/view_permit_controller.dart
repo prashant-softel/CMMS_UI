@@ -830,23 +830,23 @@ class ViewPermitController extends GetxController {
           commentRejectExtendPermitModel.toJson();
 
       Map<String, dynamic>? response =
-          await viewPermitPresenter
-              .permitRejectButton(
-                  rejectExtendPermitJsonString: rejectExtendPermitJsonString,
-                  id: permitId,
-                  ptwStatus: ptwStatus,
-                  jobId: jobId,
-                  taskId: taskId,
-                  isLoading: true,
-                  type: type.value,
-                  vegid: lstAssociatedVc!.value.length > 0
-                      ? lstAssociatedVc![0]!.plan_id
-                      : 0,
-                  vegexe: lstAssociatedVc!.value.length > 0
-                      ? lstAssociatedVc![0]!.executionId
-                      : 0,
-                  mcplanId: int.tryParse(mcplanId),
-                  mctaskId: int.tryParse(mctaskId));
+          await viewPermitPresenter.permitRejectButton(
+        rejectExtendPermitJsonString: rejectExtendPermitJsonString,
+        id: permitId,
+        ptwStatus: ptwStatus,
+        jobId: jobId,
+        taskId: taskId,
+        isLoading: true,
+        type: type.value,
+        vegid: lstAssociatedVc!.value.length > 0
+            ? lstAssociatedVc![0]!.plan_id
+            : 0,
+        vegexe: lstAssociatedVc!.value.length > 0
+            ? lstAssociatedVc![0]!.executionId
+            : 0,
+        mcplanId: int.tryParse(mcplanId),
+        mctaskId: int.tryParse(mctaskId),
+      );
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }

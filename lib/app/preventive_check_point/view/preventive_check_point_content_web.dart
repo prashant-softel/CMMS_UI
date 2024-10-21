@@ -1363,7 +1363,8 @@ class CheckPointDataSource extends DataTableSource {
       '${checkPointDetails?.requirement ?? ''}',
       "upload_image", // '${checkPointDetails?.u ?? ''}',
       '${checkPointDetails?.failure_weightage ?? ''}%',
-      checkPointDetails?.checkpoint_type == "Range"
+      checkPointDetails?.checkpoint_type == "Range" ||
+              checkPointDetails?.checkpoint_type == "Input Range"
           ? '${checkPointDetails?.checkpoint_type}(Min:${checkPointDetails?.min},Max:${checkPointDetails?.max})'
           : "${checkPointDetails?.checkpoint_type}",
       '${checkPointDetails?.type_of_observation ?? ''}',

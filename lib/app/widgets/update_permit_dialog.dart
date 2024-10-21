@@ -174,8 +174,8 @@ class UpdateNewPermitDialog extends GetView {
                     : type == 3
                         ? ElevatedButton(
                             style: Styles.darkBlueElevatedButtonStyle,
-                            onPressed: () =>
-                                Get.offAllNamed(Routes.viewAuditTask),
+                            onPressed: () => Get.offAllNamed(
+                                '${Routes.viewAuditTask}/$taskId/${controller.type}'),
                             child: const Text('View Audit'),
                           )
                         : type == 4
@@ -185,14 +185,22 @@ class UpdateNewPermitDialog extends GetView {
                                     '${Routes.addModuleCleaningExecutionContentWeb}/$mcexid/$mcplanId'),
                                 child: const Text('View MC'),
                               )
-                            : type == 6
+                            : type == 5
                                 ? ElevatedButton(
                                     style: Styles.darkBlueElevatedButtonStyle,
                                     onPressed: () => Get.offAllNamed(
-                                        '${Routes.vegExecutionScreen}/${vegexid}/${vegplanId}'),
-                                    child: const Text('View VEG'),
+                                        '${Routes.viewAuditTask}/$taskId/${controller.type}'),
+                                    child: const Text('View Evaluation'),
                                   )
-                                : Dimens.box0,
+                                : type == 6
+                                    ? ElevatedButton(
+                                        style:
+                                            Styles.darkBlueElevatedButtonStyle,
+                                        onPressed: () => Get.offAllNamed(
+                                            '${Routes.vegExecutionScreen}/${vegexid}/${vegplanId}'),
+                                        child: const Text('View VEG'),
+                                      )
+                                    : Dimens.box0,
             Dimens.boxWidth10,
           ]),
         ],

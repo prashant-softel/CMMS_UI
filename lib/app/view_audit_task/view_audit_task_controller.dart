@@ -147,6 +147,7 @@ class ViewAuditTaskController extends GetxController {
 
     if (_auditTasknDetailModel != null) {
       auditTasknDetailModel.value = _auditTasknDetailModel;
+      // assignedToList.value = [];
 
       await getReAssignedToList(auditTasknDetailModel.value.facility_id);
       await getHistory();
@@ -171,7 +172,7 @@ class ViewAuditTaskController extends GetxController {
               "value": '${element.assign_name}',
               "assign_id": '${element.assign_to}',
             },
-            {'key': "score", "value": ''},
+            {'key': "score", "value": '${element.score}'},
             {'key': "status", "value": '${element.status_short}'},
             {'key': "Action ", "value": ''},
           ]);
@@ -368,7 +369,7 @@ class ViewAuditTaskController extends GetxController {
     Get.toNamed(Routes.createPermit, arguments: {
       'permitId': permitId,
       'isChecked': isChecked,
-      "type": 2,
+      "type": type.value,
       "isFromPmTaskDetails": true,
       "jobModel": jobDetailsModel.value,
       "pmTaskModel": pmtaskViewModel.value,

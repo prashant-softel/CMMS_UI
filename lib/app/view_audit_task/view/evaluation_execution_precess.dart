@@ -232,7 +232,7 @@ class EvaluationExecutionProcessDialog extends GetView {
                                           DataColumn2(
                                               fixedWidth: 193,
                                               label: Text(
-                                                "Input Type",
+                                                "Type",
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:
@@ -383,7 +383,7 @@ class EvaluationExecutionProcessDialog extends GetView {
         );
 
       case 'type':
-        return (mapData['inpute_type'] == "2")
+        return (mapData['inpute_type'] == "2" || mapData['inpute_type'] == "3")
             ? Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -392,7 +392,10 @@ class EvaluationExecutionProcessDialog extends GetView {
                         // focusNode: controller.focusList[index],
                         width: (Get.width * .8),
                         textController:
-                            controller.textEditingControllerList[index],
+                            TextEditingController(text: mapData["value"] ?? ''),
+
+                        // textController:
+                        //     controller.textEditingControllerList[index],
                         // new TextEditingController(
                         //     text: mapData["value"] == null ||
                         //             mapData["value"] == "null"
