@@ -130,7 +130,7 @@ class ExecuteCourseController extends GetxController {
       isLoading: true,
     );
     if (response == true) {
-      Get.offAllNamed(Routes.vegExecutionListScreen);
+      Get.offAllNamed(Routes.scheduleCourseList);
     }
   }
 
@@ -146,7 +146,7 @@ class ExecuteCourseController extends GetxController {
       isLoading: true,
     );
     if (response == true) {
-      Get.offAllNamed(Routes.vegExecutionListScreen);
+      Get.offAllNamed(Routes.scheduleCourseList);
     }
   }
 

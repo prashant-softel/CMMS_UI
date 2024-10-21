@@ -18399,6 +18399,9 @@ class Repository {
           var responseMap = json.decode(res.data);
           return responseMap;
         }
+          Get.offAllNamed(
+          Routes.scheduleCourseList,
+        );
       } else {
         Utility.showDialog(res.errorCode.toString(), 'approve schedule course');
       }

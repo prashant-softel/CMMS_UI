@@ -1,9 +1,11 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/execute_course/execute_course_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/url_path.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/veg_execution_screen/view/widgets/veg_schedule_approve_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -507,10 +509,19 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
           ),
         ),
       ),
-      floatingActionButton: controller.type.value == 1
+      floatingActionButton: Obx(() {
+          // bool hasApproveAccess = 
+          varUserAccessModel.value.access_list!
+      .where((e) =>
+          e.feature_id == UserAccessConstants.kObservationFeatureId &&
+          e.approve == UserAccessConstants.kHaveApproveAccess)
+      .length > 0;
+  return controller.type.value == 1
+    
           ? Row(
               children: [
                 Spacer(),
+                if (controller.scheduleCourseDetails.value.status_code != 458)
                 Container(
                   height: 35,
                   child: CustomElevatedButton(
@@ -522,6 +533,7 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                   ),
                 ),
                 Dimens.boxWidth10,
+                if (controller.scheduleCourseDetails.value.status_code != 458)
                 Container(
                   height: 35,
                   child: CustomElevatedButton(
@@ -538,6 +550,7 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
           : Row(
               children: [
                 Spacer(),
+               if (controller.scheduleCourseDetails.value.status_code != 459 && controller.scheduleCourseDetails.value.status_code !=460)
                 Container(
                   height: 35,
                   child: CustomElevatedButton(
@@ -564,6 +577,7 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                   ),
                 ),
                 Dimens.boxWidth10,
+                if (controller.scheduleCourseDetails.value.status_code != 459 && controller.scheduleCourseDetails.value.status_code !=460)
                 Container(
                   height: 35,
                   child: CustomElevatedButton(
@@ -591,7 +605,8 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                 ),
                 Spacer(),
               ],
-            ),
+            );
+      }),
     );
   }
 
