@@ -10,14 +10,11 @@ import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:get/get.dart';
 import 'dart:html' as html;
-import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'package:get/get.dart';
 
 class CalendarViewWeb extends StatefulWidget {
   CalendarViewWeb({Key? key}) : super(key: key);
@@ -643,6 +640,103 @@ class _CalendarViewWebState extends State<CalendarViewWeb> {
                 );
               }),
             ),
+            if (controller.openFromDateToStartDatePicker)
+              Positioned(
+                right: 270,
+                top: 55,
+                child: DatePickerWidget(
+                  selectionMode: DateRangePickerSelectionMode.range,
+                  monthCellStyle: DateRangePickerMonthCellStyle(
+                    todayCellDecoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: ColorValues.appDarkBlueColor),
+                  ),
+                  initialSelectedRange: PickerDateRange(
+                    controller.fromDate.value,
+                    controller.toDate.value,
+                  ),
+                  onSubmit: (value) {
+                    PickerDateRange? data = value as PickerDateRange;
+                    var pickUpDate = DateTime.parse(data.startDate.toString());
+                    controller.fromDate.value = pickUpDate;
+                    var dropDate = DateTime.parse(data.endDate.toString());
+                    dropDate != null
+                        ? controller.toDate.value = dropDate
+                        : controller.toDate.value = pickUpDate;
+                    controller.getDashBordListByDate();
+                    controller.openFromDateToStartDatePicker = false;
+                    controller.update(['dashboard']);
+                  },
+                  onCancel: () {
+                    controller.openFromDateToStartDatePicker = false;
+                    controller.update(['dashboard']);
+                  },
+                ),
+              ),
+            Obx(() => controller.isHovered.value
+                ? Positioned(
+                    top: 80,
+                    right: 50,
+                    child: Container(
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 4,
+                            offset: Offset(2, 2),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              CircleAvatar(
+                                radius: 10,
+                                backgroundColor: ColorValues.appGreenColor,
+                              ),
+                              SizedBox(height: 5),
+                              CircleAvatar(
+                                radius: 10,
+                                backgroundColor: ColorValues.appDarkBlueColor,
+                              ),
+                              SizedBox(height: 5),
+                              CircleAvatar(
+                                radius: 10,
+                                backgroundColor:
+                                    Color.fromARGB(255, 133, 97, 163),
+                              ),
+                              SizedBox(height: 5),
+                              CircleAvatar(
+                                radius: 10,
+                                backgroundColor:
+                                    Color.fromARGB(255, 78, 126, 129),
+                              )
+                            ],
+                          ),
+                          SizedBox(width: 10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Breakdown Maintenance"),
+                              SizedBox(height: 3),
+                              Text("Preventive Maintenance"),
+                              SizedBox(height: 3),
+                              Text("Module Cleaning"),
+                              SizedBox(height: 3),
+                              Text("Incident Report")
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : SizedBox.shrink()),
           ],
         );
       },
