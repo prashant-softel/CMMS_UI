@@ -4690,7 +4690,8 @@ class DataRepository extends DomainRepository {
           type,
           facilityId,
           mcplanId,
-          mctaskId}) async =>
+          mctaskId,
+          evaluationId}) async =>
       await connectHelper.scheduleLinkToPermit(
           auth: auth,
           scheduleId: scheduleId,
@@ -4700,7 +4701,8 @@ class DataRepository extends DomainRepository {
           type: type,
           facilityId: facilityId,
           mcplanId: mcplanId,
-          mctaskId: mctaskId);
+          mctaskId: mctaskId,
+          evaluationId: evaluationId);
   Future<ResponseModel> vegscheduleLinkToPermit(
           {required String auth,
           scheduleId,

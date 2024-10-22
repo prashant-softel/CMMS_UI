@@ -81,33 +81,31 @@ class CreateAuditPlan {
 }
 
 class EvaluationChecklist {
-  EvaluationChecklist({
-    this.checklist_id,
-    required this.weightage,
-    this.comment,
-    this.ptw_req,
-    // this.title
-  });
+  EvaluationChecklist(
+      {this.checklist_id,
+      required this.weightage,
+      this.comment,
+      this.ptw_req,
+      this.map_checlist});
 
   int? checklist_id;
   int weightage;
   String? comment;
   int? ptw_req;
-  // String? title;
+  int? map_checlist;
   factory EvaluationChecklist.fromJson(Map<String, dynamic> json) =>
       EvaluationChecklist(
-        checklist_id: json["checklist_id"],
-        weightage: json["asset_item_ID"],
-        comment: json["comment"],
-        ptw_req: json["ptw_req"],
-        // title: json['title']
-      );
+          checklist_id: json["checklist_id"],
+          weightage: json["asset_item_ID"],
+          comment: json["comment"],
+          ptw_req: json["ptw_req"],
+          map_checlist: json['map_checlist']);
 
   Map<String, dynamic> toJson() => {
         "comment": comment,
         "weightage": weightage,
         "checklist_id": checklist_id,
         "ptw_req": ptw_req,
-        // "title": title
+        "map_checlist": map_checlist
       };
 }

@@ -434,13 +434,15 @@ class EvaluationExecutionProcessDialog extends GetView {
                       //   setState(() {});
                       // });
                     })
-                : _rowBoolItem(int.tryParse('${mapData['value']}'),
-                    onCheck: (val) {
-                    mapData['value'] = val == true ? "1" : "0";
-                    Future.delayed(Duration.zero, () {
-                      setState(() {});
-                    });
-                  });
+                : (mapData['inpute_type'] == "1")
+                    ? _rowBoolItem(int.tryParse('${mapData['value']}'),
+                        onCheck: (val) {
+                        mapData['value'] = val == true ? "1" : "0";
+                        Future.delayed(Duration.zero, () {
+                          setState(() {});
+                        });
+                      })
+                    : Text("");
 
       case 'job_created':
         //record[3]['value']=cpok
@@ -476,14 +478,63 @@ class EvaluationExecutionProcessDialog extends GetView {
         );
 
       case 'accept':
-        return _rowcpOkItem(int.tryParse('${mapData['value']}'),
-            onCheck: (val) {
-          mapData['value'] = val == true ? "1" : "0";
-          // updateJob(record);
-          Future.delayed(Duration.zero, () {
-            setState(() {});
-          });
-        });
+        return (mapData['three_type'] == "4")
+            ? Column(
+                mainAxisAlignment:
+                    MainAxisAlignment.center, // Center the radio buttons
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RadioListTile<int>(
+                    title: Text('YES'),
+                    value: 0,
+                    groupValue: int.tryParse('${mapData['value']}'),
+                    visualDensity: const VisualDensity(
+                      horizontal: VisualDensity.minimumDensity,
+                      vertical: VisualDensity.minimumDensity,
+                    ),
+                    onChanged: (int? value) {
+                      setState(() {
+                        mapData['value'] = value.toString();
+                      });
+                    },
+                    dense: true,
+                    contentPadding: EdgeInsets.zero,
+                  ),
+                  RadioListTile<int>(
+                    title: Text('NO'),
+                    value: 1,
+                    groupValue: int.tryParse('${mapData['value']}'),
+                    visualDensity: VisualDensity.compact,
+                    onChanged: (int? value) {
+                      setState(() {
+                        mapData['value'] = value.toString();
+                      });
+                    },
+                    dense: true,
+                    contentPadding: EdgeInsets.zero,
+                  ),
+                  RadioListTile<int>(
+                    title: Text('NA'),
+                    value: 2,
+                    groupValue: int.tryParse('${mapData['value']}'),
+                    visualDensity: VisualDensity.compact,
+                    onChanged: (int? value) {
+                      setState(() {
+                        mapData['value'] = value.toString();
+                      });
+                    },
+                    dense: true,
+                    contentPadding: EdgeInsets.zero,
+                  ),
+                ],
+              )
+            : _rowcpOkItem(int.tryParse('${mapData['value']}'), onCheck: (val) {
+                mapData['value'] = val == true ? "1" : "0";
+                // updateJob(record);
+                Future.delayed(Duration.zero, () {
+                  setState(() {});
+                });
+              });
 
       case 'uploadimg':
         return Row(

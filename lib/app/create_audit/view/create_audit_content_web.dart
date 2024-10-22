@@ -175,7 +175,8 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  Get.back();
+                                  Get.offAllNamed(
+                                      '${Routes.auditListScreen}/${controller.type.value}');
                                 },
                                 child: controller.type.value ==
                                         AppConstants.kMis

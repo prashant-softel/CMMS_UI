@@ -246,22 +246,22 @@ class HomeDrawer extends GetView<HomeController> {
                                 },
                               ),
 
-                              MenuItem(
-                                isexpand: controller.isExpanded.value,
-                                menuButton: controller.menuButton.value,
-                                fontSize: 14,
-                                width: 40,
-                                height: 16,
-                                color: Color(0xffD2D0D0),
-                                title: "Audit",
-                                iconWidget: Icon(
-                                  Icons.person_search_rounded,
-                                  color: Color(0xffD2D0D0),
-                                ),
-                                press: () {
-                                  Get.offAllNamed(Routes.audit);
-                                },
-                              ),
+                              // MenuItem(
+                              //   isexpand: controller.isExpanded.value,
+                              //   menuButton: controller.menuButton.value,
+                              //   fontSize: 14,
+                              //   width: 40,
+                              //   height: 16,
+                              //   color: Color(0xffD2D0D0),
+                              //   title: "Audit",
+                              //   iconWidget: Icon(
+                              //     Icons.person_search_rounded,
+                              //     color: Color(0xffD2D0D0),
+                              //   ),
+                              //   press: () {
+                              //     Get.offAllNamed(Routes.audit);
+                              //   },
+                              // ),
                               MenuItem(
                                 isexpand: controller.isExpanded.value,
                                 menuButton: controller.menuButton.value,
