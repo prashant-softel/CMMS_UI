@@ -12,31 +12,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:get/get.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'dart:html' as html;
+import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:get/get.dart';
 
 class CalendarViewWeb extends StatefulWidget {
-  CalendarViewWeb({
-    Key? key,
-  }) : super(key: key);
+  CalendarViewWeb({Key? key}) : super(key: key);
 
   @override
   State<CalendarViewWeb> createState() => _CalendarViewWebState();
 }
 
-class _CalendarViewWebState extends State<CalendarViewWeb>
-    with SingleTickerProviderStateMixin {
+class _CalendarViewWebState extends State<CalendarViewWeb> {
   var repository = Get.find<Repository>();
   String? selectedEventId;
   String? selectedWoDescription;
   int? selectedPlanID;
 
+  // Calendar-related variables
+  DateTime _selectedDay = DateTime.now();
+  DateTime _focusedDay = DateTime.now();
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+
+  // List to store selected day's events
+  List<Meeting> _selectedEvents = []; // Define the _selectedEvents list here
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CalendarViewController>(
-      id: 'dashboard',
+      id: 'dashboard', // This ensures that the UI updates when the controller data changes
       builder: (controller) {
         return Stack(
           children: [
@@ -283,7 +290,7 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
                                               Divider(color: Color(0xffD2D0D0)),
                                               InkWell(
                                                 onTap: () {
-                                                  _isDeleteDialog(repository);
+                                                  // _isDeleteDialog(repository);
                                                 },
                                                 child: Row(
                                                   children: [
@@ -408,171 +415,234 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
                       Container(
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height,
-                        child: GestureDetector(
-                          onSecondaryTapDown: (details) {
-                            // Use the exact position of the right-click to show the context menu
-                            _showContextMenu(
-                                details.globalPosition, controller);
-                          },
-                          child: SfCalendar(
-                            view: CalendarView.month,
-                            allowedViews: [
-                              CalendarView.day,
-                              CalendarView.week,
-                              CalendarView.workWeek,
-                              CalendarView.month,
-                              CalendarView.timelineMonth,
-                            ],
-                            dataSource:
-                                MeetingDataSource(controller.getDataSource()),
-                            todayHighlightColor: Colors.blue,
-                            showDatePickerButton: true,
-                            showNavigationArrow: true,
-                            monthViewSettings: MonthViewSettings(
-                              appointmentDisplayMode:
-                                  MonthAppointmentDisplayMode.appointment,
-                              showAgenda: true,
-                            ),
-                            onTap: (CalendarTapDetails details) {
-                              if (details.appointments != null &&
-                                  details.appointments!.isNotEmpty) {
-                                final Meeting meeting =
-                                    details.appointments!.first;
-                                selectedEventId = meeting
-                                    .eventName; // Assuming eventName is the ID
-                                selectedWoDescription = meeting
-                                    .woDescription; // Get the description
-                                selectedPlanID = meeting.planId;
-                                // Show toast with wo_number and wo_description
-                                // Fluttertoast.showToast(
-                                //   msg:
-                                //       'WO Number: ${meeting.woNumber}, Description: ${meeting.woDescription}',
-                                //   toastLength: Toast.LENGTH_SHORT,
-                                //   gravity: ToastGravity.BOTTOM,
-                                //   timeInSecForIosWeb: 3,
-                                //   backgroundColor: Colors.black,
-                                //   textColor: Colors.white,
-                                //   fontSize: 16.0,
-                                // );
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onSecondaryTapDown: (details) {
+                                // Show context menu at right-click position
+                                _showContextMenu(
+                                    details.globalPosition, controller);
+                              },
+                              child: TableCalendar(
+                                firstDay: DateTime.utc(2020, 1, 1),
+                                lastDay: DateTime.utc(2030, 12, 31),
+                                focusedDay: _focusedDay,
+                                calendarFormat: _calendarFormat,
+                                selectedDayPredicate: (day) {
+                                  return isSameDay(_selectedDay, day);
+                                },
+                                onDaySelected: (selectedDay, focusedDay) {
+                                  setState(() {
+                                    _selectedDay = selectedDay;
+                                    _focusedDay = focusedDay;
+                                  });
 
-                                _openDuplicateTab(
-                                    selectedEventId: meeting.woNumber,
-                                    controller: controller,
-                                    selectedPlanID: selectedPlanID);
-                                // Log the event details for debugging purposes
-                                print(
-                                    "Tapped on meeting: ${meeting.eventName}, Description: ${meeting.woDescription}, WO Number: ${meeting.woNumber}, From: ${meeting.from}, To: ${meeting.to}");
-                              }
-                            },
-                            onViewChanged: (ViewChangedDetails details) {
-                              print(
-                                  "View changed. Current visible dates: ${details.visibleDates}");
-                            },
-                          ),
+                                  // Filter events for the selected day
+                                  _selectedEvents = controller
+                                      .getDataSource()
+                                      .where((event) =>
+                                          isSameDay(event.from, selectedDay))
+                                      .toList();
+                                },
+                                eventLoader: (day) {
+                                  return controller
+                                      .getDataSource()
+                                      .where(
+                                          (event) => isSameDay(event.from, day))
+                                      .toList();
+                                },
+                                calendarStyle: CalendarStyle(
+                                  todayDecoration: BoxDecoration(
+                                    color: Colors.blue,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  selectedDecoration: BoxDecoration(
+                                    color: Colors.green,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                                calendarBuilders: CalendarBuilders(
+                                  markerBuilder: (context, date, events) {
+                                    if (events.isEmpty) return SizedBox();
+
+                                    // If more than 3 events, show '...'
+                                    final showEllipsis = events.length > 3;
+
+                                    return MouseRegion(
+                                      onEnter: (_) {
+                                        // Show tooltip with all events on hover
+                                        final allEventNames =
+                                            events.map((event) {
+                                          final meeting = event as Meeting;
+                                          return meeting.eventName;
+                                        }).join(', ');
+
+                                        final tooltipMessage =
+                                            allEventNames.isNotEmpty
+                                                ? allEventNames
+                                                : 'No events';
+
+                                        Tooltip(
+                                          message: tooltipMessage,
+                                          child: Wrap(
+                                            children:
+                                                events.take(3).map((event) {
+                                              final meeting = event as Meeting;
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 2.0),
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color: meeting
+                                                        .background, // Solid color
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 4.0,
+                                                        vertical: 2.0),
+                                                    child: Text(
+                                                      showEllipsis
+                                                          ? '...' // Show ellipsis if more than 3 events
+                                                          : meeting.eventName,
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: Colors
+                                                            .white, // Ensure text is visible
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        );
+                                      },
+                                      child: Wrap(
+                                        children: events.take(3).map((event) {
+                                          final meeting = event as Meeting;
+                                          return Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 2.0),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: meeting
+                                                    .background, // Solid color
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 4.0,
+                                                        vertical: 2.0),
+                                                child: Text(
+                                                  showEllipsis
+                                                      ? '...' // Show ellipsis if more than 3 events
+                                                      : meeting.eventName,
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: Colors
+                                                        .white, // Ensure text is visible
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                onFormatChanged: (format) {
+                                  if (_calendarFormat != format) {
+                                    setState(() {
+                                      _calendarFormat = format;
+                                    });
+                                  }
+                                },
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            // Display Event Details Below the Calendar
+                            Expanded(
+                              child: _selectedEvents.isNotEmpty
+                                  ? ListView.builder(
+                                      physics:
+                                          BouncingScrollPhysics(), // Added scroll physics
+                                      itemCount: _selectedEvents.length,
+                                      itemBuilder: (context, index) {
+                                        final event = _selectedEvents[index];
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8.0, horizontal: 16.0),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color: event
+                                                  .background, // Use event background color
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                            ),
+                                            child: ListTile(
+                                              title: Text(
+                                                event.eventName,
+                                                style: TextStyle(
+                                                    color: Colors
+                                                        .white), // White text for visibility
+                                              ),
+                                              subtitle: Row(
+                                                children: [
+                                                  Text(
+                                                    event.from.toString(),
+                                                    style: TextStyle(
+                                                        color: Colors
+                                                            .white), // White text for visibility
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Text(
+                                                    event.to.toString(),
+                                                    style: TextStyle(
+                                                        color: Colors
+                                                            .white), // White text for visibility
+                                                  ),
+                                                ],
+                                              ),
+                                              onTap: () {
+                                                // Add animation effect when event is tapped
+                                                _openDuplicateTab(
+                                                  selectedEventId:
+                                                      event.woNumber,
+                                                  controller: controller,
+                                                  selectedPlanID: event.planId,
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  : Center(
+                                      child: Text(
+                                        'No events for this day',
+                                        style: TextStyle(
+                                            fontSize: 16, color: Colors.grey),
+                                      ),
+                                    ),
+                            ),
+                          ],
                         ),
-                      )
+                      ),
                     ],
                   ),
                 );
               }),
             ),
-            if (controller.openFromDateToStartDatePicker)
-              Positioned(
-                right: 270,
-                top: 55,
-                child: DatePickerWidget(
-                  selectionMode: DateRangePickerSelectionMode.range,
-                  monthCellStyle: DateRangePickerMonthCellStyle(
-                    todayCellDecoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorValues.appDarkBlueColor),
-                  ),
-                  initialSelectedRange: PickerDateRange(
-                    controller.fromDate.value,
-                    controller.toDate.value,
-                  ),
-                  onSubmit: (value) {
-                    PickerDateRange? data = value as PickerDateRange;
-                    var pickUpDate = DateTime.parse(data.startDate.toString());
-                    controller.fromDate.value = pickUpDate;
-                    var dropDate = DateTime.parse(data.endDate.toString());
-                    dropDate != null
-                        ? controller.toDate.value = dropDate
-                        : controller.toDate.value = pickUpDate;
-                    controller.getDashBordListByDate();
-                    controller.openFromDateToStartDatePicker = false;
-                    controller.update(['dashboard']);
-                  },
-                  onCancel: () {
-                    controller.openFromDateToStartDatePicker = false;
-                    controller.update(['dashboard']);
-                  },
-                ),
-              ),
-            Obx(() => controller.isHovered.value
-                ? Positioned(
-                    top: 80,
-                    right: 50,
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            blurRadius: 4,
-                            offset: Offset(2, 2),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              CircleAvatar(
-                                radius: 10,
-                                backgroundColor: ColorValues.appGreenColor,
-                              ),
-                              SizedBox(height: 5),
-                              CircleAvatar(
-                                radius: 10,
-                                backgroundColor: ColorValues.appDarkBlueColor,
-                              ),
-                              SizedBox(height: 5),
-                              CircleAvatar(
-                                radius: 10,
-                                backgroundColor:
-                                    Color.fromARGB(255, 133, 97, 163),
-                              ),
-                              SizedBox(height: 5),
-                              CircleAvatar(
-                                radius: 10,
-                                backgroundColor:
-                                    Color.fromARGB(255, 78, 126, 129),
-                              )
-                            ],
-                          ),
-                          SizedBox(width: 10),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Breakdown Maintenance"),
-                              SizedBox(height: 3),
-                              Text("Preventive Maintenance"),
-                              SizedBox(height: 3),
-                              Text("Module Cleaning"),
-                              SizedBox(height: 3),
-                              Text("Incident Report")
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                : SizedBox.shrink()),
           ],
         );
       },
@@ -587,7 +657,7 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
       items: [],
     ).then((value) {
       if (value == 'open') {
-        // _openDuplicateTab();
+        _openDuplicateTab(controller: controller);
       }
     });
   }
@@ -596,11 +666,7 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
       {String? selectedEventId,
       required CalendarViewController controller,
       int? selectedPlanID}) {
-    // Pass the event details in the query parameters to open in new tab
-
-    String Id =
-        selectedEventId ?? ""; //controller.allItems[index]?.wo_number ?? "";
-    // String planId = controller.allItems[index]?.plan_id.toString() ?? "";
+    String Id = selectedEventId ?? "";
     String prefix = Id.replaceAll(RegExp(r'\d+$'), '');
 
     String jobId = Id.substring(Id.indexOf("BM") + 2);
@@ -611,17 +677,13 @@ class _CalendarViewWebState extends State<CalendarViewWeb>
         ? '/#${Routes.jobDetails}/$jobId'
         : (prefix == 'PMT')
             ? '/#${Routes.pmTaskView}/$taskId'
-            :
-            // :
-            prefix == 'MC'
+            : prefix == 'MC'
                 ? '/#${Routes.addModuleCleaningExecutionContentWeb}/$mcId/$selectedPlanID'
                 : '/#${Routes.login}';
     html.window.open(url, '_blank');
   }
 }
 
-// Class representing an individual meeting
-// Class representing an individual meeting
 class Meeting {
   Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay,
       this.woNumber, this.woDescription, this.planId);
@@ -631,82 +693,7 @@ class Meeting {
   DateTime to;
   Color background;
   bool isAllDay;
-  String woNumber; // Add the work order number
+  String woNumber;
   String woDescription;
-  int planId; // Add the work order description
-}
-
-// DataSource class for SfCalendar
-class MeetingDataSource extends CalendarDataSource {
-  MeetingDataSource(List<Meeting> source) {
-    print("MeetingDataSource initialized with ${source.length} appointments.");
-    appointments = source;
-  }
-
-  @override
-  DateTime getStartTime(int index) {
-    print("Getting start time for appointment index: $index");
-    return appointments![index].from;
-  }
-
-  @override
-  DateTime getEndTime(int index) {
-    print("Getting end time for appointment index: $index");
-    return appointments![index].to;
-  }
-
-  @override
-  String getSubject(int index) {
-    print("Getting subject for appointment index: $index");
-    return appointments![index].eventName;
-  }
-
-  @override
-  Color getColor(int index) {
-    print("Getting color for appointment index: $index");
-    return appointments![index].background;
-  }
-
-  @override
-  bool isAllDay(int index) {
-    print("Checking if appointment index $index is all day.");
-    return appointments![index].isAllDay;
-  }
-}
-
-_isDeleteDialog(Repository repository) {
-  Get.dialog(
-    AlertDialog(
-      content: Column(mainAxisSize: MainAxisSize.min, children: [
-        Icon(Icons.logout_outlined, size: 35, color: ColorValues.redColor),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-          'Are you sure you want to logout?',
-          style: Styles.blackBold14w500,
-        ),
-      ]),
-      actions: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: Text('NO'),
-            ),
-            TextButton(
-              onPressed: () {
-                repository.deleteAllSecuredValues();
-                Get.offAllNamed(Routes.login);
-              },
-              child: Text('YES'),
-            ),
-          ],
-        )
-      ],
-    ),
-  );
+  int planId;
 }
