@@ -237,7 +237,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               //   style: Styles.black17,
                                               // ),
                                               Text(
-                                                'Title :',
+                                                'Title:',
                                                 style: Styles.black17,
                                               ),
                                               // Text(
@@ -252,13 +252,23 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                       AppConstants.kEvaluation
                                                   ? Dimens.box0
                                                   : Text(
-                                                      'Checklist :',
+                                                      'Checklist:',
                                                       style: Styles.black17,
                                                     ),
-                                              Text(
-                                                'Max Score :',
-                                                style: Styles.black17,
-                                              ),
+                                              controller.type.value ==
+                                                      AppConstants.kEvaluation
+                                                  ? Dimens.box0
+                                                  : Text(
+                                                      'Max Score:',
+                                                      style: Styles.black17,
+                                                    ),
+                                              controller.type.value ==
+                                                      AppConstants.kEvaluation
+                                                  ? Dimens.box0
+                                                  : Text(
+                                                      'Score:',
+                                                      style: Styles.black17,
+                                                    ),
                                               Text(
                                                 "Last Done Date:",
                                                 style: Styles.black17,
@@ -321,9 +331,18 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                           : "",
                                                       style: Styles.blue17,
                                                     ),
-                                              Text(
-                                                  " ${controller.auditTasknDetailModel.value.max_score ?? ""}",
-                                                  style: Styles.blue17),
+                                              controller.type.value ==
+                                                      AppConstants.kEvaluation
+                                                  ? Dimens.box0
+                                                  : Text(
+                                                      " ${controller.auditTasknDetailModel.value.max_score ?? ""}",
+                                                      style: Styles.blue17),
+                                              controller.type.value ==
+                                                      AppConstants.kEvaluation
+                                                  ? Dimens.box0
+                                                  : Text(
+                                                      " ${controller.auditTasknDetailModel.value.total_Score ?? ""}",
+                                                      style: Styles.blue17),
 
                                               Text(
                                                   " ${controller.auditTasknDetailModel.value.last_done_date ?? ""}",
@@ -350,11 +369,11 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               //   style: Styles.black17,
                                               // ),
                                               Text(
-                                                'Schedule Date :',
+                                                'Schedule Date:',
                                                 style: Styles.black17,
                                               ),
                                               Text(
-                                                ' Frequency Name :',
+                                                ' Frequency:',
                                                 style: Styles.black17,
                                               ),
                                               Text(
@@ -1005,16 +1024,17 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                                       FontWeight
                                                                           .bold),
                                                             )),
-                                                            // DataColumn2(
-                                                            //     // fixedWidth: 200,
-                                                            //     label: Text(
-                                                            //   "Title ",
-                                                            //   style: TextStyle(
-                                                            //       fontSize: 15,
-                                                            //       fontWeight:
-                                                            //           FontWeight
-                                                            //               .bold),
-                                                            // )),
+                                                            DataColumn2(
+                                                                fixedWidth: 100,
+                                                                label: Text(
+                                                                  "Score",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
                                                             DataColumn2(
                                                                 fixedWidth: 150,
                                                                 label: Text(
@@ -1069,14 +1089,8 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                                       ?.name
                                                                       .toString() ??
                                                                   '')),
-                                                              // DataCell(Text(controller
-                                                              //         .auditTasknDetailModel
-                                                              //         .value!
-                                                              //         .map_checklist![
-                                                              //             index]
-                                                              //         ?.title
-                                                              //         .toString() ??
-                                                              //     '')),
+                                                              DataCell(Text(
+                                                                  '${controller.auditTasknDetailModel.value!.map_checklist![index]?.score_of_checklist.toString() ?? ''}')),
                                                               DataCell(Text(
                                                                   '${controller.auditTasknDetailModel.value!.map_checklist![index]?.weightage.toString() ?? ''}%')),
                                                               DataCell(Wrap(
@@ -1168,29 +1182,31 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              // controller.auditTasknDetailModel
-                                              //         .value.sub_PmTask!.isEmpty
-                                              //     ?
-                                              Container(
-                                                height: 45,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.submitColor,
-                                                  text: "Submit Sub Task",
-                                                  icon: Icons.check,
-                                                  onPressed: () {
-                                                    controller
-                                                        .submitSubTaskCheckList();
-                                                    // Get.dialog(
-                                                    //     AuditTaskApprovedRejectDialog(
-                                                    //   type: 4,
-                                                    //   moduletype:
-                                                    //       controller.type.value,
-                                                    // ));
-                                                  },
-                                                ),
-                                              ),
-                                              // : Dimens.box0,
+                                              controller.allSubChecklistTrue
+                                                          .value ==
+                                                      false
+                                                  ? Container(
+                                                      height: 45,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .submitColor,
+                                                        text: "Submit Sub Task",
+                                                        icon: Icons.check,
+                                                        onPressed: () {
+                                                          controller
+                                                              .submitSubTaskCheckList();
+                                                          // Get.dialog(
+                                                          //     AuditTaskApprovedRejectDialog(
+                                                          //   type: 4,
+                                                          //   moduletype:
+                                                          //       controller.type.value,
+                                                          // ));
+                                                        },
+                                                      ),
+                                                    )
+                                                  : Dimens.box0,
                                               Dimens.boxWidth10,
 
                                               controller.auditTasknDetailModel
@@ -1265,18 +1281,42 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                         text: "Close",
                                                         icon: Icons.close,
                                                         onPressed: () {
-                                                          Get.dialog(
-                                                              AuditTaskApprovedRejectDialog(
-                                                            type: 4,
-                                                            moduletype:
-                                                                controller
-                                                                    .type.value,
-                                                            id: controller
-                                                                    .auditTasknDetailModel
-                                                                    .value
-                                                                    .id ??
-                                                                0,
-                                                          ));
+                                                          controller.allSubChecklistTrue
+                                                                      .value ==
+                                                                  true
+                                                              ? Get.dialog(
+                                                                  AuditTaskApprovedRejectDialog(
+                                                                  type: 4,
+                                                                  moduletype:
+                                                                      controller
+                                                                          .type
+                                                                          .value,
+                                                                  id: controller
+                                                                          .auditTasknDetailModel
+                                                                          .value
+                                                                          .id ??
+                                                                      0,
+                                                                ))
+                                                              : Get
+                                                                  .defaultDialog(
+                                                                  radius: 5,
+                                                                  title:
+                                                                      'Alert',
+                                                                  middleText:
+                                                                      'Please complete the all sub Task',
+                                                                  textConfirm:
+                                                                      'OK',
+                                                                  onConfirm:
+                                                                      () {
+                                                                    Get.back(); // Close the dialog
+                                                                  },
+                                                                  buttonColor:
+                                                                      ColorValues
+                                                                          .appGreenColor,
+                                                                  confirmTextColor:
+                                                                      Colors
+                                                                          .white,
+                                                                );
                                                         },
                                                       ),
                                                     )
@@ -1968,36 +2008,37 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                       "Sub Tasks",
                       style: Styles.blue700,
                     ),
-                    //  controller.auditTasknDetailModel.value.sub_PmTask!.isEmpty
-                    //    ?
-                    GestureDetector(
-                      onTap: () {
-                        controller.addRowItem();
-                      },
-                      child: Container(
-                        height: 25,
-                        width: 70,
-                        decoration: BoxDecoration(
-                          color: ColorValues.addNewColor,
-                          border: Border.all(
-                            color: ColorValues.lightGreyColorWithOpacity35,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                        ),
-                        child: Center(
-                          child: Text(
-                            " + Add ",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
+                    controller.allSubChecklistTrue.value == false
+                        ? GestureDetector(
+                            onTap: () {
+                              controller.addRowItem();
+                            },
+                            child: Container(
+                              height: 25,
+                              width: 70,
+                              decoration: BoxDecoration(
+                                color: ColorValues.addNewColor,
+                                border: Border.all(
+                                  color:
+                                      ColorValues.lightGreyColorWithOpacity35,
+                                  width: 1,
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  " + Add ",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w100,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
-                    )
-                    // : Dimens.box0,
+                          )
+                        : Dimens.box0,
                   ],
                 ),
               ),
@@ -2369,37 +2410,73 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                                 )
                                               : Dimens.box0,
                                           controller.auditTasknDetailModel.value
-                                                          .sub_PmTask!
-                                                          .firstWhere(
-                                                        (e) =>
-                                                            e?.subtask_id
-                                                                .toString()
-                                                                .trim() ==
-                                                            row[0]['subtask_id']
-                                                                .toString(),
-                                                        orElse: () {
-                                                          return PreventiveCheckListModel(
-                                                              ptw_status: -1);
-                                                        },
-                                                      ).ptw_status ==
-                                                      125 &&
-                                                  controller
-                                                          .auditTasknDetailModel
-                                                          .value
-                                                          .sub_PmTask!
-                                                          .firstWhere(
-                                                        (e) =>
-                                                            e?.subtask_id
-                                                                .toString()
-                                                                .trim() ==
-                                                            row[0]['subtask_id']
-                                                                .toString(),
-                                                        orElse: () {
-                                                          return PreventiveCheckListModel(
-                                                              ptw_status: -1);
-                                                        },
-                                                      ).status_of ==
-                                                      138
+                                                              .sub_PmTask!
+                                                              .firstWhere(
+                                                            (e) =>
+                                                                e?.subtask_id
+                                                                    .toString()
+                                                                    .trim() ==
+                                                                row[0]['subtask_id']
+                                                                    .toString(),
+                                                            orElse: () {
+                                                              return PreventiveCheckListModel(
+                                                                  ptw_status:
+                                                                      -1);
+                                                            },
+                                                          ).ptw_status ==
+                                                          125 &&
+                                                      controller
+                                                              .auditTasknDetailModel
+                                                              .value
+                                                              .sub_PmTask!
+                                                              .firstWhere(
+                                                            (e) =>
+                                                                e?.subtask_id
+                                                                    .toString()
+                                                                    .trim() ==
+                                                                row[0]['subtask_id']
+                                                                    .toString(),
+                                                            orElse: () {
+                                                              return PreventiveCheckListModel(
+                                                                  ptw_status:
+                                                                      -1);
+                                                            },
+                                                          ).status_of ==
+                                                          138 ||
+                                                  controller.auditTasknDetailModel
+                                                              .value.sub_PmTask!
+                                                              .firstWhere(
+                                                            (e) =>
+                                                                e?.subtask_id
+                                                                    .toString()
+                                                                    .trim() ==
+                                                                row[0]['subtask_id']
+                                                                    .toString(),
+                                                            orElse: () {
+                                                              return PreventiveCheckListModel(
+                                                                  ptw_status:
+                                                                      -1);
+                                                            },
+                                                          ).ptw_required ==
+                                                          0 &&
+                                                      controller
+                                                              .auditTasknDetailModel
+                                                              .value
+                                                              .sub_PmTask!
+                                                              .firstWhere(
+                                                            (e) =>
+                                                                e?.subtask_id
+                                                                    .toString()
+                                                                    .trim() ==
+                                                                row[0]['subtask_id']
+                                                                    .toString(),
+                                                            orElse: () {
+                                                              return PreventiveCheckListModel(
+                                                                  ptw_status:
+                                                                      -1);
+                                                            },
+                                                          ).status_of ==
+                                                          425
                                               ? TableActionButton(
                                                   color: ColorValues
                                                       .startColor, //Color.fromARGB(255, 116, 78, 130),
@@ -2417,8 +2494,9 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                                     print(
                                                         'filteredData:${filterdData!.permit_id}');
                                                     //  selectedData = filterdData;
-                                                    filterdData.ptw_tbt_done ==
-                                                            1
+                                                    filterdData.ptw_tbt_done == 1 ||
+                                                            filterdData.ptw_required ==
+                                                                0
                                                         ? Get.dialog<void>(
                                                             CustomStartAuditDialog(
                                                                 id: filterdData
@@ -2453,9 +2531,8 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                                                   Get.back(); // Close the dialog
                                                                   // Get.offAllNamed(Routes.pmTask);
                                                                 },
-                                                                buttonColor:
-                                                                    ColorValues
-                                                                        .appGreenColor,
+                                                                buttonColor: ColorValues
+                                                                    .appGreenColor,
                                                                 confirmTextColor:
                                                                     Colors
                                                                         .white,
@@ -2463,8 +2540,7 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                                                     false)
                                                             : Get.dialog<void>(
                                                                 TbtDoneEveDialog(
-                                                                    ptw_id:
-                                                                        filterdData.permit_id ?? 0,
+                                                                    ptw_id: filterdData.permit_id ?? 0,
                                                                     id: filterdData.subtask_id ?? 0));
                                                   },
                                                 )
@@ -2574,9 +2650,8 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                                                       "accept",
                                                                   "value":
                                                                       '${element.cp_ok}',
-                                                                      "three_type":  
+                                                                  "three_type":
                                                                       '${element.check_point_type}',
-                                                                 
                                                                 },
                                                                 {
                                                                   'key':
@@ -2638,6 +2713,168 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                                             scheduleID:
                                                                 scheduleID,
                                                           ),
+                                                        );
+                                                      } else {
+                                                        print(
+                                                            'No sub_schedules found for the filtered task.');
+                                                      }
+                                                    } else {
+                                                      print(
+                                                          'No sub_PmTask found.');
+                                                    }
+                                                  })
+                                              : Dimens.box0,
+                                          controller.auditTasknDetailModel.value
+                                                      .sub_PmTask!
+                                                      .firstWhere(
+                                                    (e) =>
+                                                        e?.subtask_id
+                                                            .toString()
+                                                            .trim() ==
+                                                        row[0]['subtask_id']
+                                                            .toString(),
+                                                    orElse: () {
+                                                      return PreventiveCheckListModel(
+                                                          ptw_status: -1);
+                                                    },
+                                                  ).status_of ==
+                                                  431
+                                              ? TableActionButton(
+                                                  color: ColorValues
+                                                      .appDarkBlueColor, //Color.fromARGB(255, 116, 78, 130),
+                                                  icon: Icons.remove_red_eye,
+                                                  message: 'View',
+                                                  onPress: () {
+                                                    // Ensure 'sub_PmTask', 'sub_schedules', and 'checklist_observation' are not null
+                                                    if (controller
+                                                            .auditTasknDetailModel
+                                                            .value
+                                                            .sub_PmTask !=
+                                                        null) {
+                                                      // Clear the rowItemAuditobs at the start to avoid repeating old data
+                                                      controller
+                                                          .rowItemAuditobs.value
+                                                          .clear();
+
+                                                      // Find the task that matches the specific subtask_id
+                                                      var filteredTask = controller
+                                                          .auditTasknDetailModel
+                                                          .value
+                                                          .sub_PmTask
+                                                          ?.firstWhere((e) =>
+                                                              "${e?.subtask_id}" ==
+                                                              row[0][
+                                                                  'subtask_id']);
+
+                                                      if (filteredTask !=
+                                                              null &&
+                                                          filteredTask
+                                                                  .sub_schedules !=
+                                                              null &&
+                                                          filteredTask
+                                                              .sub_schedules!
+                                                              .isNotEmpty) {
+                                                        // Iterate through the sub_schedules of the filtered task
+                                                        filteredTask
+                                                            .sub_schedules!
+                                                            .forEach(
+                                                                (schedule) {
+                                                          if (schedule.checklist_observation !=
+                                                                  null &&
+                                                              schedule
+                                                                  .checklist_observation!
+                                                                  .isNotEmpty) {
+                                                            schedule
+                                                                .checklist_observation!
+                                                                .forEach(
+                                                                    (element) {
+                                                              // Add each checklist observation to the rowItemAuditobs list
+                                                              controller
+                                                                  .rowItemAuditobs
+                                                                  .value
+                                                                  .add([
+                                                                {
+                                                                  "key":
+                                                                      "checkpoint",
+                                                                  "id":
+                                                                      '${element.execution_id}',
+                                                                  "value":
+                                                                      '${element.check_point_name}',
+                                                                },
+                                                                {
+                                                                  "key":
+                                                                      "requirement",
+                                                                  "value":
+                                                                      '${element.requirement}',
+                                                                },
+                                                                {
+                                                                  'key':
+                                                                      "accept",
+                                                                  "value":
+                                                                      '${element.cp_ok}',
+                                                                  "three_type":
+                                                                      '${element.check_point_type}',
+                                                                },
+                                                                {
+                                                                  'key':
+                                                                      "observation",
+                                                                  "value":
+                                                                      '${element.observation ?? ''}',
+                                                                },
+                                                                {
+                                                                  'key':
+                                                                      "uploadimg",
+                                                                  "value": '',
+                                                                  "uploaded":
+                                                                      '',
+                                                                },
+                                                                {
+                                                                  'key': "type",
+                                                                  'inpute_type':
+                                                                      '${element.check_point_type}',
+                                                                  "value":
+                                                                      '${element.type_text ?? ''}',
+                                                                  "min":
+                                                                      '${element.min_range ?? 0}',
+                                                                  "max":
+                                                                      '${element.max_range ?? 0}',
+                                                                },
+                                                              ]);
+                                                            });
+                                                          } else {
+                                                            print(
+                                                                'No checklist_observation found in schedule.');
+                                                          }
+                                                        });
+
+                                                        // Get the title, checklist number, and other details from the filtered task
+                                                        var title = filteredTask
+                                                                .title ??
+                                                            "";
+                                                        var checkList_Number =
+                                                            filteredTask.name ??
+                                                                "";
+                                                        int scheduleID = filteredTask
+                                                                .sub_schedules![
+                                                                    0]
+                                                                .schedule_id ??
+                                                            0;
+                                                        int subtask_id =
+                                                            filteredTask
+                                                                    .subtask_id ??
+                                                                0;
+
+                                                        // Display the dialog with the filtered data
+                                                        Get.dialog(
+                                                          EvaluationExecutionProcessDialog(
+                                                              title: title,
+                                                              subtask_id:
+                                                                  subtask_id,
+                                                              checkList_Number:
+                                                                  checkList_Number,
+                                                              scheduleID:
+                                                                  scheduleID,
+                                                              is_view: 1),
                                                         );
                                                       } else {
                                                         print(

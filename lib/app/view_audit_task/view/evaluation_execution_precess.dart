@@ -18,11 +18,14 @@ class EvaluationExecutionProcessDialog extends GetView {
   String? title;
   String? checkList_Number;
   int? scheduleID;
+  int? is_view;
+
   EvaluationExecutionProcessDialog(
       {required this.subtask_id,
       required this.title,
       this.checkList_Number,
-      this.scheduleID});
+      this.scheduleID,
+      this.is_view});
 
   final ViewAuditTaskController controller = Get.find();
   Widget _rowItem(int? defaultValue, {required Function(bool) onCheck}) {
@@ -367,18 +370,24 @@ class EvaluationExecutionProcessDialog extends GetView {
     List<Map<String, String>> record,
   ) {
     int index = controller.rowItemAuditobs.value.indexOf(record);
+    TextEditingController _textController = TextEditingController(
+      text: mapData["value"] ?? '',
+    );
+
     switch (mapData['key']) {
       case 'observation':
         return Padding(
           padding: const EdgeInsets.all(8.0),
-          child: LoginCustomTextfield(
-            width: (Get.width * .4),
-            textController:
-                new TextEditingController(text: mapData["value"] ?? ''),
-            onChanged: (txt) {
-              mapData["value"] = txt;
-            },
-            maxLine: 5,
+          child: IgnorePointer(
+            ignoring: is_view == 1 ? true : false,
+            child: LoginCustomTextfield(
+              width: (Get.width * .4),
+              textController: _textController,
+              onChanged: (txt) {
+                mapData["value"] = txt;
+              },
+              maxLine: 5,
+            ),
           ),
         );
 
@@ -388,60 +397,80 @@ class EvaluationExecutionProcessDialog extends GetView {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    LoginCustomTextfield(
-                        // focusNode: controller.focusList[index],
+                    IgnorePointer(
+                      ignoring: is_view == 1 ? true : false,
+                      child: LoginCustomTextfield(
                         width: (Get.width * .8),
-                        textController:
-                            TextEditingController(text: mapData["value"] ?? ''),
-
-                        // textController:
-                        //     controller.textEditingControllerList[index],
-                        // new TextEditingController(
-                        //     text: mapData["value"] == null ||
-                        //             mapData["value"] == "null"
-                        //         ? ""
-                        //         : mapData["value"] ?? ''),
+                        textController: _textController,
                         onChanged: (txt) {
                           controller.debounce.run(() {
-                            mapData["value"] = txt;
-                            // updateJob(record);
+                            final value = double.tryParse(txt) ?? 0;
+                            final minValue =
+                                double.tryParse(mapData["min"] ?? '0') ?? 0;
+                            final maxValue =
+                                double.tryParse(mapData["max"] ?? '0') ?? 0;
+
+                            if (value < minValue) {
+                              // Show toast message for less than min
+                              Fluttertoast.showToast(
+                                msg:
+                                    "Value cannot be less than ${mapData["min"]}",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                              );
+                            } else if (value > maxValue) {
+                              // Show toast message for greater than max
+                              Fluttertoast.showToast(
+                                msg:
+                                    "Value cannot be greater than ${mapData["max"]}",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                              );
+                            } else {
+                              // Update the value if it's within the range
+                              mapData["value"] = txt;
+                            }
+
+                            // Trigger UI update
                             Future.delayed(Duration.zero, () {
                               setState(() {});
                             });
                           });
-                        }),
+                        },
+                      ),
+                    ),
                     Row(
                       children: [
                         Text("Min:${mapData["min"]}"),
                         Dimens.boxWidth15,
                         Text("Max:${mapData["max"]}")
                       ],
-                    )
+                    ),
                   ],
-                ))
+                ),
+              )
             : (mapData['inpute_type'] == "0")
-                ? LoginCustomTextfield(
-                    width: (Get.width * .8),
-                    textController: new TextEditingController(
-                        text: mapData["value"] == null ||
-                                mapData["value"] == "null"
-                            ? ""
-                            : mapData["value"] ?? ''),
-                    onChanged: (txt) {
-                      mapData["value"] = txt;
-                      //  updateJob(record);
-                      // Future.delayed(Duration.zero, () {
-                      //   setState(() {});
-                      // });
-                    })
+                ? IgnorePointer(
+                    ignoring: is_view == 1 ? true : false,
+                    child: LoginCustomTextfield(
+                      width: (Get.width * .8),
+                      textController: _textController,
+                      onChanged: (txt) {
+                        mapData["value"] = txt;
+                      },
+                    ),
+                  )
                 : (mapData['inpute_type'] == "1")
-                    ? _rowBoolItem(int.tryParse('${mapData['value']}'),
-                        onCheck: (val) {
-                        mapData['value'] = val == true ? "1" : "0";
-                        Future.delayed(Duration.zero, () {
-                          setState(() {});
-                        });
-                      })
+                    ? IgnorePointer(
+                        ignoring: is_view == 1 ? true : false,
+                        child: _rowBoolItem(int.tryParse('${mapData['value']}'),
+                            onCheck: (val) {
+                          mapData['value'] = val == true ? "1" : "0";
+                          Future.delayed(Duration.zero, () {
+                            setState(() {});
+                          });
+                        }),
+                      )
                     : Text("");
 
       case 'job_created':
@@ -479,102 +508,112 @@ class EvaluationExecutionProcessDialog extends GetView {
 
       case 'accept':
         return (mapData['three_type'] == "4")
-            ? Column(
-                mainAxisAlignment:
-                    MainAxisAlignment.center, // Center the radio buttons
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RadioListTile<int>(
-                    title: Text('YES'),
-                    value: 0,
-                    groupValue: int.tryParse('${mapData['value']}'),
-                    visualDensity: const VisualDensity(
-                      horizontal: VisualDensity.minimumDensity,
-                      vertical: VisualDensity.minimumDensity,
+            ? IgnorePointer(
+                ignoring: is_view == 1 ? true : false,
+                child: Column(
+                  mainAxisAlignment:
+                      MainAxisAlignment.center, // Center the radio buttons
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RadioListTile<int>(
+                      title: Text('YES'),
+                      value: 0,
+                      groupValue: int.tryParse('${mapData['value']}'),
+                      visualDensity: const VisualDensity(
+                        horizontal: VisualDensity.minimumDensity,
+                        vertical: VisualDensity.minimumDensity,
+                      ),
+                      onChanged: (int? value) {
+                        setState(() {
+                          mapData['value'] = value.toString();
+                        });
+                      },
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
                     ),
-                    onChanged: (int? value) {
-                      setState(() {
-                        mapData['value'] = value.toString();
-                      });
-                    },
-                    dense: true,
-                    contentPadding: EdgeInsets.zero,
-                  ),
-                  RadioListTile<int>(
-                    title: Text('NO'),
-                    value: 1,
-                    groupValue: int.tryParse('${mapData['value']}'),
-                    visualDensity: VisualDensity.compact,
-                    onChanged: (int? value) {
-                      setState(() {
-                        mapData['value'] = value.toString();
-                      });
-                    },
-                    dense: true,
-                    contentPadding: EdgeInsets.zero,
-                  ),
-                  RadioListTile<int>(
-                    title: Text('NA'),
-                    value: 2,
-                    groupValue: int.tryParse('${mapData['value']}'),
-                    visualDensity: VisualDensity.compact,
-                    onChanged: (int? value) {
-                      setState(() {
-                        mapData['value'] = value.toString();
-                      });
-                    },
-                    dense: true,
-                    contentPadding: EdgeInsets.zero,
-                  ),
-                ],
+                    RadioListTile<int>(
+                      title: Text('NO'),
+                      value: 1,
+                      groupValue: int.tryParse('${mapData['value']}'),
+                      visualDensity: VisualDensity.compact,
+                      onChanged: (int? value) {
+                        setState(() {
+                          mapData['value'] = value.toString();
+                        });
+                      },
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                    ),
+                    RadioListTile<int>(
+                      title: Text('NA'),
+                      value: 2,
+                      groupValue: int.tryParse('${mapData['value']}'),
+                      visualDensity: VisualDensity.compact,
+                      onChanged: (int? value) {
+                        setState(() {
+                          mapData['value'] = value.toString();
+                        });
+                      },
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                    ),
+                  ],
+                ),
               )
-            : _rowcpOkItem(int.tryParse('${mapData['value']}'), onCheck: (val) {
-                mapData['value'] = val == true ? "1" : "0";
-                // updateJob(record);
-                Future.delayed(Duration.zero, () {
-                  setState(() {});
-                });
-              });
+            : IgnorePointer(
+                ignoring: is_view == 1 ? true : false,
+                child: _rowcpOkItem(int.tryParse('${mapData['value']}'),
+                    onCheck: (val) {
+                  mapData['value'] = val == true ? "1" : "0";
+                  // updateJob(record);
+                  Future.delayed(Duration.zero, () {
+                    setState(() {});
+                  });
+                }),
+              );
 
       case 'uploadimg':
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            InkWell(
-              onTap: () async {
-                try {
-                  final result = await FilePicker.platform.pickFiles(
-                    type: FileType.image,
-                  );
-                  if (result != null && result.files.single.bytes != null) {
-                    setState(() {
-                      mapData['uploaded'] = result.files.single.name;
-                      controller.fileName.value = result.files.single.name;
-                      controller.fileBytes = result.files.single.bytes;
-                    });
-                    controller.browseFiles(
-                      fileBytes: controller.fileBytes,
+            IgnorePointer(
+              ignoring: is_view == 1 ? true : false,
+              child: InkWell(
+                onTap: () async {
+                  try {
+                    final result = await FilePicker.platform.pickFiles(
+                      type: FileType.image,
                     );
-                  } else {
-                    // Handle the case where no file is picked
-                    print('No file selected');
+                    if (result != null && result.files.single.bytes != null) {
+                      setState(() {
+                        mapData['uploaded'] = result.files.single.name;
+                        controller.fileName.value = result.files.single.name;
+                        controller.fileBytes = result.files.single.bytes;
+                      });
+                      controller.browseFiles(
+                        fileBytes: controller.fileBytes,
+                      );
+                    } else {
+                      // Handle the case where no file is picked
+                      print('No file selected');
+                    }
+                  } catch (e) {
+                    // Handle the error scenario
+                    print('Error picking file: $e');
                   }
-                } catch (e) {
-                  // Handle the error scenario
-                  print('Error picking file: $e');
-                }
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: ColorValues.appDarkBlueColor,
-                  border: Border.all(
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
                     color: ColorValues.appDarkBlueColor,
-                    width: 1,
+                    border: Border.all(
+                      color: ColorValues.appDarkBlueColor,
+                      width: 1,
+                    ),
                   ),
+                  child: Icon(Icons.upload,
+                      size: 30, color: ColorValues.whiteColor),
                 ),
-                child:
-                    Icon(Icons.upload, size: 30, color: ColorValues.whiteColor),
               ),
             ),
             SizedBox(width: 10), // Add some spacing between the icon and text
@@ -594,7 +633,6 @@ class EvaluationExecutionProcessDialog extends GetView {
       default:
         return Text(mapData['value'] ?? '');
     }
-    // return Text("data");
   }
 
   // updateJob(List<Map<String, String>> record) {

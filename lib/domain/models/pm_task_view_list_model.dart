@@ -72,7 +72,8 @@ class PmtaskViewModel {
   String? site_name;
   int? tbt_start;
   int? is_expired;
-  dynamic? max_score;
+  dynamic max_score;
+  dynamic total_Score;
   List<PreventiveCheckListModel>? map_checklist;
   List<PreventiveCheckListModel>? sub_PmTask;
 
@@ -138,12 +139,14 @@ class PmtaskViewModel {
       this.new_remark,
       this.site_name,
       this.map_checklist,
-      this.sub_PmTask});
+      this.sub_PmTask,
+      this.total_Score});
 
   factory PmtaskViewModel.fromJson(Map<String, dynamic> json) =>
       PmtaskViewModel(
         status_short_ptw: json["status_short_ptw"] ?? "",
         approved_by: json["approved_by"],
+        total_Score: json["total_Score"],
         max_score: json["max_score"],
         plan_id: json["plan_id"] ?? 0,
         is_expired: json["isExpired"] ?? 0,
@@ -227,6 +230,7 @@ class PmtaskViewModel {
 
   Map<String, dynamic> toJson() => {
         "ptw_status": ptw_status,
+        "total_Score": total_Score,
         "max_score": max_score,
         "approved_by": approved_by,
         "is_PTW": is_PTW,

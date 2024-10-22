@@ -223,6 +223,10 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                             'Description :',
                                             style: Styles.black17,
                                           ),
+                                          Text(
+                                            ' Frequency :',
+                                            style: Styles.black17,
+                                          ),
                                           controller.type.value ==
                                                   AppConstants.kEvaluation
                                               ? Text(
@@ -230,19 +234,17 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                                   style: Styles.black17,
                                                 )
                                               : Dimens.box0,
-                                          Text(
-                                            'Created By :',
-                                            style: Styles.black17,
-                                          ),
-                                          Text(
-                                            'Approved By :',
-                                            style: Styles.black17,
-                                          ),
                                           controller.type ==
                                                   AppConstants.kEvaluation
                                               ? Dimens.box0
                                               : Text(
                                                   'Checklist :',
+                                                  style: Styles.black17,
+                                                ),
+                                          controller.type == AppConstants.kMis
+                                              ? Dimens.box0
+                                              : Text(
+                                                  'Assigned To :',
                                                   style: Styles.black17,
                                                 ),
                                           controller.type ==
@@ -276,23 +278,25 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                           Text(
                                               '${controller.auditPlanDetailModel.value?.description ?? ""}',
                                               style: Styles.blue17),
+                                          Text(
+                                              '${controller.auditPlanDetailModel.value?.frequency_name ?? ''}',
+                                              style: Styles.blue17),
                                           controller.type.value ==
                                                   AppConstants.kEvaluation
                                               ? Text(
                                                   '${controller.auditPlanDetailModel.value?.max_score ?? ""}',
                                                   style: Styles.blue17)
                                               : Dimens.box0,
-                                          Text(
-                                              '${controller.auditPlanDetailModel.value?.created_by ?? ''}',
-                                              style: Styles.blue17),
-                                          Text(
-                                              '${controller.auditPlanDetailModel.value?.approved_by ?? ""}',
-                                              style: Styles.blue17),
                                           controller.type ==
                                                   AppConstants.kEvaluation
                                               ? Dimens.box0
                                               : Text(
                                                   '${controller.auditPlanDetailModel.value?.checklist_name ?? ""}',
+                                                  style: Styles.blue17),
+                                          controller.type == AppConstants.kMis
+                                              ? Dimens.box0
+                                              : Text(
+                                                  '${controller.auditPlanDetailModel.value?.assignedTo ?? ''}',
                                                   style: Styles.blue17),
                                           controller.type ==
                                                       AppConstants.kMis ||
@@ -309,22 +313,24 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
                                         children: [
-                                          controller.type == AppConstants.kMis
-                                              ? Dimens.box0
-                                              : Text(
-                                                  'Assigned To :',
-                                                  style: Styles.black17,
-                                                ),
-                                          Text(
-                                            'Approved At :',
-                                            style: Styles.black17,
-                                          ),
                                           Text(
                                             'Schedule Date :',
                                             style: Styles.black17,
                                           ),
                                           Text(
-                                            ' Frequency Name :',
+                                            'Created By :',
+                                            style: Styles.black17,
+                                          ),
+                                          Text(
+                                            'Created At :',
+                                            style: Styles.black17,
+                                          ),
+                                          Text(
+                                            'Approved By :',
+                                            style: Styles.black17,
+                                          ),
+                                          Text(
+                                            'Approved At :',
                                             style: Styles.black17,
                                           ),
                                         ],
@@ -333,11 +339,18 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          controller.type == AppConstants.kMis
-                                              ? Dimens.box0
-                                              : Text(
-                                                  '${controller.auditPlanDetailModel.value?.assignedTo ?? ''}',
-                                                  style: Styles.blue17),
+                                          Text(
+                                              '${controller.auditPlanDetailModel.value?.schedule_Date ?? ''}',
+                                              style: Styles.blue17),
+                                          Text(
+                                              '${controller.auditPlanDetailModel.value?.created_by ?? ''}',
+                                              style: Styles.blue17),
+                                          Text(
+                                              '${controller.auditPlanDetailModel.value?.created_at ?? ''}',
+                                              style: Styles.blue17),
+                                          Text(
+                                              '${controller.auditPlanDetailModel.value?.approved_by ?? ""}',
+                                              style: Styles.blue17),
                                           Text(
                                               controller
                                                           .auditPlanDetailModel
@@ -346,12 +359,6 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                                       "0001-01-01"
                                                   ? ""
                                                   : '${controller.auditPlanDetailModel.value?.approved_Date ?? ''}',
-                                              style: Styles.blue17),
-                                          Text(
-                                              '${controller.auditPlanDetailModel.value?.schedule_Date ?? ''}',
-                                              style: Styles.blue17),
-                                          Text(
-                                              '${controller.auditPlanDetailModel.value?.frequency_name ?? ''}',
                                               style: Styles.blue17),
                                         ],
                                       ),
