@@ -973,7 +973,7 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                       backgroundColor: ColorValues.updateColor,
                                       text: 'Update',
                                       onPressed: () {
-                                        controller.updateAuditNumber();
+                                        controller.checkWeightageSum(context);
                                       },
                                     ))
                                 : Container(
@@ -983,7 +983,7 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                           ColorValues.appGreenColor,
                                       text: 'Submit',
                                       onPressed: () {
-                                        controller.createAuditNumber();
+                                        controller.checkWeightageSum(context);
                                       },
                                     ),
                                   ),

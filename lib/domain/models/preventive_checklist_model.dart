@@ -47,7 +47,8 @@ class PreventiveCheckListModel {
   int? ptw_status;
   int? isolation;
   String? status_short;
-  int? score;
+  dynamic score;
+  dynamic score_of_checklist;
   List<ScheduleCheckPoint>? sub_schedules;
 
   PreventiveCheckListModel(
@@ -88,11 +89,13 @@ class PreventiveCheckListModel {
       this.tbt_start,
       this.status_short,
       this.sub_schedules,
-      this.score});
+      this.score,
+      this.score_of_checklist});
 
   factory PreventiveCheckListModel.fromJson(Map<String, dynamic> json) =>
       PreventiveCheckListModel(
         id: json['id'],
+        score_of_checklist: json['score_of_checklist'],
         score: json['score'],
         status_short: json['status_short_sub'],
         permit_code: json['permit_code'],
@@ -139,6 +142,7 @@ class PreventiveCheckListModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "score_of_checklist": score_of_checklist,
         "score": score,
         "status_short_sub": status_short,
         "sub_schedules":

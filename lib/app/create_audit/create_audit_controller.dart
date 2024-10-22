@@ -210,6 +210,47 @@ class CreateAuditController extends GetxController {
     }
   }
 
+  void checkWeightageSum(BuildContext context) {
+    int totalWeightage = 0;
+
+    rowItem.forEach((row) {
+      var weightageCell =
+          row.firstWhere((element) => element['key'] == 'Weightage');
+      int weightage = int.tryParse(weightageCell['value'] ?? '0') ?? 0;
+      totalWeightage += weightage;
+    });
+
+    if (totalWeightage != 100) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text(
+              totalWeightage < 100
+                  ? "Total Weightage is less than 100"
+                  : "Total Weightage is greater than 100",
+            ),
+            actions: [
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      if (auditId > 0) {
+        updateAuditNumber();
+      } else {
+        createAuditNumber();
+      }
+    }
+  }
+
   void onValueChanged(dynamic list, dynamic value) {
     print({"valuevaluevaluevalue": value});
     switch (list.runtimeType) {

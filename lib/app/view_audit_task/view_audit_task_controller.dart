@@ -44,6 +44,8 @@ class ViewAuditTaskController extends GetxController {
     selectedValue.value = value;
   }
 
+  Rx<bool> allSubChecklistTrue = false.obs;
+
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
   Rx<String> selectedAssignedTo = ''.obs;
   Rx<bool> isAssignedToSelected = true.obs;
@@ -71,6 +73,7 @@ class ViewAuditTaskController extends GetxController {
   Rx<bool> isScheduleDateInvalid = false.obs;
   bool openStartDatePicker = false;
   Rx<DateTime> selectedtargetDateTime = DateTime.now().obs;
+  var itemExistsWithZeroDifference = <bool>[].obs;
 
   @override
   void onInit() async {
@@ -190,9 +193,11 @@ class ViewAuditTaskController extends GetxController {
           // }
           print("Mapping element: ${dropdownMapperData[element.id]}");
         });
+        allSubChecklistTrue.value = _auditTasknDetailModel.sub_PmTask!
+            .every((schedule) => schedule?.status_of == 431);
       }
     }
-    print({"auditPlandetailss", auditTasknDetailModel.value.id});
+    print({"auditPlandetailss", allSubChecklistTrue});
   }
 
   Future<void> getReAssignedToList(_facilityId) async {
