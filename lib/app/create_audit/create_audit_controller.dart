@@ -158,12 +158,39 @@ class CreateAuditController extends GetxController {
       descriptionTc.text = _auditPlanDetailsModel.description ?? "";
       startDateDateTc.text = _auditPlanDetailsModel.schedule_Date ?? "";
       planTitleTc.text = _auditPlanDetailsModel.plan_number ?? "";
+      maxScoreTc.text = _auditPlanDetailsModel.max_score.toString();
       selectedfrequency.value = _auditPlanDetailsModel.frequency_name ?? "";
       selectedfrequencyId = _auditPlanDetailsModel.frequency ?? 0;
       selectedAssignedTo.value = _auditPlanDetailsModel.assignedTo ?? "";
       isToggleOn.value = _auditPlanDetailsModel.is_PTW == "True" ? true : false;
       if (selectedfrequencyId > 0) {
-        getPreventiveCheckList(facilityId, type, selectedfrequencyId); //
+        await getPreventiveCheckList(
+            facilityId, type.value, selectedfrequencyId); //
+        if (checkList.isNotEmpty && type.value == AppConstants.kEvaluation) {
+          _auditPlanDetailsModel.map_checklist?.forEach((element) {
+            rowItem.add([
+              {
+                "key": "Drop_down",
+                "value": '${element?.name}',
+                "map_checlist": '${element.map_checlist}',
+              },
+              {'key': "Weightage", "value": '${element.weightage}'},
+              {'key': "ptwreq", "value": '${element.ptw_required}'},
+              {'key': "Remark", "value": '${element.comments}'},
+              {'key': "Action ", "value": ''},
+            ]);
+            dropdownMapperData[element.name] =
+                checkList.firstWhere((e) => e!.id == element.id, orElse: null);
+            // final matchedChecklist = checkList.value
+            //     .firstWhere((e) => e?.id == element.id, orElse: null);
+
+            // if (matchedChecklist != null) {
+            //   dropdownMapperData[element.id] = matchedChecklist;
+            //   // dropdownMapperData[element.ptw_required] = matchedChecklist;
+            // }
+            print("Mapping element: ${dropdownMapperData[element.id]}");
+          });
+        }
         selectedchecklist.value = _auditPlanDetailsModel.checklist_name ?? "";
         selectedchecklistId.value =
             _auditPlanDetailsModel.checklist_id.toString() ?? "";
@@ -259,7 +286,7 @@ class CreateAuditController extends GetxController {
   }
 
   Future<void> getPreventiveCheckList(
-      facilityId, type, selectedfrequencyId) async {
+      int facilityId, type, selectedfrequencyId) async {
     final list = await createAuditPresenter.getPreventiveCheckList(
         facilityId: facilityId,
         type: type,
@@ -275,7 +302,9 @@ class CreateAuditController extends GetxController {
     }
     selectedchecklist.value = checkList[0]?.name.toString() ?? '';
     selectedchecklistId.value = checkList[0]?.id.toString() ?? "";
-    addRowItem();
+    if (auditId.value == 0) {
+      addRowItem();
+    }
   }
 
   Future<bool> createAuditNumber() async {
@@ -299,7 +328,7 @@ class CreateAuditController extends GetxController {
     rowItem.forEach((element) {
       EvaluationChecklist item = EvaluationChecklist(
         checklist_id: dropdownMapperData[element[0]["value"]]?.id,
-        // title: element[1]["value"] ?? '',
+        map_checlist: 0,
         comment: element[3]["value"] ?? '',
         ptw_req: element[2]["value"] == "" ? 0 : 1,
         weightage: int.tryParse(element[1]["value"] ?? '0') ?? 0,
@@ -354,9 +383,12 @@ class CreateAuditController extends GetxController {
     rowItem.forEach((element) {
       EvaluationChecklist item = EvaluationChecklist(
         checklist_id: dropdownMapperData[element[0]["value"]]?.id,
+        map_checlist: element[0]["map_checlist"] == null
+            ? 0
+            : int.tryParse("${element[0]["map_checlist"]}"),
         // title: element[1]["value"] ?? '',
         comment: element[3]["value"] ?? '',
-        ptw_req: element[2]["value"] == "0" ? 0 : 1,
+        ptw_req: element[2]["value"] == "" ? 0 : 1,
         weightage: int.tryParse(element[1]["value"] ?? '0') ?? 0,
       );
       items.add(item);

@@ -1110,8 +1110,11 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             ),
                                           )
                                         : Dimens.box0,
-                                    controller.auditTasknDetailModel.value.map_checklist != null && 
-    controller.auditTasknDetailModel.value.map_checklist!.isNotEmpty
+                                    controller.auditTasknDetailModel.value
+                                                    .map_checklist !=
+                                                null &&
+                                            controller.auditTasknDetailModel
+                                                .value.map_checklist!.isNotEmpty
                                         ? CheckListSubTaskDataTable()
                                         : Dimens.box0,
 
@@ -2515,125 +2518,136 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                                           .rowItemAuditobs.value
                                                           .clear();
 
-                                                      controller
+                                                      // Find the task that matches the specific subtask_id
+                                                      var filteredTask = controller
                                                           .auditTasknDetailModel
                                                           .value
-                                                          .sub_PmTask!
-                                                          .forEach((task) {
-                                                        if (task.sub_schedules !=
-                                                                null &&
-                                                            task.sub_schedules!
-                                                                .isNotEmpty) {
-                                                          task.sub_schedules!
-                                                              .forEach(
-                                                                  (schedule) {
-                                                            if (schedule.checklist_observation !=
-                                                                    null &&
-                                                                schedule
-                                                                    .checklist_observation!
-                                                                    .isNotEmpty) {
+                                                          .sub_PmTask
+                                                          ?.firstWhere((e) =>
+                                                              "${e?.subtask_id}" ==
+                                                              row[0][
+                                                                  'subtask_id']);
+
+                                                      if (filteredTask !=
+                                                              null &&
+                                                          filteredTask
+                                                                  .sub_schedules !=
+                                                              null &&
+                                                          filteredTask
+                                                              .sub_schedules!
+                                                              .isNotEmpty) {
+                                                        // Iterate through the sub_schedules of the filtered task
+                                                        filteredTask
+                                                            .sub_schedules!
+                                                            .forEach(
+                                                                (schedule) {
+                                                          if (schedule.checklist_observation !=
+                                                                  null &&
                                                               schedule
                                                                   .checklist_observation!
-                                                                  .forEach(
-                                                                      (element) {
-                                                                controller
-                                                                    .rowItemAuditobs
-                                                                    .value
-                                                                    .add([
-                                                                  {
-                                                                    "key":
-                                                                        "checkpoint",
-                                                                    "id":
-                                                                        '${element.execution_id}',
-                                                                    "value":
-                                                                        '${element.check_point_name}',
-                                                                  },
-                                                                  {
-                                                                    "key":
-                                                                        "requirement",
-                                                                    "value":
-                                                                        '${element.requirement}',
-                                                                  },
-                                                                  {
-                                                                    'key':
-                                                                        "accept",
-                                                                    "value":
-                                                                        '${element.cp_ok}',
-                                                                  },
-                                                                  {
-                                                                    'key':
-                                                                        "observation",
-                                                                    "value":
-                                                                        '${element.observation ?? ''}',
-                                                                  },
-                                                                  {
-                                                                    'key':
-                                                                        "uploadimg",
-                                                                    "value": '',
-                                                                    "uploaded":
-                                                                        '',
-                                                                  },
-                                                                  {
-                                                                    'key':
-                                                                        "type",
-                                                                    'inpute_type':
-                                                                        '${element.check_point_type}',
-                                                                    "value":
-                                                                        '${element.type_text ?? ''}',
-                                                                    "min":
-                                                                        '${element.min_range ?? 0}',
-                                                                    "max":
-                                                                        '${element.max_range ?? 0}',
-                                                                  },
-                                                                ]);
-                                                              });
-                                                            } else {
-                                                              print(
-                                                                  'No checklist_observation found in schedule.');
-                                                            }
-                                                          });
-                                                        } else {
-                                                          print(
-                                                              'No sub_schedules found for task.');
-                                                        }
-                                                      });
+                                                                  .isNotEmpty) {
+                                                            schedule
+                                                                .checklist_observation!
+                                                                .forEach(
+                                                                    (element) {
+                                                              // Add each checklist observation to the rowItemAuditobs list
+                                                              controller
+                                                                  .rowItemAuditobs
+                                                                  .value
+                                                                  .add([
+                                                                {
+                                                                  "key":
+                                                                      "checkpoint",
+                                                                  "id":
+                                                                      '${element.execution_id}',
+                                                                  "value":
+                                                                      '${element.check_point_name}',
+                                                                },
+                                                                {
+                                                                  "key":
+                                                                      "requirement",
+                                                                  "value":
+                                                                      '${element.requirement}',
+                                                                },
+                                                                {
+                                                                  'key':
+                                                                      "accept",
+                                                                  "value":
+                                                                      '${element.cp_ok}',
+                                                                      "three_type":  
+                                                                      '${element.check_point_type}',
+                                                                 
+                                                                },
+                                                                {
+                                                                  'key':
+                                                                      "observation",
+                                                                  "value":
+                                                                      '${element.observation ?? ''}',
+                                                                },
+                                                                {
+                                                                  'key':
+                                                                      "uploadimg",
+                                                                  "value": '',
+                                                                  "uploaded":
+                                                                      '',
+                                                                },
+                                                                {
+                                                                  'key': "type",
+                                                                  'inpute_type':
+                                                                      '${element.check_point_type}',
+                                                                  "value":
+                                                                      '${element.type_text ?? ''}',
+                                                                  "min":
+                                                                      '${element.min_range ?? 0}',
+                                                                  "max":
+                                                                      '${element.max_range ?? 0}',
+                                                                },
+                                                              ]);
+                                                            });
+                                                          } else {
+                                                            print(
+                                                                'No checklist_observation found in schedule.');
+                                                          }
+                                                        });
+
+                                                        // Get the title, checklist number, and other details from the filtered task
+                                                        var title = filteredTask
+                                                                .title ??
+                                                            "";
+                                                        var checkList_Number =
+                                                            filteredTask.name ??
+                                                                "";
+                                                        int scheduleID = filteredTask
+                                                                .sub_schedules![
+                                                                    0]
+                                                                .schedule_id ??
+                                                            0;
+                                                        int subtask_id =
+                                                            filteredTask
+                                                                    .subtask_id ??
+                                                                0;
+
+                                                        // Display the dialog with the filtered data
+                                                        Get.dialog(
+                                                          EvaluationExecutionProcessDialog(
+                                                            title: title,
+                                                            subtask_id:
+                                                                subtask_id,
+                                                            checkList_Number:
+                                                                checkList_Number,
+                                                            scheduleID:
+                                                                scheduleID,
+                                                          ),
+                                                        );
+                                                      } else {
+                                                        print(
+                                                            'No sub_schedules found for the filtered task.');
+                                                      }
                                                     } else {
                                                       print(
                                                           'No sub_PmTask found.');
                                                     }
-
-                                                    var filterdData = controller
-                                                        .auditTasknDetailModel
-                                                        .value
-                                                        .sub_PmTask
-                                                        ?.firstWhere((e) =>
-                                                            "${e?.subtask_id}" ==
-                                                            row[0]
-                                                                ['subtask_id']);
-                                                    var title =
-                                                        filterdData?.title ??
-                                                            "";
-                                                    var checkList_Number =
-                                                        filterdData?.name ?? "";
-                                                    int scheduleID = filterdData
-                                                            ?.sub_schedules![0]
-                                                            .schedule_id ??
-                                                        0;
-                                                    int subtask_id = filterdData
-                                                            ?.subtask_id ??
-                                                        0;
-
-// Display the dialog
-                                                    Get.dialog(
-                                                        EvaluationExecutionProcessDialog(
-                                                      title: title,
-                                                      subtask_id: subtask_id,
-                                                      checkList_Number:
-                                                          checkList_Number,
-                                                      scheduleID: scheduleID,
-                                                    ));
-                                                  },
-                                                )
+                                                  })
                                               : Dimens.box0,
                                           controller.auditTasknDetailModel.value
                                                           .sub_PmTask!

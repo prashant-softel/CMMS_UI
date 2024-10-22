@@ -8141,7 +8141,8 @@ class ConnectHelper {
       type,
       facilityId,
       mcplanId,
-      mctaskId}) async {
+      mctaskId,
+      evaluationId}) async {
     var responseModel = await apiWrapper.makeRequest(
       // 'PMScheduleView/LinkPermitToPMTask?schedule_id=$scheduleId&permit_id=$permitId',
 
@@ -8169,7 +8170,8 @@ class ConnectHelper {
             type: type,
             permitId: permitId,
             mcplanId: mcplanId,
-            mctaskId: mctaskId //parsedJson['id']
+            mctaskId: mctaskId,
+            evaluationId: evaluationId //parsedJson['id']
             ),
         barrierDismissible: false);
     print('jcId2:${parsedJson['id']}');

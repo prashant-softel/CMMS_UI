@@ -175,7 +175,7 @@ class UpdateNewPermitDialog extends GetView {
                         ? ElevatedButton(
                             style: Styles.darkBlueElevatedButtonStyle,
                             onPressed: () => Get.offAllNamed(
-                                '${Routes.viewAuditTask}/$taskId/${controller.type}'),
+                                '${Routes.viewAuditTask}/$taskId/$type'),
                             child: const Text('View Audit'),
                           )
                         : type == 4
@@ -189,7 +189,7 @@ class UpdateNewPermitDialog extends GetView {
                                 ? ElevatedButton(
                                     style: Styles.darkBlueElevatedButtonStyle,
                                     onPressed: () => Get.offAllNamed(
-                                        '${Routes.viewAuditTask}/$taskId/${controller.type}'),
+                                        '${Routes.viewAuditTask}/$taskId/$type'),
                                     child: const Text('View Evaluation'),
                                   )
                                 : type == 6

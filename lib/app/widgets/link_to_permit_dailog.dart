@@ -17,6 +17,7 @@ class LinkToPermitDialog extends GetView {
   int? vegplanId;
   int? mcplanId;
   int? mctaskId;
+  int? evaluationId;
   LinkToPermitDialog(
       {super.key,
       this.approveIncidentReportData,
@@ -28,7 +29,8 @@ class LinkToPermitDialog extends GetView {
       this.vegplanId,
       this.vegexid,
       this.mcplanId,
-      this.mctaskId});
+      this.mctaskId,
+      this.evaluationId});
   final NewPermitController controller = Get.find();
 
   @override
@@ -99,7 +101,7 @@ class LinkToPermitDialog extends GetView {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Spacer(),
-                type == 3 || type == 5
+                type == 3
                     ? ElevatedButton(
                         style: Styles.greenElevatedButtonStyle,
                         onPressed: () {
@@ -118,7 +120,7 @@ class LinkToPermitDialog extends GetView {
                         child:
                             Text(type == 3 ? 'View Audit' : 'View Evaluation'),
                       )
-                    : type == 4
+                    : type == 5
                         ? ElevatedButton(
                             style: Styles.greenElevatedButtonStyle,
                             onPressed: () {
@@ -130,15 +132,14 @@ class LinkToPermitDialog extends GetView {
                               //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
                               Get.back();
                               Get.offAllNamed(
-                                  '${Routes.addModuleCleaningExecutionContentWeb}/$mctaskId/$mcplanId');
-
-                              // Get.offAllNamed(
-                              //     Routes.addModuleCleaningExecutionContentWeb,
-                              //     arguments: {"mcid": taskId, "planId": 0});
+                                  '${Routes.viewAuditTask}/$evaluationId/${type}');
+                              // Get.offAllNamed(Routes.viewAuditTask,
+                              //     arguments: {'auditTaskId': taskId, 'type': type});
                             },
-                            child: const Text('View MC'),
+                            child: Text(
+                                type == 3 ? 'View Audit' : 'View Evaluation'),
                           )
-                        : type == 6
+                        : type == 4
                             ? ElevatedButton(
                                 style: Styles.greenElevatedButtonStyle,
                                 onPressed: () {
@@ -150,27 +151,47 @@ class LinkToPermitDialog extends GetView {
                                   //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
                                   Get.back();
                                   Get.offAllNamed(
-                                      '${Routes.vegExecutionScreen}/${vegexid}/${vegplanId}');
-                                },
-                                child: const Text('View VEG'),
-                              )
-                            : ElevatedButton(
-                                style: Styles.greenElevatedButtonStyle,
-                                onPressed: () {
-                                  String route = taskId.toString();
-                                  // _controller.getIncidentReportList(
-                                  //     _controller.facilityId,
-                                  //     _controller.formattedTodate,
-                                  //     _controller.formattedFromdate,
-                                  //     false);
-                                  //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
-                                  Get.offAllNamed(
-                                      '${Routes.pmTaskView}/$route');
+                                      '${Routes.addModuleCleaningExecutionContentWeb}/$mctaskId/$mcplanId');
 
-                                  Get.back();
+                                  // Get.offAllNamed(
+                                  //     Routes.addModuleCleaningExecutionContentWeb,
+                                  //     arguments: {"mcid": taskId, "planId": 0});
                                 },
-                                child: const Text('View Task'),
-                              ),
+                                child: const Text('View MC'),
+                              )
+                            : type == 6
+                                ? ElevatedButton(
+                                    style: Styles.greenElevatedButtonStyle,
+                                    onPressed: () {
+                                      // _controller.getIncidentReportList(
+                                      //     _controller.facilityId,
+                                      //     _controller.formattedTodate,
+                                      //     _controller.formattedFromdate,
+                                      //     false);
+                                      //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                                      Get.back();
+                                      Get.offAllNamed(
+                                          '${Routes.vegExecutionScreen}/${vegexid}/${vegplanId}');
+                                    },
+                                    child: const Text('View VEG'),
+                                  )
+                                : ElevatedButton(
+                                    style: Styles.greenElevatedButtonStyle,
+                                    onPressed: () {
+                                      String route = taskId.toString();
+                                      // _controller.getIncidentReportList(
+                                      //     _controller.facilityId,
+                                      //     _controller.formattedTodate,
+                                      //     _controller.formattedFromdate,
+                                      //     false);
+                                      //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                                      Get.offAllNamed(
+                                          '${Routes.pmTaskView}/$route');
+
+                                      Get.back();
+                                    },
+                                    child: const Text('View Task'),
+                                  ),
                 Dimens.boxWidth10,
                 type == 3 || type == 4 || type == 6 || type == 5
                     ? Dimens.box0
