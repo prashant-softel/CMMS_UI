@@ -295,7 +295,7 @@ class _ScheduleCourseWebState extends State<ScheduleCourseWeb> {
                                                         ScheduleCourseListDataSource(
                                                             controller);
                                                     return PaginatedDataTable2(
-                                                      dataRowHeight: 45,
+                                                      dataRowHeight: 55,
                                                       source: dataSource,
                                                       minWidth: Get.width * 1.2,
                                                       showCheckboxColumn: false,
