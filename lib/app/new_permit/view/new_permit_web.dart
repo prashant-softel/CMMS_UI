@@ -299,7 +299,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                   : controller.typee.value ==
                                                           AppConstants
                                                               .kEvaluation
-                                                      ? 'EVAL${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}'
+                                                      ? 'ET${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}'
                                                       : 'PMT${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}',
                                               style: TextStyle(
                                                 decoration:
@@ -586,7 +586,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                         .value ==
                                                                     AppConstants
                                                                         .kEvaluation
-                                                                ? 'EVAL${int.tryParse('${controller.listAssociatedPm?[index]?.pmId ?? 0}')}'
+                                                                ? 'ET${int.tryParse('${controller.listAssociatedPm?[index]?.pmId ?? 0}')}'
                                                                 : 'PMT${int.tryParse('${controller.listAssociatedPm?[index]?.pmId ?? 0}')}',
                                                         style: TextStyle(
                                                           decoration:

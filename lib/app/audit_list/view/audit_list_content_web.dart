@@ -610,7 +610,7 @@ class AuditListListDataSource extends DataTableSource {
                             )
                           : controller.type.value == AppConstants.kEvaluation
                               ? Text(
-                                  'EVAL${AuditPlanPlanningListDetails?.id}',
+                                  'EP${AuditPlanPlanningListDetails?.id}',
                                 )
                               : Text(
                                   'AUT${AuditPlanPlanningListDetails?.id}',

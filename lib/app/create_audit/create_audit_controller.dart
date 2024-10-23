@@ -348,6 +348,32 @@ class CreateAuditController extends GetxController {
     }
   }
 
+  bool validateEvaluationFields() {
+    bool isValid = true;
+    errorState.clear();
+    for (int i = 0; i < rowItem.length; i++) {
+      var row = rowItem[i];
+      for (var mapData in row) {
+        if ((mapData['key'] == 'Drop_down' &&
+                (mapData['value'] == null ||
+                    mapData['value'] == 'Please Select')) ||
+            (mapData['key'] == 'ptwreq' &&
+                (mapData['value'] == null || mapData['value'] == ''))) {
+          errorState['$i-${mapData['key']}'] = true;
+          isValid = false;
+        }
+      }
+    }
+    update();
+    return isValid;
+  }
+
+  void checkEvaluation() {
+    if (!validateEvaluationFields()) {
+      isFormInvalid.value = true;
+    }
+  }
+
   Future<bool> createAuditNumber() async {
     // if (checklistNumberCtrlr.text.trim() == '' ||
     //     selectedEquipmentId == 0 ||
@@ -356,10 +382,10 @@ class CreateAuditController extends GetxController {
     //       msg: "Please enter required field", fontSize: 16.0);
     // } else {
 
-    // checkFormAduit();
-    // if (isFormInvalid.value) {
-    //   return true;
-    // }
+    checkEvaluation();
+    if (isFormInvalid.value) {
+      return true;
+    }
     String _planTitle = planTitleTc.text.trim();
     String _description = descriptionTc.text.trim();
     String _startDate = startDateDateTc.text.trim();

@@ -989,7 +989,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                                           .value ==
                                                                       AppConstants
                                                                           .kEvaluation
-                                                                  ? "EVEL${controller.listAssociatedPm?[index]?.pmId?.toString() ?? ''}"
+                                                                  ? "ET${controller.listAssociatedPm?[index]?.pmId?.toString() ?? ''}"
                                                                   : "PMT${controller.listAssociatedPm?[index]?.pmId?.toString() ?? ''}",
                                                           style: TextStyle(
                                                             decoration:
