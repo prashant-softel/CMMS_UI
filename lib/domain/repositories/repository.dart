@@ -475,7 +475,8 @@ class Repository {
       vegexid,
       facilityId,
       mcplanId,
-      mctaskId) async {
+      mctaskId,
+      evaluationId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -507,16 +508,16 @@ class Repository {
           print('CreateForJobPermitResponse:${permitForJob[0]}');
           if (pmTaskId != null && type == 3 || pmTaskId != null && type == 5) {
             scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true,
-                type, facilityId, mcplanId, mctaskId);
+                type, facilityId, mcplanId, mctaskId, evaluationId);
           } else if (pmTaskId != null && type == 4) {
             scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true,
-                type, facilityId, mcplanId, mctaskId);
+                type, facilityId, mcplanId, mctaskId, 0);
           } else if (pmTaskId != null && type == 6) {
             vegscheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true,
                 type, vegplanId, vegexid, facilityId);
           } else {
             scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true, 0,
-                facilityId, mcplanId, mctaskId);
+                facilityId, mcplanId, mctaskId, 0);
           }
           return responseMap;
         }
@@ -14561,7 +14562,8 @@ class Repository {
       type,
       int? facilityId,
       mcplanId,
-      mctaskId) async {
+      mctaskId,
+      evaluationId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       dynamic res;
@@ -14575,7 +14577,8 @@ class Repository {
             type: type,
             facilityId: facilityId,
             mcplanId: mcplanId,
-            mctaskId: mctaskId);
+            mctaskId: mctaskId,
+            evaluationId: evaluationId);
       }
       if (!res.hasError) {
         if (res.errorCode == 200) {

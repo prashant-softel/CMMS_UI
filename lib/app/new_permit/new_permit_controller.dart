@@ -1750,7 +1750,8 @@ class NewPermitController extends GetxController {
               vegexid: vegExecutionDetailsModel?.executionId,
               facilityId: facilityId,
               mcplanId: mcExecutionDetailsModel?.planId,
-              mctaskId: mcExecutionDetailsModel?.executionId);
+              mctaskId: mcExecutionDetailsModel?.executionId,
+              evaluationId: pmtaskViewModel?.id);
       if (responseNewPermitCreatedForJob != null) {
         //  CreateNewPermitDialog();
         // showAlertDialog();

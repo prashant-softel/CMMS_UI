@@ -144,15 +144,24 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                               : controller.type.value == 2
                                                   ? Get.offNamed(
                                                       '${Routes.pmTaskView}/$taskId')
-                                                  : controller.type.value == 6
+                                                  : controller.type.value ==
+                                                              3 ||
+                                                          controller
+                                                                  .type.value ==
+                                                              5
                                                       ? Get.offAllNamed(
-                                                          '${Routes.vegExecutionScreen}/${vegexe}/${vegplan}')
+                                                          '${Routes.viewAuditTask}/$taskId/${controller.type.value}')
                                                       : controller.type.value ==
-                                                              4
+                                                              6
                                                           ? Get.offAllNamed(
-                                                              '${Routes.addModuleCleaningExecutionContentWeb}/$mcid/$mcPlanid')
-                                                          : Get.offNamed(Routes
-                                                              .newPermitList);
+                                                              '${Routes.vegExecutionScreen}/${vegexe}/${vegplan}')
+                                                          : controller.type
+                                                                      .value ==
+                                                                  4
+                                                              ? Get.offAllNamed(
+                                                                  '${Routes.addModuleCleaningExecutionContentWeb}/$mcid/$mcPlanid')
+                                                              : Get.offNamed(Routes
+                                                                  .newPermitList);
                                         },
                                         child: controller.type.value == 1
                                             ? Text(
@@ -957,22 +966,16 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                               "";
                                                           controller
                                                               .clearStoreDataPMtaskId();
-                                                          controller.type
-                                                                      .value ==
-                                                                  AppConstants
-                                                                      .kAudit
-                                                              ? Get.toNamed(
-                                                                  Routes
-                                                                      .viewAuditTask,
-                                                                  arguments: {
-                                                                      'auditTaskId': controller
-                                                                          .listAssociatedPm?[
-                                                                              index]
-                                                                          ?.pmId,
-                                                                      'type': controller
+                                                          controller.type.value ==
+                                                                      AppConstants
+                                                                          .kAudit ||
+                                                                  controller
                                                                           .type
-                                                                          .value,
-                                                                    })
+                                                                          .value ==
+                                                                      AppConstants
+                                                                          .kEvaluation
+                                                              ? Get.offAllNamed(
+                                                                  '${Routes.viewAuditTask}/${controller.listAssociatedPm?[index]?.pmId}/${controller.type.value}')
                                                               : Get.offAllNamed(
                                                                   '${Routes.pmTaskView}/$refId');
                                                         },
@@ -982,7 +985,12 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                                   AppConstants
                                                                       .kAudit
                                                               ? "AUD${controller.listAssociatedPm?[index]?.pmId?.toString() ?? ''}"
-                                                              : "PMT${controller.listAssociatedPm?[index]?.pmId?.toString() ?? ''}",
+                                                              : controller.type
+                                                                          .value ==
+                                                                      AppConstants
+                                                                          .kEvaluation
+                                                                  ? "ET${controller.listAssociatedPm?[index]?.pmId?.toString() ?? ''}"
+                                                                  : "PMT${controller.listAssociatedPm?[index]?.pmId?.toString() ?? ''}",
                                                           style: TextStyle(
                                                             decoration:
                                                                 TextDecoration

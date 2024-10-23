@@ -105,14 +105,18 @@ class PermitMessageRejectDialog extends GetView {
                     : type == 1
                         ? Get.offAllNamed('${Routes.jobDetails}/$jobId')
                         : type == 3
-                            ? Get.offAllNamed(Routes.viewAuditTask)
+                            ? Get.offAllNamed(
+                                '${Routes.viewAuditTask}/$taskId/${type}')
                             : type == 4
                                 ? Get.offAllNamed(
                                     '${Routes.addModuleCleaningExecutionContentWeb}/$mctaskId/$mcplanId')
-                                : type == 6
+                                : type == 5
                                     ? Get.offAllNamed(
-                                        '${Routes.vegExecutionScreen}/${vegexe}/${vegid}')
-                                    : Get.offAllNamed(Routes.newPermitList);
+                                        '${Routes.viewAuditTask}/$taskId/${type}')
+                                    : type == 6
+                                        ? Get.offAllNamed(
+                                            '${Routes.vegExecutionScreen}/${vegexe}/${vegid}')
+                                        : Get.offAllNamed(Routes.newPermitList);
               },
               child: const Text('Ok'),
             ),

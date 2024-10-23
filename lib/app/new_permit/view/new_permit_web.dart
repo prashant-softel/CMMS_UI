@@ -299,7 +299,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                   : controller.typee.value ==
                                                           AppConstants
                                                               .kEvaluation
-                                                      ? 'EVAL${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}'
+                                                      ? 'ET${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}'
                                                       : 'PMT${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}',
                                               style: TextStyle(
                                                 decoration:
@@ -582,7 +582,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                 AppConstants
                                                                     .kAudit
                                                             ? 'AUD${int.tryParse('${controller.listAssociatedPm?[index]?.pmId ?? 0}')}'
-                                                            : 'PMT${int.tryParse('${controller.listAssociatedPm?[index]?.pmId ?? 0}')}',
+                                                            : controller.typee
+                                                                        .value ==
+                                                                    AppConstants
+                                                                        .kEvaluation
+                                                                ? 'ET${int.tryParse('${controller.listAssociatedPm?[index]?.pmId ?? 0}')}'
+                                                                : 'PMT${int.tryParse('${controller.listAssociatedPm?[index]?.pmId ?? 0}')}',
                                                         style: TextStyle(
                                                           decoration:
                                                               TextDecoration

@@ -175,7 +175,8 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  Get.back();
+                                  Get.offAllNamed(
+                                      '${Routes.auditListScreen}/${controller.type.value}');
                                 },
                                 child: controller.type.value ==
                                         AppConstants.kMis
@@ -972,7 +973,7 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                       backgroundColor: ColorValues.updateColor,
                                       text: 'Update',
                                       onPressed: () {
-                                        controller.updateAuditNumber();
+                                        controller.checkWeightageSum(context);
                                       },
                                     ))
                                 : Container(
@@ -982,7 +983,7 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                           ColorValues.appGreenColor,
                                       text: 'Submit',
                                       onPressed: () {
-                                        controller.createAuditNumber();
+                                        controller.checkWeightageSum(context);
                                       },
                                     ),
                                   ),

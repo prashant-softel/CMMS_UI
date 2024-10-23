@@ -103,13 +103,14 @@ class PermitMessageCancelRequestDialog extends GetView {
                     : type == 2
                         ? Get.offAllNamed('${Routes.pmTaskView}/$taskId')
                         : type == 3
-                            ? Get.offAllNamed('${Routes.viewAuditTask}/$taskId')
+                            ? Get.offAllNamed(
+                                '${Routes.viewAuditTask}/$taskId/$type')
                             : type == 4
                                 ? Get.offAllNamed(
                                     '${Routes.addModuleCleaningExecutionContentWeb}/$mctaskId/$mcplanId')
                                 : type == 5
                                     ? Get.offAllNamed(
-                                        '${Routes.viewAuditTask}/$taskId')
+                                        '${Routes.viewAuditTask}/$taskId/$type')
                                     : type == 6
                                         ? Get.offAllNamed(
                                             '${Routes.vegExecutionScreen}/${vegexid}/${vegplanId}')
