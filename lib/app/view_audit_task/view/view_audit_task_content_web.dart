@@ -257,24 +257,24 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                     ),
                                               controller.type.value ==
                                                       AppConstants.kEvaluation
-                                                  ? Dimens.box0
-                                                  : Text(
+                                                  ? Text(
                                                       'Max Score:',
                                                       style: Styles.black17,
-                                                    ),
+                                                    )
+                                                  : Dimens.box0,
                                               controller.type.value ==
                                                       AppConstants.kEvaluation
-                                                  ? Dimens.box0
-                                                  : Text(
+                                                  ? Text(
                                                       'Score:',
                                                       style: Styles.black17,
-                                                    ),
+                                                    )
+                                                  : Dimens.box0,
                                               Text(
-                                                "Last Done Date:",
+                                                ' Frequency:',
                                                 style: Styles.black17,
                                               ),
                                               Text(
-                                                "Due Date:",
+                                                'Schedule Date:',
                                                 style: Styles.black17,
                                               ),
                                             ],
@@ -293,7 +293,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                       : controller.type.value ==
                                                               AppConstants
                                                                   .kEvaluation
-                                                          ? 'EVAL${controller.auditTasknDetailModel.value.id ?? ''}'
+                                                          ? 'ET${controller.auditTasknDetailModel.value.id ?? ''}'
                                                           : 'AUD${controller.auditTasknDetailModel.value.id ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                   style: Styles.blue17),
                                               // Text(
@@ -333,23 +333,23 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                     ),
                                               controller.type.value ==
                                                       AppConstants.kEvaluation
-                                                  ? Dimens.box0
-                                                  : Text(
+                                                  ? Text(
                                                       " ${controller.auditTasknDetailModel.value.max_score ?? ""}",
-                                                      style: Styles.blue17),
+                                                      style: Styles.blue17)
+                                                  : Dimens.box0,
                                               controller.type.value ==
                                                       AppConstants.kEvaluation
-                                                  ? Dimens.box0
-                                                  : Text(
+                                                  ? Text(
                                                       " ${controller.auditTasknDetailModel.value.total_Score ?? ""}",
-                                                      style: Styles.blue17),
+                                                      style: Styles.blue17)
+                                                  : Dimens.box0,
+                                              Text(
+                                                  '${controller.auditTasknDetailModel.value.frequency_name ?? ""}',
+                                                  style: Styles.blue17),
+                                              Text(
+                                                  '${controller.auditTasknDetailModel.value.schedule_Date ?? ""}',
+                                                  style: Styles.blue17),
 
-                                              Text(
-                                                  " ${controller.auditTasknDetailModel.value.last_done_date ?? ""}",
-                                                  style: Styles.blue17),
-                                              Text(
-                                                  "${controller.auditTasknDetailModel.value.due_date ?? ""}",
-                                                  style: Styles.blue17),
                                               // Text(
                                               //     "S1234590 hard coded", //   '${controller.auditPlanDetailModel.value?.frequencyApplicable ?? ""}',
                                               //     style: Styles.blue17),
@@ -368,21 +368,22 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               //   'Approved At :',
                                               //   style: Styles.black17,
                                               // ),
-                                              Text(
-                                                'Schedule Date:',
-                                                style: Styles.black17,
-                                              ),
-                                              Text(
-                                                ' Frequency:',
-                                                style: Styles.black17,
-                                              ),
+
                                               Text(
                                                 "Assigned To:",
+                                                style: Styles.black17,
+                                              ),
+                                              Text(
+                                                "Last Done Date:",
                                                 style: Styles.black17,
                                               ),
 
                                               Text(
                                                 "Done Date:",
+                                                style: Styles.black17,
+                                              ),
+                                              Text(
+                                                "Due Date:",
                                                 style: Styles.black17,
                                               ),
                                             ],
@@ -407,16 +408,16 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               //         : '${controller.auditTasknDetailModel.value.approved_at ?? ""}',
                                               //     style: Styles.blue17),
                                               Text(
-                                                  '${controller.auditTasknDetailModel.value.schedule_Date ?? ""}',
-                                                  style: Styles.blue17),
-                                              Text(
-                                                  '${controller.auditTasknDetailModel.value.frequency_name ?? ""}',
-                                                  style: Styles.blue17),
-                                              Text(
                                                   "${controller.auditTasknDetailModel.value.assigned_to_name ?? ""}",
                                                   style: Styles.blue17),
                                               Text(
+                                                  " ${controller.auditTasknDetailModel.value.last_done_date ?? ""}",
+                                                  style: Styles.blue17),
+                                              Text(
                                                   "${controller.auditTasknDetailModel.value.done_date ?? ""}",
+                                                  style: Styles.blue17),
+                                              Text(
+                                                  "${controller.auditTasknDetailModel.value.due_date ?? ""}",
                                                   style: Styles.blue17),
                                             ],
                                           ),
@@ -1182,10 +1183,16 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              controller.allSubChecklistTrue
-                                                          .value ==
-                                                      false
-                                                  ? Container(
+                                              controller.auditTasknDetailModel
+                                                              .value.status ==
+                                                          431 ||
+                                                      controller
+                                                              .auditTasknDetailModel
+                                                              .value
+                                                              .status ==
+                                                          421
+                                                  ? Dimens.box0
+                                                  : Container(
                                                       height: 45,
                                                       child:
                                                           CustomElevatedButton(
@@ -1205,10 +1212,44 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                           // ));
                                                         },
                                                       ),
+                                                    ),
+                                              Dimens.boxWidth10,
+                                              controller.auditTasknDetailModel
+                                                              .value.status ==
+                                                          421 &&
+                                                      varUserAccessModel.value
+                                                              .access_list!
+                                                              .where((e) =>
+                                                                  e.feature_id ==
+                                                                      UserAccessConstants
+                                                                          .kAuditExecutionFeatureId &&
+                                                                  e.approve ==
+                                                                      UserAccessConstants
+                                                                          .kHaveAddAccess)
+                                                              .length >
+                                                          0
+                                                  ? Container(
+                                                      height: 35,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        // icon: Icons.link,
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .blueColor,
+                                                        text: "Re-assign",
+                                                        onPressed: () {
+                                                          Get.dialog<void>(
+                                                              AssignToAuditTaskDialog(
+                                                                  id: controller
+                                                                          .auditTasknDetailModel
+                                                                          .value
+                                                                          .id ??
+                                                                      0));
+                                                          //controller.printScreen();
+                                                        },
+                                                      ),
                                                     )
                                                   : Dimens.box0,
-                                              Dimens.boxWidth10,
-
                                               controller.auditTasknDetailModel
                                                               .value.sub_PmTask !=
                                                           null &&
@@ -2008,8 +2049,10 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                       "Sub Tasks",
                       style: Styles.blue700,
                     ),
-                    controller.allSubChecklistTrue.value == false
-                        ? GestureDetector(
+                    controller.auditTasknDetailModel.value.status == 431 ||
+                            controller.auditTasknDetailModel.value.status == 421
+                        ? Dimens.box0
+                        : GestureDetector(
                             onTap: () {
                               controller.addRowItem();
                             },
@@ -2038,7 +2081,6 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                               ),
                             ),
                           )
-                        : Dimens.box0,
                   ],
                 ),
               ),
@@ -2208,6 +2250,168 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                           // row[3]['value'] == "1"
                                           //     ?
                                           controller.auditTasknDetailModel.value
+                                                      .sub_PmTask!
+                                                      .firstWhere(
+                                                    (e) =>
+                                                        e?.subtask_id
+                                                            .toString()
+                                                            .trim() ==
+                                                        row[0]['subtask_id']
+                                                            .toString(),
+                                                    orElse: () {
+                                                      return PreventiveCheckListModel(
+                                                          ptw_status: -1);
+                                                    },
+                                                  ).status_of ==
+                                                  431
+                                              ? TableActionButton(
+                                                  color: ColorValues
+                                                      .appDarkBlueColor, //Color.fromARGB(255, 116, 78, 130),
+                                                  icon: Icons.remove_red_eye,
+                                                  message: 'View',
+                                                  onPress: () {
+                                                    // Ensure 'sub_PmTask', 'sub_schedules', and 'checklist_observation' are not null
+                                                    if (controller
+                                                            .auditTasknDetailModel
+                                                            .value
+                                                            .sub_PmTask !=
+                                                        null) {
+                                                      // Clear the rowItemAuditobs at the start to avoid repeating old data
+                                                      controller
+                                                          .rowItemAuditobs.value
+                                                          .clear();
+
+                                                      // Find the task that matches the specific subtask_id
+                                                      var filteredTask = controller
+                                                          .auditTasknDetailModel
+                                                          .value
+                                                          .sub_PmTask
+                                                          ?.firstWhere((e) =>
+                                                              "${e?.subtask_id}" ==
+                                                              row[0][
+                                                                  'subtask_id']);
+
+                                                      if (filteredTask !=
+                                                              null &&
+                                                          filteredTask
+                                                                  .sub_schedules !=
+                                                              null &&
+                                                          filteredTask
+                                                              .sub_schedules!
+                                                              .isNotEmpty) {
+                                                        // Iterate through the sub_schedules of the filtered task
+                                                        filteredTask
+                                                            .sub_schedules!
+                                                            .forEach(
+                                                                (schedule) {
+                                                          if (schedule.checklist_observation !=
+                                                                  null &&
+                                                              schedule
+                                                                  .checklist_observation!
+                                                                  .isNotEmpty) {
+                                                            schedule
+                                                                .checklist_observation!
+                                                                .forEach(
+                                                                    (element) {
+                                                              // Add each checklist observation to the rowItemAuditobs list
+                                                              controller
+                                                                  .rowItemAuditobs
+                                                                  .value
+                                                                  .add([
+                                                                {
+                                                                  "key":
+                                                                      "checkpoint",
+                                                                  "id":
+                                                                      '${element.execution_id}',
+                                                                  "value":
+                                                                      '${element.check_point_name}',
+                                                                },
+                                                                {
+                                                                  "key":
+                                                                      "requirement",
+                                                                  "value":
+                                                                      '${element.requirement}',
+                                                                },
+                                                                {
+                                                                  'key':
+                                                                      "accept",
+                                                                  "value":
+                                                                      '${element.cp_ok}',
+                                                                  "three_type":
+                                                                      '${element.check_point_type}',
+                                                                },
+                                                                {
+                                                                  'key':
+                                                                      "observation",
+                                                                  "value":
+                                                                      '${element.observation ?? ''}',
+                                                                },
+                                                                {
+                                                                  'key':
+                                                                      "uploadimg",
+                                                                  "value": '',
+                                                                  "uploaded":
+                                                                      '',
+                                                                },
+                                                                {
+                                                                  'key': "type",
+                                                                  'inpute_type':
+                                                                      '${element.check_point_type}',
+                                                                  "value":
+                                                                      '${element.type_text ?? ''}',
+                                                                  "min":
+                                                                      '${element.min_range ?? 0}',
+                                                                  "max":
+                                                                      '${element.max_range ?? 0}',
+                                                                },
+                                                              ]);
+                                                            });
+                                                          } else {
+                                                            print(
+                                                                'No checklist_observation found in schedule.');
+                                                          }
+                                                        });
+
+                                                        // Get the title, checklist number, and other details from the filtered task
+                                                        var title = filteredTask
+                                                                .title ??
+                                                            "";
+                                                        var checkList_Number =
+                                                            filteredTask.name ??
+                                                                "";
+                                                        int scheduleID = filteredTask
+                                                                .sub_schedules![
+                                                                    0]
+                                                                .schedule_id ??
+                                                            0;
+                                                        int subtask_id =
+                                                            filteredTask
+                                                                    .subtask_id ??
+                                                                0;
+
+                                                        // Display the dialog with the filtered data
+                                                        Get.dialog(
+                                                          EvaluationExecutionProcessDialog(
+                                                              title: title,
+                                                              subtask_id:
+                                                                  subtask_id,
+                                                              checkList_Number:
+                                                                  checkList_Number,
+                                                              scheduleID:
+                                                                  scheduleID,
+                                                              is_view: 1),
+                                                        );
+                                                      } else {
+                                                        print(
+                                                            'No sub_schedules found for the filtered task.');
+                                                      }
+                                                    } else {
+                                                      print(
+                                                          'No sub_PmTask found.');
+                                                    }
+                                                  })
+                                              : Dimens.box0,
+                                          controller.auditTasknDetailModel.value
                                                       .sub_PmTask!.isNotEmpty &&
                                                   controller
                                                           .auditTasknDetailModel
@@ -2269,6 +2473,7 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                                   message: 'Create New Permit',
                                                 )
                                               : Dimens.box0,
+
                                           controller.auditTasknDetailModel.value
                                                       .sub_PmTask!.isNotEmpty &&
                                                   controller
@@ -2724,168 +2929,7 @@ class CheckListSubTaskDataTable extends StatelessWidget {
                                                     }
                                                   })
                                               : Dimens.box0,
-                                          controller.auditTasknDetailModel.value
-                                                      .sub_PmTask!
-                                                      .firstWhere(
-                                                    (e) =>
-                                                        e?.subtask_id
-                                                            .toString()
-                                                            .trim() ==
-                                                        row[0]['subtask_id']
-                                                            .toString(),
-                                                    orElse: () {
-                                                      return PreventiveCheckListModel(
-                                                          ptw_status: -1);
-                                                    },
-                                                  ).status_of ==
-                                                  431
-                                              ? TableActionButton(
-                                                  color: ColorValues
-                                                      .appDarkBlueColor, //Color.fromARGB(255, 116, 78, 130),
-                                                  icon: Icons.remove_red_eye,
-                                                  message: 'View',
-                                                  onPress: () {
-                                                    // Ensure 'sub_PmTask', 'sub_schedules', and 'checklist_observation' are not null
-                                                    if (controller
-                                                            .auditTasknDetailModel
-                                                            .value
-                                                            .sub_PmTask !=
-                                                        null) {
-                                                      // Clear the rowItemAuditobs at the start to avoid repeating old data
-                                                      controller
-                                                          .rowItemAuditobs.value
-                                                          .clear();
 
-                                                      // Find the task that matches the specific subtask_id
-                                                      var filteredTask = controller
-                                                          .auditTasknDetailModel
-                                                          .value
-                                                          .sub_PmTask
-                                                          ?.firstWhere((e) =>
-                                                              "${e?.subtask_id}" ==
-                                                              row[0][
-                                                                  'subtask_id']);
-
-                                                      if (filteredTask !=
-                                                              null &&
-                                                          filteredTask
-                                                                  .sub_schedules !=
-                                                              null &&
-                                                          filteredTask
-                                                              .sub_schedules!
-                                                              .isNotEmpty) {
-                                                        // Iterate through the sub_schedules of the filtered task
-                                                        filteredTask
-                                                            .sub_schedules!
-                                                            .forEach(
-                                                                (schedule) {
-                                                          if (schedule.checklist_observation !=
-                                                                  null &&
-                                                              schedule
-                                                                  .checklist_observation!
-                                                                  .isNotEmpty) {
-                                                            schedule
-                                                                .checklist_observation!
-                                                                .forEach(
-                                                                    (element) {
-                                                              // Add each checklist observation to the rowItemAuditobs list
-                                                              controller
-                                                                  .rowItemAuditobs
-                                                                  .value
-                                                                  .add([
-                                                                {
-                                                                  "key":
-                                                                      "checkpoint",
-                                                                  "id":
-                                                                      '${element.execution_id}',
-                                                                  "value":
-                                                                      '${element.check_point_name}',
-                                                                },
-                                                                {
-                                                                  "key":
-                                                                      "requirement",
-                                                                  "value":
-                                                                      '${element.requirement}',
-                                                                },
-                                                                {
-                                                                  'key':
-                                                                      "accept",
-                                                                  "value":
-                                                                      '${element.cp_ok}',
-                                                                  "three_type":
-                                                                      '${element.check_point_type}',
-                                                                },
-                                                                {
-                                                                  'key':
-                                                                      "observation",
-                                                                  "value":
-                                                                      '${element.observation ?? ''}',
-                                                                },
-                                                                {
-                                                                  'key':
-                                                                      "uploadimg",
-                                                                  "value": '',
-                                                                  "uploaded":
-                                                                      '',
-                                                                },
-                                                                {
-                                                                  'key': "type",
-                                                                  'inpute_type':
-                                                                      '${element.check_point_type}',
-                                                                  "value":
-                                                                      '${element.type_text ?? ''}',
-                                                                  "min":
-                                                                      '${element.min_range ?? 0}',
-                                                                  "max":
-                                                                      '${element.max_range ?? 0}',
-                                                                },
-                                                              ]);
-                                                            });
-                                                          } else {
-                                                            print(
-                                                                'No checklist_observation found in schedule.');
-                                                          }
-                                                        });
-
-                                                        // Get the title, checklist number, and other details from the filtered task
-                                                        var title = filteredTask
-                                                                .title ??
-                                                            "";
-                                                        var checkList_Number =
-                                                            filteredTask.name ??
-                                                                "";
-                                                        int scheduleID = filteredTask
-                                                                .sub_schedules![
-                                                                    0]
-                                                                .schedule_id ??
-                                                            0;
-                                                        int subtask_id =
-                                                            filteredTask
-                                                                    .subtask_id ??
-                                                                0;
-
-                                                        // Display the dialog with the filtered data
-                                                        Get.dialog(
-                                                          EvaluationExecutionProcessDialog(
-                                                              title: title,
-                                                              subtask_id:
-                                                                  subtask_id,
-                                                              checkList_Number:
-                                                                  checkList_Number,
-                                                              scheduleID:
-                                                                  scheduleID,
-                                                              is_view: 1),
-                                                        );
-                                                      } else {
-                                                        print(
-                                                            'No sub_schedules found for the filtered task.');
-                                                      }
-                                                    } else {
-                                                      print(
-                                                          'No sub_PmTask found.');
-                                                    }
-                                                  })
-                                              : Dimens.box0,
                                           controller.auditTasknDetailModel.value
                                                           .sub_PmTask!
                                                           .firstWhere(

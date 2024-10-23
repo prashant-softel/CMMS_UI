@@ -269,7 +269,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                                   : controller.type.value ==
                                                           AppConstants
                                                               .kEvaluation
-                                                      ? 'EVAL${controller.auditPlanDetailModel.value?.id ?? ''}'
+                                                      ? 'EP${controller.auditPlanDetailModel.value?.id ?? ''}'
                                                       : 'AUD${controller.auditPlanDetailModel.value?.id ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                               style: Styles.blue17),
                                           Text(

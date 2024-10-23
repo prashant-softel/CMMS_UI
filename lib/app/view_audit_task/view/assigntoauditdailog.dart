@@ -28,7 +28,7 @@ class AssignToAuditTaskDialog extends GetView {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Audit Task Id:",
+              "Task Id:",
               style: TextStyle(
                 fontSize: 15,
               ),
@@ -36,7 +36,7 @@ class AssignToAuditTaskDialog extends GetView {
             // Dimens.boxWidth10,
             SizedBox(width: 10),
             Text(
-              "AUD${id}",
+              "ET${id}",
               style:
                   TextStyle(fontSize: 15, color: ColorValues.appDarkBlueColor),
             ),
