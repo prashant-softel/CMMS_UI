@@ -22,8 +22,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 class NewPermitMobile extends GetView<NewPermitController> {
   NewPermitMobile({super.key});
-  final FileUploadController dropzoneController =
-      Get.put(FileUploadController( apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',));
+  final FileUploadController dropzoneController = Get.put(FileUploadController(
+    apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',
+  ));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1368,10 +1369,12 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                                                   .appDarkBlueColor,
                                                           text: "Update",
                                                           onPressed: () {
-                                                            controller.updateNewPermit(
-                                                                fileIds:
-                                                                    dropzoneController
-                                                                        .fileIds);
+                                                            controller
+                                                                .updateNewPermit(
+                                                              fileIds:
+                                                                  dropzoneController
+                                                                      .fileIds,
+                                                            );
                                                           },
                                                         ),
                                                       )

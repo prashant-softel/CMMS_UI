@@ -393,6 +393,7 @@ class NewPermitController extends GetxController {
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
   List<dynamic>? files = [];
+  // List<dynamic>? tbtFiles = [];
 
   Map<dynamic, dynamic> employee_map = {};
   Map<int, dynamic> loto_map = {};
@@ -1480,7 +1481,7 @@ class NewPermitController extends GetxController {
         category_ids: typee.value == 6 || typee.value == 4
             ? [8]
             : selectedEquipmentCategoryIdList,
-        uploadfile_ids: fileIds,
+        uploadfile_ids: fileIds, uploadfile_tbt: [],
         is_loto_required: loto_map_list.length > 0 ? true : false,
         isolated_category_ids: selectedEquipmentIsolationIdList,
         Loto_list: loto_map_list,
@@ -1597,7 +1598,7 @@ class NewPermitController extends GetxController {
         sop_type_id: selectedSOPId,
         issuer_id: selectedPermitIssuerTypeId,
         approver_id: selectedPermitApproverTypeId,
-        uploadfile_ids: fileIds,
+        uploadfile_ids: fileIds, uploadfile_tbt: [],
         user_id: userId,
         lotoOtherDetails: [],
         latitude: 0,
@@ -1717,7 +1718,7 @@ class NewPermitController extends GetxController {
         sop_type_id: selectedSOPId,
         issuer_id: selectedPermitIssuerTypeId,
         approver_id: selectedPermitApproverTypeId,
-        uploadfile_ids: fileIds,
+        uploadfile_ids: fileIds, uploadfile_tbt: [],
         user_id: userId,
         latitude: 0,
         longitude: 0,
@@ -1794,7 +1795,10 @@ class NewPermitController extends GetxController {
   //       }
 
   ///Update New Permit
-  void updateNewPermit({List<dynamic>? fileIds}) async {
+  void updateNewPermit({
+    List<dynamic>? fileIds,
+    List<dynamic>? tbtFileIds,
+  }) async {
     {
       // checkForm();
       // if (isFormInvalid.value) {
@@ -1915,6 +1919,7 @@ class NewPermitController extends GetxController {
             ? [8]
             : selectedEquipmentCategoryIdList,
         uploadfile_ids: files,
+        uploadfile_tbt: tbtFileIds ?? [],
         is_loto_required: loto_map_list.length > 0 ? true : false,
         isolated_category_ids: selectedEquipmentIsolationIdList,
         Loto_list: loto_map_list,
@@ -2049,7 +2054,7 @@ class NewPermitController extends GetxController {
         category_ids: typee.value == 6 || typee.value == 4
             ? [8]
             : selectedEquipmentCategoryIdList,
-        uploadfile_ids: fileIds,
+        uploadfile_ids: fileIds, uploadfile_tbt: [],
         is_loto_required: loto_map_list.length > 0 ? true : false,
         isolated_category_ids: selectedEquipmentIsolationIdList,
         Loto_list: loto_map_list,

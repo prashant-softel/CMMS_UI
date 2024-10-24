@@ -1,5 +1,6 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
+import 'package:cmms/app/controllers/tbt_file_upload_controller.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -7,6 +8,8 @@ import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/permit_cancel_request_dialog.dart';
+import 'package:cmms/app/widgets/tbe_file_detail_wighet.dart';
+import 'package:cmms/app/widgets/tbt_file_upload_dropzone.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -31,6 +34,10 @@ class NewPermitWeb extends GetView<NewPermitController> {
   final FileUploadController dropzoneController = Get.put(FileUploadController(
     apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',
   ));
+  final TbtFileUploadController tbtdropzoneController =
+      Get.put(TbtFileUploadController(
+          // apiUrl: UrlPath.deployUrl + 'api/FileUpload/UploadFile',
+          ));
   @override
   Widget build(BuildContext context) {
     return SelectionArea(
@@ -3368,7 +3375,33 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                               ),
                                                             ]),
                                                       )
-                                                    : Dimens.box0
+                                                    : Dimens.box0,
+                                                Container(
+                                                  height: Get.height * 0.2,
+                                                  width: Get.width,
+                                                  padding: EdgeInsets.all(10),
+                                                  child: Row(
+                                                    children: [
+                                                      Expanded(
+                                                        flex: 2,
+                                                        child:
+                                                            TbtFileUploadDropzone(),
+                                                      ),
+                                                      Dimens.boxWidth5,
+                                                      Expanded(
+                                                        flex: 8,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  top: 15),
+                                                          child:
+                                                              TbeFileDetailWighet(),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
                                               ],
                                             ),
                                           ],
@@ -3779,10 +3812,15 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                         .appDarkBlueColor,
                                                                 text: "Update",
                                                                 onPressed: () {
-                                                                  controller.updateNewPermit(
-                                                                      fileIds:
-                                                                          dropzoneController
-                                                                              .fileIds);
+                                                                  controller
+                                                                      .updateNewPermit(
+                                                                    fileIds:
+                                                                        dropzoneController
+                                                                            .fileIds,
+                                                                    tbtFileIds:
+                                                                        tbtdropzoneController
+                                                                            .fileIds,
+                                                                  );
                                                                 },
                                                               )),
                                                         )
@@ -3881,10 +3919,15 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                     },
                                                                   );
                                                                 } else {
-                                                                  controller.updateNewPermit(
-                                                                      fileIds:
-                                                                          dropzoneController
-                                                                              .fileIds);
+                                                                  controller
+                                                                      .updateNewPermit(
+                                                                    fileIds:
+                                                                        dropzoneController
+                                                                            .fileIds,
+                                                                    tbtFileIds:
+                                                                        tbtdropzoneController
+                                                                            .fileIds,
+                                                                  );
                                                                 }
                                                               },
                                                             ),

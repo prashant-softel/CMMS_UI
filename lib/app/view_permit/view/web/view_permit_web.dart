@@ -2197,6 +2197,133 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                             ],
                                                           ),
                                                         ),
+                                                        controller
+                                                                .tbt_file_list!
+                                                                .isEmpty
+                                                            ? Dimens.box0
+                                                            : Container(
+                                                                margin: Dimens
+                                                                    .edgeInsets20,
+                                                                height: ((controller.tbt_file_list?.length ??
+                                                                            0) *
+                                                                        40) +
+                                                                    130,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  border: Border
+                                                                      .all(
+                                                                    color: ColorValues
+                                                                        .lightGreyColorWithOpacity35,
+                                                                    width: 1,
+                                                                  ),
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: ColorValues
+                                                                          .appBlueBackgroundColor,
+                                                                      spreadRadius:
+                                                                          2,
+                                                                      blurRadius:
+                                                                          5,
+                                                                      offset:
+                                                                          Offset(
+                                                                              0,
+                                                                              2),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                child: Column(
+                                                                  children: [
+                                                                    Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          10.0),
+                                                                      child:
+                                                                          Row(
+                                                                        children: [
+                                                                          Text(
+                                                                            'All Uploaded TBT Files',
+                                                                            style:
+                                                                                Styles.blue700,
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                    Expanded(
+                                                                      child:
+                                                                          DataTable2(
+                                                                        border:
+                                                                            TableBorder.all(
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              206,
+                                                                              229,
+                                                                              234),
+                                                                        ),
+                                                                        columns: [
+                                                                          DataColumn(
+                                                                            label:
+                                                                                Text(
+                                                                              "File Description",
+                                                                              style: TextStyle(
+                                                                                fontSize: 15,
+                                                                                fontWeight: FontWeight.bold,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                          DataColumn(
+                                                                            label:
+                                                                                Text(
+                                                                              "View Image",
+                                                                              style: TextStyle(
+                                                                                fontSize: 15,
+                                                                                fontWeight: FontWeight.bold,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                        rows: List<
+                                                                            DataRow>.generate(
+                                                                          controller.tbt_file_list?.length ??
+                                                                              0,
+                                                                          (index) =>
+                                                                              DataRow(
+                                                                            cells: [
+                                                                              DataCell(Text(
+                                                                                controller.tbt_file_list![index]?.description.toString() ?? '',
+                                                                              )),
+                                                                              DataCell(
+                                                                                // Text("View Image"),
+                                                                                Wrap(
+                                                                                  children: [
+                                                                                    TableActionButton(
+                                                                                      color: ColorValues.appDarkBlueColor,
+                                                                                      icon: Icons.visibility,
+                                                                                      message: 'View Image',
+                                                                                      onPress: () async {
+                                                                                        // String baseUrl =
+                                                                                        //     "http://65.0.20.19/CMMS_API/";
+                                                                                        String baseUrl = UrlPath.deployUrl;
+                                                                                        String fileName = controller.tbt_file_list![index]?.fileName ?? "";
+                                                                                        String fullUrl = baseUrl + fileName;
+                                                                                        if (await canLaunch(fullUrl)) {
+                                                                                          await launch(fullUrl);
+                                                                                        } else {
+                                                                                          throw 'Could not launch $fullUrl';
+                                                                                        }
+                                                                                        // String baseUrl = UrlPath.deployUrl;
+                                                                                      },
+                                                                                    )
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
                                                       ],
                                                     ),
                                                   ],
@@ -2930,117 +3057,129 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                               //     : Dimens.box0,
 
                               ///File Upload
-                              Container(
-                                margin: Dimens.edgeInsets20,
-                                height:
-                                    ((controller.file_list?.length ?? 0) * 40) +
-                                        130,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color:
-                                        ColorValues.lightGreyColorWithOpacity35,
-                                    width: 1,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: ColorValues.appBlueBackgroundColor,
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            'All Files Uploaded',
-                                            style: Styles.blue700,
+                              controller.file_list!.isEmpty
+                                  ? Dimens.box0
+                                  : Container(
+                                      margin: Dimens.edgeInsets20,
+                                      height:
+                                          ((controller.file_list?.length ?? 0) *
+                                                  40) +
+                                              130,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: ColorValues
+                                              .lightGreyColorWithOpacity35,
+                                          width: 1,
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: ColorValues
+                                                .appBlueBackgroundColor,
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 2),
                                           ),
                                         ],
                                       ),
-                                    ),
-                                    Expanded(
-                                      child: DataTable2(
-                                        border: TableBorder.all(
-                                          color: Color.fromARGB(
-                                              255, 206, 229, 234),
-                                        ),
-                                        columns: [
-                                          DataColumn(
-                                            label: Text(
-                                              "File Description",
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  'All Files Uploaded',
+                                                  style: Styles.blue700,
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          DataColumn(
-                                            label: Text(
-                                              "View Image",
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
+                                          Expanded(
+                                            child: DataTable2(
+                                              border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234),
                                               ),
-                                            ),
-                                          ),
-                                        ],
-                                        rows: List<DataRow>.generate(
-                                          controller.file_list?.length ?? 0,
-                                          (index) => DataRow(
-                                            cells: [
-                                              DataCell(Text(
-                                                controller.file_list![index]
-                                                        ?.description
-                                                        .toString() ??
-                                                    '',
-                                              )),
-                                              DataCell(
-                                                // Text("View Image"),
-                                                Wrap(
-                                                  children: [
-                                                    TableActionButton(
-                                                      color: ColorValues
-                                                          .appDarkBlueColor,
-                                                      icon: Icons.visibility,
-                                                      message: 'View Permit',
-                                                      onPress: () async {
-                                                        // String baseUrl =
-                                                        //     "http://65.0.20.19/CMMS_API/";
-                                                        String baseUrl =
-                                                            UrlPath.deployUrl;
-                                                        String fileName =
-                                                            controller
-                                                                    .file_list![
-                                                                        index]
-                                                                    ?.fileName ??
-                                                                "";
-                                                        String fullUrl =
-                                                            baseUrl + fileName;
-                                                        if (await canLaunch(
-                                                            fullUrl)) {
-                                                          await launch(fullUrl);
-                                                        } else {
-                                                          throw 'Could not launch $fullUrl';
-                                                        }
-                                                        // String baseUrl = UrlPath.deployUrl;
-                                                      },
-                                                    )
+                                              columns: [
+                                                DataColumn(
+                                                  label: Text(
+                                                    "File Description",
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "View Image",
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                              rows: List<DataRow>.generate(
+                                                controller.file_list?.length ??
+                                                    0,
+                                                (index) => DataRow(
+                                                  cells: [
+                                                    DataCell(Text(
+                                                      controller
+                                                              .file_list![index]
+                                                              ?.description
+                                                              .toString() ??
+                                                          '',
+                                                    )),
+                                                    DataCell(
+                                                      // Text("View Image"),
+                                                      Wrap(
+                                                        children: [
+                                                          TableActionButton(
+                                                            color: ColorValues
+                                                                .appDarkBlueColor,
+                                                            icon: Icons
+                                                                .visibility,
+                                                            message:
+                                                                'View Image',
+                                                            onPress: () async {
+                                                              // String baseUrl =
+                                                              //     "http://65.0.20.19/CMMS_API/";
+                                                              String baseUrl =
+                                                                  UrlPath
+                                                                      .deployUrl;
+                                                              String fileName = controller
+                                                                      .file_list![
+                                                                          index]
+                                                                      ?.fileName ??
+                                                                  "";
+                                                              String fullUrl =
+                                                                  baseUrl +
+                                                                      fileName;
+                                                              if (await canLaunch(
+                                                                  fullUrl)) {
+                                                                await launch(
+                                                                    fullUrl);
+                                                              } else {
+                                                                throw 'Could not launch $fullUrl';
+                                                              }
+                                                              // String baseUrl = UrlPath.deployUrl;
+                                                            },
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ],
                                                 ),
                                               ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
+                                        ],
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ),
                               SizedBox(
                                 height: 10,
                               ),

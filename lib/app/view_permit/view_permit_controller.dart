@@ -212,6 +212,7 @@ class ViewPermitController extends GetxController {
   Rx<String> selectedAssignedTo = ''.obs;
   int selectedInventoryCategoryId = 0;
   RxList<FileList?>? file_list = <FileList>[].obs;
+  RxList<FileList?>? tbt_file_list = <FileList>[].obs;
 
   //Equipment Isolation
   RxList<int> selectedEquipmentIsolationIdList = <int>[].obs;
@@ -991,17 +992,19 @@ class ViewPermitController extends GetxController {
       print({"MC Data of ptw", lstAssociatedVc});
       listIsolation?.value = viewPermitDetailsModel.value?.lstIsolation ?? [];
       file_list?.value = viewPermitDetailsModel.value?.file_list ?? [];
-      print("File List:");
-      file_list?.forEach(
-        (fileItem) {
-          print("ID: ${fileItem!.id}");
-          print("File Name: ${fileItem.fileName}");
-          print("File Category: ${fileItem.fileCategory}");
-          print("File Size: ${fileItem.fileSize}");
-          print("Status: ${fileItem.status}");
-          print("PTW Files: ${fileItem.ptwFiles}");
-        },
-      );
+      tbt_file_list?.value = viewPermitDetailsModel.value?.tbtImage ?? [];
+
+      // print("File List:");
+      // file_list?.forEach(
+      //   (fileItem) {
+      //     print("ID: ${fileItem!.id}");
+      //     print("File Name: ${fileItem.fileName}");
+      //     print("File Category: ${fileItem.fileCategory}");
+      //     print("File Size: ${fileItem.fileSize}");
+      //     print("Status: ${fileItem.status}");
+      //     print("PTW Files: ${fileItem.ptwFiles}");
+      //   },
+      // );
       listExtendCondition?.value =
           viewPermitDetailsModel.value?.extendDetails?.conditions ?? [];
       listCancelCondition?.value =
