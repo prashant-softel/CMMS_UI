@@ -5,7 +5,6 @@ import '../../navigators/app_pages.dart';
 
 class HomeDrawerMobile extends GetView<HomeController> {
   HomeDrawerMobile({super.key});
-  // final HomeController controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +49,11 @@ class HomeDrawerMobile extends GetView<HomeController> {
                       fontSize: 15,
                       height: 16,
                       color: Color(0xffD2D0D0),
-                      icon: "assets/files/preventive.png",
+                      // Use iconWidget instead of icon for custom icon
+                      iconWidget: Icon(
+                        Icons.build_outlined,
+                        color: Color(0xffD2D0D0),
+                      ),
                       press: () {
                         Get.offAllNamed(Routes.breakdown);
                       },
@@ -60,14 +63,22 @@ class HomeDrawerMobile extends GetView<HomeController> {
                       fontSize: 15,
                       color: Color(0xffD2D0D0),
                       height: 16,
-                      icon: "assets/files/correct.png",
+                      // icon: "assets/files/correct.png",
+                       iconWidget: Icon(
+                                  Icons.build_circle_outlined,
+                                  color: Color(0xffD2D0D0),
+                                ),
                       press: () {
                         Get.offAllNamed(Routes.preventive);
                       },
                     ),
                     MenuItem(
                       title: "Module Cleaning",
-                      icon: "assets/files/reportins.png",
+                      // icon: "assets/files/reportins.png",
+                        iconWidget: Icon(
+                                  Icons.cleaning_services_outlined,
+                                  color: Color(0xffD2D0D0),
+                                ),
                       fontSize: 15,
                       color: Color(0xffD2D0D0),
                       height: 16,
@@ -80,7 +91,11 @@ class HomeDrawerMobile extends GetView<HomeController> {
                       height: 16,
                       color: Color(0xffD2D0D0),
                       title: "Vegetation Control",
-                      icon: "assets/files/maint.png",
+                      // icon: "assets/files/maint.png",
+                             iconWidget: Icon(
+                                  Icons.eco_outlined,
+                                  color: Color(0xffD2D0D0),
+                                ),
                       press: () {
                         Get.offAllNamed(Routes.vegetationDashboard);
                       },
@@ -90,7 +105,11 @@ class HomeDrawerMobile extends GetView<HomeController> {
                       height: 16,
                       color: Color(0xffD2D0D0),
                       title: "Incident Report",
-                      icon: "assets/files/misc.png",
+                      // icon: "assets/files/misc.png",
+                       iconWidget: Icon(
+                                  Icons.accessible_rounded,
+                                  color: Color(0xffD2D0D0),
+                                ),
                       press: () {
                         Get.offAllNamed(Routes.incidentReportDashboard);
                       },
@@ -100,7 +119,11 @@ class HomeDrawerMobile extends GetView<HomeController> {
                       height: 16,
                       color: Color(0xffD2D0D0),
                       title: "Stock Management",
-                      icon: "assets/files/warranty.png",
+                      // icon: "assets/files/warranty.png",
+                        iconWidget: Icon(
+                                  Icons.stacked_bar_chart_sharp,
+                                  color: Color(0xffD2D0D0),
+                                ),
                       press: () {
                         Get.offAllNamed(Routes.stockManagementDashboardScreen);
                       },
@@ -110,7 +133,11 @@ class HomeDrawerMobile extends GetView<HomeController> {
                       height: 16,
                       color: Color(0xffD2D0D0),
                       title: "Masters",
-                      icon: "assets/files/inventory.png",
+                      // icon: "assets/files/inventory.png",
+                      iconWidget: Icon(
+                                  Icons.account_tree_outlined,
+                                  color: Color(0xffD2D0D0),
+                                ),
                       press: () {
                         Get.offAllNamed(Routes.masterDashboard);
                       },
@@ -119,8 +146,12 @@ class HomeDrawerMobile extends GetView<HomeController> {
                       fontSize: 15,
                       height: 16,
                       color: Color(0xffD2D0D0),
-                      title: "HSE Report",
-                      icon: "assets/files/warranty.png",
+                      title: "HSE MIS",
+                      // icon: "assets/files/warranty.png",
+                       iconWidget: Icon(
+                                  Icons.health_and_safety_outlined,
+                                  color: Color(0xffD2D0D0),
+                                ),
                       press: () {
                         Get.offAllNamed(Routes.misDashboard);
                       },
@@ -140,7 +171,11 @@ class HomeDrawerMobile extends GetView<HomeController> {
                       height: 16,
                       color: Color(0xffD2D0D0),
                       title: "Administration",
-                      icon: "assets/files/admin.png",
+                      // icon: "assets/files/admin.png",
+                       iconWidget: Icon(
+                                  Icons.admin_panel_settings_outlined,
+                                  color: Color(0xffD2D0D0),
+                                ),
                       press: () {
                         Get.offAllNamed(Routes.admin_dashboard);
                       },
@@ -150,7 +185,11 @@ class HomeDrawerMobile extends GetView<HomeController> {
                       height: 16,
                       color: Color(0xffD2D0D0),
                       title: "Settings",
-                      icon: "assets/files/setting.png",
+                      // icon: "assets/files/setting.png",
+                       iconWidget: Icon(
+                                  Icons.settings,
+                                  color: Color(0xffD2D0D0),
+                                ),
                       press: () {
                         Get.offAllNamed(Routes.setting);
                       },
@@ -218,7 +257,8 @@ class MenuItem extends StatelessWidget {
   MenuItem({
     Key? key,
     this.title,
-    required this.icon,
+    this.icon,
+    this.iconWidget,
     required this.press,
     this.isexpand,
     this.width,
@@ -230,7 +270,8 @@ class MenuItem extends StatelessWidget {
   }) : super(key: key);
 
   String? title;
-  String icon;
+  String? icon;
+  Widget? iconWidget; // Add iconWidget parameter
   bool? isexpand;
   bool? menuButton;
   double? fontSize;
@@ -254,11 +295,14 @@ class MenuItem extends StatelessWidget {
                   onTap: press,
                   child: Row(
                     children: [
-                      Image.asset(
-                        icon,
-                        width: 20,
-                        height: 20,
-                      ),
+                      // Show either icon or iconWidget based on the input
+                      if (icon != null)
+                        Image.asset(
+                          icon!,
+                          width: 20,
+                          height: 20,
+                        ),
+                      if (iconWidget != null) iconWidget!,
                       Dimens.boxWidth15,
                       Expanded(
                         child: Text(
