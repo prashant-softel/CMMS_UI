@@ -39,18 +39,7 @@ class GoodsOrdersReqDetailPresenter {
     );
   }
 
-  Future<List<HistoryModel>?> getRoHistory(
-    moduleType,
-    id,
-    facilityId,
-    isLoading,
-  ) async =>
-      await goodsOrdersReqDetailUsecase.getRoHistory(
-        moduleType: moduleType,
-        id: id,
-        facilityId: facilityId,
-        isLoading: isLoading,
-      );
+ 
   Future<Map<String, dynamic>?> submitPurchaseOrderData({
     createGoReq,
     required bool isLoading,

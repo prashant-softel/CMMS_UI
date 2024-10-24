@@ -5226,27 +5226,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getRoHistory({
-    required String? auth,
-    required int facilityId,
-    int? moduleType,
-    int? id,
-    bool? isLoading,
-  }) async {
-    var responseModel = await apiWrapper.makeRequest(
-      'Utils/GetHistoryLog?module_type=$moduleType&id=$id&facility_id=$facilityId',
-      Request.get,
-      null,
-      isLoading ?? false,
-      {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $auth',
-      },
-    );
-    print('PermitHistory Response:${responseModel}');
-    return responseModel;
-  }
-
+ 
   Future<ResponseModel> updateJobCard(
       {String? auth, jobCard, bool? isLoading, int? type}) async {
     var responseModel = await apiWrapper.makeRequest(

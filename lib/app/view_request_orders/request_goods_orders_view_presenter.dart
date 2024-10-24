@@ -19,6 +19,18 @@ class PurchaseGoodsorderViewPresenter {
     );
   }
 
+  Future<List<HistoryModel>?> getHistory(
+    moduleType,
+    id,
+    facilityId,
+    isLoading,
+  ) async =>
+      await purchaseGoodsorderViewUsecase.getHistory(
+        moduleType: moduleType,
+        id: id,
+          facilityId: facilityId,
+        isLoading: isLoading,
+      );
   Future<List<CurrencyListModel>> getUnitCurrencyList({
     required bool isLoading,
     required int? facilityId,
@@ -77,18 +89,6 @@ class PurchaseGoodsorderViewPresenter {
     );
   }
 
-  Future<List<HistoryModel>?> getRoHistory(
-    moduleType,
-    facilityId,
-    id,
-    isLoading,
-  ) async =>
-      await purchaseGoodsorderViewUsecase.getRoHistory(
-        facilityId: facilityId,
-        moduleType: moduleType,
-        id: id,
-        isLoading: isLoading,
-      );
   void saveValue({String? roId}) async {
     return purchaseGoodsorderViewUsecase.saveValue(roId: roId);
   }

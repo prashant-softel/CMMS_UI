@@ -65,7 +65,7 @@ class GoodsOrdersReqDetailController extends GetxController {
               Future.delayed(Duration(seconds: 1), () async {
                 await getRoDetailsByID(
                     requestID: roId.value, facilityId: facilityId);
-                await getRoHistory(id: roId.value, facilityId: facilityId);
+                // await getRoHistory(id: roId.value, facilityId: facilityId);
               });
             }
           });
@@ -154,24 +154,6 @@ class GoodsOrdersReqDetailController extends GetxController {
       print(e.toString() + 'roId');
       //  Utility.showDialog(e.toString() + 'userId');
     }
-  }
-
-  Future<void> getRoHistory({required int id, required int facilityId}) async {
-    /// TODO: CHANGE THESE VALUES
-
-    int moduleType = UserModuleTypeConstants.kReqOrderModuleTypeId;
-
-    //
-    historyList?.value = await goodsOrdersReqDetailPresenter.getRoHistory(
-          // tempModuleType,
-          // tempJobCardId,
-          moduleType,
-          id,
-          facilityId,
-          true,
-        ) ??
-        [];
-    update(["historyList"]);
   }
 
   Future<void> getAssetList(int _facilityId) async {
