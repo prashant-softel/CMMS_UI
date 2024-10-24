@@ -24,7 +24,8 @@ class CreatePermitModel {
 
   String? start_datetime;
   String? end_datetime;
-  String? description;String?comment;
+  String? description;
+  String? comment;
   String? title;
   List<LotoList>? Loto_list;
   List<LotoOtherDetails>? lotoOtherDetails;
@@ -34,50 +35,54 @@ class CreatePermitModel {
   List<int?>? block_ids;
   List<int?>? category_ids;
   List<dynamic>? uploadfile_ids;
+  List<dynamic>? uploadfile_tbt;
   List<int?>? isolated_category_ids;
   int? TBT_Done_by;
   String? TBT_Done_at;
   String? PHYSICAL_ISO_REMARK;
   bool? is_physical_iso_required;
 
-  CreatePermitModel({
-    this.permit_id,
-    this.Loto_list,
-    this.lotoOtherDetails,
-    this.approver_id,
-    this.blockId,
-    this.block_ids,
-    this.latitude,
-    this.longitude,
-    this.category_ids,
-    this.uploadfile_ids,
-    this.description,
-    this.title,
-    this.employee_list,
-    this.end_datetime,
-    this.facility_id,
-    this.is_loto_required,
-    this.resubmit,
-    this.isolated_category_ids,
-    this.issuer_id,
-    this.lotoId,
-    this.safety_question_list,
-    this.sop_type_id,
-    this.start_datetime,
-    this.permitTypeId,
-    this.user_id,
-    this.job_type_id,
-    this.TBT_Done_by,
-    this.TBT_Done_at,
-    this.PHYSICAL_ISO_REMARK,
-    this.is_physical_iso_required,this.comment
-  });
+  CreatePermitModel(
+      {this.permit_id,
+      this.Loto_list,
+      this.lotoOtherDetails,
+      this.approver_id,
+      this.blockId,
+      this.block_ids,
+      this.latitude,
+      this.longitude,
+      this.category_ids,
+      this.uploadfile_ids,
+      this.description,
+      this.title,
+      this.employee_list,
+      this.end_datetime,
+      this.facility_id,
+      this.is_loto_required,
+      this.resubmit,
+      this.isolated_category_ids,
+      this.issuer_id,
+      this.lotoId,
+      this.safety_question_list,
+      this.sop_type_id,
+      this.start_datetime,
+      this.permitTypeId,
+      this.user_id,
+      this.job_type_id,
+      this.TBT_Done_by,
+      this.TBT_Done_at,
+      this.PHYSICAL_ISO_REMARK,
+      this.uploadfile_tbt,
+      this.is_physical_iso_required,
+      this.comment});
 
   factory CreatePermitModel.fromJson(Map<String, dynamic> json) =>
       CreatePermitModel(
         permit_id: json['permit_id'],
+        uploadfile_tbt: json['uploadfile_tbt'],
         approver_id: json["approver_id"],
-        issuer_id: json["issuer_id"],comment:json["comment"],
+        issuer_id: json["issuer_id"],
+        comment: json["comment"],
         lotoOtherDetails: json["lotoOtherDetails"] != null
             ? List<LotoOtherDetails>.from(json["lotoOtherDetails"]
                 ?.map((x) => LotoOtherDetails.fromJson(x)))
@@ -129,7 +134,8 @@ class CreatePermitModel {
 
   Map<String, dynamic> toJson() => {
         "permit_id": permit_id,
-        "comment":comment,
+        "uploadfile_tbt": uploadfile_tbt,
+        "comment": comment,
         "approver_id": approver_id,
         "issuer_id": issuer_id,
         "facility_id": facility_id,

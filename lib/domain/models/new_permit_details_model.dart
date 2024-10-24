@@ -55,6 +55,8 @@ class NewPermitDetailModel {
   List<ListSafetyQuestion>? safety_question_list;
   List<ListEmployees?>? employee_list;
   List<FileList>? file_list;
+  List<FileList>? tbtImage;
+
   List<ListIsolation?>? lstIsolation;
   List<ListCategory?>? lstCategory;
   List<LotoLists>? loto_list;
@@ -143,6 +145,7 @@ class NewPermitDetailModel {
     this.is_TBT_Expire,
     this.physical_iso_remark,
     this.file_list,
+    this.tbtImage,
     this.is_loto_required,
     this.tbT_Done_Check,
   });
@@ -254,6 +257,10 @@ class NewPermitDetailModel {
             ? List<FileList>.from(
                 json["file_list"].map((x) => FileList.fromJson(x)))
             : [],
+        tbtImage: json["tbtImage"] != null
+            ? List<FileList>.from(
+                json["tbtImage"].map((x) => FileList.fromJson(x)))
+            : [],
         extendDetails: ExtendDetails.fromJson(json['extendDetails']),
         cancelDetails: CancelDetails.fromJson(json['cancelDetails']),
         closeDetails: CloseDetails.fromJson(json['closeDetails']),
@@ -316,6 +323,7 @@ class NewPermitDetailModel {
             List<dynamic>.from(lotoOtherDetails!.map((x) => x.toJson())),
         "file_list": List<dynamic>.from(file_list!.map((x) => x.toJson())),
 
+        "tbtImage": List<dynamic>.from(tbtImage!.map((x) => x.toJson())),
         "lstAssociatedJobs":
             List<dynamic>.from(lstAssociatedJobs!.map((x) => x)),
         "lstAssociatedPM": List<dynamic>.from(lstAssociatedPM!.map((x) => x)),
