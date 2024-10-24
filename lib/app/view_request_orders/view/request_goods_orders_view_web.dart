@@ -188,7 +188,7 @@ class PurchaseGoodsorderViewWeb
                                   child: Row(
                                     children: [
                                       Text(
-                                        "Goods Order History ",
+                                        "Goods Req History ",
                                         style: Styles.blue700,
                                       ),
                                     ],
@@ -243,7 +243,9 @@ class PurchaseGoodsorderViewWeb
                                       controller.historyList?.length ?? 0,
                                       (index) => DataRow(cells: [
                                         DataCell(Text(controller
-                                                .historyList?[index]?.createdAt
+                                                .historyList?[index]
+                                                ?.createdAt
+                                                ?.result
                                                 .toString() ??
                                             '')),
                                         DataCell(Text(controller

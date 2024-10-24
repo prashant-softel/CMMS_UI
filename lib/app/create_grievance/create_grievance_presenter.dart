@@ -23,37 +23,9 @@ class CreateGrievancePresenter {
       await createGrievanceUsecase.getGrievanceType(true);
 
   Future<List<ResolutionTypeModel?>?> getResolutionType() async =>
-  await createGrievanceUsecase.getResolutionType(true);
+      await createGrievanceUsecase.getResolutionType(true);
 
-  Future<List<HistoryModel>?> getRoHistory(
-    moduleType,
-    id,
-    isLoading,
-  ) async =>
-      await createGrievanceUsecase.getRoHistory(
-        moduleType: moduleType,
-        id: id,
-        isLoading: isLoading,
-      );
-  Future<Map<String, dynamic>?> submitPurchaseOrderData({
-    createGoReq,
-    required bool isLoading,
-  }) async {
-    return createGrievanceUsecase.submitPurchaseOrderData(
-      createGoReq: createGoReq,
-      isLoading: isLoading,
-    );
-  }
 
-  Future<Map<String, dynamic>?> updatePurchaseOrderData({
-    createGoReq,
-    required bool isLoading,
-  }) async {
-    return createGrievanceUsecase.updatePurchaseOrderData(
-      createGoReq: createGoReq,
-      isLoading: isLoading,
-    );
-  }
 
   // void saveValue({String? roId}) async {
   //   return createGrievanceUsecase.saveValue(roId: roId);
@@ -71,25 +43,26 @@ class CreateGrievancePresenter {
     );
   }
 
-  Future<GrievanceListModel?> getGrievanceDetails({int? id, bool? isLoading}) async =>
-      await createGrievanceUsecase.getGrievanceDetails(id: id, isLoading: isLoading);
+  Future<GrievanceListModel?> getGrievanceDetails(
+          {int? id, bool? isLoading}) async =>
+      await createGrievanceUsecase.getGrievanceDetails(
+          id: id, isLoading: isLoading);
 
-
-  Future<Map<String, dynamic>>  updateGrievanceDetails({
+  Future<Map<String, dynamic>> updateGrievanceDetails({
     grievanceJson,
     bool? isLoading,
   }) async {
-     return createGrievanceUsecase.updateGrievanceDetails(
+    return createGrievanceUsecase.updateGrievanceDetails(
       grievanceJson: grievanceJson,
       isLoading: isLoading,
     );
   }
 
-  Future<Map<String, dynamic>>  closeGrievanceDetails({
+  Future<Map<String, dynamic>> closeGrievanceDetails({
     grievanceJson,
     bool? isLoading,
   }) async {
-     return createGrievanceUsecase.closeGrievanceDetails(
+    return createGrievanceUsecase.closeGrievanceDetails(
       grievanceJson: grievanceJson,
       isLoading: isLoading,
     );

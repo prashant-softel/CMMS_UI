@@ -18,34 +18,7 @@ class CreateGrievanceUsecase {
         facilityId,
         isLoading,
       );
-  Future<Map<String, dynamic>> submitPurchaseOrderData({
-    createGoReq,
-    bool? isLoading,
-  }) async =>
-      await repository.submitPurchaseOrderData(
-        createGoReq,
-        isLoading,
-      );
-  Future<Map<String, dynamic>> updatePurchaseOrderData({
-    createGoReq,
-    bool? isLoading,
-  }) async =>
-      await repository.updatePurchaseOrderData(
-        createGoReq,
-        isLoading,
-      );
-  Future<List<HistoryModel>?> getRoHistory({
-    moduleType,
-    id,
-    facilityId,
-    bool? isLoading,
-  }) async =>
-      await repository.getRoHistory(
-        moduleType,
-        id,
-        facilityId,
-        isLoading,
-      );
+
 
   Future<Map<String, dynamic>> saveGrievance({
     grievance,

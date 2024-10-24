@@ -36,6 +36,18 @@ class PurchaseGoodsorderViewUsecase {
     );
   }
 
+  Future<List<HistoryModel>?> getHistory({
+    moduleType,
+    id,
+    facilityId,
+    bool? isLoading,
+  }) async =>
+      await _repository.getHistory(
+        moduleType,
+        id,
+        facilityId,
+        isLoading,
+      );
   Future<Map<String, dynamic>> approveGoodsOrder({
     goodsOrderApproveJsonString,
     bool? isLoading,
@@ -66,18 +78,7 @@ class PurchaseGoodsorderViewUsecase {
         goodsOrderRejectJsonString,
         isLoading,
       );
-  Future<List<HistoryModel>?> getRoHistory({
-    moduleType,
-    id,
-    facilityId,
-    bool? isLoading,
-  }) async =>
-      await _repository.getRoHistory(
-        moduleType,
-        id,
-        facilityId,
-        isLoading,
-      );
+
   void saveValue({String? roId}) async =>
       _repository.saveValue(LocalKeys.roId, roId);
   Future<String?> getValue() async =>

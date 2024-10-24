@@ -12284,45 +12284,6 @@ class Repository {
     }
   }
 
-  Future<List<HistoryModel>?> getRoHistory(
-    int? moduleType,
-    int? id,
-    int facilityId,
-    bool? isLoading,
-  ) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-      dynamic res;
-      if (auth.isNotEmpty) {
-        res = await _dataRepository.getRoHistory(
-          auth: auth,
-          moduleType: moduleType,
-          id: id,
-          facilityId: facilityId,
-          isLoading: isLoading,
-        );
-        // print('Permit History: ${res.data}');
-      }
-      if (!res.hasError) {
-        final jsonGoDetailsModels = jsonDecode(res.data);
-        final List<HistoryModel> _goDetailsList = jsonGoDetailsModels
-            .map<HistoryModel>(
-              (m) => HistoryModel.fromJson(
-                Map<String, dynamic>.from(m),
-              ),
-            )
-            .toList();
-
-        return _goDetailsList;
-      } else {
-        Utility.showDialog(res.errorCode.toString(), "getRoHistory");
-        return null;
-      }
-    } catch (error) {
-      print(error.toString());
-      return [];
-    }
-  }
 
   // Future<bool> rejectGoodsOrder({bool? isLoading, rejecttoJsonString}) async {
   //   try {

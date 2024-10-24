@@ -205,17 +205,12 @@ class PurchaseGoodsorderViewController extends GetxController {
   }
 
   Future<void> getRoHistory({required int id, required int facilityId}) async {
-    /// TODO: CHANGE THESE VALUES
+    int moduleType = 36;
 
-    int moduleType = UserModuleTypeConstants.kReqOrderModuleTypeId;
-
-    //
-    historyList?.value = await purchaseGoodsorderViewPresenter.getRoHistory(
-          // tempModuleType,
-          // tempJobCardId,
-          facilityId,
+    historyList?.value = await purchaseGoodsorderViewPresenter.getHistory(
           moduleType,
           id,
+          facilityId,
           true,
         ) ??
         [];

@@ -42,18 +42,7 @@ class GoodsOrdersReqDetailUsecase {
         createGoReq,
         isLoading,
       );
-  Future<List<HistoryModel>?> getRoHistory({
-    moduleType,
-    id,
-    facilityId,
-    bool? isLoading,
-  }) async =>
-      await repository.getRoHistory(
-        moduleType,
-        id,
-        facilityId,
-        isLoading,
-      );
+ 
   Future<List<GetRODetailsByIDModel?>?> getRoDetailsByID(
           {bool? isLoading,
           required int requestID,
